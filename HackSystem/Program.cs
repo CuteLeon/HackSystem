@@ -33,7 +33,7 @@ namespace HackSystem
             StartUpTemplateClass.Password = ConfigController.GetConfig("Password");
             StartUpTemplateClass.HeadPortrait = Base64Controller.Base64ToImage(ConfigController.GetConfig("HeadPortrait"));
              */
-
+            StartUpController.GetStartUpPlugin(UnityModule.StartUpDirectory);
 
             Application.Run(new StartUpForm());
         }

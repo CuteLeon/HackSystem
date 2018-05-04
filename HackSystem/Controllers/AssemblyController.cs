@@ -59,7 +59,7 @@ namespace HackSystem
         /// <param name="PluginAssembly">程序集</param>
         /// <param name="TargetTypeName"></param>
         /// <returns>所有子类的实例</returns>
-        public static IEnumerable<T> CreatePluginInstance(Assembly PluginAssembly, string TargetTypeName = "")
+        public static IEnumerable<T> CreateTypeInstance(Assembly PluginAssembly, string TargetTypeName = "")
         {
             if (PluginAssembly == null) yield break;
 

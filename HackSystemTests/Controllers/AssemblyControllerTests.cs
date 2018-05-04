@@ -20,11 +20,11 @@ namespace HackSystem.Tests
         }
 
         [TestMethod()]
-        public void CreatePluginInstanceTest()
+        public void CreateTypeInstanceTest()
         {
             Assembly TestAssembly = AssemblyController<object>.CreateAssembly(@"..\..\..\Debug\StartUps\DefaultStartUp.dll");
             int InstanceCount = 0;
-            foreach (var Instance in AssemblyController<object>.CreatePluginInstance(TestAssembly))
+            foreach (var Instance in AssemblyController<object>.CreateTypeInstance(TestAssembly))
             {
                 System.Diagnostics.Debug.Print(Instance.GetType().Name);
                 InstanceCount++;
@@ -33,13 +33,13 @@ namespace HackSystem.Tests
             if (InstanceCount == 0) Assert.Fail();
 
             InstanceCount = 0;
-            foreach (var Instance in AssemblyController<object>.CreatePluginInstance(TestAssembly, "test"))
+            foreach (var Instance in AssemblyController<object>.CreateTypeInstance(TestAssembly, "test"))
                 InstanceCount++;
             System.Diagnostics.Debug.Print(InstanceCount.ToString());
             if (InstanceCount != 0) Assert.Fail();
 
             InstanceCount = 0;
-            foreach (var Instance in AssemblyController<object>.CreatePluginInstance(TestAssembly, "DefaultStartUpClass"))
+            foreach (var Instance in AssemblyController<object>.CreateTypeInstance(TestAssembly, "DefaultStartUpClass"))
                 InstanceCount++;
             System.Diagnostics.Debug.Print(InstanceCount.ToString());
             if (InstanceCount != 1) Assert.Fail();
