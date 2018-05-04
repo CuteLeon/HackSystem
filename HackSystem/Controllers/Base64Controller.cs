@@ -6,9 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace HackSystem.Controllers
+namespace HackSystem
 {
-    static class Base64Controller
+    public static class Base64Controller
     {
 
         /// <summary>
@@ -16,14 +16,14 @@ namespace HackSystem.Controllers
         /// </summary>
         /// <param name="Base64String">Base64</param>
         /// <returns>图像</returns>
-        public static Image Base64ToBitmap(string Base64String)
+        public static Image Base64ToImage(string Base64String)
         {
             UnityModule.DebugPrint("转换 Base64 编码 (HashCode = {0})为图像 ...", Base64String.GetHashCode());
             try
             {
-                byte[] BitmapData = Convert.FromBase64String(Base64String);
-                MemoryStream BitmapStream = new MemoryStream(BitmapData);
-                return Image.FromStream(BitmapStream);
+                byte[] ImageData = Convert.FromBase64String(Base64String);
+                MemoryStream ImageStream = new MemoryStream(ImageData);
+                return Image.FromStream(ImageStream);
             }
             catch (Exception ex)
             {
@@ -60,7 +60,7 @@ namespace HackSystem.Controllers
             catch (Exception ex)
             {
                 UnityModule.DebugPrint("转换图像为 Base64 编码时遇到错误：{0}", ex.Message);
-                return null;
+                return string.Empty;
             }
         }
 

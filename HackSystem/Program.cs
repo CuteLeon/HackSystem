@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,22 +16,25 @@ namespace HackSystem
         [STAThread]
         static void Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            //为 Program 监听全局异常捕获；
+            Application.ThreadException += Application_ThreadException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             //初始化目录
             CheckDirectory();
             //补齐默认配置
             ConfigController.LoadDefaultConfig();
 
+            //加载启动画面
+            /* 放到登录窗口
             StartUpTemplateClass.UserName = ConfigController.GetConfig("UserName");
             StartUpTemplateClass.Password = ConfigController.GetConfig("Password");
-            StartUpTemplateClass.HeadPortrait = null;// ConfigController.GetConfig("HeadPortrait");
+            StartUpTemplateClass.HeadPortrait = Base64Controller.Base64ToImage(ConfigController.GetConfig("HeadPortrait"));
+             */
 
-            foreach (StartUpTemplateClass ins in AssemblyController<StartUpTemplateClass>.CreatePluginInstance(@"D:\CSharp\HackSystem\Debug\StartUps\DefaultStartUp.dll"))
-            {
-                MessageBox.Show(ins.Name + "\n" + ins.Description);
-            }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartUpForm());
         }
 
@@ -49,5 +53,18 @@ namespace HackSystem
                 UnityModule.DebugPrint("创建工作目录遇到异常：{0}", ex.Message);
             }
         }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Exception UnhandledException = e.ExceptionObject as Exception;
+            MessageBox.Show(string.Format("捕获到未处理异常：{0}\r\n异常信息：{1}\r\n异常堆栈：{2}\r\nCLR即将退出：{3}", UnhandledException.GetType(), UnhandledException.Message, UnhandledException.StackTrace, e.IsTerminating));
+        }
+
+        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            Exception ThreadException = e.Exception;
+            MessageBox.Show(string.Format("捕获到未处理异常：{0}\r\n异常信息：{1}\r\n异常堆栈：{2}", ThreadException.GetType(), ThreadException.Message, ThreadException.StackTrace));
+        }
+
     }
 }

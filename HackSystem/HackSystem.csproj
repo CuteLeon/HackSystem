@@ -63,6 +63,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnityResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnityResource.resx</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\DesktopForm.resx">
       <DependentUpon>DesktopForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -75,6 +80,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UnityResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnityResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

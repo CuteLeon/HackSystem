@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,7 +46,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultStartUpClass.cs" />
+    <Compile Include="DefaultStartUpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DefaultStartUpForm.Designer.cs">
+      <DependentUpon>DefaultStartUpForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DefaultStartUpForm.resx">
+      <DependentUpon>DefaultStartUpForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

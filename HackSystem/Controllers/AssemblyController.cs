@@ -9,61 +9,75 @@ using System.Windows.Forms;
 
 namespace HackSystem
 {
-    static class AssemblyController<T> where T : class
+    public static class AssemblyController<T> where T : class
     {
-        /// <summary>  
-        /// 根据全名和路径构造对象  
-        /// </summary>  
-        /// <param name="PluginPath">插件链接库文件路径</param>
-        /// <param name="DynamicLoad">在内存中动态热加载</param>
-        /// <returns>反射实例</returns>  
-        public static IEnumerable<T> CreatePluginInstance(string PluginPath, bool DynamicLoad = true)
+        /// <summary>
+        /// 加载程序集
+        /// </summary>
+        /// <param name="AssemblyPath">程序集路径</param>
+        /// <param name="DynamicLoad">在内存中动态加载</param>
+        /// <returns>程序集</returns>
+        public static Assembly CreateAssembly(string AssemblyPath, bool DynamicLoad = true)
         {
-            UnityModule.DebugPrint("开始创建 {0} 类型实例 {1}...", typeof(T).ToString(), DynamicLoad ? "(动态模式) " : string.Empty);
-            Assembly AssemblyObject = null;
+            UnityModule.DebugPrint("开始{0}加载程序集路径：{1}...", (DynamicLoad ? "动态" : string.Empty), AssemblyPath);
 
+            Assembly PluginAssembly = null;
             try
             {
                 if (!DynamicLoad)
                 {
                     // 从链接库文件路径加载
-                    AssemblyObject = Assembly.LoadFrom(PluginPath);
+                    PluginAssembly = Assembly.LoadFrom(AssemblyPath);
                 }
                 else
                 {
                     // 把链接库文件读入内存后从内存加载，允许程序在运行时更新链接库
-                    using (FileStream PluginStream = new FileStream(PluginPath, FileMode.Open, FileAccess.Read))
+                    using (FileStream AssemblyStream = new FileStream(AssemblyPath, FileMode.Open, FileAccess.Read))
                     {
-                        using (BinaryReader PluginReader = new BinaryReader(PluginStream))
+                        using (BinaryReader AssemblyReader = new BinaryReader(AssemblyStream))
                         {
-                            byte[] PluginBuffer = PluginReader.ReadBytes((int)PluginStream.Length);
-                            AssemblyObject = Assembly.Load(PluginBuffer);
-                            PluginReader.Close();
+                            byte[] AssemblyBuffer = AssemblyReader.ReadBytes((int)AssemblyStream.Length);
+                            PluginAssembly = Assembly.Load(AssemblyBuffer);
+                            AssemblyReader.Close();
                         }
-                        PluginStream.Close();
+                        AssemblyStream.Close();
                     }
                 }
             }
             catch (Exception ex)
             {
                 UnityModule.DebugPrint("创建程序集遇到异常：{0}", ex.Message);
-                throw ex;
+                return null;
             }
 
-            if (AssemblyObject == null) throw new Exception("无法加载链接库文件 : " + PluginPath);
+            return PluginAssembly;
+        }
 
-            foreach (Type PluginType in AssemblyObject.GetTypes())
+        /// <summary>
+        /// 从程序集创建指定父类派生的所有子类的实例
+        /// </summary>
+        /// <param name="PluginAssembly">程序集</param>
+        /// <param name="TargetTypeName"></param>
+        /// <returns>所有子类的实例</returns>
+        public static IEnumerable<T> CreatePluginInstance(Assembly PluginAssembly, string TargetTypeName = "")
+        {
+            if (PluginAssembly == null) yield break;
+
+            UnityModule.DebugPrint("在程序集 {0} 中创建所有 {1} 派生的子类实例 ...", PluginAssembly.FullName, typeof(T).ToString());
+            // 仅加载范式类型派生的子类
+            foreach (Type PluginType in PluginAssembly.GetTypes().Where(
+                (PluginType => 
+                    TargetTypeName == string.Empty ? 
+                    PluginType.IsSubclassOf(typeof(T)) : 
+                    PluginType.IsSubclassOf(typeof(T)) && PluginType.Name == TargetTypeName)
+            ))
             {
-                UnityModule.DebugPrint("发现类型 : {0}", PluginType.FullName);
-
-                // 仅加载范式类型派生的子类
-                if (!PluginType.IsSubclassOf(typeof(T))) continue;
                 UnityModule.DebugPrint(">>> 可加载的插件类型 : {0}", PluginType.FullName);
-                //创建并添加可加载类型的实例
+                //创建允许加载类型的实例
                 T PluginInstance = null;
                 try
                 {
-                    PluginInstance = AssemblyObject.CreateInstance(PluginType.FullName) as T;
+                    PluginInstance = PluginAssembly.CreateInstance(PluginType.FullName) as T;
                 }
                 catch (Exception ex)
                 {

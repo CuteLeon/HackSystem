@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace HackSystem
 {
-    static class FileController
+    public static class FileController
     {
         /// <summary>
         /// 格式化字节大小
         /// </summary>
         /// <param name="ByteCount">比特总数</param>
         /// <returns></returns>
-        static public string FormatSize(ulong ByteCount)
+        public static string FormatSize(ulong ByteCount)
         {
             string Result = "";
             if (ByteCount < 1024)
@@ -35,7 +35,7 @@ namespace HackSystem
         /// 读取文件大小
         /// </summary>
         /// <returns>文件大小</returns>
-        static public string GetFileSize(string FilePath)
+        public static string GetFileSize(string FilePath)
         {
             UnityModule.DebugPrint("获取文件大小：{0}",FilePath);
             try
@@ -53,7 +53,7 @@ namespace HackSystem
         /// <param name="DirectoryPath"></param>
         /// <param name="FileName"></param>
         /// <returns></returns>
-        static public string PathCombine(string DirectoryPath, string FileName)
+        public static string PathCombine(string DirectoryPath, string FileName)
         {
             UnityModule.DebugPrint("合并文件路径：\"{0}\" + \"{1}\"",DirectoryPath,FileName);
             if (!DirectoryPath.EndsWith("\\")) DirectoryPath += "\\";
@@ -65,7 +65,7 @@ namespace HackSystem
         /// </summary>
         /// <param name="SourcesPath">源文件路径</param>
         /// <param name="TargetPath">目标文件路径</param>
-        static public void CopyFile(string SourcesPath, string TargetPath, bool OverWrite, bool ThrowException)
+        public static void CopyFile(string SourcesPath, string TargetPath, bool OverWrite, bool ThrowException)
         {
             UnityModule.DebugPrint("复制文件 \"{0}\" 至 \"{1}\"，{2}允许复写，{3}允许抛出异常 ", SourcesPath, TargetPath, OverWrite ? "" : "不", ThrowException ? "" : "不");
             try
@@ -86,7 +86,7 @@ namespace HackSystem
         /// <param name="TargetDirectory">目标目录</param>
         /// <param name="CopyChildDir">是否复制子目录</param>
         /// <returns>返回 (总目录数, 成功数, 总文件数, 成功数)</returns>
-        static public Tuple<int, int, int, int> CopyDirectory(string SourceDirectory, string TargetDirectory, bool CopyChildDir)
+        public static Tuple<int, int, int, int> CopyDirectory(string SourceDirectory, string TargetDirectory, bool CopyChildDir)
         {
             UnityModule.DebugPrint("复制目录：{0} => {1}", SourceDirectory, TargetDirectory);
             //依次对应返回值

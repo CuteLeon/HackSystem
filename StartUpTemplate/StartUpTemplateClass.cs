@@ -20,7 +20,7 @@ namespace StartUpTemplate
         /// <summary>
         /// 头像 (传送至 StartUp 插件)
         /// </summary>
-        public static Bitmap HeadPortrait = null;
+        public static Image HeadPortrait = null;
 
         private string _name = string.Empty;
         /// <summary>
@@ -42,14 +42,17 @@ namespace StartUpTemplate
             protected set => _description = value;
         }
 
-        private Image _preview = null;
+        private Image _preview = StartUpTemplateResource.DefaultStartUpPreview;
         /// <summary>
-        /// 启动预览图
+        /// 启动预览图 (图像尺寸为 160 x 90 px)
         /// </summary>
         public Image Preview
         {
             get => _preview;
-            protected set => _preview = value;
+            protected set
+            {
+                _preview = new Bitmap(value, 160, 90);
+            }
         }
 
         // 使用 volatile 关键字，防止多线程对对象造成不可预期的影响

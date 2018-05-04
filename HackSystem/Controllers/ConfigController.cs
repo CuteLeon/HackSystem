@@ -8,7 +8,7 @@ using System.IO;
 
 namespace HackSystem
 {
-    static class ConfigController
+    public static class ConfigController
     {
         private static readonly Configuration UnityConfig = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
         
@@ -18,10 +18,11 @@ namespace HackSystem
         public static void LoadDefaultConfig()
         {
             UnityModule.DebugPrint("装载默认配置信息...");
-            
+
             //TODO : 默认配置写在这里
             Dictionary<string, string> DefaultConfigDictionary = new Dictionary<string, string>();
-            DefaultConfigDictionary.Add("StartUp", "DefaultStartUp.dll");
+            DefaultConfigDictionary.Add("StartUpFile", "DefaultStartUp.dll");
+            DefaultConfigDictionary.Add("StartUpName", "DefaultStartUpClass");
             DefaultConfigDictionary.Add("UserName", "Leon");
             DefaultConfigDictionary.Add("Password", "123456");
             DefaultConfigDictionary.Add("HeadPortrait", "123456");
