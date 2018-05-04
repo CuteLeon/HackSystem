@@ -14,6 +14,7 @@ namespace HackSystem
         public StartUpForm()
         {
             InitializeComponent();
+
         }
     }
 }
