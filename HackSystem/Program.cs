@@ -117,10 +117,18 @@ namespace HackSystem
         private static StartUpTemplateClass InitializeStartUp()
         {
             StartUpTemplateClass.StartUpIcon = UnityResource.HackSystemLogoIcon;
+            string StartUpDirectoy = FileController.PathCombine(UnityModule.StartUpDirectory, ConfigController.GetConfig("StartUpFile"));
             StartUpTemplateClass StartUpInstance = StartUpController.GetStartUpPlugin(
-                FileController.PathCombine(UnityModule.StartUpDirectory, ConfigController.GetConfig("StartUpFile")),
+                StartUpDirectoy,
                 ConfigController.GetConfig("StartUpName"));
-            
+
+            //无法创建指定DLL内指定CLASS的StartUp对象时，尝试扫描整个目录
+            if (StartUpInstance == null)
+            {
+                UnityModule.DebugPrint("无法创建指定的 StartUp，尝试扫描 StartUp 目录 ...");
+                StartUpInstance = StartUpController.ScanStartUpPlugins(StartUpDirectoy).FirstOrDefault();
+            }
+
             if (StartUpInstance == null)
                 throw new Exception("无法创建 StartUp 对象");
             if (StartUpInstance.StartUpForm == null)
