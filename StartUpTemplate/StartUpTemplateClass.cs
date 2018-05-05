@@ -63,8 +63,34 @@ namespace StartUpTemplate
         /// </summary>
         public Form StartUpForm
         {
-            get => _startUpForm;
+            //TODO : 不要在 StartUpTemplate 子类的构造函数里 new 出 Form，否则扫描插件列表时就会创建出所有的 StartUpForm 占用很多内存
+            //第一次访问 Form 时创建对象，不用时 Dispose 掉，防止过多占用内存；
+            get
+            {
+                if (_startUpForm == null)
+                    _startUpForm = CreateStartUpForm();
+                return _startUpForm;
+            }
             protected set => _startUpForm = value;
+        }
+
+        /// <summary>
+        /// 启动完成事件（用于系统订阅）
+        /// </summary>
+        public event EventHandler<EventArgs> StartUpFinished; //{add{}remove{}}
+
+        /// <summary>
+        /// 触发启动完成事件
+        /// </summary>
+        /// <param name="e"></param>
+        public void OnStartUpFinished(EventArgs e)
+        {
+            StartUpFinished(this, e);
+
+            //启动完成后自动释放启动画面内存；
+            _startUpForm?.Close();
+            _startUpForm?.Dispose();
+            StartUpForm = null;
         }
 
         /// <summary>

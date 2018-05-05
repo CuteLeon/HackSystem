@@ -13,12 +13,13 @@ namespace DefaultStartUp
         {
             this.Name = "默认启动画面";
             this.Description = "默认的启动画面 ...";
-            StartUpForm = CreateStartUpForm();
         }
 
         protected override Form CreateStartUpForm()
         {
-            return new DefaultStartUpForm();
+            DefaultStartUpForm FormInstance = new DefaultStartUpForm();
+            FormInstance.FormClosing += new FormClosingEventHandler((s,e)=> { OnStartUpFinished(EventArgs.Empty); });
+            return FormInstance;
         }
     }
 }

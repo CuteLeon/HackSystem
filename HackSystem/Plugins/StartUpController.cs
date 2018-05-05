@@ -8,14 +8,31 @@ using System.Reflection;
 
 namespace HackSystem
 {
-    class StartUpController
+    public static class StartUpController
     {
-        /// <summary>
-        /// 启动窗口列表
-        /// </summary>
-        public static List<StartUpTemplateClass> StartUpList = new List<StartUpTemplateClass>();
 
-        public static void GetStartUpPlugin(string StartUpDirectory)
+        /// <summary>
+        /// 从指定 StratUp 插件文件获取 Name 的插件实例
+        /// </summary>
+        /// <param name="StartUpPath">插件路径</param>
+        /// <param name="StartUpName">插件名称</param>
+        /// <returns></returns>
+        public static StartUpTemplateClass GetStartUpPlugin(string StartUpPath, string StartUpName)
+        {
+            UnityModule.DebugPrint("获取 {0} 内的 StartUp 插件，StartUpName : {1}", StartUpPath, StartUpName);
+
+            Assembly StartUpAssembly = AssemblyController<StartUpTemplateClass>.CreateAssembly(StartUpPath);
+            if (StartUpAssembly == null) return null;
+
+            return AssemblyController<StartUpTemplateClass>.CreateTypeInstance(StartUpAssembly, StartUpName).First() ?? null;
+        }
+
+        /// <summary>
+        /// 扫描目录内所有 StartUp 插件；
+        /// </summary>
+        /// <param name="StartUpDirectory">插件目录</param>
+        /// <returns></returns>
+        public static IEnumerable<StartUpTemplateClass> ScanStartUpPlugins(string StartUpDirectory)
         {
             UnityModule.DebugPrint("扫描 StartUp 插件 : {0}", StartUpDirectory);
 
@@ -28,7 +45,7 @@ namespace HackSystem
                 foreach (StartUpTemplateClass StartUpInstance in AssemblyController<StartUpTemplateClass>.CreateTypeInstance(StartUpAssembly))
                 {
                     UnityModule.DebugPrint("创建 StartUp 实例 : {0} ({1})", StartUpInstance.Name, StartUpInstance.Description);
-                    StartUpList.Add(StartUpInstance);
+                    yield return StartUpInstance;
                 }
             }
         }

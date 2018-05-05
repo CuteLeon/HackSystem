@@ -11,9 +11,20 @@ namespace DefaultStartUp
 {
     public partial class DefaultStartUpForm : Form
     {
+
         public DefaultStartUpForm()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void DefaultStartUpForm_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

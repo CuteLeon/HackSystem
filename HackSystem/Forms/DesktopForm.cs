@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace HackSystem
 {
-    public partial class StartUpForm : Form
+    public partial class DesktopForm : Form
     {
-        public StartUpForm()
+        public DesktopForm()
         {
             InitializeComponent();
 

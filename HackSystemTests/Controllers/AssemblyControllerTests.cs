@@ -15,7 +15,7 @@ namespace HackSystem.Tests
         public void CreateAssemblyTest()
         {
             if (AssemblyController<object>.CreateAssembly(@"..\..\..\Debug\StartUps\DefaultStartUp.dll") == null) Assert.Fail();
-            if (AssemblyController<object>.CreateAssembly(@"C:\Windows\system32\user.dll") != null) Assert.Fail();
+            if (AssemblyController<object>.CreateAssembly(@"C:\Windows\system32\user32.dll") != null) Assert.Fail();
             if (AssemblyController<object>.CreateAssembly(@"FileNotExists.dll") != null) Assert.Fail();
         }
 

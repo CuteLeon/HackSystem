@@ -1,6 +1,6 @@
 ﻿namespace HackSystem
 {
-    partial class StartUpForm
+    partial class DesktopForm
     {
         /// <summary>
         /// 必需的设计器变量。

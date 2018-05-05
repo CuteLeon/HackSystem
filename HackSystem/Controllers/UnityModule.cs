@@ -4,11 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows.Forms;
-
+using System.Windows.Forms; 
 namespace HackSystem
 {
-    static class UnityModule
+    public static class UnityModule
     {
         /// <summary>
         /// 启动窗口插件目录
