@@ -38,14 +38,16 @@ namespace DefaultStartUp
         
         private void FrameTimer_Tick(object sender, EventArgs e)
         {
-            FrameLabel.Image = StartUpResource.ResourceManager.GetObject("StartingUp_" + FrameIndex.ToString()) as Image;
+            FrameLabel.Image = DefaultStartUpResource.ResourceManager.GetObject("StartingUp_" + FrameIndex.ToString()) as Image;
             ProgressLabel.Text = string.Format("Hack System Loading ... {0}%", 100 * FrameIndex / FrameCount);
 
             FrameIndex = (FrameIndex + 1) % FrameCount;
             if (FrameIndex == 0)
             {
-                ProgressLabel.Text = "Hack System Loaded !\n Welcome. (〃'▽'〃)";
                 FrameTimer.Stop();
+                ProgressLabel.Text = "Hack System Loaded !\n Welcome. (〃'▽'〃)";
+                Application.DoEvents();
+
                 ThreadPool.QueueUserWorkItem(new WaitCallback(
                     (ILoveU) => {
                         while (this.Opacity > 0)

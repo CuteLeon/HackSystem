@@ -36,9 +36,9 @@ namespace HackSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //为 Program 监听全局异常捕获；
-            Application.ThreadException += Application_ThreadException;
+            //Application.ThreadException += Application_ThreadException;
+            //AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Application.ApplicationExit += Application_ApplicationExit;
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             //初始化目录
             CheckDirectory();
@@ -60,8 +60,12 @@ namespace HackSystem
             {
                 UnityModule.DebugPrint("初始化 StartUp 遇到异常 : {0}", ex.Message);
                 MessageBox.Show("初始化 StartUp 遇到异常 : "+ ex.Message);
-                Application.Exit();
+                return;
             }
+            
+            //显示 StartUp.Preview
+            //new Form() { FormBorderStyle = FormBorderStyle.None, Size = new Size(160, 90), BackgroundImage = StartUp.Preview }.ShowDialog();
+
             StartUp.StartUpForm.ShowDialog();
             GC.Collect();
 
@@ -116,7 +120,7 @@ namespace HackSystem
             StartUpTemplateClass StartUpInstance = StartUpController.GetStartUpPlugin(
                 FileController.PathCombine(UnityModule.StartUpDirectory, ConfigController.GetConfig("StartUpFile")),
                 ConfigController.GetConfig("StartUpName"));
-
+            
             if (StartUpInstance == null)
                 throw new Exception("无法创建 StartUp 对象");
             if (StartUpInstance.StartUpForm == null)

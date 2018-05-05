@@ -55,7 +55,10 @@ namespace StartUpTemplate
             get => _preview;
             protected set
             {
-                _preview = new Bitmap(value, 160, 90);
+                if (value == null)
+                    _preview = StartUpTemplateResource.DefaultStartUpPreview;
+                else
+                    _preview = new Bitmap(value, 160, 90);
             }
         }
 

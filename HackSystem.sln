@@ -19,6 +19,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystemTests", "HackSyst
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StartUps", "StartUps", "{A8C54090-B89B-4213-B746-E687FFE0FF10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScientistStartUp", "ScientistStartUp\ScientistStartUp.csproj", "{1155531C-D174-4687-A159-0A6E170DA5EE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C618E603-DD32-4278-BEBF-6B1807E3A790} = {C618E603-DD32-4278-BEBF-6B1807E3A790}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,12 +46,17 @@ Global
 		{00DFE92D-55C0-4E95-9568-CAFFD9CE37B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00DFE92D-55C0-4E95-9568-CAFFD9CE37B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00DFE92D-55C0-4E95-9568-CAFFD9CE37B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1155531C-D174-4687-A159-0A6E170DA5EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1155531C-D174-4687-A159-0A6E170DA5EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1155531C-D174-4687-A159-0A6E170DA5EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1155531C-D174-4687-A159-0A6E170DA5EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4CD6841D-ACEF-4879-8F0D-ED624A3657CF} = {A8C54090-B89B-4213-B746-E687FFE0FF10}
+		{1155531C-D174-4687-A159-0A6E170DA5EE} = {A8C54090-B89B-4213-B746-E687FFE0FF10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79BC620D-A9A9-41B2-835E-E6CAF80E9902}

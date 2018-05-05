@@ -25,6 +25,7 @@ namespace HackSystem.Tests
         [TestMethod()]
         public void GetStartUpPluginTest()
         {
+            if (StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\ScientistStartUp.dll", "ScientistStartUpClass") == null) Assert.Fail();
             if (StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\DefaultStartUp.dll", "DefaultStartUpClass") == null) Assert.Fail();
             if (StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\FileNotExists.dll", "ClassNotFound") != null) Assert.Fail();
             if (StartUpController.GetStartUpPlugin(@"C:\Windows\System32\user32.dll", "llalalalla") != null) Assert.Fail();

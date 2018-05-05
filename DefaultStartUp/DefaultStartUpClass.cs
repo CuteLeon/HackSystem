@@ -12,7 +12,8 @@ namespace DefaultStartUp
         public DefaultStartUpClass()
         {
             this.Name = "默认启动画面";
-            this.Description = "默认的启动画面 ...";
+            this.Description = "默认启动画面 - Leon";
+            this.Preview = DefaultStartUpResource.DefaultStartUpPreview;
         }
 
         protected override Form CreateStartUpForm()

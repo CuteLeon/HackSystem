@@ -24,7 +24,7 @@ namespace HackSystem
             Assembly StartUpAssembly = AssemblyController<StartUpTemplateClass>.CreateAssembly(StartUpPath);
             if (StartUpAssembly == null) return null;
 
-            return AssemblyController<StartUpTemplateClass>.CreateTypeInstance(StartUpAssembly, StartUpName).First() ?? null;
+            return AssemblyController<StartUpTemplateClass>.CreateTypeInstance(StartUpAssembly, StartUpName).FirstOrDefault();
         }
 
         /// <summary>
