@@ -31,6 +31,8 @@ namespace HackSystem
         [STAThread]
         static void Main()
         {
+            UnityModule.DebugPrint("{0} (V {1}) 启动！=>>> Main()", Application.ProductName, Application.ProductVersion);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //为 Program 监听全局异常捕获；
@@ -43,28 +45,23 @@ namespace HackSystem
             //补齐默认配置
             ConfigController.LoadDefaultConfig();
 
-            //加载启动画面
 
             /* TODO : 放到登录窗口
             StartUpTemplateClass.UserName = ConfigController.GetConfig("UserName");
             StartUpTemplateClass.Password = ConfigController.GetConfig("Password");
             StartUpTemplateClass.HeadPortrait = Base64Controller.Base64ToImage(ConfigController.GetConfig("HeadPortrait"));
              */
-            StartUp = StartUpController.GetStartUpPlugin(
-                FileController.PathCombine(UnityModule.StartUpDirectory, ConfigController.GetConfig("StartUpFile")),
-                ConfigController.GetConfig("StartUpName")
-            );
-            if (StartUp == null)
+            //初始化启动画面
+            try
             {
-                MessageBox.Show("空的 StartUp 插件，系统即将退出。");
+                StartUp = InitializeStartUp();
+            }
+            catch (Exception ex)
+            {
+                UnityModule.DebugPrint("初始化 StartUp 遇到异常 : {0}", ex.Message);
+                MessageBox.Show("初始化 StartUp 遇到异常 : "+ ex.Message);
                 Application.Exit();
             }
-            if (StartUp.StartUpForm == null)
-            {
-                MessageBox.Show("无法创建 StartUpForm，系统即将退出。");
-                Application.Exit();
-            }
-            StartUp.StartUpFinished += new EventHandler<EventArgs>((s, e) => { SwitchToLogin(s, e); });
             StartUp.StartUpForm.ShowDialog();
 
             Application.Run(new DesktopForm());
@@ -107,6 +104,25 @@ namespace HackSystem
         {
             UnityModule.DebugPrint("启动完成！");
             
+        }
+
+        /// <summary>
+        /// 初始化启动画面
+        /// </summary>
+        private static StartUpTemplateClass InitializeStartUp()
+        {
+            StartUpTemplateClass.StartUpIcon = UnityResource.HackSystemLogoIcon;
+            StartUpTemplateClass StartUpInstance = StartUpController.GetStartUpPlugin(
+                FileController.PathCombine(UnityModule.StartUpDirectory, ConfigController.GetConfig("StartUpFile")),
+                ConfigController.GetConfig("StartUpName"));
+
+            if (StartUpInstance == null)
+                throw new Exception("无法创建 StartUp 对象");
+            if (StartUpInstance.StartUpForm == null)
+                throw new Exception("无法创建 StartUp.StartUpForm 对象");
+
+            StartUpInstance.StartUpFinished += new EventHandler<EventArgs>((s, e) => { SwitchToLogin(s, e); });
+            return StartUpInstance;
         }
 
     }

@@ -10,6 +10,10 @@ namespace StartUpTemplate
     public abstract class StartUpTemplateClass : IDisposable
     {
         /// <summary>
+        /// 图标
+        /// </summary>
+        public static Icon StartUpIcon = null;
+        /// <summary>
         /// 用户名 (传送至 StartUp 插件)
         /// </summary>
         public static string UserName = string.Empty;
@@ -69,6 +73,7 @@ namespace StartUpTemplate
             {
                 if (_startUpForm == null)
                     _startUpForm = CreateStartUpForm();
+                if (_startUpForm != null) _startUpForm.Icon = StartUpIcon;
                 return _startUpForm;
             }
             protected set => _startUpForm = value;
@@ -88,7 +93,6 @@ namespace StartUpTemplate
             StartUpFinished(this, e);
 
             //启动完成后自动释放启动画面内存；
-            _startUpForm?.Close();
             _startUpForm?.Dispose();
             StartUpForm = null;
         }

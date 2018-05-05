@@ -44,10 +44,13 @@ namespace HackSystem
         public static string GetConfig(string Key)
         {
             UnityModule.DebugPrint("获取配置项Key: {0}", Key);
+            string ConfigValue = string.Empty;
             try
             {
                 KeyValueConfigurationElement ConfigurationElement = UnityConfig.AppSettings.Settings[Key];
-                return ConfigurationElement?.Value ?? string.Empty;
+                ConfigValue = ConfigurationElement?.Value ?? string.Empty;
+                UnityModule.DebugPrint(">>> ConfigValue[\"{0}\"] = {1}", Key, ConfigValue);
+                return ConfigValue;
             }
             catch (Exception ex)
             {
