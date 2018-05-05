@@ -53,11 +53,203 @@
       <DependentUpon>DefaultStartUpForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartUpResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StartUpResource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DefaultStartUpForm.resx">
       <DependentUpon>DefaultStartUpForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="StartUpResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StartUpResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_34.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_37.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_38.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_39.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_42.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_43.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_44.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_46.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_47.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_49.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_52.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_53.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_54.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_55.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_56.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_57.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_58.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_59.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUIWallpaper.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

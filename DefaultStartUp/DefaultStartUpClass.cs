@@ -17,9 +17,7 @@ namespace DefaultStartUp
 
         protected override Form CreateStartUpForm()
         {
-            DefaultStartUpForm FormInstance = new DefaultStartUpForm();
-            FormInstance.FormClosing += new FormClosingEventHandler((s,e)=> { OnStartUpFinished(EventArgs.Empty); });
-            return FormInstance;
+            return new DefaultStartUpForm() { ParentStartUp = this };
         }
     }
 }

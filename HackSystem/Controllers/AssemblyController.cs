@@ -19,7 +19,7 @@ namespace HackSystem
         /// <returns>程序集</returns>
         public static Assembly CreateAssembly(string AssemblyPath, bool DynamicLoad = true)
         {
-            UnityModule.DebugPrint("开始{0}加载程序集路径：{1}...", (DynamicLoad ? "动态" : string.Empty), AssemblyPath);
+            UnityModule.DebugPrint("开始{0}加载程序集路径：{1} ...", (DynamicLoad ? "动态" : string.Empty), AssemblyPath);
 
             Assembly PluginAssembly = null;
             try

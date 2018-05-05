@@ -63,6 +63,7 @@ namespace HackSystem
                 Application.Exit();
             }
             StartUp.StartUpForm.ShowDialog();
+            GC.Collect();
 
             Application.Run(new DesktopForm());
         }
