@@ -11,6 +11,7 @@ namespace HackSystem
     static class Program
     {
         private volatile static StartUpTemplateClass _startUp = null;
+
         /// <summary>
         /// 系统的启动画面
         /// </summary>
