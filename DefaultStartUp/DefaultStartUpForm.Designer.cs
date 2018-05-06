@@ -80,7 +80,7 @@
             this.Name = "DefaultStartUpForm";
             this.Padding = new System.Windows.Forms.Padding(50);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DefaultStartUpForm";
+            this.Text = "Hack System Loading ...";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.DefaultStartUpForm_Load);
             this.Shown += new System.EventHandler(this.DefaultStartUpForm_Shown);

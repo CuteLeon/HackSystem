@@ -45,13 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RainbowRing\RainbowRingClass.cs" />
+    <Compile Include="ColorfulRingClass.cs" />
+    <Compile Include="RainbowRingClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RainbowRing\RainbowRingForm.cs">
+    <Compile Include="CommonRingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RainbowRing\RainbowRingForm.Designer.cs">
-      <DependentUpon>RainbowRingForm.cs</DependentUpon>
+    <Compile Include="CommonRingForm.Designer.cs">
+      <DependentUpon>CommonRingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="RingsStartUpResource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -60,8 +61,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="RainbowRing\RainbowRingForm.resx">
-      <DependentUpon>RainbowRingForm.cs</DependentUpon>
+    <EmbeddedResource Include="CommonRingForm.resx">
+      <DependentUpon>CommonRingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RingsStartUpResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -73,6 +74,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RainbowRingPreview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ColorfulRing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ColorfulRingPreview.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

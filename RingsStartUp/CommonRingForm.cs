@@ -11,15 +11,35 @@ using StartUpTemplate;
 
 namespace RingsStartUp
 {
-    public partial class RainbowRingForm : Form
+    public partial class CommonRingForm : Form
     {
         public StartUpTemplateClass ParentStartUp = null;
-
-        public RainbowRingForm()
+        private readonly int TimeOut = 200;
+        
+        private CommonRingForm()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             this.FormClosing += new FormClosingEventHandler((Leon, Mathilda) => { ParentStartUp?.OnStartUpFinished(EventArgs.Empty); });
+        }
+
+        /// <summary>
+        /// 构造播放指定资源的 StartUpForm
+        /// </summary>
+        /// <param name="imageResource">图像资源</param>
+        /// <param name="backColor">背景颜色</param>
+        /// <param name="timeOut">每步等待毫秒数（用于控制等候时长）</param> 
+        public CommonRingForm(Image imageResource, Color backColor, int timeOut = 200) : this()
+        {
+            this.WindowState = FormWindowState.Maximized;
+            
+            if (imageResource != null)
+            {
+                CommonPictureBox.Image = imageResource;
+                CommonPictureBox.Size = imageResource.Size;
+            }
+            this.BackColor = backColor;
+            this.TimeOut = timeOut;
         }
 
         private void RainbowRingForm_Shown(object sender, EventArgs e)
@@ -33,7 +53,7 @@ namespace RingsStartUp
                     {
                         while (Progress < 100)
                         {
-                            Thread.Sleep(200);
+                            Thread.Sleep(TimeOut);
                             Progress += 5;
 
                             this.Invoke(new Action(() => {

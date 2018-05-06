@@ -1,6 +1,6 @@
 ﻿namespace RingsStartUp
 {
-    partial class RainbowRingForm
+    partial class CommonRingForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.ProgressLabel = new System.Windows.Forms.Label();
-            this.RainbowPictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.RainbowPictureBox)).BeginInit();
+            this.CommonPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.CommonPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ProgressLabel
@@ -47,41 +47,39 @@
             this.ProgressLabel.Text = "Hack System Loading ...";
             this.ProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // RainbowPictureBox
+            // CommonPictureBox
             // 
-            this.RainbowPictureBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.RainbowPictureBox.Image = global::RingsStartUp.RingsStartUpResource.RainbowRing;
-            this.RainbowPictureBox.Location = new System.Drawing.Point(299, 163);
-            this.RainbowPictureBox.MaximumSize = new System.Drawing.Size(300, 225);
-            this.RainbowPictureBox.MinimumSize = new System.Drawing.Size(300, 225);
-            this.RainbowPictureBox.Name = "RainbowPictureBox";
-            this.RainbowPictureBox.Size = new System.Drawing.Size(300, 225);
-            this.RainbowPictureBox.TabIndex = 4;
-            this.RainbowPictureBox.TabStop = false;
+            this.CommonPictureBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CommonPictureBox.Location = new System.Drawing.Point(50, 50);
+            this.CommonPictureBox.Name = "CommonPictureBox";
+            this.CommonPictureBox.Size = new System.Drawing.Size(799, 237);
+            this.CommonPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.CommonPictureBox.TabIndex = 4;
+            this.CommonPictureBox.TabStop = false;
             // 
-            // RainbowRingForm
+            // CommonRingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(899, 550);
-            this.Controls.Add(this.RainbowPictureBox);
+            this.Controls.Add(this.CommonPictureBox);
             this.Controls.Add(this.ProgressLabel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "RainbowRingForm";
+            this.Name = "CommonRingForm";
             this.Padding = new System.Windows.Forms.Padding(50);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "e";
+            this.Text = "Hack System Loading ...";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Shown += new System.EventHandler(this.RainbowRingForm_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.RainbowPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CommonPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Label ProgressLabel;
-        private System.Windows.Forms.PictureBox RainbowPictureBox;
+        private System.Windows.Forms.PictureBox CommonPictureBox;
     }
 }
