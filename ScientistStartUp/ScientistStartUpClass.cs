@@ -9,7 +9,6 @@ namespace ScientistStartUp
 {
     public class ScientistStartUpClass : StartUpTemplateClass
     {
-        public StartUpTemplateClass ParentStartUp = null;
 
         public ScientistStartUpClass()
         {

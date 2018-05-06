@@ -8,12 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using StartUpTemplate;
 
 namespace DefaultStartUp
 {
     public partial class DefaultStartUpForm : Form
     {
-        public DefaultStartUpClass ParentStartUp = null;
+        public StartUpTemplateClass ParentStartUp = null;
+
         private int FrameIndex = 0;
         private const byte FrameCount = 60;
 
