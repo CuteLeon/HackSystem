@@ -19,7 +19,7 @@ namespace RingsStartUp
 
         protected override Form CreateStartUpForm()
         {
-            return new CommonRingForm(RingsStartUpResource.RainbowRing, Color.Black) { ParentStartUp  =this };
+            return new CommonRingForm(RingsStartUpResource.RainbowRing, Color.Black) { ParentStartUp = this, Padding = new Padding(50, 200, 50, 50), ForeColor = Color.Gray };
         }
     }
 }

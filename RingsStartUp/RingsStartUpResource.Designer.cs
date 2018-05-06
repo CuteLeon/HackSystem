@@ -63,6 +63,26 @@ namespace RingsStartUp {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap BallRing {
+            get {
+                object obj = ResourceManager.GetObject("BallRing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BallRingPreview {
+            get {
+                object obj = ResourceManager.GetObject("BallRingPreview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap ColorfulRing {
             get {
                 object obj = ResourceManager.GetObject("ColorfulRing", resourceCulture);
@@ -83,6 +103,66 @@ namespace RingsStartUp {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap EmptyBallRing {
+            get {
+                object obj = ResourceManager.GetObject("EmptyBallRing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap EmptyBallRingPreview {
+            get {
+                object obj = ResourceManager.GetObject("EmptyBallRingPreview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap HiveRing {
+            get {
+                object obj = ResourceManager.GetObject("HiveRing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap HiveRingPreview {
+            get {
+                object obj = ResourceManager.GetObject("HiveRingPreview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap NestingRing {
+            get {
+                object obj = ResourceManager.GetObject("NestingRing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap NestingRingPreview {
+            get {
+                object obj = ResourceManager.GetObject("NestingRingPreview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap RainbowRing {
             get {
                 object obj = ResourceManager.GetObject("RainbowRing", resourceCulture);
@@ -96,6 +176,86 @@ namespace RingsStartUp {
         internal static System.Drawing.Bitmap RainbowRingPreview {
             get {
                 object obj = ResourceManager.GetObject("RainbowRingPreview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap RedLineRing {
+            get {
+                object obj = ResourceManager.GetObject("RedLineRing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap RedLineRingPreview {
+            get {
+                object obj = ResourceManager.GetObject("RedLineRingPreview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SingleLineRing {
+            get {
+                object obj = ResourceManager.GetObject("SingleLineRing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SingleLineRingPreview {
+            get {
+                object obj = ResourceManager.GetObject("SingleLineRingPreview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SmokeRing {
+            get {
+                object obj = ResourceManager.GetObject("SmokeRing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SmokeRingPreview {
+            get {
+                object obj = ResourceManager.GetObject("SmokeRingPreview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap WhiteRing {
+            get {
+                object obj = ResourceManager.GetObject("WhiteRing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap WhiteRingPreview {
+            get {
+                object obj = ResourceManager.GetObject("WhiteRingPreview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

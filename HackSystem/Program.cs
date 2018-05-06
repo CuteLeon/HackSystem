@@ -51,6 +51,16 @@ namespace HackSystem
             StartUpTemplateClass.Password = ConfigController.GetConfig("Password");
             StartUpTemplateClass.HeadPortrait = Base64Controller.Base64ToImage(ConfigController.GetConfig("HeadPortrait"));
              */
+
+            // 显示所有 StartUpForm
+            /*
+            foreach (StartUpTemplateClass a in StartUpController.ScanStartUpPlugins(UnityModule.StartUpDirectory))
+            {
+                new Form() { FormBorderStyle = FormBorderStyle.None, Size = new Size(160, 90), BackgroundImage = a.Preview }.ShowDialog();
+                a.StartUpForm.ShowDialog();
+            }
+            */
+
             //初始化启动画面
             try
             {
@@ -117,16 +127,16 @@ namespace HackSystem
         private static StartUpTemplateClass InitializeStartUp()
         {
             StartUpTemplateClass.StartUpIcon = UnityResource.HackSystemLogoIcon;
-            string StartUpDirectoy = FileController.PathCombine(UnityModule.StartUpDirectory, ConfigController.GetConfig("StartUpFile"));
+            string StartUpPath = FileController.PathCombine(UnityModule.StartUpDirectory, ConfigController.GetConfig("StartUpFile"));
             StartUpTemplateClass StartUpInstance = StartUpController.GetStartUpPlugin(
-                StartUpDirectoy,
+                StartUpPath,
                 ConfigController.GetConfig("StartUpName"));
 
             //无法创建指定DLL内指定CLASS的StartUp对象时，尝试扫描整个目录
             if (StartUpInstance == null)
             {
                 UnityModule.DebugPrint("无法创建指定的 StartUp，尝试扫描 StartUp 目录 ...");
-                StartUpInstance = StartUpController.ScanStartUpPlugins(StartUpDirectoy).FirstOrDefault();
+                StartUpInstance = StartUpController.ScanStartUpPlugins(UnityModule.StartUpDirectory).FirstOrDefault();
             }
 
             if (StartUpInstance == null)

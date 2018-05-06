@@ -45,6 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WhiteRingClass.cs" />
+    <Compile Include="SmokeRingClass.cs" />
+    <Compile Include="SingleLineRingClass.cs" />
+    <Compile Include="RedLineRingClass.cs" />
+    <Compile Include="NestingRingClass.cs" />
+    <Compile Include="HiveRingClass.cs" />
+    <Compile Include="EmptyBallRingClass.cs" />
+    <Compile Include="BallRingClass.cs" />
     <Compile Include="ColorfulRingClass.cs" />
     <Compile Include="RainbowRingClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +88,54 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ColorfulRingPreview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BallRing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EmptyBallRing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HiveRing.GIF" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NestingRing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedLineRing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SingleLineRing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SmokeRing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhiteRing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BallRingPreview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EmptyBallRingPreview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HiveRingPreview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NestingRingPreview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedLineRingPreview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SingleLineRingPreview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SmokeRingPreview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhiteRingPreview.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

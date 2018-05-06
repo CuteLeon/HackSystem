@@ -35,6 +35,7 @@ namespace HackSystem
         public static IEnumerable<StartUpTemplateClass> ScanStartUpPlugins(string StartUpDirectory)
         {
             UnityModule.DebugPrint("扫描 StartUp 插件 : {0}", StartUpDirectory);
+            if (!Directory.Exists(StartUpDirectory)) yield break;
 
             foreach (string StartUpPath in Directory.GetFiles(StartUpDirectory).Where(StartUpPath => StartUpPath.ToLower().EndsWith(".dll")))
             {

@@ -15,12 +15,19 @@ namespace RingsStartUp
     {
         public StartUpTemplateClass ParentStartUp = null;
         private readonly int TimeOut = 200;
-        
+        /// <summary>
+        /// 字体前景颜色
+        /// </summary>
+        public new Color ForeColor
+        {
+            get => ProgressLabel.ForeColor;
+            set => ProgressLabel.ForeColor = value;
+        }
         private CommonRingForm()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            this.FormClosing += new FormClosingEventHandler((Leon, Mathilda) => { ParentStartUp?.OnStartUpFinished(EventArgs.Empty); });
+            this.FormClosing += new FormClosingEventHandler((Leon, Mathilda) => { ParentStartUp?.OnStartUpFinished(Mathilda); });
         }
 
         /// <summary>

@@ -93,7 +93,7 @@ namespace StartUpTemplate
         /// <param name="e"></param>
         public void OnStartUpFinished(EventArgs e)
         {
-            StartUpFinished.Invoke(this, e);
+            this?.StartUpFinished?.Invoke(this, e);
             
             //启动完成后自动释放启动画面内存；
             _startUpForm?.Dispose();

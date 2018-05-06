@@ -23,7 +23,7 @@ namespace DefaultStartUp
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            this.FormClosing += new FormClosingEventHandler((Leon, Mathilda) => { ParentStartUp?.OnStartUpFinished(EventArgs.Empty); });
+            this.FormClosing += new FormClosingEventHandler((Leon, Mathilda) => { ParentStartUp?.OnStartUpFinished(Mathilda); });
         }
 
         private void DefaultStartUpForm_Load(object sender, EventArgs e)
