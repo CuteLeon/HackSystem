@@ -54,13 +54,18 @@ namespace ScientistStartUp
                         if (this == null) return;
                         ThreadPool.QueueUserWorkItem(new WaitCallback(
                             (Mathilda) => {
-                                while (this.Opacity > 0)
+                                try
                                 {
-                                    Thread.Sleep(100);
-                                    this.Opacity -= 0.1;
-                                }
+                                    while (this.Opacity > 0)
+                                    {
+                                        Thread.Sleep(100);
+                                        this.Opacity -= 0.1;
+                                    }
 
-                                this.Close();
+                                    this.Close();
+                                }
+                                catch
+                                { }
                             }));
                     } catch { }
                 }));

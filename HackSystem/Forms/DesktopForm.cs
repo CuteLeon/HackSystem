@@ -14,7 +14,7 @@ namespace HackSystem
         public DesktopForm()
         {
             InitializeComponent();
-
+            this.Icon = UnityResource.HackSystemLogoIcon;
         }
     }
 }

@@ -34,6 +34,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RingsStartUp", "RingsStartU
 		{C618E603-DD32-4278-BEBF-6B1807E3A790} = {C618E603-DD32-4278-BEBF-6B1807E3A790}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimationStartUp", "AnimationStartUp\AnimationStartUp.csproj", "{3443552E-A068-4B7D-9398-970C628485FC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C618E603-DD32-4278-BEBF-6B1807E3A790} = {C618E603-DD32-4278-BEBF-6B1807E3A790}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +69,10 @@ Global
 		{43189EB8-1A80-4587-BD89-E8D1A7748C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43189EB8-1A80-4587-BD89-E8D1A7748C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43189EB8-1A80-4587-BD89-E8D1A7748C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3443552E-A068-4B7D-9398-970C628485FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3443552E-A068-4B7D-9398-970C628485FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3443552E-A068-4B7D-9398-970C628485FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3443552E-A068-4B7D-9398-970C628485FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +81,7 @@ Global
 		{4CD6841D-ACEF-4879-8F0D-ED624A3657CF} = {A8C54090-B89B-4213-B746-E687FFE0FF10}
 		{1155531C-D174-4687-A159-0A6E170DA5EE} = {A8C54090-B89B-4213-B746-E687FFE0FF10}
 		{43189EB8-1A80-4587-BD89-E8D1A7748C4F} = {A8C54090-B89B-4213-B746-E687FFE0FF10}
+		{3443552E-A068-4B7D-9398-970C628485FC} = {A8C54090-B89B-4213-B746-E687FFE0FF10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79BC620D-A9A9-41B2-835E-E6CAF80E9902}

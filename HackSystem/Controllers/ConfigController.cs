@@ -21,8 +21,8 @@ namespace HackSystem
 
             //TODO : 默认配置写在这里
             Dictionary<string, string> DefaultConfigDictionary = new Dictionary<string, string>();
-            DefaultConfigDictionary.Add("StartUpFile", "RingsStartUp.dll");
-            DefaultConfigDictionary.Add("StartUpName", "WhiteRingClass");
+            DefaultConfigDictionary.Add("StartUpFile", "AnimationStartUp.dll");
+            DefaultConfigDictionary.Add("StartUpName", "SerpentineStartUpClass");
             DefaultConfigDictionary.Add("UserName", "Leon");
             DefaultConfigDictionary.Add("Password", "123456");
             DefaultConfigDictionary.Add("HeadPortrait", "123456");

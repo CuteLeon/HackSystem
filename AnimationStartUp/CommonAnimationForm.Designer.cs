@@ -1,6 +1,6 @@
-﻿namespace DefaultStartUp
+﻿namespace AnimationStartUp
 {
-    partial class DefaultStartUpForm
+    partial class CommonAnimationForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,15 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.FrameTimer = new System.Windows.Forms.Timer(this.components);
             this.ProgressLabel = new System.Windows.Forms.Label();
-            this.FrameLabel = new System.Windows.Forms.Label();
+            this.CommonPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.CommonPictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // FrameTimer
-            // 
-            this.FrameTimer.Tick += new System.EventHandler(this.FrameTimer_Tick);
             // 
             // ProgressLabel
             // 
@@ -44,54 +39,47 @@
             this.ProgressLabel.BackColor = System.Drawing.Color.Transparent;
             this.ProgressLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ProgressLabel.Font = new System.Drawing.Font("微软雅黑", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ProgressLabel.Location = new System.Drawing.Point(50, 327);
+            this.ProgressLabel.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.ProgressLabel.Location = new System.Drawing.Point(50, 427);
             this.ProgressLabel.Name = "ProgressLabel";
-            this.ProgressLabel.Size = new System.Drawing.Size(700, 73);
-            this.ProgressLabel.TabIndex = 1;
+            this.ProgressLabel.Size = new System.Drawing.Size(799, 73);
+            this.ProgressLabel.TabIndex = 3;
             this.ProgressLabel.Text = "Hack System Loading ...";
             this.ProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // FrameLabel
+            // CommonPictureBox
             // 
-            this.FrameLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.FrameLabel.Location = new System.Drawing.Point(284, 67);
-            this.FrameLabel.Margin = new System.Windows.Forms.Padding(20);
-            this.FrameLabel.MaximumSize = new System.Drawing.Size(240, 240);
-            this.FrameLabel.MinimumSize = new System.Drawing.Size(240, 240);
-            this.FrameLabel.Name = "FrameLabel";
-            this.FrameLabel.Padding = new System.Windows.Forms.Padding(20);
-            this.FrameLabel.Size = new System.Drawing.Size(240, 240);
-            this.FrameLabel.TabIndex = 2;
-            this.FrameLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.CommonPictureBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CommonPictureBox.Location = new System.Drawing.Point(50, 50);
+            this.CommonPictureBox.Name = "CommonPictureBox";
+            this.CommonPictureBox.Size = new System.Drawing.Size(799, 237);
+            this.CommonPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.CommonPictureBox.TabIndex = 4;
+            this.CommonPictureBox.TabStop = false;
             // 
-            // DefaultStartUpForm
+            // CommonAnimationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.BackgroundImage = global::DefaultStartUp.DefaultStartUpResource.StartingUIWallpaper;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(899, 550);
             this.Controls.Add(this.ProgressLabel);
-            this.Controls.Add(this.FrameLabel);
+            this.Controls.Add(this.CommonPictureBox);
             this.DoubleBuffered = true;
-            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "DefaultStartUpForm";
+            this.Name = "CommonAnimationForm";
             this.Padding = new System.Windows.Forms.Padding(50);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hack System Loading ...";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.DefaultStartUpForm_Load);
-            this.Shown += new System.EventHandler(this.DefaultStartUpForm_Shown);
+            this.Shown += new System.EventHandler(this.RainbowRingForm_Shown);
+            ((System.ComponentModel.ISupportInitialize)(this.CommonPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer FrameTimer;
         private System.Windows.Forms.Label ProgressLabel;
-        private System.Windows.Forms.Label FrameLabel;
+        private System.Windows.Forms.PictureBox CommonPictureBox;
     }
 }

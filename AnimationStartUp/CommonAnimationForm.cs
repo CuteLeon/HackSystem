@@ -9,9 +9,9 @@ using System.Threading;
 using System.Windows.Forms;
 using StartUpTemplate;
 
-namespace RingsStartUp
+namespace AnimationStartUp
 {
-    public partial class CommonRingForm : Form
+    public partial class CommonAnimationForm : Form
     {
         public StartUpTemplateClass ParentStartUp = null;
         private readonly int TimeOut = 200;
@@ -23,7 +23,7 @@ namespace RingsStartUp
             get => ProgressLabel.ForeColor;
             set => ProgressLabel.ForeColor = value;
         }
-        private CommonRingForm()
+        private CommonAnimationForm()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
@@ -36,7 +36,7 @@ namespace RingsStartUp
         /// <param name="imageResource">图像资源</param>
         /// <param name="backColor">背景颜色</param>
         /// <param name="timeOut">每步等待毫秒数（用于控制等候时长）</param> 
-        public CommonRingForm(Image imageResource, Color backColor, int timeOut = 200) : this()
+        public CommonAnimationForm(Image imageResource, Color backColor, int timeOut = 200) : this()
         {
             this.WindowState = FormWindowState.Maximized;
             
