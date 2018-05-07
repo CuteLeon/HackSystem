@@ -106,9 +106,17 @@ namespace StartUpTemplate
         /// <returns>启动窗口</returns>
         protected abstract Form CreateStartUpForm();
 
+        ~StartUpTemplateClass()
+        {
+            (this as IDisposable).Dispose();
+        }
+
         void IDisposable.Dispose()
         {
+            System.Diagnostics.Debug.Print("Dispose : {0}", this.Name);
+            _preview?.Dispose();
             _startUpForm?.Dispose();
+            GC.SuppressFinalize(this);
         }
 
     }

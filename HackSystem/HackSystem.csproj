@@ -56,6 +56,12 @@
     <Compile Include="Controllers\Base64Controller.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Forms\StartUpsCollectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StartUpsCollectionForm.Designer.cs">
+      <DependentUpon>StartUpsCollectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\StartUpController.cs" />
     <Compile Include="Controllers\UnityModule.cs" />
     <Compile Include="Forms\DesktopForm.cs">
@@ -73,6 +79,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\DesktopForm.resx">
       <DependentUpon>DesktopForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StartUpsCollectionForm.resx">
+      <DependentUpon>StartUpsCollectionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

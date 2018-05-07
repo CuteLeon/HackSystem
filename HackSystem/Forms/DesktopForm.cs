@@ -16,5 +16,10 @@ namespace HackSystem
             InitializeComponent();
             this.Icon = UnityResource.HackSystemLogoIcon;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new StartUpsCollectionForm().Show(this);
+        }
     }
 }
