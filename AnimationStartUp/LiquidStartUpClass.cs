@@ -17,6 +17,8 @@ namespace AnimationStartUp
             Preview = StartUpResource.LiquidPreview;
         }
 
+        public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
+
         protected override Form CreateStartUpForm()
         {
             return new CommonAnimationForm(StartUpResource.Liquid, Color.White) { ParentStartUp = this, ForeColor = Color.Gray };

@@ -56,6 +56,12 @@
     <Compile Include="Controllers\Base64Controller.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controls\StartUpCardControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StartUpCardControl.Designer.cs">
+      <DependentUpon>StartUpCardControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\StartUpsCollectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UnityResource.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\StartUpCardControl.resx">
+      <DependentUpon>StartUpCardControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DesktopForm.resx">
       <DependentUpon>DesktopForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,5 +122,6 @@
   <ItemGroup>
     <None Include="Resources\HackSystemLogoIcon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

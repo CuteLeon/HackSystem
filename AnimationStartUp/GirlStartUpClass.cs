@@ -17,6 +17,8 @@ namespace AnimationStartUp
             Preview = StartUpResource.GirlPreview;
         }
 
+        public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
+
         protected override Form CreateStartUpForm()
         {
             return new CommonAnimationForm(StartUpResource.Girl, Color.FromArgb(255, 217, 225, 213)) { ParentStartUp = this, ForeColor = Color.DeepPink };

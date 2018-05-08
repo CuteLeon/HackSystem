@@ -21,30 +21,34 @@ namespace HackSystem
         private void StartUpsCollectionForm_Shown(object sender, EventArgs e)
         {
             Application.DoEvents();
-            try
-            {
-                foreach (StartUpTemplateClass StartupInstance in StartUpController.ScanStartUpPlugins(UnityModule.StartUpDirectory))
-                {
-                    //TODO : 使用用户控件显示，记录DLL文件名称和TypeName，以方便写入Config;
-                    Label StartUpLabel = new Label()
+
+            ThreadPool.QueueUserWorkItem(new WaitCallback(
+                (ILoveU) => {
+                    foreach (StartUpTemplateClass StartupInstance in StartUpController.ScanStartUpPlugins(UnityModule.StartUpDirectory))
                     {
-                        AutoEllipsis = true,
-                        AutoSize = false,
-                        BorderStyle = BorderStyle.FixedSingle,
-                        //注意！这里需要Clone图像的精确副本，因为StartUpIntance使用后会Dispose，防止图像触发空对象引用
-                        Image = StartupInstance.Preview.Clone() as Image,
-                        Size=new Size(160,120),
-                        ImageAlign = ContentAlignment.TopCenter,
-                        Margin = new Padding(5),
-                        TextAlign = ContentAlignment.BottomCenter,
-                        Text = StartupInstance.Name + "\n" + StartupInstance.Description
-                    };
-                    flowLayoutPanel1.Controls.Add(StartUpLabel);
-                            
-                }
-            }
-            catch { }
+                        try
+                        {
+                            this.Invoke(new Action(() =>
+                            {
+                                try
+                                {
+                                    StartUpCardControl startUp = new StartUpCardControl(StartupInstance.FileName, StartupInstance.GetType().Name, StartupInstance.Name, StartupInstance.Description, StartupInstance.Preview.Clone() as Image);
+                                    flowLayoutPanel1.Controls.Add(startUp);
+                                }
+                                catch (Exception ex)
+                                {
+                                    UnityModule.DebugPrint("StartUp集合窗口扫描时遇到异常：{0}", ex.Message);
+                                }
+                            }));
+                        }
+                        catch { }
+                    }
+                }));
         }
 
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

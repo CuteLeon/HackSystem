@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -25,27 +26,19 @@ namespace StartUpTemplate
         /// 头像 (传送至 StartUp 插件)
         /// </summary>
         public static Image HeadPortrait = null;
-
-        private string _name = string.Empty;
         /// <summary>
         /// 启动名称
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            protected set => _name = value;
-        }
-
-        private string _description = string.Empty;
+        public string Name { get; protected set; } = string.Empty;
         /// <summary>
         /// 启动描述
         /// </summary>
-        public string Description
-        {
-            get => _description;
-            protected set => _description = value;
-        }
-
+        public string Description { get; protected set; } = string.Empty;
+        /// <summary>
+        /// 程序集所在文件名称
+        /// </summary>
+        public abstract string FileName { get; }
+        
         private Image _preview = StartUpTemplateResource.DefaultStartUpPreview;
         /// <summary>
         /// 启动预览图 (图像尺寸为 160 x 90 px)
@@ -70,8 +63,10 @@ namespace StartUpTemplate
         /// </summary>
         public Form StartUpForm
         {
-            //TODO : 不要在 StartUpTemplate 子类的构造函数里 new 出 Form，否则扫描插件列表时就会创建出所有的 StartUpForm 占用很多内存
-            //第一次访问 Form 时创建对象，不用时 Dispose 掉，防止过多占用内存；
+            /* 
+             * 不要在 StartUpTemplate 子类的构造函数里 new 出 Form，否则会自动创建出 StartUpForm 占用很多内存
+             * 只需要实现 CreateStartUpForm() 方法，第一次访问 Form 时创建对象，不用时 Dispose 掉，防止过多占用内存；
+             */
             get
             {
                 if (_startUpForm == null)

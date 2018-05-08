@@ -26,6 +26,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScientistStartUp", "Scienti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{A4C6CDAC-D60F-45BD-98F5-732ED2065A77}"
 	ProjectSection(SolutionItems) = preProject
+		Common.txt = Common.txt
 		Documents\StartUp开发教程.md = Documents\StartUp开发教程.md
 	EndProjectSection
 EndProject

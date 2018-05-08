@@ -76,6 +76,7 @@ namespace HackSystem
             catch (Exception ex)
             {
                 UnityModule.DebugPrint("设置配置失败.Key:{0}, Value:{1}, Message:{2}", Key, Value, ex.Message);
+                throw ex;
             }
         }
 

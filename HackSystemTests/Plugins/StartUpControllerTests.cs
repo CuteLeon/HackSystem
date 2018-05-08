@@ -25,10 +25,20 @@ namespace HackSystem.Tests
         [TestMethod()]
         public void GetStartUpPluginTest()
         {
-            if (StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\ScientistStartUp.dll", "ScientistStartUpClass") == null) Assert.Fail();
-            if (StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\DefaultStartUp.dll", "DefaultStartUpClass") == null) Assert.Fail();
-            if (StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\FileNotExists.dll", "ClassNotFound") != null) Assert.Fail();
-            if (StartUpController.GetStartUpPlugin(@"C:\Windows\System32\user32.dll", "llalalalla") != null) Assert.Fail();
+            StartUpTemplateClass TestClass = null;
+            TestClass = StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\ScientistStartUp.dll", "ScientistStartUpClass");
+            if(TestClass == null) Assert.Fail();
+            if (TestClass.FileName != @"ScientistStartUp.dll") Assert.Fail();
+
+            TestClass = StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\DefaultStartUp.dll", "DefaultStartUpClass");
+            if(TestClass == null) Assert.Fail();
+            if (TestClass.FileName != @"DefaultStartUp.dll") Assert.Fail();
+
+            TestClass = StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\FileNotExists.dll", "ClassNotFound");
+            if(TestClass != null) Assert.Fail();
+
+            TestClass = StartUpController.GetStartUpPlugin(@"C:\Windows\System32\user32.dll", "llalalalla");
+            if(TestClass != null) Assert.Fail();
         }
     }
 }

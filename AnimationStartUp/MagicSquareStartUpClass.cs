@@ -17,6 +17,8 @@ namespace AnimationStartUp
             Preview = StartUpResource.MagicSquarePreview;
         }
 
+        public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
+
         protected override Form CreateStartUpForm()
         {
             return new CommonAnimationForm(StartUpResource.MagicSquare, Color.Black) { ParentStartUp = this, ForeColor = Color.FromArgb(255, 255, 90, 33) };

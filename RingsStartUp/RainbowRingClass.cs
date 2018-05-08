@@ -17,6 +17,8 @@ namespace RingsStartUp
             Preview = RingsStartUpResource.RainbowRingPreview;
         }
 
+        public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
+
         protected override Form CreateStartUpForm()
         {
             return new CommonRingForm(RingsStartUpResource.RainbowRing, Color.Black) { ParentStartUp = this, Padding = new Padding(50, 200, 50, 50), ForeColor = Color.Gray };

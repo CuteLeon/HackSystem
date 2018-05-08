@@ -72,10 +72,10 @@ namespace HackSystem
                 MessageBox.Show("初始化 StartUp 遇到异常 : "+ ex.Message);
                 return;
             }
-            
+
             //显示 StartUp.Preview
             //new Form() { FormBorderStyle = FormBorderStyle.None, Size = new Size(160, 90), BackgroundImage = StartUp.Preview }.ShowDialog();
-
+            StartUp.StartUpForm.TopMost = true;
             StartUp.StartUpForm.ShowDialog();
             GC.Collect();
 

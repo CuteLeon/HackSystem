@@ -16,6 +16,8 @@ namespace DefaultStartUp
             this.Preview = DefaultStartUpResource.DefaultStartUpPreview;
         }
 
+        public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
+
         protected override Form CreateStartUpForm()
         {
             return new DefaultStartUpForm() { ParentStartUp = this };
