@@ -21,7 +21,7 @@ namespace HackSystem
         /// <returns>图像</returns>
         public static Image Base64ToImage(string Base64String)
         {
-            UnityModule.DebugPrint("转换 Base64 编码 (HashCode = {0})为图像 ...", Base64String.GetHashCode());
+            LogController.Debug("转换 Base64 编码 (HashCode = {0})为图像 ...", Base64String.GetHashCode());
             try
             {
                 byte[] ImageData = Convert.FromBase64String(Base64String);
@@ -30,7 +30,7 @@ namespace HackSystem
             }
             catch (Exception ex)
             {
-                UnityModule.DebugPrint("转换 Base64 编码为图像时遇到错误：{0}", ex.Message);
+                LogController.Error("转换 Base64 编码为图像时遇到错误：{0}", ex.Message);
                 return null;
             }
         }
@@ -53,7 +53,7 @@ namespace HackSystem
         /// <returns>Base64</returns>
         public static string ImageToBase64(Image ImageObject, ImageFormat ImageFormatType)
         {
-            UnityModule.DebugPrint("转换图像(HashCode = {0})为 Base64 编码 ...", ImageObject.GetHashCode());
+            LogController.Debug("转换图像(HashCode = {0})为 Base64 编码 ...", ImageObject.GetHashCode());
             try
             {
                 MemoryStream ImageStream = new MemoryStream();
@@ -62,7 +62,7 @@ namespace HackSystem
             }
             catch (Exception ex)
             {
-                UnityModule.DebugPrint("转换图像为 Base64 编码时遇到错误：{0}", ex.Message);
+                LogController.Error("转换图像为 Base64 编码时遇到错误：{0}", ex.Message);
                 return string.Empty;
             }
         }

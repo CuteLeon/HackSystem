@@ -68,14 +68,14 @@ namespace HackSystem
         /// <param name="TargetPath">目标文件路径</param>
         public static void CopyFile(string SourcesPath, string TargetPath, bool OverWrite, bool ThrowException)
         {
-            UnityModule.DebugPrint("复制文件 \"{0}\" 至 \"{1}\"，{2}允许复写，{3}允许抛出异常 ", SourcesPath, TargetPath, OverWrite ? "" : "不", ThrowException ? "" : "不");
+            LogController.Debug("复制文件 \"{0}\" 至 \"{1}\"，{2}允许复写，{3}允许抛出异常 ", SourcesPath, TargetPath, OverWrite ? "" : "不", ThrowException ? "" : "不");
             try
             {
                 File.Copy(SourcesPath, TargetPath, OverWrite);
             }
             catch (Exception CopyException)
             {
-                UnityModule.DebugPrint("复制文件遇到错误：{0}", CopyException.Message);
+                LogController.Error("复制文件遇到错误：{0}", CopyException.Message);
                 if (ThrowException) throw CopyException;
             }
         }
@@ -89,13 +89,13 @@ namespace HackSystem
         /// <returns>返回 (总目录数, 成功数, 总文件数, 成功数)</returns>
         public static Tuple<int, int, int, int> CopyDirectory(string SourceDirectory, string TargetDirectory, bool CopyChildDir)
         {
-            UnityModule.DebugPrint("复制目录：{0} => {1}", SourceDirectory, TargetDirectory);
+            LogController.Debug("复制目录：{0} => {1}", SourceDirectory, TargetDirectory);
             //依次对应返回值
             int DirCount = 0, DirOKCount = 0, FileCount = 0, FileOKCount = 0;
 
             if (!Directory.Exists(SourceDirectory))
             {
-                UnityModule.DebugPrint("源目录 {0} 不存在，无法复制", SourceDirectory);
+                LogController.Warn("源目录 {0} 不存在，无法复制", SourceDirectory);
                 return new Tuple<int, int, int, int>(0, 0, 0, 0);
             }
 
@@ -107,7 +107,7 @@ namespace HackSystem
                 }
                 catch (Exception ex)
                 {
-                    UnityModule.DebugPrint("创建目录 {0} 失败：{1}", TargetDirectory, ex.Message);
+                    LogController.Error("创建目录 {0} 失败：{1}", TargetDirectory, ex.Message);
                     return new Tuple<int, int, int, int>(0, 0, 0, 0);
                 }
             }
@@ -117,7 +117,7 @@ namespace HackSystem
             //复制文件
             foreach (string FilePath in Directory.GetFiles(SourceDirectory))
             {
-                UnityModule.DebugPrint("复制文件：{0}", FilePath);
+                LogController.Debug("复制文件：{0}", FilePath);
                 try
                 {
                     File.Copy(FilePath, PathCombine(TargetDirectory, Path.GetFileName(FilePath)), true);
@@ -125,7 +125,7 @@ namespace HackSystem
                 }
                 catch (Exception ex)
                 {
-                    UnityModule.DebugPrint("复制文件遇到错误：{0}", ex.Message);
+                    LogController.Error("复制文件遇到错误：{0}", ex.Message);
                 }
                 finally
                 {
@@ -144,7 +144,7 @@ namespace HackSystem
                     DirOKCount += CopyResult.Item2;
                     FileCount += CopyResult.Item3;
                     FileOKCount += CopyResult.Item4;
-                    UnityModule.DebugPrint("复制子目录：{0}\n\t\t\t\t\t\t\t     DirCount:{1}    DirOKCount:{2}    FileCount:{3}    FileOKCount:{4}", ChildDirectoryPath, CopyResult.Item1, CopyResult.Item2, CopyResult.Item3, CopyResult.Item4);
+                    LogController.Debug("复制子目录：{0}\n\t\t\t\t\t\t\t     DirCount:{1}    DirOKCount:{2}    FileCount:{3}    FileOKCount:{4}", ChildDirectoryPath, CopyResult.Item1, CopyResult.Item2, CopyResult.Item3, CopyResult.Item4);
                 }
             }
 

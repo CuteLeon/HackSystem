@@ -20,7 +20,7 @@ namespace HackSystem
         /// </summary>
         public static void LoadDefaultConfig()
         {
-            UnityModule.DebugPrint("装载默认配置信息...");
+            LogController.Info("装载默认配置信息...");
 
             //TODO : 默认配置写在这里
             Dictionary<string, string> DefaultConfigDictionary = new Dictionary<string, string>();
@@ -46,18 +46,18 @@ namespace HackSystem
         /// <returns>配置信息</returns>
         public static string GetConfig(string Key)
         {
-            UnityModule.DebugPrint("获取配置项Key: {0}", Key);
+            LogController.Debug("获取配置项Key: {0}", Key);
             string ConfigValue = string.Empty;
             try
             {
                 KeyValueConfigurationElement ConfigurationElement = UnityConfig.AppSettings.Settings[Key];
                 ConfigValue = ConfigurationElement?.Value ?? string.Empty;
-                UnityModule.DebugPrint(">>> ConfigValue[\"{0}\"] = {1}", Key, ConfigValue);
+                LogController.Debug(">>> ConfigValue[\"{0}\"] = {1}", Key, ConfigValue);
                 return ConfigValue;
             }
             catch (Exception ex)
             {
-                UnityModule.DebugPrint("读取配置失败 : Key = {0}, Message:{1}",Key, ex.Message);
+                LogController.Error("读取配置失败 : Key = {0}, Message:{1}",Key, ex.Message);
                 return string.Empty;
             }
         }
@@ -69,7 +69,7 @@ namespace HackSystem
         /// <param name="Value">配置Value</param>
         public static void SetConfig(string Key, string Value)
         {
-            UnityModule.DebugPrint("设置配置项Key:{0}, Value:{1}", Key, Value);
+            LogController.Debug("设置配置项Key:{0}, Value:{1}", Key, Value);
             try
             {
                 UnityConfig.AppSettings.Settings.Remove(Key);
@@ -78,7 +78,7 @@ namespace HackSystem
             }
             catch (Exception ex)
             {
-                UnityModule.DebugPrint("设置配置失败.Key:{0}, Value:{1}, Message:{2}", Key, Value, ex.Message);
+                LogController.Error("设置配置失败.Key:{0}, Value:{1}, Message:{2}", Key, Value, ex.Message);
                 throw ex;
             }
         }

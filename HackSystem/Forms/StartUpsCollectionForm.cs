@@ -57,7 +57,7 @@ namespace HackSystem
                                 }
                                 catch (Exception ex)
                                 {
-                                    UnityModule.DebugPrint("StartUp集合窗口扫描时遇到异常：{0}", ex.Message);
+                                    LogController.Error("StartUp集合窗口扫描时遇到异常：{0}", ex.Message);
                                 }
                             }));
                         }
@@ -81,7 +81,7 @@ namespace HackSystem
             }
             catch (Exception ex)
             {
-                UnityModule.DebugPrint("更新 StartUp 配置遇到异常：{0}", ex.Message);
+                LogController.Warn("更新 StartUp 配置遇到异常：{0}", ex.Message);
                 MessageBox.Show(string.Format("更新 StartUp 配置遇到异常：{0}", ex.Message));
                 return;
             }

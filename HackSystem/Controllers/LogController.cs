@@ -57,44 +57,110 @@ namespace HackSystem
             LogListener = new FileLogTraceListener("UnityLogListener")
             {
                 DiskSpaceExhaustedBehavior = DiskSpaceExhaustedOption.DiscardMessages,
-                BaseFileName = LogFileName,
+                LogFileCreationSchedule = LogFileCreationScheduleOption.Daily,
                 Location = LogFileLocation.Custom,
                 CustomLocation = LogDirectory,
-                AutoFlush = true,
+                MaxFileSize = 100 * 1024 * 1024,
+                BaseFileName = LogFileName,
                 Encoding = Encoding.UTF8,
-                LogFileCreationSchedule = LogFileCreationScheduleOption.Daily,
-                MaxFileSize = 10 * 1024 * 1024,
+                IncludeHostName = true,
+                AutoFlush = true,
+                Append = true,
                 IndentSize = 4,
-
-                // ???
-                TraceOutputOptions = TraceOptions.Timestamp
             };
 
-            Debug.Print(LogListener.FullLogFileName);
-            LogListener.WriteLine(LogListener.MaxFileSize);
-            LogListener.WriteLine("测试信息1");
-            LogListener.WriteLine("测试信息2");
-            LogListener.WriteLine("测试信息3");
+            LogListener.WriteLine("——————————————————————————");
+            Info("程序启动...");
         }
 
-        public static void WriteLine(string LogMessage, LogTypes LogType, params object[] LogValues)
-        {
-            WriteLine(string.Format(LogMessage, LogValues), LogType);
-        }
+        /// <summary>
+        /// 写入一行日志
+        /// </summary>
+        /// <param name="LogMessage">日志消息</param>
+        /// <param name="LogType">日志类型</param>
+        /// <param name="LogValues">参数值</param>
+        public static void WriteLog(string LogMessage, LogTypes LogType = LogTypes.INFO, params object[] LogValues) => 
+            WriteLog(string.Format(LogMessage, LogValues), LogType);
 
-        public static void WriteLine(string LogMessage, LogTypes LogType)
+        /// <summary>
+        /// 写入一行日志
+        /// </summary>
+        /// <param name="LogMessage">日志消息</param>
+        /// <param name="LogType">日志类型</param>
+        public static void WriteLog(string LogMessage, LogTypes LogType = LogTypes.INFO)
         {
-            LogListener?.WriteLine(string.Format(
-                "{0}  [{1}]  {2}",
-                DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss.fff"),
-                LogType.ToString(),
+            string Message = string.Format(
+                @"\{0}/   <{1}>   {2}",
+                DateTime.Now.ToString("yyyy/MM/dd-hh:mm:ss.fff"),
+                LogType.ToString().PadRight(5),
                 LogMessage
-                ));
+                );
+            LogListener?.WriteLine(Message);
+            System.Diagnostics.Debug.Print(Message);
         }
 
+        /// <summary>
+        /// 写入一条调试日志
+        /// </summary>
+        /// <param name="LogMessage">日志信息</param>
+        /// <param name="LogValues">参数值</param>
+        public static void Debug(string LogMessage, params object[] LogValues) => WriteLog(LogMessage, LogTypes.DEBUG, LogValues);
+        /// <summary>
+        /// 写入一条调试日志
+        /// </summary>
+        /// <param name="LogMessage">日志信息</param>
+        public static void Debug(string LogMessage) => WriteLog(LogMessage, LogTypes.DEBUG);
+        /// <summary>
+        /// 写入一条信息日志
+        /// </summary>
+        /// <param name="LogMessage">日志信息</param>
+        /// <param name="LogValues">参数值</param>
+        public static void Info(string LogMessage, params object[] LogValues) => WriteLog(LogMessage, LogTypes.INFO, LogValues);
+        /// <summary>
+        /// 写入一条信息日志
+        /// </summary>
+        /// <param name="LogMessage">日志信息</param>
+        public static void Info(string LogMessage) => WriteLog(LogMessage, LogTypes.INFO);
+        /// <summary>
+        /// 写入一条警告日志
+        /// </summary>
+        /// <param name="LogMessage">日志信息</param>
+        /// <param name="LogValues">参数值</param>
+        public static void Warn(string LogMessage, params object[] LogValues) => WriteLog(LogMessage, LogTypes.WARN, LogValues);
+        /// <summary>
+        /// 写入一条警告日志
+        /// </summary>
+        /// <param name="LogMessage">日志信息</param>
+        public static void Warn(string LogMessage) => WriteLog(LogMessage, LogTypes.WARN);
+        /// <summary>
+        /// 写入一条错误日志
+        /// </summary>
+        /// <param name="LogMessage">日志信息</param>
+        /// <param name="LogValues">参数值</param>
+        public static void Error(string LogMessage, params object[] LogValues) => WriteLog(LogMessage, LogTypes.ERROR, LogValues);
+        /// <summary>
+        /// 写入一条错误日志
+        /// </summary>
+        /// <param name="LogMessage">日志信息</param>
+        public static void Error(string LogMessage) => WriteLog(LogMessage, LogTypes.ERROR);
+        /// <summary>
+        /// 写入一条致命日志
+        /// </summary>
+        /// <param name="LogMessage">日志信息</param>
+        /// <param name="LogValues">参数值</param>
+        public static void Fatal(string LogMessage, params object[] LogValues) => WriteLog(LogMessage, LogTypes.FATAL, LogValues);
+        /// <summary>
+        /// 写入一条致命日志
+        /// </summary>
+        /// <param name="LogMessage">日志信息</param>
+        public static void Fatal(string LogMessage) => WriteLog(LogMessage, LogTypes.FATAL);
+
+        /// <summary>
+        /// 关闭并释放日志监听器
+        /// </summary>
         public static void CloseLogListener()
         {
-            Debug.Print("关闭日志记录器 ...");
+            Info("关闭日志记录器 ...");
             LogListener?.Close();
             LogListener?.Dispose();
         }

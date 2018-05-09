@@ -74,26 +74,5 @@ namespace HackSystem
             }
         }
 
-        /// <summary>
-        /// 封装的函数以输出调试信息
-        /// </summary>
-        /// <param name="DebugMessage">调试信息</param>
-        public static void DebugPrint(string DebugMessage)
-        {
-            string Message = string.Format("{0}    {1}", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"), DebugMessage);
-            Debug.Print(Message);
-            LogController.
-        }
-
-        /// <summary>
-        /// 封装的函数以输出调试信息
-        /// </summary>
-        /// <param name="DebugMessage">调试信息</param>
-        /// <param name="DebugValue">调试信息的值</param>
-        public static void DebugPrint(string DebugMessage, params object[] DebugValue)
-        {
-            DebugPrint(string.Format(DebugMessage, DebugValue));
-        }
-
     }
 }

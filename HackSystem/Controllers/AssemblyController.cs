@@ -23,7 +23,7 @@ namespace HackSystem
         /// <returns>程序集</returns>
         public static Assembly CreateAssembly(string AssemblyPath, bool DynamicLoad = true)
         {
-            UnityModule.DebugPrint("开始{0}加载程序集路径：{1} ...", (DynamicLoad ? "动态" : string.Empty), AssemblyPath);
+            LogController.Info("开始{0}加载程序集路径：{1} ...", (DynamicLoad ? "动态" : string.Empty), AssemblyPath);
 
             Assembly PluginAssembly = null;
             try
@@ -50,7 +50,7 @@ namespace HackSystem
             }
             catch (Exception ex)
             {
-                UnityModule.DebugPrint("创建程序集遇到异常：{0}", ex.Message);
+                LogController.Error("创建程序集遇到异常：{0}", ex.Message);
                 return null;
             }
 
@@ -67,7 +67,7 @@ namespace HackSystem
         {
             if (PluginAssembly == null) yield break;
 
-            UnityModule.DebugPrint("在程序集 {0} 中创建所有 {1} 派生的子类实例 ...", PluginAssembly.FullName, typeof(T).ToString());
+            LogController.Info("在程序集 {0} 中创建所有 {1} 派生的子类实例 ...", PluginAssembly.FullName, typeof(T).ToString());
             // 仅加载范式类型派生的子类
             foreach (Type PluginType in PluginAssembly.GetTypes().Where(
                 (PluginType => 
@@ -76,7 +76,7 @@ namespace HackSystem
                     PluginType.IsSubclassOf(typeof(T)) && PluginType.Name == TargetTypeName)
             ))
             {
-                UnityModule.DebugPrint(">>> 可加载的插件类型 : {0}", PluginType.FullName);
+                LogController.Debug("可加载的插件类型 : {0}", PluginType.FullName);
                 //创建允许加载类型的实例
                 T PluginInstance = null;
                 try
@@ -85,7 +85,7 @@ namespace HackSystem
                 }
                 catch (Exception ex)
                 {
-                    UnityModule.DebugPrint("创建 {0} 类型实例遇到异常 : {1}", PluginType.FullName, ex.Message);
+                    LogController.Error("创建 {0} 类型实例遇到异常 : {1}", PluginType.FullName, ex.Message);
                     continue;
                 }
                 yield return PluginInstance;

@@ -21,7 +21,7 @@ namespace HackSystem
             set
             {
                 _startUp = value;
-                UnityModule.DebugPrint("系统当前 StartUp : {0} ({1})", value.Name, value.Description);
+                LogController.Debug("系统当前 StartUp : {0} ({1})", value.Name, value.Description);
             }
         }
 
@@ -31,14 +31,14 @@ namespace HackSystem
         [STAThread]
         static void Main()
         {
-            UnityModule.DebugPrint("{0} (V {1}) 启动！=>>> Main()", Application.ProductName, Application.ProductVersion);
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //TODO : 为 Program 监听全局异常捕获；
             //Application.ThreadException += Application_ThreadException;
             //AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Application.ApplicationExit += Application_ApplicationExit;
+            //创建日志监听器
+            LogController.CreateLogListener(UnityModule.LogDirectory, Application.ProductName);
 
             //初始化目录
             try
@@ -47,11 +47,10 @@ namespace HackSystem
             }
             catch (Exception ex)
             {
-                UnityModule.DebugPrint("创建工作目录遇到异常：{0}", ex.Message);
+                LogController.Fatal("创建工作目录遇到异常：{0}", ex.Message);
                 MessageBox.Show("创建工作目录遇到异常："+ex.Message);
                 Application.Exit();
             }
-            LogController.CreateLogListener(UnityModule.LogDirectory, Application.ProductName);
 
             //补齐默认配置
             ConfigController.LoadDefaultConfig();
@@ -70,7 +69,7 @@ namespace HackSystem
             }
             catch (Exception ex)
             {
-                UnityModule.DebugPrint("初始化 StartUp 遇到异常 : {0}", ex.Message);
+                LogController.Fatal("初始化 StartUp 遇到异常 : {0}", ex.Message);
                 MessageBox.Show("初始化 StartUp 遇到异常 : "+ ex.Message);
                 return;
             }
@@ -87,11 +86,11 @@ namespace HackSystem
         /// </summary>
         private static void CheckDirectory()
         {
-            UnityModule.DebugPrint("检查工作目录 ...");
+            LogController.Info("检查工作目录 ...");
+
             //TODO : 程序需要的目录在这里初始化
             foreach (string TargetDirectory in new string[] {
                 UnityModule.StartUpDirectory,
-                UnityModule.LogDirectory,
             })
             {
                 try
@@ -119,13 +118,14 @@ namespace HackSystem
 
         static void Application_ApplicationExit(object sender, EventArgs e)
         {
+            LogController.Info("程序退出 ...");
+
             LogController.CloseLogListener();
-            UnityModule.DebugPrint("程序退出 ...");
         }
 
         private static void SwitchToLogin(object s, EventArgs e)
         {
-            UnityModule.DebugPrint("启动完成！");
+            LogController.Info("启动完成！");
             
         }
 
@@ -143,7 +143,7 @@ namespace HackSystem
             //无法创建指定DLL内指定CLASS的StartUp对象时，尝试扫描整个目录
             if (StartUpInstance == null)
             {
-                UnityModule.DebugPrint("无法创建指定的 StartUp，尝试扫描 StartUp 目录 ...");
+                LogController.Error("无法创建指定的 StartUp，尝试扫描 StartUp 目录 ...", LogController.LogTypes.ERROR);
                 StartUpInstance = StartUpController.ScanStartUpPlugins(UnityModule.StartUpDirectory).FirstOrDefault();
             }
 

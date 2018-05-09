@@ -19,7 +19,7 @@ namespace HackSystem
         /// <returns></returns>
         public static StartUpTemplateClass GetStartUpPlugin(string StartUpPath, string StartUpName)
         {
-            UnityModule.DebugPrint("获取 {0} 内的 StartUp 插件，StartUpName : {1}", StartUpPath, StartUpName);
+            LogController.Info("获取 {0} 内的 StartUp 插件，StartUpName : {1}", StartUpPath, StartUpName);
 
             Assembly StartUpAssembly = AssemblyController<StartUpTemplateClass>.CreateAssembly(StartUpPath);
             if (StartUpAssembly == null) return null;
@@ -35,18 +35,18 @@ namespace HackSystem
         /// <returns></returns>
         public static IEnumerable<StartUpTemplateClass> ScanStartUpPlugins(string StartUpDirectory, string Extension = ".dll")
         {
-            UnityModule.DebugPrint("扫描 StartUp 插件 : {0}", StartUpDirectory);
+            LogController.Debug("扫描 StartUp 插件 : {0}", StartUpDirectory);
             if (!Directory.Exists(StartUpDirectory)) yield break;
 
             foreach (string StartUpPath in Directory.GetFiles(StartUpDirectory).Where(StartUpPath => StartUpPath.ToLower().EndsWith(Extension)))
             {
-                UnityModule.DebugPrint("发现 StartUp 插件 dll 文件 : {0}", StartUpPath);
+                LogController.Debug("发现 StartUp 插件 dll 文件 : {0}", StartUpPath);
                 Assembly StartUpAssembly = AssemblyController<StartUpTemplateClass>.CreateAssembly(StartUpPath);
                 if (StartUpAssembly == null) continue;
 
                 foreach (StartUpTemplateClass StartUpInstance in AssemblyController<StartUpTemplateClass>.CreateTypeInstance(StartUpAssembly))
                 {
-                    UnityModule.DebugPrint("创建 StartUp 实例 : {0} ({1})", StartUpInstance.Name, StartUpInstance.Description);
+                    LogController.Info("创建 StartUp 实例 : {0} ({1})", StartUpInstance.Name, StartUpInstance.Description);
                     yield return StartUpInstance;
                 }
             }
