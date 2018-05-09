@@ -28,25 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.StartUpsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // StartUpsLayoutPanel
             // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(884, 561);
-            this.flowLayoutPanel1.TabIndex = 0;
-            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
+            this.StartUpsLayoutPanel.AutoScroll = true;
+            this.StartUpsLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StartUpsLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.StartUpsLayoutPanel.Name = "StartUpsLayoutPanel";
+            this.StartUpsLayoutPanel.Size = new System.Drawing.Size(884, 561);
+            this.StartUpsLayoutPanel.TabIndex = 0;
             // 
             // StartUpsCollectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 561);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.StartUpsLayoutPanel);
             this.DoubleBuffered = true;
             this.Name = "StartUpsCollectionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -58,6 +57,6 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel StartUpsLayoutPanel;
     }
 }

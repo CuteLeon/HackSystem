@@ -11,6 +11,11 @@ namespace HackSystem
 {
     public partial class StartUpCardControl : UserControl
     {
+        /// <summary>
+        /// 点击事件
+        /// </summary>
+        public new event EventHandler Click;
+
         private bool _isActived = false;
         /// <summary>
         /// 是否激活
@@ -23,7 +28,13 @@ namespace HackSystem
                 _isActived = value;
                 if (value)
                 {
-                    this.BackColor = Color.Gray;
+                    DescriptionLabel.ForeColor = Color.OrangeRed;
+                    DescriptionLabel.Text = "正在使用";
+                }
+                else
+                {
+                    DescriptionLabel.ForeColor = Color.Gray;
+                    DescriptionLabel.Text = Description;
                 }
             }
         }
@@ -43,13 +54,19 @@ namespace HackSystem
             get => NameLabel.Text;
             set => NameLabel.Text = value;
         }
+        private string _description = string.Empty;
         /// <summary>
         /// StartUp 描述
         /// </summary>
         public string Description
         {
-            get => DescriptionLabel.Text;
-            set => DescriptionLabel.Text = value;
+            get => _description;
+            set
+            {
+                _description = value;
+                if (!IsActived)
+                    DescriptionLabel.Text = value;
+            }
         }
         /// <summary>
         /// 预览图
@@ -106,37 +123,14 @@ namespace HackSystem
             NameLabel.MouseUp += CardMouseUp;
             DescriptionLabel.MouseUp += CardMouseUp;
 
-            EventHandler CardClick = new EventHandler((s, v) =>
-            {
-                ActiveStartUp();
-            });
-
-            this.Click += CardClick;
-            NameLabel.Click += CardClick;
-            DescriptionLabel.Click += CardClick;
+            base.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
+            NameLabel.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
+            DescriptionLabel.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
         }
         
         private void StartUpCardControl_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawRectangle(Pens.DodgerBlue, new Rectangle(0, 0, 159, 109));
-        }
-
-        private void ActiveStartUp()
-        {
-            if (MessageBox.Show(string.Format("是否使用启动画面 {0} ？", Name), "使用启动画面？", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
-            try
-            {
-                ConfigController.SetConfig("StartUpFile", FileName);
-                ConfigController.SetConfig("StartUpName", ClassName);
-            }
-            catch (Exception ex)
-            {
-                UnityModule.DebugPrint("更新 StartUp 配置遇到异常：{0}", ex.Message);
-                MessageBox.Show(string.Format("更新 StartUp 配置遇到异常：{0}", ex.Message));
-                return;
-            }
-            MessageBox.Show(string.Format("更新 StartUp 配置成功，重启即可查看效果"));
-            Application.Restart();
         }
 
     }

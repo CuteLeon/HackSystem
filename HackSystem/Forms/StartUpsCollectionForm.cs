@@ -13,6 +13,19 @@ namespace HackSystem
 {
     public partial class StartUpsCollectionForm : Form
     {
+        private StartUpCardControl _lastActived =null;
+        private StartUpCardControl LastActived
+        {
+            get => _lastActived;
+            set
+            {
+                if (_lastActived != null)
+                    _lastActived.IsActived = false;
+                _lastActived = value;
+                value.IsActived = true;
+            }
+        }
+
         public StartUpsCollectionForm()
         {
             InitializeComponent();
@@ -24,6 +37,8 @@ namespace HackSystem
 
             ThreadPool.QueueUserWorkItem(new WaitCallback(
                 (ILoveU) => {
+                    string ActivedFileName = ConfigController.GetConfig("StartUpFile");
+                    string ActivedClassName = ConfigController.GetConfig("StartUpName");
                     foreach (StartUpTemplateClass StartupInstance in StartUpController.ScanStartUpPlugins(UnityModule.StartUpDirectory))
                     {
                         try
@@ -33,7 +48,12 @@ namespace HackSystem
                                 try
                                 {
                                     StartUpCardControl startUp = new StartUpCardControl(StartupInstance.FileName, StartupInstance.GetType().Name, StartupInstance.Name, StartupInstance.Description, StartupInstance.Preview.Clone() as Image);
-                                    flowLayoutPanel1.Controls.Add(startUp);
+                                    startUp.Click += ActiveStartUp;
+                                    if (startUp.FileName == ActivedFileName && startUp.ClassName == ActivedClassName)
+                                    {
+                                        LastActived = startUp;
+                                    }
+                                    StartUpsLayoutPanel.Controls.Add(startUp);
                                 }
                                 catch (Exception ex)
                                 {
@@ -46,9 +66,29 @@ namespace HackSystem
                 }));
         }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void ActiveStartUp(object sender, EventArgs e)
         {
+            if (!(sender is StartUpCardControl)) return;
 
+            //预览
+            //StartUpController.GetStartUpPlugin(FileController.PathCombine(UnityModule.StartUpDirectory, (sender as StartUpCardControl).FileName), (sender as StartUpCardControl).ClassName).StartUpForm.Show(this);
+
+            if (MessageBox.Show(string.Format("是否使用启动画面 {0} ？", (sender as StartUpCardControl).Name), "使用启动画面？", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+            try
+            {
+                ConfigController.SetConfig("StartUpFile", (sender as StartUpCardControl).FileName);
+                ConfigController.SetConfig("StartUpName", (sender as StartUpCardControl).ClassName);
+            }
+            catch (Exception ex)
+            {
+                UnityModule.DebugPrint("更新 StartUp 配置遇到异常：{0}", ex.Message);
+                MessageBox.Show(string.Format("更新 StartUp 配置遇到异常：{0}", ex.Message));
+                return;
+            }
+            LastActived = (sender as StartUpCardControl);
+            MessageBox.Show(string.Format("更新 StartUp 配置成功，重启即可查看效果"));
+            //Application.Restart();
         }
+
     }
 }
