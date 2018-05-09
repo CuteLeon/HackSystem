@@ -8,6 +8,9 @@ using System.Text;
 
 namespace HackSystem
 {
+    /// <summary>
+    /// Base64 编码控制器
+    /// </summary>
     public static class Base64Controller
     {
 

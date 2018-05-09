@@ -27,18 +27,19 @@ namespace HackSystem.Tests
         {
             StartUpTemplateClass TestClass = null;
             TestClass = StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\ScientistStartUp.dll", "ScientistStartUpClass");
-            if(TestClass == null) Assert.Fail();
+            if (TestClass == null) Assert.Fail();
             if (TestClass.FileName != @"ScientistStartUp.dll") Assert.Fail();
 
             TestClass = StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\DefaultStartUp.dll", "DefaultStartUpClass");
-            if(TestClass == null) Assert.Fail();
+            if (TestClass == null) Assert.Fail();
             if (TestClass.FileName != @"DefaultStartUp.dll") Assert.Fail();
 
             TestClass = StartUpController.GetStartUpPlugin(@"..\..\..\Debug\StartUps\FileNotExists.dll", "ClassNotFound");
-            if(TestClass != null) Assert.Fail();
+            if (TestClass != null) Assert.Fail();
 
             TestClass = StartUpController.GetStartUpPlugin(@"C:\Windows\System32\user32.dll", "llalalalla");
-            if(TestClass != null) Assert.Fail();
+            if (TestClass != null) Assert.Fail();
         }
+
     }
 }

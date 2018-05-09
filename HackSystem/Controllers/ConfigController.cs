@@ -8,6 +8,9 @@ using System.IO;
 
 namespace HackSystem
 {
+    /// <summary>
+    /// 配置控制器
+    /// </summary>
     public static class ConfigController
     {
         private static readonly Configuration UnityConfig = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);

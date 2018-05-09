@@ -4,15 +4,24 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows.Forms; 
+using System.Windows.Forms;
+
 namespace HackSystem
 {
+    /// <summary>
+    /// 全局模块
+    /// </summary>
     public static class UnityModule
     {
+
         /// <summary>
         /// 启动窗口插件目录
         /// </summary>
         public static readonly string StartUpDirectory = FileController.PathCombine(Environment.CurrentDirectory,"StartUps");
+        /// <summary>
+        /// 日志文件目录
+        /// </summary>
+        public static readonly string LogDirectory = FileController.PathCombine(Environment.CurrentDirectory, "Logs");
 
         [DllImport("user32.dll")]
         public static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprc, IntPtr hrgn, uint flags);
@@ -56,7 +65,7 @@ namespace HackSystem
         /// <summary>
         /// 注册以帮助鼠标拖动无边框窗体
         /// </summary>
-        static public void MoveFormViaMouse(object sender, MouseEventArgs e)
+        public static void MoveFormViaMouse(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -69,9 +78,11 @@ namespace HackSystem
         /// 封装的函数以输出调试信息
         /// </summary>
         /// <param name="DebugMessage">调试信息</param>
-        static public void DebugPrint(string DebugMessage)
+        public static void DebugPrint(string DebugMessage)
         {
-            Debug.Print(string.Format("{0}    {1}", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"), DebugMessage));
+            string Message = string.Format("{0}    {1}", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"), DebugMessage);
+            Debug.Print(Message);
+            LogController.
         }
 
         /// <summary>
@@ -79,9 +90,10 @@ namespace HackSystem
         /// </summary>
         /// <param name="DebugMessage">调试信息</param>
         /// <param name="DebugValue">调试信息的值</param>
-        static public void DebugPrint(string DebugMessage, params object[] DebugValue)
+        public static void DebugPrint(string DebugMessage, params object[] DebugValue)
         {
             DebugPrint(string.Format(DebugMessage, DebugValue));
         }
+
     }
 }

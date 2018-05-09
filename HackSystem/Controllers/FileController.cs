@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HackSystem
 {
+    /// <summary>
+    /// 文件系统控制器
+    /// </summary>
     public static class FileController
     {
         /// <summary>
@@ -27,7 +30,7 @@ namespace HackSystem
                 Result = string.Format("{0} GB", ByteCount >> 30);
             else
                 Result = string.Format("{0} TB", ByteCount >> 40);
-            UnityModule.DebugPrint("格式化文件大小：{0} => {1}",ByteCount.ToString(),Result);
+            
             return Result;
         }
 
@@ -37,7 +40,6 @@ namespace HackSystem
         /// <returns>文件大小</returns>
         public static string GetFileSize(string FilePath)
         {
-            UnityModule.DebugPrint("获取文件大小：{0}",FilePath);
             try
             {
                 return FormatSize(Convert.ToUInt64(new FileInfo(FilePath).Length));
@@ -55,7 +57,6 @@ namespace HackSystem
         /// <returns></returns>
         public static string PathCombine(string DirectoryPath, string FileName)
         {
-            UnityModule.DebugPrint("合并文件路径：\"{0}\" + \"{1}\"",DirectoryPath,FileName);
             if (!DirectoryPath.EndsWith("\\")) DirectoryPath += "\\";
             return (DirectoryPath + FileName).Replace("\\\\", "\\");
         }

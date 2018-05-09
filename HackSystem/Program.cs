@@ -35,13 +35,24 @@ namespace HackSystem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //为 Program 监听全局异常捕获；
+            //TODO : 为 Program 监听全局异常捕获；
             //Application.ThreadException += Application_ThreadException;
             //AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Application.ApplicationExit += Application_ApplicationExit;
 
             //初始化目录
-            CheckDirectory();
+            try
+            {
+                CheckDirectory();
+            }
+            catch (Exception ex)
+            {
+                UnityModule.DebugPrint("创建工作目录遇到异常：{0}", ex.Message);
+                MessageBox.Show("创建工作目录遇到异常："+ex.Message);
+                Application.Exit();
+            }
+            LogController.CreateLogListener(UnityModule.LogDirectory, Application.ProductName);
+
             //补齐默认配置
             ConfigController.LoadDefaultConfig();
 
@@ -51,15 +62,6 @@ namespace HackSystem
             StartUpTemplateClass.Password = ConfigController.GetConfig("Password");
             StartUpTemplateClass.HeadPortrait = Base64Controller.Base64ToImage(ConfigController.GetConfig("HeadPortrait"));
              */
-
-            // 显示所有 StartUpForm
-            /*
-            foreach (StartUpTemplateClass a in StartUpController.ScanStartUpPlugins(UnityModule.StartUpDirectory))
-            {
-                new Form() { FormBorderStyle = FormBorderStyle.None, Size = new Size(160, 90), BackgroundImage = a.Preview }.ShowDialog();
-                a.StartUpForm.ShowDialog();
-            }
-            */
 
             //初始化启动画面
             try
@@ -73,9 +75,7 @@ namespace HackSystem
                 return;
             }
 
-            //显示 StartUp.Preview
-            //new Form() { FormBorderStyle = FormBorderStyle.None, Size = new Size(160, 90), BackgroundImage = StartUp.Preview }.ShowDialog();
-            StartUp.StartUpForm.TopMost = true;
+            //StartUp.StartUpForm.TopMost = true;
             StartUp.StartUpForm.ShowDialog();
             GC.Collect();
 
@@ -87,14 +87,21 @@ namespace HackSystem
         /// </summary>
         private static void CheckDirectory()
         {
+            UnityModule.DebugPrint("检查工作目录 ...");
             //TODO : 程序需要的目录在这里初始化
-            try
+            foreach (string TargetDirectory in new string[] {
+                UnityModule.StartUpDirectory,
+                UnityModule.LogDirectory,
+            })
             {
-                if (!Directory.Exists(UnityModule.StartUpDirectory))
-                    Directory.CreateDirectory(UnityModule.StartUpDirectory);
-            }catch(Exception ex)
-            {
-                UnityModule.DebugPrint("创建工作目录遇到异常：{0}", ex.Message);
+                try
+                {
+                    if (!Directory.Exists(TargetDirectory))
+                        Directory.CreateDirectory(TargetDirectory);
+                }catch(Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
 
@@ -112,6 +119,7 @@ namespace HackSystem
 
         static void Application_ApplicationExit(object sender, EventArgs e)
         {
+            LogController.CloseLogListener();
             UnityModule.DebugPrint("程序退出 ...");
         }
 

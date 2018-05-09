@@ -33,7 +33,9 @@
   <PropertyGroup>
     <ApplicationIcon>Resources\HackSystemLogoIcon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="StartUpTemplate, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Debug\StartUpTemplate.dll</HintPath>
@@ -56,6 +58,7 @@
     <Compile Include="Controllers\Base64Controller.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controls\StartUpCardControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

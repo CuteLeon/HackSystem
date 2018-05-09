@@ -9,6 +9,10 @@ using System.Windows.Forms;
 
 namespace HackSystem
 {
+    /// <summary>
+    /// 程序集控制器
+    /// </summary>
+    /// <typeparam name="T">类型</typeparam>
     public static class AssemblyController<T> where T : class
     {
         /// <summary>
