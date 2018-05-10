@@ -1,87 +1,67 @@
-> ### ÑÝÊ¾ÏîÄ¿ GitHub µØÖ· : [RingsStartUp](https://github.com/CuteLeon/HackSystem/tree/master/RingsStartUp)
+> ### æ¼”ç¤ºé¡¹ç›® GitHub åœ°å€ : [DefaultStartUp](https://github.com/CuteLeon/HackSystem/tree/master/DefaultStartUp)
 ***
 
-> ### 1>. Ê×ÏÈÔÚ½â¾ö·½°¸¹ÜÀíÆ÷Àï StartUps ½â¾ö·½°¸ÎÄ¼þ¼ÐÄÚÐÂ½¨ÏîÄ¿£¬
-    ÏîÄ¿ÀàÐÍÎª Visual C#>Windows ¾­µä×ÀÃæ>Àà¿â (.Net Framework)£»
-	¿ò¼Ü°æ±¾Îª .Net Framework 4.0£»
+> ### 1>. é¦–å…ˆåœ¨è§£å†³æ–¹æ¡ˆç®¡ç†å™¨é‡Œ StartUps è§£å†³æ–¹æ¡ˆæ–‡ä»¶å¤¹å†…æ–°å»ºé¡¹ç›®ï¼Œ
+    é¡¹ç›®ç±»åž‹ä¸º Visual C#>Windows ç»å…¸æ¡Œé¢>ç±»åº“ (.Net Framework)ï¼›
+	æ¡†æž¶ç‰ˆæœ¬ä¸º .Net Framework 4.0ï¼›
 ***
-> ### 2>. ½øÈëÏîÄ¿ÊôÐÔ£¬
-	Éú³ÉÄ¿Â¼ÉèÖÃÎª£º
+> ### 2>. è¿›å…¥é¡¹ç›®å±žæ€§ï¼Œ
+	ç”Ÿæˆç›®å½•è®¾ç½®ä¸ºï¼š
 	Debug => ..\Debug\StartUps\
 	Release => ..\Release\StartUps\
 ***
 
-> ### 3>. ÎªÏîÄ¿Ìí¼ÓÒýÓÃ£¬
-	Ìí¼ÓÒýÓÃ => StartUpTemplate.dll
-	ÔÚ ÏîÄ¿>ÒýÓÃ ÀïÑ¡ÖÐStratUpTemplate£¬ÊôÐÔ´°¿ÚÄÚ ¸´ÖÆ±¾µØ => false£»
+> ### 3>. ä¸ºé¡¹ç›®æ·»åŠ å¼•ç”¨
+	æ·»åŠ å¼•ç”¨ => StartUpTemplate.dll
+	åœ¨ é¡¹ç›®>å¼•ç”¨ é‡Œé€‰ä¸­StartUpTemplateï¼Œå±žæ€§çª—å£å†… å¤åˆ¶æœ¬åœ° => falseï¼›
 ***
 
-> ### 4>. ÉèÖÃ½â¾ö·½°¸ÏîÄ¿ÒÀÀµ
-	Îª RingsStartUp ÏîÄ¿ÉèÖÃ StartUpTeamplate ÏîÄ¿ÒÀÀµ
+> ### 4>. è®¾ç½®è§£å†³æ–¹æ¡ˆé¡¹ç›®ä¾èµ–
+	ä¸º DefaultStartUp é¡¹ç›®è®¾ç½® StartUpTeamplate é¡¹ç›®ä¾èµ–
 ***
 
-> ### 5>. ÏÂÃæÒÔ RingsStartUp ×÷Îª¿ª·¢ÑÝÊ¾£º
-	´ËÏîÄ¿ÄÚ½«°üº¬¶à¸öStartUp²å¼þ
-***
+> ### 5>. StartUpç±»å†…å¼•ç”¨ StartUpTemplateï¼Œç»§æ‰¿å¹¶å®žçŽ° StartUpTemplateClass æŠ½è±¡ç±»
+	åœ¨æž„é€ å‡½æ•°å†…èµ‹å€¼æ’ä»¶çš„ åç§°ã€æè¿°ã€é¢„è§ˆï¼›
+	ä½¿ç”¨FileNameå±žæ€§è¿”å›žç¨‹åºé›†æ–‡ä»¶åç§°;
+	æ³¨æ„ï¼Œåªéœ€è¦åœ¨CreateStartUpForm()æ–¹æ³•è¿”å›žFormå³å¯ï¼Œä¸è¦åœ¨æž„é€ å‡½æ•°å†…åˆ›å»ºFormå¯¹è±¡ï¼Œå¦åˆ™ä¼šå› ä¸ºåˆ›å»ºClasså¯¹è±¡è€Œé€ æˆFormå ç”¨å¤§é‡å†…å­˜ï¼›
 
-> ### 6>. ÏîÄ¿ Ìí¼Ó>ÐÂ½¨Ïî>Visual C#>×ÊÔ´ÎÄ¼þ
-	ÃüÃûÎª RingsStartUpResource
-***
-
-> ### 7>. ÏîÄ¿ÄÚÐÂ½¨ÎÄ¼þ¼Ð£¬£¨Ö»°üº¬µ¥¸öStratUp²å¼þÊ±Ò²¿ÉÒÔ²»ÐÂ½¨ÎÄ¼þ¼Ð£©
-	ÃûÎª RainbowRing£¬°Ñ Class1 Ç¨ÒÆµ½´ËÎÄ¼þ¼ÐÖÐ£¬
-	µ«Òª×¢Òâ Class Ëù´¦ÃüÃû¿Õ¼äÈÔÐèÔÚ½â¾ö·½°¸¸ù²ã£¬¼´ namespace RingsStartUp£»
-	ÖØÃüÃû Class1 ÀàÎª RainbowRingClass
-	Õâ¸öÒ²½«×÷Îª²å¼þµÄ TypeÃû³Æ
-	RainbowRing ÎÄ¼þ¼ÐÄÚÐÂ½¨ Form£¬
-	Ãû³ÆÎª RainbowRingForm
-	Ãû³Æ¿Õ¼ä¸ÄÎª namespace RingsStartUp£»
-***
-
-> ### 8>. RainbowRingClass ÄÚÒýÓÃ StartUpTemplate
-	RainbowRingClass ÄÚÒýÈëÃüÃû¿Õ¼ä using StartUpTemplate£»
-	RainbowRingClass ¼Ì³Ð²¢ÊµÏÖ StartUpTemplateClass ³éÏóÀà£»
-	ÔÚ¹¹Ôìº¯ÊýÄÚ¸³Öµ²å¼þµÄ Ãû³Æ¡¢ÃèÊö¡¢Ô¤ÀÀ£»
-	×¢Òâ£¡
-	²»±ØÔÙ¹¹Ôìº¯ÊýÀï new ³ö Form£¬¶øÒ»¶¨ÒªÔÚ CreateStartUpForm ·½·¨ÄÚ·µ»ØÓÐÐ§µÄ Form ¶ÔÏó£¬
 ``` csharp
-using System.Windows.Forms;
 using StartUpTemplate;
+using System.Windows.Forms;
 
-namespace RingsStartUp
+namespace DefaultStartUp
 {
-	public class RainbowRingClass : StartUpTemplateClass
-	{
-		public RainbowRingClass()
-		{
-			Name = "²Êºç»·";
-			Description = "²Êºç»·Æô¶¯»­Ãæ - Leon";
-			Preview = RingsStartUpResource.RainbowStartUpPreview;
-		}
+    public class DefaultStartUpClass : StartUpTemplateClass
+    {
+        public DefaultStartUpClass()
+        {
+            this.Name = "é’¢é“ä¾ ";
+            this.Description = "é’¢é“ä¾ å¯åŠ¨ç”»é¢ - Leon";
+            this.Preview = DefaultStartUpResource.DefaultStartUpPreview;
+        }
 
-		protected override Form CreateStartUpForm()
-		{
-			return new RainbowRingForm() { ParentStartUp  =this };
-		}
-	}
+        public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
+
+        protected override Form CreateStartUpForm()
+        {
+            return new DefaultStartUpForm() { ParentStartUp = this };
+        }
+    }
 }
 ```
 ***
 
-> ### 9>. RainbowStartUpForm Ôö¼Ó StartUpTemplateClass ÀàÐÍ×Ö¶Î
-	public StartUpTemplateClass ParentStartUp = null;
-	ÓÃÓÚ¼ÇÂ¼´°¿ÚËùÊô StartUp
+> ### 6>. å‘æŒ¥æƒ³è±¡ï¼Œè®¾è®¡å–œæ¬¢çš„ StartUp ç•Œé¢
 ***
 
-> ### 10>. ·¢»ÓÏëÏóÁ¦£¬Éè¼ÆÏ²»¶µÄ StartUp ½çÃæ
-***
+> ### 7>. å¯åŠ¨å®Œæ¯•ï¼Œè§¦å‘Class.OnStartUpFinished()å¹¶å…³é—­Form
+	å¯åŠ¨ç”»é¢åŠ è½½å®Œæ¯•ï¼Œéœ€è¦å…³é—­Formæ‰å¯ä»¥ç»§ç»­è¿è¡Œç¨‹åºï¼›
+	æŽ¨èä¸¤ç§æ–¹æ³•è§¦å‘Class.OnStartUpFinished()ï¼š
+	1>. Classå†…åˆ›å»ºFormæ—¶ï¼Œè®¢é˜…FormClosingäº‹ä»¶ä»¥è§¦å‘OnStartUpFinished();ï¼ŒFormå…³é—­æ—¶å³å¯è§¦å‘ï¼›
+	2>.åœ¨Formå†…ä½¿ç”¨å­—æ®µè®°å½•æ‰€å±žClassï¼Œåœ¨Formå†…æ ¹æ®ç”¨æˆ·æ“ä½œé€‚æ—¶è§¦å‘Class.OnStartUpFinished();
 
-> ### 11>. ¼ÓÔØÍê³ÉÊÂ¼þ
-	Æô¶¯»­Ãæ¼ÓÔØÍê³ÉºóÒªµ÷ÓÃ ParentStartUp.OnStartUpFinished(s, e);
-	²¢¹Ø±Õ StartUpForm£»
-	¼òµ¥µÄÊµÏÖ·½°¸£º
 ``` csharp
-public RainbowRingForm()
+public DefaultStartUpForm()
 {
     InitializeComponent();
     CheckForIllegalCrossThreadCalls = false;
@@ -89,7 +69,7 @@ public RainbowRingForm()
 }
 ```
 
-    µ±¼ÓÔØ½áÊøÊ±£º
+    å½“åŠ è½½ç»“æŸæ—¶ï¼š
 ``` csharp
 ThreadPool.QueueUserWorkItem(new WaitCallback(
     (ILoveU) => {
@@ -104,15 +84,15 @@ ThreadPool.QueueUserWorkItem(new WaitCallback(
 ```
 ***
 
-12>. Ê¹ÓÃ²å¼þ£¬
-	¿ÉÒÔÔÚ HackSystem Æô¶¯»­Ãæ´¦ÉèÖÃÊ¹ÓÃ´Ë StartUp ²å¼þ£»
-	Ò²¿ÉÒÔÖ±½ÓÐÞ¸Ä Config ÎÄ¼þÒÔÊ¹ÓÃ´Ë StartUp ²å¼þ£º
+> ### 8>. ä½¿ç”¨æ’ä»¶
+	å¯ä»¥åœ¨ HackSystem å¯åŠ¨ç”»é¢é…ç½®ç•Œé¢å¯ç”¨æ­¤æ’ä»¶ï¼›
+	ä¹Ÿå¯ä»¥ç›´æŽ¥ä¿®æ”¹ Config æ–‡ä»¶ä»¥å¯ç”¨æ­¤æ’ä»¶ï¼š
 ``` xml
-<add key="StartUpFile" value="RingStartUp.dll" />
-<add key="StartUpName" value="RainbowRingClass" />
+<add key="StartUpFile" value="DefaultStartUp.dll" />
+<add key="StartUpName" value="DefaultStartUpClass" />
 ```
 
 ***
 
-> ### ½áÊø
-via : Leon.ID#QQ.COM
+> ### ç»“æŸ
+via : Leon.ID@QQ.COM

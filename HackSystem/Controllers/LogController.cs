@@ -52,15 +52,13 @@ namespace HackSystem
         /// <param name="LogFileName">日志文件名称前缀</param>
         public static void CreateLogListener(string LogDirectory, string LogFileName)
         {
-            CloseLogListener(); //仅做尝试
-
             LogListener = new FileLogTraceListener("UnityLogListener")
             {
                 DiskSpaceExhaustedBehavior = DiskSpaceExhaustedOption.DiscardMessages,
                 LogFileCreationSchedule = LogFileCreationScheduleOption.Daily,
                 Location = LogFileLocation.Custom,
-                CustomLocation = LogDirectory,
                 MaxFileSize = 100 * 1024 * 1024,
+                CustomLocation = LogDirectory,
                 BaseFileName = LogFileName,
                 Encoding = Encoding.UTF8,
                 IncludeHostName = true,

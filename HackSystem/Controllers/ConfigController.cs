@@ -26,6 +26,8 @@ namespace HackSystem
             Dictionary<string, string> DefaultConfigDictionary = new Dictionary<string, string>();
             DefaultConfigDictionary.Add("StartUpFile", "AnimationStartUp.dll");
             DefaultConfigDictionary.Add("StartUpName", "SerpentineStartUpClass");
+            DefaultConfigDictionary.Add("LoginFile", "DefaultLogin.dll");
+            DefaultConfigDictionary.Add("LoginName", "DefaultLoginClass");
             DefaultConfigDictionary.Add("UserName", "Leon");
             DefaultConfigDictionary.Add("Password", "123456");
             DefaultConfigDictionary.Add("HeadPortrait", "123456");

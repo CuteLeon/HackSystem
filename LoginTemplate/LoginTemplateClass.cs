@@ -12,19 +12,30 @@ namespace LoginTemplate
         /// <summary>
         /// 图标
         /// </summary>
-        public static Icon StartUpIcon = null;
+        public static Icon LoginIcon = null;
         /// <summary>
-        /// 用户名 (传送至 StartUp 插件)
+        /// 用户名 (传送至 Login 插件)
         /// </summary>
         public static string UserName = string.Empty;
         /// <summary>
-        /// 密码 (传送至 StartUp 插件)
+        /// 密码 (传送至 Login 插件)
         /// </summary>
         public static string Password = string.Empty;
+        private static Image _headPortrait = LoginTemplateResource.DefaultHeadPortrait;
         /// <summary>
-        /// 头像 (传送至 StartUp 插件)
+        /// 头像 (传送至 Login 插件)
         /// </summary>
-        public static Image HeadPortrait = null;
+        public static Image HeadPortrait
+        {
+            get => _headPortrait;
+            set
+            {
+                if (value == null)
+                    _headPortrait = LoginTemplateResource.DefaultHeadPortrait;
+                else
+                    _headPortrait = value;
+            }
+        }
         /// <summary>
         /// 启动名称
         /// </summary>
@@ -70,7 +81,7 @@ namespace LoginTemplate
             {
                 if (_loginForm == null)
                     _loginForm = CreateLoginForm();
-                if (_loginForm != null) _loginForm.Icon = StartUpIcon;
+                if (_loginForm != null) _loginForm.Icon = LoginIcon;
                 return _loginForm;
             }
             protected set => _loginForm = value;

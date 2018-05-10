@@ -35,7 +35,14 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="LoginTemplate, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Debug\LoginTemplate.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StartUpTemplate, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Debug\StartUpTemplate.dll</HintPath>
@@ -46,7 +53,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -71,6 +80,7 @@
     <Compile Include="Forms\StartUpsCollectionForm.Designer.cs">
       <DependentUpon>StartUpsCollectionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\LoginController.cs" />
     <Compile Include="Plugins\StartUpController.cs" />
     <Compile Include="Controllers\UnityModule.cs" />
     <Compile Include="Forms\DesktopForm.cs">

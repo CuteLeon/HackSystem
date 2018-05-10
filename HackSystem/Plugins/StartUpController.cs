@@ -12,7 +12,7 @@ namespace HackSystem
     {
 
         /// <summary>
-        /// 从指定 StratUp 插件文件获取 Name 的插件实例
+        /// 从指定 StartUp 插件文件获取 Name 的插件实例
         /// </summary>
         /// <param name="StartUpPath">插件路径</param>
         /// <param name="StartUpName">插件名称</param>

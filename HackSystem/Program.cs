@@ -5,13 +5,13 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using StartUpTemplate;
+using LoginTemplate;
 
 namespace HackSystem
 {
     static class Program
     {
         private volatile static StartUpTemplateClass _startUp = null;
-
         /// <summary>
         /// 系统的启动画面
         /// </summary>
@@ -21,6 +21,20 @@ namespace HackSystem
             set
             {
                 _startUp = value;
+                LogController.Debug("系统当前 StartUp : {0} ({1})", value.Name, value.Description);
+            }
+        }
+
+        private volatile static LoginTemplateClass _login = null;
+        /// <summary>
+        /// 系统的登录界面
+        /// </summary>
+        public static LoginTemplateClass Login
+        {
+            get => _login;
+            set
+            {
+                _login = value;
                 LogController.Debug("系统当前 StartUp : {0} ({1})", value.Name, value.Description);
             }
         }
@@ -54,12 +68,6 @@ namespace HackSystem
             //补齐默认配置
             ConfigController.LoadDefaultConfig();
 
-            /* TODO : 放到登录窗口
-            StartUpTemplateClass.UserName = ConfigController.GetConfig("UserName");
-            StartUpTemplateClass.Password = ConfigController.GetConfig("Password");
-            StartUpTemplateClass.HeadPortrait = Base64Controller.Base64ToImage(ConfigController.GetConfig("HeadPortrait"));
-             */
-
             //初始化启动画面
             try
             {
@@ -76,6 +84,22 @@ namespace HackSystem
             StartUp.StartUpForm.ShowDialog();
             GC.Collect();
 
+            //初始化登录界面
+            try
+            {
+                Login = InitializeLogin();
+            }
+            catch (Exception ex)
+            {
+                LogController.Fatal("初始化 Login 遇到异常 : {0}", ex.Message);
+                MessageBox.Show("初始化 Login 遇到异常 : " + ex.Message);
+                return;
+            }
+
+            //Login.LoginForm.TopMost = true;
+            Login.LoginForm.ShowDialog();
+            GC.Collect();
+            
             Application.Run(new DesktopForm());
         }
 
@@ -89,8 +113,10 @@ namespace HackSystem
             //TODO : 程序需要的目录在这里初始化
             foreach (string TargetDirectory in new string[] {
                 UnityModule.StartUpDirectory,
+                UnityModule.LoginDirectory,
             })
             {
+                LogController.Debug("检查目录：{0}", TargetDirectory);
                 try
                 {
                     if (!Directory.Exists(TargetDirectory))
@@ -164,6 +190,38 @@ namespace HackSystem
 
             StartUpInstance.StartUpFinished += new EventHandler<EventArgs>((s, e) => { SwitchToLogin(s, e); });
             return StartUpInstance;
+        }
+
+        /// <summary>
+        /// 初始化登录界面
+        /// </summary>
+        private static LoginTemplateClass InitializeLogin()
+        {
+            LoginTemplateClass.LoginIcon = UnityResource.HackSystemLogoIcon;
+
+            LoginTemplateClass.UserName = ConfigController.GetConfig("UserName");
+            LoginTemplateClass.Password = ConfigController.GetConfig("Password");
+            LoginTemplateClass.HeadPortrait = Base64Controller.Base64ToImage( ConfigController.GetConfig("HeadPortrait"));
+
+            string LoginPath = FileController.PathCombine(UnityModule.LoginDirectory, ConfigController.GetConfig("LoginFile"));
+            LoginTemplateClass LoginInstance = LoginController.GetLoginPlugin(
+                LoginPath,
+                ConfigController.GetConfig("LoginName"));
+
+            //无法创建指定DLL内指定CLASS的Login对象时，尝试扫描整个目录
+            if (LoginInstance == null)
+            {
+                LogController.Error("无法创建指定的 Login，尝试扫描 Login 目录 ...", LogController.LogTypes.ERROR);
+                LoginInstance = LoginController.ScanLoginPlugins(UnityModule.LoginDirectory).FirstOrDefault();
+            }
+
+            if (LoginInstance == null)
+                throw new Exception("无法创建 Login 对象");
+            if (LoginInstance.LoginForm == null)
+                throw new Exception("无法创建 Login.LoginForm 对象");
+
+            LoginInstance.LoginFinished += new EventHandler<EventArgs>((s, e) => { SwitchToLogin(s, e); });
+            return LoginInstance;
         }
 
     }

@@ -11,8 +11,8 @@ namespace DefaultStartUp
     {
         public DefaultStartUpClass()
         {
-            this.Name = "默认启动画面";
-            this.Description = "默认启动画面 - Leon";
+            this.Name = "钢铁侠";
+            this.Description = "钢铁侠启动画面 - Leon";
             this.Preview = DefaultStartUpResource.DefaultStartUpPreview;
         }
 

@@ -26,6 +26,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{A4C6CDAC-D60F-45BD-98F5-732ED2065A77}"
 	ProjectSection(SolutionItems) = preProject
 		Common.txt = Common.txt
+		Documents\Login开发教程.md = Documents\Login开发教程.md
 		Documents\StartUp开发教程.md = Documents\StartUp开发教程.md
 	EndProjectSection
 EndProject
@@ -42,6 +43,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystemTests", "HackSystemTests\HackSystemTests.csproj", "{00DFE92D-55C0-4E95-9568-CAFFD9CE37B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginTemplate", "LoginTemplate\LoginTemplate.csproj", "{4138EEB0-2A53-4111-9898-E953609A21DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logins", "Logins", "{440F20B3-CDA8-41CE-AF87-E58BC267B533}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultLogin", "DefaultLogin\DefaultLogin.csproj", "{4C709A95-7B5F-4CA6-91CA-264E4D243CA9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4138EEB0-2A53-4111-9898-E953609A21DD} = {4138EEB0-2A53-4111-9898-E953609A21DD}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +89,10 @@ Global
 		{4138EEB0-2A53-4111-9898-E953609A21DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4138EEB0-2A53-4111-9898-E953609A21DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4138EEB0-2A53-4111-9898-E953609A21DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C709A95-7B5F-4CA6-91CA-264E4D243CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C709A95-7B5F-4CA6-91CA-264E4D243CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C709A95-7B5F-4CA6-91CA-264E4D243CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C709A95-7B5F-4CA6-91CA-264E4D243CA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +102,7 @@ Global
 		{1155531C-D174-4687-A159-0A6E170DA5EE} = {A8C54090-B89B-4213-B746-E687FFE0FF10}
 		{43189EB8-1A80-4587-BD89-E8D1A7748C4F} = {A8C54090-B89B-4213-B746-E687FFE0FF10}
 		{3443552E-A068-4B7D-9398-970C628485FC} = {A8C54090-B89B-4213-B746-E687FFE0FF10}
+		{4C709A95-7B5F-4CA6-91CA-264E4D243CA9} = {440F20B3-CDA8-41CE-AF87-E58BC267B533}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79BC620D-A9A9-41B2-835E-E6CAF80E9902}
