@@ -33,10 +33,9 @@ namespace HackSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //TODO : 为 Program 监听全局异常捕获；
-            //Application.ThreadException += Application_ThreadException;
-            //AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Application.ApplicationExit += Application_ApplicationExit;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             //创建日志监听器
             LogController.CreateLogListener(UnityModule.LogDirectory, Application.ProductName);
 
@@ -54,7 +53,6 @@ namespace HackSystem
 
             //补齐默认配置
             ConfigController.LoadDefaultConfig();
-
 
             /* TODO : 放到登录窗口
             StartUpTemplateClass.UserName = ConfigController.GetConfig("UserName");
@@ -107,19 +105,31 @@ namespace HackSystem
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Exception UnhandledException = e.ExceptionObject as Exception;
-            MessageBox.Show(string.Format("捕获到未处理异常：{0}\r\n异常信息：{1}\r\n异常堆栈：{2}\r\nCLR即将退出：{3}", UnhandledException.GetType(), UnhandledException.Message, UnhandledException.StackTrace, e.IsTerminating));
-        }
-
-        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
-        {
-            Exception ThreadException = e.Exception;
-            MessageBox.Show(string.Format("捕获到未处理异常：{0}\r\n异常信息：{1}\r\n异常堆栈：{2}", ThreadException.GetType(), ThreadException.Message, ThreadException.StackTrace));
+            string ExceptionDescription = string.Format(
+                "应用域内发现未被捕获的异常：\r\n"+
+                "   异常类型 : {0}\r\n" +
+                "   异常地址 : {1}\r\n" +
+                "   异常信息 : {2}\r\n" +
+                "   调用堆栈 : \r\n{3}\r\n" +
+                "   即将终止 : {4}",
+                UnhandledException.GetType().ToString(),
+                UnhandledException.Source,
+                UnhandledException.Message,
+                UnhandledException.StackTrace,
+                e.IsTerminating
+                );
+            LogController.Fatal(ExceptionDescription);
+            MessageBox.Show(string.Format(
+                "{0} \n——————————————\n日志文件：{1}\n请联系作者：{2}\n或把问题提交在 : {3}\n\t感谢您的帮助！" ,
+                ExceptionDescription,
+                LogController.GetLogPath(),
+                "Leon.ID@QQ.COM",
+                "http://www.GitHub.com/CuteLeon/HackSystem"));
         }
 
         static void Application_ApplicationExit(object sender, EventArgs e)
         {
             LogController.Info("程序退出 ...");
-
             LogController.CloseLogListener();
         }
 

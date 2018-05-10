@@ -165,5 +165,14 @@ namespace HackSystem
             LogListener?.Dispose();
         }
 
+        /// <summary>
+        /// 获取日志文件路径
+        /// </summary>
+        /// <returns></returns>
+        public static string GetLogPath()
+        {
+            return LogListener?.FullLogFileName ?? "未创建日志监听器";
+        }
+
     }
 }
