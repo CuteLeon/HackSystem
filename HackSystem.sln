@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem", "HackSystem\HackSystem.csproj", "{6A25BE16-22E7-4002-8CD7-99A7A6BFB2AA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C618E603-DD32-4278-BEBF-6B1807E3A790} = {C618E603-DD32-4278-BEBF-6B1807E3A790}
+		{4138EEB0-2A53-4111-9898-E953609A21DD} = {4138EEB0-2A53-4111-9898-E953609A21DD}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartUpTemplate", "StartUpTemplate\StartUpTemplate.csproj", "{C618E603-DD32-4278-BEBF-6B1807E3A790}"
@@ -38,7 +39,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimationStartUp", "Animati
 		{C618E603-DD32-4278-BEBF-6B1807E3A790} = {C618E603-DD32-4278-BEBF-6B1807E3A790}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystemTests", "HackSystemTests\HackSystemTests.csproj", "{80EEE037-DDFB-4040-81FF-00CF9712BF8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystemTests", "HackSystemTests\HackSystemTests.csproj", "{00DFE92D-55C0-4E95-9568-CAFFD9CE37B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginTemplate", "LoginTemplate\LoginTemplate.csproj", "{4138EEB0-2A53-4111-9898-E953609A21DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,10 +73,14 @@ Global
 		{3443552E-A068-4B7D-9398-970C628485FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3443552E-A068-4B7D-9398-970C628485FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3443552E-A068-4B7D-9398-970C628485FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80EEE037-DDFB-4040-81FF-00CF9712BF8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80EEE037-DDFB-4040-81FF-00CF9712BF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80EEE037-DDFB-4040-81FF-00CF9712BF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80EEE037-DDFB-4040-81FF-00CF9712BF8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00DFE92D-55C0-4E95-9568-CAFFD9CE37B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00DFE92D-55C0-4E95-9568-CAFFD9CE37B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00DFE92D-55C0-4E95-9568-CAFFD9CE37B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00DFE92D-55C0-4E95-9568-CAFFD9CE37B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4138EEB0-2A53-4111-9898-E953609A21DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4138EEB0-2A53-4111-9898-E953609A21DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4138EEB0-2A53-4111-9898-E953609A21DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4138EEB0-2A53-4111-9898-E953609A21DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
