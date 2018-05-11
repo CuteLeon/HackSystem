@@ -60,6 +60,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DefaultLoginForm.resx">
+      <DependentUpon>DefaultLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DefaultLoginResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DefaultLoginResource.Designer.cs</LastGenOutput>
