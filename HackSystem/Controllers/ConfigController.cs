@@ -54,7 +54,7 @@ namespace HackSystem
             {
                 KeyValueConfigurationElement ConfigurationElement = UnityConfig.AppSettings.Settings[Key];
                 ConfigValue = ConfigurationElement?.Value ?? string.Empty;
-                LogController.Debug(">>> ConfigValue[\"{0}\"] = {1}", Key, ConfigValue);
+                LogController.Debug(">>> ConfigValue[\"{0}\"] = {1}", Key, ConfigValue.Length<=1024?ConfigValue: "0x" + ConfigValue.GetHashCode().ToString("X"));
                 return ConfigValue;
             }
             catch (Exception ex)

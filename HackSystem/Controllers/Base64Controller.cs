@@ -21,7 +21,7 @@ namespace HackSystem
         /// <returns>图像</returns>
         public static Image Base64ToImage(string Base64String)
         {
-            LogController.Debug("转换 Base64 编码 (HashCode = {0})为图像 ...", Base64String.GetHashCode());
+            LogController.Debug("转换 Base64 编码 (HashCode = 0x{0})为图像 ...", Base64String.GetHashCode().ToString("X"));
             try
             {
                 byte[] ImageData = Convert.FromBase64String(Base64String);
@@ -53,7 +53,7 @@ namespace HackSystem
         /// <returns>Base64</returns>
         public static string ImageToBase64(Image ImageObject, ImageFormat ImageFormatType)
         {
-            LogController.Debug("转换图像(HashCode = {0})为 Base64 编码 ...", ImageObject.GetHashCode());
+            LogController.Debug("转换图像(HashCode = 0x{0})为 Base64 编码 ...", ImageObject.GetHashCode().ToString("X"));
             try
             {
                 MemoryStream ImageStream = new MemoryStream();
