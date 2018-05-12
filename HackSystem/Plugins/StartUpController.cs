@@ -43,7 +43,7 @@ namespace HackSystem
                 LogController.Debug("发现 StartUp 插件 dll 文件 : {0}", StartUpPath);
                 Assembly StartUpAssembly = AssemblyController<StartUpTemplateClass>.CreateAssembly(StartUpPath);
                 if (StartUpAssembly == null) continue;
-
+                
                 foreach (StartUpTemplateClass StartUpInstance in AssemblyController<StartUpTemplateClass>.CreateTypeInstance(StartUpAssembly))
                 {
                     LogController.Info("创建 StartUp 实例 : {0} ({1})", StartUpInstance.Name, StartUpInstance.Description);

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HeadPortraitController.cs" />
     <Compile Include="LoginTemplateClass.cs" />
     <Compile Include="LoginTemplateResource.Designer.cs">
       <AutoGen>True</AutoGen>

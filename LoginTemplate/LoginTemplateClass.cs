@@ -21,6 +21,10 @@ namespace LoginTemplate
         /// 密码 (传送至 Login 插件)
         /// </summary>
         public static string Password = string.Empty;
+        /// <summary>
+        /// 圆形头像
+        /// </summary>
+        public static Image CircularHeadPortrait { get; protected set; }
         private static Image _headPortrait = LoginTemplateResource.DefaultHeadPortrait;
         /// <summary>
         /// 头像 (传送至 Login 插件)
@@ -34,6 +38,8 @@ namespace LoginTemplate
                     _headPortrait = LoginTemplateResource.DefaultHeadPortrait;
                 else
                     _headPortrait = value;
+
+                CircularHeadPortrait = HeadPortraitController.GetCircularHeadPortrait(value as Bitmap);
             }
         }
         /// <summary>

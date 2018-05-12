@@ -68,5 +68,32 @@
       <LastGenOutput>DefaultLoginResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeadMask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoginArea.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoginButton_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoginButton_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoginButton_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wallpaper.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PasswordInputBox_Down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PasswordInputBox_Enter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PasswordInputBox_Normal.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
