@@ -61,26 +61,43 @@ namespace DefaultLogin
 	2>.在Form内使用字段记录所属Class，在Form内根据用户操作适时触发Class.OnLoginFinished();
 
 ``` csharp
-public DefaultLoginForm()
+//在窗体定义布尔值变量记录是否允许窗口关闭
+bool AllowToClose = false;
+
+//窗体加载时订阅窗口即将关闭事件
+private void HTMLLoginForm_Load(object sender, EventArgs e)
 {
-    InitializeComponent();
-    CheckForIllegalCrossThreadCalls = false;
-    this.FormClosing += new FormClosingEventHandler((Leon, Mathilda) => { ParentLogin?.OnLoginFinished(EventArgs.Empty); });
+	//只允许密码验证代码置AllowToClose为true后才允许关闭窗口，否则无法直接关闭登录窗口
+    this.FormClosing += new FormClosingEventHandler(
+        (Leon, Mathilda) => {
+            if (!AllowToClose)
+                Mathilda.Cancel = true;
+            else
+                ParentLogin?.OnLoginFinished(EventArgs.Empty);
+        });
 }
-```
 
-    当加载结束时：
-``` csharp
-ThreadPool.QueueUserWorkItem(new WaitCallback(
-    (ILoveU) => {
-        while (this.Opacity > 0)
-        {
-            Thread.Sleep(100);
-            this.Opacity -= 0.1;
-        }
-
-        this.Close();
-    }));
+private void CheckUserInfo(string UserName, string Password)
+{
+	//用户信息通过后，置AllowToClose为true
+	if(UserName == "123" && Password == "456")
+	{
+		ThreadPool.QueueUserWorkItem(new WaitCallback(
+            (ILoveU) => {
+                try
+                {
+                    while (this.Opacity > 0)
+                    {
+                        Thread.Sleep(100);
+                        this.Opacity -= 0.1;
+                    }
+                }
+                catch { }
+                AllowToClose = true;
+                this.Close();
+            }));
+	}
+}
 ```
 ***
 

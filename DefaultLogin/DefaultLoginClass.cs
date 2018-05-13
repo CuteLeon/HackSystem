@@ -13,7 +13,7 @@ namespace DefaultLogin
         {
             this.Name = "钢铁侠";
             this.Description = "钢铁侠登录画面 - Leon";
-            //TODO : this.Preview = DefaultLoginResource.DefaultLoginPreview;
+            this.Preview = DefaultLoginResource.DefaultLoginPreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
