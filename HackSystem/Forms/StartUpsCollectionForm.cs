@@ -13,8 +13,8 @@ namespace HackSystem
 {
     public partial class StartUpsCollectionForm : Form
     {
-        private StartUpCardControl _lastActived =null;
-        private StartUpCardControl LastActived
+        private CardControl _lastActived =null;
+        private CardControl LastActived
         {
             get => _lastActived;
             set
@@ -47,7 +47,7 @@ namespace HackSystem
                             {
                                 try
                                 {
-                                    StartUpCardControl startUp = new StartUpCardControl(StartupInstance.FileName, StartupInstance.GetType().Name, StartupInstance.Name, StartupInstance.Description, StartupInstance.Preview.Clone() as Image);
+                                    CardControl startUp = new CardControl(StartupInstance.FileName, StartupInstance.GetType().Name, StartupInstance.Name, StartupInstance.Description, StartupInstance.Preview.Clone() as Image);
                                     startUp.Click += ActiveStartUp;
                                     if (startUp.FileName == ActivedFileName && startUp.ClassName == ActivedClassName)
                                     {
@@ -68,16 +68,16 @@ namespace HackSystem
 
         private void ActiveStartUp(object sender, EventArgs e)
         {
-            if (!(sender is StartUpCardControl)) return;
+            if (!(sender is CardControl)) return;
 
             //预览
             //StartUpController.GetStartUpPlugin(FileController.PathCombine(UnityModule.StartUpDirectory, (sender as StartUpCardControl).FileName), (sender as StartUpCardControl).ClassName).StartUpForm.Show(this);
 
-            if (MessageBox.Show(string.Format("是否使用启动画面 {0} ？", (sender as StartUpCardControl).Name), "使用启动画面？", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+            if (MessageBox.Show(string.Format("是否使用启动画面 {0} ？", (sender as CardControl).Name), "使用启动画面？", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
             try
             {
-                ConfigController.SetConfig("StartUpFile", (sender as StartUpCardControl).FileName);
-                ConfigController.SetConfig("StartUpName", (sender as StartUpCardControl).ClassName);
+                ConfigController.SetConfig("StartUpFile", (sender as CardControl).FileName);
+                ConfigController.SetConfig("StartUpName", (sender as CardControl).ClassName);
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace HackSystem
                 MessageBox.Show(string.Format("更新 StartUp 配置遇到异常：{0}", ex.Message));
                 return;
             }
-            LastActived = (sender as StartUpCardControl);
+            LastActived = (sender as CardControl);
             MessageBox.Show(string.Format("更新 StartUp 配置成功，重启即可查看效果"));
             //Application.Restart();
         }

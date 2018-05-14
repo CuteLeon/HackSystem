@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace HackSystem
 {
-    public partial class StartUpCardControl : UserControl
+    public partial class CardControl : UserControl
     {
         /// <summary>
         /// 点击事件
@@ -47,7 +47,7 @@ namespace HackSystem
         /// </summary>
         public string ClassName { get; protected set; } = string.Empty;
         /// <summary>
-        /// StartUp 名称
+        /// 名称
         /// </summary>
         public new string Name
         {
@@ -56,7 +56,7 @@ namespace HackSystem
         }
         private string _description = string.Empty;
         /// <summary>
-        /// StartUp 描述
+        /// 描述
         /// </summary>
         public string Description
         {
@@ -77,7 +77,7 @@ namespace HackSystem
             set => this.BackgroundImage = value;
         }
 
-        public StartUpCardControl(string fileName, string className,string name,string description, Image preview)
+        public CardControl(string fileName, string className,string name,string description, Image preview)
         {
             InitializeComponent();
 
@@ -88,7 +88,7 @@ namespace HackSystem
             Preview = preview;
         }
 
-        private void StartUpCardControl_Load(object sender, EventArgs e)
+        private void CardControl_Load(object sender, EventArgs e)
         {
             EventHandler CardMouseEnter = new EventHandler((s, v) =>
             {
@@ -128,7 +128,7 @@ namespace HackSystem
             DescriptionLabel.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
         }
         
-        private void StartUpCardControl_Paint(object sender, PaintEventArgs e)
+        private void CardControl_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawRectangle(Pens.DodgerBlue, new Rectangle(0, 0, 159, 109));
         }

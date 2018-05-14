@@ -1,6 +1,6 @@
 ﻿namespace HackSystem
 {
-    partial class StartUpCardControl
+    partial class CardControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -42,7 +42,7 @@
             this.DescriptionLabel.Name = "DescriptionLabel";
             this.DescriptionLabel.Size = new System.Drawing.Size(158, 20);
             this.DescriptionLabel.TabIndex = 0;
-            this.DescriptionLabel.Text = "这是一个演示启动画面 - Leon";
+            this.DescriptionLabel.Text = "<描述>";
             this.DescriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NameLabel
@@ -57,10 +57,10 @@
             this.NameLabel.Name = "NameLabel";
             this.NameLabel.Size = new System.Drawing.Size(158, 22);
             this.NameLabel.TabIndex = 1;
-            this.NameLabel.Text = "演示启动画面";
+            this.NameLabel.Text = "演示卡片";
             this.NameLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // StartUpCardControl
+            // CardControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -70,11 +70,11 @@
             this.Controls.Add(this.DescriptionLabel);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "StartUpCardControl";
+            this.Name = "CardControl";
             this.Padding = new System.Windows.Forms.Padding(1);
             this.Size = new System.Drawing.Size(160, 110);
-            this.Load += new System.EventHandler(this.StartUpCardControl_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.StartUpCardControl_Paint);
+            this.Load += new System.EventHandler(this.CardControl_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CardControl_Paint);
             this.ResumeLayout(false);
 
         }

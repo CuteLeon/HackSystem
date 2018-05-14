@@ -68,11 +68,17 @@
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\LogController.cs" />
-    <Compile Include="Controls\StartUpCardControl.cs">
+    <Compile Include="Controls\CardControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\StartUpCardControl.Designer.cs">
-      <DependentUpon>StartUpCardControl.cs</DependentUpon>
+    <Compile Include="Controls\CardControl.Designer.cs">
+      <DependentUpon>CardControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoginsCollectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginsCollectionForm.Designer.cs">
+      <DependentUpon>LoginsCollectionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\StartUpsCollectionForm.cs">
       <SubType>Form</SubType>
@@ -96,11 +102,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UnityResource.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Controls\StartUpCardControl.resx">
-      <DependentUpon>StartUpCardControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\CardControl.resx">
+      <DependentUpon>CardControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DesktopForm.resx">
       <DependentUpon>DesktopForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginsCollectionForm.resx">
+      <DependentUpon>LoginsCollectionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StartUpsCollectionForm.resx">
       <DependentUpon>StartUpsCollectionForm.cs</DependentUpon>
