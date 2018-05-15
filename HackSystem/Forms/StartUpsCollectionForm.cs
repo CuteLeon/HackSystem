@@ -60,6 +60,7 @@ namespace HackSystem
                                     LogController.Error("StartUp集合窗口扫描时遇到异常：{0}", ex.Message);
                                 }
                             }));
+                            (StartupInstance as IDisposable).Dispose();
                         }
                         catch { }
                     }
