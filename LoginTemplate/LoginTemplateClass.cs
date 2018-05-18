@@ -124,7 +124,7 @@ namespace LoginTemplate
 
         void IDisposable.Dispose()
         {
-            System.Diagnostics.Debug.Print("Dispose : {0}", this.Name);
+            System.Diagnostics.Debug.Print("Dispose Login : {0}", this.Name);
             _preview?.Dispose();
             _loginForm?.Dispose();
             GC.SuppressFinalize(this);

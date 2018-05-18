@@ -96,7 +96,7 @@ namespace StartUpTemplate
 
         void IDisposable.Dispose()
         {
-            System.Diagnostics.Debug.Print("Dispose : {0}", this.Name);
+            System.Diagnostics.Debug.Print("Dispose StartUp : {0}", this.Name);
             _preview?.Dispose();
             _startUpForm?.Dispose();
             GC.SuppressFinalize(this);

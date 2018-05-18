@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem", "HackSystem\HackSystem.csproj", "{6A25BE16-22E7-4002-8CD7-99A7A6BFB2AA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C618E603-DD32-4278-BEBF-6B1807E3A790} = {C618E603-DD32-4278-BEBF-6B1807E3A790}
+		{EEC78196-7BB3-4344-AAFA-8B88ABD01DA1} = {EEC78196-7BB3-4344-AAFA-8B88ABD01DA1}
 		{4138EEB0-2A53-4111-9898-E953609A21DD} = {4138EEB0-2A53-4111-9898-E953609A21DD}
 	EndProjectSection
 EndProject
@@ -56,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTMLLogin", "HTMLLogin\HTML
 		{4138EEB0-2A53-4111-9898-E953609A21DD} = {4138EEB0-2A53-4111-9898-E953609A21DD}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramTemplate", "ProgramTemplate\ProgramTemplate.csproj", "{EEC78196-7BB3-4344-AAFA-8B88ABD01DA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +105,10 @@ Global
 		{923ED0AC-F5F5-4AE9-9859-0A1C84EBE5C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{923ED0AC-F5F5-4AE9-9859-0A1C84EBE5C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{923ED0AC-F5F5-4AE9-9859-0A1C84EBE5C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC78196-7BB3-4344-AAFA-8B88ABD01DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC78196-7BB3-4344-AAFA-8B88ABD01DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC78196-7BB3-4344-AAFA-8B88ABD01DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC78196-7BB3-4344-AAFA-8B88ABD01DA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
