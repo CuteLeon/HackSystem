@@ -53,6 +53,7 @@ namespace ProgramTemplate
                 (s, e) => {
                     ProgramForms.Remove(NewProgramForm);
                 });
+            System.Diagnostics.Debug.Print("窗口列表总数：" + ProgramForms.Count);
 
             return NewProgramForm;
         }
