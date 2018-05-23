@@ -90,6 +90,16 @@ namespace HackSystem
 
         private void CardControl_Load(object sender, EventArgs e)
         {
+            AddEventHandler();
+        }
+        
+        private void CardControl_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(Pens.DodgerBlue, new Rectangle(0, 0, 159, 109));
+        }
+
+        private void AddEventHandler()
+        {
             EventHandler CardMouseEnter = new EventHandler((s, v) =>
             {
                 NameLabel.ForeColor = Color.OrangeRed;
@@ -126,11 +136,6 @@ namespace HackSystem
             base.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
             NameLabel.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
             DescriptionLabel.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
-        }
-        
-        private void CardControl_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawRectangle(Pens.DodgerBlue, new Rectangle(0, 0, 159, 109));
         }
 
     }

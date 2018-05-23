@@ -15,10 +15,25 @@ namespace ProgramTemplate
         /// </summary>
         public FormCollection ProgramForms { get; } = new FormCollection();
 
+        private Image _icon = ProgramResource.DefaultProgramIcon;
         /// <summary>
         /// 图标
         /// </summary>
-        public Icon ProgramIcon = null;
+        public Image Icon
+        {
+            get => _icon;
+            set
+            {
+                if (value == null)
+                {
+                    _icon = null;
+                }
+                else
+                {
+                    _icon = new Bitmap(value, new Size(64, 64));
+                }
+            }
+        }
         /// <summary>
         /// 名称
         /// </summary>

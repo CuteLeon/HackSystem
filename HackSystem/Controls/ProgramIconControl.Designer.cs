@@ -1,4 +1,4 @@
-﻿namespace HackSystem.Controls
+﻿namespace HackSystem
 {
     partial class ProgramIconControl
     {
@@ -28,10 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.NameLabel = new System.Windows.Forms.Label();
+            this.IconPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.IconPictureBox)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // NameLabel
+            // 
+            this.NameLabel.AutoEllipsis = true;
+            this.NameLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.NameLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.NameLabel.ForeColor = System.Drawing.Color.DimGray;
+            this.NameLabel.Location = new System.Drawing.Point(0, 64);
+            this.NameLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.NameLabel.Name = "NameLabel";
+            this.NameLabel.Size = new System.Drawing.Size(64, 24);
+            this.NameLabel.TabIndex = 1;
+            this.NameLabel.Text = "钢铁侠";
+            this.NameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // IconPictureBox
+            // 
+            this.IconPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.IconPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.IconPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.IconPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.IconPictureBox.Name = "IconPictureBox";
+            this.IconPictureBox.Size = new System.Drawing.Size(64, 64);
+            this.IconPictureBox.TabIndex = 2;
+            this.IconPictureBox.TabStop = false;
+            // 
+            // ProgramIconControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.IconPictureBox);
+            this.Controls.Add(this.NameLabel);
+            this.Name = "ProgramIconControl";
+            this.Size = new System.Drawing.Size(64, 88);
+            ((System.ComponentModel.ISupportInitialize)(this.IconPictureBox)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+        private System.Windows.Forms.Label NameLabel;
+        private System.Windows.Forms.PictureBox IconPictureBox;
     }
 }

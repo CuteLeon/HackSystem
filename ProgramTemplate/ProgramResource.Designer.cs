@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HackSystem {
+namespace ProgramTemplate {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace HackSystem {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class UnityResource {
+    internal class ProgramResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal UnityResource() {
+        internal ProgramResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace HackSystem {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("HackSystem.UnityResource", typeof(UnityResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ProgramTemplate.ProgramResource", typeof(ProgramResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,39 +63,9 @@ namespace HackSystem {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap HackSystemLogo {
+        internal static System.Drawing.Bitmap DefaultProgramIcon {
             get {
-                object obj = ResourceManager.GetObject("HackSystemLogo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Icon HackSystemLogoIcon {
-            get {
-                object obj = ResourceManager.GetObject("HackSystemLogoIcon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap ProgramIconMask_0 {
-            get {
-                object obj = ResourceManager.GetObject("ProgramIconMask_0", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap ProgramIconMask_1 {
-            get {
-                object obj = ResourceManager.GetObject("ProgramIconMask_1", resourceCulture);
+                object obj = ResourceManager.GetObject("DefaultProgramIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

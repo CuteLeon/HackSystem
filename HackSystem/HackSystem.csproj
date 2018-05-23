@@ -137,6 +137,9 @@
     <EmbeddedResource Include="Controls\CardControl.resx">
       <DependentUpon>CardControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProgramIconControl.resx">
+      <DependentUpon>ProgramIconControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DesktopForm.resx">
       <DependentUpon>DesktopForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +178,11 @@
   <ItemGroup>
     <None Include="Resources\HackSystemLogoIcon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\ProgramIconMask_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgramIconMask_0.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

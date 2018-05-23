@@ -42,32 +42,21 @@ namespace HackSystem
             //TODO : 测试代码（扫描演示程序插件，并显示图标，点击图标将新建程序窗口，达到5个程序窗口时关闭全部程序窗口）
             foreach (ProgramTemplateClass ProgramInstance in ProgramController.ScanProgramPlugins(UnityModule.ProgramDirectory))
             {
-                Label ProgramLabel = new Label()
-                {
-                    AutoSize = false,
-                    BackColor = Color.Transparent,
-                    ImageAlign = ContentAlignment.TopCenter,
-                    Image = new Bitmap(this.Icon.ToBitmap(), 50, 50),
-                    TextAlign = ContentAlignment.BottomCenter,
-                    Text = ProgramInstance.Name,
-                    ForeColor= Color.DimGray,
-                    Location = new Point(100, 100),
-                    Size = new Size(50,64),
-                    Tag = ProgramInstance,
-                };
-                this.Controls.Add(ProgramLabel);
-                ProgramLabel.Click += new EventHandler(
+                ProgramIconControl ProgramCard = new ProgramIconControl(ProgramInstance.Name, ProgramInstance.Icon, ProgramInstance);
+                ProgramCard.Click += new EventHandler(
                     (s, e) => {
-                        ProgramTemplateClass tag = (s as Label).Tag as ProgramTemplateClass;
-                        tag.GetNewProgramForm().Show(this);
-                        if (tag.ProgramForms.Count == 5)
+                        ProgramTemplateClass CurrentProgram = (s as ProgramIconControl).ParentProgram;
+                        CurrentProgram.GetNewProgramForm().Show(this);
+                        if (CurrentProgram.ProgramForms.Count == 5)
                         {
-                            while (tag.ProgramForms.Count > 0)
+                            while (CurrentProgram.ProgramForms.Count > 0)
                             {
-                                tag.ProgramForms[0]?.Close();
+                                CurrentProgram.ProgramForms[0]?.Close();
                             }
                         }
                     });
+
+                ProgramLayoutPanel.Controls.Add(ProgramCard);
             }
         }
     }
