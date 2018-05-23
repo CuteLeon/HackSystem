@@ -18,7 +18,7 @@ namespace ProgramTemplate
         /// <summary>
         /// 图标
         /// </summary>
-        public static Icon ProgramIcon = null;
+        public Icon ProgramIcon = null;
         /// <summary>
         /// 名称
         /// </summary>
@@ -44,16 +44,15 @@ namespace ProgramTemplate
             {
                 NewProgramForm = default(Form);
             }
-            //TODO : 需要测试
             //将新窗口添加至程序窗口集合
             ProgramForms.Add(NewProgramForm);
-            //TODO : 需要测试
             //窗口关闭后从集合移除
             NewProgramForm.FormClosed += new FormClosedEventHandler(
                 (s, e) => {
+                    System.Diagnostics.Debug.Print("关闭窗口：{0}，窗口列表总数：{1}", (s as Form).GetHashCode().ToString("X"), ProgramForms.Count);
                     ProgramForms.Remove(NewProgramForm);
                 });
-            System.Diagnostics.Debug.Print("窗口列表总数：" + ProgramForms.Count);
+            System.Diagnostics.Debug.Print("增加新窗口：{0}，窗口列表总数：{1}", NewProgramForm.GetHashCode().ToString("X"), ProgramForms.Count);
 
             return NewProgramForm;
         }

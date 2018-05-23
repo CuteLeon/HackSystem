@@ -99,6 +99,12 @@
     <Compile Include="Controls\CardControl.Designer.cs">
       <DependentUpon>CardControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ProgramIconControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ProgramIconControl.Designer.cs">
+      <DependentUpon>ProgramIconControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LoginsCollectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,7 @@
       <DependentUpon>StartUpsCollectionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\LoginController.cs" />
+    <Compile Include="Plugins\ProgramController.cs" />
     <Compile Include="Plugins\StartUpController.cs" />
     <Compile Include="Controllers\UnityModule.cs" />
     <Compile Include="Forms\DesktopForm.cs">

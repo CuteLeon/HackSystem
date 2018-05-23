@@ -114,6 +114,7 @@ namespace HackSystem
             foreach (string TargetDirectory in new string[] {
                 UnityModule.StartUpDirectory,
                 UnityModule.LoginDirectory,
+                UnityModule.ProgramDirectory,
             })
             {
                 LogController.Debug("检查目录：{0}", TargetDirectory);

@@ -65,6 +65,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hack System Starting Up ...";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Shown += new System.EventHandler(this.DesktopForm_Shown);
             this.ResumeLayout(false);
 
         }

@@ -23,6 +23,10 @@ namespace HackSystem
         /// </summary>
         public static readonly string LoginDirectory = FileController.PathCombine(Environment.CurrentDirectory, "Logins");
         /// <summary>
+        /// 程序插件目录
+        /// </summary>
+        public static readonly string ProgramDirectory = FileController.PathCombine(Environment.CurrentDirectory, "Programs");
+        /// <summary>
         /// 日志文件目录
         /// </summary>
         public static readonly string LogDirectory = FileController.PathCombine(Environment.CurrentDirectory, "Logs");

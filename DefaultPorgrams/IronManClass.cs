@@ -9,11 +9,17 @@ namespace DefaultPorgrams
 {
     public class IronManClass : ProgramTemplateClass
     {
+        public IronManClass()
+        {
+            Name = "钢铁侠";
+            Description = "钢铁侠 [via leon]";
+        }
+
         public override string FileName => throw new NotImplementedException();
 
         protected override Form CreateProgramForm()
         {
-            throw new NotImplementedException();
+            return new DefaultProgramForm();
         }
     }
 }
