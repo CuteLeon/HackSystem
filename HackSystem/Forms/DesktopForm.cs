@@ -48,12 +48,8 @@ namespace HackSystem
                         ProgramTemplateClass CurrentProgram = (s as ProgramIconControl).ParentProgram;
                         CurrentProgram.GetNewProgramForm().Show(this);
                         if (CurrentProgram.ProgramForms.Count == 5)
-                        {
                             while (CurrentProgram.ProgramForms.Count > 0)
-                            {
                                 CurrentProgram.ProgramForms[0]?.Close();
-                            }
-                        }
                     });
 
                 ProgramLayoutPanel.Controls.Add(ProgramCard);

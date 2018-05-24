@@ -19,7 +19,7 @@ namespace DefaultPorgrams
 
         protected override Form CreateProgramForm()
         {
-            return new DefaultProgramForm();
+            return new DefaultProgramForm() { ImageResource = DefaultProgramResource.IronMan };
         }
     }
 }
