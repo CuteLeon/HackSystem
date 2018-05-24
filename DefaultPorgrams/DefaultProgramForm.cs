@@ -23,18 +23,16 @@ namespace DefaultPorgrams
                     _imageResource = value;
 
                 MainPictureBox.Image = _imageResource;
-                MainPictureBox.Size = _imageResource.Size;
             }
         }
-
 
         public DefaultProgramForm()
         {
             InitializeComponent();
             this.FormClosed += delegate {
-                this.Dispose(true);
                 MainPictureBox.Image?.Dispose();
                 MainPictureBox.Image = null;
+                this.Dispose(true);
                 GC.Collect();
             };
         }
@@ -46,7 +44,7 @@ namespace DefaultPorgrams
 
         private void DefaultProgramForm_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawRectangle(Pens.LightGray, 0, 0, this.Width - 1, this.Height - 1);
+            e.Graphics.DrawRectangle(Pens.DimGray, 0, 0, this.Width - 1, this.Height - 1);
         }
     }
 }
