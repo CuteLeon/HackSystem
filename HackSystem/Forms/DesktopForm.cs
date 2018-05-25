@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using ProgramTemplate;
 
@@ -44,18 +45,29 @@ namespace HackSystem
         /// </summary>
         private void LoadProgram()
         {
-            //TODO : 测试代码（扫描演示程序插件，并显示图标，点击图标将新建程序窗口，达到5个程序窗口时关闭全部程序窗口）
-            foreach (ProgramTemplateClass ProgramInstance in ProgramController.ScanProgramPlugins(UnityModule.ProgramDirectory))
-            {
-                ProgramIconControl ProgramCard = new ProgramIconControl(ProgramInstance.Name, ProgramInstance.Icon, ProgramInstance);
-                ProgramCard.Click += new EventHandler(
-                    (s, e) => {
-                        ProgramTemplateClass CurrentProgram = (s as ProgramIconControl).ParentProgram;
-                        CurrentProgram.GetNewProgramForm().Show(this);
-                    });
-
-                ProgramLayoutPanel.Controls.Add(ProgramCard);
-            }
+            ThreadPool.QueueUserWorkItem(new WaitCallback(delegate {
+                foreach (ProgramTemplateClass ProgramInstance in ProgramController.ScanProgramPlugins(UnityModule.ProgramDirectory))
+                {
+                    try
+                    {
+                        ProgramIconControl ProgramCard = new ProgramIconControl(ProgramInstance.Name, ProgramInstance.Icon, ProgramInstance);
+                        ProgramCard.Click += new EventHandler(
+                            (s, e) =>
+                            {
+                                ProgramTemplateClass CurrentProgram = (s as ProgramIconControl).ParentProgram;
+                                CurrentProgram.GetNewProgramForm().Show(this);
+                            });
+                        this.Invoke(new Action(delegate
+                        {
+                            ProgramLayoutPanel.Controls.Add(ProgramCard);
+                        }));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogController.Error("加载程序插件遇到异常：{0}", ex.Message);
+                    }
+                }
+            }));
         }
 
         private void DesktopForm_FormClosing(object sender, FormClosingEventArgs e)

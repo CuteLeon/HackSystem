@@ -64,6 +64,7 @@
     <Compile Include="AttackDataClass.cs" />
     <Compile Include="BallisticMissileClass.cs" />
     <Compile Include="CombatClass.cs" />
+    <Compile Include="DigitalRainClass.cs" />
     <Compile Include="UAVCameraClass.cs" />
     <Compile Include="ThreeDMapClass.cs" />
     <Compile Include="IronManClass.cs" />
@@ -158,6 +159,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DecryptIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DigitalRain.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DigitalRainIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

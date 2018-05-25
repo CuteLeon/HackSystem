@@ -263,6 +263,26 @@ namespace DefaultPorgrams {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap DigitalRain {
+            get {
+                object obj = ResourceManager.GetObject("DigitalRain", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap DigitalRainIcon {
+            get {
+                object obj = ResourceManager.GetObject("DigitalRainIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap HackSystemLogo {
             get {
                 object obj = ResourceManager.GetObject("HackSystemLogo", resourceCulture);
