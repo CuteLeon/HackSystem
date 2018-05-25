@@ -57,6 +57,7 @@
       <DependentUpon>DefaultProgramResource.resx</DependentUpon>
     </Compile>
     <Compile Include="ActionIndicationClass.cs" />
+    <Compile Include="AgentInfoClass.cs" />
     <Compile Include="UAVCameraClass.cs" />
     <Compile Include="ThreeDMapClass.cs" />
     <Compile Include="IronManClass.cs" />
@@ -109,6 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ActionIndicationIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AgentInfo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AgentInfoIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
