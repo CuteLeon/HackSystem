@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DecryptClass.cs" />
     <Compile Include="DefaultProgramForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +152,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\CombatIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Decrypt.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DecryptIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
