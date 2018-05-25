@@ -211,4 +211,22 @@
   <data name="DrivingSystemIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\DrivingSystemIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Face3DModel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Face3DModel.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Face3DModelIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Face3DModelIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GraphicOS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\GraphicOS.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GraphicOSIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\GraphicOSIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LifeSupport" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\LifeSupport.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LifeSupportIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\LifeSupportIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

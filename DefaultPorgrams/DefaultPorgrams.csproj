@@ -66,6 +66,9 @@
     <Compile Include="CombatClass.cs" />
     <Compile Include="DigitalRainClass.cs" />
     <Compile Include="DrivingSystemClass.cs" />
+    <Compile Include="Face3DModelClass.cs" />
+    <Compile Include="LifeSupportClass.cs" />
+    <Compile Include="GraphicOSClass.cs" />
     <Compile Include="UAVCameraClass.cs" />
     <Compile Include="ThreeDMapClass.cs" />
     <Compile Include="IronManClass.cs" />
@@ -172,6 +175,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DrivingSystemIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Face3DModel.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Face3DModelIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GraphicOS.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GraphicOSIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LifeSupport.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LifeSupportIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

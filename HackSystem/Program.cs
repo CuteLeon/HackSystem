@@ -1,7 +1,7 @@
 ﻿// 跳过启动画面
-#define SkipStartUp
+#undef SkipStartUp
 // 跳过登录界面
-#define SkipLogin
+#undef SkipLogin
 // 捕获全局异常
 #undef CatchException
 

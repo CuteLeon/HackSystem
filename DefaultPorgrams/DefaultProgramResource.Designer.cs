@@ -303,6 +303,46 @@ namespace DefaultPorgrams {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Face3DModel {
+            get {
+                object obj = ResourceManager.GetObject("Face3DModel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Face3DModelIcon {
+            get {
+                object obj = ResourceManager.GetObject("Face3DModelIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap GraphicOS {
+            get {
+                object obj = ResourceManager.GetObject("GraphicOS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap GraphicOSIcon {
+            get {
+                object obj = ResourceManager.GetObject("GraphicOSIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap HackSystemLogo {
             get {
                 object obj = ResourceManager.GetObject("HackSystemLogo", resourceCulture);
@@ -326,6 +366,26 @@ namespace DefaultPorgrams {
         internal static System.Drawing.Bitmap IronManIcon {
             get {
                 object obj = ResourceManager.GetObject("IronManIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap LifeSupport {
+            get {
+                object obj = ResourceManager.GetObject("LifeSupport", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap LifeSupportIcon {
+            get {
+                object obj = ResourceManager.GetObject("LifeSupportIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
