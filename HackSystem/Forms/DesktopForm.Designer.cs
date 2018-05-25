@@ -58,6 +58,7 @@
             this.ProgramLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ProgramLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.ProgramLayoutPanel.Name = "ProgramLayoutPanel";
+            this.ProgramLayoutPanel.Padding = new System.Windows.Forms.Padding(10);
             this.ProgramLayoutPanel.Size = new System.Drawing.Size(969, 661);
             this.ProgramLayoutPanel.TabIndex = 2;
             // 
@@ -73,8 +74,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DesktopForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Hack System Starting Up ...";
+            this.Text = "Hack System";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DesktopForm_FormClosing);
             this.Shown += new System.EventHandler(this.DesktopForm_Shown);
             this.ResumeLayout(false);
 

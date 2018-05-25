@@ -2,6 +2,8 @@
 #define SkipStartUp
 // 跳过登录界面
 #define SkipLogin
+// 捕获全局异常
+#undef CatchException
 
 using System;
 using System.Collections.Generic;
@@ -73,7 +75,9 @@ namespace HackSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ApplicationExit += Application_ApplicationExit;
+#if (CatchException)
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+#endif
 
             //创建日志监听器
             LogController.CreateLogListener(UnityModule.LogDirectory, Application.ProductName);

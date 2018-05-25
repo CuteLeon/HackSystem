@@ -74,5 +74,20 @@
   <ItemGroup>
     <None Include="Resources\IronMan.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_Down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_Enter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_Normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IronManIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

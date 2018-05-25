@@ -12,6 +12,11 @@ namespace HackSystem
 {
     public partial class DesktopForm : Form
     {
+        /// <summary>
+        /// 是否允许退出
+        /// </summary>
+        protected static bool AllowToQuit = false;
+
         public DesktopForm()
         {
             InitializeComponent();
@@ -47,12 +52,26 @@ namespace HackSystem
                     (s, e) => {
                         ProgramTemplateClass CurrentProgram = (s as ProgramIconControl).ParentProgram;
                         CurrentProgram.GetNewProgramForm().Show(this);
-                        if (CurrentProgram.ProgramForms.Count == 5)
-                            while (CurrentProgram.ProgramForms.Count > 0)
-                                CurrentProgram.ProgramForms[0]?.Close();
                     });
 
                 ProgramLayoutPanel.Controls.Add(ProgramCard);
+            }
+        }
+
+        private void DesktopForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!AllowToQuit)
+            {
+                e.Cancel = true;
+                if (MessageBox.Show("真的要退出 HackSystem 吗？", "真的要退出吗？", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                {
+                    AllowToQuit = false;
+                }
+                else
+                {
+                    AllowToQuit = true;
+                    this.Close();
+                }
             }
         }
     }

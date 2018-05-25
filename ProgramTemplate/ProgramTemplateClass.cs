@@ -10,6 +10,13 @@ namespace ProgramTemplate
 {
     public abstract class ProgramTemplateClass : IDisposable
     {
+        /* TODO: 右键菜单对象(可为空)，系统桌面图标被右击时弹出
+         * 固定菜单项：
+         *      新建窗口
+         *      ————————
+         *      关闭所有已打开窗口
+         */
+
         /// <summary>
         /// 窗口集合 (允许插件打开多个程序窗口)
         /// </summary>
@@ -57,17 +64,17 @@ namespace ProgramTemplate
             Form NewProgramForm = CreateProgramForm();
             if (NewProgramForm == null)
             {
-                NewProgramForm = default(Form);
+                NewProgramForm = new Form();
             }
             //将新窗口添加至程序窗口集合
             ProgramForms.Add(NewProgramForm);
+            System.Diagnostics.Debug.Print("增加新窗口：{0}，窗口列表总数：{1}", NewProgramForm.GetHashCode().ToString("X"), ProgramForms.Count);
             //窗口关闭后从集合移除
             NewProgramForm.FormClosed += new FormClosedEventHandler(
                 (s, e) => {
+                    ProgramForms.Remove(s as Form);
                     System.Diagnostics.Debug.Print("关闭窗口：{0}，窗口列表总数：{1}", (s as Form).GetHashCode().ToString("X"), ProgramForms.Count);
-                    ProgramForms.Remove(NewProgramForm);
                 });
-            System.Diagnostics.Debug.Print("增加新窗口：{0}，窗口列表总数：{1}", NewProgramForm.GetHashCode().ToString("X"), ProgramForms.Count);
 
             return NewProgramForm;
         }
