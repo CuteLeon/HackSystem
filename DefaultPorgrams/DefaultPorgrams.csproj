@@ -56,6 +56,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DefaultProgramResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="UAVCameraClass.cs" />
     <Compile Include="ThreeDMapClass.cs" />
     <Compile Include="IronManClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ThreeDMapIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UAVCamera.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UAVCameraIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
