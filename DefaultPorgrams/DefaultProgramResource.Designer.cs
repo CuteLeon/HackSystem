@@ -143,6 +143,26 @@ namespace DefaultPorgrams {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap AttackData {
+            get {
+                object obj = ResourceManager.GetObject("AttackData", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap AttackDataIcon {
+            get {
+                object obj = ResourceManager.GetObject("AttackDataIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Close_Down {
             get {
                 object obj = ResourceManager.GetObject("Close_Down", resourceCulture);

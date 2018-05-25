@@ -60,6 +60,7 @@
     <Compile Include="AgentInfoClass.cs" />
     <Compile Include="AirDefenceClass.cs" />
     <Compile Include="ARToolkitClass.cs" />
+    <Compile Include="AttackDataClass.cs" />
     <Compile Include="UAVCameraClass.cs" />
     <Compile Include="ThreeDMapClass.cs" />
     <Compile Include="IronManClass.cs" />
@@ -130,6 +131,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ARToolkitIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AttackData.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AttackDataIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
