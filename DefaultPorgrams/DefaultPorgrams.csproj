@@ -69,6 +69,13 @@
     <Compile Include="Face3DModelClass.cs" />
     <Compile Include="LifeSupportClass.cs" />
     <Compile Include="GraphicOSClass.cs" />
+    <Compile Include="MissileClass.cs" />
+    <Compile Include="NetworkAttackClass.cs" />
+    <Compile Include="NOVA6Class.cs" />
+    <Compile Include="SatelliteClass.cs" />
+    <Compile Include="ThinkingExportClass.cs" />
+    <Compile Include="ZoneIsolationClass.cs" />
+    <Compile Include="WaitingClass.cs" />
     <Compile Include="UAVCameraClass.cs" />
     <Compile Include="ThreeDMapClass.cs" />
     <Compile Include="IronManClass.cs" />
@@ -193,6 +200,48 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\LifeSupportIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Missile.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MissileIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NetworkAttack.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NetworkAttackIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NOVA6.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NOVA6Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Satellite.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SatelliteIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThinkingExport.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThinkingExportIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Waiting.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WaitingIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoneIsolation.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoneIsolationIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

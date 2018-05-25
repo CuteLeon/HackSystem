@@ -229,4 +229,46 @@
   <data name="LifeSupportIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\LifeSupportIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Missile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Missile.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MissileIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MissileIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NetworkAttack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\NetworkAttack.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NetworkAttackIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\NetworkAttackIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NOVA6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\NOVA6.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NOVA6Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\NOVA6Icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Satellite" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Satellite.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SatelliteIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SatelliteIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ThinkingExport" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ThinkingExport.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ThinkingExportIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ThinkingExportIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Waiting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Waiting.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WaitingIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\WaitingIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZoneIsolation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ZoneIsolation.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZoneIsolationIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ZoneIsolationIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
