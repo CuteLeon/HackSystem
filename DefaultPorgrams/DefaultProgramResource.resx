@@ -130,6 +130,18 @@
   <data name="AgentInfoIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\AgentInfoIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AirDefence" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\AirDefence.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AirDefenceIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\AirDefenceIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ARToolkit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ARToolkit.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ARToolkitIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ARToolkitIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Close_Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Close_Down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
