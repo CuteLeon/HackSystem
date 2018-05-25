@@ -1,4 +1,9 @@
-﻿using System;
+﻿// 跳过启动画面
+#define SkipStartUp
+// 跳过登录界面
+#define SkipLogin
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -14,7 +19,7 @@ namespace HackSystem
     static class Program
     {
         /// <summary>
-        /// 允许新建此进程
+        /// 允许运行此进程
         /// </summary>
         private static bool CreateNew = true;
         /// <summary>
@@ -72,7 +77,6 @@ namespace HackSystem
             //创建日志监听器
             LogController.CreateLogListener(UnityModule.LogDirectory, Application.ProductName);
 
-            //初始化目录
             try
             {
                 CheckDirectory();
@@ -87,6 +91,8 @@ namespace HackSystem
             //补齐默认配置
             ConfigController.LoadDefaultConfig();
 
+#if (!SkipStartUp)
+            //初始化目录
             //初始化启动画面
             try
             {
@@ -102,7 +108,9 @@ namespace HackSystem
             //StartUp.StartUpForm.TopMost = true;
             StartUp.StartUpForm.ShowDialog();
             GC.Collect();
+#endif
 
+#if (!SkipLogin)
             //初始化登录界面
             try
             {
@@ -118,6 +126,7 @@ namespace HackSystem
             //Login.LoginForm.TopMost = true;
             Login.LoginForm.ShowDialog();
             GC.Collect();
+#endif
             
             Application.Run(new DesktopForm());
         }
