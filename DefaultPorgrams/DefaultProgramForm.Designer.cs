@@ -108,6 +108,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DefaultProgramForm";
             this.Padding = new System.Windows.Forms.Padding(1);
+            this.ShowInTaskbar = false;
             this.Text = "DefaultProgramForm";
             this.Activated += new System.EventHandler(this.DefaultProgramForm_Activated);
             this.Deactivate += new System.EventHandler(this.DefaultProgramForm_Deactivate);

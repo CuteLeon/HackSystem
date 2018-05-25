@@ -56,6 +56,7 @@
             // ProgramLayoutPanel
             // 
             this.ProgramLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ProgramLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.ProgramLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.ProgramLayoutPanel.Name = "ProgramLayoutPanel";
             this.ProgramLayoutPanel.Padding = new System.Windows.Forms.Padding(10);

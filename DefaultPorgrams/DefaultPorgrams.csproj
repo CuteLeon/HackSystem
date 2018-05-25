@@ -56,6 +56,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DefaultProgramResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="ThreeDMapClass.cs" />
     <Compile Include="IronManClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -88,6 +89,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\IronManIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThreeDMap.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThreeDMapIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

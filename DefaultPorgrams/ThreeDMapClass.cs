@@ -7,13 +7,13 @@ using System.Windows.Forms;
 
 namespace DefaultPorgrams
 {
-    public class IronManClass : ProgramTemplateClass
+    public class ThreeDMapClass : ProgramTemplateClass
     {
-        public IronManClass()
+        public ThreeDMapClass()
         {
-            Name = "钢铁侠";
-            Description = "钢铁侠 [via leon]";
-            Icon = DefaultProgramResource.IronManIcon;
+            Name = "3D地图";
+            Description = "3D地图 [via leon]";
+            Icon = DefaultProgramResource.ThreeDMapIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -23,7 +23,7 @@ namespace DefaultPorgrams
             return new DefaultProgramForm(
                 Name,
                 Icon,
-                DefaultProgramResource.IronMan
+                DefaultProgramResource.ThreeDMap
                 );
         }
     }
