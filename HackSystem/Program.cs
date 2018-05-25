@@ -68,6 +68,7 @@ namespace HackSystem
                 MessageBox.Show("已经有实例运行，程序即将退出...");
                 return;
             }
+            Application.AddMessageFilter(new UnityMessageFilter());
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

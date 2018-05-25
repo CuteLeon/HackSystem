@@ -93,6 +93,7 @@
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Controllers\UnityMessageFilter.cs" />
     <Compile Include="Controls\CardControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
