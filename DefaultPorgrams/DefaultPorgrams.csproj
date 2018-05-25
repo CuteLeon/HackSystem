@@ -65,6 +65,7 @@
     <Compile Include="BallisticMissileClass.cs" />
     <Compile Include="CombatClass.cs" />
     <Compile Include="DigitalRainClass.cs" />
+    <Compile Include="DrivingSystemClass.cs" />
     <Compile Include="UAVCameraClass.cs" />
     <Compile Include="ThreeDMapClass.cs" />
     <Compile Include="IronManClass.cs" />
@@ -165,6 +166,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DigitalRainIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DrivingSystem.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DrivingSystemIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

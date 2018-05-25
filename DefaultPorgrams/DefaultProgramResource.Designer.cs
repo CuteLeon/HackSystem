@@ -283,6 +283,26 @@ namespace DefaultPorgrams {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap DrivingSystem {
+            get {
+                object obj = ResourceManager.GetObject("DrivingSystem", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap DrivingSystemIcon {
+            get {
+                object obj = ResourceManager.GetObject("DrivingSystemIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap HackSystemLogo {
             get {
                 object obj = ResourceManager.GetObject("HackSystemLogo", resourceCulture);
