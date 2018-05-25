@@ -6,11 +6,22 @@ using System.Linq;
 using System.Windows.Forms;
 using StartUpTemplate;
 using LoginTemplate;
+using System.Threading;
+using System.Diagnostics;
 
 namespace HackSystem
 {
     static class Program
     {
+        /// <summary>
+        /// 允许新建此进程
+        /// </summary>
+        private static bool CreateNew = true;
+        /// <summary>
+        /// 创建互斥体，使程序仅可单实例运行；
+        /// </summary>
+        private static readonly Mutex UnityMutex = new Mutex(true, Application.ProductName, out CreateNew);
+
         private volatile static StartUpTemplateClass _startUp = null;
         /// <summary>
         /// 系统的启动画面
@@ -45,6 +56,14 @@ namespace HackSystem
         [STAThread]
         static void Main()
         {
+            //检查单实例进程运行
+            if (!CreateNew)
+            {
+                Debug.Print("已经有实例运行，程序即将退出...");
+                MessageBox.Show("已经有实例运行，程序即将退出...");
+                return;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ApplicationExit += Application_ApplicationExit;
@@ -156,6 +175,8 @@ namespace HackSystem
 
         static void Application_ApplicationExit(object sender, EventArgs e)
         {
+            LogController.Debug("释放互斥体...");
+            UnityMutex?.ReleaseMutex();
             LogController.Info("程序退出 ...");
             LogController.CloseLogListener();
         }
