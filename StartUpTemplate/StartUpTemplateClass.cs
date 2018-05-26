@@ -17,11 +17,11 @@ namespace StartUpTemplate
         /// <summary>
         /// 启动名称
         /// </summary>
-        public string Name { get; protected set; } = string.Empty;
+        public string Name { get; protected set; } = "启动";
         /// <summary>
         /// 启动描述
         /// </summary>
-        public string Description { get; protected set; } = string.Empty;
+        public string Description { get; protected set; } = "描述";
         /// <summary>
         /// 程序集所在文件名称
         /// </summary>

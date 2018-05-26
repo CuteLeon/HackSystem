@@ -44,11 +44,11 @@ namespace ProgramTemplate
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name { get; protected set; } = string.Empty;
+        public string Name { get; protected set; } = "程序";
         /// <summary>
         /// 描述
         /// </summary>
-        public string Description { get; protected set; } = string.Empty;
+        public string Description { get; protected set; } = "程序描述";
 
         /// <summary>
         /// 程序集所在文件名称
