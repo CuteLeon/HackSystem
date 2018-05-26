@@ -40,7 +40,7 @@ namespace HackSystem
             {
                 if (value == null)
                 {
-                    IconPictureBox.BackgroundImage = null;
+                    IconPictureBox.BackgroundImage = UnityResource.DefaultProgramIcon;
                 }
                 else
                 {

@@ -33,7 +33,7 @@ namespace ProgramTemplate
             {
                 if (value == null)
                 {
-                    _icon = null;
+                    _icon = ProgramResource.DefaultProgramIcon;
                 }
                 else
                 {

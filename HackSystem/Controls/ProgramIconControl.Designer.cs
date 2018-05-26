@@ -49,6 +49,7 @@
             // 
             // IconPictureBox
             // 
+            this.IconPictureBox.BackgroundImage = global::HackSystem.UnityResource.DefaultProgramIcon;
             this.IconPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.IconPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IconPictureBox.Location = new System.Drawing.Point(0, 0);

@@ -9,11 +9,19 @@ namespace TenTenGame
 {
     public class TenTenGameClass : ProgramTemplateClass
     {
-        public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
+        public TenTenGameClass()
+        {
+            Name = "1010";
+            Description = "1010 [via : Leon]";
+            Icon = null;
+        }
+
+        public override string FileName => 
+            System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
 
         protected override Form CreateProgramForm()
         {
-            throw new NotImplementedException();
+            return new Form();
         }
     }
 }

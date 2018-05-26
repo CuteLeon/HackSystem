@@ -63,6 +63,16 @@ namespace HackSystem {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap DefaultProgramIcon {
+            get {
+                object obj = ResourceManager.GetObject("DefaultProgramIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap HackSystemLogo {
             get {
                 object obj = ResourceManager.GetObject("HackSystemLogo", resourceCulture);

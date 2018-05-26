@@ -185,5 +185,8 @@
   <ItemGroup>
     <None Include="Resources\ProgramIconMask_0.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultProgramIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
