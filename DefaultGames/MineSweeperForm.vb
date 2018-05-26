@@ -118,6 +118,8 @@ Public Class MineSweeperForm
         Dim NowIndex As PointF = New PointF(e.X \ 32, e.Y \ 32)
         If LastHLIndex = New PointF(-1, -1) Then LastHLIndex = NowIndex
         If NowIndex = LastHLIndex Then Exit Sub
+        If (NowIndex.X < 0 OrElse NowIndex.X > 9 Or
+            NowIndex.Y < 0 OrElse NowIndex.Y > 9) Then Exit Sub
         If CellState(LastHLIndex.X, LastHLIndex.Y) > 2 Then CellState(LastHLIndex.X, LastHLIndex.Y) -= 3
         If CellState(NowIndex.X, NowIndex.Y) < 2 Then CellState(NowIndex.X, NowIndex.Y) += 3
         LastHLIndex = NowIndex
