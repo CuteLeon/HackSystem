@@ -24,6 +24,7 @@ Partial Class TenTenGameForm
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TenTenGameForm))
         Me.ScoreLabel = New System.Windows.Forms.Label()
         Me.ObjectLabel0 = New System.Windows.Forms.Label()
         Me.ObjectLabel1 = New System.Windows.Forms.Label()
@@ -74,7 +75,7 @@ Partial Class TenTenGameForm
         'MaskLabel
         '
         Me.MaskLabel.BackColor = System.Drawing.Color.Transparent
-        Me.MaskLabel.Image = Global.TenTenGame.My.Resources.TenTenGameResource.Mask
+        Me.MaskLabel.Image = Global.DefaultGames.My.Resources.DefaultGameResource.Mask
         Me.MaskLabel.Location = New System.Drawing.Point(40, 88)
         Me.MaskLabel.Name = "MaskLabel"
         Me.MaskLabel.Size = New System.Drawing.Size(280, 280)
@@ -83,7 +84,7 @@ Partial Class TenTenGameForm
         'CloseButton
         '
         Me.CloseButton.BackColor = System.Drawing.Color.Transparent
-        Me.CloseButton.Image = Global.TenTenGame.My.Resources.TenTenGameResource.GameClose_0
+        Me.CloseButton.Image = Global.DefaultGames.My.Resources.DefaultGameResource.GameClose_0
         Me.CloseButton.Location = New System.Drawing.Point(404, 12)
         Me.CloseButton.Name = "CloseButton"
         Me.CloseButton.Size = New System.Drawing.Size(25, 25)
@@ -93,7 +94,7 @@ Partial Class TenTenGameForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.TenTenGame.My.Resources.TenTenGameResource.Background
+        Me.BackgroundImage = Global.DefaultGames.My.Resources.DefaultGameResource.TenTenBackground
         Me.ClientSize = New System.Drawing.Size(450, 400)
         Me.Controls.Add(Me.CloseButton)
         Me.Controls.Add(Me.MaskLabel)
@@ -103,6 +104,7 @@ Partial Class TenTenGameForm
         Me.Controls.Add(Me.ScoreLabel)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "TenTenGameForm"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

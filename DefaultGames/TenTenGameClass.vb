@@ -7,7 +7,7 @@ Public Class TenTenGameClass
     Public Sub New()
         Name = "1010"
         Description = "1010 [via : Leon]"
-        Icon = My.Resources.TenTenGameResource.TenTenGameIcon
+        Icon = My.Resources.DefaultGameResource.TenTenGameIcon
     End Sub
 
 

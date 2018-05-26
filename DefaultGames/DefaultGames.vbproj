@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{41F075DA-7801-4C70-B25E-34E6F6115B83}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TenTenGame</RootNamespace>
-    <AssemblyName>TenTenGame</AssemblyName>
+    <RootNamespace>DefaultGames</RootNamespace>
+    <AssemblyName>DefaultGames</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -18,7 +18,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>..\Debug\Programs\</OutputPath>
-    <DocumentationFile>TenTenGame.xml</DocumentationFile>
+    <DocumentationFile>DefaultGames.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -27,7 +27,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>..\Release\Programs\</OutputPath>
-    <DocumentationFile>TenTenGame.xml</DocumentationFile>
+    <DocumentationFile>DefaultGames.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -67,6 +67,15 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrawImageModule.vb" />
+    <Compile Include="MineSweeperClass.vb" />
+    <Compile Include="MineSweeperForm.designer.vb">
+      <DependentUpon>MineSweeperForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MineSweeperForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TwosGameClass.vb" />
     <Compile Include="TenTenGameClass.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -89,13 +98,22 @@
     <Compile Include="TenTenGameForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TenTenGameResource.Designer.vb">
+    <Compile Include="DefaultGameResource.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TenTenGameResource.resx</DependentUpon>
+      <DependentUpon>DefaultGameResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TwosGameForm.designer.vb">
+      <DependentUpon>TwosGameForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TwosGameForm.vb">
+      <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MineSweeperForm.resx">
+      <DependentUpon>MineSweeperForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -105,10 +123,13 @@
     <EmbeddedResource Include="TenTenGameForm.resx">
       <DependentUpon>TenTenGameForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TenTenGameResource.resx">
+    <EmbeddedResource Include="DefaultGameResource.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>TenTenGameResource.Designer.vb</LastGenOutput>
+      <LastGenOutput>DefaultGameResource.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwosGameForm.resx">
+      <DependentUpon>TwosGameForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -121,12 +142,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1010.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Background.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\GameClose_0.png" />
@@ -142,6 +157,129 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TenTenGameIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card1024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card2048.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card4096.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card8192.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card16384.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card32768.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card65536.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card131072.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DirectiionKey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TenTenBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwosBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwosGameIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MineSweeperBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HighLight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HighLight_Mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lost.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoMine_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoMine_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoMine_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoMine_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoMine_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoMine_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoMine_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoMine_7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoMine_8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Unknown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Win.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MineSweeperGameIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

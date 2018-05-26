@@ -10,11 +10,11 @@ Public Class TenTenGameForm
     Private Const PaddingSize As Integer = 30 '裁片集中区域与窗体边框的距离
     Private Const CardSize As Integer = 26 '卡片尺寸
     Dim ScoreList() As Integer = {0, 10, 30, 60, 100, 150, 210}
-    Dim MousePointInLabel As Point '用于记录鼠标拖动标签时鼠标坐标与标签起点差值
+    Dim MousePointInLabel As Drawing.Point '用于记录鼠标拖动标签时鼠标坐标与标签起点差值
     Dim Score As Integer = 0 '分数
     Dim Moved As Boolean '定义一个标识，记录是否发生了移动，以确定操作是否有效
     Dim BlankColor As Color = Color.FromArgb(100, Color.DarkGray)
-    Dim ObjectLabelLocation() As Point
+    Dim ObjectLabelLocation() As Drawing.Point
     Dim CardColor() As Color = {
         Color.FromArgb(255, 121, 136, 191),
         Color.FromArgb(255, 254, 198, 61),
@@ -33,31 +33,30 @@ Public Class TenTenGameForm
     Dim ObjectCount As Integer '还没有被放入游戏区的物体个数
     Dim ObjectLabels() As Label
     '记录每个魔性占用的行和列数，用以生成对应尺寸的图像
-    Dim ObjectSize() As Size = {New Size(1, 1), New Size(1, 2), New Size(2, 1), New Size(2, 2), New Size(2, 2), New Size(2, 2), New Size(2, 2), New Size(1, 3), New Size(3, 1), New Size(2, 2), New Size(1, 4), New Size(4, 1), New Size(3, 3), New Size(3, 3), New Size(3, 3), New Size(3, 3), New Size(1, 5), New Size(5, 1), New Size(3, 3)}
-    Dim ObjectModel As Point()() = {
-        New Point() {New Point(0, 0)},'单个方格
-        New Point() {New Point(0, 0), New Point(1, 0)},'垂直排列的两个方格
-        New Point() {New Point(0, 0), New Point(0, 1)},'水平排量的两个方格
-        New Point() {New Point(1, 0), New Point(0, 1), New Point(1, 1)},'缺少第二象限的三个方格
-        New Point() {New Point(0, 0), New Point(1, 0), New Point(1, 1)},'缺少第一象限的三个方格
-        New Point() {New Point(0, 0), New Point(0, 1), New Point(1, 1)},'缺少第三象限的三个方格
-        New Point() {New Point(0, 0), New Point(1, 0), New Point(0, 1)},'缺少第四象限的三个方格
-        New Point() {New Point(0, 0), New Point(1, 0), New Point(2, 0)},'垂直的三个方格
-        New Point() {New Point(0, 0), New Point(0, 1), New Point(0, 2)},'水平的三个方格
-        New Point() {New Point(0, 0), New Point(1, 0), New Point(0, 1), New Point(1, 1)},'四个紧凑的方格
-        New Point() {New Point(0, 0), New Point(1, 0), New Point(2, 0), New Point(3, 0)},'垂直的四个方格
-        New Point() {New Point(0, 0), New Point(0, 1), New Point(0, 2), New Point(0, 3)},'水平的四个方格
-        New Point() {New Point(0, 2), New Point(1, 2), New Point(2, 2), New Point(2, 1), New Point(2, 0)},'缺少第二象限的五个方格
-        New Point() {New Point(0, 0), New Point(1, 0), New Point(2, 0), New Point(2, 1), New Point(2, 2)},'缺少第一象限的五个方格
-        New Point() {New Point(0, 0), New Point(0, 1), New Point(0, 2), New Point(1, 2), New Point(2, 2)},'缺少第三象限的五个方格
-        New Point() {New Point(0, 0), New Point(0, 1), New Point(0, 2), New Point(1, 0), New Point(2, 0)},'缺少第四象限的五个方格
-        New Point() {New Point(0, 0), New Point(1, 0), New Point(2, 0), New Point(3, 0), New Point(4, 0)},'垂直的五个方格
-        New Point() {New Point(0, 0), New Point(0, 1), New Point(0, 2), New Point(0, 3), New Point(0, 4)},'水平的五个方格
-        New Point() {New Point(0, 0), New Point(0, 1), New Point(0, 2), New Point(1, 0), New Point(1, 1), New Point(1, 2), New Point(2, 0), New Point(2, 1), New Point(2, 2)}'九个方格组成的超大正方形
+    Dim ObjectSize() As Drawing.Size = {New Drawing.Size(1, 1), New Drawing.Size(1, 2), New Drawing.Size(2, 1), New Drawing.Size(2, 2), New Drawing.Size(2, 2), New Drawing.Size(2, 2), New Drawing.Size(2, 2), New Drawing.Size(1, 3), New Drawing.Size(3, 1), New Drawing.Size(2, 2), New Drawing.Size(1, 4), New Drawing.Size(4, 1), New Drawing.Size(3, 3), New Drawing.Size(3, 3), New Drawing.Size(3, 3), New Drawing.Size(3, 3), New Drawing.Size(1, 5), New Drawing.Size(5, 1), New Drawing.Size(3, 3)}
+    Dim ObjectModel As Drawing.Point()() = {
+        New Drawing.Point() {New Drawing.Point(0, 0)},'单个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(1, 0)},'垂直排列的两个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(0, 1)},'水平排量的两个方格
+        New Drawing.Point() {New Drawing.Point(1, 0), New Drawing.Point(0, 1), New Drawing.Point(1, 1)},'缺少第二象限的三个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(1, 0), New Drawing.Point(1, 1)},'缺少第一象限的三个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(0, 1), New Drawing.Point(1, 1)},'缺少第三象限的三个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(1, 0), New Drawing.Point(0, 1)},'缺少第四象限的三个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(1, 0), New Drawing.Point(2, 0)},'垂直的三个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(0, 1), New Drawing.Point(0, 2)},'水平的三个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(1, 0), New Drawing.Point(0, 1), New Drawing.Point(1, 1)},'四个紧凑的方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(1, 0), New Drawing.Point(2, 0), New Drawing.Point(3, 0)},'垂直的四个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(0, 1), New Drawing.Point(0, 2), New Drawing.Point(0, 3)},'水平的四个方格
+        New Drawing.Point() {New Drawing.Point(0, 2), New Drawing.Point(1, 2), New Drawing.Point(2, 2), New Drawing.Point(2, 1), New Drawing.Point(2, 0)},'缺少第二象限的五个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(1, 0), New Drawing.Point(2, 0), New Drawing.Point(2, 1), New Drawing.Point(2, 2)},'缺少第一象限的五个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(0, 1), New Drawing.Point(0, 2), New Drawing.Point(1, 2), New Drawing.Point(2, 2)},'缺少第三象限的五个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(0, 1), New Drawing.Point(0, 2), New Drawing.Point(1, 0), New Drawing.Point(2, 0)},'缺少第四象限的五个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(1, 0), New Drawing.Point(2, 0), New Drawing.Point(3, 0), New Drawing.Point(4, 0)},'垂直的五个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(0, 1), New Drawing.Point(0, 2), New Drawing.Point(0, 3), New Drawing.Point(0, 4)},'水平的五个方格
+        New Drawing.Point() {New Drawing.Point(0, 0), New Drawing.Point(0, 1), New Drawing.Point(0, 2), New Drawing.Point(1, 0), New Drawing.Point(1, 1), New Drawing.Point(1, 2), New Drawing.Point(2, 0), New Drawing.Point(2, 1), New Drawing.Point(2, 2)}'九个方格组成的超大正方形
     }
 
     Private Sub GameForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Icon = My.Resources.TenTenGameResource._1010
         '记录三个新物体的初始位置
         ObjectLabelLocation = {ObjectLabel0.Location, ObjectLabel1.Location, ObjectLabel2.Location}
         '记录储存三个新物体的控件
@@ -66,7 +65,7 @@ Public Class TenTenGameForm
         CreateNewObject()
         '计算 MaskLabel 的坐标，使用控件当做蒙版模拟出圆角效果，不需要重复绘制，节省计算能力
         'PS操作: "色彩范围"选取10x10个灰色小矩形后，"选择"菜单>"修改">"平滑">输入"2"
-        MaskLabel.Location = New Point(PaddingSize - 1, PaddingSize + TitleHeight - 1)
+        MaskLabel.Location = New Drawing.Point(PaddingSize - 1, PaddingSize + TitleHeight - 1)
         '刷新界面
         DrawForm()
     End Sub
@@ -76,7 +75,7 @@ Public Class TenTenGameForm
     ''' </summary>
     Private Sub DrawForm()
         ScoreLabel.Text = Score.ToString
-        Dim UnityBitmap As Bitmap = My.Resources.TenTenGameResource.Background
+        Dim UnityBitmap As Bitmap = My.Resources.DefaultGameResource.TenTenBackground
         Using UnityGraphics As Graphics = Graphics.FromImage(UnityBitmap)
             For IndexY As Integer = 0 To 9
                 For IndexX As Integer = 0 To 9
@@ -115,19 +114,19 @@ Public Class TenTenGameForm
             ObjectColor(Index) = CardColor(VBMath.Rnd * 7)
             'ObjectColor(Index) = Color.FromArgb(255, VBMath.Rnd * 255, VBMath.Rnd * 255, VBMath.Rnd * 255)
             '恢复控件的坐标，方便改变控件大小后重新居中对齐控件（首次生成时不需要恢复坐标）
-            If ObjectImage(Index) IsNot Nothing Then ObjectLabels(Index).Location = New Point(ObjectLabels(Index).Left + ObjectImage(Index).Width / 4, ObjectLabels(Index).Top + ObjectImage(Index).Height / 4)
+            If ObjectImage(Index) IsNot Nothing Then ObjectLabels(Index).Location = New Drawing.Point(ObjectLabels(Index).Left + ObjectImage(Index).Width / 4, ObjectLabels(Index).Top + ObjectImage(Index).Height / 4)
             '使用 ObjectSize 数组产生对应大小的物体图像
             ObjectImage(Index) = New Bitmap(
                 ObjectSize(ObjectType(Index)).Width * CardSize + (ObjectSize(ObjectType(Index)).Width - 1) * MarginSize,
                 ObjectSize(ObjectType(Index)).Height * CardSize + (ObjectSize(ObjectType(Index)).Height - 1) * MarginSize)
             '是控件适应图像并大小重新居中对齐
-            ObjectLabels(Index).Size = New Size(ObjectImage(Index).Width / 2, ObjectImage(Index).Height / 2)
-            ObjectLabels(Index).Location = New Point(ObjectLabels(Index).Left - ObjectImage(Index).Width / 4, ObjectLabels(Index).Top - ObjectImage(Index).Height / 4)
+            ObjectLabels(Index).Size = New Drawing.Size(ObjectImage(Index).Width / 2, ObjectImage(Index).Height / 2)
+            ObjectLabels(Index).Location = New Drawing.Point(ObjectLabels(Index).Left - ObjectImage(Index).Width / 4, ObjectLabels(Index).Top - ObjectImage(Index).Height / 4)
             '记录控件对齐后的坐标，将物体拖入游戏区失败时会把控件恢复到此处记录的坐标
             ObjectLabelLocation(Index) = ObjectLabels(Index).Location
             Using CardGraphics As Graphics = Graphics.FromImage(ObjectImage(Index))
                 '绘制物体模型和颜色对应的物体图像
-                For Each ObjectCell As Point In ObjectModel(ObjectType(Index))
+                For Each ObjectCell As Drawing.Point In ObjectModel(ObjectType(Index))
                     CardGraphics.FillRectangle(New SolidBrush(ObjectColor(Index)), New Rectangle(
                         ObjectCell.Y * CardSize + (ObjectCell.Y) * MarginSize,
                         ObjectCell.X * CardSize + (ObjectCell.X) * MarginSize,
@@ -166,7 +165,7 @@ Public Class TenTenGameForm
         '首先要隐藏控件
         ObjectLabel.Hide()
         '恢复控件尺寸为游戏区对应尺寸的一半
-        ObjectLabel.Size = New Size(ObjectImage(ObjectLabel.Tag).Width / 2, ObjectImage(ObjectLabel.Tag).Height / 2)
+        ObjectLabel.Size = New Drawing.Size(ObjectImage(ObjectLabel.Tag).Width / 2, ObjectImage(ObjectLabel.Tag).Height / 2)
         'Label 控件不允许图像拉伸，需要自行缩放图像
         ObjectLabel.Image = New Bitmap(ObjectImage(ObjectLabel.Tag), ObjectImage(ObjectLabel.Tag).Width / 2, ObjectImage(ObjectLabel.Tag).Height / 2)
         '恢复 ObjectLabel 的位置
@@ -195,15 +194,15 @@ Public Class TenTenGameForm
     ''' <returns>是否拖入成功</returns>
     Private Function MoveToGameAera(ByVal Index As Integer) As Boolean
         Dim IndexX, IndexY As Integer '当前鼠标位置对应的 CardData 坐标
-        Dim PointsInGameAera(0) As Point '记录拖入的物体在游戏区对应的坐标组，方便拖入成功时赋值
-        Dim PointInGameAera As Point '用作游戏区里坐标
+        Dim PointsInGameAera(0) As Drawing.Point '记录拖入的物体在游戏区对应的坐标组，方便拖入成功时赋值
+        Dim PointInGameAera As Drawing.Point '用作游戏区里坐标
         '根据鼠标在游戏区的坐标判断在 CardData 数组所对应的坐标
         IndexY = Math.Round((MousePosition.X - PaddingSize - MousePointInLabel.X - Me.Left) / (CardSize + MarginSize))
         IndexX = Math.Round((MousePosition.Y - PaddingSize - TitleHeight - MousePointInLabel.Y - Me.Top) / (CardSize + MarginSize))
         '防止数组越界
         If IndexX < 0 OrElse IndexX > 9 OrElse IndexY < 0 OrElse IndexY > 9 Then Return False
         '检测当前位置是否放得下物体
-        For Each ObjectCell As Point In ObjectModel(ObjectType(Index))
+        For Each ObjectCell As Drawing.Point In ObjectModel(ObjectType(Index))
             PointInGameAera.X = IndexX + ObjectCell.X
             PointInGameAera.Y = IndexY + ObjectCell.Y
             '物体超出到游戏区边缘，当前坐标放不下物体，返回假
@@ -213,7 +212,7 @@ Public Class TenTenGameForm
                 Return False
             Else
                 '当前坐标可以放得下(整个物体不一定放的下)，先记录下坐标，方便如果放的下时对游戏区对应坐标赋值
-                PointsInGameAera(UBound(PointsInGameAera)) = New Point(PointInGameAera.X, PointInGameAera.Y)
+                PointsInGameAera(UBound(PointsInGameAera)) = New Drawing.Point(PointInGameAera.X, PointInGameAera.Y)
                 '为 PointsInGameAera 数组扩展一个元素，方便记录下一个放的下的坐标
                 ReDim Preserve PointsInGameAera(UBound(PointsInGameAera) + 1)
             End If
@@ -332,9 +331,9 @@ Public Class TenTenGameForm
     ''' <param name="ObjectType"></param>
     ''' <returns>能否放置</returns>
     Private Function CanPutItIn(ByVal PointX As Integer, ByVal PointY As Integer, ByVal ObjectType As Integer) As Boolean
-        Dim PointInGameAera As Point '在游戏区对应的坐标
+        Dim PointInGameAera As Drawing.Point '在游戏区对应的坐标
         '遍历物体模型的坐标组
-        For Each ObjectCell As Point In ObjectModel(ObjectType)
+        For Each ObjectCell As Drawing.Point In ObjectModel(ObjectType)
             '计算物体在游戏区内对应的坐标
             PointInGameAera.X = PointX + ObjectCell.X
             PointInGameAera.Y = PointY + ObjectCell.Y
@@ -371,19 +370,19 @@ Public Class TenTenGameForm
     End Sub
 
     Private Sub CloseButton_MouseDown(sender As Object, e As MouseEventArgs) Handles CloseButton.MouseDown
-        CloseButton.Image = My.Resources.TenTenGameResource.GameClose_2
+        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_2
     End Sub
 
     Private Sub CloseButton_MouseEnter(sender As Object, e As EventArgs) Handles CloseButton.MouseEnter
-        CloseButton.Image = My.Resources.TenTenGameResource.GameClose_1
+        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_1
     End Sub
 
     Private Sub CloseButton_MouseLeave(sender As Object, e As EventArgs) Handles CloseButton.MouseLeave
-        CloseButton.Image = My.Resources.TenTenGameResource.GameClose_0
+        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_0
     End Sub
 
     Private Sub CloseButton_MouseUp(sender As Object, e As MouseEventArgs) Handles CloseButton.MouseUp
-        CloseButton.Image = My.Resources.TenTenGameResource.GameClose_1
+        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_1
     End Sub
 
     Private Sub TenTenGameForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
