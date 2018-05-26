@@ -26,7 +26,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScientistStartUp", "Scienti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{A4C6CDAC-D60F-45BD-98F5-732ED2065A77}"
 	ProjectSection(SolutionItems) = preProject
-		Common.txt = Common.txt
+		Documents\Common.txt = Documents\Common.txt
 		Documents\Login开发教程.md = Documents\Login开发教程.md
 		Documents\Program开发教程.md = Documents\Program开发教程.md
 		Documents\StartUp开发教程.md = Documents\StartUp开发教程.md
@@ -63,6 +63,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Programs", "Programs", "{FC61430E-A89A-452A-9F1C-9E3DF38C8ACE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultPorgrams", "DefaultPorgrams\DefaultPorgrams.csproj", "{292361FA-1E23-4748-8C4C-6990EE3A8A2C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EEC78196-7BB3-4344-AAFA-8B88ABD01DA1} = {EEC78196-7BB3-4344-AAFA-8B88ABD01DA1}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TenTenGame", "TenTenGame\TenTenGame.csproj", "{81B9DA85-17D2-422E-A951-CB58B1A2A893}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EEC78196-7BB3-4344-AAFA-8B88ABD01DA1} = {EEC78196-7BB3-4344-AAFA-8B88ABD01DA1}
 	EndProjectSection
@@ -121,6 +126,10 @@ Global
 		{292361FA-1E23-4748-8C4C-6990EE3A8A2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{292361FA-1E23-4748-8C4C-6990EE3A8A2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{292361FA-1E23-4748-8C4C-6990EE3A8A2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81B9DA85-17D2-422E-A951-CB58B1A2A893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81B9DA85-17D2-422E-A951-CB58B1A2A893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81B9DA85-17D2-422E-A951-CB58B1A2A893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81B9DA85-17D2-422E-A951-CB58B1A2A893}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,6 +142,7 @@ Global
 		{4C709A95-7B5F-4CA6-91CA-264E4D243CA9} = {440F20B3-CDA8-41CE-AF87-E58BC267B533}
 		{923ED0AC-F5F5-4AE9-9859-0A1C84EBE5C2} = {440F20B3-CDA8-41CE-AF87-E58BC267B533}
 		{292361FA-1E23-4748-8C4C-6990EE3A8A2C} = {FC61430E-A89A-452A-9F1C-9E3DF38C8ACE}
+		{81B9DA85-17D2-422E-A951-CB58B1A2A893} = {FC61430E-A89A-452A-9F1C-9E3DF38C8ACE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79BC620D-A9A9-41B2-835E-E6CAF80E9902}

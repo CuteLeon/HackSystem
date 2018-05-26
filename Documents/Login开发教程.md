@@ -40,7 +40,8 @@ namespace DefaultLogin
             this.Preview = DefaultLoginResource.DefaultLoginPreview;
         }
 
-        public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
+        public override string FileName => 
+			System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
 
         protected override Form CreateLoginForm()
         {
