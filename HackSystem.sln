@@ -68,11 +68,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultPorgrams", "DefaultP
 	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DefaultGames", "DefaultGames\DefaultGames.vbproj", "{41F075DA-7801-4C70-B25E-34E6F6115B83}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EEC78196-7BB3-4344-AAFA-8B88ABD01DA1} = {EEC78196-7BB3-4344-AAFA-8B88ABD01DA1}
+	EndProjectSection
 EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -146,6 +146,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79BC620D-A9A9-41B2-835E-E6CAF80E9902}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true
