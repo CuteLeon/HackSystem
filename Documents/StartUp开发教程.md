@@ -26,10 +26,10 @@
 	注意，只需要在CreateStartUpForm()方法返回Form即可，不要在构造函数内创建Form对象，否则会因为创建Class对象而造成Form占用大量内存；
 
 ``` csharp
-using StartUpTemplate;
+using HackSystem.StartUpTemplate;
 using System.Windows.Forms;
 
-namespace DefaultStartUp
+namespace Leon.DefaultStartUp
 {
     public class DefaultStartUpClass : StartUpTemplateClass
     {

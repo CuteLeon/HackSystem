@@ -31,10 +31,10 @@
 >*外部类调用 GetNewProgramForm() 获取新窗口以显示；*
 
 ``` csharp
-using ProgramTemplate;
+using HackSystem.ProgramTemplate;
 using System.Windows.Forms;
 
-namespace DefaultPrograms
+namespace Leon.DefaultPrograms
 {
     public class DefaultProgramClass : ProgramTemplateClass
     {

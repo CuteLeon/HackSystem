@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4C709A95-7B5F-4CA6-91CA-264E4D243CA9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Leon.DefaultLogon</RootNamespace>
+    <AssemblyName>Leon.DefaultLogon</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\Logons\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\Logons\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DefaultLogonClass.cs" />
+    <Compile Include="DefaultLogonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DefaultLogonForm.Designer.cs">
+      <DependentUpon>DefaultLogonForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DefaultLogonResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DefaultLogonResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DefaultLogonForm.resx">
+      <DependentUpon>DefaultLogonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DefaultLogonResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DefaultLogonResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeadMask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogonArea.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogonButton_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogonButton_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogonButton_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wallpaper.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PasswordInputBox_Down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PasswordInputBox_Enter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PasswordInputBox_Normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultLogonPreview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HackSystem.LogonTemplate\HackSystem.LogonTemplate.csproj">
+      <Project>{4138eeb0-2a53-4111-9898-e953609a21dd}</Project>
+      <Name>HackSystem.LogonTemplate</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

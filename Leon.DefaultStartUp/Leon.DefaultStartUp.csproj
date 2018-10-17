@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4CD6841D-ACEF-4879-8F0D-ED624A3657CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Leon.DefaultStartUp</RootNamespace>
+    <AssemblyName>Leon.DefaultStartUp</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\StartUps\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\StartUps\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DefaultStartUpClass.cs" />
+    <Compile Include="DefaultStartUpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DefaultStartUpForm.Designer.cs">
+      <DependentUpon>DefaultStartUpForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DefaultStartUpResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DefaultStartUpResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DefaultStartUpForm.resx">
+      <DependentUpon>DefaultStartUpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DefaultStartUpResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DefaultStartUpResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_34.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_37.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_38.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_39.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_42.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_43.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_44.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_46.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_47.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_49.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_52.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_53.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_54.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_55.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_56.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_57.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_58.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUp_59.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartingUIWallpaper.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultStartUpPreview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HackSystem.StartUpTemplate\HackSystem.StartUpTemplate.csproj">
+      <Project>{c618e603-dd32-4278-bebf-6b1807e3a790}</Project>
+      <Name>HackSystem.StartUpTemplate</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
