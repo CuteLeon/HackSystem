@@ -134,12 +134,6 @@ namespace Leon.DefaultPorgrams
 
         private void DefaultProgramForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            /* TODO : 很奇怪的BUG，在主桌面的窗口触发Form_Closing()的时候，窗口关闭事件就会执行到这里来
-             * 但是，此处直接 return 时就不会发生此BUG.
-             */
-
-            return;
-
             if (!this.CloseProgram)
             {
                 e.Cancel = true;
