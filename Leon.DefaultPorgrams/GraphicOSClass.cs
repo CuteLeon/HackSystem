@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public GraphicOSClass()
         {
-            Name = "示波器";
-            Description = "示波器 [via leon]";
-            Icon = DefaultProgramResource.GraphicOSIcon;
+            this.Name = "示波器";
+            this.Description = "示波器 [via leon]";
+            this.Icon = DefaultProgramResource.GraphicOSIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.GraphicOS
                 );
         }

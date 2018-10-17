@@ -58,28 +58,28 @@ Public Class TenTenGameForm
 
     Private Sub GameForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         '记录三个新物体的初始位置
-        ObjectLabelLocation = {ObjectLabel0.Location, ObjectLabel1.Location, ObjectLabel2.Location}
+        Me.ObjectLabelLocation = {Me.ObjectLabel0.Location, Me.ObjectLabel1.Location, Me.ObjectLabel2.Location}
         '记录储存三个新物体的控件
-        ObjectLabels = {ObjectLabel0, ObjectLabel1, ObjectLabel2}
+        Me.ObjectLabels = {Me.ObjectLabel0, Me.ObjectLabel1, Me.ObjectLabel2}
         '创建三个新物体
-        CreateNewObject()
+        Me.CreateNewObject()
         '计算 MaskLabel 的坐标，使用控件当做蒙版模拟出圆角效果，不需要重复绘制，节省计算能力
         'PS操作: "色彩范围"选取10x10个灰色小矩形后，"选择"菜单>"修改">"平滑">输入"2"
-        MaskLabel.Location = New Drawing.Point(PaddingSize - 1, PaddingSize + TitleHeight - 1)
+        Me.MaskLabel.Location = New Drawing.Point(PaddingSize - 1, PaddingSize + TitleHeight - 1)
         '刷新界面
-        DrawForm()
+        Me.DrawForm()
     End Sub
 
     ''' <summary>
     ''' 根据 CardData 数组刷新界面
     ''' </summary>
     Private Sub DrawForm()
-        ScoreLabel.Text = Score.ToString
+        Me.ScoreLabel.Text = Me.Score.ToString
         Dim UnityBitmap As Bitmap = My.Resources.DefaultGameResource.TenTenBackground
         Using UnityGraphics As Graphics = Graphics.FromImage(UnityBitmap)
             For IndexY As Integer = 0 To 9
                 For IndexX As Integer = 0 To 9
-                    UnityGraphics.FillRectangle(New SolidBrush(IIf(CardData(IndexY, IndexX), ColorData(IndexY, IndexX), BlankColor)), New RectangleF(PaddingSize + IndexX * (CardSize + MarginSize), PaddingSize + IndexY * (CardSize + MarginSize) + TitleHeight, CardSize, CardSize))
+                    UnityGraphics.FillRectangle(New SolidBrush(IIf(Me.CardData(IndexY, IndexX), Me.ColorData(IndexY, IndexX), Me.BlankColor)), New RectangleF(PaddingSize + IndexX * (CardSize + MarginSize), PaddingSize + IndexY * (CardSize + MarginSize) + TitleHeight, CardSize, CardSize))
                     'UnityGraphics.DrawString(IndexX & "," & IndexY, Me.Font, Brushes.Red, PaddingSize + IndexX * (CardSize + MarginSize), PaddingSize + IndexY * (CardSize + MarginSize) + TitleHeight)
                 Next
             Next
@@ -103,38 +103,38 @@ Public Class TenTenGameForm
     ''' </summary>
     Private Sub CreateNewObject()
         '重置剩余物体的数量，恢复显示新物体控件
-        ObjectCount = 3
-        ObjectLabel0.Show()
-        ObjectLabel1.Show()
-        ObjectLabel2.Show()
+        Me.ObjectCount = 3
+        Me.ObjectLabel0.Show()
+        Me.ObjectLabel1.Show()
+        Me.ObjectLabel2.Show()
         '循环产生新物体
         For Index As Integer = 0 To 2
             '随机产生物体模型标识和颜色
-            ObjectType(Index) = VBMath.Rnd * 18
-            ObjectColor(Index) = CardColor(VBMath.Rnd * 7)
+            Me.ObjectType(Index) = VBMath.Rnd * 18
+            Me.ObjectColor(Index) = Me.CardColor(Rnd() * 7)
             'ObjectColor(Index) = Color.FromArgb(255, VBMath.Rnd * 255, VBMath.Rnd * 255, VBMath.Rnd * 255)
             '恢复控件的坐标，方便改变控件大小后重新居中对齐控件（首次生成时不需要恢复坐标）
-            If ObjectImage(Index) IsNot Nothing Then ObjectLabels(Index).Location = New Drawing.Point(ObjectLabels(Index).Left + ObjectImage(Index).Width / 4, ObjectLabels(Index).Top + ObjectImage(Index).Height / 4)
+            If Me.ObjectImage(Index) IsNot Nothing Then Me.ObjectLabels(Index).Location = New Drawing.Point(Me.ObjectLabels(Index).Left + Me.ObjectImage(Index).Width / 4, Me.ObjectLabels(Index).Top + Me.ObjectImage(Index).Height / 4)
             '使用 ObjectSize 数组产生对应大小的物体图像
-            ObjectImage(Index) = New Bitmap(
-                ObjectSize(ObjectType(Index)).Width * CardSize + (ObjectSize(ObjectType(Index)).Width - 1) * MarginSize,
-                ObjectSize(ObjectType(Index)).Height * CardSize + (ObjectSize(ObjectType(Index)).Height - 1) * MarginSize)
+            Me.ObjectImage(Index) = New Bitmap(
+                (Me.ObjectSize(Me.ObjectType(Index)).Width * CardSize) + (Me.ObjectSize(Me.ObjectType(Index)).Width - 1) * MarginSize,
+                Me.ObjectSize(Me.ObjectType(Index)).Height * CardSize + (Me.ObjectSize(Me.ObjectType(Index)).Height - 1) * MarginSize)
             '是控件适应图像并大小重新居中对齐
-            ObjectLabels(Index).Size = New Drawing.Size(ObjectImage(Index).Width / 2, ObjectImage(Index).Height / 2)
-            ObjectLabels(Index).Location = New Drawing.Point(ObjectLabels(Index).Left - ObjectImage(Index).Width / 4, ObjectLabels(Index).Top - ObjectImage(Index).Height / 4)
+            Me.ObjectLabels(Index).Size = New Drawing.Size(Me.ObjectImage(Index).Width / 2, Me.ObjectImage(Index).Height / 2)
+            Me.ObjectLabels(Index).Location = New Drawing.Point(Me.ObjectLabels(Index).Left - (Me.ObjectImage(Index).Width / 4), Me.ObjectLabels(Index).Top - Me.ObjectImage(Index).Height / 4)
             '记录控件对齐后的坐标，将物体拖入游戏区失败时会把控件恢复到此处记录的坐标
-            ObjectLabelLocation(Index) = ObjectLabels(Index).Location
-            Using CardGraphics As Graphics = Graphics.FromImage(ObjectImage(Index))
+            Me.ObjectLabelLocation(Index) = Me.ObjectLabels(Index).Location
+            Using CardGraphics As Graphics = Graphics.FromImage(Me.ObjectImage(Index))
                 '绘制物体模型和颜色对应的物体图像
-                For Each ObjectCell As Drawing.Point In ObjectModel(ObjectType(Index))
-                    CardGraphics.FillRectangle(New SolidBrush(ObjectColor(Index)), New Rectangle(
+                For Each ObjectCell As Drawing.Point In Me.ObjectModel(Me.ObjectType(Index))
+                    CardGraphics.FillRectangle(New SolidBrush(Me.ObjectColor(Index)), New Rectangle(
                         ObjectCell.Y * CardSize + (ObjectCell.Y) * MarginSize,
                         ObjectCell.X * CardSize + (ObjectCell.X) * MarginSize,
                         CardSize, CardSize))
                 Next
             End Using
             '把生成的图像绘制到控件
-            ObjectLabels(Index).Image = New Bitmap(ObjectImage(Index), ObjectImage(Index).Width / 2, ObjectImage(Index).Height / 2)
+            Me.ObjectLabels(Index).Image = New Bitmap(Me.ObjectImage(Index), Me.ObjectImage(Index).Width / 2, Me.ObjectImage(Index).Height / 2)
             '回收内存
             GC.Collect()
         Next
@@ -145,42 +145,42 @@ Public Class TenTenGameForm
         '把当前拖动的控件带到Z顺序前面，即控件置前显示
         ObjectLabel.BringToFront()
         '将控件放大至适应游戏区的尺寸
-        ObjectLabel.Size = ObjectImage(ObjectLabel.Tag).Size
-        ObjectLabel.Image = ObjectImage(ObjectLabel.Tag)
+        ObjectLabel.Size = Me.ObjectImage(ObjectLabel.Tag).Size
+        ObjectLabel.Image = Me.ObjectImage(ObjectLabel.Tag)
         '记录鼠标按下时在控件内的坐标，绑定鼠标移动事件，允许鼠标拖动控件
-        MousePointInLabel = e.Location
-        AddHandler ObjectLabel.MouseMove, AddressOf ObjectLabel_MouseMove
+        Me.MousePointInLabel = e.Location
+        AddHandler ObjectLabel.MouseMove, AddressOf Me.ObjectLabel_MouseMove
     End Sub
 
     Private Sub ObjectLabel_MouseMove(sender As Object, e As MouseEventArgs)
         '允许鼠标拖动控件
-        CType(sender, Label).Left = MousePosition.X - Me.Left - MousePointInLabel.X
-        CType(sender, Label).Top = MousePosition.Y - Me.Top - MousePointInLabel.Y
+        CType(sender, Label).Left = MousePosition.X - Me.Left - Me.MousePointInLabel.X
+        CType(sender, Label).Top = MousePosition.Y - Me.Top - Me.MousePointInLabel.Y
     End Sub
 
     Private Sub ObjectLabel_MouseUp(sender As Object, e As MouseEventArgs) Handles ObjectLabel0.MouseUp, ObjectLabel1.MouseUp, ObjectLabel2.MouseUp
         Dim ObjectLabel As Label = CType(sender, Label)
         '卸载控件的鼠标移动事件，不允许鼠标拖动控件
-        RemoveHandler ObjectLabel.MouseMove, AddressOf ObjectLabel_MouseMove
+        RemoveHandler ObjectLabel.MouseMove, AddressOf Me.ObjectLabel_MouseMove
         '首先要隐藏控件
         ObjectLabel.Hide()
         '恢复控件尺寸为游戏区对应尺寸的一半
-        ObjectLabel.Size = New Drawing.Size(ObjectImage(ObjectLabel.Tag).Width / 2, ObjectImage(ObjectLabel.Tag).Height / 2)
+        ObjectLabel.Size = New Drawing.Size(Me.ObjectImage(ObjectLabel.Tag).Width / 2, Me.ObjectImage(ObjectLabel.Tag).Height / 2)
         'Label 控件不允许图像拉伸，需要自行缩放图像
-        ObjectLabel.Image = New Bitmap(ObjectImage(ObjectLabel.Tag), ObjectImage(ObjectLabel.Tag).Width / 2, ObjectImage(ObjectLabel.Tag).Height / 2)
+        ObjectLabel.Image = New Bitmap(Me.ObjectImage(ObjectLabel.Tag), Me.ObjectImage(ObjectLabel.Tag).Width / 2, Me.ObjectImage(ObjectLabel.Tag).Height / 2)
         '恢复 ObjectLabel 的位置
-        ObjectLabel.Location = ObjectLabelLocation(ObjectLabel.Tag)
+        ObjectLabel.Location = Me.ObjectLabelLocation(ObjectLabel.Tag)
         '检测是否拖入成功
-        If MoveToGameAera(ObjectLabel.Tag) Then
+        If Me.MoveToGameAera(ObjectLabel.Tag) Then
             '拖入游戏区成功时首先检查整行整列
-            IsFullInLine()
+            Me.IsFullInLine()
             '刷新界面
-            DrawForm()
+            Me.DrawForm()
             '剩余物体个数自减
-            ObjectCount -= 1
-            If ObjectCount = 0 Then CreateNewObject()
+            Me.ObjectCount -= 1
+            If Me.ObjectCount = 0 Then Me.CreateNewObject()
             '需要检测剩余的物体是否可以放入游戏区，以判断游戏是否结束
-            If IsGameOver() Then GameOver()
+            If Me.IsGameOver() Then Me.GameOver()
         Else
             '拖入失败时恢复显示控件
             ObjectLabel.Show()
@@ -197,17 +197,17 @@ Public Class TenTenGameForm
         Dim PointsInGameAera(0) As Drawing.Point '记录拖入的物体在游戏区对应的坐标组，方便拖入成功时赋值
         Dim PointInGameAera As Drawing.Point '用作游戏区里坐标
         '根据鼠标在游戏区的坐标判断在 CardData 数组所对应的坐标
-        IndexY = Math.Round((MousePosition.X - PaddingSize - MousePointInLabel.X - Me.Left) / (CardSize + MarginSize))
-        IndexX = Math.Round((MousePosition.Y - PaddingSize - TitleHeight - MousePointInLabel.Y - Me.Top) / (CardSize + MarginSize))
+        IndexY = Math.Round((MousePosition.X - PaddingSize - Me.MousePointInLabel.X - Me.Left) / (CardSize + MarginSize))
+        IndexX = Math.Round((MousePosition.Y - PaddingSize - TitleHeight - Me.MousePointInLabel.Y - Me.Top) / (CardSize + MarginSize))
         '防止数组越界
         If IndexX < 0 OrElse IndexX > 9 OrElse IndexY < 0 OrElse IndexY > 9 Then Return False
         '检测当前位置是否放得下物体
-        For Each ObjectCell As Drawing.Point In ObjectModel(ObjectType(Index))
+        For Each ObjectCell As Drawing.Point In Me.ObjectModel(Me.ObjectType(Index))
             PointInGameAera.X = IndexX + ObjectCell.X
             PointInGameAera.Y = IndexY + ObjectCell.Y
             '物体超出到游戏区边缘，当前坐标放不下物体，返回假
             If PointInGameAera.X < 0 OrElse PointInGameAera.X > 9 OrElse PointInGameAera.Y < 0 OrElse PointInGameAera.Y > 9 Then Return False
-            If CardData(PointInGameAera.X, PointInGameAera.Y) Then
+            If Me.CardData(PointInGameAera.X, PointInGameAera.Y) Then
                 '当前坐标放不下，立即返回假
                 Return False
             Else
@@ -222,10 +222,10 @@ Public Class TenTenGameForm
         '遍历之前记录的物体在游戏区对应的坐标
         For PointIndex As Integer = 0 To UBound(PointsInGameAera)
             '每放入一个坐标，加一分
-            Score += 1
+            Me.Score += 1
             '在游戏区储存物体的位置和颜色（相当于放入了物体）
-            CardData(PointsInGameAera(PointIndex).X, PointsInGameAera(PointIndex).Y) = True
-            ColorData(PointsInGameAera(PointIndex).X, PointsInGameAera(PointIndex).Y) = ObjectColor(Index)
+            Me.CardData(PointsInGameAera(PointIndex).X, PointsInGameAera(PointIndex).Y) = True
+            Me.ColorData(PointsInGameAera(PointIndex).X, PointsInGameAera(PointIndex).Y) = Me.ObjectColor(Index)
         Next
         '物体可以放在当前坐标，返回真
         Return True
@@ -243,7 +243,7 @@ Public Class TenTenGameForm
         For IndexY = 0 To 9
             IsFulled = True
             For IndexX = 0 To 9
-                If Not CardData(IndexY, IndexX) Then
+                If Not Me.CardData(IndexY, IndexX) Then
                     '不是整行时立即跳出内层循环
                     IsFulled = False : Exit For
                 End If
@@ -261,7 +261,7 @@ Public Class TenTenGameForm
         For IndexX = 0 To 9
             IsFulled = True
             For IndexY = 0 To 9
-                If Not CardData(IndexY, IndexX) Then
+                If Not Me.CardData(IndexY, IndexX) Then
                     '不是整列时立即跳出内层循环
                     IsFulled = False : Exit For
                 End If
@@ -276,20 +276,20 @@ Public Class TenTenGameForm
         '删除 FulledColumn 数组最后一个未赋值的元素
         ReDim Preserve FulledColumn(UBound(FulledColumn) - 1)
         '计算得分（每次同时消失的行或列数不同，得分也不同，见数组 ScoreList）
-        Score += ScoreList(FulledColumn.Count + FulledLine.Count)
+        Me.Score += Me.ScoreList(FulledColumn.Count + FulledLine.Count)
 
         '清除整行或整列
         If FulledLine.Count > 0 OrElse FulledColumn.Count > 0 Then
             For IndexX = 0 To 9
                 For IndexY = 0 To UBound(FulledLine)
-                    CardData(FulledLine(IndexY), IndexX) = False
+                    Me.CardData(FulledLine(IndexY), IndexX) = False
                     '用于显示整行消失动态效果
                 Next
                 For IndexY = 0 To UBound(FulledColumn)
-                    CardData(IndexX, FulledColumn(IndexY)) = False
+                    Me.CardData(IndexX, FulledColumn(IndexY)) = False
                 Next
                 Threading.Thread.Sleep(25)
-                DrawForm()
+                Me.DrawForm()
                 Me.Refresh()
             Next
         End If
@@ -306,11 +306,11 @@ Public Class TenTenGameForm
 
         For Index = 0 To 2
             '跳过已经放入游戏区的物体
-            If ObjectLabels(Index).Visible Then
+            If Me.ObjectLabels(Index).Visible Then
                 For PointY = 0 To 9
                     For PointX = 0 To 9
                         '逐个坐标检测是否可以放入游戏区
-                        Result = CanPutItIn(PointX, PointY, ObjectType(Index))
+                        Result = Me.CanPutItIn(PointX, PointY, Me.ObjectType(Index))
                         '一旦可以放入立即跳出内层循环，节省计算能力，下同
                         If Result Then Exit For
                     Next
@@ -333,14 +333,14 @@ Public Class TenTenGameForm
     Private Function CanPutItIn(ByVal PointX As Integer, ByVal PointY As Integer, ByVal ObjectType As Integer) As Boolean
         Dim PointInGameAera As Drawing.Point '在游戏区对应的坐标
         '遍历物体模型的坐标组
-        For Each ObjectCell As Drawing.Point In ObjectModel(ObjectType)
+        For Each ObjectCell As Drawing.Point In Me.ObjectModel(ObjectType)
             '计算物体在游戏区内对应的坐标
             PointInGameAera.X = PointX + ObjectCell.X
             PointInGameAera.Y = PointY + ObjectCell.Y
             '物体超出到游戏区边缘，当前坐标放不下物体，返回假
             If PointInGameAera.X < 0 OrElse PointInGameAera.X > 9 OrElse PointInGameAera.Y < 0 OrElse PointInGameAera.Y > 9 Then Return False
             '游戏区目标坐标已经放入了物体，无法重复放入，返回假
-            If CardData(PointInGameAera.X, PointInGameAera.Y) Then Return False
+            If Me.CardData(PointInGameAera.X, PointInGameAera.Y) Then Return False
         Next
         '运行到这里没有返回假而跳出过程水命可以放入物体，返回真
         Return True
@@ -351,16 +351,16 @@ Public Class TenTenGameForm
     ''' </summary>
     Private Sub GameOver()
         '游戏结束的自定义过程，用以重置游戏
-        MsgBox("得分：" & Score, 64, "游戏结束：")
+        MsgBox("得分：" & Me.Score, 64, "游戏结束：")
         '分数清零
-        Score = 0
-        ScoreLabel.Text = "0"
+        Me.Score = 0
+        Me.ScoreLabel.Text = "0"
         '重置游戏区
-        ReDim CardData(9, 9)
+        ReDim Me.CardData(9, 9)
         '重新产生三个物体
-        CreateNewObject()
+        Me.CreateNewObject()
         '刷新界面
-        DrawForm()
+        Me.DrawForm()
     End Sub
 
 #Region "关闭按钮"
@@ -370,19 +370,19 @@ Public Class TenTenGameForm
     End Sub
 
     Private Sub CloseButton_MouseDown(sender As Object, e As MouseEventArgs) Handles CloseButton.MouseDown
-        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_2
+        Me.CloseButton.Image = My.Resources.DefaultGameResource.GameClose_2
     End Sub
 
     Private Sub CloseButton_MouseEnter(sender As Object, e As EventArgs) Handles CloseButton.MouseEnter
-        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_1
+        Me.CloseButton.Image = My.Resources.DefaultGameResource.GameClose_1
     End Sub
 
     Private Sub CloseButton_MouseLeave(sender As Object, e As EventArgs) Handles CloseButton.MouseLeave
-        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_0
+        Me.CloseButton.Image = My.Resources.DefaultGameResource.GameClose_0
     End Sub
 
     Private Sub CloseButton_MouseUp(sender As Object, e As MouseEventArgs) Handles CloseButton.MouseUp
-        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_1
+        Me.CloseButton.Image = My.Resources.DefaultGameResource.GameClose_1
     End Sub
 
     Private Sub TenTenGameForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed

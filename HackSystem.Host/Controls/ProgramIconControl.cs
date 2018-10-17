@@ -22,8 +22,8 @@ namespace HackSystem.Host
         /// 名称
         /// </summary>
         public new string Name {
-            get => NameLabel.Text;
-            set => NameLabel.Text = value;
+            get => this.NameLabel.Text;
+            set => this.NameLabel.Text = value;
         }
 
         /// <summary>
@@ -31,77 +31,77 @@ namespace HackSystem.Host
         /// </summary>
         public Image Icon
         {
-            get => IconPictureBox.BackgroundImage;
+            get => this.IconPictureBox.BackgroundImage;
             set
             {
                 if (value == null)
                 {
-                    IconPictureBox.BackgroundImage = UnityResource.DefaultProgramIcon;
+                    this.IconPictureBox.BackgroundImage = UnityResource.DefaultProgramIcon;
                 }
                 else
                 {
-                    IconPictureBox.BackgroundImage = new Bitmap(value, new Size(64, 64));
+                    this.IconPictureBox.BackgroundImage = new Bitmap(value, new Size(64, 64));
                 }
             }
         }
 
         private ProgramIconControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public ProgramIconControl(string name, Image icon, ProgramTemplateClass parentProgram)
         {
-            InitializeComponent();
-            AddEventHandler();
-            
-            Name = name;
-            Icon = icon;
-            ParentProgram = parentProgram;
+            this.InitializeComponent();
+            this.AddEventHandler();
+
+            this.Name = name;
+            this.Icon = icon;
+            this.ParentProgram = parentProgram;
         }
 
         private void AddEventHandler()
         {
             EventHandler CardMouseEnter = new EventHandler((s, v) =>
             {
-                NameLabel.ForeColor = Color.OrangeRed;
-                IconPictureBox.Image = UnityResource.ProgramIconMask_0;
+                this.NameLabel.ForeColor = Color.OrangeRed;
+                this.IconPictureBox.Image = UnityResource.ProgramIconMask_0;
             });
             EventHandler CardMouseLeave = new EventHandler((s, v) =>
             {
-                NameLabel.ForeColor = Color.DimGray;
-                IconPictureBox.Image = null;
+                this.NameLabel.ForeColor = Color.DimGray;
+                this.IconPictureBox.Image = null;
             });
             MouseEventHandler CardMouseDown = new MouseEventHandler((s, v) =>
             {
-                NameLabel.ForeColor = Color.Red;
-                IconPictureBox.Image = UnityResource.ProgramIconMask_1;
+                this.NameLabel.ForeColor = Color.Red;
+                this.IconPictureBox.Image = UnityResource.ProgramIconMask_1;
             });
             MouseEventHandler CardMouseUp = new MouseEventHandler((s, v) =>
             {
-                NameLabel.ForeColor = Color.OrangeRed;
-                IconPictureBox.Image = UnityResource.ProgramIconMask_0;
+                this.NameLabel.ForeColor = Color.OrangeRed;
+                this.IconPictureBox.Image = UnityResource.ProgramIconMask_0;
             });
 
             this.MouseEnter += CardMouseEnter;
-            NameLabel.MouseEnter += CardMouseEnter;
-            IconPictureBox.MouseEnter += CardMouseEnter;
+            this.NameLabel.MouseEnter += CardMouseEnter;
+            this.IconPictureBox.MouseEnter += CardMouseEnter;
 
             this.MouseLeave += CardMouseLeave;
-            NameLabel.MouseLeave += CardMouseLeave;
-            IconPictureBox.MouseLeave += CardMouseLeave;
+            this.NameLabel.MouseLeave += CardMouseLeave;
+            this.IconPictureBox.MouseLeave += CardMouseLeave;
 
             this.MouseDown += CardMouseDown;
-            NameLabel.MouseDown += CardMouseDown;
-            IconPictureBox.MouseDown += CardMouseDown;
+            this.NameLabel.MouseDown += CardMouseDown;
+            this.IconPictureBox.MouseDown += CardMouseDown;
 
             this.MouseUp += CardMouseUp;
-            NameLabel.MouseUp += CardMouseUp;
-            IconPictureBox.MouseUp += CardMouseUp;
+            this.NameLabel.MouseUp += CardMouseUp;
+            this.IconPictureBox.MouseUp += CardMouseUp;
 
             base.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
-            NameLabel.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
-            IconPictureBox.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
+            this.NameLabel.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
+            this.IconPictureBox.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
         }
 
     }

@@ -12,19 +12,19 @@ namespace HackSystem.Host
         private CardControl _lastActived =null;
         private CardControl LastActived
         {
-            get => _lastActived;
+            get => this._lastActived;
             set
             {
-                if (_lastActived != null)
-                    _lastActived.IsActived = false;
-                _lastActived = value;
+                if (this._lastActived != null)
+                    this._lastActived.IsActived = false;
+                this._lastActived = value;
                 value.IsActived = true;
             }
         }
 
         public LogonsCollectionForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void LogonsCollectionForm_Shown(object sender, EventArgs e)
@@ -44,12 +44,12 @@ namespace HackSystem.Host
                                 try
                                 {
                                     CardControl Logon = new CardControl(LogonInstance.FileName, LogonInstance.GetType().Name, LogonInstance.Name, LogonInstance.Description, LogonInstance.Preview.Clone() as Image);
-                                    Logon.Click += ActiveLogon;
+                                    Logon.Click += this.ActiveLogon;
                                     if (Logon.FileName == ActivedFileName && Logon.ClassName == ActivedClassName)
                                     {
-                                        LastActived = Logon;
+                                        this.LastActived = Logon;
                                     }
-                                    LogonsLayoutPanel.Controls.Add(Logon);
+                                    this.LogonsLayoutPanel.Controls.Add(Logon);
                                 }
                                 catch (Exception ex)
                                 {
@@ -82,7 +82,7 @@ namespace HackSystem.Host
                 MessageBox.Show(string.Format("更新 Logon 配置遇到异常：{0}", ex.Message));
                 return;
             }
-            LastActived = (sender as CardControl);
+            this.LastActived = (sender as CardControl);
             MessageBox.Show(string.Format("更新 Logon 配置成功，重启即可查看效果"));
             //Application.Restart();
         }

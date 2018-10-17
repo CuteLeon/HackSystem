@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public ThreeDMapClass()
         {
-            Name = "3D地图";
-            Description = "3D地图 [via leon]";
-            Icon = DefaultProgramResource.ThreeDMapIcon;
+            this.Name = "3D地图";
+            this.Description = "3D地图 [via leon]";
+            this.Icon = DefaultProgramResource.ThreeDMapIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.ThreeDMap
                 );
         }

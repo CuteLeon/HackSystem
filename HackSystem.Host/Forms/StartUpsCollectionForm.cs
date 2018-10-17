@@ -12,19 +12,19 @@ namespace HackSystem.Host
         private CardControl _lastActived =null;
         private CardControl LastActived
         {
-            get => _lastActived;
+            get => this._lastActived;
             set
             {
-                if (_lastActived != null)
-                    _lastActived.IsActived = false;
-                _lastActived = value;
+                if (this._lastActived != null)
+                    this._lastActived.IsActived = false;
+                this._lastActived = value;
                 value.IsActived = true;
             }
         }
 
         public StartUpsCollectionForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void StartUpsCollectionForm_Shown(object sender, EventArgs e)
@@ -44,12 +44,12 @@ namespace HackSystem.Host
                                 try
                                 {
                                     CardControl startUp = new CardControl(StartupInstance.FileName, StartupInstance.GetType().Name, StartupInstance.Name, StartupInstance.Description, StartupInstance.Preview.Clone() as Image);
-                                    startUp.Click += ActiveStartUp;
+                                    startUp.Click += this.ActiveStartUp;
                                     if (startUp.FileName == ActivedFileName && startUp.ClassName == ActivedClassName)
                                     {
-                                        LastActived = startUp;
+                                        this.LastActived = startUp;
                                     }
-                                    StartUpsLayoutPanel.Controls.Add(startUp);
+                                    this.StartUpsLayoutPanel.Controls.Add(startUp);
                                 }
                                 catch (Exception ex)
                                 {
@@ -82,7 +82,7 @@ namespace HackSystem.Host
                 MessageBox.Show(string.Format("更新 StartUp 配置遇到异常：{0}", ex.Message));
                 return;
             }
-            LastActived = (sender as CardControl);
+            this.LastActived = (sender as CardControl);
             MessageBox.Show(string.Format("更新 StartUp 配置成功，重启即可查看效果"));
             //Application.Restart();
         }

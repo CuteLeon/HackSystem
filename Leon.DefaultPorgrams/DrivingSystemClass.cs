@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public DrivingSystemClass()
         {
-            Name = "驾驶系统";
-            Description = "驾驶系统 [via leon]";
-            Icon = DefaultProgramResource.DrivingSystemIcon;
+            this.Name = "驾驶系统";
+            this.Description = "驾驶系统 [via leon]";
+            this.Icon = DefaultProgramResource.DrivingSystemIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.DrivingSystem
                 );
         }

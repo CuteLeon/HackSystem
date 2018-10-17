@@ -9,9 +9,9 @@ namespace Leon.AnimationStartUp
     {
         public GirlStartUpClass()
         {
-            Name = "女孩";
-            Description = "女孩启动画面 - Leon";
-            Preview = StartUpResource.GirlPreview;
+            this.Name = "女孩";
+            this.Description = "女孩启动画面 - Leon";
+            this.Preview = StartUpResource.GirlPreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;

@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public ThinkingExportClass()
         {
-            Name = "思维导出";
-            Description = "思维导出 [via leon]";
-            Icon = DefaultProgramResource.ThinkingExportIcon;
+            this.Name = "思维导出";
+            this.Description = "思维导出 [via leon]";
+            this.Icon = DefaultProgramResource.ThinkingExportIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.ThinkingExport
                 );
         }

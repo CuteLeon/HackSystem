@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public WaitingClass()
         {
-            Name = "等待";
-            Description = "等待 [via leon]";
-            Icon = DefaultProgramResource.WaitingIcon;
+            this.Name = "等待";
+            this.Description = "等待 [via leon]";
+            this.Icon = DefaultProgramResource.WaitingIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.Waiting
                 );
         }

@@ -29,13 +29,13 @@ namespace HackSystem.StartUpTemplate
         /// </summary>
         public Image Preview
         {
-            get => _preview;
+            get => this._preview;
             protected set
             {
                 if (value == null)
-                    _preview = StartUpTemplateResource.DefaultStartUpPreview;
+                    this._preview = StartUpTemplateResource.DefaultStartUpPreview;
                 else
-                    _preview = new Bitmap(value, 160, 90);
+                    this._preview = new Bitmap(value, 160, 90);
             }
         }
 
@@ -53,12 +53,12 @@ namespace HackSystem.StartUpTemplate
              */
             get
             {
-                if (_startUpForm == null)
-                    _startUpForm = CreateStartUpForm();
-                if (_startUpForm != null) _startUpForm.Icon = StartUpIcon;
-                return _startUpForm;
+                if (this._startUpForm == null)
+                    this._startUpForm = this.CreateStartUpForm();
+                if (this._startUpForm != null) this._startUpForm.Icon = StartUpIcon;
+                return this._startUpForm;
             }
-            protected set => _startUpForm = value;
+            protected set => this._startUpForm = value;
         }
 
         /// <summary>
@@ -73,10 +73,10 @@ namespace HackSystem.StartUpTemplate
         public void OnStartUpFinished(EventArgs e)
         {
             this?.StartUpFinished?.Invoke(this, e);
-            
+
             //启动完成后自动释放启动画面内存；
-            _startUpForm?.Dispose();
-            StartUpForm = null;
+            this._startUpForm?.Dispose();
+            this.StartUpForm = null;
         }
 
         /// <summary>
@@ -93,8 +93,8 @@ namespace HackSystem.StartUpTemplate
         void IDisposable.Dispose()
         {
             System.Diagnostics.Debug.Print("Dispose StartUp : {0}", this.Name);
-            _preview?.Dispose();
-            _startUpForm?.Dispose();
+            this._preview?.Dispose();
+            this._startUpForm?.Dispose();
             GC.SuppressFinalize(this);
         }
 

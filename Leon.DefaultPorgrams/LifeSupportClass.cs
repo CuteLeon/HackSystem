@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public LifeSupportClass()
         {
-            Name = "生命维持";
-            Description = "生命维持 [via leon]";
-            Icon = DefaultProgramResource.LifeSupportIcon;
+            this.Name = "生命维持";
+            this.Description = "生命维持 [via leon]";
+            this.Icon = DefaultProgramResource.LifeSupportIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.LifeSupport
                 );
         }

@@ -16,9 +16,9 @@ namespace Leon.DefaultStartUp
 
         public DefaultStartUpForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            this.FormClosing += new FormClosingEventHandler((Leon, Mathilda) => { ParentStartUp?.OnStartUpFinished(Mathilda); });
+            this.FormClosing += new FormClosingEventHandler((Leon, Mathilda) => { this.ParentStartUp?.OnStartUpFinished(Mathilda); });
         }
 
         private void DefaultStartUpForm_Load(object sender, EventArgs e)
@@ -30,19 +30,19 @@ namespace Leon.DefaultStartUp
         {
             Application.DoEvents();
 
-            FrameTimer.Start();
+            this.FrameTimer.Start();
         }
         
         private void FrameTimer_Tick(object sender, EventArgs e)
         {
-            FrameLabel.Image = DefaultStartUpResource.ResourceManager.GetObject("StartingUp_" + FrameIndex.ToString()) as Image;
-            ProgressLabel.Text = string.Format("Hack System Loading ... {0}%", 100 * FrameIndex / FrameCount);
+            this.FrameLabel.Image = DefaultStartUpResource.ResourceManager.GetObject("StartingUp_" + this.FrameIndex.ToString()) as Image;
+            this.ProgressLabel.Text = string.Format("Hack System Loading ... {0}%", 100 * this.FrameIndex / FrameCount);
 
-            FrameIndex = (FrameIndex + 1) % FrameCount;
-            if (FrameIndex == 0)
+            this.FrameIndex = (this.FrameIndex + 1) % FrameCount;
+            if (this.FrameIndex == 0)
             {
-                FrameTimer.Stop();
-                ProgressLabel.Text = "Hack System Loaded !\n Welcome. (〃'▽'〃)";
+                this.FrameTimer.Stop();
+                this.ProgressLabel.Text = "Hack System Loaded !\n Welcome. (〃'▽'〃)";
                 Application.DoEvents();
 
                 ThreadPool.QueueUserWorkItem(new WaitCallback(

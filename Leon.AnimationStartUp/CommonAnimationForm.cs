@@ -16,14 +16,14 @@ namespace Leon.AnimationStartUp
         /// </summary>
         public new Color ForeColor
         {
-            get => ProgressLabel.ForeColor;
-            set => ProgressLabel.ForeColor = value;
+            get => this.ProgressLabel.ForeColor;
+            set => this.ProgressLabel.ForeColor = value;
         }
         private CommonAnimationForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            this.FormClosing += new FormClosingEventHandler((Leon, Mathilda) => { ParentStartUp?.OnStartUpFinished(Mathilda); });
+            this.FormClosing += new FormClosingEventHandler((Leon, Mathilda) => { this.ParentStartUp?.OnStartUpFinished(Mathilda); });
         }
 
         /// <summary>
@@ -38,8 +38,8 @@ namespace Leon.AnimationStartUp
             
             if (imageResource != null)
             {
-                CommonPictureBox.Image = imageResource;
-                CommonPictureBox.Size = imageResource.Size;
+                this.CommonPictureBox.Image = imageResource;
+                this.CommonPictureBox.Size = imageResource.Size;
             }
             this.BackColor = backColor;
             this.TimeOut = timeOut;
@@ -56,17 +56,17 @@ namespace Leon.AnimationStartUp
                     {
                         while (Progress < 100)
                         {
-                            Thread.Sleep(TimeOut);
+                            Thread.Sleep(this.TimeOut);
                             Progress += 5;
 
                             this.Invoke(new Action(() => {
-                                ProgressLabel.Text = string.Format("Hack System Loading ... {0}%", Progress);
+                                this.ProgressLabel.Text = string.Format("Hack System Loading ... {0}%", Progress);
                                 Application.DoEvents();
                             }));
                         }
 
                         this.Invoke(new Action(() => {
-                            ProgressLabel.Text = "Hack System Loaded !\n Welcome. (〃'▽'〃)";
+                            this.ProgressLabel.Text = "Hack System Loaded !\n Welcome. (〃'▽'〃)";
                             Application.DoEvents();
                         }));
 

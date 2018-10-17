@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public ActionIndicationClass()
         {
-            Name = "行动指示";
-            Description = "行动指示 [via leon]";
-            Icon = DefaultProgramResource.ActionIndicationIcon;
+            this.Name = "行动指示";
+            this.Description = "行动指示 [via leon]";
+            this.Icon = DefaultProgramResource.ActionIndicationIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.ActionIndication
                 );
         }

@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public IronManClass()
         {
-            Name = "钢铁侠";
-            Description = "钢铁侠 [via leon]";
-            Icon = DefaultProgramResource.IronManIcon;
+            this.Name = "钢铁侠";
+            this.Description = "钢铁侠 [via leon]";
+            this.Icon = DefaultProgramResource.IronManIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.IronMan
                 );
         }

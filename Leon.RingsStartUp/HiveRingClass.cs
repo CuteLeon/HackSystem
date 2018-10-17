@@ -9,9 +9,9 @@ namespace Leon.RingsStartUp
     {
         public HiveRingClass()
         {
-            Name = "蜂巢";
-            Description = "蜂巢启动画面 - Leon";
-            Preview = RingsStartUpResource.HiveRingPreview;
+            this.Name = "蜂巢";
+            this.Description = "蜂巢启动画面 - Leon";
+            this.Preview = RingsStartUpResource.HiveRingPreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;

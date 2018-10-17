@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public AgentInfoClass()
         {
-            Name = "特工信息";
-            Description = "特工信息 [via leon]";
-            Icon = DefaultProgramResource.AgentInfoIcon;
+            this.Name = "特工信息";
+            this.Description = "特工信息 [via leon]";
+            this.Icon = DefaultProgramResource.AgentInfoIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.AgentInfo
                 );
         }

@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public Face3DModelClass()
         {
-            Name = "面部模型";
-            Description = "面部模型 [via leon]";
-            Icon = DefaultProgramResource.Face3DModelIcon;
+            this.Name = "面部模型";
+            this.Description = "面部模型 [via leon]";
+            this.Icon = DefaultProgramResource.Face3DModelIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.Face3DModel
                 );
         }

@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public AirDefenceClass()
         {
-            Name = "防空系统";
-            Description = "防空系统 [via leon]";
-            Icon = DefaultProgramResource.AirDefenceIcon;
+            this.Name = "防空系统";
+            this.Description = "防空系统 [via leon]";
+            this.Icon = DefaultProgramResource.AirDefenceIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.AirDefence
                 );
         }

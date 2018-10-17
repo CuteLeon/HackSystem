@@ -9,9 +9,9 @@ namespace Leon.RingsStartUp
     {
         public EmptyBallRingClass()
         {
-            Name = "线条球形圆环";
-            Description = "线条球形圆环启动画面 - Leon";
-            Preview = RingsStartUpResource.EmptyBallRingPreview;
+            this.Name = "线条球形圆环";
+            this.Description = "线条球形圆环启动画面 - Leon";
+            this.Preview = RingsStartUpResource.EmptyBallRingPreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;

@@ -9,9 +9,9 @@ namespace Leon.AnimationStartUp
     {
         public SerpentineStartUpClass()
         {
-            Name = "蜿蜒";
-            Description = "蜿蜒启动画面 - Leon";
-            Preview = StartUpResource.SerpentinePreview;
+            this.Name = "蜿蜒";
+            this.Description = "蜿蜒启动画面 - Leon";
+            this.Preview = StartUpResource.SerpentinePreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;

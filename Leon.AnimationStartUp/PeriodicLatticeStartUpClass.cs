@@ -9,9 +9,9 @@ namespace Leon.AnimationStartUp
     {
         public PeriodicLatticeStartUpClass()
         {
-            Name = "点阵";
-            Description = "点阵启动画面 - Leon";
-            Preview = StartUpResource.PeriodicLatticePreview;
+            this.Name = "点阵";
+            this.Description = "点阵启动画面 - Leon";
+            this.Preview = StartUpResource.PeriodicLatticePreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;

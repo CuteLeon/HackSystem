@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public UAVCameraClass()
         {
-            Name = "无人机";
-            Description = "无人机 [via leon]";
-            Icon = DefaultProgramResource.UAVCameraIcon;
+            this.Name = "无人机";
+            this.Description = "无人机 [via leon]";
+            this.Icon = DefaultProgramResource.UAVCameraIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.UAVCamera
                 );
         }

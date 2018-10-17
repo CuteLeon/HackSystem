@@ -9,9 +9,9 @@ namespace Leon.AnimationStartUp
     {
         public LiquidStartUpClass()
         {
-            Name = "流体";
-            Description = "流体启动画面 - Leon";
-            Preview = StartUpResource.LiquidPreview;
+            this.Name = "流体";
+            this.Description = "流体启动画面 - Leon";
+            this.Preview = StartUpResource.LiquidPreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;

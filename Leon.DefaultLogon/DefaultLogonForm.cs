@@ -15,47 +15,47 @@ namespace Leon.DefaultLogon
 
         public DefaultLogonForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            LogonPanel.Controls.Add(InnerTextBox);
-            InnerTextBox.Location = PasswordInputBox.Location;
+            this.LogonPanel.Controls.Add(this.InnerTextBox);
+            this.InnerTextBox.Location = this.PasswordInputBox.Location;
             this.FormClosing += new FormClosingEventHandler(
                 (Leon, Mathilda) => {
-                    if (!AllowToClose)
+                    if (!this.AllowToClose)
                         Mathilda.Cancel = true;
                     else
-                        ParentLogon?.OnLogonFinished(EventArgs.Empty);
+                        this.ParentLogon?.OnLogonFinished(EventArgs.Empty);
                 });
-            HeadPortraitPictureBox.BackgroundImage = new Bitmap(LogonTemplateClass.CircularHeadPortrait, 159, 159);
+            this.HeadPortraitPictureBox.BackgroundImage = new Bitmap(LogonTemplateClass.CircularHeadPortrait, 159, 159);
 
-            LogonButton.MouseEnter += delegate { LogonButton.Image = DefaultLogonResource.LogonButton_2; };
-            LogonButton.MouseDown += delegate { LogonButton.Image = DefaultLogonResource.LogonButton_3; };
-            LogonButton.MouseUp += delegate { LogonButton.Image = DefaultLogonResource.LogonButton_2; };
-            LogonButton.MouseLeave += delegate { LogonButton.Image = DefaultLogonResource.LogonButton_1; };
+            this.LogonButton.MouseEnter += delegate { this.LogonButton.Image = DefaultLogonResource.LogonButton_2; };
+            this.LogonButton.MouseDown += delegate { this.LogonButton.Image = DefaultLogonResource.LogonButton_3; };
+            this.LogonButton.MouseUp += delegate { this.LogonButton.Image = DefaultLogonResource.LogonButton_2; };
+            this.LogonButton.MouseLeave += delegate { this.LogonButton.Image = DefaultLogonResource.LogonButton_1; };
 
-            PasswordInputBox.Click += delegate { InnerTextBox.Focus(); };
-            PasswordInputBox.MouseEnter += delegate { PasswordInputBox.Image = DefaultLogonResource.PasswordInputBox_Enter; };
-            PasswordInputBox.MouseDown += delegate { PasswordInputBox.Image = DefaultLogonResource.PasswordInputBox_Down; };
-            PasswordInputBox.MouseUp += delegate { PasswordInputBox.Image = DefaultLogonResource.PasswordInputBox_Enter; };
-            PasswordInputBox.MouseLeave += delegate { PasswordInputBox.Image = DefaultLogonResource.PasswordInputBox_Normal; };
+            this.PasswordInputBox.Click += delegate { this.InnerTextBox.Focus(); };
+            this.PasswordInputBox.MouseEnter += delegate { this.PasswordInputBox.Image = DefaultLogonResource.PasswordInputBox_Enter; };
+            this.PasswordInputBox.MouseDown += delegate { this.PasswordInputBox.Image = DefaultLogonResource.PasswordInputBox_Down; };
+            this.PasswordInputBox.MouseUp += delegate { this.PasswordInputBox.Image = DefaultLogonResource.PasswordInputBox_Enter; };
+            this.PasswordInputBox.MouseLeave += delegate { this.PasswordInputBox.Image = DefaultLogonResource.PasswordInputBox_Normal; };
 
-            InnerTextBox.TextChanged += delegate { PasswordInputBox.Text = string.Empty.PadRight(InnerTextBox.Text.Length, '♋'); };
-            InnerTextBox.KeyDown += new KeyEventHandler((s, e) => { if (e.KeyCode == Keys.Enter) { CheckPassword(); } });
+            this.InnerTextBox.TextChanged += delegate { this.PasswordInputBox.Text = string.Empty.PadRight(this.InnerTextBox.Text.Length, '♋'); };
+            this.InnerTextBox.KeyDown += new KeyEventHandler((s, e) => { if (e.KeyCode == Keys.Enter) { this.CheckPassword(); } });
         }
 
         private void LogonButton_Click(object sender, EventArgs e)
         {
-            CheckPassword();
+            this.CheckPassword();
         }
 
         private void CheckPassword()
         {
-            if (InnerTextBox.Text != DefaultLogonClass.Password)
+            if (this.InnerTextBox.Text != DefaultLogonClass.Password)
             {
-                AllowToClose = false;
+                this.AllowToClose = false;
                 //TODO: 等系统提供了弹窗或浮窗的API，使用系统弹出错误提示
                 MessageBox.Show("密码不正确！");
-                InnerTextBox.Focus();
+                this.InnerTextBox.Focus();
             }
             else
             {
@@ -70,7 +70,7 @@ namespace Leon.DefaultLogon
                             }
                         }
                         catch { }
-                        AllowToClose = true;
+                        this.AllowToClose = true;
                         this.Close();
                     }));
             }
@@ -82,7 +82,7 @@ namespace Leon.DefaultLogon
     {
         public PanelEx()
         {
-            SetStyle(ControlStyles.UserPaint |
+            this.SetStyle(ControlStyles.UserPaint |
                 ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.ResizeRedraw |

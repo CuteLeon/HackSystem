@@ -11,9 +11,9 @@ namespace Leon.HTMLLogon
 
         public DefaultHTMLLogonClass()
         {
-            Name = "浅绿";
-            Description = "浅绿登录画面-Leon";
-            Preview = HTMLLogonResource.DefaultHTMLLogonPreview;
+            this.Name = "浅绿";
+            this.Description = "浅绿登录画面-Leon";
+            this.Preview = HTMLLogonResource.DefaultHTMLLogonPreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;

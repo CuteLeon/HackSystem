@@ -9,9 +9,9 @@ namespace Leon.AnimationStartUp
     {
         public MagicSquareStartUpClass()
         {
-            Name = "魔方";
-            Description = "魔方启动画面 - Leon";
-            Preview = StartUpResource.MagicSquarePreview;
+            this.Name = "魔方";
+            this.Description = "魔方启动画面 - Leon";
+            this.Preview = StartUpResource.MagicSquarePreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;

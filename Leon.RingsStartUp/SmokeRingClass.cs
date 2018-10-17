@@ -9,9 +9,9 @@ namespace Leon.RingsStartUp
     {
         public SmokeRingClass()
         {
-            Name = "烟圈";
-            Description = "烟圈启动画面 - Leon";
-            Preview = RingsStartUpResource.SmokeRingPreview;
+            this.Name = "烟圈";
+            this.Description = "烟圈启动画面 - Leon";
+            this.Preview = RingsStartUpResource.SmokeRingPreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;

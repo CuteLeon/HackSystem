@@ -20,14 +20,14 @@ namespace Leon.HTMLLogon
         /// </summary>
         public MemoryStream HTMLStream
         {
-            get => (MemoryStream)MainWebBrowser.DocumentStream;
+            get => (MemoryStream)this.MainWebBrowser.DocumentStream;
             set
             {
-                MainWebBrowser.DocumentStream = value ?? default(MemoryStream);
-                MainWebBrowser.ObjectForScripting = this;
-                MainWebBrowser.IsWebBrowserContextMenuEnabled = false;
-                MainWebBrowser.ScrollBarsEnabled = false;
-                MainWebBrowser.ScriptErrorsSuppressed = false;
+                this.MainWebBrowser.DocumentStream = value ?? default(MemoryStream);
+                this.MainWebBrowser.ObjectForScripting = this;
+                this.MainWebBrowser.IsWebBrowserContextMenuEnabled = false;
+                this.MainWebBrowser.ScrollBarsEnabled = false;
+                this.MainWebBrowser.ScriptErrorsSuppressed = false;
             }
         }
 
@@ -35,16 +35,19 @@ namespace Leon.HTMLLogon
 
         public HTMLLogonForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void HTMLLogonForm_Load(object sender, EventArgs e)
         {
             this.FormClosing += new FormClosingEventHandler(
                 (Leon, Mathilda) => {
-                    if (!AllowToClose)
+                    if (!this.AllowToClose)
+                    {
                         Mathilda.Cancel = true;
+                    }
                     else
+                        this.
                         ParentLogon?.OnLogonFinished(EventArgs.Empty);
                 });
         }
@@ -54,8 +57,9 @@ namespace Leon.HTMLLogon
             //用户信息通过后，置AllowToClose为true
             if (UserName == LogonTemplateClass.UserName && Password == LogonTemplateClass.Password)
             {
+
                 //Client 调用 Browser 代码；
-                MainWebBrowser.Document.InvokeScript("LogonSuccessfully",
+                this.MainWebBrowser.Document.InvokeScript("LogonSuccessfully",
                 new String[] { "登录成功，欢迎访问！" });
                 ThreadPool.QueueUserWorkItem(new WaitCallback(
                     (ILoveU) =>
@@ -70,7 +74,7 @@ namespace Leon.HTMLLogon
                             }
                         }
                         catch { }
-                        AllowToClose = true;
+                        this.AllowToClose = true;
                         this.Close();
                     }));
             }

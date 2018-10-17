@@ -82,12 +82,12 @@ namespace HackSystem.LogonTemplate
              */
             get
             {
-                if (_LogonForm == null)
-                    _LogonForm = CreateLogonForm();
-                if (_LogonForm != null) _LogonForm.Icon = LogonIcon;
-                return _LogonForm;
+                if (this._LogonForm == null)
+                    this._LogonForm = this.CreateLogonForm();
+                if (this._LogonForm != null) this._LogonForm.Icon = LogonIcon;
+                return this._LogonForm;
             }
-            protected set => _LogonForm = value;
+            protected set => this._LogonForm = value;
         }
 
         /// <summary>
@@ -104,8 +104,8 @@ namespace HackSystem.LogonTemplate
             this?.LogonFinished?.Invoke(this, e);
 
             //启动完成后自动释放启动画面内存；
-            _LogonForm?.Dispose();
-            LogonForm = null;
+            this._LogonForm?.Dispose();
+            this.LogonForm = null;
         }
 
         /// <summary>
@@ -122,8 +122,8 @@ namespace HackSystem.LogonTemplate
         void IDisposable.Dispose()
         {
             System.Diagnostics.Debug.Print("Dispose Logon : {0}", this.Name);
-            _preview?.Dispose();
-            _LogonForm?.Dispose();
+            this._preview?.Dispose();
+            this._LogonForm?.Dispose();
             GC.SuppressFinalize(this);
         }
 

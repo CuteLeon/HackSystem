@@ -6,9 +6,9 @@ Public Class MineSweeperClass
     Inherits ProgramTemplateClass
 
     Public Sub New()
-        Name = "扫雷"
-        Description = "扫雷 [via : Leon]"
-        Icon = My.Resources.DefaultGameResource.MineSweeperGameIcon
+        Me.Name = "扫雷"
+        Me.Description = "扫雷 [via : Leon]"
+        Me.Icon = My.Resources.DefaultGameResource.MineSweeperGameIcon
     End Sub
 
 

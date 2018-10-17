@@ -6,9 +6,9 @@ Public Class TenTenGameClass
     Inherits ProgramTemplateClass
 
     Public Sub New()
-        Name = "1010"
-        Description = "1010 [via : Leon]"
-        Icon = My.Resources.DefaultGameResource.TenTenGameIcon
+        Me.Name = "1010"
+        Me.Description = "1010 [via : Leon]"
+        Me.Icon = My.Resources.DefaultGameResource.TenTenGameIcon
     End Sub
 
 

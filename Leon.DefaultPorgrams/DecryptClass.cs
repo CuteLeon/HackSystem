@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public DecryptClass()
         {
-            Name = "解密";
-            Description = "解密 [via leon]";
-            Icon = DefaultProgramResource.DecryptIcon;
+            this.Name = "解密";
+            this.Description = "解密 [via leon]";
+            this.Icon = DefaultProgramResource.DecryptIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.Decrypt
                 );
         }

@@ -6,9 +6,9 @@ Public Class TwosGameClass
     Inherits ProgramTemplateClass
 
     Public Sub New()
-        Name = "2048"
-        Description = "2048 [via : Leon]"
-        Icon = My.Resources.DefaultGameResource.TwosGameIcon
+        Me.Name = "2048"
+        Me.Description = "2048 [via : Leon]"
+        Me.Icon = My.Resources.DefaultGameResource.TwosGameIcon
     End Sub
 
 

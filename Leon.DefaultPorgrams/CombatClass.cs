@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public CombatClass()
         {
-            Name = "战役";
-            Description = "战役 [via leon]";
-            Icon = DefaultProgramResource.CombatIcon;
+            this.Name = "战役";
+            this.Description = "战役 [via leon]";
+            this.Icon = DefaultProgramResource.CombatIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.Combat
                 );
         }

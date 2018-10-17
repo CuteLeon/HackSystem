@@ -15,7 +15,7 @@ namespace HackSystem.Host
 
         public DesktopForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.Icon = UnityResource.HackSystemLogoIcon;
         }
 
@@ -32,7 +32,7 @@ namespace HackSystem.Host
         private void DesktopForm_Shown(object sender, EventArgs e)
         {
             Application.DoEvents();
-            LoadProgram();
+            this.LoadProgram();
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace HackSystem.Host
                             });
                         this.Invoke(new Action(delegate
                         {
-                            ProgramLayoutPanel.Controls.Add(ProgramCard);
+                            this.ProgramLayoutPanel.Controls.Add(ProgramCard);
                         }));
                     }
                     catch (Exception ex)

@@ -18,10 +18,10 @@ namespace Leon.DefaultPorgrams
         bool CloseProgram = false;
 
         public new string Text {
-            get => TitleLabel.Text;
+            get => this.TitleLabel.Text;
             set
             {
-                TitleLabel.Text = value;
+                this.TitleLabel.Text = value;
                 base.Text = value;
             }
         }
@@ -29,55 +29,55 @@ namespace Leon.DefaultPorgrams
         private Bitmap _icon = DefaultProgramResource.DefaultIcon;
         public new Image Icon
         {
-            get => _icon;
+            get => this._icon;
             set
             {
                 if (value == null)
                 {
-                    _icon = DefaultProgramResource.DefaultIcon;
+                    this._icon = DefaultProgramResource.DefaultIcon;
                 }
                 else
                 {
-                    _icon = new Bitmap(value, 24, 24);
+                    this._icon = new Bitmap(value, 24, 24);
                 }
-                base.Icon = System.Drawing.Icon.FromHandle(_icon.GetHicon());
-                IconLabel.Image = _icon;
+                base.Icon = System.Drawing.Icon.FromHandle(this._icon.GetHicon());
+                this.IconLabel.Image = this._icon;
             }
         }
 
         private Image _imageResource = DefaultProgramResource.HackSystemLogo;
         public Image ImageResource
         {
-            get => _imageResource;
+            get => this._imageResource;
             set
             {
                 if (value == null)
-                    _imageResource = DefaultProgramResource.HackSystemLogo;
+                    this._imageResource = DefaultProgramResource.HackSystemLogo;
                 else
-                    _imageResource = value;
+                    this._imageResource = value;
 
-                MainPictureBox.Image = _imageResource;
-                MainPictureBox.MaximumSize = _imageResource.Size;
-                MainPictureBox.MinimumSize = _imageResource.Size;
+                this.MainPictureBox.Image = this._imageResource;
+                this.MainPictureBox.MaximumSize = this._imageResource.Size;
+                this.MainPictureBox.MinimumSize = this._imageResource.Size;
             }
         }
 
         private DefaultProgramForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            AddEventHandler();
+            this.AddEventHandler();
         }
 
         public DefaultProgramForm(string text, Image icon, Image imageResource)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            AddEventHandler();
+            this.AddEventHandler();
 
-            Text = text;
-            Icon = icon;
-            ImageResource = imageResource;
+            this.Text = text;
+            this.Icon = icon;
+            this.ImageResource = imageResource;
         }
 
         private void DefaultProgramForm_Load(object sender, EventArgs e)
@@ -92,31 +92,31 @@ namespace Leon.DefaultPorgrams
 
         private void AddEventHandler()
         {
-            CloseButton.MouseEnter += delegate {
-                CloseButton.Image = DefaultProgramResource.Close_Enter;
+            this.CloseButton.MouseEnter += delegate {
+                this.CloseButton.Image = DefaultProgramResource.Close_Enter;
             };
-            CloseButton.MouseLeave += delegate {
-                CloseButton.Image = DefaultProgramResource.Close_Normal;
+            this.CloseButton.MouseLeave += delegate {
+                this.CloseButton.Image = DefaultProgramResource.Close_Normal;
             };
-            CloseButton.MouseDown += delegate {
-                CloseButton.Image = DefaultProgramResource.Close_Down;
+            this.CloseButton.MouseDown += delegate {
+                this.CloseButton.Image = DefaultProgramResource.Close_Down;
             };
-            CloseButton.MouseUp += delegate {
-                CloseButton.Image = DefaultProgramResource.Close_Enter;
+            this.CloseButton.MouseUp += delegate {
+                this.CloseButton.Image = DefaultProgramResource.Close_Enter;
             };
 
-            CloseButton.Click += delegate { this.Close(); };
+            this.CloseButton.Click += delegate { this.Close(); };
 
             this.FormClosed += delegate {
-                MainPictureBox.Image?.Dispose();
-                MainPictureBox.Image = null;
+                this.MainPictureBox.Image?.Dispose();
+                this.MainPictureBox.Image = null;
                 this.Dispose(true);
                 GC.Collect();
             };
 
-            IconLabel.MouseDown += MoveFormViaMouse;
-            TitleLabel.MouseDown += MoveFormViaMouse;
-            MainPictureBox.MouseDown += MoveFormViaMouse;
+            this.IconLabel.MouseDown += this.MoveFormViaMouse;
+            this.TitleLabel.MouseDown += this.MoveFormViaMouse;
+            this.MainPictureBox.MouseDown += this.MoveFormViaMouse;
         }
 
         public void MoveFormViaMouse(object sender, MouseEventArgs e)
@@ -128,9 +128,9 @@ namespace Leon.DefaultPorgrams
             }
         }
 
-        private void DefaultProgramForm_Activated(object sender, EventArgs e) => TitlePanel.Height = 24;
+        private void DefaultProgramForm_Activated(object sender, EventArgs e) => this.TitlePanel.Height = 24;
 
-        private void DefaultProgramForm_Deactivate(object sender, EventArgs e) => TitlePanel.Height = 0;
+        private void DefaultProgramForm_Deactivate(object sender, EventArgs e) => this.TitlePanel.Height = 0;
 
         private void DefaultProgramForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -139,7 +139,8 @@ namespace Leon.DefaultPorgrams
              */
 
             return;
-            if (!CloseProgram)
+
+            if (!this.CloseProgram)
             {
                 e.Cancel = true;
                 ThreadPool.QueueUserWorkItem(new WaitCallback(delegate {
@@ -150,7 +151,7 @@ namespace Leon.DefaultPorgrams
                             this.Opacity -= 0.1;
                             Thread.Sleep(20);
                         }
-                        CloseProgram = true;
+                        this.CloseProgram = true;
                         this.Close();
                     }
                     catch { }

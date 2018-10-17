@@ -9,9 +9,9 @@ namespace Leon.RingsStartUp
     {
         public NestingRingClass()
         {
-            Name = "嵌套";
-            Description = "嵌套启动画面 - Leon";
-            Preview = RingsStartUpResource.NestingRingPreview;
+            this.Name = "嵌套";
+            this.Description = "嵌套启动画面 - Leon";
+            this.Preview = RingsStartUpResource.NestingRingPreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;

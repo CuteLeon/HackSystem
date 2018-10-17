@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public NOVA6Class()
         {
-            Name = "NOVA6";
-            Description = "NOVA6 [via leon]";
-            Icon = DefaultProgramResource.NOVA6Icon;
+            this.Name = "NOVA6";
+            this.Description = "NOVA6 [via leon]";
+            this.Icon = DefaultProgramResource.NOVA6Icon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.NOVA6
                 );
         }

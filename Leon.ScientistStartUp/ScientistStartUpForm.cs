@@ -12,7 +12,7 @@ namespace Leon.ScientistStartUp
 
         public ScientistStartUpForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
         }
 
@@ -36,13 +36,13 @@ namespace Leon.ScientistStartUp
                             Progress += 5;
 
                             this.Invoke(new Action(() => {
-                                ProgressLabel.Text = string.Format("Hack System Loading ... {0}%", Progress);
+                                this.ProgressLabel.Text = string.Format("Hack System Loading ... {0}%", Progress);
                                 Application.DoEvents();
                             }));
                         }
 
                         this.Invoke(new Action(() => {
-                            ProgressLabel.Text = "Hack System Loaded !\n Welcome. (〃'▽'〃)";
+                            this.ProgressLabel.Text = "Hack System Loaded !\n Welcome. (〃'▽'〃)";
                             Application.DoEvents();
                         }));
 

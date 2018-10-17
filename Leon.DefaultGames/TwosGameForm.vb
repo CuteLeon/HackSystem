@@ -14,26 +14,26 @@ Public Class TwosGameForm
     Private Sub GameForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim DirectiionKeyBitmap As Bitmap = My.Resources.DefaultGameResource.DirectiionKey
         DirectiionKeyBitmap.RotateFlip(RotateFlipType.Rotate90FlipNone)
-        KeyUpLabel.Image = DirectiionKeyBitmap.Clone
+        Me.KeyUpLabel.Image = DirectiionKeyBitmap.Clone
         DirectiionKeyBitmap.RotateFlip(RotateFlipType.Rotate90FlipNone)
-        KeyRightLabel.Image = DirectiionKeyBitmap.Clone
+        Me.KeyRightLabel.Image = DirectiionKeyBitmap.Clone
         DirectiionKeyBitmap.RotateFlip(RotateFlipType.Rotate90FlipNone)
-        KeyDownLabel.Image = DirectiionKeyBitmap.Clone
+        Me.KeyDownLabel.Image = DirectiionKeyBitmap.Clone
 
-        CreatNewCard()
-        DrawForm()
+        Me.CreatNewCard()
+        Me.DrawForm()
     End Sub
 
     ''' <summary>
     ''' 根据 CardData 数组刷新界面
     ''' </summary>
     Private Sub DrawForm()
-        ScoreLabel.Text = Score.ToString
+        Me.ScoreLabel.Text = Me.Score.ToString
         Dim UnityBitmap As Bitmap = My.Resources.DefaultGameResource.TwosBackground
         Using UnityGraphics As Graphics = Graphics.FromImage(UnityBitmap)
             For IndexY As Integer = 0 To 3
                 For IndexX As Integer = 0 To 3
-                    UnityGraphics.DrawImage(My.Resources.DefaultGameResource.ResourceManager.GetObject("Card" & CardData(IndexY, IndexX)), PaddingSize + IndexX * 70, PaddingSize + IndexY * 74 + TitleHeight, 70, 74)
+                    UnityGraphics.DrawImage(My.Resources.DefaultGameResource.ResourceManager.GetObject("Card" & Me.CardData(IndexY, IndexX)), PaddingSize + IndexX * 70, PaddingSize + IndexY * 74 + TitleHeight, 70, 74)
                 Next
             Next
         End Using
@@ -46,77 +46,77 @@ Public Class TwosGameForm
     ''' </summary>
     Private Sub ApplyCardsChange(ByVal Key As Keys)
         Dim IndexX, IndexY As Integer
-        Moved = False
+        Me.Moved = False
         Select Case Key
             Case Keys.Up
-                RemoveBlock(Key)
+                Me.RemoveBlock(Key)
                 For IndexX = 0 To 3 Step 1
                     For IndexY = 0 To 2 Step 1
-                        If CardData(IndexY, IndexX) > 0 Then
-                            If CardData(IndexY, IndexX) = CardData(IndexY + 1, IndexX) Then
-                                CardData(IndexY, IndexX) = 2 * CardData(IndexY, IndexX)
-                                Score += CardData(IndexY, IndexX)
-                                CardData(IndexY + 1, IndexX) = 0
+                        If Me.CardData(IndexY, IndexX) > 0 Then
+                            If Me.CardData(IndexY, IndexX) = Me.CardData(IndexY + 1, IndexX) Then
+                                Me.CardData(IndexY, IndexX) = 2 * Me.CardData(IndexY, IndexX)
+                                Me.Score += Me.CardData(IndexY, IndexX)
+                                Me.CardData(IndexY + 1, IndexX) = 0
                                 IndexY += 1 '合并后跳过一个卡片
-                                Moved = True
+                                Me.Moved = True
                             End If
                         End If
                     Next
                 Next
-                RemoveBlock(Key)
+                Me.RemoveBlock(Key)
             Case Keys.Down
-                RemoveBlock(Key)
+                Me.RemoveBlock(Key)
                 For IndexX = 0 To 3 Step 1
                     For IndexY = 3 To 1 Step -1
-                        If CardData(IndexY, IndexX) > 0 Then
-                            If CardData(IndexY, IndexX) = CardData(IndexY - 1, IndexX) Then
-                                CardData(IndexY, IndexX) = 2 * CardData(IndexY, IndexX)
-                                Score += CardData(IndexY, IndexX)
-                                CardData(IndexY - 1, IndexX) = 0
+                        If Me.CardData(IndexY, IndexX) > 0 Then
+                            If Me.CardData(IndexY, IndexX) = Me.CardData(IndexY - 1, IndexX) Then
+                                Me.CardData(IndexY, IndexX) = 2 * Me.CardData(IndexY, IndexX)
+                                Me.Score += Me.CardData(IndexY, IndexX)
+                                Me.CardData(IndexY - 1, IndexX) = 0
                                 IndexY -= 1 '合并后跳过一个卡片
-                                Moved = True
+                                Me.Moved = True
                             End If
                         End If
                     Next
                 Next
-                RemoveBlock(Key)
+                Me.RemoveBlock(Key)
             Case Keys.Left
-                RemoveBlock(Key)
+                Me.RemoveBlock(Key)
                 For IndexY = 0 To 3 Step 1
                     For IndexX = 0 To 2 Step 1
-                        If CardData(IndexY, IndexX) > 0 Then
-                            If CardData(IndexY, IndexX) = CardData(IndexY, IndexX + 1) Then
-                                CardData(IndexY, IndexX) = 2 * CardData(IndexY, IndexX)
-                                Score += CardData(IndexY, IndexX)
-                                CardData(IndexY, IndexX + 1) = 0
+                        If Me.CardData(IndexY, IndexX) > 0 Then
+                            If Me.CardData(IndexY, IndexX) = Me.CardData(IndexY, IndexX + 1) Then
+                                Me.CardData(IndexY, IndexX) = 2 * Me.CardData(IndexY, IndexX)
+                                Me.Score += Me.CardData(IndexY, IndexX)
+                                Me.CardData(IndexY, IndexX + 1) = 0
                                 IndexX += 1 '合并后跳过一个卡片
-                                Moved = True
+                                Me.Moved = True
                             End If
                         End If
                     Next
                 Next
-                RemoveBlock(Key)
+                Me.RemoveBlock(Key)
             Case Keys.Right
-                RemoveBlock(Key)
+                Me.RemoveBlock(Key)
                 For IndexY = 0 To 3 Step 1
                     For IndexX = 3 To 1 Step -1
-                        If CardData(IndexY, IndexX) > 0 Then
-                            If CardData(IndexY, IndexX) = CardData(IndexY, IndexX - 1) Then
-                                CardData(IndexY, IndexX) = 2 * CardData(IndexY, IndexX)
-                                Score += CardData(IndexY, IndexX)
-                                CardData(IndexY, IndexX - 1) = 0
+                        If Me.CardData(IndexY, IndexX) > 0 Then
+                            If Me.CardData(IndexY, IndexX) = Me.CardData(IndexY, IndexX - 1) Then
+                                Me.CardData(IndexY, IndexX) = 2 * Me.CardData(IndexY, IndexX)
+                                Me.Score += Me.CardData(IndexY, IndexX)
+                                Me.CardData(IndexY, IndexX - 1) = 0
                                 IndexX -= 1 '合并后跳过一个卡片
-                                Moved = True
+                                Me.Moved = True
                             End If
                         End If
                     Next
                 Next
-                RemoveBlock(Key)
+                Me.RemoveBlock(Key)
         End Select
 
-        If Moved Then
-            CreatNewCard() '检测是否产生新的数字 2或4
-            DrawForm()       '重新刷新界面
+        If Me.Moved Then
+            Me.CreatNewCard() '检测是否产生新的数字 2或4
+            Me.DrawForm()       '重新刷新界面
         End If
     End Sub
 
@@ -130,12 +130,12 @@ Public Class TwosGameForm
                 For IndexX = 0 To 3 Step 1
                     Dis = 1
                     For IndexY = 0 To 2 Step 1
-                        If CardData(IndexY, IndexX) = 0 Then
+                        If Me.CardData(IndexY, IndexX) = 0 Then
                             Do While IndexY + Dis < 4
-                                If CardData(IndexY + Dis, IndexX) > 0 Then
-                                    CardData(IndexY, IndexX) = CardData(IndexY + Dis, IndexX)
-                                    CardData(IndexY + Dis, IndexX) = 0
-                                    Moved = True
+                                If Me.CardData(IndexY + Dis, IndexX) > 0 Then
+                                    Me.CardData(IndexY, IndexX) = Me.CardData(IndexY + Dis, IndexX)
+                                    Me.CardData(IndexY + Dis, IndexX) = 0
+                                    Me.Moved = True
                                     Exit Do
                                 End If
                                 Dis += 1
@@ -147,12 +147,12 @@ Public Class TwosGameForm
                 For IndexX = 0 To 3 Step 1
                     Dis = -1
                     For IndexY = 3 To 1 Step -1
-                        If CardData(IndexY, IndexX) = 0 Then
+                        If Me.CardData(IndexY, IndexX) = 0 Then
                             Do While IndexY + Dis > -1
-                                If CardData(IndexY + Dis, IndexX) > 0 Then
-                                    CardData(IndexY, IndexX) = CardData(IndexY + Dis, IndexX)
-                                    CardData(IndexY + Dis, IndexX) = 0
-                                    Moved = True
+                                If Me.CardData(IndexY + Dis, IndexX) > 0 Then
+                                    Me.CardData(IndexY, IndexX) = Me.CardData(IndexY + Dis, IndexX)
+                                    Me.CardData(IndexY + Dis, IndexX) = 0
+                                    Me.Moved = True
                                     Exit Do
                                 End If
                                 Dis -= 1
@@ -164,12 +164,12 @@ Public Class TwosGameForm
                 For IndexY = 0 To 3 Step 1
                     Dis = 1
                     For IndexX = 0 To 2 Step 1
-                        If CardData(IndexY, IndexX) = 0 Then
+                        If Me.CardData(IndexY, IndexX) = 0 Then
                             Do While IndexX + Dis < 4
-                                If CardData(IndexY, IndexX + Dis) > 0 Then
-                                    CardData(IndexY, IndexX) = CardData(IndexY, IndexX + Dis)
-                                    CardData(IndexY, IndexX + Dis) = 0
-                                    Moved = True
+                                If Me.CardData(IndexY, IndexX + Dis) > 0 Then
+                                    Me.CardData(IndexY, IndexX) = Me.CardData(IndexY, IndexX + Dis)
+                                    Me.CardData(IndexY, IndexX + Dis) = 0
+                                    Me.Moved = True
                                     Exit Do
                                 End If
                                 Dis += 1
@@ -181,12 +181,12 @@ Public Class TwosGameForm
                 For IndexY = 0 To 3 Step 1
                     Dis = -1
                     For IndexX = 3 To 1 Step -1
-                        If CardData(IndexY, IndexX) = 0 Then
+                        If Me.CardData(IndexY, IndexX) = 0 Then
                             Do While IndexX + Dis > -1
-                                If CardData(IndexY, IndexX + Dis) > 0 Then
-                                    CardData(IndexY, IndexX) = CardData(IndexY, IndexX + Dis)
-                                    CardData(IndexY, IndexX + Dis) = 0
-                                    Moved = True
+                                If Me.CardData(IndexY, IndexX + Dis) > 0 Then
+                                    Me.CardData(IndexY, IndexX) = Me.CardData(IndexY, IndexX + Dis)
+                                    Me.CardData(IndexY, IndexX + Dis) = 0
+                                    Me.Moved = True
                                     Exit Do
                                 End If
                                 Dis -= 1
@@ -206,7 +206,7 @@ Public Class TwosGameForm
         Dim PointX, PointY As Integer
         For IndexY As Integer = 0 To 3
             For IndexX As Integer = 0 To 3
-                If CardData(IndexY, IndexX) = 0 Then
+                If Me.CardData(IndexY, IndexX) = 0 Then
                     BlankList.Add(IndexY * 4 + IndexX)
                 End If
             Next
@@ -214,18 +214,18 @@ Public Class TwosGameForm
 
         RndIndex = CType(BlankList(Int(VBMath.Rnd * BlankList.Count)), Integer)
         PointY = RndIndex \ 4 : PointX = RndIndex Mod 4
-        CardData(PointY, PointX) = IIf(VBMath.Rnd > 0.5, 4, 2)
+        Me.CardData(PointY, PointX) = IIf(VBMath.Rnd > 0.5, 4, 2)
 
         If BlankList.Count = 1 Then
-            If IsGameOver() Then
+            If Me.IsGameOver() Then
                 '调用游戏结束函数
-                GameOver()
+                Me.GameOver()
             End If
         End If
     End Sub
 
     Private Sub GameForm_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
-        ApplyCardsChange(e.KeyCode) '相应用户按键
+        Me.ApplyCardsChange(e.KeyCode) '相应用户按键
     End Sub
 
     ''' <summary>
@@ -235,14 +235,14 @@ Public Class TwosGameForm
     Private Function IsGameOver() As Boolean
         For IndexY As Integer = 0 To 3
             For IndexX As Integer = 0 To 2
-                If CardData(IndexY, IndexX) = CardData(IndexY, IndexX + 1) Then
+                If Me.CardData(IndexY, IndexX) = Me.CardData(IndexY, IndexX + 1) Then
                     Return False
                 End If
             Next
         Next
         For IndexX As Integer = 0 To 3
             For IndexY As Integer = 0 To 2
-                If CardData(IndexY, IndexX) = CardData(IndexY + 1, IndexX) Then
+                If Me.CardData(IndexY, IndexX) = Me.CardData(IndexY + 1, IndexX) Then
                     Return False
                 End If
             Next
@@ -254,14 +254,14 @@ Public Class TwosGameForm
     ''' 游戏结束
     ''' </summary>
     Private Sub GameOver()
-        DrawForm()
-        MsgBox("游戏分数：" & vbCrLf & Score, 64, "游戏结束")
+        Me.DrawForm()
+        MsgBox("游戏分数：" & vbCrLf & Me.Score, 64, "游戏结束")
 
-        ScoreLabel.Text = "0"
-        Score = 0
-        ReDim CardData(3, 3)
-        CreatNewCard()
-        DrawForm()
+        Me.ScoreLabel.Text = "0"
+        Me.Score = 0
+        ReDim Me.CardData(3, 3)
+        Me.CreatNewCard()
+        Me.DrawForm()
     End Sub
 
     ''' <summary>
@@ -280,7 +280,7 @@ Public Class TwosGameForm
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub KeyLabel_Click(sender As Object, e As EventArgs) Handles KeyUpLabel.Click, KeyDownLabel.Click, KeyLeftLabel.Click, KeyRightLabel.Click
-        ApplyCardsChange(CType(sender, Label).Tag)
+        Me.ApplyCardsChange(CType(sender, Label).Tag)
     End Sub
 
 #Region "关闭按钮"
@@ -290,19 +290,19 @@ Public Class TwosGameForm
     End Sub
 
     Private Sub CloseButton_MouseDown(sender As Object, e As MouseEventArgs) Handles CloseButton.MouseDown
-        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_2
+        Me.CloseButton.Image = My.Resources.DefaultGameResource.GameClose_2
     End Sub
 
     Private Sub CloseButton_MouseEnter(sender As Object, e As EventArgs) Handles CloseButton.MouseEnter
-        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_1
+        Me.CloseButton.Image = My.Resources.DefaultGameResource.GameClose_1
     End Sub
 
     Private Sub CloseButton_MouseLeave(sender As Object, e As EventArgs) Handles CloseButton.MouseLeave
-        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_0
+        Me.CloseButton.Image = My.Resources.DefaultGameResource.GameClose_0
     End Sub
 
     Private Sub CloseButton_MouseUp(sender As Object, e As MouseEventArgs) Handles CloseButton.MouseUp
-        CloseButton.Image = My.Resources.DefaultGameResource.GameClose_1
+        Me.CloseButton.Image = My.Resources.DefaultGameResource.GameClose_1
     End Sub
 
     Private Sub GameForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed

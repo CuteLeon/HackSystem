@@ -8,11 +8,7 @@ namespace HackSystem.Host
         {
             //TODO: 增加全局消息过滤器，用于实现
             return false;
-            if (m.Msg >= 513 && m.Msg <= 515)
-            {
-                return true;
-            }
-            else return false;
+            return m.Msg >= 513 && m.Msg <= 515 ? true : false;
         }
     }
 }

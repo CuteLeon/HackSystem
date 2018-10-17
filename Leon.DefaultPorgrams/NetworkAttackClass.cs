@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public NetworkAttackClass()
         {
-            Name = "网络攻击";
-            Description = "网络攻击 [via leon]";
-            Icon = DefaultProgramResource.NetworkAttackIcon;
+            this.Name = "网络攻击";
+            this.Description = "网络攻击 [via leon]";
+            this.Icon = DefaultProgramResource.NetworkAttackIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.NetworkAttack
                 );
         }

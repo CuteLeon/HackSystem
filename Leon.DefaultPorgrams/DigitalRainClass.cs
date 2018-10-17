@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public DigitalRainClass()
         {
-            Name = "数码雨";
-            Description = "数码雨 [via leon]";
-            Icon = DefaultProgramResource.DigitalRainIcon;
+            this.Name = "数码雨";
+            this.Description = "数码雨 [via leon]";
+            this.Icon = DefaultProgramResource.DigitalRainIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.DigitalRain
                 );
         }

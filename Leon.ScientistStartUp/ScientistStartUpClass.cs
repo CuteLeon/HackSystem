@@ -9,9 +9,9 @@ namespace Leon.ScientistStartUp
 
         public ScientistStartUpClass()
         {
-            Name = "科学家";
-            Description = "科学家 - Leon";
-            Preview = ScientistStartUpResource.ScientistStartUpPreview;
+            this.Name = "科学家";
+            this.Description = "科学家 - Leon";
+            this.Preview = ScientistStartUpResource.ScientistStartUpPreview;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;

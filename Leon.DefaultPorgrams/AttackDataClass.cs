@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public AttackDataClass()
         {
-            Name = "攻击数据";
-            Description = "攻击数据 [via leon]";
-            Icon = DefaultProgramResource.AttackDataIcon;
+            this.Name = "攻击数据";
+            this.Description = "攻击数据 [via leon]";
+            this.Icon = DefaultProgramResource.AttackDataIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.AttackData
                 );
         }

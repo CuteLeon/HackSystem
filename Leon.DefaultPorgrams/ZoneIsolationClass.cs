@@ -8,9 +8,9 @@ namespace Leon.DefaultPorgrams
     {
         public ZoneIsolationClass()
         {
-            Name = "区域隔离";
-            Description = "区域隔离 [via leon]";
-            Icon = DefaultProgramResource.ZoneIsolationIcon;
+            this.Name = "区域隔离";
+            this.Description = "区域隔离 [via leon]";
+            this.Icon = DefaultProgramResource.ZoneIsolationIcon;
         }
 
         public override string FileName => System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName;
@@ -18,8 +18,8 @@ namespace Leon.DefaultPorgrams
         protected override Form CreateProgramForm()
         {
             return new DefaultProgramForm(
-                Name,
-                Icon,
+                this.Name,
+                this.Icon,
                 DefaultProgramResource.ZoneIsolation
                 );
         }

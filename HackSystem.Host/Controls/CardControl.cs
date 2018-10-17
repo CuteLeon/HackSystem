@@ -17,19 +17,19 @@ namespace HackSystem.Host
         /// </summary>
         public bool IsActived
         {
-            get => _isActived;
+            get => this._isActived;
             set
             {
-                _isActived = value;
+                this._isActived = value;
                 if (value)
                 {
-                    DescriptionLabel.ForeColor = Color.OrangeRed;
-                    DescriptionLabel.Text = "正在使用";
+                    this.DescriptionLabel.ForeColor = Color.OrangeRed;
+                    this.DescriptionLabel.Text = "正在使用";
                 }
                 else
                 {
-                    DescriptionLabel.ForeColor = Color.Gray;
-                    DescriptionLabel.Text = Description;
+                    this.DescriptionLabel.ForeColor = Color.Gray;
+                    this.DescriptionLabel.Text = this.Description;
                 }
             }
         }
@@ -46,8 +46,8 @@ namespace HackSystem.Host
         /// </summary>
         public new string Name
         {
-            get => NameLabel.Text;
-            set => NameLabel.Text = value;
+            get => this.NameLabel.Text;
+            set => this.NameLabel.Text = value;
         }
         private string _description = string.Empty;
         /// <summary>
@@ -55,12 +55,12 @@ namespace HackSystem.Host
         /// </summary>
         public string Description
         {
-            get => _description;
+            get => this._description;
             set
             {
-                _description = value;
-                if (!IsActived)
-                    DescriptionLabel.Text = value;
+                this._description = value;
+                if (!this.IsActived)
+                    this.DescriptionLabel.Text = value;
             }
         }
         /// <summary>
@@ -74,18 +74,18 @@ namespace HackSystem.Host
 
         public CardControl(string fileName, string className,string name,string description, Image preview)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            FileName = fileName;
-            ClassName = className;
-            Name = name;
-            Description = description;
-            Preview = preview;
+            this.FileName = fileName;
+            this.ClassName = className;
+            this.Name = name;
+            this.Description = description;
+            this.Preview = preview;
         }
 
         private void CardControl_Load(object sender, EventArgs e)
         {
-            AddEventHandler();
+            this.AddEventHandler();
         }
         
         private void CardControl_Paint(object sender, PaintEventArgs e)
@@ -97,40 +97,40 @@ namespace HackSystem.Host
         {
             EventHandler CardMouseEnter = new EventHandler((s, v) =>
             {
-                NameLabel.ForeColor = Color.OrangeRed;
+                this.NameLabel.ForeColor = Color.OrangeRed;
             });
             EventHandler CardMouseLeave = new EventHandler((s, v) =>
             {
-                NameLabel.ForeColor = Color.Black;
+                this.NameLabel.ForeColor = Color.Black;
             });
             MouseEventHandler CardMouseDown = new MouseEventHandler((s, v) =>
             {
-                NameLabel.ForeColor = Color.Red;
+                this.NameLabel.ForeColor = Color.Red;
             });
             MouseEventHandler CardMouseUp = new MouseEventHandler((s, v) =>
             {
-                NameLabel.ForeColor = Color.OrangeRed;
+                this.NameLabel.ForeColor = Color.OrangeRed;
             });
 
             this.MouseEnter += CardMouseEnter;
-            NameLabel.MouseEnter += CardMouseEnter;
-            DescriptionLabel.MouseEnter += CardMouseEnter;
+            this.NameLabel.MouseEnter += CardMouseEnter;
+            this.DescriptionLabel.MouseEnter += CardMouseEnter;
 
             this.MouseLeave += CardMouseLeave;
-            NameLabel.MouseLeave += CardMouseLeave;
-            DescriptionLabel.MouseLeave += CardMouseLeave;
+            this.NameLabel.MouseLeave += CardMouseLeave;
+            this.DescriptionLabel.MouseLeave += CardMouseLeave;
 
             this.MouseDown += CardMouseDown;
-            NameLabel.MouseDown += CardMouseDown;
-            DescriptionLabel.MouseDown += CardMouseDown;
+            this.NameLabel.MouseDown += CardMouseDown;
+            this.DescriptionLabel.MouseDown += CardMouseDown;
 
             this.MouseUp += CardMouseUp;
-            NameLabel.MouseUp += CardMouseUp;
-            DescriptionLabel.MouseUp += CardMouseUp;
+            this.NameLabel.MouseUp += CardMouseUp;
+            this.DescriptionLabel.MouseUp += CardMouseUp;
 
             base.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
-            NameLabel.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
-            DescriptionLabel.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
+            this.NameLabel.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
+            this.DescriptionLabel.Click += delegate { Click?.Invoke(this, EventArgs.Empty); };
         }
 
     }
