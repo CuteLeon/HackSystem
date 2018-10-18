@@ -1,7 +1,7 @@
 ﻿// 跳过启动画面
-#define SkipStartUp
+#undef SkipStartUp
 // 跳过登录界面
-#define SkipLogon
+#undef SkipLogon
 // 捕获全局异常
 #undef CatchException
 
@@ -17,6 +17,10 @@ using HackSystem.StartUpTemplate;
 
 namespace HackSystem.Host
 {
+
+    /* TODO: 使用 ORM 框架（全局静态连接）、增加多用户、权限管理、启动+登录+程序开关、个性化配置、权限配置、家庭组等
+     */
+
     static class Program
     {
         /// <summary>

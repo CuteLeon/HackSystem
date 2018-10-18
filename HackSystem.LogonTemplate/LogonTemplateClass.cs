@@ -42,11 +42,11 @@ namespace HackSystem.LogonTemplate
         /// <summary>
         /// 启动名称
         /// </summary>
-        public string Name { get; protected set; } = "登录";
+        public virtual string Name { get; protected set; } = "登录";
         /// <summary>
         /// 启动描述
         /// </summary>
-        public string Description { get; protected set; } = "描述";
+        public virtual string Description { get; protected set; } = "描述";
         /// <summary>
         /// 程序集所在文件名称
         /// </summary>
@@ -56,7 +56,7 @@ namespace HackSystem.LogonTemplate
         /// <summary>
         /// 启动预览图 (图像尺寸为 160 x 90 px)
         /// </summary>
-        public Image Preview
+        public virtual Image Preview
         {
             get => this._preview;
             protected set
@@ -82,6 +82,7 @@ namespace HackSystem.LogonTemplate
              */
             get
             {
+                //TODO: 线程安全 单实例
                 if (this._LogonForm == null)
                     this._LogonForm = this.CreateLogonForm();
                 if (this._LogonForm != null) this._LogonForm.Icon = LogonIcon;
