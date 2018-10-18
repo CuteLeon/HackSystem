@@ -7,6 +7,11 @@ namespace HackSystem.StartUpTemplate
     public abstract class StartUpTemplateClass : IDisposable
     {
         /// <summary>
+        /// 异步锁芯
+        /// </summary>
+        private readonly object LockSeed = new object();
+
+        /// <summary>
         /// 图标
         /// </summary>
         public static Icon StartUpIcon = null;
@@ -22,7 +27,7 @@ namespace HackSystem.StartUpTemplate
         /// 程序集所在文件名称
         /// </summary>
         public abstract string FileName { get; }
-        
+
         private Image _preview = StartUpTemplateResource.DefaultStartUpPreview;
         /// <summary>
         /// 启动预览图 (图像尺寸为 160 x 90 px)
@@ -53,9 +58,15 @@ namespace HackSystem.StartUpTemplate
              */
             get
             {
+                //线程安全 单实例
                 if (this._startUpForm == null)
-                    this._startUpForm = this.CreateStartUpForm();
-                if (this._startUpForm != null) this._startUpForm.Icon = StartUpIcon;
+                    lock (this.LockSeed)
+                        if (this._startUpForm == null)
+                        {
+                            this._startUpForm = this.CreateStartUpForm();
+                            this._startUpForm.Icon = StartUpIcon;
+                        }
+
                 return this._startUpForm;
             }
             protected set => this._startUpForm = value;

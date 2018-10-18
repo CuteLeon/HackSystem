@@ -7,6 +7,11 @@ namespace HackSystem.LogonTemplate
     public abstract class LogonTemplateClass : IDisposable
     {
         /// <summary>
+        /// 异步锁芯
+        /// </summary>
+        private readonly object LockSeed = new object();
+
+        /// <summary>
         /// 图标
         /// </summary>
         public static Icon LogonIcon = null;
@@ -82,10 +87,15 @@ namespace HackSystem.LogonTemplate
              */
             get
             {
-                //TODO: 线程安全 单实例
+                //线程安全 单实例
                 if (this._LogonForm == null)
-                    this._LogonForm = this.CreateLogonForm();
-                if (this._LogonForm != null) this._LogonForm.Icon = LogonIcon;
+                    lock (this.LockSeed)
+                        if (this._LogonForm == null)
+                        {
+                            this._LogonForm = this.CreateLogonForm();
+                            this._LogonForm.Icon = LogonIcon;
+                        }
+
                 return this._LogonForm;
             }
             protected set => this._LogonForm = value;
