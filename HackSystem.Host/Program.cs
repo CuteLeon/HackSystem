@@ -17,7 +17,9 @@ using HackSystem.StartUpTemplate;
 
 namespace HackSystem.Host
 {
-
+    //TODO: LeonRBAC 框架托管账户及授权功能
+    //TODO:  private List<WeakReference> _ListUIBase; 弱引用，引用对象的同时允许对象被回收
+    //TODO: FileStream & BinaryFormatter 使用字节流传输对象
     /* TODO: 使用 ORM 框架（全局静态连接）、增加多用户、权限管理、启动+登录+程序开关、个性化配置、权限配置、家庭组等
      */
 
