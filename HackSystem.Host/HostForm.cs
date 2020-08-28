@@ -24,8 +24,10 @@ namespace HackSystem.Host
         {
             this.WebBrowser = new ChromiumWebBrowser(string.Empty, null)
             {
-                Name = "HostWebBrowser"
+                Name = "HostWebBrowser",
+                MenuHandler = new ChromiumDisableMenuHandler()
             };
+
             this.Controls.Add(this.WebBrowser);
             this.WebBrowser.ConsoleMessage += ChromiumWebBrowserMessageHandler.DoConsoleMessage;
             this.WebBrowser.JavascriptMessageReceived += ChromiumWebBrowserMessageHandler.DoJavascriptMessage;

@@ -280,6 +280,7 @@
     <Compile Include="EventHandlers\AppDomainExceptionHandler.cs" />
     <Compile Include="EventHandlers\ApplicationExitHandler.cs" />
     <Compile Include="EventHandlers\ApplicationThreadExceptionHandler.cs" />
+    <Compile Include="EventHandlers\ChromiumDisableMenuHandler.cs" />
     <Compile Include="EventHandlers\ChromiumWebBrowserMessageHandler.cs" />
     <Compile Include="HostForm.cs">
       <SubType>Form</SubType>
@@ -294,6 +295,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="HostForm.resx">
+      <DependentUpon>HostForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HostResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>HostResource.Designer.cs</LastGenOutput>
