@@ -1,2 +1,0 @@
-1>. AssemblyController 程序集创建反射时可选通过内存动态加载链接库，此时将导致 Assmebly.Location 为空，而导致无法获取连接库文件的具体路径，所以使用 Class 内返回 System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.ScopeName 作为文件名，所以扫描插件的函数不允许扫描子目录，否则在通过动态加载的插件溯源文件名时将取得空值；
-		注意：插件模板类只声明抽象的 FileName 属性或方法，而需要在子类实现，如果在抽象类实现此字段，将返回抽象类的文件名称；
