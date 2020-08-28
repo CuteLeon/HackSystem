@@ -12,9 +12,9 @@ namespace HackSystem.Host
         [STAThread]
         static void Main()
         {
-            Application.ApplicationExit += ApplicationExitHandler.OnEvent;
-            Application.ThreadException += ApplicationThreadExceptionHandler.OnEvent;
-            AppDomain.CurrentDomain.UnhandledException += AppDomainExceptionHandler.OnEvent;
+            Application.ApplicationExit += ApplicationExitHandler.DoApplicationExit;
+            Application.ThreadException += ApplicationThreadExceptionHandler.DoApplicationThreadException;
+            AppDomain.CurrentDomain.UnhandledException += AppDomainExceptionHandler.DoAppDomainException;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -4,7 +4,7 @@ namespace HackSystem.Host.EventHandlers
 {
     public static class ApplicationExitHandler
     {
-        public static void OnEvent(object sender, EventArgs e)
-            => Console.WriteLine($"{nameof(ApplicationExitHandler)}: {nameof(OnEvent)}");
+        public static void DoApplicationExit(object sender, EventArgs e)
+            => Console.WriteLine($"{nameof(ApplicationExitHandler)}: {nameof(DoApplicationExit)}");
     }
 }
