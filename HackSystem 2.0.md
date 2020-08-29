@@ -22,7 +22,9 @@
 
 ### 1.2 宿主
 
-​	宿主使用 .Net Core 平台的 Windows Form。窗体内部嵌入浏览器控件，以显示前端程序。
+> 掣肘于低版本的 WebBrowser 不支持更新的前端样式和功能，CefSharp 和 WebView2 等 Chromium 方案对 .Net Core 支持较差，只能将 Host 迁移至 .Net Framework 平台。
+
+​	宿主使用 .Net Framework 平台的 WinForm。窗体内部嵌入浏览器控件，以显示前端程序。
 
 ### 1.3 前端
 
@@ -32,9 +34,11 @@
 
 > 使用 RESTful API 风格。
 
-​	后端使用 ASP.NET Core 平台的 MVC / Web API。为前端提供服务。
+​	后端使用 ASP.NET Core 平台的 MVC 。为前端提供 API 服务，同时作为管理网站。
 
 ## 二、基础服务
+
+### 用户认证与授权
 
 ### 依赖注入容器
 
