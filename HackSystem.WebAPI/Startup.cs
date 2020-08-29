@@ -24,6 +24,11 @@ namespace HackSystem.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("AllowAny", builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()));
+
             // 配置数据库交互
             services.AddDbContext<HackSystemDBContext>(options =>
                 options.UseSqlite(this.Configuration.GetConnectionString("HSDB")));
@@ -78,11 +83,14 @@ namespace HackSystem.WebAPI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors("AllowAny");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-            
+
             // 用户认证
             app.UseAuthentication();
             // 用户授权

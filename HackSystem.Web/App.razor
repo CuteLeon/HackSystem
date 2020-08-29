@@ -1,6 +1,9 @@
 <Router AppAssembly="@typeof(Program).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        @* <AuthorizeRouteView> 组件来自 Microsoft.AspNetCore.Components.Authorization Nuget
+         * 此组件提供类型为Task<AuthenticationState>的级联参数，<AuthorizeView> 组件使用此参数确定用户的身份认证状态
+        *@
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
     </Found>
     <NotFound>
         <LayoutView Layout="@typeof(MainLayout)">
