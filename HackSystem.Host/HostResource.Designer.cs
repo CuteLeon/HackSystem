@@ -79,5 +79,21 @@ namespace HackSystem.Host {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找类似 &lt;!DOCTYPE html&gt;
+        ///&lt;html &gt;
+        ///    &lt;head&gt;
+        ///        &lt;meta charset=&quot;utf-8&quot;/&gt;
+        ///    &lt;/head&gt;
+        ///  &lt;body style=&quot;text-align: center; overflow: hidden;background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+        ///  background-blend-mode: multiply,multiply;background-attachment: fixed;background-repeat: no-repeat; background-size:cover;&quot;&gt;
+        ///    &lt;div style=&quot;position:absolute; transform: translate(-50%,-50%); [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string StartUpPage {
+            get {
+                return ResourceManager.GetString("StartUpPage", resourceCulture);
+            }
+        }
     }
 }

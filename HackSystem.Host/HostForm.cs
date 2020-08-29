@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Threading;
+using System.Windows.Forms;
 using CefSharp.WinForms;
 using HackSystem.Host.Configs;
 using HackSystem.Host.EventHandlers;
@@ -31,11 +32,27 @@ namespace HackSystem.Host
             this.Controls.Add(this.WebBrowser);
             this.WebBrowser.ConsoleMessage += ChromiumWebBrowserMessageHandler.DoConsoleMessage;
             this.WebBrowser.JavascriptMessageReceived += ChromiumWebBrowserMessageHandler.DoJavascriptMessage;
+            this.WebBrowser.LoadingStateChanged += ChromiumWebBrowserLoadHandler.DoLoadingStateChanged;
+            this.WebBrowser.LoadError += ChromiumWebBrowserLoadHandler.DoLoadError;
+            this.WebBrowser.FrameLoadStart += ChromiumWebBrowserLoadHandler.DoFrameLoadStart;
+            this.WebBrowser.FrameLoadEnd += ChromiumWebBrowserLoadHandler.DoFrameLoadEnd;
+
+            this.WebBrowser.RegisterStartUpPageResource("https://StartUpPage.HackSystem.com", "Loading ...");
+        }
+
+        private void HostForm_Shown(object sender, System.EventArgs e)
+        {
+            this.LoadRemoteURL();
         }
 
         private void LoadRemoteURL()
         {
-            this.WebBrowser.Load(HostConfigs.RemoteURL);
+            ThreadPool.QueueUserWorkItem(new WaitCallback((x) =>
+            {
+                this.WebBrowser.Load("https://StartUpPage.HackSystem.com");
+                Thread.Sleep(1000);
+                this.WebBrowser.Load(HostConfigs.RemoteURL);
+            }));
         }
     }
 }

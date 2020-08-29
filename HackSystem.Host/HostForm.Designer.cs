@@ -41,6 +41,7 @@
             this.Name = "HostForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Shown += new System.EventHandler(this.HostForm_Shown);
             this.ResumeLayout(false);
 
         }
