@@ -18,10 +18,12 @@ namespace HackSystem.Host.EventHandlers
 
         public static void DoLoadError(object sender, LoadErrorEventArgs e)
         {
+            if (e.ErrorCode == CefErrorCode.Aborted) return;
+
             Console.WriteLine($"{nameof(ChromiumWebBrowserLoadHandler)}: {nameof(DoLoadError)} => {e.FailedUrl} {e.ErrorCode} {e.ErrorText}");
             // 加载失败时使用静态页面显示错误信息
             var htmlContent = ChromiumRegisterResourceHandler.GetStartUpPageHtml($"Load Error. (Code = {e.ErrorCode})", $"{e.FailedUrl}<br/>{e.ErrorText}");
-            e.Frame.LoadHtml(htmlContent, true);
+            // e.Frame.LoadHtml(htmlContent, true);
         }
     }
 }

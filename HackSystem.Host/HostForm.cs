@@ -51,7 +51,7 @@ namespace HackSystem.Host
             {
                 this.WebBrowser.Load("https://StartUpPage.HackSystem.com");
                 Thread.Sleep(1000);
-                this.WebBrowser.Load(HostConfigs.RemoteURL);
+                this.WebBrowser.Load($"{HostConfigs.RemoteURL}/{HostConfigs.StartURI}");
             }));
         }
     }
