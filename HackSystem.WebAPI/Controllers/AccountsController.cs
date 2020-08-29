@@ -42,7 +42,7 @@ namespace HackSystem.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterDTO register)
         {
-            this.logger.LogDebug($"Register new account: {register.Email}");
+            this.logger.LogDebug($"注册新账户: {register.Email}");
             var newUser = new IdentityUser
             {
                 UserName = register.Email,
@@ -52,7 +52,7 @@ namespace HackSystem.WebAPI.Controllers
             var result = await this.userManager.CreateAsync(newUser, register.Password);
             if (!result.Succeeded)
             {
-                this.logger.LogDebug($"Register account failed with {result.Errors.Count()} errors: {register.Email}");
+                this.logger.LogDebug($"注册账户失败: {register.Email} ({result.Errors.Count()} 个错误)");
                 var errors = result.Errors.Select(x => $"(代码:{x.Code}) {x.Description}");
                 var failedResult = new RegisterResultDTO
                 {
@@ -62,7 +62,7 @@ namespace HackSystem.WebAPI.Controllers
                 return this.BadRequest(failedResult);
             }
 
-            this.logger.LogDebug($"Register account successfully: {register.Email}");
+            this.logger.LogDebug($"注册账户成功: {register.Email}");
             var registerResult = new RegisterResultDTO()
             {
                 Successful = true
@@ -78,7 +78,7 @@ namespace HackSystem.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
-            this.logger.LogDebug($"Login account: {login.Email}");
+            this.logger.LogDebug($"登录账户: {login.Email}");
             var result = await this.signInManager.PasswordSignInAsync(login.Email, login.Password, false, false);
             if (!result.Succeeded)
             {
@@ -87,10 +87,10 @@ namespace HackSystem.WebAPI.Controllers
                     { } when result.IsLockedOut => "账户被锁定",
                     { } when result.IsNotAllowed => "账户被禁用",
                     { } when result.RequiresTwoFactor => "账户需要验证",
-                    _ => "用户名或密码无效"
+                    _ => "邮箱或密码无效"
                 };
 
-                this.logger.LogDebug($"Login failed because of {errorMessage}: {login.Email}");
+                this.logger.LogDebug($"登录账户失败: {login.Email} ({errorMessage})");
                 var failedResul = new LoginResultDTO
                 {
                     Successful = false,
@@ -116,7 +116,7 @@ namespace HackSystem.WebAPI.Controllers
                 signingCredentials: creds
             );
 
-            this.logger.LogDebug($"Login successfully: {login.Email}");
+            this.logger.LogDebug($"登录账户成功: {login.Email}");
             var loginResul = new LoginResultDTO
             {
                 Successful = true,
