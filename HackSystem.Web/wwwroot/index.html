@@ -11,21 +11,29 @@
     <link href="/libs/font-awesome/css/all.css" rel="stylesheet" />
     <link href="/libs/font-awesome/css/regular.css" rel="stylesheet" />
     <link href="/libs/font-awesome/css/brands.css" rel="stylesheet" />
-    
+
     <link href="css/app.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
-    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="LogoImage.png" />
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">
+        <div class="position-absolute gradual-background" style="overflow:hidden; top:0; bottom:0; left:0; right:0;">
+            <div class="text-center" style="position:absolute; transform: translate(-50%,-50%); left: 50%; top: 50%;">
+                <img src="LogoImage.png" class="img-fluid" />
+                <br />
+                <span class="spinner-border text-white" style="width:4rem;height:4rem;"></span>
+            </div>
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    
+
     <script src="/libs/jquery/jquery.js"></script>
     <script src="/libs/twitter-bootstrap/js/bootstrap.bundle.js"></script>
 
