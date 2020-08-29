@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HackSystem.WebDTO
+namespace HackSystem.WebDTO.Account
 {
     public class LoginDTO
     {

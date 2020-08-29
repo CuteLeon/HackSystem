@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HackSystem.WebDTO
+namespace HackSystem.WebDTO.Account
 {
     public class RegisterResultDTO
     {

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using HackSystem.WebDTO;
+using HackSystem.WebDTO.Account;
 
 namespace HackSystem.Web.Authentication.Services
 {

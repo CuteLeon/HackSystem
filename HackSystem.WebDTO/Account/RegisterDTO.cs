@@ -1,22 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HackSystem.WebDTO
+namespace HackSystem.WebDTO.Account
 {
     public class RegisterDTO
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "邮箱")]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "密码")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        [Display(Name = "Confirm password")]
+        [Compare(nameof(Password), ErrorMessage = "密码与确认密码不一致")]
+        [Display(Name = "确认密码")]
         public string ConfirmPassword { get; set; }
     }
 }

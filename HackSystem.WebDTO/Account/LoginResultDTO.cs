@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebDTO
+﻿namespace HackSystem.WebDTO.Account
 {
     public class LoginResultDTO
     {

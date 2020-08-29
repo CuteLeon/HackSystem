@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using HackSystem.Web.Authentication.Providers;
-using HackSystem.WebDTO;
+using HackSystem.WebDTO.Account;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace HackSystem.Web.Authentication.Services
@@ -34,7 +34,7 @@ namespace HackSystem.Web.Authentication.Services
         /// <returns></returns>
         public async Task<RegisterResultDTO> Register(RegisterDTO registerModel)
         {
-            var response = await httpClient.PostAsJsonAsync("api/accounts", registerModel);
+            var response = await httpClient.PostAsJsonAsync("api/accounts/register", registerModel);
             var registerResult = JsonSerializer.Deserialize<RegisterResultDTO>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             return registerResult;
         }
@@ -47,7 +47,7 @@ namespace HackSystem.Web.Authentication.Services
         public async Task<LoginResultDTO> Login(LoginDTO loginModel)
         {
             var loginAsJson = JsonSerializer.Serialize(loginModel);
-            var response = await httpClient.PostAsync("api/Login", new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
+            var response = await httpClient.PostAsync("api/accounts/login", new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
             var loginResult = JsonSerializer.Deserialize<LoginResultDTO>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             if (!response.IsSuccessStatusCode)
