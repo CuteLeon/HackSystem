@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HackSystem.WebAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HackSystem.WebAPI.Controllers
 {
@@ -23,6 +24,7 @@ namespace HackSystem.WebAPI.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
