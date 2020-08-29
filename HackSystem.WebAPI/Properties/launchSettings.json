@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "HackSystem.WebAPI": {
+      "commandName": "Project",
+      "launchUrl": "https://localhost:4237",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
+      },
+      "dotnetRunMessages": "true",
+      "applicationUrl": "https://0:4237"
+    }
+  }
+}
