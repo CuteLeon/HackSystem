@@ -117,14 +117,21 @@ namespace HackSystem.WebAPI.Controllers
                 return this.BadRequest(failedResul);
             }
 
+            var claims = new List<Claim>();
             var user = await this.userManager.FindByNameAsync(login.UserName);
-            var roles = await this.userManager.GetRolesAsync(user);
-            var claims = new List<Claim>
+            claims.Add(new Claim(ClaimTypes.Name, user.UserName));
+            claims.Add(new Claim(ClaimTypes.Email, user.Email));
+            var userClaims = await this.userManager.GetClaimsAsync(user);
+            claims.AddRange(userClaims);
+
+            var roleNames = await this.userManager.GetRolesAsync(user);
+            claims.AddRange(roleNames.Select(role => new Claim(ClaimTypes.Role, role)));
+            foreach (var roleName in roleNames)
             {
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email),
-            };
-            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+                var role = await roleManager.FindByNameAsync(roleName);
+                var roleClaims = await roleManager.GetClaimsAsync(role);
+                claims.AddRange(roleClaims);
+            }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration["JwtSecurityKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

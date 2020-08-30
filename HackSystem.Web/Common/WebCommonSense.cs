@@ -7,5 +7,14 @@
         public const string AuthenticationType = "jwt";
 
         public const string AuthenticationScheme = "bearer";
+
+        public class AuthorizationPolicy
+        {
+            public const string HackerPolicy = "HackerPolicy";
+
+            public const string ProfessionalHackerPolicy = "ProfessionalHackerPolicy";
+
+            public const string LeonPolicy = "LeonPolicy";
+        }
     }
 }

@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Authentication.Services;
+using HackSystem.Web.Common;
+using HackSystem.WebDTO.Common;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +20,9 @@ namespace HackSystem.Web
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.InitService();
+            builder
+                .InitService()
+                .InitAuthorizationPolicy();
 
             await builder.Build().RunAsync();
         }
@@ -42,6 +46,37 @@ namespace HackSystem.Web
             {
                 var configuration = serviceProvider.GetService<IConfiguration>();
                 httpClient.BaseAddress = new Uri(configuration["APIURL"]);
+            });
+
+            return builder;
+        }
+
+        /// <summary>
+        /// 配置授权策略
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <remarks>
+        /// 需要满足策略的所有需求才可以获得此策略，
+        /// 可以在 Authorize 特性的 Policy 验证需要的策略
+        /// </remarks>
+        /// <returns></returns>
+        public static WebAssemblyHostBuilder InitAuthorizationPolicy(this WebAssemblyHostBuilder builder)
+        {
+            builder.Services.AddAuthorizationCore(options =>
+            {
+                options.AddPolicy(WebCommonSense.AuthorizationPolicy.HackerPolicy, policy =>
+                {
+                    policy.RequireRole(CommonSense.Roles.HackerRole);
+                });
+                options.AddPolicy(WebCommonSense.AuthorizationPolicy.ProfessionalHackerPolicy, policy =>
+                {
+                    policy.RequireRole(CommonSense.Roles.HackerRole);
+                    policy.RequireClaim(CommonSense.Claims.ProfessionalClaim, "true", "TRUE", "True");
+                });
+                options.AddPolicy(WebCommonSense.AuthorizationPolicy.LeonPolicy, policy =>
+                {
+                    policy.RequireUserName("Leon");
+                });
             });
 
             return builder;

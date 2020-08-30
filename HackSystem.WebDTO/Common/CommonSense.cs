@@ -14,5 +14,13 @@
             /// </summary>
             public const string HackerRole = "Hacker";
         }
+
+        public class Claims
+        {
+            /// <summary>
+            /// 专业的
+            /// </summary>
+            public const string ProfessionalClaim = "Professional";
+        }
     }
 }
