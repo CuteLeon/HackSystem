@@ -3,7 +3,7 @@ using HackSystem.WebDTO.Account;
 
 namespace HackSystem.Web.Authentication.Services
 {
-    public interface IAuthService
+    public interface IAuthenticationService
     {
         Task<RegisterResultDTO> Register(RegisterDTO registerModel);
 

@@ -17,13 +17,13 @@ namespace HackSystem.WebAPI.Controllers
     [ApiController]
     public class AccountsController : Controller
     {
-        private readonly Logger<AccountsController> logger;
+        private readonly ILogger<AccountsController> logger;
         private readonly IConfiguration configuration;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly UserManager<IdentityUser> userManager;
 
         public AccountsController(
-            Logger<AccountsController> logger,
+            ILogger<AccountsController> logger,
             IConfiguration configuration,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager)

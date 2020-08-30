@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.Authentication.Providers
 {
@@ -16,13 +17,25 @@ namespace HackSystem.Web.Authentication.Providers
     /// </summary>
     public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider
     {
+        private const string AuthTokenName = "AuthToken";
+        private const string AuthenticationType = "jwt";
+        private const string AuthenticationScheme = "bearer";
+
+        private readonly ILogger<HackSystemAuthenticationStateProvider> logger;
         private readonly HttpClient httpClient;
         private readonly ILocalStorageService localStorage;
 
+        /// <summary>
+        /// 身份认证头的值
+        /// </summary>
+        public AuthenticationHeaderValue AuthenticationHeaderValue { get; protected set; }
+
         public HackSystemAuthenticationStateProvider(
+            ILogger<HackSystemAuthenticationStateProvider> logger,
             HttpClient httpClient,
             ILocalStorageService localStorage)
         {
+            this.logger = logger;
             this.httpClient = httpClient;
             this.localStorage = localStorage;
         }
@@ -33,16 +46,17 @@ namespace HackSystem.Web.Authentication.Providers
         /// <returns></returns>
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var savedToken = await this.localStorage.GetItemAsync<string>("authToken");
-
+            logger.LogDebug($"获取用户认证状态...");
+            var savedToken = await this.localStorage.GetItemAsync<string>(AuthTokenName);
             if (string.IsNullOrWhiteSpace(savedToken))
             {
-                return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
+                logger.LogDebug($"用户认证状态 = 未登录");
+                return new AuthenticationState(new ClaimsPrincipal());
             }
 
-            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", savedToken);
-
-            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(this.ParseClaimsFromJwt(savedToken), "jwt")));
+            logger.LogDebug($"用户认证状态 = 未登录");
+            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthenticationScheme, savedToken);
+            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(this.ParseClaimsFromJwt(savedToken), AuthenticationType)));
         }
 
         /// <summary>
@@ -51,7 +65,8 @@ namespace HackSystem.Web.Authentication.Providers
         /// <param name="token"></param>
         public void MarkUserAsAuthenticated(string token)
         {
-            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(this.ParseClaimsFromJwt(token), "jwt"));
+            logger.LogDebug($"标记用户认证成功...");
+            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(this.ParseClaimsFromJwt(token), AuthenticationType));
             var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
             this.NotifyAuthenticationStateChanged(authState);
         }
@@ -61,6 +76,7 @@ namespace HackSystem.Web.Authentication.Providers
         /// </summary>
         public void MarkUserAsLoggedOut()
         {
+            logger.LogDebug($"标记用户注销...");
             var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
             var authState = Task.FromResult(new AuthenticationState(anonymousUser));
             this.NotifyAuthenticationStateChanged(authState);

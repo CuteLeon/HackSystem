@@ -8,20 +8,28 @@ using Blazored.LocalStorage;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.WebDTO.Account;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace HackSystem.Web.Authentication.Services
 {
-    public class AuthService : IAuthService
+    public class AuthenticationService : IAuthenticationService
     {
+        private const string AuthTokenName = "AuthToken";
+        private const string AuthenticationScheme = "bearer";
+
+        private readonly ILogger<AuthenticationService> logger;
         private readonly HttpClient httpClient;
         private readonly AuthenticationStateProvider authenticationStateProvider;
         private readonly ILocalStorageService localStorage;
 
-        public AuthService(
+        public AuthenticationService(
+            ILogger<AuthenticationService> logger,
             HttpClient httpClient,
             AuthenticationStateProvider authenticationStateProvider,
             ILocalStorageService localStorage)
         {
+            this.logger = logger;
             this.httpClient = httpClient;
             this.authenticationStateProvider = authenticationStateProvider;
             this.localStorage = localStorage;
@@ -30,34 +38,34 @@ namespace HackSystem.Web.Authentication.Services
         /// <summary>
         /// 注册用户
         /// </summary>
-        /// <param name="registerModel"></param>
+        /// <param name="register"></param>
         /// <returns></returns>
-        public async Task<RegisterResultDTO> Register(RegisterDTO registerModel)
+        public async Task<RegisterResultDTO> Register(RegisterDTO register)
         {
-            var response = await httpClient.PostAsJsonAsync("api/accounts/register", registerModel);
-            var registerResult = JsonSerializer.Deserialize<RegisterResultDTO>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            logger.LogDebug($"请求注册用户：{register.Email}");
+            var response = await httpClient.PostAsJsonAsync("api/accounts/register", register);
+            var registerResult = JsonConvert.DeserializeObject<RegisterResultDTO>(await response.Content.ReadAsStringAsync());
             return registerResult;
         }
 
         /// <summary>
         /// 登录
         /// </summary>
-        /// <param name="loginModel"></param>
+        /// <param name="login"></param>
         /// <returns></returns>
-        public async Task<LoginResultDTO> Login(LoginDTO loginModel)
+        public async Task<LoginResultDTO> Login(LoginDTO login)
         {
-            var loginAsJson = JsonSerializer.Serialize(loginModel);
-            var response = await httpClient.PostAsync("api/accounts/login", new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
-            var loginResult = JsonSerializer.Deserialize<LoginResultDTO>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
+            logger.LogDebug($"请求登录用户：{login.Email}");
+            var response = await httpClient.PostAsJsonAsync("api/accounts/login", login);
+            var loginResult = JsonConvert.DeserializeObject<LoginResultDTO>(await response.Content.ReadAsStringAsync());
             if (!response.IsSuccessStatusCode)
             {
                 return loginResult;
             }
 
-            await localStorage.SetItemAsync("authToken", loginResult.Token);
+            await localStorage.SetItemAsync(AuthTokenName, loginResult.Token);
             ((HackSystemAuthenticationStateProvider)authenticationStateProvider).MarkUserAsAuthenticated(loginResult.Token);
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResult.Token);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthenticationScheme, loginResult.Token);
 
             return loginResult;
         }
@@ -68,10 +76,10 @@ namespace HackSystem.Web.Authentication.Services
         /// <returns></returns>
         public async Task Logout()
         {
-            await localStorage.RemoveItemAsync("authToken");
+            logger.LogDebug($"请求注销用户");
+            await localStorage.RemoveItemAsync(AuthTokenName);
             ((HackSystemAuthenticationStateProvider)authenticationStateProvider).MarkUserAsLoggedOut();
             httpClient.DefaultRequestHeaders.Authorization = null;
         }
     }
-
 }
