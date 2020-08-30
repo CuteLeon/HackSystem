@@ -1,11 +1,10 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using HackSystem.Web.Authentication.Providers;
+using HackSystem.Web.Common;
 using HackSystem.WebDTO.Account;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
@@ -15,9 +14,6 @@ namespace HackSystem.Web.Authentication.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private const string AuthTokenName = "AuthToken";
-        private const string AuthenticationScheme = "bearer";
-
         private readonly ILogger<AuthenticationService> logger;
         private readonly HttpClient httpClient;
         private readonly AuthenticationStateProvider authenticationStateProvider;
@@ -63,9 +59,9 @@ namespace HackSystem.Web.Authentication.Services
                 return loginResult;
             }
 
-            await localStorage.SetItemAsync(AuthTokenName, loginResult.Token);
+            await localStorage.SetItemAsync(WebCommonSense.AuthTokenName, loginResult.Token);
             ((HackSystemAuthenticationStateProvider)authenticationStateProvider).MarkUserAsAuthenticated(loginResult.Token);
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthenticationScheme, loginResult.Token);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(WebCommonSense.AuthenticationScheme, loginResult.Token);
 
             return loginResult;
         }
@@ -78,7 +74,7 @@ namespace HackSystem.Web.Authentication.Services
         {
             logger.LogDebug($"请求注销用户");
             _ = await httpClient.GetAsync("api/accounts/logout");
-            await localStorage.RemoveItemAsync(AuthTokenName);
+            await localStorage.RemoveItemAsync(WebCommonSense.AuthTokenName);
             ((HackSystemAuthenticationStateProvider)authenticationStateProvider).MarkUserAsLoggedOut();
             httpClient.DefaultRequestHeaders.Authorization = null;
         }
