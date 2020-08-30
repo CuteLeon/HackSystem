@@ -89,6 +89,7 @@ namespace HackSystem.Web.Authentication.Providers
         /// <returns></returns>
         private IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
         {
+            // TODO: Leon: 解析 JWT
             var claims = new List<Claim>();
             var payload = jwt.Split('.')[1];
             var jsonBytes = this.ParseBase64WithoutPadding(payload);

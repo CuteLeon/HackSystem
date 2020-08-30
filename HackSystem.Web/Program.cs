@@ -26,7 +26,7 @@ namespace HackSystem.Web
 
         public static WebAssemblyHostBuilder InitConfig(this WebAssemblyHostBuilder builder)
         {
-            // TODO: 使用配置服务向自身应用请求json文件内的配置
+            // TODO: Leon: 使用配置服务向自身应用请求json文件内的配置
             const string ConfigFileName = "appsettings.json";
 
             var configuration = new ConfigurationBuilder()
