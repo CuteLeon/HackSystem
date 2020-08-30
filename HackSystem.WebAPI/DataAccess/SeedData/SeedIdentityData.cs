@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HackSystem.WebDTO.Common;
 using Microsoft.AspNetCore.Identity;
@@ -113,14 +115,36 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
                     var user = await userManager.FindByNameAsync(userName);
                     if (user != null)
                     {
-                        var result = await userManager.AddClaimsAsync(user, claims);
-                        if (result.Succeeded)
+                        var userClaims = (await userManager.GetClaimsAsync(user))
+                            .GroupBy(claim => claim.Type)
+                            .Select(group => new Tuple<string, HashSet<string>>(group.Key, new HashSet<string>(group.Select(claim => claim.Value))))
+                            .ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2);
+
+                        var newClaims = claims
+                            .GroupBy(claim => claim.Type)
+                            .Select(group => new Tuple<string, HashSet<string>>(group.Key, new HashSet<string>(group.Select(claim => claim.Value))))
+                            .ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2);
+
+                        foreach (var type in userClaims.Keys)
                         {
-                            logger.LogInformation($"添加用户声明成功：{user.UserName}");
+                            if (newClaims.TryGetValue(type, out var values))
+                            {
+                                values.ExceptWith(userClaims[type]);
+                            }
                         }
-                        else
+
+                        var addClaims = newClaims.SelectMany(pair => pair.Value.Select(value => new Claim(pair.Key, value))).ToList();
+                        if (addClaims.Count > 0)
                         {
-                            logger.LogWarning($"添加用户声明失败：{user.UserName} \t异常如下：\n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
+                            var result = await userManager.AddClaimsAsync(user, addClaims);
+                            if (result.Succeeded)
+                            {
+                                logger.LogInformation($"添加用户声明成功：{user.UserName}");
+                            }
+                            else
+                            {
+                                logger.LogWarning($"添加用户声明失败：{user.UserName} \t异常如下：\n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
+                            }
                         }
                     }
                 }
@@ -141,16 +165,39 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
                     var role = await roleManager.FindByNameAsync(roleName);
                     if (role != null)
                     {
-                        foreach (var claim in claims)
+
+                        var roleClaims = (await roleManager.GetClaimsAsync(role))
+                            .GroupBy(claim => claim.Type)
+                            .Select(group => new Tuple<string, HashSet<string>>(group.Key, new HashSet<string>(group.Select(claim => claim.Value))))
+                            .ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2);
+
+                        var newClaims = claims
+                            .GroupBy(claim => claim.Type)
+                            .Select(group => new Tuple<string, HashSet<string>>(group.Key, new HashSet<string>(group.Select(claim => claim.Value))))
+                            .ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2);
+
+                        foreach (var type in roleClaims.Keys)
                         {
-                            var result = await roleManager.AddClaimAsync(role, claim);
-                            if (result.Succeeded)
+                            if (newClaims.TryGetValue(type, out var values))
                             {
-                                logger.LogInformation($"添加角色声明成功：{role.Name}");
+                                values.ExceptWith(roleClaims[type]);
                             }
-                            else
+                        }
+
+                        var addClaims = newClaims.SelectMany(pair => pair.Value.Select(value => new Claim(pair.Key, value))).ToList();
+                        if (addClaims.Count > 0)
+                        {
+                            foreach (var claim in addClaims)
                             {
-                                logger.LogWarning($"添加角色声明失败：{role.Name} \t异常如下：\n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
+                                var result = await roleManager.AddClaimAsync(role, claim);
+                                if (result.Succeeded)
+                                {
+                                    logger.LogInformation($"添加角色声明成功：{role.Name}");
+                                }
+                                else
+                                {
+                                    logger.LogWarning($"添加角色声明失败：{role.Name} \t异常如下：\n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
+                                }
                             }
                         }
                     }
