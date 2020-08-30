@@ -5,11 +5,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using HackSystem.WebAPI.Configurations;
 using HackSystem.WebDTO.Account;
 using HackSystem.WebDTO.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
@@ -20,21 +21,21 @@ namespace HackSystem.WebAPI.Controllers
     public class AccountsController : Controller
     {
         private readonly ILogger<AccountsController> logger;
-        private readonly IConfiguration configuration;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly JwtConfiguration jwtConfiguration;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<IdentityUser> userManager;
 
         public AccountsController(
             ILogger<AccountsController> logger,
-            IConfiguration configuration,
             SignInManager<IdentityUser> signInManager,
+            JwtConfiguration jwtConfiguration,
             RoleManager<IdentityRole> roleManager,
             UserManager<IdentityUser> userManager)
         {
             this.logger = logger;
-            this.configuration = configuration;
             this.signInManager = signInManager;
+            this.jwtConfiguration = jwtConfiguration;
             this.roleManager = roleManager;
             this.userManager = userManager;
         }
@@ -133,13 +134,13 @@ namespace HackSystem.WebAPI.Controllers
                 claims.AddRange(roleClaims);
             }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration["JwtSecurityKey"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.jwtConfiguration.JwtSecurityKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expiry = DateTime.Now.AddMinutes(Convert.ToInt32(this.configuration["JwtExpiryInMinutes"]));
+            var expiry = DateTime.Now.AddMinutes(this.jwtConfiguration.JwtExpiryInMinutes);
 
             var token = new JwtSecurityToken(
-                this.configuration["JwtIssuer"],
-                this.configuration["JwtAudience"],
+                this.jwtConfiguration.JwtIssuer,
+                this.jwtConfiguration.JwtAudience,
                 claims,
                 expires: expiry,
                 signingCredentials: creds
@@ -159,6 +160,7 @@ namespace HackSystem.WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             this.logger.LogDebug($"注销账户...");
@@ -166,11 +168,18 @@ namespace HackSystem.WebAPI.Controllers
             return this.Ok();
         }
 
+        /// <summary>
+        /// 获取账户信息
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAccountInfo()
         {
-            // TODO: Leon: 获取当前用户的信息
-            var user = await userManager.GetUserAsync(this.HttpContext.User);
+            var userName = this.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value ??
+                throw new ArgumentException(nameof(ClaimTypes.Name));
+
+            var user = await userManager.FindByNameAsync(userName);
             return this.Ok(user);
         }
     }

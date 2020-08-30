@@ -1,4 +1,5 @@
 using System.Text;
+using HackSystem.WebAPI.Configurations;
 using HackSystem.WebAPI.DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -56,18 +57,25 @@ namespace HackSystem.WebAPI
                 .AddEntityFrameworkStores<HackSystemDBContext>();
 
             // 启用身份认证
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            var jwtConfiguration = this.Configuration.GetSection("JwtConfiguration").Get<JwtConfiguration>();
+            services.AddSingleton(jwtConfiguration);
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
                 .AddJwtBearer(options =>
                 {
+                    options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = this.Configuration["JwtIssuer"],
-                        ValidAudience = this.Configuration["JwtAudience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["JwtSecurityKey"]))
+                        ValidIssuer = jwtConfiguration.JwtIssuer,
+                        ValidAudience = jwtConfiguration.JwtAudience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.JwtSecurityKey))
                     };
                 });
 
@@ -102,10 +110,11 @@ namespace HackSystem.WebAPI
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
-            app.UseRouting();
-
             // 用户认证
             app.UseAuthentication();
+
+            app.UseRouting();
+
             // 用户授权
             app.UseAuthorization();
 

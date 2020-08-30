@@ -9,6 +9,8 @@ namespace HackSystem.Web.Authentication.Services
 
         Task<LoginResultDTO> Login(LoginDTO loginModel);
 
+        Task<string> GetAccountInfo();
+
         Task Logout();
     }
 }

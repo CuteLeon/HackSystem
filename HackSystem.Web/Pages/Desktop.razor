@@ -1,16 +1,18 @@
 ﻿@page "/Desktop"
 @attribute [Authorize(Roles = CommonSense.Roles.HackerRole)]
 @inject IConfiguration Configuration
+@inject IAuthenticationService AuthenticationService
 
 <h3>Desktop</h3>
-<button>Button</button>
+<button class="btn btn-success" @onclick="GetAccountInfo">获取用户信息</button>
+<p>@accountInfo</p>
 
 <AuthorizeView Policy=@WebCommonSense.AuthorizationPolicy.LeonPolicy>
     <h4><span class="badge badge-primary">Leon</span></h4>
 </AuthorizeView>
 
 <AuthorizeView Policy=@WebCommonSense.AuthorizationPolicy.ProfessionalHackerPolicy>
-    <a class="h4" href="/ProfessionalHackerPage"><span class="badge badge-danger">Professional</span></a>
+    <a class="h4" href="/ProfessionalHackerPage"><span class="badge badge-warning">Professional</span></a>
 </AuthorizeView>
 
 <AuthorizeView Policy=@WebCommonSense.AuthorizationPolicy.HackerPolicy>
@@ -22,4 +24,10 @@
 <p>Configuration: @Configuration["APIURL"]</p>
 
 @code {
+    string accountInfo = "账户信息";
+
+    private async Task GetAccountInfo()
+    {
+        accountInfo =await this.AuthenticationService.GetAccountInfo();
+    }
 }

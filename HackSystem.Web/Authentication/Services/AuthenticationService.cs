@@ -67,12 +67,34 @@ namespace HackSystem.Web.Authentication.Services
         }
 
         /// <summary>
+        /// 获取账户信息
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> GetAccountInfo()
+        {
+            logger.LogDebug($"请求用户信息...");
+            // TODO: Leon: 发送 JWT 头
+            var savedToken = await this.localStorage.GetItemAsync<string>(WebCommonSense.AuthTokenName);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(WebCommonSense.AuthenticationScheme, savedToken);
+            logger.LogWarning($"Authorization 头的值为：{httpClient.DefaultRequestHeaders.Authorization?.Scheme} => {httpClient.DefaultRequestHeaders.Authorization?.Parameter}");
+
+            var response = await httpClient.GetStringAsync("api/accounts/GetAccountInfo");
+            return response;
+        }
+
+        /// <summary>
         /// 注销
         /// </summary>
         /// <returns></returns>
         public async Task Logout()
         {
             logger.LogDebug($"请求注销用户");
+
+            // TODO: Leon: 发送 JWT 头
+            var savedToken = await this.localStorage.GetItemAsync<string>(WebCommonSense.AuthTokenName);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(WebCommonSense.AuthenticationScheme, savedToken);
+            logger.LogWarning($"Authorization 头的值为：{httpClient.DefaultRequestHeaders.Authorization?.Scheme} => {httpClient.DefaultRequestHeaders.Authorization?.Parameter}");
+
             _ = await httpClient.GetAsync("api/accounts/logout");
             await localStorage.RemoveItemAsync(WebCommonSense.AuthTokenName);
             ((HackSystemAuthenticationStateProvider)authenticationStateProvider).MarkUserAsLoggedOut();
