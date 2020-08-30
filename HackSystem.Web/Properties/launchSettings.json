@@ -3,7 +3,7 @@
     "HackSystem.Web": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:2473/Desktop",
+      "launchUrl": "https://localhost:2473/StartUp",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

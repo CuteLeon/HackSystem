@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using HackSystem.WebDTO.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -79,7 +80,7 @@ namespace HackSystem.WebAPI.Controllers
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
             this.logger.LogDebug($"登录账户: {login.Email}");
-            var result = await this.signInManager.PasswordSignInAsync(login.Email, login.Password, false, false);
+            var result = await this.signInManager.PasswordSignInAsync(login.Email, login.Password, true, false);
             if (!result.Succeeded)
             {
                 var errorMessage = result switch
@@ -132,12 +133,17 @@ namespace HackSystem.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            // TODO: Leon: 检查Token
-            // HttpContext.User
-            // HttpContext.Request.Headers
             this.logger.LogDebug($"注销账户...");
             await this.signInManager.SignOutAsync();
             return this.Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAccountInfo()
+        {
+            // TODO: Leon: 获取当前用户的信息
+            var user = await userManager.GetUserAsync(this.HttpContext.User);
+            return this.Ok(user);
         }
     }
 }

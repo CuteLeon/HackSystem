@@ -1,26 +1,8 @@
-﻿@page "/"
-@page "/Desktop"
+﻿@page "/Desktop"
+@attribute [Authorize]
 
 <h3>Desktop</h3>
-<button @onclick="@LogUsername">Log username</button>
+<button>Button</button>
 
 @code {
-    // <AuthorizeRouteView> 组件提供的级联参数，<AuthorizeView> 组件使用此参数确定用户的身份认证状态
-    [CascadingParameter]
-    private Task<AuthenticationState> authenticationStateTask { get; set; }
-
-    private async Task LogUsername()
-    {
-        var authState = await authenticationStateTask;
-        var user = authState.User;
-
-        if (user.Identity.IsAuthenticated)
-        {
-            Console.WriteLine($"{user.Identity.Name} is authenticated.");
-        }
-        else
-        {
-            Console.WriteLine("The user is NOT authenticated.");
-        }
-    }
 }

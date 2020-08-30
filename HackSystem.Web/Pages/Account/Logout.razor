@@ -1,4 +1,4 @@
-﻿@page "/logout"
+﻿@page "/Logout"
 @inject IAuthenticationService AuthService
 @inject NavigationManager NavigationManager
 
@@ -6,6 +6,6 @@
     protected override async Task OnInitializedAsync()
     {
         await AuthService.Logout();
-        NavigationManager.NavigateTo("/Desktop");
+        NavigationManager.NavigateTo("/StartUp");
     }
 }

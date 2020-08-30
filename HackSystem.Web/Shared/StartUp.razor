@@ -1,0 +1,23 @@
+﻿@page "/"
+@page "/StartUp"
+@inject NavigationManager NavigationManager
+
+@code{
+    // <AuthorizeRouteView> 组件提供的级联参数，<AuthorizeView> 组件使用此参数确定用户的身份认证状态
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+        if (user?.Identity?.IsAuthenticated ?? false)
+        {
+            this.NavigationManager.NavigateTo(nameof(Desktop));
+        }
+        else
+        {
+            this.NavigationManager.NavigateTo(nameof(Login));
+        }
+    }
+}

@@ -1,14 +1,11 @@
 ﻿@page "/notfound"
 @page "/notfound/{Message}"
 
-<div class="position-absolute gradual-background" style="overflow:hidden; top:0; bottom:0; left:0; right:0;">
-    <div class="text-center" style="position:absolute; transform: translate(-50%,-50%); left: 50%; top: 50%;">
-        <img src="LogoImage.png" class="img-fluid" />
-        <h3 class="text-white">@Message</h3>
-    </div>
-</div>
+<HackSystemMessage Message="@Message"></HackSystemMessage>
 
 @code{
+    private string message = "Not Found";
+
     [Parameter]
-    public string Message { get; set; } = "Not Found";
+    public string Message { get => message; set => message = value; }
 }

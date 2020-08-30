@@ -1,0 +1,13 @@
+﻿@page "/AccessDenied"
+@page "/AccessDenied/{Message}"
+
+<HackSystemMessage Message="@message">
+    <LoginDisplay/>
+</HackSystemMessage>
+
+@code{
+    private string message = "Access Denied";
+
+    [Parameter]
+    public string Message { get => message; set => message = value; }
+}

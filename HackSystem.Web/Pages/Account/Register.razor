@@ -1,4 +1,4 @@
-﻿@page "/register"
+﻿@page "/Register"
 @inject IAuthenticationService AuthService
 @inject NavigationManager NavigationManager
 
@@ -52,7 +52,7 @@
 
         if (result.Successful)
         {
-            NavigationManager.NavigateTo("/login");
+            NavigationManager.NavigateTo("/StartUp");
         }
         else
         {

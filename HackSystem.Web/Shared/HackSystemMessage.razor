@@ -1,0 +1,20 @@
+﻿@page "/HackSystemMessage"
+@page "/HackSystemMessage/{Message}"
+
+<div class="position-absolute gradual-background" style="overflow:hidden; top:0; bottom:0; left:0; right:0;">
+    <div class="text-center" style="position:absolute; transform: translate(-50%,-50%); left: 50%; top: 50%;">
+        <img src="LogoImage.png" class="img-fluid" />
+        <h3 class="text-white">@message</h3>
+        @ChildContent
+    </div>
+</div>
+
+@code{
+    private string message = "Hack System Message";
+
+    [Parameter]
+    public string Message { get => message; set => message = value; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
