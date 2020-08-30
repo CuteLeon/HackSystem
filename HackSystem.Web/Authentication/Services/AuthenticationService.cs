@@ -77,6 +77,7 @@ namespace HackSystem.Web.Authentication.Services
         public async Task Logout()
         {
             logger.LogDebug($"请求注销用户");
+            _ = await httpClient.GetAsync("api/accounts/logout");
             await localStorage.RemoveItemAsync(AuthTokenName);
             ((HackSystemAuthenticationStateProvider)authenticationStateProvider).MarkUserAsLoggedOut();
             httpClient.DefaultRequestHeaders.Authorization = null;

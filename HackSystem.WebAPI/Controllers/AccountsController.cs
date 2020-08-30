@@ -124,5 +124,20 @@ namespace HackSystem.WebAPI.Controllers
             };
             return this.Ok(loginResul);
         }
+
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            // TODO: Leon: 检查Token
+            // HttpContext.User
+            // HttpContext.Request.Headers
+            this.logger.LogDebug($"注销账户...");
+            await this.signInManager.SignOutAsync();
+            return this.Ok();
+        }
     }
 }
