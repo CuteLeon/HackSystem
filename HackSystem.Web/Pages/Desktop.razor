@@ -1,8 +1,12 @@
 ﻿@page "/Desktop"
 @attribute [Authorize]
+@inject IConfiguration Configuration
 
 <h3>Desktop</h3>
 <button>Button</button>
+
+<h1>Configuration example</h1>
+<p>Configuration: @Configuration["APIURL"]</p>
 
 @code {
 }

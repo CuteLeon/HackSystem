@@ -1,13 +1,13 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Blazored.LocalStorage;
+using HackSystem.Web.Authentication.Providers;
+using HackSystem.Web.Authentication.Services;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using HackSystem.Web.Authentication.Services;
-using Blazored.LocalStorage;
-using HackSystem.Web.Authentication.Providers;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web
@@ -22,18 +22,6 @@ namespace HackSystem.Web
             builder.InitService();
 
             await builder.Build().RunAsync();
-        }
-
-        public static WebAssemblyHostBuilder InitConfig(this WebAssemblyHostBuilder builder)
-        {
-            // TODO: Leon: 使用配置服务向自身应用请求json文件内的配置
-            const string ConfigFileName = "appsettings.json";
-
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile(ConfigFileName)
-                .Build();
-            builder.Services.AddSingleton(configuration);
-            return builder;
         }
 
         public static WebAssemblyHostBuilder InitService(this WebAssemblyHostBuilder builder)
@@ -56,7 +44,8 @@ namespace HackSystem.Web
             // 注册认证服务及其 HttpClient 服务
             builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>((serviceProvider, httpClient) =>
             {
-                httpClient.BaseAddress = new Uri("https://localhost:4237");
+                var configuration = serviceProvider.GetService<IConfiguration>();
+                httpClient.BaseAddress = new Uri(configuration["APIURL"]);
             });
 
             return builder;
