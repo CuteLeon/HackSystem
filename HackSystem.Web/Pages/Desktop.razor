@@ -1,10 +1,11 @@
 ﻿@page "/Desktop"
-@attribute [Authorize]
+@attribute [Authorize(Roles = CommonSense.Roles.HackerRole)]
 @inject IConfiguration Configuration
 
 <h3>Desktop</h3>
 <button>Button</button>
 
+<a class="btn btn-primary" href="/SystemSettings">系统设置</a>
 <h1>Configuration example</h1>
 <p>Configuration: @Configuration["APIURL"]</p>
 

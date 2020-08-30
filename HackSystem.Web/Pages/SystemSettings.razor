@@ -1,0 +1,18 @@
+﻿@page "/SystemSettings"
+@attribute [Authorize]
+
+<h3>系统设置</h3>
+
+<h4>所有角色可见的设置</h4>
+
+<AuthorizeView Roles=@CommonSense.Roles.HackerRole>
+    <h4>@CommonSense.Roles.HackerRole 角色可见的设置</h4>
+</AuthorizeView>
+
+<AuthorizeView Roles=@CommonSense.Roles.CommanderRole>
+    <h4>@CommonSense.Roles.CommanderRole 角色可见的设置</h4>
+</AuthorizeView>
+
+@code {
+
+}

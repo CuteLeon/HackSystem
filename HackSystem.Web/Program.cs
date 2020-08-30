@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web
 {
@@ -27,11 +26,7 @@ namespace HackSystem.Web
         public static WebAssemblyHostBuilder InitService(this WebAssemblyHostBuilder builder)
         {
             // 日志服务
-#if DEBUG
-            builder.Services.AddLogging(options => options.SetMinimumLevel(LogLevel.Debug));
-#else
-            services.AddLogging(options => options.SetMinimumLevel(LogLevel.Warning));
-#endif
+            builder.Services.AddLogging();
             // JWT 解析器
             builder.Services.AddScoped<IJWTParser, JWTParser>();
             // 在本地存储 Tokwn
