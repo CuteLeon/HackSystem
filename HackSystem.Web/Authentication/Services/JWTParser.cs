@@ -35,7 +35,7 @@ namespace HackSystem.Web.Authentication.Services
 
         public IEnumerable<Claim> ParseJWTPayload(string payload)
         {
-            this.logger.LogInformation($"解析 JWT Payload: {payload}");
+            this.logger.LogDebug($"解析 JWT Payload: {payload}");
             if (string.IsNullOrWhiteSpace(payload))
             {
                 throw new ArgumentException($"“{nameof(payload)}”不能为 Null 或空白", nameof(payload));
@@ -59,7 +59,7 @@ namespace HackSystem.Web.Authentication.Services
                 }
             }
 
-            this.logger.LogInformation($"解析 Claim: \n\t{string.Join("\n\t", claims.Select(claim => $"{claim.Type} = {claim.Value}"))}");
+            this.logger.LogDebug($"解析 Claim: \n\t{string.Join("\n\t", claims.Select(claim => $"{claim.Type} = {claim.Value}"))}");
             return claims;
         }
 
