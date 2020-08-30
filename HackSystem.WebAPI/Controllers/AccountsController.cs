@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using HackSystem.WebDTO.Account;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -43,10 +42,10 @@ namespace HackSystem.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterDTO register)
         {
-            this.logger.LogDebug($"注册新账户: {register.Email}");
+            this.logger.LogDebug($"注册新账户: {register.UserName}");
             var newUser = new IdentityUser
             {
-                UserName = register.Email,
+                UserName = register.UserName,
                 Email = register.Email
             };
 
@@ -63,7 +62,7 @@ namespace HackSystem.WebAPI.Controllers
                 return this.BadRequest(failedResult);
             }
 
-            this.logger.LogDebug($"注册账户成功: {register.Email}");
+            this.logger.LogDebug($"注册账户成功: {register.UserName}");
             var registerResult = new RegisterResultDTO()
             {
                 Successful = true
@@ -79,8 +78,8 @@ namespace HackSystem.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
-            this.logger.LogDebug($"登录账户: {login.Email}");
-            var result = await this.signInManager.PasswordSignInAsync(login.Email, login.Password, true, false);
+            this.logger.LogDebug($"登录账户: {login.UserName}");
+            var result = await this.signInManager.PasswordSignInAsync(login.UserName, login.Password, true, false);
             if (!result.Succeeded)
             {
                 var errorMessage = result switch
@@ -91,7 +90,7 @@ namespace HackSystem.WebAPI.Controllers
                     _ => "邮箱或密码无效"
                 };
 
-                this.logger.LogDebug($"登录账户失败: {login.Email} ({errorMessage})");
+                this.logger.LogDebug($"登录账户失败: {login.UserName} ({errorMessage})");
                 var failedResul = new LoginResultDTO
                 {
                     Successful = false,
@@ -102,7 +101,7 @@ namespace HackSystem.WebAPI.Controllers
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, login.Email)
+                new Claim(ClaimTypes.Name, login.UserName)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration["JwtSecurityKey"]));
@@ -117,7 +116,7 @@ namespace HackSystem.WebAPI.Controllers
                 signingCredentials: creds
             );
 
-            this.logger.LogDebug($"登录账户成功: {login.Email}");
+            this.logger.LogDebug($"登录账户成功: {login.UserName}");
             var loginResul = new LoginResultDTO
             {
                 Successful = true,

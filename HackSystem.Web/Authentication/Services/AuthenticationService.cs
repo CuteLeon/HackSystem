@@ -38,7 +38,7 @@ namespace HackSystem.Web.Authentication.Services
         /// <returns></returns>
         public async Task<RegisterResultDTO> Register(RegisterDTO register)
         {
-            logger.LogDebug($"请求注册用户：{register.Email}");
+            logger.LogDebug($"请求注册用户：{register.UserName}");
             var response = await httpClient.PostAsJsonAsync("api/accounts/register", register);
             var registerResult = JsonConvert.DeserializeObject<RegisterResultDTO>(await response.Content.ReadAsStringAsync());
             return registerResult;
@@ -51,7 +51,7 @@ namespace HackSystem.Web.Authentication.Services
         /// <returns></returns>
         public async Task<LoginResultDTO> Login(LoginDTO login)
         {
-            logger.LogDebug($"请求登录用户：{login.Email}");
+            logger.LogDebug($"请求登录用户：{login.UserName}");
             var response = await httpClient.PostAsJsonAsync("api/accounts/login", login);
             var loginResult = JsonConvert.DeserializeObject<LoginResultDTO>(await response.Content.ReadAsStringAsync());
             if (!response.IsSuccessStatusCode)

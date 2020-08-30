@@ -5,6 +5,10 @@ namespace HackSystem.WebDTO.Account
     public class RegisterDTO
     {
         [Required]
+        [Display(Name = "名称")]
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "邮箱")]
         public string Email { get; set; }

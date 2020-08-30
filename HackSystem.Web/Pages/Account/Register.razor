@@ -18,7 +18,11 @@
         <EditForm Model="RegisterModel" OnValidSubmit="HandleRegistration">
             <DataAnnotationsValidator />
             <ValidationSummary />
-
+            <div class="form-group">
+                <label for="username">User Name</label>
+                <InputText Id="userName" Class="form-control" @bind-Value="RegisterModel.UserName" />
+                <ValidationMessage For="@(() => RegisterModel.UserName)" />
+            </div>
             <div class="form-group">
                 <label for="email">Email address</label>
                 <InputText Id="email" class="form-control" @bind-Value="RegisterModel.Email" />
