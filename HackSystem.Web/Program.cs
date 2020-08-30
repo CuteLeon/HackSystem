@@ -32,7 +32,8 @@ namespace HackSystem.Web
 #else
             services.AddLogging(options => options.SetMinimumLevel(LogLevel.Warning));
 #endif
-
+            // JWT 解析器
+            builder.Services.AddScoped<IJWTParser, JWTParser>();
             // 在本地存储 Tokwn
             builder.Services.AddBlazoredLocalStorage();
             // 启用身份认证功能

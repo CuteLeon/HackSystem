@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using HackSystem.WebDTO.Account;
+using HackSystem.WebDTO.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -20,17 +22,20 @@ namespace HackSystem.WebAPI.Controllers
         private readonly ILogger<AccountsController> logger;
         private readonly IConfiguration configuration;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<IdentityUser> userManager;
 
         public AccountsController(
             ILogger<AccountsController> logger,
             IConfiguration configuration,
             SignInManager<IdentityUser> signInManager,
+            RoleManager<IdentityRole> roleManager,
             UserManager<IdentityUser> userManager)
         {
             this.logger = logger;
             this.configuration = configuration;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
             this.userManager = userManager;
         }
 
@@ -52,7 +57,20 @@ namespace HackSystem.WebAPI.Controllers
             var result = await this.userManager.CreateAsync(newUser, register.Password);
             if (!result.Succeeded)
             {
-                this.logger.LogDebug($"注册账户失败: {register.Email} ({result.Errors.Count()} 个错误)");
+                this.logger.LogError(new Exception(string.Join("\n", result.Errors)), $"注册账户失败: {register.UserName} ({result.Errors.Count()} 个错误)");
+                var errors = result.Errors.Select(x => $"(代码:{x.Code}) {x.Description}");
+                var failedResult = new RegisterResultDTO
+                {
+                    Successful = false,
+                    Errors = errors
+                };
+                return this.BadRequest(failedResult);
+            }
+
+            result = await this.userManager.AddToRoleAsync(newUser, CommonSense.Roles.HackerRole);
+            if (!result.Succeeded)
+            {
+                this.logger.LogError(new Exception(string.Join("\n", result.Errors)), $"配置账户角色失败: {register.UserName} ({result.Errors.Count()} 个错误)");
                 var errors = result.Errors.Select(x => $"(代码:{x.Code}) {x.Description}");
                 var failedResult = new RegisterResultDTO
                 {
@@ -99,10 +117,14 @@ namespace HackSystem.WebAPI.Controllers
                 return this.BadRequest(failedResul);
             }
 
-            var claims = new[]
+            var user = await this.userManager.FindByNameAsync(login.UserName);
+            var roles = await this.userManager.GetRolesAsync(user);
+            var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, login.UserName)
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
             };
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration["JwtSecurityKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
