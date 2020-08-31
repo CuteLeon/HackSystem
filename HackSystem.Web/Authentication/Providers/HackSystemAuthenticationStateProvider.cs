@@ -6,6 +6,7 @@ using Blazored.LocalStorage;
 using HackSystem.Web.Authentication.Services;
 using HackSystem.Web.Common;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.Authentication.Providers
@@ -15,10 +16,13 @@ namespace HackSystem.Web.Authentication.Providers
     /// </summary>
     public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider
     {
+        private readonly IServiceScope serviceScope;
         private readonly ILogger<HackSystemAuthenticationStateProvider> logger;
         private readonly HttpClient httpClient;
         private readonly IJWTParser jwtParser;
         private readonly ILocalStorageService localStorage;
+
+        public int Counter { get; set; }
 
         /// <summary>
         /// 身份认证头的值
@@ -27,14 +31,13 @@ namespace HackSystem.Web.Authentication.Providers
 
         public HackSystemAuthenticationStateProvider(
             ILogger<HackSystemAuthenticationStateProvider> logger,
-            HttpClient httpClient,
-            IJWTParser jwtParser,
-            ILocalStorageService localStorage)
+            IServiceScopeFactory serviceScopeFactory)
         {
             this.logger = logger;
-            this.httpClient = httpClient;
-            this.jwtParser = jwtParser;
-            this.localStorage = localStorage;
+            this.serviceScope = serviceScopeFactory.CreateScope();
+            this.httpClient = serviceScope.ServiceProvider.GetService<HttpClient>();
+            this.jwtParser = serviceScope.ServiceProvider.GetService<IJWTParser>();
+            this.localStorage = serviceScope.ServiceProvider.GetService<ILocalStorageService>();
         }
 
         /// <summary>

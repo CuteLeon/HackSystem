@@ -38,9 +38,11 @@ namespace HackSystem.Web
             // 启用身份认证功能
             builder.Services.AddAuthorizationCore();
             // 注册用户身份认证状态提供者
-            builder.Services.AddScoped<AuthenticationStateProvider, HackSystemAuthenticationStateProvider>();
+            builder.Services.AddSingleton<AuthenticationStateProvider, HackSystemAuthenticationStateProvider>();
             // 注册指向本应用的 HttpClient 服务
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            // 注册 HttpClient 服务
+            builder.Services.AddHttpClient();
             // 注册认证服务及其 HttpClient 服务
             builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>((serviceProvider, httpClient) =>
             {
