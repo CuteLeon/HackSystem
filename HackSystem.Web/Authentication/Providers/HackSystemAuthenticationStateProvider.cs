@@ -22,8 +22,6 @@ namespace HackSystem.Web.Authentication.Providers
         private readonly IJWTParser jwtParser;
         private readonly ILocalStorageService localStorage;
 
-        public int Counter { get; set; }
-
         /// <summary>
         /// 身份认证头的值
         /// </summary>

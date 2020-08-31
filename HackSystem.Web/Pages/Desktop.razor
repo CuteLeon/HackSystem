@@ -2,13 +2,13 @@
 @attribute [Authorize(Roles = CommonSense.Roles.HackerRole)]
 @inject IConfiguration Configuration
 @inject IJSRuntime JSRuntime
+@inject ILogger<Desktop> Logger
 @inject IAuthenticationService AuthenticationService
-@inject AuthenticationStateProvider provider
+@inject ICookieStorageService CookieStorageService
 
 <h3>Desktop</h3>
 <button class="btn btn-success" @onclick="GetAccountInfo">获取用户信息</button>
 <p>@accountInfo</p>
-<h1>@provider.GetHashCode().ToString("X") Counter= @((provider as HackSystemAuthenticationStateProvider).Counter)</h1>
 
 <AuthorizeView Policy=@WebCommonSense.AuthorizationPolicy.LeonPolicy>
     <h4><span class="badge badge-primary">Leon</span></h4>
@@ -26,12 +26,54 @@
 <h1>Configuration example</h1>
 <p>Configuration: @Configuration["APIURL"]</p>
 
+<div class="btn btn-group">
+    <button class="btn btn-outline-primary" @onclick="GetAll">获取所有</button>
+    <button class="btn btn-outline-primary" @onclick="Save">保存</button>
+    <button class="btn btn-outline-primary" @onclick="Remove">移除</button>
+    <button class="btn btn-outline-primary" @onclick="Get">获取</button>
+</div>
+
 @code {
     string accountInfo = "账户信息";
 
     private async Task GetAccountInfo()
     {
-        (provider as HackSystemAuthenticationStateProvider).Counter++;
         accountInfo = await this.AuthenticationService.GetAccountInfo();
+    }
+
+    private async Task GetAll()
+    {
+        var cookies = await this.CookieStorageService.GetAllAsync();
+        this.Logger.LogInformation($"所有 Cookie: {string.Join("; ", cookies.Select(pair => $"{pair.Key} = {pair.Value}"))}");
+    }
+
+    private async Task Save()
+    {
+        await this.CookieStorageService.SaveCookieAsync("leon", "cute");
+        await this.CookieStorageService.SaveCookieAsync("Leon", "Cute");
+        await this.CookieStorageService.SaveCookieAsync("Leon ", "C ute");
+        await this.CookieStorageService.SaveCookieAsync("Le on ", "Cu te");
+        await this.CookieStorageService.SaveCookieAsync("1", "1");
+        await this.CookieStorageService.SaveCookieAsync("2", "2", -1);
+        await this.CookieStorageService.SaveCookieAsync("3", "3", -2);
+        await this.CookieStorageService.SaveCookieAsync("4", "4", 10);
+        await this.CookieStorageService.SaveCookieAsync("5", "5", 60 * 60 * 24 * 3);
+    }
+
+    private async Task Remove()
+    {
+        await this.CookieStorageService.RemoveCookieAsync("leon");
+        await this.CookieStorageService.RemoveCookieAsync("Leon");
+        await this.CookieStorageService.RemoveCookieAsync("Le on");
+    }
+
+    private async Task Get()
+    {
+        var cookie = await this.CookieStorageService.GetCookieAsync("Leon ");
+        this.Logger.LogInformation($"获得Cookie: Leon = {cookie}");
+        cookie = await this.CookieStorageService.GetCookieAsync(" leon");
+        this.Logger.LogInformation($"获得Cookie: leon = {cookie}");
+        cookie = await this.CookieStorageService.GetCookieAsync("cute");
+        this.Logger.LogInformation($"获得Cookie: cute = {cookie}");
     }
 }

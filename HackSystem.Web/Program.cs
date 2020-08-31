@@ -5,6 +5,7 @@ using Blazored.LocalStorage;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Authentication.Services;
 using HackSystem.Web.Common;
+using HackSystem.Web.Services.Storage;
 using HackSystem.WebDTO.Common;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -33,8 +34,9 @@ namespace HackSystem.Web
             builder.Services.AddLogging();
             // JWT 解析器
             builder.Services.AddScoped<IJWTParser, JWTParser>();
-            // 在本地存储 Tokwn
+            // 配置本地存储服务
             builder.Services.AddBlazoredLocalStorage();
+            builder.Services.AddCookieStorage();
             // 启用身份认证功能
             builder.Services.AddAuthorizationCore();
             // 注册用户身份认证状态提供者
