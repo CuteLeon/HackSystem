@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using HackSystem.WebAPI.Configurations;
 using HackSystem.WebAPI.DataAccess;
@@ -69,6 +70,8 @@ namespace HackSystem.WebAPI
                     options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
+                        // 修正过期时间偏移
+                        ClockSkew = TimeSpan.Zero,
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateLifetime = true,
