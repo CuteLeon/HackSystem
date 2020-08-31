@@ -2,7 +2,6 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Blazored.LocalStorage;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Common;
 using HackSystem.WebDTO.Account;
@@ -17,18 +16,15 @@ namespace HackSystem.Web.Authentication.Services
         private readonly ILogger<AuthenticationService> logger;
         private readonly HttpClient httpClient;
         private readonly AuthenticationStateProvider authenticationStateProvider;
-        private readonly ILocalStorageService localStorage;
 
         public AuthenticationService(
             ILogger<AuthenticationService> logger,
             HttpClient httpClient,
-            AuthenticationStateProvider authenticationStateProvider,
-            ILocalStorageService localStorage)
+            AuthenticationStateProvider authenticationStateProvider)
         {
             this.logger = logger;
             this.httpClient = httpClient;
             this.authenticationStateProvider = authenticationStateProvider;
-            this.localStorage = localStorage;
         }
 
         /// <summary>
@@ -59,10 +55,7 @@ namespace HackSystem.Web.Authentication.Services
                 return loginResult;
             }
 
-            await localStorage.SetItemAsync(WebCommonSense.AuthTokenName, loginResult.Token);
-            ((HackSystemAuthenticationStateProvider)authenticationStateProvider).MarkUserAsAuthenticated(loginResult.Token);
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(WebCommonSense.AuthenticationScheme, loginResult.Token);
-
+            await ((HackSystemAuthenticationStateProvider)this.authenticationStateProvider).UpdateAuthenticattionStateAsync(loginResult.Token);
             return loginResult;
         }
 
@@ -73,11 +66,10 @@ namespace HackSystem.Web.Authentication.Services
         public async Task<string> GetAccountInfo()
         {
             logger.LogDebug($"请求用户信息...");
-            // TODO: Leon: 发送 JWT 头
-            var savedToken = await this.localStorage.GetItemAsync<string>(WebCommonSense.AuthTokenName);
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(WebCommonSense.AuthenticationScheme, savedToken);
-            logger.LogWarning($"Authorization 头的值为：{httpClient.DefaultRequestHeaders.Authorization?.Scheme} => {httpClient.DefaultRequestHeaders.Authorization?.Parameter}");
 
+            // TODO: Leon: 发送 JWT 头
+            var currentToken = await ((HackSystemAuthenticationStateProvider)this.authenticationStateProvider).GetCurrentTokenAsync();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(WebCommonSense.AuthenticationScheme, currentToken);
             var response = await httpClient.GetStringAsync("api/accounts/GetAccountInfo");
             return response;
         }
@@ -91,14 +83,8 @@ namespace HackSystem.Web.Authentication.Services
             logger.LogDebug($"请求注销用户");
 
             // TODO: Leon: 发送 JWT 头
-            var savedToken = await this.localStorage.GetItemAsync<string>(WebCommonSense.AuthTokenName);
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(WebCommonSense.AuthenticationScheme, savedToken);
-            logger.LogWarning($"Authorization 头的值为：{httpClient.DefaultRequestHeaders.Authorization?.Scheme} => {httpClient.DefaultRequestHeaders.Authorization?.Parameter}");
-
-            _ = await httpClient.GetAsync("api/accounts/logout");
-            await localStorage.RemoveItemAsync(WebCommonSense.AuthTokenName);
-            ((HackSystemAuthenticationStateProvider)authenticationStateProvider).MarkUserAsLoggedOut();
-            httpClient.DefaultRequestHeaders.Authorization = null;
+            await httpClient.GetAsync("api/accounts/logout");
+            await ((HackSystemAuthenticationStateProvider)this.authenticationStateProvider).UpdateAuthenticattionStateAsync(string.Empty);
         }
     }
 }

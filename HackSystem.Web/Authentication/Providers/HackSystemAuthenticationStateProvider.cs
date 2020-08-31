@@ -1,10 +1,9 @@
-﻿using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using HackSystem.Web.Authentication.Services;
 using HackSystem.Web.Common;
+using HackSystem.Web.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -18,14 +17,8 @@ namespace HackSystem.Web.Authentication.Providers
     {
         private readonly IServiceScope serviceScope;
         private readonly ILogger<HackSystemAuthenticationStateProvider> logger;
-        private readonly HttpClient httpClient;
         private readonly IJWTParser jwtParser;
         private readonly ILocalStorageService localStorage;
-
-        /// <summary>
-        /// 身份认证头的值
-        /// </summary>
-        public AuthenticationHeaderValue AuthenticationHeaderValue { get; protected set; }
 
         public HackSystemAuthenticationStateProvider(
             ILogger<HackSystemAuthenticationStateProvider> logger,
@@ -33,10 +26,11 @@ namespace HackSystem.Web.Authentication.Providers
         {
             this.logger = logger;
             this.serviceScope = serviceScopeFactory.CreateScope();
-            this.httpClient = serviceScope.ServiceProvider.GetService<HttpClient>();
             this.jwtParser = serviceScope.ServiceProvider.GetService<IJWTParser>();
             this.localStorage = serviceScope.ServiceProvider.GetService<ILocalStorageService>();
         }
+
+        #region 获取认证信息
 
         /// <summary>
         /// 获取用户身份认证状态
@@ -44,44 +38,105 @@ namespace HackSystem.Web.Authentication.Providers
         /// <returns></returns>
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            logger.LogDebug($"获取用户认证状态...");
+            this.logger.LogInformation("Get Authentication State...");
             var savedToken = await this.localStorage.GetItemAsync<string>(WebCommonSense.AuthTokenName);
             if (string.IsNullOrWhiteSpace(savedToken))
             {
-                logger.LogDebug($"用户认证状态 = 未登录");
-                return new AuthenticationState(new ClaimsPrincipal());
+                return WebCommonSense.AnonymousState;
             }
 
-            logger.LogDebug($"用户认证状态 = 未登录");
-            var claims = this.jwtParser.ParseJWTToken(savedToken);
-            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(WebCommonSense.AuthenticationScheme, savedToken);
+            var claimsIdentity = this.GetClaimsIdentity(savedToken);
+            if (!this.CheckClaimsIdentity(claimsIdentity))
+            {
+                return WebCommonSense.AnonymousState;
+            }
 
-            var user = new ClaimsPrincipal(new ClaimsIdentity(claims, WebCommonSense.AuthenticationType));
+            var user = new ClaimsPrincipal(claimsIdentity);
             return new AuthenticationState(user);
         }
 
         /// <summary>
-        /// 用户认证成功
+        /// 获取当前 Token
+        /// </summary>
+        /// <returns></returns>
+        public async ValueTask<string> GetCurrentTokenAsync()
+        {
+            return await this.localStorage.GetItemAsStringAsync(WebCommonSense.AuthTokenName);
+        }
+        #endregion
+
+        #region 更新认证信息
+
+        /// <summary>
+        /// 更新认证状态
         /// </summary>
         /// <param name="token"></param>
-        public void MarkUserAsAuthenticated(string token)
+        public async Task UpdateAuthenticattionStateAsync(string token)
         {
-            logger.LogDebug($"标记用户认证成功...");
-            var claims = this.jwtParser.ParseJWTToken(token);
-            var user = new ClaimsPrincipal(new ClaimsIdentity(claims, WebCommonSense.AuthenticationType));
-            var authState = Task.FromResult(new AuthenticationState(user));
-            this.NotifyAuthenticationStateChanged(authState);
+            this.logger.LogInformation("Update Authentication State...");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                await this.AuthenticateFailed();
+                return;
+            }
+
+            var claimsIdentity = this.GetClaimsIdentity(token);
+            if (this.CheckClaimsIdentity(claimsIdentity))
+            {
+                await this.AuthenticateSuccessfully(claimsIdentity, token);
+            }
+            else
+            {
+                await this.AuthenticateFailed();
+            }
         }
 
         /// <summary>
-        /// 用户注销
+        /// 认证成功
         /// </summary>
-        public void MarkUserAsLoggedOut()
+        private async Task AuthenticateSuccessfully(ClaimsIdentity claimsIdentity, string token)
         {
-            logger.LogDebug($"标记用户注销...");
-            var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
-            var authState = Task.FromResult(new AuthenticationState(anonymousUser));
-            this.NotifyAuthenticationStateChanged(authState);
+            this.logger.LogInformation("Authenticate Successfully !");
+            await this.localStorage.SetItemAsync(WebCommonSense.AuthTokenName, token);
+            var authenticationState = new AuthenticationState(new ClaimsPrincipal(claimsIdentity));
+            this.NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
+
+        /// <summary>
+        /// 认证失败
+        /// </summary>
+        private async Task AuthenticateFailed()
+        {
+            this.logger.LogWarning("Authenticate Failed !");
+            await this.localStorage.RemoveItemAsync(WebCommonSense.AuthTokenName);
+            this.NotifyAuthenticationStateChanged(Task.FromResult(WebCommonSense.AnonymousState));
+        }
+        #endregion
+
+        #region 解析和检查
+
+        /// <summary>
+        /// 获取声明组合证件
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        private ClaimsIdentity GetClaimsIdentity(string token)
+        {
+            this.logger.LogInformation("Get Claims Identity from Token...");
+            var claims = this.jwtParser.ParseJWTToken(token);
+            return new ClaimsIdentity(claims, WebCommonSense.AuthenticationType);
+        }
+
+        /// <summary>
+        /// 检查声明组合证件
+        /// </summary>
+        /// <param name="claimsIdentity"></param>
+        /// <returns></returns>
+        private bool CheckClaimsIdentity(ClaimsIdentity claimsIdentity)
+        {
+            this.logger.LogInformation("Check Claims Identity...");
+            return claimsIdentity.Claims.IsUnexpired();
+        }
+        #endregion
     }
 }
