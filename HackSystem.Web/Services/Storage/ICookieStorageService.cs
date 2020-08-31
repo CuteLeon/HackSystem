@@ -16,9 +16,9 @@ namespace HackSystem.Web.Services.Storage
 
         Dictionary<string, string> GetAll();
 
-        ValueTask SaveCookieAsync(string name, string value, int expiresInSecond = -1);
+        ValueTask SaveCookieAsync(string name, string value, long expiresInSecond = -1);
 
-        void SaveCookie(string name, string value, int expiresInSecond = -1);
+        void SaveCookie(string name, string value, long expiresInSecond = -1);
 
         ValueTask<string> GetCookieAsync(string name);
 

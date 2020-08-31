@@ -91,7 +91,7 @@ namespace HackSystem.Web.Services.Storage
         /// Cookie 的 Name 前后的空格将被忽略
         /// Cookie 的 Name 和 Value 不允许含有英文分号和等于号
         /// </remarks>
-        public void SaveCookie(string name, string value, int expiresInSecond = -1)
+        public void SaveCookie(string name, string value, long expiresInSecond = -1)
         {
             this.jsInProcessRuntime.InvokeVoid("cookies.saveCookie", name, value, expiresInSecond);
 
@@ -112,7 +112,7 @@ namespace HackSystem.Web.Services.Storage
         /// Cookie 的 Name 前后的空格将被忽略
         /// Cookie 的 Name 和 Value 不允许含有英文分号和等于号
         /// </remarks>
-        public async ValueTask SaveCookieAsync(string name, string value, int expiresInSecond = -1)
+        public async ValueTask SaveCookieAsync(string name, string value, long expiresInSecond = -1)
         {
             await this.jsInProcessRuntime.InvokeVoidAsync("cookies.saveCookie", name, value, expiresInSecond);
         }

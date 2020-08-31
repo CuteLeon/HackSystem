@@ -5,6 +5,7 @@ using Blazored.LocalStorage;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Authentication.Services;
 using HackSystem.Web.Common;
+using HackSystem.Web.Configurations;
 using HackSystem.Web.Services.Storage;
 using HackSystem.WebDTO.Common;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -22,6 +23,7 @@ namespace HackSystem.Web
             builder.RootComponents.Add<App>("#app");
 
             builder
+                .InitConfiguration()
                 .InitService()
                 .InitAuthorizationPolicy();
 
@@ -48,10 +50,22 @@ namespace HackSystem.Web
             // 注册认证服务及其 HttpClient 服务
             builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>((serviceProvider, httpClient) =>
             {
-                var configuration = serviceProvider.GetService<IConfiguration>();
-                httpClient.BaseAddress = new Uri(configuration["APIURL"]);
+                var configuration = serviceProvider.GetService<APIConfiguration>();
+                httpClient.BaseAddress = new Uri(configuration.APIURL);
             });
 
+            return builder;
+        }
+
+        /// <summary>
+        /// 初始化配置
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static WebAssemblyHostBuilder InitConfiguration(this WebAssemblyHostBuilder builder)
+        {
+            var apiConfiguration = builder.Configuration.GetSection("APIConfiguration").Get<APIConfiguration>();
+            builder.Services.AddSingleton(apiConfiguration);
             return builder;
         }
 

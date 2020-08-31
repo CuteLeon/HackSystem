@@ -70,8 +70,14 @@ namespace HackSystem.Web.Authentication.Services
             // TODO: Leon: 发送 JWT 头
             var currentToken = await ((HackSystemAuthenticationStateProvider)this.authenticationStateProvider).GetCurrentTokenAsync();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(WebCommonSense.AuthenticationScheme, currentToken);
-            var response = await httpClient.GetStringAsync("api/accounts/GetAccountInfo");
-            return response;
+            var response = await httpClient.GetAsync("api/accounts/GetAccountInfo");
+            if (!response.IsSuccessStatusCode)
+            {
+                return $"{(int)response.StatusCode} - {response.StatusCode}";
+            }
+
+            var accountInfo = await response.Content.ReadAsStringAsync();
+            return accountInfo;
         }
 
         /// <summary>

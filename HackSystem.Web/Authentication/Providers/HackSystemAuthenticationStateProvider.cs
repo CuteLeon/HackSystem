@@ -1,9 +1,10 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
-using Blazored.LocalStorage;
 using HackSystem.Web.Authentication.Services;
 using HackSystem.Web.Common;
+using HackSystem.Web.Configurations;
 using HackSystem.Web.Extensions;
+using HackSystem.Web.Services.Storage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -17,17 +18,20 @@ namespace HackSystem.Web.Authentication.Providers
     {
         private readonly IServiceScope serviceScope;
         private readonly ILogger<HackSystemAuthenticationStateProvider> logger;
+        private readonly APIConfiguration apiConfiguration;
         private readonly IJWTParser jwtParser;
-        private readonly ILocalStorageService localStorage;
+        private readonly ICookieStorageService cookieStorageService;
 
         public HackSystemAuthenticationStateProvider(
             ILogger<HackSystemAuthenticationStateProvider> logger,
+            APIConfiguration apiConfiguration,
             IServiceScopeFactory serviceScopeFactory)
         {
             this.logger = logger;
+            this.apiConfiguration = apiConfiguration;
             this.serviceScope = serviceScopeFactory.CreateScope();
             this.jwtParser = serviceScope.ServiceProvider.GetService<IJWTParser>();
-            this.localStorage = serviceScope.ServiceProvider.GetService<ILocalStorageService>();
+            this.cookieStorageService = serviceScope.ServiceProvider.GetService<ICookieStorageService>();
         }
 
         #region 获取认证信息
@@ -39,7 +43,7 @@ namespace HackSystem.Web.Authentication.Providers
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             this.logger.LogInformation("Get Authentication State...");
-            var savedToken = await this.localStorage.GetItemAsync<string>(WebCommonSense.AuthTokenName);
+            var savedToken = await this.cookieStorageService.GetCookieAsync(WebCommonSense.AuthTokenName);
             if (string.IsNullOrWhiteSpace(savedToken))
             {
                 return WebCommonSense.AnonymousState;
@@ -61,7 +65,7 @@ namespace HackSystem.Web.Authentication.Providers
         /// <returns></returns>
         public async ValueTask<string> GetCurrentTokenAsync()
         {
-            return await this.localStorage.GetItemAsStringAsync(WebCommonSense.AuthTokenName);
+            return await this.cookieStorageService.GetCookieAsync(WebCommonSense.AuthTokenName);
         }
         #endregion
 
@@ -97,7 +101,7 @@ namespace HackSystem.Web.Authentication.Providers
         private async Task AuthenticateSuccessfully(ClaimsIdentity claimsIdentity, string token)
         {
             this.logger.LogInformation("Authenticate Successfully !");
-            await this.localStorage.SetItemAsync(WebCommonSense.AuthTokenName, token);
+            await this.cookieStorageService.SaveCookieAsync(WebCommonSense.AuthTokenName, token, apiConfiguration.TokenExpiryInMinutes * 60);
             var authenticationState = new AuthenticationState(new ClaimsPrincipal(claimsIdentity));
             this.NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
@@ -108,7 +112,7 @@ namespace HackSystem.Web.Authentication.Providers
         private async Task AuthenticateFailed()
         {
             this.logger.LogWarning("Authenticate Failed !");
-            await this.localStorage.RemoveItemAsync(WebCommonSense.AuthTokenName);
+            await this.cookieStorageService.RemoveCookieAsync(WebCommonSense.AuthTokenName);
             this.NotifyAuthenticationStateChanged(Task.FromResult(WebCommonSense.AnonymousState));
         }
         #endregion
