@@ -1,9 +1,8 @@
 ﻿using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using HackSystem.Web.Authentication.Providers;
-using HackSystem.Web.Common;
+using HackSystem.Web.Extensions;
 using HackSystem.WebDTO.Account;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
@@ -67,9 +66,8 @@ namespace HackSystem.Web.Authentication.Services
         {
             logger.LogDebug($"请求用户信息...");
 
-            // TODO: Leon: 发送 JWT 头
             var currentToken = await ((HackSystemAuthenticationStateProvider)this.authenticationStateProvider).GetCurrentTokenAsync();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(WebCommonSense.AuthenticationScheme, currentToken);
+            httpClient.AddAuthorizationHeader(currentToken);
             var response = await httpClient.GetAsync("api/accounts/GetAccountInfo");
             if (!response.IsSuccessStatusCode)
             {
@@ -88,7 +86,8 @@ namespace HackSystem.Web.Authentication.Services
         {
             logger.LogDebug($"请求注销用户");
 
-            // TODO: Leon: 发送 JWT 头
+            var currentToken = await ((HackSystemAuthenticationStateProvider)this.authenticationStateProvider).GetCurrentTokenAsync();
+            httpClient.AddAuthorizationHeader(currentToken);
             await httpClient.GetAsync("api/accounts/logout");
             await ((HackSystemAuthenticationStateProvider)this.authenticationStateProvider).UpdateAuthenticattionStateAsync(string.Empty);
         }
