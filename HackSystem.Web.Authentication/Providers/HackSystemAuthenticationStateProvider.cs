@@ -127,7 +127,8 @@ namespace HackSystem.Web.Authentication.Providers
             this.logger.LogInformation("HackSystem Authenticate Successfully !");
             await this.cookieStorageService.SaveCookieAsync(this.options.AuthTokenName, token, this.options.TokenExpiryInMinutes * 60);
             var authenticationState = new AuthenticationState(new ClaimsPrincipal(claimsIdentity));
-            this.NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
+
+            this.NotifyAuthenticationStateChanged(authenticationState);
         }
 
         /// <summary>
@@ -137,7 +138,19 @@ namespace HackSystem.Web.Authentication.Providers
         {
             this.logger.LogWarning("HackSystem Authenticate Failed !");
             await this.cookieStorageService.RemoveCookieAsync(this.options.AuthTokenName);
-            this.NotifyAuthenticationStateChanged(Task.FromResult(this.options.AnonymousState));
+
+            this.NotifyAuthenticationStateChanged(this.options.AnonymousState);
+        }
+
+        /// <summary>
+        /// 通知认证状态改变
+        /// </summary>
+        /// <param name="authenticationState"></param>
+        /// <returns></returns>
+        private void NotifyAuthenticationStateChanged(AuthenticationState authenticationState)
+        {
+            this.logger.LogWarning($"HackSystem Notify Authentication State Change to {authenticationState.User?.Identity?.Name ?? "[null]"}");
+            this.NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
         #endregion
 
