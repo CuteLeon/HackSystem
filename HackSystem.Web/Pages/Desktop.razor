@@ -1,6 +1,12 @@
 ﻿@page "/Desktop"
 @attribute [Authorize(Roles = CommonSense.Roles.HackerRole)]
 
+@inject ILogger<Desktop> logger;
+@inject IJSRuntime jsRuntime;
+@inject IOptionsMonitor<APIConfiguration> optionMonitor;
+@inject IAuthenticationService authenticationService;
+@inject ICookieStorageService cookieStorageService;
+
 <h3>Desktop</h3>
 <button class="btn btn-success" @onclick="GetAccountInfo">获取用户信息</button>
 <p>@accountInfo</p>
@@ -19,7 +25,7 @@
 
 <a class="btn btn-primary" href="/SystemSettings">系统设置</a>
 <h1>Configuration example</h1>
-<p>Configuration: @configuration.APIURL</p>
+<p>Configuration: @optionMonitor.CurrentValue.APIURL</p>
 
 <div class="btn btn-group">
     <button class="btn btn-outline-primary" @onclick="GetAll">获取所有</button>

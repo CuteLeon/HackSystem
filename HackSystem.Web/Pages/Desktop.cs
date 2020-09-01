@@ -1,34 +1,13 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using HackSystem.Web.Configurations;
-using HackSystem.Web.CookieStorage;
-using HackSystem.Web.Services;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.JSInterop;
 
 namespace HackSystem.Web.Pages
 {
     public partial class Desktop
     {
-        private readonly ILogger<Desktop> logger;
-        private readonly IJSRuntime jsRuntime;
-        private readonly APIConfiguration configuration;
-        private readonly IAuthenticationService authenticationService;
-        private readonly ICookieStorageService cookieStorageService;
-
-        public Desktop(
-            ILogger<Desktop> logger,
-            IJSRuntime jsRuntime,
-            IOptionsMonitor<APIConfiguration> optionsMonitor,
-            IAuthenticationService authenticationService,
-            ICookieStorageService cookieStorageService)
+        public Desktop()
         {
-            this.logger = logger;
-            this.jsRuntime = jsRuntime;
-            this.configuration = optionsMonitor.CurrentValue;
-            this.authenticationService = authenticationService;
-            this.cookieStorageService = cookieStorageService;
         }
 
         private async Task GetAccountInfo()

@@ -1,5 +1,10 @@
 ﻿@page "/Login"
 
+@inject ILogger<Login> logger
+@inject IAuthenticationService authenticationService
+@inject IHackSystemAuthenticationStateProvider authenticationStateProvider
+@inject NavigationManager navigationManager
+
 <h1>Login</h1>
 
 @if (ShowErrors) {

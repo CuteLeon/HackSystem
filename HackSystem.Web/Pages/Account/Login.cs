@@ -1,30 +1,14 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using HackSystem.Web.Authentication.Providers;
-using HackSystem.Web.Services;
 using HackSystem.WebDTO.Account;
-using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.Pages.Account
 {
     public partial class Login
     {
-        private readonly ILogger<Login> logger;
-        private readonly IAuthenticationService authenticationService;
-        private readonly IHackSystemAuthenticationStateProvider authenticationStateProvider;
-        private readonly NavigationManager navigationManager;
-
-        public Login(
-            ILogger<Login> logger,
-            IAuthenticationService authenticationService,
-            IHackSystemAuthenticationStateProvider authenticationStateProvider,
-            NavigationManager navigationManager)
+        public Login()
         {
-            this.logger = logger;
-            this.authenticationService = authenticationService;
-            this.authenticationStateProvider = authenticationStateProvider;
-            this.navigationManager = navigationManager;
         }
 
         private LoginDTO loginModel = new LoginDTO();

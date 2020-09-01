@@ -1,5 +1,9 @@
 ﻿@page "/Register"
 
+@inject ILogger<Register> logger
+@inject IAuthenticationService authenticationService
+@inject NavigationManager navigationManager
+
 <h1>Register</h1>
 
 @if (ShowErrors) {
