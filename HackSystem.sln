@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		HackSystem 2.0.md = HackSystem 2.0.md
 		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.Host", "HackSystem.Host\HackSystem.Host.csproj", "{6FDC3E30-9967-4EFB-8366-6612D97930B9}"
