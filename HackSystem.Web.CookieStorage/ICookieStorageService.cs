@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HackSystem.Web.Services.Storage
+namespace HackSystem.Web.CookieStorage
 {
     public interface ICookieStorageService
     {

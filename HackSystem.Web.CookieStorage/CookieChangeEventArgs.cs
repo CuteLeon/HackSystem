@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HackSystem.Web.Services.Storage
+namespace HackSystem.Web.CookieStorage
 {
     public class CookieChangedEventArgs : EventArgs
     {

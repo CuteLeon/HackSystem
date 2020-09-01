@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace HackSystem.Web.Services.Storage
+namespace HackSystem.Web.CookieStorage
 {
     public static class CookieStorageExtension
     {

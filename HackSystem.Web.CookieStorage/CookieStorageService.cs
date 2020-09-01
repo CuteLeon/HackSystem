@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace HackSystem.Web.Services.Storage
+namespace HackSystem.Web.CookieStorage
 {
     /// <summary>
     /// Cookie 存储服务
     /// </summary>
+    /// <remarks> 需要搭配 blazor.cookie.js 使用 </remarks>
     public class CookieStorageService : ICookieStorageService
     {
         public event EventHandler<CookieChangedEventArgs> CookieChanged;

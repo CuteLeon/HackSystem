@@ -3,7 +3,7 @@ using System.Security.Claims;
 
 namespace HackSystem.Web.Authentication.Services
 {
-    public interface IJWTParser
+    public interface IJWTParserService
     {
         IEnumerable<Claim> ParseJWTToken(string token);
 

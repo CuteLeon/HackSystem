@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace HackSystem.WebAPI.Controllers
@@ -29,13 +30,13 @@ namespace HackSystem.WebAPI.Controllers
         public AccountsController(
             ILogger<AccountsController> logger,
             SignInManager<IdentityUser> signInManager,
-            JwtConfiguration jwtConfiguration,
+            IOptionsMonitor<JwtConfiguration> optionsMonitor,
             RoleManager<IdentityRole> roleManager,
             UserManager<IdentityUser> userManager)
         {
             this.logger = logger;
             this.signInManager = signInManager;
-            this.jwtConfiguration = jwtConfiguration;
+            this.jwtConfiguration = optionsMonitor.CurrentValue;
             this.roleManager = roleManager;
             this.userManager = userManager;
         }

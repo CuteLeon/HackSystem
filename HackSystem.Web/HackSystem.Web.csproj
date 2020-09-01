@@ -12,8 +12,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.0-preview.8.20414.8" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0-preview.8.20414.8" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-preview.8.20414.8" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0-preview.8.20407.11" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0-preview.8.20407.11" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0-preview.8.20407.11" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0-preview.8.20407.11" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0-preview.8.20407.11" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.76" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
@@ -27,6 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HackSystem.Web.Authentication\HackSystem.Web.Authentication.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.CookieStorage\HackSystem.Web.CookieStorage.csproj" />
     <ProjectReference Include="..\HackSystem.WebDTO\HackSystem.WebDTO.csproj" />
   </ItemGroup>
 

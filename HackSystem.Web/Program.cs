@@ -1,14 +1,15 @@
 using System;
+using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using HackSystem.Web.Authentication.Providers;
-using HackSystem.Web.Authentication.Services;
+using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Common;
 using HackSystem.Web.Configurations;
-using HackSystem.Web.Services.Storage;
+using HackSystem.Web.CookieStorage;
+using HackSystem.Web.Services;
 using HackSystem.WebDTO.Common;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +24,6 @@ namespace HackSystem.Web
             builder.RootComponents.Add<App>("#app");
 
             builder
-                .InitConfiguration()
                 .InitService()
                 .InitAuthorizationPolicy();
 
@@ -32,40 +32,31 @@ namespace HackSystem.Web
 
         public static WebAssemblyHostBuilder InitService(this WebAssemblyHostBuilder builder)
         {
-            // 日志服务
-            builder.Services.AddLogging();
-            // JWT 解析器
-            builder.Services.AddScoped<IJWTParser, JWTParser>();
-            // 配置本地存储服务
-            builder.Services.AddBlazoredLocalStorage();
-            builder.Services.AddCookieStorage();
-            // 启用身份认证功能
-            builder.Services.AddAuthorizationCore();
-            // 注册用户身份认证状态提供者
-            builder.Services.AddSingleton<AuthenticationStateProvider, HackSystemAuthenticationStateProvider>();
-            // 注册指向本应用的 HttpClient 服务
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            // 注册 HttpClient 服务
-            builder.Services.AddHttpClient();
-            // 注册认证服务及其 HttpClient 服务
-            builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>((serviceProvider, httpClient) =>
-            {
-                var configuration = serviceProvider.GetService<APIConfiguration>();
-                httpClient.BaseAddress = new Uri(configuration.APIURL);
-            });
-
-            return builder;
-        }
-
-        /// <summary>
-        /// 初始化配置
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        public static WebAssemblyHostBuilder InitConfiguration(this WebAssemblyHostBuilder builder)
-        {
             var apiConfiguration = builder.Configuration.GetSection("APIConfiguration").Get<APIConfiguration>();
-            builder.Services.AddSingleton(apiConfiguration);
+
+            builder.Services
+                .Configure<APIConfiguration>(builder.Configuration.GetSection("APIConfiguration"))
+                .AddLogging()
+                .AddBlazoredLocalStorage()
+                .AddCookieStorage()
+                .AddAuthorizationCore()
+                .AddHackSystemAuthentication(options =>
+                {
+                    options.AnonymousState.User.Claims.Append(new Claim(ClaimTypes.Name, "Anonymous"));
+                    options.AuthenticationURL = apiConfiguration.APIURL;
+                    options.TokenExpiryInMinutes = apiConfiguration.TokenExpiryInMinutes;
+                    options.AuthenticationScheme = WebCommonSense.AuthenticationScheme;
+                    options.AuthenticationType = WebCommonSense.AuthenticationType;
+                    options.AuthTokenName = WebCommonSense.AuthTokenName;
+                    options.ExpiryClaimType = WebCommonSense.ExpiryClaimType;
+                })
+                .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
+                .AddHttpClient()
+                .AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient =>
+                {
+                    httpClient.BaseAddress = new Uri(apiConfiguration.APIURL);
+                });
+
             return builder;
         }
 

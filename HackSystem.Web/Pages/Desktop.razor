@@ -1,6 +1,6 @@
 ﻿@page "/Desktop"
 @attribute [Authorize(Roles = CommonSense.Roles.HackerRole)]
-@inject IConfiguration Configuration
+@inject IOptionsMonitor<APIConfiguration> Configuration
 @inject IJSRuntime JSRuntime
 @inject ILogger<Desktop> Logger
 @inject IAuthenticationService AuthenticationService
@@ -24,7 +24,7 @@
 
 <a class="btn btn-primary" href="/SystemSettings">系统设置</a>
 <h1>Configuration example</h1>
-<p>Configuration: @Configuration["APIURL"]</p>
+<p>Configuration: @Configuration.CurrentValue.APIURL</p>
 
 <div class="btn btn-group">
     <button class="btn btn-outline-primary" @onclick="GetAll">获取所有</button>

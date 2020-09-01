@@ -10,11 +10,11 @@ namespace HackSystem.Web.Authentication.Services
     /// <summary>
     /// 从 JWT 解析 Claims
     /// </summary>
-    public class JWTParser : IJWTParser
+    public class JWTParserService : IJWTParserService
     {
-        private readonly ILogger<JWTParser> logger;
+        private readonly ILogger<JWTParserService> logger;
 
-        public JWTParser(ILogger<JWTParser> logger)
+        public JWTParserService(ILogger<JWTParserService> logger)
         {
             this.logger = logger;
         }
@@ -67,7 +67,7 @@ namespace HackSystem.Web.Authentication.Services
         {
             if (string.IsNullOrWhiteSpace(base64))
             {
-                throw new ArgumentException(nameof(base64));
+                throw new ArgumentNullException(nameof(base64));
             }
 
             string text = base64;

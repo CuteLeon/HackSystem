@@ -58,8 +58,8 @@ namespace HackSystem.WebAPI
                 .AddEntityFrameworkStores<HackSystemDBContext>();
 
             // 启用身份认证
+            services.Configure<JwtConfiguration>(this.Configuration.GetSection("JwtConfiguration"));
             var jwtConfiguration = this.Configuration.GetSection("JwtConfiguration").Get<JwtConfiguration>();
-            services.AddSingleton(jwtConfiguration);
             services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

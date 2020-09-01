@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using HackSystem.WebDTO.Account;
 
-namespace HackSystem.Web.Authentication.Services
+namespace HackSystem.Web.Services
 {
     public interface IAuthenticationService
     {
