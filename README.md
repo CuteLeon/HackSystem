@@ -1,5 +1,5 @@
 # HackSystem
 
 
-![](.\HackSystem.Web\wwwroot\LogoImage.svg)
+![](https://raw.github.com/CuteLeon/HackSystem/master/HackSystem.Web/wwwroot/LogoImage.png)
 
