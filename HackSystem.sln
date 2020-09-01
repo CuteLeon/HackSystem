@@ -18,6 +18,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebDTO", "HackSy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebAPI", "HackSystem.WebAPI\HackSystem.WebAPI.csproj", "{0E0F3F13-BDA9-4FD9-8F8F-0B45BC42653D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HostClient", "HostClient", "{0DE3AEA0-023B-4A96-B845-886AC37DC41F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{8F1A915B-6FF6-4BD2-BDD7-F7AF638E049E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{C38BAE94-BA73-4A57-9826-1468FA22DDE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{032758B4-9152-4B10-8627-7914F5F4E0E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +87,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6FDC3E30-9967-4EFB-8366-6612D97930B9} = {0DE3AEA0-023B-4A96-B845-886AC37DC41F}
+		{50BC607B-8E72-4F3B-8E30-85EC46C02B5B} = {8F1A915B-6FF6-4BD2-BDD7-F7AF638E049E}
+		{86F2CB39-9486-4780-B7DD-3B639E639BF3} = {032758B4-9152-4B10-8627-7914F5F4E0E0}
+		{0E0F3F13-BDA9-4FD9-8F8F-0B45BC42653D} = {C38BAE94-BA73-4A57-9826-1468FA22DDE8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79BC620D-A9A9-41B2-835E-E6CAF80E9902}
