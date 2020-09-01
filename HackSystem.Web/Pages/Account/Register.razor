@@ -1,6 +1,4 @@
 ﻿@page "/Register"
-@inject IAuthenticationService AuthenticationService
-@inject NavigationManager NavigationManager
 
 <h1>Register</h1>
 
@@ -44,25 +42,4 @@
 </div>
 
 @code {
-    private RegisterDTO RegisterModel = new RegisterDTO();
-    private bool ShowErrors;
-    private IEnumerable<string> Errors;
-
-    private async Task HandleRegistration()
-    {
-        ShowErrors = false;
-
-        var result = await AuthenticationService.Register(RegisterModel);
-
-        if (result.Successful)
-        {
-            NavigationManager.NavigateTo("/StartUp");
-        }
-        else
-        {
-            Errors = result.Errors;
-            ShowErrors = true;
-        }
-    }
-
 }
