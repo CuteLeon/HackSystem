@@ -6,7 +6,7 @@ namespace HackSystem.Web.Pages.Account
 {
     public partial class Register
     {
-        private RegisterDTO RegisterModel = new RegisterDTO();
+        private readonly RegisterDTO RegisterModel = new RegisterDTO();
         private bool ShowErrors;
         private IEnumerable<string> Errors;
 
@@ -16,18 +16,18 @@ namespace HackSystem.Web.Pages.Account
 
         private async Task HandleRegistration()
         {
-            ShowErrors = false;
+            this.ShowErrors = false;
 
-            var result = await authenticationService.Register(RegisterModel);
+            var result = await this.authenticationService.Register(this.RegisterModel);
 
             if (result.Successful)
             {
-                navigationManager.NavigateTo("/StartUp");
+                this.navigationManager.NavigateTo("/StartUp");
             }
             else
             {
-                Errors = result.Errors;
-                ShowErrors = true;
+                this.Errors = result.Errors;
+                this.ShowErrors = true;
             }
         }
     }
