@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using HackSystem.WebAPI.Configurations;
+using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebDTO.Account;
 using HackSystem.WebDTO.Common;
 using Microsoft.AspNetCore.Authorization;
@@ -22,17 +23,17 @@ namespace HackSystem.WebAPI.Controllers
     public class AccountsController : Controller
     {
         private readonly ILogger<AccountsController> logger;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly SignInManager<HackSystemUser> signInManager;
         private readonly JwtConfiguration jwtConfiguration;
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly RoleManager<HackSystemRole> roleManager;
+        private readonly UserManager<HackSystemUser> userManager;
 
         public AccountsController(
             ILogger<AccountsController> logger,
-            SignInManager<IdentityUser> signInManager,
+            SignInManager<HackSystemUser> signInManager,
             IOptionsMonitor<JwtConfiguration> optionsMonitor,
-            RoleManager<IdentityRole> roleManager,
-            UserManager<IdentityUser> userManager)
+            RoleManager<HackSystemRole> roleManager,
+            UserManager<HackSystemUser> userManager)
         {
             this.logger = logger;
             this.signInManager = signInManager;
@@ -50,7 +51,7 @@ namespace HackSystem.WebAPI.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterDTO register)
         {
             this.logger.LogDebug($"注册新账户: {register.UserName}");
-            var newUser = new IdentityUser
+            var newUser = new HackSystemUser
             {
                 UserName = register.UserName,
                 Email = register.Email

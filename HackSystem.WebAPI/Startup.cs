@@ -2,10 +2,10 @@ using System;
 using System.Text;
 using HackSystem.WebAPI.Configurations;
 using HackSystem.WebAPI.DataAccess;
+using HackSystem.WebAPI.Model.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,10 +37,10 @@ namespace HackSystem.WebAPI
 
             // 配置数据库交互
             services.AddDbContext<HackSystemDBContext>(options =>
-                options.UseSqlite(this.Configuration.GetConnectionString("HSDB")));
+                    options.UseSqlite(this.Configuration.GetConnectionString("HSDB")));
 
             // 注册 Identity 服务及配置
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<HackSystemUser, HackSystemRole>(options =>
                 {
                     options.Password.RequireDigit = true;
                     options.Password.RequiredLength = 8;

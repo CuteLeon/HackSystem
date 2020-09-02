@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HackSystem.WebAPI.Migrations
+namespace HackSystem.WebAPI.DataAccess.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class CreateModels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,8 @@ namespace HackSystem.WebAPI.Migrations
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    Level = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,11 +40,26 @@ namespace HackSystem.WebAPI.Migrations
                     TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false),
+                    Level = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProgramBase",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProgramBase", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,6 +168,31 @@ namespace HackSystem.WebAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserProgramMaps",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true),
+                    ProgramId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserProgramMaps", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserProgramMaps_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserProgramMaps_ProgramBase_ProgramId",
+                        column: x => x.ProgramId,
+                        principalTable: "ProgramBase",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -188,6 +229,26 @@ namespace HackSystem.WebAPI.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "BasicProgram_Index",
+                table: "ProgramBase",
+                columns: new[] { "Id", "Name" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserProgramMaps_ProgramId",
+                table: "UserProgramMaps",
+                column: "ProgramId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserProgramMaps_UserId",
+                table: "UserProgramMaps",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "UserProgramMap_Index",
+                table: "UserProgramMaps",
+                columns: new[] { "Id", "UserId" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -208,10 +269,16 @@ namespace HackSystem.WebAPI.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "UserProgramMaps");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "ProgramBase");
         }
     }
 }

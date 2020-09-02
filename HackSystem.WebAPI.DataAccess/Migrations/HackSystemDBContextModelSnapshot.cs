@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace HackSystem.WebAPI.Migrations
+namespace HackSystem.WebAPI.DataAccess.Migrations
 {
     [DbContext(typeof(HackSystemDBContext))]
     partial class HackSystemDBContextModelSnapshot : ModelSnapshot
@@ -16,7 +16,7 @@ namespace HackSystem.WebAPI.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.0-preview.8.20407.4");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Identity.HackSystemRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -24,6 +24,9 @@ namespace HackSystem.WebAPI.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
@@ -42,30 +45,7 @@ namespace HackSystem.WebAPI.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Identity.HackSystemUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -82,6 +62,9 @@ namespace HackSystem.WebAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Level")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("LockoutEnabled")
@@ -127,6 +110,75 @@ namespace HackSystem.WebAPI.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Map.UserMap.UserProgramMap", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProgramId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgramId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex(new[] { "Id", "UserId" }, "UserProgramMap_Index");
+
+                    b.ToTable("UserProgramMaps");
+                });
+
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Program.ProgramBase", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProgramBase");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("ProgramBase");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -208,9 +260,31 @@ namespace HackSystem.WebAPI.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Program.BasicProgram", b =>
+                {
+                    b.HasBaseType("HackSystem.WebAPI.Model.Program.ProgramBase");
+
+                    b.HasIndex(new[] { "Id", "Name" }, "BasicProgram_Index");
+
+                    b.HasDiscriminator().HasValue("BasicProgram");
+                });
+
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Map.UserMap.UserProgramMap", b =>
+                {
+                    b.HasOne("HackSystem.WebAPI.Model.Program.ProgramBase", "Program")
+                        .WithMany("UserProgramMaps")
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HackSystem.WebAPI.Model.Identity.HackSystemUser", "User")
+                        .WithMany("UserProgramMaps")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("HackSystem.WebAPI.Model.Identity.HackSystemRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -219,7 +293,7 @@ namespace HackSystem.WebAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("HackSystem.WebAPI.Model.Identity.HackSystemUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -228,7 +302,7 @@ namespace HackSystem.WebAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("HackSystem.WebAPI.Model.Identity.HackSystemUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -237,13 +311,13 @@ namespace HackSystem.WebAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("HackSystem.WebAPI.Model.Identity.HackSystemRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("HackSystem.WebAPI.Model.Identity.HackSystemUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -252,7 +326,7 @@ namespace HackSystem.WebAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("HackSystem.WebAPI.Model.Identity.HackSystemUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

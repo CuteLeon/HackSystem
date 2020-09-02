@@ -287,5 +287,5 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
-HS.db-shm
-HS.db-wal
+*.db-shm
+*.db-wal

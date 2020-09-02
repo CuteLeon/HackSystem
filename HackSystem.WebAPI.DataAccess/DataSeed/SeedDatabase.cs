@@ -30,7 +30,7 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
         {
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
-            var logger = services.GetRequiredService<ILogger>();
+            var logger = services.GetRequiredService<ILogger<IHost>>();
             var dbContext = services.GetRequiredService<HackSystemDBContext>();
 
             try

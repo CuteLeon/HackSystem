@@ -8,7 +8,9 @@ namespace HackSystem.WebAPI.DataAccess
 {
     public class HackSystemDBContext : IdentityDbContext<HackSystemUser, HackSystemRole, string>
     {
-        public HackSystemDBContext(DbContextOptions options)
+        public HackSystemDBContext() { }
+
+        public HackSystemDBContext(DbContextOptions<HackSystemDBContext> options)
             : base(options)
         {
         }
@@ -26,6 +28,12 @@ namespace HackSystem.WebAPI.DataAccess
 
             builder.Entity<BasicProgram>().HasIndex(program => new { program.Id, program.Name }, $"{nameof(BasicProgram)}_Index");
             builder.Entity<UserProgramMap>().HasIndex(map => new { map.Id, map.UserId }, $"{nameof(UserProgramMap)}_Index");
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // 这个和无参构造函数用于设计时生成数据库迁移
+            base.OnConfiguring(optionsBuilder.UseSqlite("DATA SOURCE=HackSystem.db"));
         }
     }
 }

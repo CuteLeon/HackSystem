@@ -26,10 +26,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HackSystem.WebAPI.Common\HackSystem.WebAPI.Common.csproj" />
+    <ProjectReference Include="..\HackSystem.WebAPI.DataAccess\HackSystem.WebAPI.DataAccess.csproj" />
+    <ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
     <ProjectReference Include="..\HackSystem.WebDTO\HackSystem.WebDTO.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="HackSystem.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="HS.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
