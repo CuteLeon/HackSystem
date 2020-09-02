@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using HackSystem.WebDataTransfer.Program;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.Pages
@@ -17,38 +19,40 @@ namespace HackSystem.Web.Pages
 
         private async Task GetAll()
         {
-            var cookies = await this.cookieStorageService.GetAllAsync();
-            this.logger.LogInformation($"所有 Cookie: {string.Join("; ", cookies.Select(pair => $"{pair.Key} = {pair.Value}"))}");
+            var result = await this.basicProgramService.GetAll();
+            this.programInfo = string.Join(";", result.Select(x => $"{x.Id} ({x.Name})"));
         }
 
-        private async Task Save()
+        private async Task Update()
         {
-            await this.cookieStorageService.SaveCookieAsync("leon", "cute");
-            await this.cookieStorageService.SaveCookieAsync("Leon", "Cute");
-            await this.cookieStorageService.SaveCookieAsync("Leon ", "C ute");
-            await this.cookieStorageService.SaveCookieAsync("Le on ", "Cu te");
-            await this.cookieStorageService.SaveCookieAsync("1", "1");
-            await this.cookieStorageService.SaveCookieAsync("2", "2", -1);
-            await this.cookieStorageService.SaveCookieAsync("3", "3", -2);
-            await this.cookieStorageService.SaveCookieAsync("4", "4", 10);
-            await this.cookieStorageService.SaveCookieAsync("5", "5", 60 * 60 * 24 * 3);
+            var programs = await this.basicProgramService.GetAll();
+            if (!programs.Any()) return;
+            var payload = new UpdateBasicProgramDTO() { Id = programs.First().Id, Name = $"修改-{DateTime.Now}" };
+            var result = await this.basicProgramService.Update(payload);
+            this.programInfo = $"{result?.Id} ({result?.Name})";
         }
 
-        private async Task Remove()
+        private async Task Delete()
         {
-            await this.cookieStorageService.RemoveCookieAsync("leon");
-            await this.cookieStorageService.RemoveCookieAsync("Leon");
-            await this.cookieStorageService.RemoveCookieAsync("Le on");
+            var programs = await this.basicProgramService.GetAll();
+            if (!programs.Any()) return;
+            var result = await this.basicProgramService.Delete(programs.First().Id);
+            this.programInfo = $"{result?.Id} ({result?.Name})";
+        }
+
+        private async Task Create()
+        {
+            var program = new CreateBasicProgramDTO() { Name = $"新程序-{DateTime.Now}" };
+            var result = await this.basicProgramService.Create(program);
+            this.programInfo = $"{result.Id} ({result.Name})";
         }
 
         private async Task Get()
         {
-            var cookie = await this.cookieStorageService.GetCookieAsync("Leon ");
-            this.logger.LogInformation($"获得Cookie: Leon = {cookie}");
-            cookie = await this.cookieStorageService.GetCookieAsync(" leon");
-            this.logger.LogInformation($"获得Cookie: leon = {cookie}");
-            cookie = await this.cookieStorageService.GetCookieAsync("cute");
-            this.logger.LogInformation($"获得Cookie: cute = {cookie}");
+            var programs = await this.basicProgramService.GetAll();
+            if (!programs.Any()) return;
+            var result = await this.basicProgramService.Get(programs.First().Id);
+            this.programInfo = $"{result.Id} ({result.Name})";
         }
     }
 }

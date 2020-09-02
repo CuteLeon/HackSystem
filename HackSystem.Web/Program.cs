@@ -9,6 +9,8 @@ using HackSystem.Web.Common;
 using HackSystem.Web.Configurations;
 using HackSystem.Web.CookieStorage;
 using HackSystem.Web.Services.Authentication;
+using HackSystem.Web.Services.API.Program;
+using HackSystem.Web.Services.Program;
 using HackSystem.Common;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -78,9 +80,8 @@ namespace HackSystem.Web
         /// <remarks>可以有更优雅的方式外置这些代码，需要注意 Servcide 需要的 Options 的传递</remarks>
         public static WebAssemblyHostBuilder RegisterServices(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
         {
-            builder.Services
-                .AddHttpClient<IAuthenticationService, AuthenticationService>(
-                    httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
+            builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
+            builder.Services.AddHttpClient<IBasicProgramService, BasicProgramService>(httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
 
             return builder;
         }

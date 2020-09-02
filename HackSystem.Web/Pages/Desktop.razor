@@ -1,11 +1,11 @@
 ﻿@page "/Desktop"
 @attribute [Authorize(Roles = CommonSense.Roles.HackerRole)]
 
-@inject ILogger<Desktop> logger;
-@inject IJSRuntime jsRuntime;
-@inject IOptionsMonitor<APIConfiguration> optionMonitor;
-@inject IAuthenticationService authenticationService;
-@inject ICookieStorageService cookieStorageService;
+@inject ILogger<Desktop> logger
+@inject IJSRuntime jsRuntime
+@inject IOptionsMonitor<APIConfiguration> optionMonitor
+@inject IAuthenticationService authenticationService
+@inject IBasicProgramService basicProgramService
 
 <h3>Desktop</h3>
 <button class="btn btn-success" @onclick="GetAccountInfo">获取用户信息</button>
@@ -29,11 +29,16 @@
 
 <div class="btn btn-group">
     <button class="btn btn-outline-primary" @onclick="GetAll">获取所有</button>
-    <button class="btn btn-outline-primary" @onclick="Save">保存</button>
-    <button class="btn btn-outline-primary" @onclick="Remove">移除</button>
     <button class="btn btn-outline-primary" @onclick="Get">获取</button>
+    <button class="btn btn-outline-primary" @onclick="Create">创建</button>
+    <button class="btn btn-outline-primary" @onclick="Update">更新</button>
+    <button class="btn btn-outline-primary" @onclick="Delete">删除</button>
 </div>
+
+<p>@programInfo</p>
 
 @code {
     string accountInfo = "账户信息";
+
+    string programInfo = "程序信息";
 }
