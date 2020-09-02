@@ -30,9 +30,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
     <ProjectReference Include="..\HackSystem.Web.Authentication\HackSystem.Web.Authentication.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.Common\HackSystem.Web.Common.csproj" />
     <ProjectReference Include="..\HackSystem.Web.CookieStorage\HackSystem.Web.CookieStorage.csproj" />
-    <ProjectReference Include="..\HackSystem.WebDTO\HackSystem.WebDTO.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.Services.API\HackSystem.Web.Services.API.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.Services\HackSystem.Web.Services.csproj" />
+    <ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

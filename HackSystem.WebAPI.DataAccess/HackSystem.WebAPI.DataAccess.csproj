@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Common\HackSystem.WebAPI.Common.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
-    <ProjectReference Include="..\HackSystem.WebDTO\HackSystem.WebDTO.csproj" />
   </ItemGroup>
 
 </Project>

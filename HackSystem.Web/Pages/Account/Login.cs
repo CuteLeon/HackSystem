@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using HackSystem.WebDTO.Account;
+using HackSystem.WebDataTransfer.Account;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.Pages.Account

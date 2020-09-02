@@ -26,10 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Common\HackSystem.WebAPI.Common.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.DataAccess\HackSystem.WebAPI.DataAccess.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
-    <ProjectReference Include="..\HackSystem.WebDTO\HackSystem.WebDTO.csproj" />
+    <ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,11 +8,12 @@ using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Common;
 using HackSystem.Web.Configurations;
 using HackSystem.Web.CookieStorage;
-using HackSystem.Web.Services;
-using HackSystem.WebDTO.Common;
+using HackSystem.Web.Services.Authentication;
+using HackSystem.Common;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using HackSystem.Web.Services.API.Authentication;
 
 namespace HackSystem.Web
 {
@@ -21,21 +22,22 @@ namespace HackSystem.Web
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            var apiConfiguration = builder.Configuration.GetSection("APIConfiguration").Get<APIConfiguration>();
+
             builder.RootComponents.Add<App>("#app");
 
             builder
-                .InitService()
+                .InitConfiguration()
+                .InitService(apiConfiguration)
+                .RegisterServices(apiConfiguration)
                 .InitAuthorizationPolicy();
 
             await builder.Build().RunAsync();
         }
 
-        public static WebAssemblyHostBuilder InitService(this WebAssemblyHostBuilder builder)
+        public static WebAssemblyHostBuilder InitService(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
         {
-            var apiConfiguration = builder.Configuration.GetSection("APIConfiguration").Get<APIConfiguration>();
-
             builder.Services
-                .Configure<APIConfiguration>(builder.Configuration.GetSection("APIConfiguration"))
                 .AddLogging()
                 .AddBlazoredLocalStorage()
                 .AddCookieStorage()
@@ -51,11 +53,34 @@ namespace HackSystem.Web
                     options.ExpiryClaimType = WebCommonSense.ExpiryClaimType;
                 })
                 .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
-                .AddHttpClient()
-                .AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient =>
-                {
-                    httpClient.BaseAddress = new Uri(apiConfiguration.APIURL);
-                });
+                .AddHttpClient();
+
+            return builder;
+        }
+
+        /// <summary>
+        /// 初始化配置
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static WebAssemblyHostBuilder InitConfiguration(this WebAssemblyHostBuilder builder)
+        {
+            builder.Services.Configure<APIConfiguration>(builder.Configuration.GetSection("APIConfiguration"));
+
+            return builder;
+        }
+
+        /// <summary>
+        /// 注册服务
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        /// <remarks>可以有更优雅的方式外置这些代码，需要注意 Servcide 需要的 Options 的传递</remarks>
+        public static WebAssemblyHostBuilder RegisterServices(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
+        {
+            builder.Services
+                .AddHttpClient<IAuthenticationService, AuthenticationService>(
+                    httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
 
             return builder;
         }

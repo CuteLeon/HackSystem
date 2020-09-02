@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HackSystem.Web.Authentication\HackSystem.Web.Authentication.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.Common\HackSystem.Web.Common.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.CookieStorage\HackSystem.Web.CookieStorage.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.Services.API\HackSystem.Web.Services.API.csproj" />
+    <ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
+  </ItemGroup>
+
+</Project>

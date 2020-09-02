@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using HackSystem.WebDTO.Account;
+using HackSystem.WebDataTransfer.Account;
 
 namespace HackSystem.Web.Pages.Account
 {

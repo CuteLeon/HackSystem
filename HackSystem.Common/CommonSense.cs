@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebDTO.Common
+﻿namespace HackSystem.Common
 {
     public class CommonSense
     {
