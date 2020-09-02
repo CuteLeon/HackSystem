@@ -39,6 +39,7 @@ namespace HackSystem.Web
                 .AddLogging()
                 .AddBlazoredLocalStorage()
                 .AddCookieStorage()
+                .AddAuthorizationCore()
                 .AddHackSystemAuthentication(options =>
                 {
                     options.AnonymousState.User.Claims.Append(new Claim(ClaimTypes.Name, "Anonymous"));
@@ -49,7 +50,6 @@ namespace HackSystem.Web
                     options.AuthTokenName = WebCommonSense.AuthTokenName;
                     options.ExpiryClaimType = WebCommonSense.ExpiryClaimType;
                 })
-                .AddAuthorizationCore()
                 .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
                 .AddHttpClient()
                 .AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient =>
