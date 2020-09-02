@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.ComponentModel;
+using Microsoft.AspNetCore.Identity;
 
 namespace HackSystem.WebAPI.Model.Identity
 {
@@ -14,6 +15,7 @@ namespace HackSystem.WebAPI.Model.Identity
         {
         }
 
+        [DefaultValue(0)]
         public int Level { get; set; }
     }
 }
