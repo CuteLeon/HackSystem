@@ -16,7 +16,6 @@ namespace HackSystem.Host
             this.Icon = HostResource.Logo;
 
             this.InitializeComponent();
-
             this.InitWebBrowser();
             this.LoadRemoteURL();
         }
@@ -47,10 +46,10 @@ namespace HackSystem.Host
 
         private void LoadRemoteURL()
         {
+            this.WebBrowser.Load("https://StartUpPage.HackSystem.com");
             ThreadPool.QueueUserWorkItem(new WaitCallback((x) =>
             {
-                this.WebBrowser.Load("https://StartUpPage.HackSystem.com");
-                Thread.Sleep(1000);
+                Thread.Sleep(666);
                 this.WebBrowser.Load($"{HostConfigs.RemoteURL}/{HostConfigs.StartURI}");
             }));
         }
