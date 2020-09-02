@@ -22,8 +22,8 @@ namespace HackSystem.Web.Pages.Account
             var result = await this.authenticationService.Login(this.loginModel);
 
             this.logger.LogInformation($"页面登录结果：{result.Successful}");
-            this.logger.LogInformation($"当前Cookie内的Token: {await this.authenticationStateProvider.GetCurrentTokenAsync()}");
-            var state = await this.authenticationStateProvider.GetAuthenticationStateAsync();
+            this.logger.LogInformation($"当前Cookie内的Token: {await this.authenticationStateHandler.GetCurrentTokenAsync()}");
+            var state = await this.authenticationStateHandler.GetAuthenticationStateAsync();
             this.logger.LogInformation($"当前认证状态的声明：{string.Join("\n", state.User.Claims.Select(c => $"{c.Type} = {c.Value}"))}");
             this.logger.LogInformation($"当前认证状态：{state.User?.Identity?.IsAuthenticated}");
             this.logger.LogInformation($"当前Hacker角色状态：{state.User?.IsInRole("Hacker")}");

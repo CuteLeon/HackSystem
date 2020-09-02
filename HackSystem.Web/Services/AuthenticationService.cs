@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Extensions;
 using HackSystem.WebDTO.Account;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -14,16 +13,16 @@ namespace HackSystem.Web.Services
     {
         private readonly ILogger<AuthenticationService> logger;
         private readonly HttpClient httpClient;
-        private readonly AuthenticationStateProvider authenticationStateProvider;
+        private readonly IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler;
 
         public AuthenticationService(
             ILogger<AuthenticationService> logger,
             HttpClient httpClient,
-            AuthenticationStateProvider authenticationStateProvider)
+            IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler)
         {
             this.logger = logger;
             this.httpClient = httpClient;
-            this.authenticationStateProvider = authenticationStateProvider;
+            this.hackSystemAuthenticationStateHandler = hackSystemAuthenticationStateHandler;
         }
 
         /// <summary>
@@ -54,7 +53,7 @@ namespace HackSystem.Web.Services
                 return loginResult;
             }
 
-            await ((HackSystemAuthenticationStateProvider)this.authenticationStateProvider).UpdateAuthenticattionStateAsync(loginResult.Token);
+            await this.hackSystemAuthenticationStateHandler.UpdateAuthenticattionStateAsync(loginResult.Token);
             return loginResult;
         }
 
@@ -66,7 +65,7 @@ namespace HackSystem.Web.Services
         {
             logger.LogDebug($"请求用户信息...");
 
-            var currentToken = await ((HackSystemAuthenticationStateProvider)this.authenticationStateProvider).GetCurrentTokenAsync();
+            var currentToken = await this.hackSystemAuthenticationStateHandler.GetCurrentTokenAsync();
             httpClient.AddAuthorizationHeader(currentToken);
             var response = await httpClient.GetAsync("api/accounts/GetAccountInfo");
             if (!response.IsSuccessStatusCode)
@@ -86,10 +85,10 @@ namespace HackSystem.Web.Services
         {
             logger.LogDebug($"请求注销用户");
 
-            var currentToken = await ((HackSystemAuthenticationStateProvider)this.authenticationStateProvider).GetCurrentTokenAsync();
+            var currentToken = await this.hackSystemAuthenticationStateHandler.GetCurrentTokenAsync();
             httpClient.AddAuthorizationHeader(currentToken);
             await httpClient.GetAsync("api/accounts/logout");
-            await ((HackSystemAuthenticationStateProvider)this.authenticationStateProvider).UpdateAuthenticattionStateAsync(string.Empty);
+            await this.hackSystemAuthenticationStateHandler.UpdateAuthenticattionStateAsync(string.Empty);
         }
     }
 }

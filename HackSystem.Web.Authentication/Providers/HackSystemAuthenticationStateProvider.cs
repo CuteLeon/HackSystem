@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Authentication.Options;
@@ -14,7 +13,7 @@ namespace HackSystem.Web.Authentication.Providers
     /// <summary>
     /// 用户身份认证状态提供者
     /// </summary>
-    public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider, IHackSystemAuthenticationStateProvider
+    public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider
     {
         private readonly ILogger<HackSystemAuthenticationStateProvider> logger;
         private readonly IJWTParserService jwtParser;
@@ -42,13 +41,13 @@ namespace HackSystem.Web.Authentication.Providers
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             this.logger.LogInformation("HackSystem Get Authentication State...");
-            var savedToken = await this.cookieStorageService.GetCookieAsync(this.options.AuthTokenName);
+            var savedToken = await this.GetCurrentTokenAsync();
             if (string.IsNullOrWhiteSpace(savedToken))
             {
                 return await this.ReturnAnonymousState();
             }
 
-            var claimsIdentity = this.GetClaimsIdentity(savedToken);
+            var claimsIdentity = this.ParseClaimsIdentity(savedToken);
             if (!this.CheckClaimsIdentity(claimsIdentity))
             {
                 return await this.ReturnAnonymousState();
@@ -64,6 +63,7 @@ namespace HackSystem.Web.Authentication.Providers
         /// <returns></returns>
         public async ValueTask<string> GetCurrentTokenAsync()
         {
+            this.logger.LogInformation("HackSystem Get Current Token.");
             return await this.cookieStorageService.GetCookieAsync(this.options.AuthTokenName);
         }
         #endregion
@@ -96,58 +96,11 @@ namespace HackSystem.Web.Authentication.Providers
         #region 更新认证信息
 
         /// <summary>
-        /// 更新认证状态
-        /// </summary>
-        /// <param name="token"></param>
-        public async Task UpdateAuthenticattionStateAsync(string token)
-        {
-            this.logger.LogInformation("HackSystem Update Authentication State...");
-            if (string.IsNullOrWhiteSpace(token))
-            {
-                await this.AuthenticateFailed();
-                return;
-            }
-
-            var claimsIdentity = this.GetClaimsIdentity(token);
-            if (this.CheckClaimsIdentity(claimsIdentity))
-            {
-                await this.AuthenticateSuccessfully(claimsIdentity, token);
-            }
-            else
-            {
-                await this.AuthenticateFailed();
-            }
-        }
-
-        /// <summary>
-        /// 认证成功
-        /// </summary>
-        private async Task AuthenticateSuccessfully(ClaimsIdentity claimsIdentity, string token)
-        {
-            this.logger.LogInformation("HackSystem Authenticate Successfully !");
-            await this.cookieStorageService.SaveCookieAsync(this.options.AuthTokenName, token, this.options.TokenExpiryInMinutes * 60);
-            var authenticationState = new AuthenticationState(new ClaimsPrincipal(claimsIdentity));
-
-            this.NotifyAuthenticationStateChanged(authenticationState);
-        }
-
-        /// <summary>
-        /// 认证失败
-        /// </summary>
-        private async Task AuthenticateFailed()
-        {
-            this.logger.LogWarning("HackSystem Authenticate Failed !");
-            await this.cookieStorageService.RemoveCookieAsync(this.options.AuthTokenName);
-
-            this.NotifyAuthenticationStateChanged(this.options.AnonymousState);
-        }
-
-        /// <summary>
         /// 通知认证状态改变
         /// </summary>
         /// <param name="authenticationState"></param>
         /// <returns></returns>
-        private void NotifyAuthenticationStateChanged(AuthenticationState authenticationState)
+        public void NotifyAuthenticationStateChanged(AuthenticationState authenticationState)
         {
             this.logger.LogWarning($"HackSystem Notify Authentication State Change to {authenticationState.User?.Identity?.Name ?? "[null]"}");
             this.NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
@@ -157,11 +110,11 @@ namespace HackSystem.Web.Authentication.Providers
         #region 解析和检查
 
         /// <summary>
-        /// 获取声明组合证件
+        /// 解析声明组合证件
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        private ClaimsIdentity GetClaimsIdentity(string token)
+        public ClaimsIdentity ParseClaimsIdentity(string token)
         {
             this.logger.LogInformation("HackSystem Get Claims Identity from Token...");
             var claims = this.jwtParser.ParseJWTToken(token);
@@ -173,7 +126,7 @@ namespace HackSystem.Web.Authentication.Providers
         /// </summary>
         /// <param name="claimsIdentity"></param>
         /// <returns></returns>
-        private bool CheckClaimsIdentity(ClaimsIdentity claimsIdentity)
+        public bool CheckClaimsIdentity(ClaimsIdentity claimsIdentity)
         {
             this.logger.LogInformation("HackSystem Check Claims Identity...");
             return claimsIdentity.Claims.IsUnexpired(this.options.ExpiryClaimType);
