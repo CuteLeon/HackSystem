@@ -13,7 +13,7 @@ namespace HackSystem.Web.Authentication.Providers
     /// <summary>
     /// 用户身份认证状态提供者
     /// </summary>
-    public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider
+    public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider, IHackSystemAuthenticationStateProvider
     {
         private readonly ILogger<HackSystemAuthenticationStateProvider> logger;
         private readonly IJWTParserService jwtParser;
