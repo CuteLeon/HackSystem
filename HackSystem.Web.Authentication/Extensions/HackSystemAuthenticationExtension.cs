@@ -15,8 +15,8 @@ namespace HackSystem.Web.Authentication.Extensions
             services
                 .Configure(configure)
                 .AddScoped<IJWTParserService, JWTParserService>()
-                .AddScoped<IAuthorizationService, HackSystemAuthorizationService>()
-                .AddScoped<IAuthorizationHandlerContextFactory, HackSystemAuthorizationHandlerContextFactory>()
+                // .AddScoped<IAuthorizationService, HackSystemAuthorizationService>()
+                // .AddScoped<IAuthorizationHandlerContextFactory, HackSystemAuthorizationHandlerContextFactory>()
                 .AddScoped<IHackSystemAuthenticationStateHandler, HackSystemAuthenticationStateHandler>()
                 .AddScoped<AuthenticationStateProvider, HackSystemAuthenticationStateProvider>();
 
