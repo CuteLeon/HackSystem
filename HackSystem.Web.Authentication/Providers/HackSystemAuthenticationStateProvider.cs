@@ -63,7 +63,7 @@ namespace HackSystem.Web.Authentication.Providers
         /// <returns></returns>
         public async ValueTask<string> GetCurrentTokenAsync()
         {
-            this.logger.LogInformation("HackSystem Get Current Token.");
+            this.logger.LogDebug("HackSystem Get Current Token.");
             return await this.cookieStorageService.GetCookieAsync(this.options.AuthTokenName);
         }
         #endregion
@@ -102,7 +102,7 @@ namespace HackSystem.Web.Authentication.Providers
         /// <returns></returns>
         public void NotifyAuthenticationStateChanged(AuthenticationState authenticationState)
         {
-            this.logger.LogWarning($"HackSystem Notify Authentication State Change to {authenticationState.User?.Identity?.Name ?? "[null]"}");
+            this.logger.LogInformation($"HackSystem Notify Authentication State Change to {authenticationState.User?.Identity?.Name ?? "[null]"}");
             this.NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
         #endregion
@@ -116,7 +116,7 @@ namespace HackSystem.Web.Authentication.Providers
         /// <returns></returns>
         public ClaimsIdentity ParseClaimsIdentity(string token)
         {
-            this.logger.LogInformation("HackSystem Get Claims Identity from Token...");
+            this.logger.LogDebug("HackSystem Get Claims Identity from Token...");
             var claims = this.jwtParser.ParseJWTToken(token);
             return new ClaimsIdentity(claims, this.options.AuthenticationType);
         }
@@ -128,7 +128,7 @@ namespace HackSystem.Web.Authentication.Providers
         /// <returns></returns>
         public bool CheckClaimsIdentity(ClaimsIdentity claimsIdentity)
         {
-            this.logger.LogInformation("HackSystem Check Claims Identity...");
+            this.logger.LogDebug("HackSystem Check Claims Identity...");
             return claimsIdentity.Claims.IsUnexpired(this.options.ExpiryClaimType);
         }
         #endregion

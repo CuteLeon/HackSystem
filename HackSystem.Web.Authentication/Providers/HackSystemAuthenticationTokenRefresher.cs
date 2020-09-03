@@ -57,11 +57,11 @@ namespace HackSystem.Web.Authentication.Providers
 
         public virtual async Task<string> RefreshTokenAsync()
         {
-            this.logger.LogInformation($"尝试刷新 Token ...");
+            this.logger.LogDebug($"尝试刷新 Token ...");
             var currentToken = await this.hackSystemAuthenticationStateHandler.GetCurrentTokenAsync();
             if (string.IsNullOrWhiteSpace(currentToken))
             {
-                this.logger.LogInformation($"获取当前 Token 为空，跳过刷新 ...");
+                this.logger.LogDebug($"获取当前 Token 为空，跳过刷新 ...");
                 return default;
             }
 
@@ -70,7 +70,7 @@ namespace HackSystem.Web.Authentication.Providers
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
-                this.logger.LogWarning($"刷新 Token 失败：({(int)response.StatusCode}) {response.StatusCode}\n\t{content}");
+                this.logger.LogWarning($"刷新 Token 失败：({(int)response.StatusCode}) {response.StatusCode} => {content}");
                 return default;
             }
 
