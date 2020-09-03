@@ -5,7 +5,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using HackSystem.WebAPI.Configurations;
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebDataTransfer.Account;
 using HackSystem.Common;
@@ -15,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using HackSystem.WebAPI.Authentication.Configurations;
 
 namespace HackSystem.WebAPI.Controllers
 {
@@ -24,14 +24,14 @@ namespace HackSystem.WebAPI.Controllers
     {
         private readonly ILogger<AccountsController> logger;
         private readonly SignInManager<HackSystemUser> signInManager;
-        private readonly JwtConfiguration jwtConfiguration;
+        private readonly JwtAuthenticationOptions jwtConfiguration;
         private readonly RoleManager<HackSystemRole> roleManager;
         private readonly UserManager<HackSystemUser> userManager;
 
         public AccountsController(
             ILogger<AccountsController> logger,
             SignInManager<HackSystemUser> signInManager,
-            IOptionsMonitor<JwtConfiguration> optionsMonitor,
+            IOptionsMonitor<JwtAuthenticationOptions> optionsMonitor,
             RoleManager<HackSystemRole> roleManager,
             UserManager<HackSystemUser> userManager)
         {

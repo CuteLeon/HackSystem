@@ -1,6 +1,6 @@
-﻿namespace HackSystem.WebAPI.Configurations
+﻿namespace HackSystem.WebAPI.Authentication.Configurations
 {
-    public class JwtConfiguration
+    public class JwtAuthenticationOptions
     {
         public string JwtSecurityKey { get; set; }
 
