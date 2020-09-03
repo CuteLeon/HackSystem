@@ -54,8 +54,8 @@ namespace HackSystem.Web
                     options.AuthTokenName = WebCommonSense.AuthTokenName;
                     options.ExpiryClaimType = WebCommonSense.ExpiryClaimType;
                 })
-                .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
-                .AddHttpClient();
+                .AddTransient(sp => new HttpClient { BaseAddress = new Uri(apiConfiguration.APIURL) })
+                .AddHttpClient("LocalHttpClient", httpClient => httpClient.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
             return builder;
         }

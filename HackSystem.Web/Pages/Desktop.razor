@@ -3,6 +3,8 @@
 
 @inject ILogger<Desktop> logger
 @inject IJSRuntime jsRuntime
+@inject HttpClient httpClient
+@inject IHackSystemAuthenticationStateHandler authenticationStateHandler
 @inject IOptionsMonitor<APIConfiguration> optionMonitor
 @inject IAuthenticationService authenticationService
 @inject IBasicProgramService basicProgramService
@@ -10,6 +12,9 @@
 <h3>Desktop</h3>
 <button class="btn btn-success" @onclick="GetAccountInfo">获取用户信息</button>
 <p>@accountInfo</p>
+
+<button class="btn btn-warning" @onclick="RefreshTokenInfo">刷新 Token 信息</button>
+<p>@tokenInfo</p>
 
 <AuthorizeView Policy=@WebCommonSense.AuthorizationPolicy.LeonPolicy>
     <h4><span class="badge badge-primary">Leon</span></h4>
@@ -41,4 +46,6 @@
     string accountInfo = "账户信息";
 
     string programInfo = "程序信息";
+
+    string tokenInfo = "Token 信息";
 }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebDataTransfer.Account;
@@ -12,34 +9,29 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using HackSystem.WebAPI.Authentication.Configurations;
+using HackSystem.WebAPI.Authentication.Services;
 
 namespace HackSystem.WebAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class AccountsController : Controller
+    public class AccountsController : AuthenticateControllerBase
     {
         private readonly ILogger<AccountsController> logger;
+        private readonly ITokenGenerator tokenGenerator;
         private readonly SignInManager<HackSystemUser> signInManager;
-        private readonly JwtAuthenticationOptions jwtConfiguration;
-        private readonly RoleManager<HackSystemRole> roleManager;
-        private readonly UserManager<HackSystemUser> userManager;
 
         public AccountsController(
             ILogger<AccountsController> logger,
+            ITokenGenerator tokenGenerator,
             SignInManager<HackSystemUser> signInManager,
-            IOptionsMonitor<JwtAuthenticationOptions> optionsMonitor,
             RoleManager<HackSystemRole> roleManager,
             UserManager<HackSystemUser> userManager)
+            : base(roleManager, userManager)
         {
             this.logger = logger;
+            this.tokenGenerator = tokenGenerator;
             this.signInManager = signInManager;
-            this.jwtConfiguration = optionsMonitor.CurrentValue;
-            this.roleManager = roleManager;
-            this.userManager = userManager;
         }
 
         /// <summary>
@@ -120,40 +112,15 @@ namespace HackSystem.WebAPI.Controllers
                 return this.BadRequest(failedResul);
             }
 
-            var claims = new List<Claim>();
-            var user = await this.userManager.FindByNameAsync(login.UserName);
-            claims.Add(new Claim(ClaimTypes.Name, user.UserName));
-            claims.Add(new Claim(ClaimTypes.Email, user.Email));
-            var userClaims = await this.userManager.GetClaimsAsync(user);
-            claims.AddRange(userClaims);
-
-            var roleNames = await this.userManager.GetRolesAsync(user);
-            claims.AddRange(roleNames.Select(role => new Claim(ClaimTypes.Role, role)));
-            foreach (var roleName in roleNames)
-            {
-                var role = await roleManager.FindByNameAsync(roleName);
-                var roleClaims = await roleManager.GetClaimsAsync(role);
-                claims.AddRange(roleClaims);
-            }
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.jwtConfiguration.JwtSecurityKey));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expiry = DateTime.Now.AddMinutes(this.jwtConfiguration.JwtExpiryInMinutes);
-
-            var token = new JwtSecurityToken(
-                this.jwtConfiguration.JwtIssuer,
-                this.jwtConfiguration.JwtAudience,
-                claims,
-                expires: expiry,
-                signingCredentials: creds
-            );
-
-            this.logger.LogDebug($"登录账户成功: {login.UserName}");
+            var claims = await this.GetClaimsAsync(login.UserName);
+            var token = this.tokenGenerator.GenerateSecurityToken(claims);
             var loginResul = new LoginResultDTO
             {
                 Successful = true,
-                Token = new JwtSecurityTokenHandler().WriteToken(token)
+                Token = token
             };
+
+            this.logger.LogDebug($"登录账户成功: {login.UserName}");
             return this.Ok(loginResul);
         }
 

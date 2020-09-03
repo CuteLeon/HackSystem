@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using HackSystem.Web.Extensions;
 using HackSystem.WebDataTransfer.Program;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.Pages
 {
@@ -53,6 +53,22 @@ namespace HackSystem.Web.Pages
             if (!programs.Any()) return;
             var result = await this.basicProgramService.Get(programs.First().Id);
             this.programInfo = $"{result.Id} ({result.Name})";
+        }
+
+        private async Task RefreshTokenInfo()
+        {
+            var token = await this.authenticationStateHandler.GetCurrentTokenAsync();
+            this.httpClient.AddAuthorizationHeader(token);
+            var response = await this.httpClient.GetAsync("api/token/refresh");
+            if (response.IsSuccessStatusCode)
+            {
+                var newToken = await response.Content.ReadAsStringAsync();
+                this.tokenInfo = $"刷新 Token 成功：{newToken}";
+            }
+            else
+            {
+                this.tokenInfo = $"刷新 Token 失败：({(int)response.StatusCode}){response.StatusCode}";
+            }
         }
     }
 }

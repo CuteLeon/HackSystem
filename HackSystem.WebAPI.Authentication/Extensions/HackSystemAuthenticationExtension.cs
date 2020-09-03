@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 using HackSystem.WebAPI.Authentication.Configurations;
 using HackSystem.WebAPI.Authentication.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -30,6 +31,12 @@ namespace HackSystem.Web.Authentication.Extensions
                 })
                 .AddJwtBearer(options =>
                 {
+                    options.Events = new JwtBearerEvents()
+                    {
+                        OnForbidden = context => Task.CompletedTask,
+                        OnAuthenticationFailed = context => Task.CompletedTask,
+                    };
+                    options.RequireHttpsMetadata = false;
                     options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
