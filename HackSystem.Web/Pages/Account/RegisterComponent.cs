@@ -4,13 +4,13 @@ using HackSystem.WebDataTransfer.Account;
 
 namespace HackSystem.Web.Pages.Account
 {
-    public partial class Register
+    public partial class RegisterComponent
     {
         private readonly RegisterDTO RegisterModel = new RegisterDTO();
         private bool ShowErrors;
         private IEnumerable<string> Errors;
 
-        public Register()
+        public RegisterComponent()
         {
         }
 

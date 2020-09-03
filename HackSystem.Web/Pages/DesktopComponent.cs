@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using HackSystem.Web.Extensions;
 using HackSystem.WebDataTransfer.Program;
 
 namespace HackSystem.Web.Pages
 {
-    public partial class Desktop
+    public partial class DesktopComponent
     {
-        public Desktop()
+        public DesktopComponent()
         {
         }
 

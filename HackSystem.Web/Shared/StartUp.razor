@@ -13,11 +13,11 @@
         var user = authState.User;
         if (user?.Identity?.IsAuthenticated ?? false)
         {
-            this.NavigationManager.NavigateTo(nameof(Desktop));
+            this.NavigationManager.NavigateTo("Desktop");
         }
         else
         {
-            this.NavigationManager.NavigateTo(nameof(Login));
+            this.NavigationManager.NavigateTo("Login");
         }
     }
 }

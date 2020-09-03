@@ -1,7 +1,8 @@
 ﻿@page "/Desktop"
+@layout DesktopLayout
 @attribute [Authorize(Roles = CommonSense.Roles.HackerRole)]
 
-@inject ILogger<Desktop> logger
+@inject ILogger<DesktopComponent> logger
 @inject IJSRuntime jsRuntime
 @inject HttpClient httpClient
 @inject IHackSystemAuthenticationStateHandler authenticationStateHandler

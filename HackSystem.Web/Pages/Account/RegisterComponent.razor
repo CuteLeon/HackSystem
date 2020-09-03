@@ -1,14 +1,16 @@
 ﻿@page "/Register"
 
-@inject ILogger<Register> logger
+@inject ILogger<RegisterComponent> logger
 @inject IAuthenticationService authenticationService
 @inject NavigationManager navigationManager
 
 <h1>Register</h1>
 
-@if (ShowErrors) {
+@if (ShowErrors)
+{
     <div class="alert alert-danger" role="alert">
-        @foreach (var error in Errors) {
+        @foreach (var error in Errors)
+        {
             <p>@error</p>
         }
     </div>
