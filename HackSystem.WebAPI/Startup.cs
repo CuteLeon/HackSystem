@@ -3,6 +3,8 @@ using System.Text;
 using HackSystem.WebAPI.Configurations;
 using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.Model.Identity;
+using HackSystem.WebAPI.Services.API.DataServices.Program;
+using HackSystem.WebAPI.Services.DataServices.Program;
 using HackSystem.WebAPI.Services.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -30,21 +32,41 @@ namespace HackSystem.WebAPI
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            var jwtConfiguration = this.Configuration.GetSection("JwtConfiguration").Get<JwtConfiguration>();
-
+            // 配置 CORS
             services.AddCors(options => options.AddPolicy("AllowAny", builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()));
 
-            services
-                .Configure<JwtConfiguration>(this.Configuration.GetSection("JwtConfiguration"))
-                .AddDbContext<HackSystemDBContext>(options =>
-                    options.UseSqlite(this.Configuration.GetConnectionString("HSDB")))
-                .AddAPIServices()
-                .AddResponseCompression();
+            // 配置数据库交互
+            services.AddDbContext<HackSystemDBContext>(options =>
+                    options.UseSqlite(this.Configuration.GetConnectionString("HSDB")));
 
-            services.AddAuthentication(options =>
+            // 注册 Identity 服务及配置
+            services.AddIdentity<HackSystemUser, HackSystemRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 4;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+
+                options.Lockout.AllowedForNewUsers = true;
+
+                options.SignIn.RequireConfirmedAccount = false;
+
+                options.User.RequireUniqueEmail = true;
+            })
+                .AddEntityFrameworkStores<HackSystemDBContext>();
+
+            services.AddScoped<IBasicProgramDataService, BasicProgramDataService>();
+
+            // 启用身份认证
+            services.Configure<JwtConfiguration>(this.Configuration.GetSection("JwtConfiguration"));
+            var jwtConfiguration = this.Configuration.GetSection("JwtConfiguration").Get<JwtConfiguration>();
+            services
+                .AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -66,22 +88,7 @@ namespace HackSystem.WebAPI
                     };
                 });
 
-            services.AddIdentity<HackSystemUser, HackSystemRole>(options =>
-                {
-                    options.Password.RequireDigit = true;
-                    options.Password.RequiredLength = 8;
-                    options.Password.RequiredUniqueChars = 4;
-                    options.Password.RequireLowercase = true;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequireNonAlphanumeric = true;
-
-                    options.Lockout.AllowedForNewUsers = true;
-
-                    options.SignIn.RequireConfirmedAccount = false;
-
-                    options.User.RequireUniqueEmail = true;
-                })
-                .AddEntityFrameworkStores<HackSystemDBContext>();
+            services.AddResponseCompression();
 
             services
                 .AddControllersWithViews()
