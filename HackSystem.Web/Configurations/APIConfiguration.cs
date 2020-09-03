@@ -5,5 +5,7 @@
         public string APIURL { get; set; }
 
         public int TokenExpiryInMinutes { get; set; }
+
+        public int TokenRefreshInMinutes { get; set; }
     }
 }

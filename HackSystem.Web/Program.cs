@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using HackSystem.Web.Services.API.Authentication;
+using HackSystem.Web.Extensions;
 
 namespace HackSystem.Web
 {
@@ -34,7 +35,10 @@ namespace HackSystem.Web
                 .RegisterServices(apiConfiguration)
                 .InitAuthorizationPolicy();
 
-            await builder.Build().RunAsync();
+            await builder
+                .Build()
+                .LaunchBasicServices()
+                .RunAsync();
         }
 
         public static WebAssemblyHostBuilder InitService(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
@@ -53,6 +57,7 @@ namespace HackSystem.Web
                     options.AuthenticationType = WebCommonSense.AuthenticationType;
                     options.AuthTokenName = WebCommonSense.AuthTokenName;
                     options.ExpiryClaimType = WebCommonSense.ExpiryClaimType;
+                    options.TokenRefreshInMinutes = apiConfiguration.TokenRefreshInMinutes;
                 })
                 .AddTransient(sp => new HttpClient { BaseAddress = new Uri(apiConfiguration.APIURL) })
                 .AddHttpClient("LocalHttpClient", httpClient => httpClient.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));

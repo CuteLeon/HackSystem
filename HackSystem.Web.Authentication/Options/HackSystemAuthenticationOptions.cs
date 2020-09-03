@@ -13,6 +13,8 @@ namespace HackSystem.Web.Authentication.Options
 
         public int TokenExpiryInMinutes { get; set; } = 30;
 
+        public int TokenRefreshInMinutes { get; set; } = 25;
+
         public readonly AuthenticationState AnonymousState = new AuthenticationState(new ClaimsPrincipal());
 
         public string AuthTokenName { get; set; } = "AuthToken";

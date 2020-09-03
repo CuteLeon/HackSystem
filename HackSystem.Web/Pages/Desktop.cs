@@ -57,18 +57,6 @@ namespace HackSystem.Web.Pages
 
         private async Task RefreshTokenInfo()
         {
-            var token = await this.authenticationStateHandler.GetCurrentTokenAsync();
-            this.httpClient.AddAuthorizationHeader(token);
-            var response = await this.httpClient.GetAsync("api/token/refresh");
-            if (response.IsSuccessStatusCode)
-            {
-                var newToken = await response.Content.ReadAsStringAsync();
-                this.tokenInfo = $"刷新 Token 成功：{newToken}";
-            }
-            else
-            {
-                this.tokenInfo = $"刷新 Token 失败：({(int)response.StatusCode}){response.StatusCode}";
-            }
         }
     }
 }
