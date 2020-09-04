@@ -1,32 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Threading.Tasks;
-using HackSystem.WebDataTransfer.Account;
+using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.Pages.Account
 {
     public partial class RegisterComponent
     {
-        private readonly RegisterDTO RegisterModel = new RegisterDTO();
-        private bool ShowErrors;
-        private IEnumerable<string> Errors;
-
         public RegisterComponent()
         {
         }
 
-        private async Task HandleRegistration()
+        private async Task OnRegister()
         {
             this.ShowErrors = false;
 
-            var result = await this.authenticationService.Register(this.RegisterModel);
+            this.ShowErrors = false;
+            this.logger.LogDebug($"Try to Register: {this.registerDto.UserName}");
 
-            if (result.Successful)
+            try
             {
-                this.navigationManager.NavigateTo("/StartUp");
+                var result = await this.authenticationService.Register(this.registerDto);
+                this.logger.LogDebug($"Register result: {(result.Successful ? "Success" : "Fail")}");
+
+                if (result.Successful)
+                {
+                    this.navigationManager.NavigateTo("/Login");
+                }
+                else
+                {
+                    this.logger.LogWarning($"Register Error: {string.Join("; ", result.Errors)}");
+                    this.Errors = result.Errors;
+                    this.ShowErrors = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.Errors = result.Errors;
+                this.logger.LogError($"Register Exception: {ex.Message}");
+                this.Errors = new[] { ex.Message };
                 this.ShowErrors = true;
             }
         }

@@ -4,10 +4,10 @@ namespace HackSystem.WebDataTransfer.Account
 {
     public class LoginDTO
     {
-        [Required]
+        [Required(ErrorMessage = "用户名称是必要的")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "登录密码是必要的")]
         public string Password { get; set; }
     }
 }

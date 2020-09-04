@@ -4,48 +4,65 @@
 @inject IAuthenticationService authenticationService
 @inject NavigationManager navigationManager
 
-<h1>Register</h1>
+<div class="row container-fluid m-0 p-0 position-fixed img-fluid" style="width: 100%; height: 100%; background-image: url(images/RegisterBackground.jpg); background-size: cover; background-position-x: center;">
+    <div class="card col-10 col-md-6 flex-column mx-auto my-auto shadow-lg" style="filter:1rem;">
+        <div class="card-body">
+            <h5 class="card-title">注册</h5>
 
-@if (ShowErrors)
-{
-    <div class="alert alert-danger" role="alert">
-        @foreach (var error in Errors)
-        {
-            <p>@error</p>
-        }
-    </div>
-}
+            @if (ShowErrors)
+            {
+                @* 不要使用 Bootstrap 自带的关闭警告窗功能，因为自带功能将会销毁元素，而Blazor自动销毁时将找不到被销毁的元素 *@
+                <div class="alert alert-warning fade show" role="alert">
+                    <strong>注册失败！</strong>
+                    <button type="button" class="close" aria-label="Close" @onclick="OnCloseAlert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    @foreach (var error in this.Errors)
+                    {
+                        @error
+                    }
+                </div>
+            }
 
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Please enter your details</h5>
-        <EditForm Model="RegisterModel" OnValidSubmit="HandleRegistration">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div class="form-group">
-                <label for="username">User Name</label>
-                <InputText Id="userName" Class="form-control" @bind-Value="RegisterModel.UserName" />
-                <ValidationMessage For="@(() => RegisterModel.UserName)" />
-            </div>
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <InputText Id="email" class="form-control" @bind-Value="RegisterModel.Email" />
-                <ValidationMessage For="@(() => RegisterModel.Email)" />
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <InputText Id="password" type="password" class="form-control" @bind-Value="RegisterModel.Password" />
-                <ValidationMessage For="@(() => RegisterModel.Password)" />
-            </div>
-            <div class="form-group">
-                <label for="confirmpassword">Confirm Password</label>
-                <InputText Id="confirmpassword" type="password" class="form-control" @bind-Value="RegisterModel.ConfirmPassword" />
-                <ValidationMessage For="@(() => RegisterModel.ConfirmPassword)" />
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </EditForm>
+            <EditForm Model="registerDto" OnValidSubmit="OnRegister">
+                <DataAnnotationsValidator />
+                <div class="form-group">
+                    <label for="username">用户名称</label>
+                    <InputText Id="userName" Class="form-control" @bind-Value="registerDto.UserName" />
+                    <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.UserName)" /></small>
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <InputText Id="email" Class="form-control" @bind-Value="registerDto.Email" />
+                    <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.Email)" /></small>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <InputText Id="password" type="password" Class="form-control" @bind-Value="registerDto.Password" />
+                    <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.Password)" /></small>
+                </div>
+                <div class="form-group">
+                    <label for="confirmpassword">确认密码</label>
+                    <InputText Id="confirmpassword" type="password" Class="form-control" @bind-Value="registerDto.ConfirmPassword" />
+                    <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.ConfirmPassword)" /></small>
+                </div>
+                <div class="form-row">
+                    <div class="col-12 col-md-6 text-right text-md-left">
+                        <a class="btn btn-link" href="/Login">直接登录</a>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <button type="submit" class="btn btn-block btn-primary">注册</button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
     </div>
 </div>
 
 @code {
+    private bool ShowErrors { get; set; }
+    private IEnumerable<string> Errors;
+    private readonly RegisterDTO registerDto = new RegisterDTO();
+
+    public void OnCloseAlert() => this.ShowErrors = false;
 }

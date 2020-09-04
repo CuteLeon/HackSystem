@@ -5,9 +5,8 @@
 @inject IHackSystemAuthenticationStateHandler authenticationStateHandler
 @inject NavigationManager navigationManager
 
-<div class="row container-fluid p-0 position-fixed img-fluid" style="width:100%;height:100%;
-        background-image:url(images/LoginBackground.jpg);background-size:cover;background-position-x:center;">
-    <div class="card col-12 col-lg-8 col-xl-6 d-flex mx-auto mt-auto mb-5 fixed-bottom w-75 shadow-lg">
+<div class="row container-fluid m-0 p-0 position-fixed img-fluid" style="overflow: hidden; width: 100%; height: 100%; background-image: url(images/LoginBackground.jpg); background-size: cover; background-position-x: center;">
+    <div class="card col-10 col-md-8 d-flex mx-auto mt-auto mb-5 fixed-bottom shadow-lg">
         <div class="card-body">
             <h5 class="card-title">登录</h5>
 
@@ -15,10 +14,11 @@
             {
                 @* 不要使用 Bootstrap 自带的关闭警告窗功能，因为自带功能将会销毁元素，而Blazor自动销毁时将找不到被销毁的元素 *@
                 <div class="alert alert-warning fade show" role="alert">
-                    <strong>登录失败！</strong> @Error
+                    <strong>登录失败！</strong>
                     <button type="button" class="close" aria-label="Close" @onclick="OnCloseAlert">
                         <span aria-hidden="true">&times;</span>
                     </button>
+                    @Error
                 </div>
             }
 
@@ -28,18 +28,18 @@
                     <div class="col-md-6 mb-3">
                         <label for="username">用户名称</label>
                         <InputText Id="userName" Class="form-control" @bind-Value="loginDto.UserName" />
-                        <ValidationMessage class="valid-feedback" For="@(() => loginDto.UserName)" />
+                        <small><ValidationMessage class="valid-feedback" For="@(() => loginDto.UserName)" /></small>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="password">密码</label>
                         <InputText Id="password" type="password" Class="form-control" @bind-Value="loginDto.Password" />
-                        <ValidationMessage class="valid-feedback" For="@(() => loginDto.Password)" />
+                        <small><ValidationMessage class="valid-feedback" For="@(() => loginDto.Password)" /></small>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-12 col-md-6">
-                        <a class="btn btn-link btn-sm" href="/Register">注册</a>
-                        <a class="btn btn-link btn-sm" href="#">忘记密码</a>
+                    <div class="col-12 col-md-6 text-right text-md-left">
+                        <a class="btn btn-link" href="/Register">注册</a>
+                        <a class="btn btn-link" href="#">忘记密码</a>
                     </div>
                     <div class="col-12 col-md-6">
                         <button type="submit" class="btn btn-block btn-primary">登录</button>
@@ -55,5 +55,5 @@
     private string Error { get; set; }
     private readonly LoginDTO loginDto = new LoginDTO();
 
-    public void OnCloseAlert() => ShowErrors = false;
+    public void OnCloseAlert() => this.ShowErrors = false;
 }
