@@ -1,0 +1,57 @@
+﻿<div id="@Id" class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="pointer-events:auto;">
+    <div class="toast-header">
+        @switch (icon)
+        {
+            case Icons.Information:
+                <span class="fas fa-info-circle text-success mr-2" style="font-size:20px;"></span>
+                break;
+            case Icons.Question:
+                <span class="fas fa-question-circle text-primary mr-2" style="font-size:20px;"></span>
+                break;
+            case Icons.Warning:
+                <span class="fas fa-exclamation-circle text-warning mr-2" style="font-size:20px;"></span>
+                break;
+            case Icons.Error:
+                <span class="fas fa-times-circle text-danger mr-2" style="font-size:20px;"></span>
+                break;
+            default:
+            case Icons.HackSystem:
+                <img src="/LogoImageSmall.png" class="rounded mr-2" />
+                break;
+        }
+        <strong class="mr-auto">@title</strong>
+        <small class="text-muted">@dateTime.ToLongTimeString()</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body">
+        @message
+    </div>
+</div>
+
+@code{
+    private DateTime dateTime = DateTime.Now;
+    private string title = "Hack System";
+    private string message = "Hack System Toast Message.";
+    private Icons icon;
+    private bool autoHide = true;
+    private int hideDelay = 3000;
+
+    public string Id { get; protected set; } = Guid.NewGuid().ToString("N");
+
+    [Parameter]
+    public string Title { get => this.title; set => this.title = value; }
+
+    [Parameter]
+    public string Message { get => this.message; set => this.message = value; }
+
+    [Parameter]
+    public Icons Icon { get => this.icon; set => this.icon = value; }
+
+    [Parameter]
+    public bool AutoHide { get => this.autoHide; set => this.autoHide = value; }
+
+    [Parameter]
+    public int HideDelay { get => this.hideDelay; set => this.hideDelay = value; }
+}

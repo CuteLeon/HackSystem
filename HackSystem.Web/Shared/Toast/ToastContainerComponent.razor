@@ -1,0 +1,33 @@
+﻿@inject IJSRuntime jsRuntime
+
+<div class="position-fixed p-3" style="overflow-y:hidden; top:@(top)rem; bottom:@(bottom)rem; right:0; max-width:365px;min-width:365px;pointer-events: none;z-index:@z_Index;">
+    <ToastComponent AutoHide="false" Icon="Icons.HackSystem" />
+    <ToastComponent AutoHide="false" Icon="Icons.Information" />
+    <ToastComponent AutoHide="false" Icon="Icons.Question" />
+    <ToastComponent AutoHide="false" Icon="Icons.Warning" />
+    <ToastComponent AutoHide="false" Icon="Icons.Error" />
+
+    @foreach (var toast in this.ToastSet)
+    {
+        @toast
+    }
+</div>
+
+@code{
+    private int z_Index = 512;
+    private int top = 0;
+    private int bottom = 0;
+
+    public void SetJSRuntime(IJSRuntime runtime) => this.jsRuntime = runtime;
+
+    [Parameter]
+    public int Z_Index { get => this.z_Index; set => this.z_Index = value; }
+
+    [Parameter]
+    public int Top { get => this.top; set => this.top = value; }
+
+    [Parameter]
+    public int Bottom { get => this.bottom; set => this.bottom = value; }
+
+    protected ISet<ToastComponent> ToastSet { get; set; } = new HashSet<ToastComponent>();
+}
