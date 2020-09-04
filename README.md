@@ -5,7 +5,7 @@
 
 ## How to launch?
 
-- Install .Net 5.0 Runtime.
+- Install .Net 5.0 SDK.
 - Download source code and open in Visual Studio 2019 (16.2+).
 - Set HackSystem.Web and HackSystem.WebAPI as startup projects.
 - Press F5 to run.
