@@ -10,7 +10,6 @@ using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using HackSystem.WebDataTransfer.Account;
 
 namespace HackSystem.WebAPI
 {
