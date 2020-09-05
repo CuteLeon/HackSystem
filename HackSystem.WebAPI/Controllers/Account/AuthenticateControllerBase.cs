@@ -6,7 +6,7 @@ using HackSystem.WebAPI.Model.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HackSystem.WebAPI.Controllers
+namespace HackSystem.WebAPI.Controllers.Account
 {
     public abstract class AuthenticateControllerBase : Controller
     {

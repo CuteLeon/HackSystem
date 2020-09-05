@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebAPI.Services.API.DataServices.Program;
 using HackSystem.WebDataTransfer.Program;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.Controllers
+namespace HackSystem.WebAPI.Controllers.Program
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
@@ -16,13 +17,16 @@ namespace HackSystem.WebAPI.Controllers
     public class BasicProgramController : ControllerBase
     {
         private readonly ILogger<BasicProgramController> logger;
+        private readonly IMapper mapper;
         private readonly IBasicProgramDataService basicProgramDataService;
 
         public BasicProgramController(
             ILogger<BasicProgramController> logger,
+            IMapper mapper,
             IBasicProgramDataService basicProgramDataService)
         {
             this.logger = logger;
+            this.mapper = mapper;
             this.basicProgramDataService = basicProgramDataService;
         }
 
@@ -31,7 +35,7 @@ namespace HackSystem.WebAPI.Controllers
         {
             this.logger.LogInformation($"Query all Basic Programs.");
             var entities = await this.basicProgramDataService.ToArrayAsync();
-            var result = entities.Select(x => new QueryBasicProgramDTO() { Id = x.Id, Name = x.Name }).ToArray();
+            var result = this.mapper.Map<IEnumerable<QueryBasicProgramDTO>>(entities).ToArray();
             return result;
         }
 
@@ -40,7 +44,7 @@ namespace HackSystem.WebAPI.Controllers
         {
             this.logger.LogInformation($"Query Basic Programs id = {programId}");
             var entity = await this.basicProgramDataService.FindAsync(programId);
-            var result = new QueryBasicProgramDTO() { Id = entity.Id, Name = entity.Name };
+            var result = this.mapper.Map<QueryBasicProgramDTO>(entity);
             return result;
         }
 
@@ -48,9 +52,9 @@ namespace HackSystem.WebAPI.Controllers
         public async Task<QueryBasicProgramDTO> Create([FromBody] CreateBasicProgramDTO basicProgram)
         {
             this.logger.LogInformation($"Create Basic Programs: {basicProgram.Name}");
-            var entity = new BasicProgram() { Name = basicProgram.Name };
+            var entity = this.mapper.Map<BasicProgram>(basicProgram);
             entity = await this.basicProgramDataService.AddAsync(entity);
-            var result = new QueryBasicProgramDTO() { Id = entity.Id, Name = entity.Name };
+            var result = this.mapper.Map<QueryBasicProgramDTO>(entity);
             return result;
         }
 
@@ -58,9 +62,9 @@ namespace HackSystem.WebAPI.Controllers
         public async Task<QueryBasicProgramDTO> Update([FromBody] UpdateBasicProgramDTO basicProgram)
         {
             this.logger.LogInformation($"Update Basic Programs: {basicProgram.Name}");
-            var entity = new BasicProgram() { Id = basicProgram.Id, Name = basicProgram.Name };
+            var entity = this.mapper.Map<BasicProgram>(basicProgram);
             entity = this.basicProgramDataService.Update(entity);
-            var result = new QueryBasicProgramDTO() { Id = entity.Id, Name = entity.Name };
+            var result = this.mapper.Map<QueryBasicProgramDTO>(entity);
             return result;
         }
 
@@ -70,7 +74,7 @@ namespace HackSystem.WebAPI.Controllers
             this.logger.LogInformation($"Delete Basic Programs id = {programId}");
             var entity = await this.basicProgramDataService.FindAsync(programId);
             this.basicProgramDataService.Remove(entity);
-            var result = new QueryBasicProgramDTO() { Id = entity.Id, Name = entity.Name };
+            var result = this.mapper.Map<QueryBasicProgramDTO>(entity);
             return result;
         }
     }

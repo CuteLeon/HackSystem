@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.Controllers
+namespace HackSystem.WebAPI.Controllers.Account
 {
     [Route("api/[controller]/[action]")]
     [ApiController]

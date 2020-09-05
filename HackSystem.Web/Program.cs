@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using HackSystem.Web.Services.API.Authentication;
 using HackSystem.Web.Extensions;
+using AutoMapper;
 
 namespace HackSystem.Web
 {
@@ -44,6 +45,7 @@ namespace HackSystem.Web
         public static WebAssemblyHostBuilder InitializeBasicService(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
         {
             builder.Services
+                .AddAutoMapper(typeof(Program).Assembly)
                 .AddLogging()
                 .AddBlazoredLocalStorage()
                 .AddCookieStorage()
