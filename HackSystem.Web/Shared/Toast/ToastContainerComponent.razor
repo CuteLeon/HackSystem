@@ -1,4 +1,6 @@
-﻿@inject IJSRuntime jsRuntime
+﻿@implements IToastContainer
+@inject ILogger<ToastContainerComponent> logger
+@inject IJSRuntime jsRuntime
 
 <div class="position-fixed p-3" style="overflow-y:hidden; top:@(top)rem; bottom:@(bottom)rem; right:0; max-width:365px;min-width:365px;pointer-events: none;z-index:@z_Index;">
     <ToastComponent AutoHide="false" Icon="Icons.HackSystem" />

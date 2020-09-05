@@ -48,5 +48,5 @@
     string programInfo = "程序信息";
 
     [CascadingParameter]
-    private Func<ToastContainerComponent> GetToastContainer { get; set; }
+    private Func<IToastContainer> GetToastContainer { get; set; }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using static HackSystem.Web.Shared.Toast.ToastComponent;
 
@@ -13,6 +14,7 @@ namespace HackSystem.Web.Shared.Toast
         // TODO Leon: 以通过级联参数将此方法下发给子元素
         public async Task PopToastAsync(string title, string message, Icons icon, bool autoHide = true, int hideDelay = 3000)
         {
+            this.logger.LogWarning($"Try to pop a Toast: {title}");
             var toast = new ToastComponent()
             {
                 Title = title,
