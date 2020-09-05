@@ -30,10 +30,10 @@ namespace HackSystem.Web
             builder.RootComponents.Add<App>("#app");
 
             builder
-                .InitConfiguration()
-                .InitService(apiConfiguration)
-                .RegisterServices(apiConfiguration)
-                .InitAuthorizationPolicy();
+                .InitializeConfiguration()
+                .InitializeBasicService(apiConfiguration)
+                .InitializeHackSystemServices(apiConfiguration)
+                .InitializeAuthorizationPolicy();
 
             await builder
                 .Build()
@@ -41,7 +41,7 @@ namespace HackSystem.Web
                 .RunAsync();
         }
 
-        public static WebAssemblyHostBuilder InitService(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
+        public static WebAssemblyHostBuilder InitializeBasicService(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
         {
             builder.Services
                 .AddLogging()
@@ -70,7 +70,7 @@ namespace HackSystem.Web
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public static WebAssemblyHostBuilder InitConfiguration(this WebAssemblyHostBuilder builder)
+        public static WebAssemblyHostBuilder InitializeConfiguration(this WebAssemblyHostBuilder builder)
         {
             builder.Services.Configure<APIConfiguration>(builder.Configuration.GetSection("APIConfiguration"));
 
@@ -83,7 +83,7 @@ namespace HackSystem.Web
         /// <param name="builder"></param>
         /// <returns></returns>
         /// <remarks>可以有更优雅的方式外置这些代码，需要注意 Servcide 需要的 Options 的传递</remarks>
-        public static WebAssemblyHostBuilder RegisterServices(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
+        public static WebAssemblyHostBuilder InitializeHackSystemServices(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
         {
             builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
             builder.Services.AddHttpClient<IBasicProgramService, BasicProgramService>(httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
@@ -100,7 +100,7 @@ namespace HackSystem.Web
         /// 可以在 Authorize 特性的 Policy 验证需要的策略
         /// </remarks>
         /// <returns></returns>
-        public static WebAssemblyHostBuilder InitAuthorizationPolicy(this WebAssemblyHostBuilder builder)
+        public static WebAssemblyHostBuilder InitializeAuthorizationPolicy(this WebAssemblyHostBuilder builder)
         {
             builder.Services.AddAuthorizationCore(options =>
             {
