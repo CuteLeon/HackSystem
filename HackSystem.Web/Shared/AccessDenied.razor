@@ -1,9 +1,7 @@
 ﻿@page "/AccessDenied"
 @page "/AccessDenied/{Message}"
 
-<HackSystemMessage Message="@message">
-    <UserStateComponent />
-</HackSystemMessage>
+<HackSystemMessage Message="@message"></HackSystemMessage>
 
 @code{
     private string message = "Access Denied";
