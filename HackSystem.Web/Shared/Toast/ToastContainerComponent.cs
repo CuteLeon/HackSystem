@@ -27,6 +27,9 @@ namespace HackSystem.Web.Shared.Toast
         {
             if (!this.Id.Equals(e.ToastDetail.ContainerId, StringComparison.InvariantCultureIgnoreCase))
                 return;
+            // 由 Toast 销毁不需要重新渲染组件，否则将会闪烁
+            if (e.EventType == ToastChangeEventArgs.ToastEventTypes.Hide)
+                return;
 
             this.StateHasChanged();
         }
