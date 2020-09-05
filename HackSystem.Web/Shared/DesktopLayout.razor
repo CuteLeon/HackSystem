@@ -1,11 +1,13 @@
 ﻿@inherits LayoutComponentBase
 @inject ILogger<DesktopLayout> logger
 
-<div class="container-fluid p-0">
+<div class="container-fluid p-0 position-absolute" style="overflow: hidden; height: 100%; width: 100%; background-image: url(images/DesktopBackground.jpg); background-size: cover; background-position-y:center; background-position-x: center;">
     <UserStateComponent />
     <ToastContainerComponent @ref="ToastContainer" />
     <CascadingValue Value=@GetToastContainer>
-        @Body
+        <div class="text-warning">
+            @Body
+        </div>
     </CascadingValue>
 </div>
 
