@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using HackSystem.WebDataTransfer.Program;
-using static HackSystem.Web.Shared.Toast.ToastComponent;
+using static HackSystem.Web.Shared.Toast.ToastDetail;
 
 namespace HackSystem.Web.Pages
 {
@@ -61,7 +61,9 @@ namespace HackSystem.Web.Pages
 
         private async Task PopToast()
         {
-            await this.GetToastContainer().PopToastAsync("测试", "测试弹窗", Icons.Warning, true, 3000);
+            await this.GetToastContainer().PopToastAsync("测试", "提示信息将在三秒内关闭", Icons.Information, true, 3000);
+            await this.GetToastContainer().PopToastAsync("测试", "默认信息将在五秒内关闭", Icons.HackSystem, true, 5000);
+            await this.GetToastContainer().PopToastAsync("测试", "错误信息不会自动关闭", Icons.Error, false);
         }
     }
 }

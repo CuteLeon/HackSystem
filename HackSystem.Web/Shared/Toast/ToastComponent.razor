@@ -1,6 +1,8 @@
-﻿<div id="@Id" @key="@Id" class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="pointer-events:auto;">
+﻿@inject IJSRuntime jsRuntime
+
+<div id="@this.ToastDetail.Id" @key="@this.ToastDetail.Id" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="pointer-events:auto;">
     <div class="toast-header">
-        @switch (icon)
+        @switch (this.ToastDetail.Icon)
         {
             case Icons.Information:
                 <span class="fas fa-info-circle text-success mr-2" style="font-size:20px;"></span>
@@ -19,39 +21,18 @@
                 <img src="/LogoImageSmall.png" class="rounded mr-2" />
                 break;
         }
-        <strong class="mr-auto">@title</strong>
-        <small class="text-muted">@dateTime.ToLongTimeString()</small>
+        <strong class="mr-auto">@this.ToastDetail.Title</strong>
+        <small class="text-muted">@this.ToastDetail.CreateTime.ToLongTimeString()</small>
         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="toast-body">
-        @message
+        @this.ToastDetail.Message
     </div>
 </div>
 
 @code{
-    private DateTime dateTime = DateTime.Now;
-    private string title = "Hack System";
-    private string message = "Hack System Toast Message.";
-    private Icons icon;
-    private bool autoHide = true;
-    private int hideDelay = 3000;
-
-    public string Id { get; protected set; } = Guid.NewGuid().ToString("N");
-
     [Parameter]
-    public string Title { get => this.title; set => this.title = value; }
-
-    [Parameter]
-    public string Message { get => this.message; set => this.message = value; }
-
-    [Parameter]
-    public Icons Icon { get => this.icon; set => this.icon = value; }
-
-    [Parameter]
-    public bool AutoHide { get => this.autoHide; set => this.autoHide = value; }
-
-    [Parameter]
-    public int HideDelay { get => this.hideDelay; set => this.hideDelay = value; }
+    public ToastDetail ToastDetail { get; set; }
 }

@@ -1,11 +1,10 @@
 ﻿@implements IToastContainer
 @inject ILogger<ToastContainerComponent> logger
-@inject IJSRuntime jsRuntime
 
 <div class="position-fixed p-3" style="overflow-y:hidden; top:@(top)rem; bottom:@(bottom)rem; right:0; max-width:365px;min-width:365px;pointer-events: none;z-index:@z_Index;">
     @foreach (var toast in this.ToastSet)
     {
-        @toast <br/>
+        <ToastComponent ToastDetail="toast" />
     }
 </div>
 
@@ -13,8 +12,6 @@
     private int z_Index = 512;
     private int top = 0;
     private int bottom = 0;
-
-    public void SetJSRuntime(IJSRuntime runtime) => this.jsRuntime = runtime;
 
     [Parameter]
     public int Z_Index { get => this.z_Index; set => this.z_Index = value; }
@@ -25,5 +22,5 @@
     [Parameter]
     public int Bottom { get => this.bottom; set => this.bottom = value; }
 
-    protected ISet<ToastComponent> ToastSet { get; set; } = new HashSet<ToastComponent>();
+    protected ISet<ToastDetail> ToastSet { get; set; } = new HashSet<ToastDetail>();
 }
