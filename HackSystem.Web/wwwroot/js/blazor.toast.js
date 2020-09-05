@@ -6,6 +6,12 @@
             autohide: autohide,
             delay: delay
         });
+        toast.on('hide.bs.toast', function (e) {
+            $(e.target).slideUp(150);
+        });
+        toast.on('hidden.bs.toast', function () {
+
+        });
         toast.toast('show');
     }
 };
