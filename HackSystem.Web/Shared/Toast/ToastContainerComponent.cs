@@ -33,7 +33,7 @@ namespace HackSystem.Web.Shared.Toast
 
         public void PopToast(string title, string message, Icons icon = Icons.HackSystem, bool autoHide = true, int hideDelay = 3000)
         {
-            this.logger.LogWarning($"Pop a Toast: {title}");
+            this.logger.LogDebug($"Pop a Toast: {title}");
             var toast = new ToastDetail()
             {
                 ContainerId = this.Id,

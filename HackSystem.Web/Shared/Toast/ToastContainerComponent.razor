@@ -2,7 +2,6 @@
 @inject ILogger<ToastContainerComponent> logger
 
 <div class="position-fixed p-3" style="overflow-y:hidden; top:@(top)rem; bottom:@(bottom)rem; right:0; max-width:365px;min-width:365px;pointer-events: none;z-index:@z_Index;">
-    @this.ToastSet.Count
     @foreach (var toast in this.ToastSet.Values)
     {
         <ToastComponent ToastDetail="toast" />
