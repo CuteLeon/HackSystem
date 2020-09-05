@@ -1,6 +1,7 @@
 ﻿@inject IJSRuntime jsRuntime
+@inject ILogger<ToastComponent> logger
 
-<div id="@this.ToastDetail.Id" @key="@this.ToastDetail.Id" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="pointer-events:auto;">
+<div id="@this.ToastDetail.Id" @key="@this.ToastDetail.Id" data-containerid="@this.ToastDetail.ContainerId" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="pointer-events:auto;">
     <div class="toast-header">
         @switch (this.ToastDetail.Icon)
         {

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 
 namespace HackSystem.Web.Shared.Toast
@@ -15,7 +16,7 @@ namespace HackSystem.Web.Shared.Toast
 
             if (firstRender)
             {
-                // TODO: Leon: Toast 组件自动关闭之后，需要手动从 ToastSet 移除并自动 Dispose：监听 hide 事件？
+                this.logger.LogInformation($"Initialize Toast: {this.ToastDetail.Title}({this.ToastDetail.Id})");
                 await this.jsRuntime.InvokeVoidAsync("toasts.popToast", this.ToastDetail.Id, this.ToastDetail.AutoHide, this.ToastDetail.HideDelay);
             }
         }

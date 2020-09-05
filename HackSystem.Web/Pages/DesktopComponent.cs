@@ -61,9 +61,9 @@ namespace HackSystem.Web.Pages
 
         private async Task PopToast()
         {
-            await this.GetToastContainer().PopToastAsync("Info 提示信息", "提示信息将在三秒内关闭", Icons.Information, true, 3000);
-            await this.GetToastContainer().PopToastAsync("HackSystem 信息", "HackSystem 信息将在五秒内关闭", Icons.HackSystem, true, 5000);
-            await this.GetToastContainer().PopToastAsync("Error 错误信息", "错误信息不会自动关闭", Icons.Error, false);
+            this.GetToastContainer().PopToast("Info 提示信息", "提示信息将在三秒内关闭", Icons.Information, true, 3000);
+            this.GetToastContainer().PopToast("HackSystem 信息", "HackSystem 信息将在五秒内关闭", Icons.HackSystem, true, 5000);
+            this.GetToastContainer().PopToast("Error 错误信息", "错误信息不会自动关闭", Icons.Error, false);
         }
     }
 }

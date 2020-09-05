@@ -2,7 +2,8 @@
 @inject ILogger<ToastContainerComponent> logger
 
 <div class="position-fixed p-3" style="overflow-y:hidden; top:@(top)rem; bottom:@(bottom)rem; right:0; max-width:365px;min-width:365px;pointer-events: none;z-index:@z_Index;">
-    @foreach (var toast in this.ToastSet)
+    @this.ToastSet.Count
+    @foreach (var toast in this.ToastSet.Values)
     {
         <ToastComponent ToastDetail="toast" />
     }
@@ -13,6 +14,8 @@
     private int top = 0;
     private int bottom = 0;
 
+    public string Id { get; protected set; } = $"toastConteiner_{Guid.NewGuid():N}";
+
     [Parameter]
     public int Z_Index { get => this.z_Index; set => this.z_Index = value; }
 
@@ -22,5 +25,5 @@
     [Parameter]
     public int Bottom { get => this.bottom; set => this.bottom = value; }
 
-    protected ISet<ToastDetail> ToastSet { get; set; } = new HashSet<ToastDetail>();
+    protected IReadOnlyDictionary<string, ToastDetail> ToastSet { get => ToastInterop.GetToastCollection(this.Id); }
 }
