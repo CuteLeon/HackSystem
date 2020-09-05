@@ -1,6 +1,24 @@
 ﻿@inherits LayoutComponentBase
+@inject ILogger<DesktopLayout> logger
 
 <div class="container-fluid p-0">
     <UserStateComponent />
-    @Body
+    <ToastContainerComponent @ref="ToastContainer" />
+    <CascadingValue Value=@GetToastContainer>
+        @Body
+    </CascadingValue>
 </div>
+
+@code{
+    private Func<ToastContainerComponent> GetToastContainer { get; set; }
+    private ToastContainerComponent ToastContainer { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        // @ref 指令仅在当前组件渲染后被执行，因此直接将 ToastContainer 属性作为级联参数会因为此书香尚未被 @ref 指令赋值而导致所有的子组件均无法顺利拿到此级联参数的真实引用
+        // 变通的方案是延迟这个引用，将一个委托作为级联参数而延迟获取引用
+        this.GetToastContainer = new Func<ToastContainerComponent>(() => this.ToastContainer);
+    }
+}

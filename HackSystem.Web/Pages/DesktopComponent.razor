@@ -14,8 +14,7 @@
 <button class="btn btn-success" @onclick="GetAccountInfo">获取用户信息</button>
 <p>@accountInfo</p>
 
-<button class="btn btn-warning" @onclick="RefreshTokenInfo">刷新 Token 信息</button>
-<p>@tokenInfo</p>
+<button class="btn btn-primary" @onclick="PopToast">弹出 Toast</button>
 
 <AuthorizeView Policy=@WebCommonSense.AuthorizationPolicy.LeonPolicy>
     <h4><span class="badge badge-primary">Leon</span></h4>
@@ -48,5 +47,6 @@
 
     string programInfo = "程序信息";
 
-    string tokenInfo = "Token 信息";
+    [CascadingParameter]
+    private Func<ToastContainerComponent> GetToastContainer { get; set; }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using HackSystem.WebDataTransfer.Program;
+using static HackSystem.Web.Shared.Toast.ToastComponent;
 
 namespace HackSystem.Web.Pages
 {
@@ -56,6 +57,11 @@ namespace HackSystem.Web.Pages
 
         private async Task RefreshTokenInfo()
         {
+        }
+
+        private async Task PopToast()
+        {
+            await this.GetToastContainer().PopToastAsync("测试", "测试弹窗", Icons.Warning, true, 3000);
         }
     }
 }
