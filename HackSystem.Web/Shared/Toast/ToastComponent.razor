@@ -1,8 +1,7 @@
 ﻿@inject IJSRuntime jsRuntime
 @inject ILogger<ToastComponent> logger
-
 @* 魔法！勿动！@key 指令是必须的 *@
-<div id="@this.ToastDetail.Id" @key="@this.ToastDetail.Id" data-containerid="@this.ToastDetail.ContainerId" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="pointer-events:auto;">
+<div id="@this.ToastDetail.Id" @key="@this.ToastDetail.Id" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="pointer-events:auto;">
     <div class="toast-header">
         @switch (this.ToastDetail.Icon)
         {
@@ -37,4 +36,7 @@
 @code{
     [Parameter]
     public ToastDetail ToastDetail { get; set; }
+
+    [Parameter]
+    public DotNetObjectReference<IToastContainer> ToastContainerInterop { get; set; }
 }

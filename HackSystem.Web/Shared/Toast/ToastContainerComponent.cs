@@ -1,6 +1,6 @@
 ﻿using System;
-using HackSystem.Web.Shared.Toast.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.JSInterop;
 using static HackSystem.Web.Shared.Toast.ToastDetail;
 
 namespace HackSystem.Web.Shared.Toast
@@ -11,6 +11,8 @@ namespace HackSystem.Web.Shared.Toast
     /// <remarks> 需要配合 blazor.toast.js 使用 </remarks>
     public partial class ToastContainerComponent : IToastContainer, IDisposable
     {
+        private DotNetObjectReference<IToastContainer> interopReference;
+
         public ToastContainerComponent()
         {
         }
@@ -19,19 +21,7 @@ namespace HackSystem.Web.Shared.Toast
         {
             base.OnInitialized();
 
-            ToastInterop.ToastChange += this.ToastInterop_ToastChange;
-            ToastInterop.CreateToastCollection(this.Id);
-        }
-
-        private void ToastInterop_ToastChange(object sender, ToastChangeEventArgs e)
-        {
-            if (!this.Id.Equals(e.ToastDetail.ContainerId, StringComparison.InvariantCultureIgnoreCase))
-                return;
-            // 由 Toast 销毁不需要重新渲染组件，否则将会闪烁
-            if (e.EventType == ToastChangeEventArgs.ToastEventTypes.Hide)
-                return;
-
-            this.StateHasChanged();
+            interopReference = DotNetObjectReference.Create<IToastContainer>(this);
         }
 
         public void PopToast(string title, string message, Icons icon = Icons.HackSystem, bool autoHide = true, int hideDelay = 3000)
@@ -39,20 +29,27 @@ namespace HackSystem.Web.Shared.Toast
             this.logger.LogDebug($"Pop a Toast: {title}");
             var toast = new ToastDetail()
             {
-                ContainerId = this.Id,
                 Title = title,
                 Message = message,
                 Icon = icon,
                 AutoHide = autoHide,
                 HideDelay = hideDelay,
             };
-            ToastInterop.PopToast(toast);
+
+            this.Toasts.Add(toast.Id, toast);
             this.StateHasChanged();
+        }
+
+        [JSInvokable]
+        public void CloseToast(string toastId)
+        {
+            this.Toasts.Remove(toastId);
         }
 
         public void Dispose()
         {
-            ToastInterop.RemoveToastCollection(this.Id);
+            this.Toasts.Clear();
+            interopReference.Dispose();
         }
     }
 }

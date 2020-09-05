@@ -1,10 +1,11 @@
 ﻿@implements IToastContainer
 @inject ILogger<ToastContainerComponent> logger
+@inject IJSRuntime jsRuntime
 
 <div class="position-fixed p-3" style="overflow-y:hidden; top:@(top)rem; bottom:@(bottom)rem; right:0; max-width:365px;min-width:365px;pointer-events: none;z-index:@z_Index;">
-    @foreach (var toast in this.ToastSet.Values)
+    @foreach (var toast in this.Toasts.Values.OrderBy(detail => detail.CreateTime).ThenByDescending(detail => detail.Icon))
     {
-        <ToastComponent ToastDetail="toast" />
+        <ToastComponent ToastContainerInterop="this.interopReference" ToastDetail="toast" />
     }
 </div>
 
@@ -12,8 +13,6 @@
     private int z_Index = 512;
     private int top = 0;
     private int bottom = 0;
-
-    public string Id { get; protected set; } = $"toastConteiner_{Guid.NewGuid():N}";
 
     [Parameter]
     public int Z_Index { get => this.z_Index; set => this.z_Index = value; }
@@ -24,5 +23,5 @@
     [Parameter]
     public int Bottom { get => this.bottom; set => this.bottom = value; }
 
-    protected IReadOnlyDictionary<string, ToastDetail> ToastSet { get => ToastInterop.GetToastCollection(this.Id); }
+    private readonly Dictionary<string, ToastDetail> Toasts = new Dictionary<string, ToastDetail>();
 }

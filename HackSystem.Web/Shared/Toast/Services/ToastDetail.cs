@@ -17,8 +17,6 @@ namespace HackSystem.Web.Shared.Toast
 
         public string Id { get; protected set; } = $"toast_{Guid.NewGuid():N}";
 
-        public string ContainerId { get; set; }
-
         public string Title { get; set; } = "Hack System";
 
         public string Message { get; set; } = "Hack System Toast Message.";
