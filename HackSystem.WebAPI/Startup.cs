@@ -36,7 +36,9 @@ namespace HackSystem.WebAPI
 
             // 配置数据库交互
             services.AddDbContext<HackSystemDBContext>(options =>
-                    options.UseSqlite(this.Configuration.GetConnectionString("HSDB")));
+                    options
+                        .UseSqlite(this.Configuration.GetConnectionString("HSDB"))
+                        .UseLazyLoadingProxies());
 
             // 注册 Identity 服务及配置
             services

@@ -26,9 +26,10 @@ namespace HackSystem.WebAPI.DataAccess
 
             builder.Entity<UserProgramMap>().HasOne(map => map.Program).WithMany(program => program.UserProgramMaps).HasForeignKey(map => map.ProgramId).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<UserProgramMap>().HasOne(map => map.User).WithMany(user => user.UserProgramMaps).HasForeignKey(map => map.UserId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<UserProgramMap>().HasKey(map => new { map.UserId, map.ProgramId });
 
             builder.Entity<BasicProgram>().HasIndex(program => new { program.Id, program.Name }, $"{nameof(BasicProgram)}_Index");
-            builder.Entity<UserProgramMap>().HasIndex(map => new { map.Id, map.UserId }, $"{nameof(UserProgramMap)}_Index");
+            builder.Entity<UserProgramMap>().HasIndex(map => new { map.UserId, map.ProgramId }, $"{nameof(UserProgramMap)}_Index");
 
             builder.InitializeBasicProgramData();
         }

@@ -13,6 +13,7 @@ namespace HackSystem.WebAPI
                 .Build()
                 .InitializeDatabase()
                 .InitializeIdentityData()
+                .InitializeUserProgramMapData()
                 .Run();
         }
 
