@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using HackSystem.WebDataTransfer.Program;
 using static HackSystem.Web.Shared.Toast.ToastDetail;
 
-namespace HackSystem.Web.Pages
+namespace HackSystem.Web.Pages.Desktop
 {
     public partial class DesktopComponent
     {
