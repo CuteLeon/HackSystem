@@ -90,7 +90,7 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
                         result = await userManager.AddToRolesAsync(user, roles);
                         if (result.Succeeded)
                         {
-                            logger.LogInformation($"加入角色 {roles} 成功");
+                            logger.LogInformation($"加入角色 {string.Join("、", roles)} 成功");
                         }
                         else
                         {

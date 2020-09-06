@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,13 +36,20 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
 
             try
             {
-                logger.LogDebug($"开始数据库自动迁移...");
-                dbContext.Database.Migrate();
-                logger.LogDebug($"数据库自动迁移完成");
+                logger.LogDebug($"检查数据库创建...");
+                await dbContext.Database.EnsureCreatedAsync();
+                logger.LogDebug($"检查数据库迁移...");
+                var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
+                if (pendingMigrations.Any())
+                {
+                    logger.LogInformation($"需要合并的被挂起迁移：\n\t{string.Join("、", pendingMigrations)}");
+                    await dbContext.Database.MigrateAsync();
+                }
+                logger.LogDebug($"数据库检查完成");
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, $"数据库自动迁移失败：");
+                logger.LogError(ex, $"数据库检查失败：");
             }
 
             try
