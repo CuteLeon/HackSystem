@@ -8,21 +8,29 @@ using HackSystem.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 
 namespace HackSystem.WebAPI.DataAccess.SeedData
 {
-    public class SeedIdentityData
+    public static class IdentityDatabaseInitializer
     {
+        public static IHost InitializeIdentityData(this IHost host)
+        {
+            InitializeIdentityDataAsync(host).ConfigureAwait(false);
+
+            return host;
+        }
+
         /// <summary>
         /// 初始化身份信息
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static async Task InitializeAsync(IServiceProvider services)
+        public static async Task InitializeIdentityDataAsync(IHost host)
         {
-            var userManager = services.GetRequiredService<UserManager<HackSystemUser>>();
-            var roleManager = services.GetRequiredService<RoleManager<HackSystemRole>>();
-            var logger = services.GetRequiredService<ILogger<SeedIdentityData>>();
+            var userManager = host.Services.GetRequiredService<UserManager<HackSystemUser>>();
+            var roleManager = host.Services.GetRequiredService<RoleManager<HackSystemRole>>();
+            var logger = host.Services.GetRequiredService<ILogger<HackSystemDBContext>>();
 
             // 初始化角色
             foreach (string roleName in new string[]

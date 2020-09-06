@@ -6,28 +6,28 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.DataAccess.SeedData
+namespace HackSystem.WebAPI.DataAccess
 {
-    public static class SeedDatabase
+    public static class DatabaseInitializer
     {
         /// <summary>
-        /// 填充种子数据
+        /// 初始化数据库
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
-        public static IHost SeedData(this IHost host)
+        public static IHost InitializeDatabase(this IHost host)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
 
-            InitializeDatabase(host).ConfigureAwait(false);
+            InitializeDatabaseAsync(host).ConfigureAwait(false);
 
             return host;
         }
 
-        private async static Task InitializeDatabase(IHost host)
+        private async static Task InitializeDatabaseAsync(IHost host)
         {
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
@@ -50,15 +50,6 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
             catch (Exception ex)
             {
                 logger.LogError(ex, $"数据库检查失败：");
-            }
-
-            try
-            {
-                await SeedIdentityData.InitializeAsync(services);
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "填充种子数据遇到异常");
             }
         }
     }

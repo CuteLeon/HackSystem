@@ -1,4 +1,5 @@
-﻿using HackSystem.WebAPI.Model.Identity;
+﻿using HackSystem.WebAPI.DataAccess.DataSeed;
+using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Model.Map.UserMap;
 using HackSystem.WebAPI.Model.Program;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -28,6 +29,8 @@ namespace HackSystem.WebAPI.DataAccess
 
             builder.Entity<BasicProgram>().HasIndex(program => new { program.Id, program.Name }, $"{nameof(BasicProgram)}_Index");
             builder.Entity<UserProgramMap>().HasIndex(map => new { map.Id, map.UserId }, $"{nameof(UserProgramMap)}_Index");
+
+            builder.InitializeBasicProgramData();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
