@@ -28,9 +28,9 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
         /// <returns></returns>
         public static async Task InitializeIdentityDataAsync(IHost host)
         {
-            var userManager = host.Services.GetRequiredService<UserManager<HackSystemUser>>();
-            var roleManager = host.Services.GetRequiredService<RoleManager<HackSystemRole>>();
-            var logger = host.Services.GetRequiredService<ILogger<HackSystemDBContext>>();
+            var userManager = host.Services.CreateScope().ServiceProvider.GetRequiredService<UserManager<HackSystemUser>>();
+            var roleManager = host.Services.CreateScope().ServiceProvider.GetRequiredService<RoleManager<HackSystemRole>>();
+            var logger = host.Services.CreateScope().ServiceProvider.GetRequiredService<ILogger<HackSystemDBContext>>();
 
             // 初始化角色
             foreach (string roleName in new string[]
