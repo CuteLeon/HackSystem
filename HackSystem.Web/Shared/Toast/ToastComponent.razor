@@ -1,7 +1,7 @@
 ﻿@inject IJSRuntime jsRuntime
 @inject ILogger<ToastComponent> logger
 @* 魔法！勿动！@key 指令是必须的 *@
-<div id="@this.ToastDetail.Id" @key="@this.ToastDetail.Id" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="pointer-events:auto;">
+<div id="@this.ToastDetail.Id" @key="@this.ToastDetail.Id" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="pointer-events:auto;backdrop-filter: blur(4px);">
     <div class="toast-header">
         @switch (this.ToastDetail.Icon)
         {
