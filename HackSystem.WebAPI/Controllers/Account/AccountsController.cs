@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HackSystem.WebAPI.Authentication.Services;
+using AutoMapper;
 
 namespace HackSystem.WebAPI.Controllers.Account
 {
@@ -19,11 +20,13 @@ namespace HackSystem.WebAPI.Controllers.Account
     {
         private readonly ILogger<AccountsController> logger;
         private readonly ITokenGenerator tokenGenerator;
+        private readonly IMapper mapper;
         private readonly SignInManager<HackSystemUser> signInManager;
 
         public AccountsController(
             ILogger<AccountsController> logger,
             ITokenGenerator tokenGenerator,
+            IMapper mapper,
             SignInManager<HackSystemUser> signInManager,
             RoleManager<HackSystemRole> roleManager,
             UserManager<HackSystemUser> userManager)
@@ -31,6 +34,7 @@ namespace HackSystem.WebAPI.Controllers.Account
         {
             this.logger = logger;
             this.tokenGenerator = tokenGenerator;
+            this.mapper = mapper;
             this.signInManager = signInManager;
         }
 
@@ -149,7 +153,8 @@ namespace HackSystem.WebAPI.Controllers.Account
                 throw new ArgumentException(nameof(ClaimTypes.Name));
 
             var user = await userManager.FindByNameAsync(userName);
-            return this.Ok(user);
+            var result = this.mapper.Map<AccountInfoDTO>(user);
+            return this.Ok(result);
         }
     }
 }

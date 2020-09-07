@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HackSystem.WebAPI.Model.Map.UserMap;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebDataTransfer.Program;
 
@@ -13,6 +14,8 @@ namespace HackSystem.WebAPI.Mappers.ProgramMapper
 
             this.CreateMap<CreateBasicProgramDTO, BasicProgram>();
             this.CreateMap<UpdateBasicProgramDTO, BasicProgram>();
+
+            this.CreateMap<UserProgramMap, UserProgramMapDTO>();
         }
     }
 }
