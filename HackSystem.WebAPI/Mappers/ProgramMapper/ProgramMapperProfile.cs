@@ -10,7 +10,8 @@ namespace HackSystem.WebAPI.Mappers.ProgramMapper
         public ProgramMapperProfile()
         {
             this.CreateMap<QueryBasicProgramDTO, BasicProgram>();
-            this.CreateMap<BasicProgram, QueryBasicProgramDTO>();
+            this.CreateMap<BasicProgram, QueryBasicProgramDTO>()
+                .ForMember(dto => dto.IconUrl, map => map.MapFrom(program => $"~/image/Icon/{program.Id}.png"));
 
             this.CreateMap<CreateBasicProgramDTO, BasicProgram>();
             this.CreateMap<UpdateBasicProgramDTO, BasicProgram>();

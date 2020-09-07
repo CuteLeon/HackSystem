@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using HackSystem.WebAPI.Model.Program;
+using HackSystem.Common;
 using HackSystem.WebAPI.Services.API.DataServices.Program;
 using HackSystem.WebDataTransfer.Program;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +13,7 @@ namespace HackSystem.WebAPI.Controllers.Program
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = CommonSense.Roles.HackerRole)]
     public class BasicProgramController : ControllerBase
     {
         private readonly ILogger<BasicProgramController> logger;
@@ -44,36 +44,6 @@ namespace HackSystem.WebAPI.Controllers.Program
         {
             this.logger.LogInformation($"Query Basic Programs id = {programId}");
             var entity = await this.basicProgramDataService.FindAsync(programId);
-            var result = this.mapper.Map<QueryBasicProgramDTO>(entity);
-            return result;
-        }
-
-        [HttpPost]
-        public async Task<QueryBasicProgramDTO> Create([FromBody] CreateBasicProgramDTO basicProgram)
-        {
-            this.logger.LogInformation($"Create Basic Programs: {basicProgram.Name}");
-            var entity = this.mapper.Map<BasicProgram>(basicProgram);
-            entity = await this.basicProgramDataService.AddAsync(entity);
-            var result = this.mapper.Map<QueryBasicProgramDTO>(entity);
-            return result;
-        }
-
-        [HttpPut]
-        public async Task<QueryBasicProgramDTO> Update([FromBody] UpdateBasicProgramDTO basicProgram)
-        {
-            this.logger.LogInformation($"Update Basic Programs: {basicProgram.Name}");
-            var entity = this.mapper.Map<BasicProgram>(basicProgram);
-            entity = this.basicProgramDataService.Update(entity);
-            var result = this.mapper.Map<QueryBasicProgramDTO>(entity);
-            return result;
-        }
-
-        [HttpDelete]
-        public async Task<QueryBasicProgramDTO> Delete(string programId)
-        {
-            this.logger.LogInformation($"Delete Basic Programs id = {programId}");
-            var entity = await this.basicProgramDataService.FindAsync(programId);
-            this.basicProgramDataService.Remove(entity);
             var result = this.mapper.Map<QueryBasicProgramDTO>(entity);
             return result;
         }
