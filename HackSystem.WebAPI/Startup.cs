@@ -10,6 +10,7 @@ using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using HackSystem.WebAPI.Services.FileStores.Configurations;
 
 namespace HackSystem.WebAPI
 {
@@ -62,6 +63,7 @@ namespace HackSystem.WebAPI
             // ≈‰÷√∑˛ŒÒ
             var jwtConfiguration = this.Configuration.GetSection("JwtConfiguration").Get<JwtAuthenticationOptions>();
             services
+                .Configure<FileStoreConfiguration>(this.Configuration.GetSection("FileStoreConfiguration"))
                 .AddAutoMapper(typeof(Startup).Assembly)
                 .AddAPIServices()
                 .AddAPIAuthentication(jwtConfiguration);
