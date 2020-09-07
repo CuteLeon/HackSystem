@@ -8,7 +8,7 @@ namespace HackSystem.WebAPI.Services.Extensions
     {
         public static IServiceCollection AddAPIServices(this IServiceCollection services)
         {
-            services.AddScoped<IBasicProgramDataService, BasicProgramDataService>();
+            services.AddScoped<IUserBasicProgramMapDataService, UserBasicProgramMapDataService>();
 
             return services;
         }
