@@ -17,6 +17,6 @@ namespace HackSystem.WebAPI.Model.Program
         [DefaultValue(true)]
         public bool Enabled { get; set; }
 
-        public virtual IList<UserProgramMap> UserProgramMaps { get; set; }
+        public virtual IList<UserBasicProgramMap> UserProgramMaps { get; set; }
     }
 }

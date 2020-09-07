@@ -4,7 +4,7 @@ using HackSystem.WebAPI.Model.Program;
 
 namespace HackSystem.WebAPI.Model.Map.UserMap
 {
-    public class UserProgramMap
+    public class UserBasicProgramMap
     {
         public string UserId { get; set; }
 
@@ -12,7 +12,7 @@ namespace HackSystem.WebAPI.Model.Map.UserMap
 
         public string ProgramId { get; set; }
 
-        public virtual ProgramBase Program { get; set; }
+        public virtual BasicProgram BasicProgram { get; set; }
 
         [DefaultValue(false)]
         public bool Hide { get; set; }

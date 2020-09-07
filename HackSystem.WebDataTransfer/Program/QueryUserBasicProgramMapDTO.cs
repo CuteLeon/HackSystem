@@ -1,8 +1,8 @@
 ﻿namespace HackSystem.WebDataTransfer.Program
 {
-    public class QueryUserProgramMapDTO
+    public class QueryUserBasicProgramMapDTO
     {
-        public QueryBasicProgramDTO Program { get; set; }
+        public QueryBasicProgramDTO BasicProgram { get; set; }
 
         public bool Hide { get; set; }
 

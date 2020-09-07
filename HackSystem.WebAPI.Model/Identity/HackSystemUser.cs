@@ -20,6 +20,6 @@ namespace HackSystem.WebAPI.Model.Identity
         [DefaultValue(0)]
         public int Level { get; set; }
 
-        public virtual IList<UserProgramMap> UserProgramMaps { get; set; }
+        public virtual IList<UserBasicProgramMap> UserProgramMaps { get; set; }
     }
 }
