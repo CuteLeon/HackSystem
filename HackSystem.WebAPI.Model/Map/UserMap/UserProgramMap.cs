@@ -14,5 +14,11 @@ namespace HackSystem.WebAPI.Model.Map.UserMap
         public virtual ProgramBase Program { get; set; }
 
         public bool Hide { get; set; }
+
+        public bool PinToDock { get; set; }
+
+        public bool PinToTop { get; set; }
+
+        public string Rename { get; set; }
     }
 }

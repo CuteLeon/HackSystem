@@ -17,6 +17,6 @@ namespace HackSystem.WebDataTransfer.Account
 
         public virtual bool PhoneNumberConfirmed { get; set; }
 
-        public virtual IList<UserProgramMapDTO> UserProgramMaps { get; set; }
+        public virtual IList<QueryUserProgramMapDTO> UserProgramMaps { get; set; }
     }
 }
