@@ -32,14 +32,14 @@ namespace HackSystem.WebAPI.Services.API.DataServices
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        TEntity Update(TEntity entity);
+        Task<TEntity> UpdateAsync(TEntity entity);
 
         /// <summary>
         /// 更新实体集合
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        int UpdateRange(IEnumerable<TEntity> entities);
+        Task<int> UpdateRangeAsync(IEnumerable<TEntity> entities);
         #endregion
 
         #region 删除
@@ -49,14 +49,14 @@ namespace HackSystem.WebAPI.Services.API.DataServices
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        TEntity Remove(TEntity entity);
+        Task<TEntity> RemoveAsync(TEntity entity);
 
         /// <summary>
         /// 移除实体集合
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        int RemoveRange(IEnumerable<TEntity> entities);
+        Task<int> RemoveRangeAsync(IEnumerable<TEntity> entities);
         #endregion
 
         #region 加载

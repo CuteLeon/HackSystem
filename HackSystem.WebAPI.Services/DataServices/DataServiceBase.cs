@@ -35,7 +35,7 @@ namespace HackSystem.WebAPI.Services.DataServices
         public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
             var result = await this.hackSystemDBContext.Set<TEntity>().AddAsync(entity);
-            this.hackSystemDBContext.SaveChanges();
+            await this.hackSystemDBContext.SaveChangesAsync();
             return result.Entity;
         }
 
@@ -59,10 +59,10 @@ namespace HackSystem.WebAPI.Services.DataServices
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual TEntity Update(TEntity entity)
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity)
         {
             var result = this.hackSystemDBContext.Set<TEntity>().Update(entity);
-            this.hackSystemDBContext.SaveChanges();
+            await this.hackSystemDBContext.SaveChangesAsync();
             return result.Entity;
         }
 
@@ -71,10 +71,10 @@ namespace HackSystem.WebAPI.Services.DataServices
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual int UpdateRange(IEnumerable<TEntity> entities)
+        public virtual async Task<int> UpdateRangeAsync(IEnumerable<TEntity> entities)
         {
             this.hackSystemDBContext.Set<TEntity>().UpdateRange(entities);
-            var results = this.hackSystemDBContext.SaveChanges();
+            var results = await this.hackSystemDBContext.SaveChangesAsync();
             return results;
         }
         #endregion
@@ -86,10 +86,10 @@ namespace HackSystem.WebAPI.Services.DataServices
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual TEntity Remove(TEntity entity)
+        public virtual async Task<TEntity> RemoveAsync(TEntity entity)
         {
             var result = this.hackSystemDBContext.Set<TEntity>().Remove(entity);
-            this.hackSystemDBContext.SaveChanges();
+            await this.hackSystemDBContext.SaveChangesAsync();
             return result.Entity;
         }
 
@@ -98,10 +98,10 @@ namespace HackSystem.WebAPI.Services.DataServices
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual int RemoveRange(IEnumerable<TEntity> entities)
+        public virtual async Task<int> RemoveRangeAsync(IEnumerable<TEntity> entities)
         {
             this.hackSystemDBContext.Set<TEntity>().RemoveRange(entities);
-            var results = this.hackSystemDBContext.SaveChanges();
+            var results = await this.hackSystemDBContext.SaveChangesAsync();
             return results;
         }
         #endregion
