@@ -6,9 +6,9 @@
 @inject NavigationManager navigationManager
 
 <div class="row container-fluid m-0 p-0 position-fixed img-fluid" style="overflow: hidden; width: 100%; height: 100%; background-image: url(images/LoginBackground.jpg); background-size: cover; background-position-x: center;">
-    <div class="card col-10 col-md-8 d-flex mx-auto mt-auto mb-5 fixed-bottom shadow-lg">
-        <div class="card-body">
-            <h5 class="card-title">登录</h5>
+    <div class="card col-10 col-md-8 d-flex mx-auto mt-auto mb-5 fixed-bottom bg-transparent shadow-lg" style="backdrop-filter: blur(10px);">
+        <div class="card-body text-white" style="text-shadow:0 0 10px #000">
+            <h4 class="card-title">登录</h4>
 
             @if (ShowErrors)
             {
