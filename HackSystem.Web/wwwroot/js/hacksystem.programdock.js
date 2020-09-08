@@ -15,12 +15,14 @@
     },
     mouseDownIcon: function (e) {
         $(e).prev().animate({
-            opacity: 0.8,
-        }, 200);
+            opacity: 1,
+            margin: '-50px 0 0 0',
+        }, 150);
     },
     mouseUpIcon: function (e) {
         $(e).prev().animate({
             opacity: 1,
-        }, 200);
+            margin: '-25px 0 0 0',
+        }, 150);
     }
 };
