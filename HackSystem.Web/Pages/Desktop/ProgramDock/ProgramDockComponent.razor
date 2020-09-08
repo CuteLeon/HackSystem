@@ -1,0 +1,17 @@
+﻿@inject IJSRuntime jsRuntime
+
+@if (this.BasicProgramMaps.Count > 0)
+{
+    <div class="fixed-bottom d-none d-md-block border-bottom border-white m-5 rounded-pill shadow" style="backdrop-filter: blur(8px);">
+        <div class="d-flex justify-content-center user-select-none">
+            @foreach (var programMap in this.BasicProgramMaps.Values)
+            {
+                <ProgramInDockComponent @key="@programMap.BasicProgram.Id" Name="@(string.IsNullOrWhiteSpace(programMap.Rename)?programMap.BasicProgram.Name:programMap.Rename)" IconUrl="@programMap.BasicProgram.IconUrl" />
+            }
+        </div>
+    </div>
+}
+
+@code{
+    protected Dictionary<string, QueryUserBasicProgramMapDTO> BasicProgramMaps { get; set; } = new Dictionary<string, QueryUserBasicProgramMapDTO>();
+}

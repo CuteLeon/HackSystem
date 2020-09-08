@@ -3,20 +3,18 @@
 @attribute [Authorize(Roles = CommonSense.Roles.HackerRole)]
 
 @inject ILogger<DesktopComponent> logger
+@inject IOptionsMonitor<APIConfiguration> apiConfiguration
 @inject IBasicProgramService basicProgramService
 
 <button class="btn btn-warning" @onclick="OnTest">测试按钮</button>
 
-@foreach (var programMap in this.BasicProgramMaps ?? Enumerable.Empty<QueryUserBasicProgramMapDTO>())
-{
-    @programMap.BasicProgram.Name
-}
-
-<ProgramDockComponent />
+<ProgramDockComponent @ref="@ProgramDockComponent" />
 
 @code {
     [CascadingParameter]
     private Func<IToastContainer> GetToastContainer { get; set; }
 
-    protected IEnumerable<QueryUserBasicProgramMapDTO> BasicProgramMaps { get; set; }
+    protected Dictionary<string, QueryUserBasicProgramMapDTO> BasicProgramMaps { get; set; } = new Dictionary<string, QueryUserBasicProgramMapDTO>();
+
+    protected ProgramDockComponent ProgramDockComponent { get; set; }
 }

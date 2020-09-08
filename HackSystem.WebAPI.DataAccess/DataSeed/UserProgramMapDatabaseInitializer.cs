@@ -32,7 +32,7 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
                         {
                             UserId = user.Id,
                             ProgramId = program.Id,
-                            Hide = false,
+                            PinToDock = true,
                         });
                     }
                 }
