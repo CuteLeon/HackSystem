@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using HackSystem.Web.Authentication.Providers;
@@ -86,9 +87,17 @@ namespace HackSystem.Web.Services.Authentication
         {
             logger.LogDebug($"请求注销用户");
 
-            var currentToken = await this.hackSystemAuthenticationStateHandler.GetCurrentTokenAsync();
-            httpClient.AddAuthorizationHeader(currentToken);
-            await httpClient.GetAsync("api/accounts/logout");
+            try
+            {
+                var currentToken = await this.hackSystemAuthenticationStateHandler.GetCurrentTokenAsync();
+                httpClient.AddAuthorizationHeader(currentToken);
+                await httpClient.GetAsync("api/accounts/logout");
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning($"Logout Failed: {ex.Message}");
+            }
+
             await this.hackSystemAuthenticationStateHandler.UpdateAuthenticattionStateAsync(string.Empty);
         }
     }
