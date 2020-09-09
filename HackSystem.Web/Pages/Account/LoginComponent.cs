@@ -12,6 +12,7 @@ namespace HackSystem.Web.Pages.Account
 
         private async Task OnLogin()
         {
+            this.Logging = true;
             this.ShowErrors = false;
             this.logger.LogDebug($"User try to Login: {this.loginDto.UserName}");
 
@@ -37,6 +38,8 @@ namespace HackSystem.Web.Pages.Account
                 this.Error = ex.Message;
                 this.ShowErrors = true;
             }
+
+            this.Logging = false;
         }
     }
 }

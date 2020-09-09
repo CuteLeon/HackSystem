@@ -42,7 +42,19 @@
                         <a class="btn btn-link" href="#">忘记密码</a>
                     </div>
                     <div class="col-12 col-md-6">
-                        <button type="submit" class="btn btn-block btn-primary">登录</button>
+                        @if (this.Logging)
+                        {
+                            <button type="submit" class="btn btn-block btn-secondary">
+                                <p class="spinner-border spinner-border-sm text-light mb-0" role="status"></p>
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-block btn-primary">
+                                <text>登录</text>
+                            </button>
+                        }
+
                     </div>
                 </div>
             </EditForm>
@@ -53,6 +65,7 @@
 @code {
     private bool ShowErrors { get; set; }
     private string Error { get; set; }
+    private bool Logging { get; set; } = false;
     private readonly LoginDTO loginDto = new LoginDTO();
 
     public void OnCloseAlert() => this.ShowErrors = false;
