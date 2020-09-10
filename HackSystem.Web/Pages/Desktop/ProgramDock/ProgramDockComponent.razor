@@ -1,15 +1,11 @@
-﻿@inject IJSRuntime jsRuntime
-
-@if (this.BasicProgramMaps.Count > 0)
+﻿@if (this.BasicProgramMaps.Count > 0)
 {
-    <div class="d-none d-md-flex justify-content-center fixed-bottom mb-2 mb-md-5" style="pointer-events:none;">
-        <div class="border-bottom border-white px-5 rounded-pill shadow" style="pointer-events: auto; backdrop-filter: blur(8px);">
-            <div class="d-flex justify-content-center user-select-none">
-                @foreach (var programMap in this.BasicProgramMaps.Values)
-                {
-                    <ProgramDockIconComponent @key="@programMap.BasicProgram.Id" Name="@(string.IsNullOrWhiteSpace(programMap.Rename)?programMap.BasicProgram.Name:programMap.Rename)" IconUrl="@programMap.BasicProgram.IconUrl" />
-                }
-            </div>
+    <div class="border-bottom border-white px-5 rounded-pill shadow" style="pointer-events: auto; backdrop-filter: blur(10px);">
+        <div class="d-flex justify-content-center user-select-none">
+            @foreach (var programMap in this.BasicProgramMaps.Values)
+            {
+                <ProgramDockIconComponent @key="@programMap.BasicProgram.Id" Name="@(string.IsNullOrWhiteSpace(programMap.Rename)?programMap.BasicProgram.Name:programMap.Rename)" IconUrl="@programMap.BasicProgram.IconUrl" />
+            }
         </div>
     </div>
 }

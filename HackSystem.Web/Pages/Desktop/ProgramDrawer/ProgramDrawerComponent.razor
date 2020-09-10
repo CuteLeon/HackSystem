@@ -1,0 +1,15 @@
+﻿@if (BasicProgramMaps.Any())
+{
+    <div class="rounded-lg" style="height:100%;overflow-y:auto;">
+        <div class="d-flex flex-wrap user-select-none">
+            @foreach (var programMap in this.BasicProgramMaps.Values)
+            {
+                <ProgramDrawerIconComponent @key="@programMap.BasicProgram.Id" Name="@(string.IsNullOrWhiteSpace(programMap.Rename)?programMap.BasicProgram.Name:programMap.Rename)" IconUrl="@programMap.BasicProgram.IconUrl" />
+            }
+        </div>
+    </div>
+}
+
+@code{
+    protected Dictionary<string, QueryUserBasicProgramMapDTO> BasicProgramMaps { get; set; } = new Dictionary<string, QueryUserBasicProgramMapDTO>();
+}

@@ -1,0 +1,16 @@
+﻿<div class="m-2 mb-3 position-relative">
+    <figure class="mb-0">
+        <img src="@this.IconUrl" class="img-fluid m-1" style="width:75px;height:75px;" />
+        <figcaption class="text-white font-weight-bold text-center stretched-link" style="text-shadow: 0px 0px 10px #000;">
+            @this.Name
+        </figcaption>
+    </figure>
+</div>
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string IconUrl { get; set; }
+}

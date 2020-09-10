@@ -46,11 +46,13 @@ namespace HackSystem.Web.Pages.Desktop
                         })
                         .ToDictionary(map => map.BasicProgram.Id, map => map);
 
+                    this.ProgramDrawerComponent.LoadProgramDrawer(maps);
                     this.ProgramDockComponent.LoadProgramDock(maps.Where(map => map.PinToDock));
                 }
                 else
                 {
                     this.ProgramDockComponent.ClearProgramDock();
+                    this.ProgramDrawerComponent.ClearProgramDrawer();
                     this.BasicProgramMaps.Clear();
                 }
                 this.GetToastContainer().PopToast("获取程序映射成功", $"获取程序映射信息成功！共 {this.BasicProgramMaps.Count()} 个。", Icons.Information, true, 3000);
