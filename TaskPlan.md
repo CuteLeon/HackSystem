@@ -14,13 +14,13 @@
 
 ## 图标容器
 
-​	桌面主体左侧部分为图标容器，用于显示用户的程序（图标和名称）
+​	桌面主体部分为图标容器，用于显示用户的程序（图标和名称）
 
 1. ~~容器背景使用 backdropoff-filter 效果~~
 2. ~~图标使用响应式排列，在不同尺寸显示不同的列数~~
-3. 容器使用Tab页，以按照程序的分类区分显示，额外：全部Tab、隐藏Tab
+3. 顶部控件组筛选程序图标：分类下拉框(全部(默认)|系统|办公|娱乐|...)，状态下拉框(可见(默认)|全部|隐藏)，名称搜索框，
 4. 图标鼠标进入和离开显示效果
-5. ~~使用拉伸链接同一处理整个卡片的事件~~
+5. ~~使用拉伸链接统一处理整个卡片的事件~~
 6. 图标右键菜单
    1. 打开
    2. 隐藏/取消隐藏
@@ -44,7 +44,7 @@
 
 ## 信息面板
 
-​	桌面主题右侧部分为信息面板，用于显示数据信息（天气、时间、任务...）
+​	桌面主体浮动显示信息面板，用于显示数据信息（天气、时间、任务...）
 
 # 应用商店
 
@@ -95,3 +95,54 @@
    2. ~~固定到坞~~
    3. ~~固定到顶部~~
    4. ~~重命名~~
+
+
+
+# Z-Index
+
+## 桌面
+
+### 图标容器
+
+```scss
+$zindex-iconcontainer:    0-49 !default;
+```
+
+### 信息面板
+
+```scss
+$zindex-infopanel:    50-149 !default;
+```
+
+### 程序坞
+
+```scss
+$zindex-programdock:    150-199 !default;
+```
+
+## 程序
+
+### 普通程序
+
+```scss
+$zindex-normalprogram:    200-849 !default;
+```
+
+### 置顶程序
+
+```scss
+$zindex-topprogram:    850-999 !default;
+```
+
+## Bootstrap 保留
+
+```scss
+$zindex-dropdown:          1000 !default;
+$zindex-sticky:            1020 !default;
+$zindex-fixed:             1030 !default;
+$zindex-modal-backdrop:    1040 !default;
+$zindex-modal:             1050 !default;
+$zindex-popover:           1060 !default;
+$zindex-tooltip:           1070 !default;
+```
+
