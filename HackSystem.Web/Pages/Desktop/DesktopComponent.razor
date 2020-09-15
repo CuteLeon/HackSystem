@@ -6,12 +6,14 @@
 @inject IOptionsMonitor<APIConfiguration> apiConfiguration
 @inject IBasicProgramService basicProgramService
 
-<button class="btn btn-warning" @onclick="OnTest">测试按钮</button>
+<div class="fixed-top">
+    <TopBarComponent />
+</div>
 
-<div class="position-fixed w-100 m-0" style="top:0px;bottom:0px;overflow:hidden;">
+<div class="w-100 h-100" style="padding-top:30px; overflow:hidden;pointer-events:none;">
     <ProgramDrawerComponent @ref="@ProgramDrawerComponent" />
 
-    <div class="rounded-lg border border-white position-fixed" style="top:3rem; right:3rem; pointer-events:none; backdrop-filter:blur(10px);">
+    <div class="rounded-lg border border-white position-fixed" style="top:4rem; right:3rem; pointer-events:none; backdrop-filter:blur(10px);">
         <p class="display-1 text-white p-3 mb-0">信息面板</p>
     </div>
 </div>

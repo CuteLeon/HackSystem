@@ -2,8 +2,7 @@
 @inject ILogger<DesktopLayout> logger
 
 <div class="container-fluid p-0 position-absolute" style="overflow: hidden; height: 100%; width: 100%; background-image: url(images/DesktopBackground.jpg); background-size: cover; background-position-y:center; background-position-x: center;">
-    <UserStateComponent />
-    <ToastContainerComponent @ref="ToastContainer" />
+    <ToastContainerComponent Top="2" @ref="ToastContainer" />
     <CascadingValue Value=@GetToastContainer>
         @Body
     </CascadingValue>

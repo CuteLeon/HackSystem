@@ -1,0 +1,9 @@
+﻿<div class="container-fluid bg-light" style="height:30px">
+    <UserStateComponent />
+    <button class="btn btn-warning btn-sm" @onclick="OnTest">测试按钮</button>
+</div>
+
+@code{
+    [CascadingParameter]
+    private Func<IToastContainer> GetToastContainer { get; set; }
+}
