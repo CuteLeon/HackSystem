@@ -8,16 +8,12 @@
 
 <button class="btn btn-warning" @onclick="OnTest">测试按钮</button>
 
-<div class="position-fixed row w-100 m-0 px-5 py-3" style="top:50px;bottom:160px;overflow-y:visible;">
-        <div class="col-12 col-md-4 m-0 p-1 order-first order-md-last" style="overflow:hidden;">
-            <div class="rounded-lg bg-light" style="height:100%;overflow-y:hidden;">
-                <p class="display-1 mb-0">信息面板</p>
-            </div>
-        </div>
+<div class="position-fixed w-100 m-0" style="top:0px;bottom:0px;overflow:hidden;">
+    <ProgramDrawerComponent @ref="@ProgramDrawerComponent" />
 
-        <div class="col-12 col-md-8 m-0 p-3" style="height:100%; overflow-y:hidden;">
-            <ProgramDrawerComponent @ref="@ProgramDrawerComponent" />
-        </div>
+    <div class="rounded-lg border border-white position-fixed" style="top:3rem; right:3rem; pointer-events:none; backdrop-filter:blur(10px);">
+        <p class="display-1 text-white p-3 mb-0">信息面板</p>
+    </div>
 </div>
 
 

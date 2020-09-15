@@ -1,8 +1,9 @@
-﻿<div class="m-2 mb-3 position-relative">
+﻿<div class="m-2 rounded position-relative" tabindex="1" onfocus="drawerEvents.focusIcon(this)" onblur="drawerEvents.blurIcon(this)">
     <figure class="mb-0">
-        <img src="@this.IconUrl" class="img-fluid m-1" style="width:75px;height:75px;" />
-        <figcaption class="text-white font-weight-bold text-center stretched-link" style="text-shadow: 0px 0px 10px #000;">
-            @this.Name
+        <img src="@this.IconUrl" class="img-fluid m-1" style="width:60px;height:60px;" />
+        <figcaption class="text-white small text-center stretched-link" style="text-shadow: 0px 0px 3px #000, 0px 1px 3px #000, 0px 1px 5px #222;"
+                    onmouseover="drawerEvents.mouseOverIcon(this)" onmouseout="drawerEvents.mouseOutIcon(this)" onmousedown="drawerEvents.mouseDownIcon(this)" onmouseup="drawerEvents.mouseUpIcon(this)">
+            <span class="d-block text-truncate" style="width:70px;">@this.Name</span>
         </figcaption>
     </figure>
 </div>
