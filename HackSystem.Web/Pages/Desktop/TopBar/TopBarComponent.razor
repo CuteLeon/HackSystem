@@ -1,9 +1,12 @@
-﻿<div class="container-fluid bg-light" style="height:30px">
-    <UserStateComponent />
-    <button class="btn btn-warning btn-sm" @onclick="OnTest">测试按钮</button>
-</div>
+﻿<div class="container-fluid justify-content-between d-inline-flex p-0 shadow-sm user-select-none" style="height: 30px; backdrop-filter: blur(15px) opacity(0.8);">
+    <MenuBarComponent></MenuBarComponent>
 
-@code{
-    [CascadingParameter]
-    private Func<IToastContainer> GetToastContainer { get; set; }
-}
+    <form class="d-none d-md-block form-inline mx-2 align-self-center">
+        <input class="form-control bg-transparent small text-white" style="height:24px;" type="search" placeholder="搜索..." aria-label="Search">
+    </form>
+
+    @* TODO: 用户状态组件重构 **@
+    <UserStateComponent />
+
+    <StatusBarComponent></StatusBarComponent>
+</div>

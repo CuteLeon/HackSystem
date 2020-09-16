@@ -1,0 +1,38 @@
+﻿<nav class="navbar navbar-expand p-0 navbar-dark">
+    <div class="navbar-brand p-0 ml-2">
+        <img class="img-fluid" src="/LogoImageSmall.png" />
+        <span>Hack System</span>
+    </div>
+
+    <ul class="navbar-nav text-nowrap">
+        <li class="nav-item active">
+            <a role="button" class="nav-link">文件</a>
+        </li>
+        <li class="nav-item active">
+            <a role="button" class="nav-link">编辑</a>
+        </li>
+        <li class="nav-item dropdown active">
+            <a role="button" class="nav-link dropdown-toggle" data-toggle="dropdown">视图</a>
+            <div class="dropdown-menu">
+                <a role="button" class="dropdown-item">顶部栏</a>
+                <a role="button" class="dropdown-item">菜单栏</a>
+                <a role="button" class="dropdown-item">状态栏</a>
+                <div class="dropdown-divider"></div>
+                <a role="button" class="dropdown-item">图标容器</a>
+                <div class="dropdown-divider"></div>
+                <a role="button" class="dropdown-item">程序坞</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a role="button" class="nav-link disabled">调试</a>
+        </li>
+        <li class="nav-item active">
+            <a role="button" class="nav-link text-warning" @onclick="OnTest">测试</a>
+        </li>
+    </ul>
+</nav>
+
+@code{
+    [CascadingParameter]
+    private Func<IToastContainer> GetToastContainer { get; set; }
+}
