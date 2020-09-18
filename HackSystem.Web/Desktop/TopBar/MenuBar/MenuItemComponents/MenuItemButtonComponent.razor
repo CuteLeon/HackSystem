@@ -1,0 +1,8 @@
+﻿@inherits MenuItemComponentBase
+
+<li @key="this.MenuItem.Key" class="nav-item
+    @(this.MenuItem.Active?"active":string.Empty)
+    @(this.MenuItem.Visible?"d-inline-block":"d-none")">
+    <a role="button" class="nav-link
+       @(this.MenuItem.Enabled?string.Empty:"disabled")">@this.MenuItem.Title</a>
+</li>

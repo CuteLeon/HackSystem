@@ -1,38 +1,59 @@
 ﻿<nav class="navbar navbar-expand p-0 navbar-dark">
     <div class="navbar-brand p-0 ml-2">
+        @* TODO: Leon: 这里优先显示激活程序的图标和名称 *@
         <img class="img-fluid" src="/LogoImageSmall.png" />
         <span>Hack System</span>
     </div>
 
+    @* TODO: Leon: 菜单项支持 Icon *@
+    @* TODO: Leon: 按钮菜单项 *@
+    @* TODO: Leon: 复选框菜单项 *@
+    @* TODO: Leon: 单选框菜单项 *@
+    @* TODO: Leon: 分割线菜单项 *@
+    @* TODO: Leon: 子菜单菜单项 *@
+    @* TODO: Leon: 菜单项点击事件，附带参数 MenuIdentity *@
+
     <ul class="navbar-nav text-nowrap">
-        <li class="nav-item active">
-            <a role="button" class="nav-link">文件</a>
-        </li>
-        <li class="nav-item active">
-            <a role="button" class="nav-link">编辑</a>
-        </li>
-        <li class="nav-item dropdown active">
-            <a role="button" class="nav-link dropdown-toggle" data-toggle="dropdown">视图</a>
-            <div class="dropdown-menu">
-                <a role="button" class="dropdown-item">顶部栏</a>
-                <a role="button" class="dropdown-item">菜单栏</a>
-                <a role="button" class="dropdown-item">状态栏</a>
-                <div class="dropdown-divider"></div>
-                <a role="button" class="dropdown-item">图标容器</a>
-                <div class="dropdown-divider"></div>
-                <a role="button" class="dropdown-item">程序坞</a>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a role="button" class="nav-link disabled">调试</a>
-        </li>
-        <li class="nav-item active">
-            <a role="button" class="nav-link text-warning" @onclick="OnTest">测试</a>
-        </li>
+        @if (this.DesktopMenuContext?.MenuItems?.Any() ?? false)
+        {
+            foreach (var menuItem in this.DesktopMenuContext.MenuItems)
+            {
+                <li>@menuItem.Title</li>
+                if (menuItem.SubMenuItems != null)
+                {
+                    <MenuItemSubMenuComponent MenuItem="menuItem"></MenuItemSubMenuComponent>
+                }
+                else
+                {
+                    switch (menuItem.MenuType)
+                    {
+                        case MenuItem.MenuTypes.Button:
+                            {
+                                <MenuItemButtonComponent MenuItem="menuItem"></MenuItemButtonComponent>
+                                break;
+                            }
+                        case MenuItem.MenuTypes.CheckBox:
+                            {
+                                <MenuItemCheckBoxComponent MenuItem="menuItem"></MenuItemCheckBoxComponent>
+                                break;
+                            }
+                        case MenuItem.MenuTypes.Radio:
+                            {
+                                <MenuItemRadioComponent MenuItem="menuItem"></MenuItemRadioComponent>
+                                break;
+                            }
+                        default: break;
+                    }
+                }
+            }
+        }
     </ul>
 </nav>
 
 @code{
     [CascadingParameter]
     private Func<IToastContainer> GetToastContainer { get; set; }
+
+    [CascadingParameter(Name = "DesktopMenuContext")]
+    protected IMenuContext DesktopMenuContext { get; set; }
 }
