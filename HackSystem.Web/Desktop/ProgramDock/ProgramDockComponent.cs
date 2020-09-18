@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using HackSystem.WebDataTransfer.Program;
 
-namespace HackSystem.Web.Pages.Desktop.ProgramDock
+namespace HackSystem.Web.Desktop.ProgramDock
 {
     public partial class ProgramDockComponent
     {

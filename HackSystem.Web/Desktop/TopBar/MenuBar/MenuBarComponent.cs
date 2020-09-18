@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using static HackSystem.Web.Toast.Model.ToastDetail;
 
-namespace HackSystem.Web.Pages.Desktop.TopBar
+namespace HackSystem.Web.Desktop.TopBar.MenuBar
 {
     public partial class MenuBarComponent
     {

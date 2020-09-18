@@ -2,7 +2,7 @@
 using System.Linq;
 using HackSystem.WebDataTransfer.Program;
 
-namespace HackSystem.Web.Pages.Desktop.ProgramDrawer
+namespace HackSystem.Web.Desktop.ProgramDrawer
 {
     public partial class ProgramDrawerComponent
     {

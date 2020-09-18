@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace HackSystem.Web.Pages.Desktop.TopBar
+namespace HackSystem.Web.Desktop.TopBar.StatusBar
 {
     public partial class StatusBarComponent
     {

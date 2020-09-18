@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static HackSystem.Web.Toast.Model.ToastDetail;
 
-namespace HackSystem.Web.Pages.Desktop
+namespace HackSystem.Web.Desktop
 {
     public partial class DesktopComponent
     {

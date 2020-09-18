@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.Pages.Account
+namespace HackSystem.Web.Account
 {
     public partial class LoginComponent
     {

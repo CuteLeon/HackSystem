@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace HackSystem.Web.Pages.Desktop.TopBar
+namespace HackSystem.Web.Desktop.TopBar
 {
     public partial class TopBarComponent
     {
