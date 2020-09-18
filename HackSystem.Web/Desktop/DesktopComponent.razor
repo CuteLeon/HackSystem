@@ -7,7 +7,9 @@
 @inject IBasicProgramService basicProgramService
 
 <div class="fixed-top">
-    <TopBarComponent />
+    <CascadingValue IsFixed="true" Name="DesktopMenuContext" Value=@MenuContext>
+        <TopBarComponent />
+    </CascadingValue>
 </div>
 
 <div class="w-100 h-100" style="padding-top:30px; overflow:hidden;pointer-events:none;">
@@ -30,4 +32,6 @@
 
     protected ProgramDockComponent ProgramDockComponent { get; set; }
     protected ProgramDrawerComponent ProgramDrawerComponent { get; set; }
+
+    protected IMenuContext MenuContext { get; set; } = new MenuContext();
 }
