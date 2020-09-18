@@ -9,7 +9,7 @@ namespace HackSystem.Web.Desktop.TopBar.StatusBar
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            await this.jsRuntime.InvokeVoidAsync("statusbar.refreshTooltip");
+            await this.jsRuntime.InvokeVoidAsync("tooltips.initTooltips");
         }
     }
 }
