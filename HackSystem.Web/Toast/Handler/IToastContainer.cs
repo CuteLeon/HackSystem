@@ -1,6 +1,6 @@
-﻿using static HackSystem.Web.Shared.Toast.ToastDetail;
+﻿using static HackSystem.Web.Toast.Model.ToastDetail;
 
-namespace HackSystem.Web.Shared.Toast
+namespace HackSystem.Web.Toast.Handler
 {
     public interface IToastContainer
     {

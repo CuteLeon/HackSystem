@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using static HackSystem.Web.Shared.Toast.ToastDetail;
+using static HackSystem.Web.Toast.Model.ToastDetail;
 
 namespace HackSystem.Web.Pages.Desktop.TopBar
 {

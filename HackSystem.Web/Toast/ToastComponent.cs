@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 
-namespace HackSystem.Web.Shared.Toast
+namespace HackSystem.Web.Toast
 {
     public partial class ToastComponent
     {

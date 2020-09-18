@@ -1,9 +1,11 @@
 ﻿using System;
+using HackSystem.Web.Toast.Model;
+using HackSystem.Web.Toast.Handler;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
-using static HackSystem.Web.Shared.Toast.ToastDetail;
+using static HackSystem.Web.Toast.Model.ToastDetail;
 
-namespace HackSystem.Web.Shared.Toast
+namespace HackSystem.Web.Toast
 {
     /// <summary>
     /// Toast 容器组件

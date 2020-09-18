@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HackSystem.Web.Shared.Toast
+namespace HackSystem.Web.Toast.Model
 {
     public class ToastDetail
     {
