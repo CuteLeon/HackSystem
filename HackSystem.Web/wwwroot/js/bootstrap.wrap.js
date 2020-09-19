@@ -4,5 +4,11 @@
     },
     hideTooltips: function () {
         $('[data-toggle="tooltip"]').tooltip('hide');
+    },
+};
+
+window.submenus = {
+    initSubMenus: function () {
+        $('[data-submenu]').submenupicker();
     }
 };

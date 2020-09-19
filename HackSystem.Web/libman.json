@@ -25,6 +25,10 @@
     {
       "library": "jquery@3.5.1",
       "destination": "wwwroot/libs/jquery/"
+    },
+    {
+      "library": "bootstrap-submenu@3.0.1",
+      "destination": "wwwroot/libs/bootstrap-submenu/"
     }
   ]
 }
