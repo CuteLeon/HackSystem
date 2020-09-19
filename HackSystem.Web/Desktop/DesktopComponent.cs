@@ -19,10 +19,19 @@ namespace HackSystem.Web.Desktop
         {
             this.MenuContext.MenuItems = new List<MenuItem>
             {
+                new MenuItem("Home", "主页", active:true),
                 new MenuItem("File", "文件").AddSubMenus(
                     new MenuItem("NewFile", "新文件"),
                     new MenuItem("OpenFile", "打开文件"),
                     new MenuItem("SaveFile", "保存文件"),
+                    new MenuItem(menuType: MenuTypes.Divider),
+                    new MenuItem("RecentFiles","最近的文件").AddSubMenus(
+                        new MenuItem("RecentFile_1", "最近的文件_1", MenuTypes.Radio, radioGroup:"RecentFilesGroup"),
+                        new MenuItem("RecentFile_2", "最近的文件_2", MenuTypes.Radio, radioGroup:"RecentFilesGroup"),
+                        new MenuItem("RecentFile_3", "最近的文件_3", MenuTypes.Radio, radioGroup:"RecentFilesGroup"),
+                        new MenuItem("RecentFile_4", "最近的文件_4", MenuTypes.Radio, radioGroup:"RecentFilesGroup"),
+                        new MenuItem("RecentFile_5", "最近的文件_5", MenuTypes.Radio, radioGroup:"RecentFilesGroup")),
+                    new MenuItem(menuType: MenuTypes.Divider),
                     new MenuItem("CloseFile", "关闭文件")),
                 new MenuItem("Edit", "编辑").AddSubMenus(
                     new MenuItem("Cut", "剪切"),
@@ -44,7 +53,7 @@ namespace HackSystem.Web.Desktop
                     new MenuItem("StatusBar", "状态栏", MenuTypes.CheckBox),
                     new MenuItem(menuType: MenuTypes.Divider),
                     new MenuItem("ProgramDock", "程序坞", MenuTypes.CheckBox)),
-                new MenuItem("Test","测试")
+                new MenuItem("Test","测试"),
             };
 
             this.MenuContext.MenuItemEvent += this.MenuContext_MenuItemEventHandler;

@@ -1,4 +1,6 @@
-﻿<nav class="navbar navbar-expand p-0 navbar-dark">
+﻿@inject IJSRuntime jsRuntime
+
+<nav class="navbar navbar-expand p-0 navbar-dark">
     <div class="navbar-brand p-0 ml-2">
         @* TODO: Leon: 这里优先显示激活程序的图标和名称 *@
         <img class="img-fluid" src="/LogoImageSmall.png" />
@@ -18,32 +20,44 @@
         {
             foreach (var menuItem in this.DesktopMenuContext.MenuItems)
             {
-                <li>@menuItem.Title</li>
                 if (menuItem.SubMenuItems != null)
                 {
-                    <MenuItemSubMenuComponent MenuItem="menuItem"></MenuItemSubMenuComponent>
+                    <li @key="menuItem.Key" class="nav-item @(menuItem.Active?"active":string.Empty) @(menuItem.Visible?string.Empty:"d-none")">
+                        <div class="dropdown">
+                            <a role="button" class="nav-link dropdown-toggle @(menuItem.Enabled?string.Empty:"disabled")" data-toggle="dropdown" data-submenu>@menuItem.Title</a>
+                            <SubMenuComponent MenuItem="menuItem"></SubMenuComponent>
+                        </div>
+                    </li>
                 }
                 else
                 {
-                    switch (menuItem.MenuType)
-                    {
-                        case MenuItem.MenuTypes.Button:
-                            {
-                                <MenuItemButtonComponent MenuItem="menuItem"></MenuItemButtonComponent>
-                                break;
-                            }
-                        case MenuItem.MenuTypes.CheckBox:
-                            {
-                                <MenuItemCheckBoxComponent MenuItem="menuItem"></MenuItemCheckBoxComponent>
-                                break;
-                            }
-                        case MenuItem.MenuTypes.Radio:
-                            {
-                                <MenuItemRadioComponent MenuItem="menuItem"></MenuItemRadioComponent>
-                                break;
-                            }
-                        default: break;
-                    }
+                    <li @key="menuItem.Key" class="nav-item @(menuItem.Active?"active":string.Empty) @(menuItem.Visible?string.Empty:"d-none")">
+                        @switch (menuItem.MenuType)
+                        {
+                            case MenuItem.MenuTypes.Button:
+                                {
+                                    <a role="button" class="nav-link @(menuItem.Enabled?string.Empty:"disabled")">@menuItem.Title</a>
+                                    break;
+                                }
+                            case MenuItem.MenuTypes.CheckBox:
+                                {
+                                    <div class="custom-control custom-checkbox nav-link pl-4">
+                                        <input type="checkbox" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(menuItem)" id="@MenuHelper.GetInputId(menuItem)">
+                                        <label class="custom-control-label" for="@MenuHelper.GetInputId(menuItem)">@menuItem.Title</label>
+                                    </div>
+                                    break;
+                                }
+                            case MenuItem.MenuTypes.Radio:
+                                {
+                                    <div class="custom-control custom-radio nav-link pl-4">
+                                        <input type="radio" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(menuItem)" name="@menuItem.RadioGroup" id="@MenuHelper.GetInputId(menuItem)">
+                                        <label class="custom-control-label" for="@MenuHelper.GetInputId(menuItem)">@menuItem.Title</label>
+                                    </div>
+                                    break;
+                                }
+                            default: break;
+                        }
+                    </li>
                 }
             }
         }

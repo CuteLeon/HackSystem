@@ -1,0 +1,62 @@
+﻿<div class="dropdown-menu">
+    @if (this.MenuItem.SubMenuItems != null)
+    {
+        foreach (var subMenuItem in this.MenuItem.SubMenuItems)
+        {
+            if (subMenuItem.SubMenuItems != null)
+            {
+                <div @key="subMenuItem.Key" class="dropdown dropright dropdown-submenu @(subMenuItem.Active?"active":string.Empty) @(subMenuItem.Visible?string.Empty:"d-none")">
+                    <a role="button" class="dropdown-item dropdown-toggle @(menuItem.Enabled?string.Empty:"disabled")">@subMenuItem.Title</a>
+                    <SubMenuComponent MenuItem="subMenuItem"></SubMenuComponent>
+                </div>
+            }
+            else
+            {
+                @switch (subMenuItem.MenuType)
+                {
+                    case MenuItem.MenuTypes.Button:
+                        {
+                            <div @key="subMenuItem.Key" class="dropdown-item @(subMenuItem.Active?"active":string.Empty) @(subMenuItem.Visible?string.Empty:"d-none")">
+                                <a role="button" cclass="@(subMenuItem.Enabled?string.Empty:"disabled")">@subMenuItem.Title</a>
+                            </div>
+                            break;
+                        }
+                    case MenuItem.MenuTypes.CheckBox:
+                        {
+                            <div @key="subMenuItem.Key" class="dropdown-item @(subMenuItem.Active?"active":string.Empty) @(subMenuItem.Visible?string.Empty:"d-none")">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(subMenuItem)" id="@MenuHelper.GetInputId(subMenuItem)">
+                                    <label class="custom-control-label" for="@MenuHelper.GetInputId(subMenuItem)">@subMenuItem.Title</label>
+                                </div>
+                            </div>
+                            break;
+                        }
+                    case MenuItem.MenuTypes.Radio:
+                        {
+                            <div @key="subMenuItem.Key" class="dropdown-item @(subMenuItem.Active?"active":string.Empty) @(subMenuItem.Visible?string.Empty:"d-none")">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(subMenuItem)" name="@subMenuItem.RadioGroup" id="@MenuHelper.GetInputId(subMenuItem)">
+                                    <label class="custom-control-label" for="@MenuHelper.GetInputId(subMenuItem)">@subMenuItem.Title</label>
+                                </div>
+                            </div>
+
+                            break;
+                        }
+                    case MenuItem.MenuTypes.Divider:
+                        {
+                            <div class="dropdown-divider"></div>
+                            break;
+                        }
+                    default: break;
+                }
+            }
+        }
+    }
+</div>
+
+@code{
+    private MenuItem menuItem;
+
+    [Parameter]
+    public MenuItem MenuItem { get => menuItem; set => menuItem = value; }
+}

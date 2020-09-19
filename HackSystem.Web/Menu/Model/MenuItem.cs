@@ -21,7 +21,8 @@ namespace HackSystem.Web.Menu.Model
             bool active = false,
             bool enabled = true,
             bool visible = true,
-            bool @checked = false)
+            bool @checked = false,
+            string radioGroup = null)
         {
             this.MenuIdentity = menuIdentity;
             this.Key = Guid.NewGuid().ToString();
@@ -32,6 +33,7 @@ namespace HackSystem.Web.Menu.Model
             this.Enabled = enabled;
             this.Visible = visible;
             this.Checked = @checked;
+            this.RadioGroup = radioGroup;
         }
 
         public string Key { get; init; }
@@ -49,6 +51,8 @@ namespace HackSystem.Web.Menu.Model
         public bool Visible { get; set; }
 
         public bool Checked { get; set; }
+
+        public string RadioGroup { get; set; }
 
         public MenuTypes MenuType { get; init; }
 
