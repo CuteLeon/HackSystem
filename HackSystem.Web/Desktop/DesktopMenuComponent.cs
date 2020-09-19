@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace HackSystem.Web.Desktop.TopBar.MenuBar
+namespace HackSystem.Web.Desktop
 {
-    public partial class MenuBarComponent
+    public partial class DesktopMenuComponent
     {
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

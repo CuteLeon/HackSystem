@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HackSystem.Web.Menu.Model;
-using Microsoft.Extensions.Logging;
-using static HackSystem.Web.Menu.Model.MenuItem;
 using static HackSystem.Web.Toast.Model.ToastDetail;
 
 namespace HackSystem.Web.Desktop
@@ -17,70 +13,7 @@ namespace HackSystem.Web.Desktop
 
         protected override async Task OnInitializedAsync()
         {
-            this.MenuContext.MenuItems = new List<MenuItem>
-            {
-                new MenuItem("Home", "主页", active:true),
-                new MenuItem("File", "文件").AddSubMenus(
-                    new MenuItem("NewFile", "新文件"),
-                    new MenuItem("OpenFile", "打开文件"),
-                    new MenuItem("SaveFile", "保存文件"),
-                    new MenuItem(menuType: MenuTypes.Divider),
-                    new MenuItem("RecentFiles","最近的文件").AddSubMenus(
-                        new MenuItem("RecentFile_1", "最近的文件_1", MenuTypes.Radio, radioGroup:"RecentFilesGroup"),
-                        new MenuItem("RecentFile_2", "最近的文件_2", MenuTypes.Radio, radioGroup:"RecentFilesGroup"),
-                        new MenuItem("RecentFile_3", "最近的文件_3", MenuTypes.Radio, radioGroup:"RecentFilesGroup"),
-                        new MenuItem("RecentFile_4", "最近的文件_4", MenuTypes.Radio, radioGroup:"RecentFilesGroup"),
-                        new MenuItem("RecentFile_5", "最近的文件_5", MenuTypes.Radio, radioGroup:"RecentFilesGroup")),
-                    new MenuItem(menuType: MenuTypes.Divider),
-                    new MenuItem("CloseFile", "关闭文件")),
-                new MenuItem("Edit", "编辑").AddSubMenus(
-                    new MenuItem("Cut", "剪切"),
-                    new MenuItem("Copy", "复制"),
-                    new MenuItem("Paste", "粘贴"),
-                    new MenuItem("Delete", "删除"),
-                    new MenuItem(menuType: MenuTypes.Divider),
-                    new MenuItem("Select", "选择").AddSubMenus(
-                        new MenuItem("SelectAll", "全选"),
-                        new MenuItem("SelectNone", "全不选"),
-                        new MenuItem("SelectInvert", "反选")),
-                    new MenuItem(menuType: MenuTypes.Divider),
-                    new MenuItem("Find", "查找"),
-                    new MenuItem("Replace", "替换")
-                    ),
-                new MenuItem("View", "视图").AddSubMenus(
-                    new MenuItem("TopBar", "顶部栏", MenuTypes.CheckBox),
-                    new MenuItem("MenuBar", "菜单栏", MenuTypes.CheckBox),
-                    new MenuItem("StatusBar", "状态栏", MenuTypes.CheckBox),
-                    new MenuItem(menuType: MenuTypes.Divider),
-                    new MenuItem("ProgramDock", "程序坞", MenuTypes.CheckBox)),
-                new MenuItem("Test","测试"),
-                new MenuItem("CheckBox_1","复选_1", MenuTypes.CheckBox),
-                new MenuItem("CheckBox_2","复选_2", MenuTypes.CheckBox, @checked:true),
-                new MenuItem("CheckBox_3","复选_3", MenuTypes.CheckBox),
-                new MenuItem("Radio_1","单选_1", MenuTypes.Radio, radioGroup:"DesktopRadioGroup"),
-                new MenuItem("Radio_2","单选_2", MenuTypes.Radio, radioGroup:"DesktopRadioGroup", @checked:true),
-                new MenuItem("Radio_3","单选_3", MenuTypes.Radio, radioGroup:"DesktopRadioGroup", @checked:true),
-            };
-
-            this.MenuContext.MenuItemEvent += this.MenuContext_MenuItemEventHandler;
-
             await base.OnInitializedAsync();
-        }
-
-        private void MenuContext_MenuItemEventHandler(object sender, MenuItemEventArgs e)
-        {
-            this.logger.LogInformation($"Desktop menu event: {nameof(e.MenuIdentity)}=>{e.MenuIdentity}\n\t{e.MenuItem.Title}\n\t{nameof(e.MenuItem.Checked)}=>{e.MenuItem.Checked}");
-
-            switch (e.MenuIdentity)
-            {
-                case "Test":
-                    {
-                        this.OnTest();
-                        break;
-                    }
-                default:
-                    break;
-            }
         }
 
         private void OnTest()

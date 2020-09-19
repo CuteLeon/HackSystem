@@ -7,10 +7,14 @@
 @inject IBasicProgramService basicProgramService
 
 <div class="fixed-top">
-    <CascadingValue IsFixed="true" Name="DesktopMenuContext" Value=@MenuContext>
+    <CascadingValue IsFixed="false" Name="DesktopMenuView" Value=@DesktopMenuView>
         <TopBarComponent />
     </CascadingValue>
 </div>
+
+<ProgramMenuView @ref="DesktopMenuView">
+    <DesktopMenuComponent></DesktopMenuComponent>
+</ProgramMenuView>
 
 <div class="w-100 h-100" style="padding-top:30px; overflow:hidden;pointer-events:none;">
     <ProgramDrawerComponent @ref="@ProgramDrawerComponent" />
@@ -32,6 +36,5 @@
 
     protected ProgramDockComponent ProgramDockComponent { get; set; }
     protected ProgramDrawerComponent ProgramDrawerComponent { get; set; }
-
-    protected IMenuContext MenuContext { get; set; } = new MenuContext();
+    protected ProgramMenuView DesktopMenuView { get; set; }
 }
