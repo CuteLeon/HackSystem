@@ -12,7 +12,6 @@
         toast.on('hidden.bs.toast', function (e) {
             let toastId = e.target.id;
             let reference = interop;
-            console.log(reference);
             reference.invokeMethodAsync('CloseToast', toastId);
         });
         toast.toast('show');

@@ -108,7 +108,7 @@
         <a role="button" class="nav-link disabled">已禁用</a>
     </li>
     <li class="nav-item active">
-        <a role="button" class="nav-link text-warning">测试</a>
+        <a role="button" class="nav-link text-warning" @onclick=" async()=> { if (this.OnTest.HasDelegate) await this.OnTest.InvokeAsync(); }">测试</a>
     </li>
     <li class="nav-item">
         <div class="custom-control custom-checkbox nav-link pl-4">
@@ -117,33 +117,14 @@
         </div>
     </li>
     <li class="nav-item">
-        <div class="custom-control custom-checkbox nav-link pl-4">
-            <input type="checkbox" class="custom-control-input" checked id="desktopCheckBox_2">
-            <label class="custom-control-label" for="desktopCheckBox_2">复选-2</label>
-        </div>
-    </li>
-    <li class="nav-item">
-        <div class="custom-control custom-checkbox nav-link pl-4">
-            <input type="checkbox" class="custom-control-input" disabled id="desktopCheckBox_3">
-            <label class="custom-control-label" for="desktopCheckBox_3">复选-3</label>
-        </div>
-    </li>
-    <li class="nav-item">
         <div class="custom-control custom-radio nav-link pl-4">
             <input type="radio" class="custom-control-input" name="DesktopRadioGroup" id="desktopRadio_1">
             <label class="custom-control-label" for="desktopRadio_1">单选-1</label>
         </div>
     </li>
-    <li class="nav-item">
-        <div class="custom-control custom-radio nav-link pl-4">
-            <input type="radio" class="custom-control-input" checked name="DesktopRadioGroup" id="desktopRadio_2">
-            <label class="custom-control-label" for="desktopRadio_2">单选-2</label>
-        </div>
-    </li>
-    <li class="nav-item">
-        <div class="custom-control custom-radio nav-link pl-4">
-            <input type="radio" class="custom-control-input" disabled name="DesktopRadioGroup" id="desktopRadio_3">
-            <label class="custom-control-label" for="desktopRadio_3">单选-3</label>
-        </div>
-    </li>
 </ul>
+
+@code{
+    [Parameter]
+    public EventCallback<EventArgs> OnTest { get; set; }
+}
