@@ -8,12 +8,6 @@
     </div>
 
     @* TODO: Leon: 菜单项支持 Icon *@
-    @* TODO: Leon: 按钮菜单项 *@
-    @* TODO: Leon: 复选框菜单项 *@
-    @* TODO: Leon: 单选框菜单项 *@
-    @* TODO: Leon: 分割线菜单项 *@
-    @* TODO: Leon: 子菜单菜单项 *@
-    @* TODO: Leon: 菜单项点击事件，附带参数 MenuIdentity *@
 
     <ul class="navbar-nav text-nowrap">
         @if (this.DesktopMenuContext?.MenuItems?.Any() ?? false)
@@ -24,7 +18,7 @@
                 {
                     <li @key="menuItem.Key" class="nav-item @(menuItem.Active?"active":string.Empty) @(menuItem.Visible?string.Empty:"d-none")">
                         <div class="dropdown">
-                            <a role="button" class="nav-link dropdown-toggle @(menuItem.Enabled?string.Empty:"disabled")" data-toggle="dropdown" data-submenu>@menuItem.Title</a>
+                            <a role="button" class="nav-link dropdown-toggle @(menuItem.Enabled?string.Empty:"disabled")" data-toggle="dropdown" data-submenu @onclick="@(()=>this.DesktopMenuContext.RaiseMenuItemEvent(menuItem.MenuIdentity, menuItem))">@menuItem.Title</a>
                             <SubMenuComponent MenuItem="menuItem"></SubMenuComponent>
                         </div>
                     </li>
@@ -36,13 +30,13 @@
                         {
                             case MenuItem.MenuTypes.Button:
                                 {
-                                    <a role="button" class="nav-link @(menuItem.Enabled?string.Empty:"disabled")">@menuItem.Title</a>
+                                    <a role="button" class="nav-link @(menuItem.Enabled?string.Empty:"disabled")" @onclick="@(()=>this.DesktopMenuContext.RaiseMenuItemEvent(menuItem.MenuIdentity, menuItem))">@menuItem.Title</a>
                                     break;
                                 }
                             case MenuItem.MenuTypes.CheckBox:
                                 {
                                     <div class="custom-control custom-checkbox nav-link pl-4">
-                                        <input type="checkbox" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(menuItem)" id="@MenuHelper.GetInputId(menuItem)">
+                                        <input type="checkbox" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(menuItem)" id="@MenuHelper.GetInputId(menuItem)" @onchange="@(()=> { menuItem.Checked = !menuItem.Checked; this.DesktopMenuContext.RaiseMenuItemEvent(menuItem.MenuIdentity, menuItem); })">
                                         <label class="custom-control-label" for="@MenuHelper.GetInputId(menuItem)">@menuItem.Title</label>
                                     </div>
                                     break;
@@ -50,7 +44,7 @@
                             case MenuItem.MenuTypes.Radio:
                                 {
                                     <div class="custom-control custom-radio nav-link pl-4">
-                                        <input type="radio" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(menuItem)" name="@menuItem.RadioGroup" id="@MenuHelper.GetInputId(menuItem)">
+                                        <input type="radio" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(menuItem)" name="@menuItem.RadioGroup" id="@MenuHelper.GetInputId(menuItem)" @onchange="@(() =>{ menuItem.Checked = true; this.DesktopMenuContext.RaiseMenuItemEvent(menuItem.MenuIdentity, menuItem); })">
                                         <label class="custom-control-label" for="@MenuHelper.GetInputId(menuItem)">@menuItem.Title</label>
                                     </div>
                                     break;

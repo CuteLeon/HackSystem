@@ -54,6 +54,12 @@ namespace HackSystem.Web.Desktop
                     new MenuItem(menuType: MenuTypes.Divider),
                     new MenuItem("ProgramDock", "程序坞", MenuTypes.CheckBox)),
                 new MenuItem("Test","测试"),
+                new MenuItem("CheckBox_1","复选_1", MenuTypes.CheckBox),
+                new MenuItem("CheckBox_2","复选_2", MenuTypes.CheckBox, @checked:true),
+                new MenuItem("CheckBox_3","复选_3", MenuTypes.CheckBox),
+                new MenuItem("Radio_1","单选_1", MenuTypes.Radio, radioGroup:"DesktopRadioGroup"),
+                new MenuItem("Radio_2","单选_2", MenuTypes.Radio, radioGroup:"DesktopRadioGroup", @checked:true),
+                new MenuItem("Radio_3","单选_3", MenuTypes.Radio, radioGroup:"DesktopRadioGroup", @checked:true),
             };
 
             this.MenuContext.MenuItemEvent += this.MenuContext_MenuItemEventHandler;
@@ -63,7 +69,7 @@ namespace HackSystem.Web.Desktop
 
         private void MenuContext_MenuItemEventHandler(object sender, MenuItemEventArgs e)
         {
-            this.logger.LogInformation($"Desktop menu event: {nameof(e.MenuIdentity)}=>{e.MenuIdentity}, {nameof(e.Value)}=>{e.Value}");
+            this.logger.LogInformation($"Desktop menu event: {nameof(e.MenuIdentity)}=>{e.MenuIdentity}\n\t{e.MenuItem.Title}\n\t{nameof(e.MenuItem.Checked)}=>{e.MenuItem.Checked}");
 
             switch (e.MenuIdentity)
             {

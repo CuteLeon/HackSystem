@@ -6,7 +6,7 @@
             if (subMenuItem.SubMenuItems != null)
             {
                 <div @key="subMenuItem.Key" class="dropdown dropright dropdown-submenu @(subMenuItem.Active?"active":string.Empty) @(subMenuItem.Visible?string.Empty:"d-none")">
-                    <a role="button" class="dropdown-item dropdown-toggle @(menuItem.Enabled?string.Empty:"disabled")">@subMenuItem.Title</a>
+                    <a role="button" class="dropdown-item dropdown-toggle @(menuItem.Enabled?string.Empty:"disabled")" @onclick="@(()=>this.DesktopMenuContext.RaiseMenuItemEvent(subMenuItem.MenuIdentity, subMenuItem))">@subMenuItem.Title</a>
                     <SubMenuComponent MenuItem="subMenuItem"></SubMenuComponent>
                 </div>
             }
@@ -17,7 +17,7 @@
                     case MenuItem.MenuTypes.Button:
                         {
                             <div @key="subMenuItem.Key" class="dropdown-item @(subMenuItem.Active?"active":string.Empty) @(subMenuItem.Visible?string.Empty:"d-none")">
-                                <a role="button" cclass="@(subMenuItem.Enabled?string.Empty:"disabled")">@subMenuItem.Title</a>
+                                <a role="button" cclass="@(subMenuItem.Enabled?string.Empty:"disabled")" @onclick="@(()=>this.DesktopMenuContext.RaiseMenuItemEvent(subMenuItem.MenuIdentity, subMenuItem))">@subMenuItem.Title</a>
                             </div>
                             break;
                         }
@@ -25,7 +25,7 @@
                         {
                             <div @key="subMenuItem.Key" class="dropdown-item @(subMenuItem.Active?"active":string.Empty) @(subMenuItem.Visible?string.Empty:"d-none")">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(subMenuItem)" id="@MenuHelper.GetInputId(subMenuItem)">
+                                    <input type="checkbox" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(subMenuItem)" id="@MenuHelper.GetInputId(subMenuItem)" @onchange="@(()=> { subMenuItem.Checked = !subMenuItem.Checked; this.DesktopMenuContext.RaiseMenuItemEvent(subMenuItem.MenuIdentity, subMenuItem); })">
                                     <label class="custom-control-label" for="@MenuHelper.GetInputId(subMenuItem)">@subMenuItem.Title</label>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                         {
                             <div @key="subMenuItem.Key" class="dropdown-item @(subMenuItem.Active?"active":string.Empty) @(subMenuItem.Visible?string.Empty:"d-none")">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(subMenuItem)" name="@subMenuItem.RadioGroup" id="@MenuHelper.GetInputId(subMenuItem)">
+                                    <input type="radio" class="custom-control-input" @attributes="@MenuHelper.GetInputAttributions(subMenuItem)" name="@subMenuItem.RadioGroup" id="@MenuHelper.GetInputId(subMenuItem)" @onchange="@(()=> { subMenuItem.Checked = true; this.DesktopMenuContext.RaiseMenuItemEvent(subMenuItem.MenuIdentity, subMenuItem); })">
                                     <label class="custom-control-label" for="@MenuHelper.GetInputId(subMenuItem)">@subMenuItem.Title</label>
                                 </div>
                             </div>
@@ -59,4 +59,7 @@
 
     [Parameter]
     public MenuItem MenuItem { get => menuItem; set => menuItem = value; }
+
+    [CascadingParameter(Name = "DesktopMenuContext")]
+    protected IMenuContext DesktopMenuContext { get; set; }
 }

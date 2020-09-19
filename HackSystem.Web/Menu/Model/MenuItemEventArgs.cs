@@ -6,6 +6,6 @@ namespace HackSystem.Web.Menu.Model
     {
         public string MenuIdentity { get; set; }
 
-        public object Value { get; set; }
+        public MenuItem MenuItem { get; set; }
     }
 }

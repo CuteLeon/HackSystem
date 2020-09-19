@@ -10,6 +10,6 @@ namespace HackSystem.Web.Menu.Handler
 
         event EventHandler<MenuItemEventArgs> MenuItemEvent;
 
-        void RaiseMenuItemEvent(string menuIdentity, object value);
+        void RaiseMenuItemEvent(string menuIdentity, MenuItem menuItem);
     }
 }
