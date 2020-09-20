@@ -51,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebAPI.Services.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebAPI.Authentication", "HackSystem.WebAPI.Authentication\HackSystem.WebAPI.Authentication.csproj", "{DBBEAD4F-B6D7-42A3-BA89-D5B8F2F231E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.WebHost", "HackSystem.WebHost\HackSystem.WebHost.csproj", "{E55625BC-F9AC-4185-BA0A-CE4F71B84E80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebHost", "HackSystem.WebHost\HackSystem.WebHost.csproj", "{E55625BC-F9AC-4185-BA0A-CE4F71B84E80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

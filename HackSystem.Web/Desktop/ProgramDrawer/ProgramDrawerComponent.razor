@@ -1,4 +1,4 @@
-﻿<div class="d-flex flex-column flex-wrap align-content-start user-select-none" style="height:100%;pointer-events:none;overflow:hidden;">
+﻿<div class="d-flex flex-column flex-wrap align-content-start user-select-none w-100 h-100" style="pointer-events:none;overflow:hidden;">
     @foreach (var programMap in this.BasicProgramMaps.Values)
     {
         <ProgramDrawerIconComponent @key="@programMap.BasicProgram.Id" Name="@(string.IsNullOrWhiteSpace(programMap.Rename)?programMap.BasicProgram.Name:programMap.Rename)" IconUrl="@programMap.BasicProgram.IconUrl" />
