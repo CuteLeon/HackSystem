@@ -82,7 +82,6 @@ namespace HackSystem.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseWebAssemblyDebugging();
             }
             else
             {
@@ -93,7 +92,6 @@ namespace HackSystem.WebAPI
             app.UseCors("AllowAny");
 
             app.UseHttpsRedirection();
-            app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -108,7 +106,6 @@ namespace HackSystem.WebAPI
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapFallbackToFile("index.html");
             });
         }
     }
