@@ -3,13 +3,13 @@
 
 <div class="container-fluid p-0 position-absolute" style="overflow: hidden; height: 100%; width: 100%; background-image: url(images/DesktopBackground.jpg); background-size: cover; background-position-y:center; background-position-x: center;">
     <ToastContainerComponent Top="2" @ref="ToastContainer" />
-    <CascadingValue Value=@GetToastContainer>
+    <CascadingValue IsFixed="true" Name="DesktopToastContainer" Value=@GetDesktopToastContainer>
         @Body
     </CascadingValue>
 </div>
 
 @code{
-    private Func<IToastContainer> GetToastContainer { get; set; }
+    private Func<IToastContainer> GetDesktopToastContainer { get; set; }
     private ToastContainerComponent ToastContainer { get; set; }
 
     protected override void OnInitialized()
@@ -21,6 +21,6 @@
          * I raise an Issue on GitHub and My solution was remommended as a better way.
          * Visit at: https://github.com/dotnet/aspnetcore/issues/25640
          */
-        this.GetToastContainer = new Func<IToastContainer>(() => this.ToastContainer);
+        this.GetDesktopToastContainer = new Func<IToastContainer>(() => this.ToastContainer);
     }
 }

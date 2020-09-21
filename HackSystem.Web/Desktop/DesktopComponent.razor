@@ -34,8 +34,8 @@
 </div>
 
 @code {
-    [CascadingParameter]
-    private Func<IToastContainer> GetToastContainer { get; set; }
+    [CascadingParameter(Name = "DesktopToastContainer")]
+    private Func<IToastContainer> GetDesktopToastContainer { get; set; }
 
     protected Dictionary<string, QueryUserBasicProgramMapDTO> BasicProgramMaps { get; set; } = new Dictionary<string, QueryUserBasicProgramMapDTO>();
 

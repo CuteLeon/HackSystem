@@ -18,11 +18,11 @@ namespace HackSystem.Web.Desktop
 
         private void OnTest()
         {
-            this.GetToastContainer().PopToast("Hack System", "此消息将在 1 秒自动关闭。", Icons.Information, true, 1000);
-            this.GetToastContainer().PopToast("Hack System", "此消息将在 2 秒自动关闭。", Icons.Question, true, 2000);
-            this.GetToastContainer().PopToast("Hack System", "此消息将在 3 秒自动关闭。", Icons.Warning, true, 3000);
-            this.GetToastContainer().PopToast("Hack System", "此消息需要处理后手动关闭。", Icons.Error, false);
-            this.GetToastContainer().PopToast("Hack System", "欢迎进入 Hack System。", Icons.HackSystem, false);
+            this.GetDesktopToastContainer().PopToast("Hack System", "此消息将在 1 秒自动关闭。", Icons.Information, true, 1000);
+            this.GetDesktopToastContainer().PopToast("Hack System", "此消息将在 2 秒自动关闭。", Icons.Question, true, 2000);
+            this.GetDesktopToastContainer().PopToast("Hack System", "此消息将在 3 秒自动关闭。", Icons.Warning, true, 3000);
+            this.GetDesktopToastContainer().PopToast("Hack System", "此消息需要处理后手动关闭。", Icons.Error, false);
+            this.GetDesktopToastContainer().PopToast("Hack System", "欢迎进入 Hack System。", Icons.HackSystem, false);
         }
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
@@ -59,12 +59,12 @@ namespace HackSystem.Web.Desktop
                     this.ProgramDrawerComponent.ClearProgramDrawer();
                     this.BasicProgramMaps.Clear();
                 }
-                this.GetToastContainer().PopToast("获取程序映射成功", $"获取程序映射信息成功！共 {this.BasicProgramMaps.Count()} 个。", Icons.Information, true, 3000);
+                this.GetDesktopToastContainer().PopToast("获取程序映射成功", $"获取程序映射信息成功！共 {this.BasicProgramMaps.Count()} 个。", Icons.Information, true, 3000);
                 this.StateHasChanged();
             }
             catch (Exception ex)
             {
-                this.GetToastContainer().PopToast("获取程序映射失败", $"获取程序映射失败:{ex.Message}", Icons.Error, false);
+                this.GetDesktopToastContainer().PopToast("获取程序映射失败", $"获取程序映射失败:{ex.Message}", Icons.Error, false);
             }
         }
     }
