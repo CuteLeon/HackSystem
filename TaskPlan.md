@@ -65,7 +65,7 @@
    - [ ] 正常
    - [ ] 最大化
    - [ ] 最小化
-   - [ ] Peek
+   - [ ] Quick View (速览)
 - [ ] 置顶显示
 
 ## 进程管理器
@@ -85,26 +85,8 @@
 
 - [ ] 按进程管理内维护的数据渲染程序组件实例
 
-   - [ ] 如何渲染一个组件的实例，而不是 RenderFragment?
-
-      ```csharp
-      protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder){
-      	__builder.OpenComponent<HackSystem.Web.Account.UserStatusComponent>(4);
-      	__builder.CloseComponent();
-      }
-      ```
-   
-      ```csharp
-      var frames = new[]
-      {
-          RenderTreeFrame.ChildComponent(0, typeof(FakeComponent)).WithComponentSubtreeLength(1)
-      };
-      var parameterView = new ParameterView(lifetime, frames, 0);
-      
-   Component{
-          public Task SetParametersAsync(ParameterView parameters)
-      }
-      ```
+   - [ ] 使用 RenderFragment 和 RenderTreeBuilder 渲染程序的实例
+- [ ] 需要注意 RenderTreeBuilder 与差分算法对性能最佳的写法
    
 
 # 应用商店
