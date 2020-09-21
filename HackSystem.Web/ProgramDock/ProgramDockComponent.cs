@@ -1,22 +1,21 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using HackSystem.WebDataTransfer.Program;
 
-namespace HackSystem.Web.Desktop.ProgramDrawer
+namespace HackSystem.Web.ProgramDock
 {
-    public partial class ProgramDrawerComponent
+    public partial class ProgramDockComponent
     {
-        public void ClearProgramDrawer()
+        public void ClearProgramDock()
         {
             this.BasicProgramMaps.Clear();
             this.StateHasChanged();
         }
 
-        public void LoadProgramDrawer(IEnumerable<QueryUserBasicProgramMapDTO> maps)
+        public void LoadProgramDock(IEnumerable<QueryUserBasicProgramMapDTO> maps)
         {
             this.BasicProgramMaps.Clear();
 
-            foreach (var map in maps.OrderByDescending(map => map.PinToTop))
+            foreach (var map in maps)
             {
                 this.BasicProgramMaps.Add(map.BasicProgram.Id, map);
             }

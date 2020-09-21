@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using HackSystem.Web.Desktop.InfoPanel;
+using HackSystem.Web.InfoPanel;
 using Microsoft.AspNetCore.Components;
 
 namespace HackSystem.Web.ProgramLayer
