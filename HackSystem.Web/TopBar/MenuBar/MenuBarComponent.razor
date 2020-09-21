@@ -1,6 +1,4 @@
-﻿@inject IJSRuntime jsRuntime
-
-<nav class="navbar navbar-expand p-0 navbar-dark">
+﻿<nav class="navbar navbar-expand p-0 navbar-dark">
     <div class="navbar-brand p-0 ml-2">
         @* TODO: Leon: 这里优先显示激活程序的图标和名称 *@
         <img class="img-fluid" src="/LogoImageSmall.png" />
@@ -11,9 +9,6 @@
 </nav>
 
 @code{
-    [CascadingParameter]
-    private Func<IToastContainer> GetToastContainer { get; set; }
-
     [CascadingParameter(Name = "DesktopTopBarView")]
     protected TopBarView DesktopTopBarView { get; set; }
 }
