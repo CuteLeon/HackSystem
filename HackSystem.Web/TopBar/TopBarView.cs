@@ -3,15 +3,15 @@ using Microsoft.AspNetCore.Components;
 
 namespace HackSystem.Web.ProgramMenu
 {
-    public class ProgramMenuView : IComponent
+    public class TopBarView : IComponent
     {
         private RenderHandle renderHandle;
 
-        /// <summary>
-        /// The content to which the value should be provided.
-        /// </summary>
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        public RenderFragment ProgramMenuView { get; set; }
+
+        [Parameter]
+        public RenderFragment ProgramStatusView { get; set; }
 
         public void Attach(RenderHandle renderHandle)
         {
@@ -20,7 +20,9 @@ namespace HackSystem.Web.ProgramMenu
 
         public Task SetParametersAsync(ParameterView parameters)
         {
-            this.ChildContent = parameters.GetValueOrDefault<RenderFragment>(nameof(this.ChildContent), null);
+            this.ProgramMenuView = parameters.GetValueOrDefault<RenderFragment>(nameof(this.ProgramMenuView), null);
+            this.ProgramStatusView = parameters.GetValueOrDefault<RenderFragment>(nameof(this.ProgramStatusView), null);
+
             return Task.CompletedTask;
         }
     }

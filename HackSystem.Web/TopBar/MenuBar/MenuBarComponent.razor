@@ -7,13 +7,13 @@
         <span>Hack System</span>
     </div>
 
-    @DesktopMenuView?.ChildContent
+    @DesktopTopBarView?.ProgramMenuView
 </nav>
 
 @code{
     [CascadingParameter]
     private Func<IToastContainer> GetToastContainer { get; set; }
 
-    [CascadingParameter(Name = "DesktopMenuView")]
-    protected ProgramMenuView DesktopMenuView { get; set; }
+    [CascadingParameter(Name = "DesktopTopBarView")]
+    protected TopBarView DesktopTopBarView { get; set; }
 }
