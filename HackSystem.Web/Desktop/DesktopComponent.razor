@@ -6,12 +6,6 @@
 @inject IOptionsMonitor<APIConfiguration> apiConfiguration
 @inject IBasicProgramService basicProgramService
 
-<div class="fixed-top">
-    <CascadingValue IsFixed="false" Name="DesktopTopBarView" Value=@this.TopBarView>
-        <TopBarComponent />
-    </CascadingValue>
-</div>
-
 <TopBarView @ref="TopBarView">
     <ProgramMenuView>
         <DesktopMenuComponent OnTest="this.OnTest"></DesktopMenuComponent>
@@ -21,16 +15,26 @@
     </ProgramStatusView>
 </TopBarView>
 
-<div class="w-100 h-100" style="padding-top:30px; overflow:hidden;pointer-events:none;">
-    <ProgramDrawerComponent @ref="@ProgramDrawerComponent" />
+<div id="topBar" class="fixed-top">
+    <CascadingValue IsFixed="false" Name="DesktopTopBarView" Value=@this.TopBarView>
+        <TopBarComponent />
+    </CascadingValue>
+</div>
 
+<div id="programDrawer" class="w-100 h-100" style="padding-top:30px;">
+    <ProgramDrawerComponent @ref="@ProgramDrawerComponent" />
+</div>
+
+<div id="infoPanel" class="position-fixed w-100 h-100" style="left:0px;top:0px;padding-top:30px;">
     <InfoPanelContainerComponent></InfoPanelContainerComponent>
 </div>
 
-<ProgramContainerComponent></ProgramContainerComponent>
-
-<div class="d-none d-md-flex justify-content-center fixed-bottom mb-1 mb-md-3" style="pointer-events:none;">
+<div id="programDock" class="position-fixed d-none d-md-flex justify-content-center" style="bottom:45px; pointer-events:none;">
     <ProgramDockComponent @ref="@ProgramDockComponent" />
+</div>
+
+<div id="programContainer" class="position-fixed w-100 h-100" style="left: 0px; top: 0px;">
+    <ProgramContainerComponent></ProgramContainerComponent>
 </div>
 
 @code {

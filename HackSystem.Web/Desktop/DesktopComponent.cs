@@ -32,6 +32,7 @@ namespace HackSystem.Web.Desktop
             if (firstRender)
             {
                 await this.LoadProgramIcons();
+                this.StateHasChanged();
             }
         }
 
@@ -60,7 +61,6 @@ namespace HackSystem.Web.Desktop
                     this.BasicProgramMaps.Clear();
                 }
                 this.GetDesktopToastContainer().PopToast("获取程序映射成功", $"获取程序映射信息成功！共 {this.BasicProgramMaps.Count()} 个。", Icons.Information, true, 3000);
-                this.StateHasChanged();
             }
             catch (Exception ex)
             {

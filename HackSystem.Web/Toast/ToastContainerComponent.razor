@@ -2,7 +2,7 @@
 @inject ILogger<ToastContainerComponent> logger
 @inject IJSRuntime jsRuntime
 
-<div class="position-fixed" style="overflow:hidden;top:@(top)rem; bottom:@(bottom)rem; right:0; width:380px;pointer-events: none;z-index:@z_Index;">
+<div class="position-fixed overflow-hidden" style="top:@(top)rem; bottom:@(bottom)rem; right:0; width:380px;pointer-events: none;z-index:@z_Index;">
     <div class="p-3" style="overflow-y:scroll;height:100%; width:405px;">
         @foreach (var toast in this.Toasts.Values.OrderBy(detail => detail.CreateTime).ThenByDescending(detail => detail.Icon))
         {
