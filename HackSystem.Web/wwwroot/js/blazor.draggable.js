@@ -67,5 +67,6 @@
         dragTarget = null;
         $(document).off('mousemove', dragEvents.mouseDragMove);
         document.removeEventListener('touchmove', dragEvents.touchDragMove);
+        document.removeEventListener('touchend', dragEvents.dragEnd);
     }
 };
