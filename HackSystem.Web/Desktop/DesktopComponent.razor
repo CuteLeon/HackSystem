@@ -25,15 +25,15 @@
     <ProgramDrawerComponent @ref="@ProgramDrawerComponent" />
 </div>
 
-<div id="infoPanel" class="position-fixed w-100 h-100" style="left:0px;top:0px;padding-top:30px;">
+<div id="infoPanel" class="position-fixed w-100 h-100" style="left:0px;top:0px;padding-top:30px;pointer-events:none;">
     <InfoPanelContainerComponent></InfoPanelContainerComponent>
 </div>
 
-<div id="programDock" class="position-fixed d-none d-md-flex justify-content-center" style="bottom:45px; pointer-events:none;">
+<div id="programDock" class="position-fixed w-100 d-none d-md-flex justify-content-center" style="bottom:45px; pointer-events:none;">
     <ProgramDockComponent @ref="@ProgramDockComponent" />
 </div>
 
-<div id="programContainer" class="position-fixed w-100 h-100" style="left: 0px; top: 0px;">
+<div id="programContainer" class="position-fixed w-100 h-100" style="left: 0px; top: 0px;pointer-events:none;">
     <ProgramContainerComponent></ProgramContainerComponent>
 </div>
 
