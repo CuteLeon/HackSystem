@@ -25,3 +25,29 @@
       1. Before you launch `HackSystem.Host`, edit `HostConfigs.json` file so that `RemoteURL` equals the address which you just configured for `HackSystem.WebHost`.
       2. Just run `HackSystem.Host.exe`.
 6. Enjoy it.
+
+
+
+# Screen
+
+## Start Up
+
+![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/StartUp.jpg)
+
+
+
+## Register
+
+![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/Register.jpg)
+
+
+
+## Login
+
+![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/Login.jpg)
+
+
+
+## Desktop Demo
+
+![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/DesktopDemo.jpg)
