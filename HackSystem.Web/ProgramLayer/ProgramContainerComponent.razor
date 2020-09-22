@@ -1,4 +1,6 @@
-﻿<div class="position-fixed w-100 h-100 user-select-none" style="overflow:hidden;pointer-events:none;">
+﻿@inject ILogger<ProgramContainerComponent> logger
+
+<div class="position-fixed w-100 h-100 user-select-none" style="overflow:hidden;pointer-events:none;">
     <div class="modal-dialog position-fixed m-0 w-100 shadow rounded border border-primary" role="dialog" style="left:3rem;top:3rem;">
         <div class="modal-content bg-transparent">
             <div class="modal-header" style="backdrop-filter:blur(20px);" onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget=".modal-dialog">
