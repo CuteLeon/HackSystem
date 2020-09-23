@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
-namespace HackSystem.Web.ProgramMenu
+namespace HackSystem.Web.TopBar
 {
     public class TopBarView : IComponent
     {

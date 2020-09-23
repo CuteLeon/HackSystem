@@ -46,7 +46,7 @@ namespace HackSystem.Web.Desktop
                     this.BasicProgramMaps = maps
                         .Select(map =>
                         {
-                            map.BasicProgram.IconUrl = new Uri(new Uri(apiConfiguration.CurrentValue.APIURL), map.BasicProgram.IconUrl).AbsoluteUri;
+                            map.BasicProgram.IconUrl = new Uri(new Uri(this.apiConfiguration.CurrentValue.APIURL), map.BasicProgram.IconUrl).AbsoluteUri;
                             return map;
                         })
                         .ToDictionary(map => map.BasicProgram.Id, map => map);
@@ -60,7 +60,7 @@ namespace HackSystem.Web.Desktop
                     this.ProgramDrawerComponent.ClearProgramDrawer();
                     this.BasicProgramMaps.Clear();
                 }
-                this.GetDesktopToastContainer().PopToast("获取程序映射成功", $"获取程序映射信息成功！共 {this.BasicProgramMaps.Count()} 个。", Icons.Information, true, 3000);
+                this.GetDesktopToastContainer().PopToast("获取程序映射成功", $"获取程序映射信息成功！共 {this.BasicProgramMaps.Count} 个。", Icons.Information, true, 3000);
             }
             catch (Exception ex)
             {
