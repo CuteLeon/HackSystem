@@ -1,9 +1,12 @@
-﻿<div class="rounded-lg @(showBorderFlag?"border border-white":"border-0") text-nowrap border-white position-fixed" @onmouseover="e=>this.showBorderFlag=true" @onmouseout="e=>this.showBorderFlag=false" style="top:4rem; left:40rem; backdrop-filter:blur(10px);">
-    <p class="fas @(showMoveFlag?"fa-arrows-alt":string.Empty) p-2 mb-0 text-light position-fixed float-left" @onmouseover="e=>this.showMoveFlag=true" @onmouseout="e=>this.showMoveFlag=false" onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget=".position-fixed" style="pointer-events: auto; cursor: move;"></p>
-    <p class="display-1 text-white p-3 mb-0 user-select-none">信息面板</p>
+﻿<div class="rounded-lg @(showBorderFlag?"border border-white":"border-0") text-nowrap text-white position-fixed" style="top:4rem; left:40rem; backdrop-filter:blur(10px);">
+    <div class="position-fixed float-left p-1" style="pointer-events: auto;" @onmouseover="e=>this.showBorderFlag=true" @onmouseout="e=>this.showBorderFlag=false">
+        <p class="fas fa-arrows-alt p-1 mb-0" onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget=".border" style="cursor: move;"></p>
+        <p class="fas fa-circle-notch @(showRefreshingFlag?"fa-spin":string.Empty) p-1 mb-0" @onclick="e=>showRefreshingFlag=!showRefreshingFlag" style="cursor: pointer;"></p>
+    </div>
+    <p class="display-1 p-3 mb-0 user-select-none">信息面板</p>
 </div>
 
 @code{
-    bool showMoveFlag = false;
     bool showBorderFlag = false;
+    bool showRefreshingFlag = true;
 }
