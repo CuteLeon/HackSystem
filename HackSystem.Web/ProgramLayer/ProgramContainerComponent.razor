@@ -2,18 +2,7 @@
 
 <div class="position-fixed w-100 h-100 user-select-none overflow-hidden" style="pointer-events:none;">
     <!-- Resize 窗口 -->
-    <div class="position-fixed user-select-none flex-nowrap text-nowrap"
-         style="padding:8px; left:20rem;top:5rem;pointer-events:auto;">
-
-        <div class="position-absolute" style="width:16px;height:16px;left:0px;top:0px;cursor:nw-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="height:8px;left:16px;top:0px;right:16px;cursor: n-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;right:0px;top:0px;cursor: ne-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:8px;left:0px;top:16px;bottom:16px;cursor:w-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:8px;top:16px;right:0px;bottom:16px;cursor:e-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;left:0px;bottom:0px;cursor:sw-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="height:8px;left:16px;right:16px;bottom:0px;cursor: s-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;right:0px;bottom:0px;cursor:se-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-
+    <ResizeableView ResizeableOption="new ResizeableOption() { Left=20, Top=5 }">
         <div class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;">
             <div class="modal-content border-primary bg-transparent overflow-hidden" style="height: 100%;">
                 <div class="modal-header" style="backdrop-filter:blur(20px);" onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget=".position-fixed">
@@ -38,20 +27,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </ResizeableView>
     <!-- Resize 窗口 -->
-    <div class="position-fixed user-select-none flex-nowrap text-nowrap"
-         style="padding:8px; left:25rem;top:8rem;pointer-events:auto;">
-
-        <div class="position-absolute" style="width:16px;height:16px;left:0px;top:0px;cursor:nw-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="height:8px;left:16px;top:0px;right:16px;cursor: n-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;right:0px;top:0px;cursor: ne-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:8px;left:0px;top:16px;bottom:16px;cursor:w-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:8px;top:16px;right:0px;bottom:16px;cursor:e-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;left:0px;bottom:0px;cursor:sw-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="height:8px;left:16px;right:16px;bottom:0px;cursor: s-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;right:0px;bottom:0px;cursor:se-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-
+    <ResizeableView ResizeableOption="new ResizeableOption() { Left=25, Top=8 }">
         <div class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;">
             <div class="modal-content border-danger overflow-hidden" style="height: 100%;">
                 <div class="modal-header" onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget=".position-fixed">
@@ -76,20 +54,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </ResizeableView>
     <!-- Resize 窗口 -->
-    <div class="position-fixed user-select-none flex-nowrap text-nowrap"
-         style="padding:8px; left:30rem;top:11rem;pointer-events:auto;">
-
-        <div class="position-absolute" style="width:16px;height:16px;left:0px;top:0px;cursor:nw-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="height:8px;left:16px;top:0px;right:16px;cursor: n-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;right:0px;top:0px;cursor: ne-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:8px;left:0px;top:16px;bottom:16px;cursor:w-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:8px;top:16px;right:0px;bottom:16px;cursor:e-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;left:0px;bottom:0px;cursor:sw-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="height:8px;left:16px;right:16px;bottom:0px;cursor: s-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;right:0px;bottom:0px;cursor:se-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-
+    <ResizeableView ResizeableOption="new ResizeableOption() { Left=30, Top=11 }">
         <div class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;text-shadow:0px 0px 3px #000, 0px 1px 5px #000">
             <div class="modal-content bg-transparent text-white overflow-hidden" style="height: 100%;backdrop-filter:blur(20px);">
                 <div class="modal-header" onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget=".position-fixed">
@@ -114,20 +81,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </ResizeableView>
     <!-- Resize 窗口 -->
-    <div class="position-fixed user-select-none flex-nowrap text-nowrap"
-         style="padding:8px; left:35rem;top:14rem;pointer-events:auto;">
-
-        <div class="position-absolute" style="width:16px;height:16px;left:0px;top:0px;cursor:nw-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="height:8px;left:16px;top:0px;right:16px;cursor: n-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;right:0px;top:0px;cursor: ne-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:8px;left:0px;top:16px;bottom:16px;cursor:w-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:8px;top:16px;right:0px;bottom:16px;cursor:e-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;left:0px;bottom:0px;cursor:sw-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="height:8px;left:16px;right:16px;bottom:0px;cursor: s-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;right:0px;bottom:0px;cursor:se-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-
+    <ResizeableView ResizeableOption="new ResizeableOption() { Left=35, Top=14 }">
         <div class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;">
             <div class="modal-content border-warning bg-dark text-white overflow-hidden" style="height: 100%;">
                 <div class="modal-header" onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget=".position-fixed">
@@ -152,20 +108,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </ResizeableView>
     <!-- Resize 窗口 -->
-    <div class="position-fixed user-select-none flex-nowrap text-nowrap"
-         style="padding:8px; left:40rem;top:17rem;pointer-events:auto;">
-
-        <div class="position-absolute" style="width:16px;height:16px;left:0px;top:0px;cursor:nw-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="height:8px;left:16px;top:0px;right:16px;cursor: n-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;right:0px;top:0px;cursor: ne-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:8px;left:0px;top:16px;bottom:16px;cursor:w-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:8px;top:16px;right:0px;bottom:16px;cursor:e-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;left:0px;bottom:0px;cursor:sw-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="height:8px;left:16px;right:16px;bottom:0px;cursor: s-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-        <div class="position-absolute" style="width:16px;height:16px;right:0px;bottom:0px;cursor:se-resize" data-resizetarget=".position-fixed" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-
+    <ResizeableView ResizeableOption="new ResizeableOption() { Left=40, Top=17 }">
         <div class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;">
             <div class="modal-content border-danger bg-dark text-white overflow-hidden" style="height: 100%;">
                 <div class="modal-header" onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget=".position-fixed">
@@ -190,7 +135,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </ResizeableView>
 
     @this.renderFragment
 </div>
