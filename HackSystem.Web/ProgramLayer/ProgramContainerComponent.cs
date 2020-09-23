@@ -25,7 +25,8 @@ namespace HackSystem.Web.ProgramLayer
                     typeof(Program2Component),
                     typeof(Program3Component),
                     typeof(Program4Component),
-                    typeof(Program5Component)
+                    typeof(Program5Component),
+                    typeof(SystemProgram1Component)
                 }.Select((programType, index) =>
                 {
                     var programID = index;
