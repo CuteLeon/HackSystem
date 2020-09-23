@@ -11,5 +11,7 @@
         public int BorderSize { get; set; } = 8;
 
         public int CornerSize { get; set; } = 16;
+
+        public int Z_Index { get; set; }
     }
 }

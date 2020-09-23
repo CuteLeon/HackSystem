@@ -1,0 +1,28 @@
+﻿@inherits ProgramComponentBase
+
+<ResizeableView ResizeableOption="new ResizeableOption() { Left=30, Top=11, Z_Index=this.ProgramEntity.Z_Index }">
+    <div data-pid="@ProgramEntity.PID" class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;text-shadow:0px 0px 3px #000, 0px 1px 5px #000">
+        <div class="modal-content bg-transparent text-white overflow-hidden" style="height: 100%;backdrop-filter:blur(20px);">
+            <div class="modal-header" onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget=".position-fixed">
+                <h5 class="modal-title" id="exampleModalLabel">标题</h5>
+                <button type="button" class="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-inline-block">
+                    <i class="fas fa-4x fa-info-circle text-primary m-2"></i>
+                </div>
+                <div class="d-inline-block">
+                    模态窗口内容，点击背景自动关闭模态窗口。<br />
+                    模态窗口内容，点击背景自动关闭模态窗口。<br />
+                    模态窗口内容，点击背景自动关闭模态窗口。
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary">关闭</button>
+                <button type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</ResizeableView>
