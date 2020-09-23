@@ -50,4 +50,6 @@
 
 ## Desktop Demo
 
-![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/DesktopDemo.jpg)
+![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/DesktopDemo_0.jpg)
+
+![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/DesktopDemo_1.jpg)
