@@ -1,10 +1,10 @@
-﻿namespace HackSystem.Web.Shared.Resizeable
+﻿namespace HackSystem.Web.ProgramSDK.ResizeableComponent
 {
     public class ResizeableOption
     {
-        public int Left { get; set; } = 0;
+        public int Left { get; set; }
 
-        public int Top { get; set; } = 0;
+        public int Top { get; set; }
 
         public string ResizeTarget { get; set; } = ".position-fixed";
 

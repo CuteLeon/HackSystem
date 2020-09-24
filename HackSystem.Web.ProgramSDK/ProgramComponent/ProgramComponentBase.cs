@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace HackSystem.Web.ProgramLayer.ProgramComponent
+namespace HackSystem.Web.ProgramSDK.ProgramComponent
 {
     public class ProgramComponentBase : ComponentBase
     {
