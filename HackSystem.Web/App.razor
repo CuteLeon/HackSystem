@@ -1,18 +1,25 @@
-<Router AppAssembly="@typeof(Program).Assembly">
+@inject ILogger<App> logger
+@inject LazyAssemblyLoader lazyAssemblyLoader
+
+<Router AppAssembly="@typeof(Program).Assembly" OnNavigateAsync="this.OnNavigateAsync" AdditionalAssemblies="this.AdditionalAssemblies">
     <Found Context="routeData">
         @* <AuthorizeRouteView> 组件来自 Microsoft.AspNetCore.Components.Authorization Nuget
-         * 此组件提供类型为Task<AuthenticationState>的级联参数，<AuthorizeView> 组件使用此参数确定用户的身份认证状态
+            * 此组件提供类型为Task<AuthenticationState>的级联参数，<AuthorizeView> 组件使用此参数确定用户的身份认证状态
         *@
         <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(FullLayout)">
             <Authorizing>
-                <HackSystemMessage Message="正在认证"/>
+                <HackSystemMessage Message="正在认证" />
             </Authorizing>
             <NotAuthorized>
-                <AccessDenied/>
+                <AccessDenied />
             </NotAuthorized>
         </AuthorizeRouteView>
     </Found>
     <NotFound>
-        <NotFound/>
+        <NotFound />
     </NotFound>
 </Router>
+
+@code{
+    protected HashSet<Assembly> AdditionalAssemblies = new HashSet<Assembly>();
+}
