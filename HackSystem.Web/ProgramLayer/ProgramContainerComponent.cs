@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using HackSystem.Web.ProgramLayer.ProgramComponent;
+using HackSystem.Web.ProgramSDK.ProgramComponent;
 using HackSystem.Web.SystemProgram;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.ProgramLayer
 {
+    /// <summary>
+    /// 程序容器组件
+    /// </summary>
+    /// <remarks>
+    /// 引用外部 .Net Core Razor Class Library 项目中的 Razor 组件
+    /// 详细请参考：https://github.com/dotnet/aspnetcore/issues/26228
+    /// </remarks>
     public partial class ProgramContainerComponent
     {
         private readonly Dictionary<int, ComponentBase> programComponents = new Dictionary<int, ComponentBase>();
@@ -17,7 +23,6 @@ namespace HackSystem.Web.ProgramLayer
         {
             base.OnInitialized();
 
-            this.logger.LogInformation("初始化...");
             this.renderFragment = builder =>
             {
                 _ = new[] {
