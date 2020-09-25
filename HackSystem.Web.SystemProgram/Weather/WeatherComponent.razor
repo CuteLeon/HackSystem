@@ -1,0 +1,40 @@
+﻿@inherits ProgramComponentBase
+
+<div data-pid="@ProgramEntity.PID" class="position-fixed user-select-none modal-dialog m-0 shadow" role="dialog" style="left:50rem;top:10rem;width:450px;height:240px;max-width:none;text-shadow:0px 0px 3px #000, 0px 1px 3px #000">
+    <div class="modal-content bg-transparent text-white overflow-hidden" style="backdrop-filter:blur(10px);">
+        <DraggableHandle DragTarget=".position-fixed">
+            <div class="modal-header border-0 py-2">
+                <h5 class="modal-title" id="exampleModalLabel">天气</h5>
+                <button type="button" class="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </DraggableHandle>
+        <div class="modal-body text-center p-2">
+            <div class="row m-0">
+                <div class="col-5 row p-0 m-0 border-right">
+                    <div class="col-12">
+                        <p class="fas fa-cloud-sun-rain fa-5x"></p>
+                    </div>
+                    <div class="col-12">晴转小雨</div>
+                    <div class="col-6">24℃</div>
+                    <div class="col-6">16℃</div>
+                </div>
+                <div class="col p-2">
+                    <ul class="list-unstyled mb-0">
+                        @for (int day = 1; day <= 6; day++)
+                        {
+                            <li>
+                                <div class="row m-0">
+                                    <div class="col-4 px-1">@System.DateTime.Today.AddDays(day).ToString("MM/dd")</div>
+                                    <div class="col-3 px-1"><p class="fas fa-sun mb-0"></p></div>
+                                    <div class="col-5 px-1">26℃ ~ 18℃</div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

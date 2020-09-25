@@ -1,0 +1,34 @@
+﻿@inherits ProgramComponentBase
+
+<ResizeableView ResizeableOption="new ResizeableOption() { Left = 25, Top = 8, Width = 800, Height = 600, Z_Index=this.ProgramEntity.Z_Index }">
+    <div data-pid="@ProgramEntity.PID" class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;">
+        <div class="modal-content border-danger overflow-hidden" style="height: 100%;">
+            <DraggableHandle DragTarget=".position-fixed">
+                <div class="modal-header py-2">
+                    <h5 class="modal-title" id="exampleModalLabel">资源浏览器</h5>
+                    <button type="button" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </DraggableHandle>
+            <div class="modal-body text-center p-0">
+                <div class="d-flex h-100">
+                    <div class="d-inline-block bg-light">
+                        <div class="nav flex-column nav-pills" style="width:200px;">
+                            <a class="nav-link active" data-toggle="pill">Hack System</a>
+                            <a class="nav-link" data-toggle="pill">Network</a>
+                            <a class="nav-link" data-toggle="pill">Session</a>
+                            <a class="nav-link" data-toggle="pill">Cookie</a>
+                            <a class="nav-link" data-toggle="pill">Local</a>
+                            <a class="nav-link" data-toggle="pill">Disk</a>
+                        </div>
+                    </div>
+                    <div class="d-inline-block w-100 h-100 p-5">
+                        <i class="fas fa-folder-open fa-10x text-dark my-3"></i>
+                        <p class="display-4 text-dark">Explorer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ResizeableView>

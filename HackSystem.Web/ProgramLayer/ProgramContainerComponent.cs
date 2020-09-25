@@ -2,6 +2,13 @@
 using System.Linq;
 using HackSystem.Web.ProgramSDK.ProgramComponent;
 using HackSystem.Web.SystemProgram;
+using HackSystem.Web.SystemProgram.AppStore;
+using HackSystem.Web.SystemProgram.Borwser;
+using HackSystem.Web.SystemProgram.Explorer;
+using HackSystem.Web.SystemProgram.Home;
+using HackSystem.Web.SystemProgram.Profile;
+using HackSystem.Web.SystemProgram.Setting;
+using HackSystem.Web.SystemProgram.Weather;
 using Microsoft.AspNetCore.Components;
 
 namespace HackSystem.Web.ProgramLayer
@@ -26,12 +33,13 @@ namespace HackSystem.Web.ProgramLayer
             this.renderFragment = builder =>
             {
                 _ = new[] {
-                    typeof(Program1Component),
-                    typeof(Program2Component),
-                    typeof(Program3Component),
-                    typeof(Program4Component),
-                    typeof(Program5Component),
-                    typeof(SystemProgram1Component)
+                    typeof(AppStoreComponent),
+                    typeof(BorwserComponent),
+                    typeof(ExplorerComponent),
+                    typeof(HomeComponent),
+                    typeof(ProfileComponent),
+                    typeof(SettingComponent),
+                    typeof(WeatherComponent)
                 }.Select((programType, index) =>
                 {
                     var programID = index;

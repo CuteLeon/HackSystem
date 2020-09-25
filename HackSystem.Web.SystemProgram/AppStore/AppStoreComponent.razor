@@ -1,0 +1,23 @@
+﻿@inherits ProgramComponentBase
+
+<ResizeableView ResizeableOption="new ResizeableOption() { Left=20, Top=5, Z_Index=this.ProgramEntity.Z_Index }">
+    <div data-pid="@ProgramEntity.PID" class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;">
+        <div class="modal-content border-primary bg-transparent overflow-hidden" style="height: 100%;">
+            <DraggableHandle DragTarget=".position-fixed">
+                <div class="modal-header py-2" style="backdrop-filter:blur(10px);" cur>
+                    <h5 class="modal-title text-white" style="text-shadow: 0px 0px 3px #000, 0px 1px 5px #000" id="exampleModalLabel">APP 商店</h5>
+                    <button type="button" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </DraggableHandle>
+            <div class="modal-body text-center p-5 bg-dark">
+                <i class="fab fa-app-store fa-10x text-white my-3"></i>
+                <p class="display-4 text-light">Welcome to <span class="text-warning">APP Store</span> !</p>
+            </div>
+            <div class="modal-footer justify-content-center" style="backdrop-filter:blur(10px);">
+                <button type="button" class="btn btn-primary px-5">进入</button>
+            </div>
+        </div>
+    </div>
+</ResizeableView>

@@ -1,0 +1,19 @@
+﻿@inherits ProgramComponentBase
+
+<ResizeableView ResizeableOption="new ResizeableOption() { Left=25, Top=8, Z_Index=this.ProgramEntity.Z_Index }">
+    <div data-pid="@ProgramEntity.PID" class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;">
+        <div class="modal-content border-danger overflow-hidden" style="height: 100%;">
+            <DraggableHandle DragTarget=".position-fixed">
+                <div class="modal-header border-0 bg-secondary text-white py-2">
+                    <h5 class="modal-title" id="exampleModalLabel">Home</h5>
+                    <button type="button" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </DraggableHandle>
+            <div class="modal-body bg-secondary text-center p-0">
+                <img src="LogoImage.png" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</ResizeableView>

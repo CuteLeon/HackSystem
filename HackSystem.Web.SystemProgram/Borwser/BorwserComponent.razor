@@ -1,0 +1,20 @@
+﻿@inherits ProgramComponentBase
+
+<ResizeableView ResizeableOption="new ResizeableOption() { Left=20, Top=5, Width=640, Height=450, Z_Index=this.ProgramEntity.Z_Index }">
+    <div data-pid="@ProgramEntity.PID" class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;">
+        <div class="modal-content border-primary bg-transparent overflow-hidden" style="height: 100%;backdrop-filter:blur(10px);">
+            <DraggableHandle DragTarget=".position-fixed">
+                <div class="modal-header py-2">
+                    <h5 class="modal-title text-white" style="text-shadow: 0px 0px 3px #000, 0px 1px 5px #000" id="exampleModalLabel">浏览器</h5>
+                    <button type="button" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </DraggableHandle>
+            <div class="modal-body p-0">
+                <iframe class="border-0 w-100 h-100 embed-responsive-item" src="https://blazor.net">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</ResizeableView>
