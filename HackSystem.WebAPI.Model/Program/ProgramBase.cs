@@ -19,6 +19,8 @@ namespace HackSystem.WebAPI.Model.Program
         [DefaultValue(true)]
         public bool Enabled { get; set; }
 
+        public bool IsSingleton { get; set; }
+
         public string AssemblyTypeFullName { get; set; }
 
         public virtual IList<UserBasicProgramMap> UserProgramMaps { get; set; }

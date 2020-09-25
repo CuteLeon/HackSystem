@@ -10,6 +10,8 @@
 
         public bool Enabled { get; set; }
 
+        public bool IsSingleton { get; set; }
+
         public string AssemblyTypeFullName { get; set; }
     }
 }
