@@ -12,10 +12,14 @@ namespace HackSystem.WebAPI.Model.Program
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
+        public string IconUri { get; set; }
+
         public string Name { get; set; }
 
         [DefaultValue(true)]
         public bool Enabled { get; set; }
+
+        public string AssemblyTypeFullName { get; set; }
 
         public virtual IList<UserBasicProgramMap> UserProgramMaps { get; set; }
     }
