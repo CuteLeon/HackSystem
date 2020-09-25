@@ -41,7 +41,7 @@ namespace HackSystem.WebAPI.Controllers.Program
         public async Task<IEnumerable<QueryUserBasicProgramMapDTO>> QueryUserBasicProgramMaps()
         {
             var userName = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
-            var user = await this.userManager.FindByNameAsync(userName) ?? throw new IdentityNotMappedException();
+            var user = await this.userManager.FindByNameAsync(userName) ?? throw new AuthenticationException();
             var userId = user.Id;
             var maps = await this.basicProgramDataService.QueryUserBasicProgramMaps(userId);
             var dtos = this.mapper.Map<IEnumerable<QueryUserBasicProgramMapDTO>>(maps);

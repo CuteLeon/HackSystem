@@ -4,7 +4,7 @@
         <div class="d-flex justify-content-center user-select-none">
             @foreach (var programMap in this.BasicProgramMaps.Values)
             {
-                <ProgramDockIconComponent @key="@programMap.BasicProgram.Id" Name="@(string.IsNullOrWhiteSpace(programMap.Rename)?programMap.BasicProgram.Name:programMap.Rename)" IconUrl="@programMap.BasicProgram.IconUrl" />
+                <ProgramDockIconComponent @key="@programMap.BasicProgram.Id" UserBasicProgramMap="programMap" />
             }
         </div>
     </div>

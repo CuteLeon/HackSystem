@@ -46,7 +46,7 @@ namespace HackSystem.Web.Desktop
                     this.BasicProgramMaps = maps
                         .Select(map =>
                         {
-                            map.BasicProgram.IconUrl = new Uri(new Uri(this.apiConfiguration.CurrentValue.APIURL), map.BasicProgram.IconUrl).AbsoluteUri;
+                            map.BasicProgram.IconUri = new Uri(new Uri(this.apiConfiguration.CurrentValue.APIURL), map.BasicProgram.IconUri).AbsoluteUri;
                             return map;
                         })
                         .ToDictionary(map => map.BasicProgram.Id, map => map);
