@@ -1,0 +1,16 @@
+﻿<span onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget="@this.dragTarget" style="@(string.IsNullOrEmpty(this.cursor)?string.Empty:"cursor:move;")">
+    @this.ChildContent
+</span>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private string dragTarget = ".position-fixed";
+    [Parameter]
+    public string DragTarget { get => this.dragTarget; set => this.dragTarget = value; }
+
+    private string cursor;
+    [Parameter]
+    public string Cursor { get => this.cursor; set => this.cursor = value; }
+}
