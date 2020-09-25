@@ -3,12 +3,14 @@
 <ResizeableView ResizeableOption="new ResizeableOption() { Left=40, Top=17, Z_Index=this.ProgramEntity.Z_Index }">
     <div data-pid="@ProgramEntity.PID" class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;">
         <div class="modal-content border-danger bg-dark text-white overflow-hidden" style="height: 100%;">
-            <div class="modal-header" onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget=".position-fixed">
-                <h5 class="modal-title" id="exampleModalLabel">标题</h5>
-                <button type="button" class="close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+            <DraggableHandle DragTarget=".position-fixed">
+                <div class="modal-header py-2">
+                    <h5 class="modal-title" id="exampleModalLabel">标题</h5>
+                    <button type="button" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </DraggableHandle>
             <div class="modal-body">
                 <div class="d-inline-block">
                     <i class="fas fa-4x fa-info-circle text-primary m-2"></i>

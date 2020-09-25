@@ -57,7 +57,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientProgram", "ClientProg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.SystemProgram", "HackSystem.Web.SystemProgram\HackSystem.Web.SystemProgram.csproj", "{5226E183-63CC-4C2A-9E54-952CC0352483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.Web.ProgramSDK", "HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj", "{059B5654-8BA9-4082-8ACF-F6B65B624C53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.ProgramSDK", "HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj", "{059B5654-8BA9-4082-8ACF-F6B65B624C53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
