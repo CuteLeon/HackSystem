@@ -52,4 +52,6 @@
 
 ![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/DesktopDemo_0.jpg)
 
+![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/DesktopDemo_2.jpg)
+
 ![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/DesktopDemo_1.jpg)
