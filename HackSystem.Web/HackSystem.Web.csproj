@@ -32,6 +32,7 @@
     <ProjectReference Include="..\HackSystem.Web.Common\HackSystem.Web.Common.csproj" />
     <ProjectReference Include="..\HackSystem.Web.CookieStorage\HackSystem.Web.CookieStorage.csproj" />
     <ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.Scheduler.Program\HackSystem.Web.Scheduler.Program.csproj" />
     <ProjectReference Include="..\HackSystem.Web.Services.API\HackSystem.Web.Services.API.csproj" />
     <ProjectReference Include="..\HackSystem.Web.Services\HackSystem.Web.Services.csproj" />
     <ProjectReference Include="..\HackSystem.Web.SystemProgram\HackSystem.Web.SystemProgram.csproj" />

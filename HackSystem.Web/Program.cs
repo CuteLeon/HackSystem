@@ -8,6 +8,7 @@ using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Common;
 using HackSystem.Web.Configurations;
 using HackSystem.Web.CookieStorage;
+using HackSystem.Web.Scheduler.Program;
 using HackSystem.Web.Services.Authentication;
 using HackSystem.Web.Services.API.Program;
 using HackSystem.Web.Services.Program;
@@ -48,6 +49,11 @@ namespace HackSystem.Web
                 .AddAutoMapper(typeof(Program).Assembly)
                 .AddLogging()
                 .AddBlazoredLocalStorage()
+                .AddHackSystemProgramScheduler(options =>
+                {
+                    options.ProgramLayerStart = 200;
+                    options.TopProgramLayerStart = 850;
+                })
                 .AddCookieStorage()
                 .AddAuthorizationCore()
                 .AddHackSystemAuthentication(options =>
