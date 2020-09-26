@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
+using HackSystem.Web.ProgramSDK.ProgramComponent;
 using HackSystem.WebDataTransfer.Program;
 using Microsoft.Extensions.Logging;
 
@@ -55,6 +56,11 @@ namespace HackSystem.Web.ProgramDrawer
                     this.logger.LogWarning($"使用方法二获取类型为空");
                 }
                 this.logger.LogWarning($"使用方法二获取类型：{type.FullName}");
+
+                if (!typeof(ProgramComponentBase).IsAssignableFrom(type))
+                {
+                    throw new TypeLoadException($"The target program type must derive from {typeof(ProgramComponentBase).Name}");
+                }
             }
             catch (Exception ex)
             {
