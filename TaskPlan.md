@@ -83,6 +83,38 @@
 - [ ] 结束进程方法：在字典和链表中删除此程序组件，视为关闭了一个进程
 - [ ] 正在运行的程序集合变化时，通知程序坞更新显示状态
 
+### 程序启动器
+
+> 注入程序调度器和程序容器
+
+1. 内部维护当前有效的最大PID
+2. 启动程序
+   1. 传入 QueryBasicProgramDTO
+   2. 传出 ProcessEntity
+      1. 包含一个ProgramComponentBase类型的属性表示组件实例的引用
+         1. 包含一个ProgramEntity类型的属性维护程序的状态信息
+      2. 包含一个Type类型的init属性表示该程序组件的真实类型
+      3. 包含一个RenderFramgment类型的成员表示该组件的渲染委托，由前端使用
+   3. 判断程序是否为单实例且程序容器中已有启动实例
+      1. 是：返回程序容器中该程序ID已经存在的单实例的ProcessEntity
+      2. 否：创建ProcessEntity
+         1. 使用当前有效的最大PID，并使PID自增
+         2. 创建RenderFramgment
+            1. 使用PID作为builder.OpenRegion的序列号
+            2. 将组件引用绑定到ProcessEntity的ProgramComponentBase成员上
+            3. 为ProgramComponentBase赋值ProgramEntity
+         3. 将此ProcessEntity添加到程序容器
+         4. 返回ProcessEntity
+3. 渲染程序组件
+   1. 页面使用程序容器获取当前可用的程序，使用其RenderFramgment属性将程序的组件渲染到页面
+4. 切换程序焦点时
+   1. 在构造RenderFramgment时为程序组件绑定激活事件
+      1. 激活时，使用程序调度器将激活程序从链表中移到最后的位置
+         1. 将链表中原位置之后的程序实体的Z_Index属性从激活程序的原Z-Index底层，以使Z-Index有序，且激活程序的Z-Index最大
+5. 销毁进程
+   1. 从程序容器移除进程的数据
+   2. 释放组件实例和数据
+
 ## 程序层
 
 - [ ] 按进程管理内维护的数据渲染程序组件实例

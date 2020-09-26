@@ -1,5 +1,9 @@
 ﻿@inject ILogger<ProgramContainerComponent> logger
+@inject IProgramContainer programContainer
 
 <div class="position-fixed w-100 h-100 user-select-none overflow-hidden" style="pointer-events:none;">
-    @this.renderFragment
+    @foreach (var renderFramgment in this.programContainer.GetProcesses().Select(process => process.ProgramRenderFramgment))
+    {
+        @renderFramgment
+    }
 </div>

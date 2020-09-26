@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HackSystem.Web.Scheduler.Program.Model;
+using HackSystem.WebDataTransfer.Program;
 
 namespace HackSystem.Web.Scheduler.Program.Launcher
 {
     public interface IProgramLauncher
     {
+        ProcessEntity LaunchProgram(QueryBasicProgramDTO basicProgram);
     }
 }

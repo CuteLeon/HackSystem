@@ -1,15 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HackSystem.Web.ProgramSDK.ProgramComponent;
-using HackSystem.Web.SystemProgram;
-using HackSystem.Web.SystemProgram.AppStore;
-using HackSystem.Web.SystemProgram.Borwser;
-using HackSystem.Web.SystemProgram.Explorer;
-using HackSystem.Web.SystemProgram.Home;
-using HackSystem.Web.SystemProgram.Profile;
-using HackSystem.Web.SystemProgram.Setting;
-using HackSystem.Web.SystemProgram.Weather;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.ProgramLayer
 {
@@ -22,58 +14,15 @@ namespace HackSystem.Web.ProgramLayer
     /// </remarks>
     public partial class ProgramContainerComponent
     {
-        private readonly Dictionary<int, ComponentBase> programComponents = new Dictionary<int, ComponentBase>();
-
-        RenderFragment renderFragment;
-
-        protected override void OnInitialized()
+        protected async override Task OnInitializedAsync()
         {
-            base.OnInitialized();
+            await base.OnInitializedAsync();
 
-            this.renderFragment = builder =>
+            this.programContainer.OnProcessesUpdate = new EventCallback(this, (Action)(() =>
             {
-                _ = new[] {
-                    typeof(AppStoreComponent),
-                    typeof(BorwserComponent),
-                    typeof(ExplorerComponent),
-                    typeof(HomeComponent),
-                    typeof(ProfileComponent),
-                    typeof(SettingComponent),
-                    typeof(WeatherComponent)
-                }.Select((programType, index) =>
-                {
-                    var programID = index;
-                    var programComponent = default(ProgramComponentBase);
-                    var programEntity = new ProgramEntity()
-                    {
-                        PID = programID,
-                        Z_Index = programID,
-                    };
-
-                    // 差分算法性能：Region 的序列号必须与程序ID对应
-                    builder.OpenRegion(programID);
-                    // 差分算法稳定性：Region 内的序列号可以重新开始递增
-                    builder.OpenComponent(0, programType);
-                    // Attribute 需要先于其他数据被添加
-                    builder.AddAttribute(2, nameof(ProgramComponentBase.ProgramEntity), programEntity);
-                    builder.AddComponentReferenceCapture(1, reference =>
-                    {
-                        programComponent = (ProgramComponentBase)reference;
-                        programComponents.Add(programID, programComponent);
-                    });
-                    // 为组件设置参数
-                    // builder.AddAttribute(1, default, default);
-                    // 差分算法性能：Component 的 @key 必须与程序ID对应
-                    builder.SetKey(programID);
-                    // 差分算法要求：标签开启和关闭必须对齐
-                    builder.CloseComponent();
-                    builder.CloseRegion();
-
-                    // 按引用操作程序组件实例
-                    // await programComponent.SetParametersAsync(default);
-                    return programComponent;
-                }).ToArray();
-            };
+                this.logger.LogInformation($"程序层容器接收到事件，重新渲染...");
+                this.StateHasChanged();
+            }));
         }
     }
 }

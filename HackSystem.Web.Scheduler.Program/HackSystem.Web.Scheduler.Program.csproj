@@ -10,4 +10,9 @@
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0-rc.1.20451.14" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
+	  <ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
+	</ItemGroup>
+
 </Project>
