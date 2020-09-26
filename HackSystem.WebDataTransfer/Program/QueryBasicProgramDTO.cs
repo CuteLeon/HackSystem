@@ -12,6 +12,8 @@
 
         public bool IsSingleton { get; set; }
 
-        public string AssemblyTypeFullName { get; set; }
+        public string AssemblyName { get; set; }
+
+        public string TypeName { get; set; }
     }
 }
