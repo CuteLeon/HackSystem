@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Reflection;
+using HackSystem.Observer.Publisher;
 using HackSystem.Web.ProgramSDK.ProgramComponent;
 using HackSystem.Web.Scheduler.Program.Container;
 using HackSystem.Web.Scheduler.Program.Model;
@@ -13,13 +13,16 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
     {
         private int availablePID = 0;
         private readonly ILogger<ProgramLauncher> logger;
+        private readonly IPublisher<ProgramLaunchMessage> publisher;
         private readonly IProgramContainer programContainer;
 
         public ProgramLauncher(
             ILogger<ProgramLauncher> logger,
+            IPublisher<ProgramLaunchMessage> publisher,
             IProgramContainer programContainer)
         {
             this.logger = logger;
+            this.publisher = publisher;
             this.programContainer = programContainer;
         }
 
@@ -57,7 +60,9 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
                 builder.CloseRegion();
             };
 
+            this.logger.LogInformation($"程序启动器：添加进程到容器并广播消息...");
             this.programContainer.AddProcess(process);
+            this.publisher.Publish(new ProgramLaunchMessage());
             return process;
         }
 

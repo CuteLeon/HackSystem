@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using HackSystem.Web.Services.API.Authentication;
 using HackSystem.Web.Extensions;
 using AutoMapper;
+using HackSystem.Observer;
 
 namespace HackSystem.Web
 {
@@ -48,6 +49,7 @@ namespace HackSystem.Web
             builder.Services
                 .AddAutoMapper(typeof(Program).Assembly)
                 .AddLogging()
+                .AddHackSystemObserver()
                 .AddBlazoredLocalStorage()
                 .AddHackSystemProgramScheduler(options =>
                 {

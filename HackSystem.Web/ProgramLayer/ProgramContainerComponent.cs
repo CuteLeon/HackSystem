@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
+using HackSystem.Web.Scheduler.Program.Launcher;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.ProgramLayer
@@ -12,17 +12,24 @@ namespace HackSystem.Web.ProgramLayer
     /// 引用外部 .Net Core Razor Class Library 项目中的 Razor 组件
     /// 详细请参考：https://github.com/dotnet/aspnetcore/issues/26228
     /// </remarks>
-    public partial class ProgramContainerComponent
+    public partial class ProgramContainerComponent : IDisposable
     {
         protected async override Task OnInitializedAsync()
         {
-            await base.OnInitializedAsync();
+            this.programLaunchSubcriber.HandleMessage = this.HandleProgramLaunchMessage;
 
-            this.programContainer.OnProcessesUpdate = new EventCallback(this, (Action)(() =>
-            {
-                this.logger.LogInformation($"程序层容器接收到事件，重新渲染...");
-                this.StateHasChanged();
-            }));
+            await base.OnInitializedAsync();
+        }
+
+        private async Task HandleProgramLaunchMessage(ProgramLaunchMessage message)
+        {
+            this.logger.LogInformation($"程序层容器接收到消息，重新渲染...");
+            this.StateHasChanged();
+        }
+
+        public void Dispose()
+        {
+            this.programLaunchSubcriber.Dispose();
         }
     }
 }
