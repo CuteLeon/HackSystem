@@ -40,8 +40,11 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
 
             var programComponentType = this.GetProgramComponentType(basicProgram.AssemblyName, basicProgram.TypeName);
             var programEntity = new ProgramEntity() { Name = basicProgram.Name };
+            process.ProgramComponentType = programComponentType;
 
             this.logger.LogInformation($"程序启动器：Type={programComponentType.FullName}");
+            
+            // TODO: Leon: Big Bug: 程序层组件刷新时，会重新调用RenderBuilder委托，导致已实例化的组件引用被更新
             process.ProgramRenderFramgment = builder =>
             {
                 // 差分算法性能：Region 的序列号必须与程序ID对应
@@ -53,6 +56,7 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
                 builder.AddAttribute(2, nameof(ProgramComponentBase.PID), process.PID);
                 builder.AddComponentReferenceCapture(3, reference =>
                 {
+                    this.logger.LogInformation($"进程 {process.ProgramComponentType.Name} PID={process.PID} 的组件引用由 {process.ProgramComponent?.GetHashCode():X} 更新为 {reference.GetHashCode():X}");
                     process.ProgramComponent = (ProgramComponentBase)reference;
                 });
                 // 差分算法性能：Component 的 @key 必须与程序ID对应
