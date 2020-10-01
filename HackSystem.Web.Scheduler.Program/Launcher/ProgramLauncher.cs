@@ -11,7 +11,7 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
 {
     public class ProgramLauncher : IProgramLauncher
     {
-        private int availablePID = 0;
+        private int availablePID = 1;
         private readonly ILogger<ProgramLauncher> logger;
         private readonly IPublisher<ProgramLaunchMessage> publisher;
         private readonly IProgramContainer programContainer;
