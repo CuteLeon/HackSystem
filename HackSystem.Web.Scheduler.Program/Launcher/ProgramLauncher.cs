@@ -3,6 +3,7 @@ using System.Reflection;
 using HackSystem.Observer.Publisher;
 using HackSystem.Web.ProgramSDK.ProgramComponent;
 using HackSystem.Web.Scheduler.Program.Container;
+using HackSystem.Web.Scheduler.Program.IDGenerator;
 using HackSystem.Web.Scheduler.Program.Model;
 using HackSystem.WebDataTransfer.Program;
 using Microsoft.Extensions.Logging;
@@ -11,29 +12,28 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
 {
     public class ProgramLauncher : IProgramLauncher
     {
-        private int availablePID = 1;
         private readonly ILogger<ProgramLauncher> logger;
         private readonly IPublisher<ProgramLaunchMessage> publisher;
+        private readonly IPIDGenerator pIDGenerator;
         private readonly IProgramContainer programContainer;
 
         public ProgramLauncher(
             ILogger<ProgramLauncher> logger,
             IPublisher<ProgramLaunchMessage> publisher,
+            IPIDGenerator pIDGenerator,
             IProgramContainer programContainer)
         {
             this.logger = logger;
             this.publisher = publisher;
+            this.pIDGenerator = pIDGenerator;
             this.programContainer = programContainer;
         }
-
-        private int GetAvailablePID()
-            => this.availablePID++;
 
         public ProcessEntity LaunchProgram(QueryBasicProgramDTO basicProgram)
         {
             var process = new ProcessEntity()
             {
-                PID = this.GetAvailablePID(),
+                PID = this.pIDGenerator.GetAvailablePID(),
             };
             this.logger.LogInformation($"程序启动器：Name={basicProgram.Name} ({process.PID})");
 
