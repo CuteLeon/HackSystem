@@ -22,11 +22,26 @@ namespace HackSystem.Web.Scheduler.Program.Container
             return this.Processes.Values.ToList();
         }
 
+        public ProcessEntity GetProcess(int pID)
+        {
+            this.logger.LogInformation($"程序容器：获取进程=> {pID}");
+            return this.Processes.TryGetValue(pID, out ProcessEntity process) ? process : default;
+        }
+
         public void AddProcess(ProcessEntity process)
         {
             this.logger.LogInformation($"程序容器：增加进程=> {process.PID} ({process.ProgramComponent?.GetHashCode().ToString("X")})");
             this.Processes.Add(process.PID, process);
             this.logger.LogInformation($"程序容器：当前进程集合=> {this.Processes.Count} 个");
+        }
+
+        public ProcessEntity RemoveProcess(int pID)
+        {
+            var process = this.GetProcess(pID);
+            this.logger.LogInformation($"程序容器：移除进程=> {pID}  ({process.ProgramComponent?.GetHashCode().ToString("X")})");
+            this.Processes.Remove(pID);
+            this.logger.LogInformation($"程序容器：当前进程集合=> {this.Processes.Count} 个");
+            return process;
         }
     }
 }

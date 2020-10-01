@@ -2,6 +2,7 @@
 using System.Reflection;
 using HackSystem.Observer.Publisher;
 using HackSystem.Web.ProgramSDK.ProgramComponent;
+using HackSystem.Web.ProgramSDK.ProgramComponent.ProgramMessages;
 using HackSystem.Web.Scheduler.Program.Container;
 using HackSystem.Web.Scheduler.Program.IDGenerator;
 using HackSystem.Web.Scheduler.Program.Model;
@@ -49,7 +50,8 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
                 builder.OpenComponent(0, programComponentType);
                 // Attribute 需要先于其他数据被添加
                 builder.AddAttribute(1, nameof(ProgramComponentBase.ProgramEntity), programEntity);
-                builder.AddComponentReferenceCapture(2, reference =>
+                builder.AddAttribute(2, nameof(ProgramComponentBase.PID), process.PID);
+                builder.AddComponentReferenceCapture(3, reference =>
                 {
                     process.ProgramComponent = (ProgramComponentBase)reference;
                 });

@@ -1,6 +1,10 @@
 ﻿@inject ILogger<ProgramContainerComponent> logger
 @inject IProgramContainer programContainer
 @inject ISubscriber<ProgramLaunchMessage> programLaunchSubcriber
+@inject ISubscriber<ProgramCloseMessage> programCloseSubscriber
+@inject IProgramLauncher programLauncher
+@inject IProgramDisposer programDisposer
+@inject IProgramScheduler programScheduler
 
 <div class="position-fixed w-100 h-100 user-select-none overflow-hidden" style="pointer-events:none;">
     @foreach (var renderFramgment in this.programContainer.GetProcesses().Select(process => process.ProgramRenderFramgment))

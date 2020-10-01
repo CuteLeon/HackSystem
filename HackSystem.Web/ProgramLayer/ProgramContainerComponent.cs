@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HackSystem.Web.Scheduler.Program.Launcher;
+using HackSystem.Web.ProgramSDK.ProgramComponent.ProgramMessages;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.ProgramLayer
@@ -17,11 +17,18 @@ namespace HackSystem.Web.ProgramLayer
         protected async override Task OnInitializedAsync()
         {
             this.programLaunchSubcriber.HandleMessage = this.HandleProgramLaunchMessage;
+            this.programCloseSubscriber.HandleMessage = this.HandleProgramCloseMessage;
 
             await base.OnInitializedAsync();
         }
 
         private async Task HandleProgramLaunchMessage(ProgramLaunchMessage message)
+        {
+            this.logger.LogInformation($"程序层容器接收到消息，重新渲染...");
+            this.StateHasChanged();
+        }
+
+        private async Task HandleProgramCloseMessage(ProgramCloseMessage arg)
         {
             this.logger.LogInformation($"程序层容器接收到消息，重新渲染...");
             this.StateHasChanged();

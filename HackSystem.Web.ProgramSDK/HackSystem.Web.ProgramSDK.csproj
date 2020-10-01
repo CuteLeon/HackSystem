@@ -9,4 +9,8 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0-rc.1.20451.14" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\HackSystem.Observer\HackSystem.Observer.csproj" />
+	</ItemGroup>
+
 </Project>

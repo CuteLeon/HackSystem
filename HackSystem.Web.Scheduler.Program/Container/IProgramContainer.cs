@@ -8,5 +8,9 @@ namespace HackSystem.Web.Scheduler.Program.Container
         List<ProcessEntity> GetProcesses();
 
         void AddProcess(ProcessEntity process);
+        
+        ProcessEntity RemoveProcess(int pID);
+
+        ProcessEntity GetProcess(int pID);
     }
 }
