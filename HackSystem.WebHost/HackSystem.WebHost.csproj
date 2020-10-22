@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
     <UserSecretsId>201558c0-ef31-4abd-98e8-74fae33e2f73</UserSecretsId>
   </PropertyGroup>
 
