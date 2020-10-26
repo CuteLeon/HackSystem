@@ -29,7 +29,9 @@
 
 # Video
 
-<iframe src="//player.bilibili.com/player.html?aid=542162080&bvid=BV1di4y177TH&cid=239380638&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+> Click image below to watch video.
+
+[![CuteLeon/HackSystem](https://i2.hdslb.com/bfs/archive/e656c696dd64c8e4104d1792cbbe35c6192381cc.jpg)](https://www.bilibili.com/video/BV1di4y177TH/ "CuteLeon/HackSystem")
 
 # Screen
 
