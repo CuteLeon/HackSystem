@@ -30,9 +30,9 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
             this.programContainer = programContainer;
         }
 
-        public ProcessEntity LaunchProgram(QueryBasicProgramDTO basicProgram)
+        public ProcessDetail LaunchProgram(QueryBasicProgramDTO basicProgram)
         {
-            var process = new ProcessEntity()
+            var process = new ProcessDetail()
             {
                 PID = this.pIDGenerator.GetAvailablePID(),
             };
@@ -43,7 +43,7 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
             process.ProgramComponentType = programComponentType;
 
             this.logger.LogInformation($"程序启动器：Type={programComponentType.FullName}");
-            
+
             // TODO: Leon: Big Bug: 程序层组件刷新时，会重新调用RenderBuilder委托，导致已实例化的组件引用被更新
             process.ProgramRenderFramgment = builder =>
             {
@@ -60,7 +60,7 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
                     process.ProgramComponent = (ProgramComponentBase)reference;
                 });
                 // 差分算法性能：Component 的 @key 必须与程序ID对应
-                builder.SetKey(process.PID);
+                builder.SetKey($"Process_{process.PID}");
                 // 差分算法要求：标签开启和关闭必须对齐
                 builder.CloseComponent();
                 builder.CloseRegion();

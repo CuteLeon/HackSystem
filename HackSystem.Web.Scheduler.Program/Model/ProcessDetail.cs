@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace HackSystem.Web.Scheduler.Program.Model
 {
-    public class ProcessEntity
+    public class ProcessDetail
     {
         public int PID { get; set; }
 

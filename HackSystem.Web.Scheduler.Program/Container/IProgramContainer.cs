@@ -5,12 +5,12 @@ namespace HackSystem.Web.Scheduler.Program.Container
 {
     public interface IProgramContainer
     {
-        List<ProcessEntity> GetProcesses();
+        List<ProcessDetail> GetProcesses();
 
-        void AddProcess(ProcessEntity process);
+        void AddProcess(ProcessDetail process);
         
-        ProcessEntity RemoveProcess(int pID);
+        ProcessDetail RemoveProcess(int pID);
 
-        ProcessEntity GetProcess(int pID);
+        ProcessDetail GetProcess(int pID);
     }
 }

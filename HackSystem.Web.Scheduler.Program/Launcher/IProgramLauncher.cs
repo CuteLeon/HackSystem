@@ -5,6 +5,6 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
 {
     public interface IProgramLauncher
     {
-        ProcessEntity LaunchProgram(QueryBasicProgramDTO basicProgram);
+        ProcessDetail LaunchProgram(QueryBasicProgramDTO basicProgram);
     }
 }
