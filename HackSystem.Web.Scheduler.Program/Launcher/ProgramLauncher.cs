@@ -16,18 +16,18 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
         private readonly ILogger<ProgramLauncher> logger;
         private readonly IPublisher<ProgramLaunchMessage> publisher;
         private readonly IPIDGenerator pIDGenerator;
-        private readonly IProgramContainer programContainer;
+        private readonly IProcessContainer processContainer;
 
         public ProgramLauncher(
             ILogger<ProgramLauncher> logger,
             IPublisher<ProgramLaunchMessage> publisher,
             IPIDGenerator pIDGenerator,
-            IProgramContainer programContainer)
+            IProcessContainer processContainer)
         {
             this.logger = logger;
             this.publisher = publisher;
             this.pIDGenerator = pIDGenerator;
-            this.programContainer = programContainer;
+            this.processContainer = processContainer;
         }
 
         public ProcessDetail LaunchProgram(QueryBasicProgramDTO basicProgram)
@@ -60,7 +60,7 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
             };
 
             this.logger.LogInformation($"程序启动器：添加进程到容器并广播消息...");
-            this.programContainer.AddProcess(process);
+            this.processContainer.AddProcess(process);
             this.publisher.Publish(new ProgramLaunchMessage());
             return process;
         }

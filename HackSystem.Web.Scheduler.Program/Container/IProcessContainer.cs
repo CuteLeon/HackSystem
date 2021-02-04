@@ -3,7 +3,7 @@ using HackSystem.Web.Scheduler.Program.Model;
 
 namespace HackSystem.Web.Scheduler.Program.Container
 {
-    public interface IProgramContainer
+    public interface IProcessContainer
     {
         IEnumerable<ProcessDetail> GetProcesses();
 

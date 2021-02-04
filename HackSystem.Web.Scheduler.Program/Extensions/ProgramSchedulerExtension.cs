@@ -16,7 +16,7 @@ namespace HackSystem.Web.Scheduler.Program
             services
                 .Configure(configure)
                 .AddSingleton<IPIDGenerator, PIDGenerator>()
-                .AddSingleton<IProgramContainer, ProgramContainer>()
+                .AddSingleton<IProcessContainer, ProcessContainer>()
                 .AddSingleton<IProgramLauncher, ProgramLauncher>()
                 .AddSingleton<IProgramDisposer, ProgramDisposer>()
                 .AddSingleton<IProgramScheduler, ProgramScheduler>();
