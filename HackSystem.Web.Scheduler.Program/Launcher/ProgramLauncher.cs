@@ -55,7 +55,6 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
                     this.logger.LogInformation($"进程 {process.ProgramComponentType.Name} PID={process.PID} 的组件引用由 {process.ProgramComponent?.GetHashCode():X} 更新为 {reference.GetHashCode():X}");
                     process.ProgramComponent = (ProgramComponentBase)reference;
                 });
-                builder.SetKey(0x40000000 | process.PID);
                 builder.CloseComponent();
             };
 

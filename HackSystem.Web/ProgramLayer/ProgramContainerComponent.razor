@@ -10,7 +10,8 @@
     @foreach (var process in this.processContainer.GetProcesses())
     {
         <!-- Fixed a big issue here. More details please navigate to https://github.com/dotnet/aspnetcore/issues/29176 -->
-        <span @key="@process.PID">
+        var key = $"Process_{process.PID}";
+        <span @key=key>
             @process.ProgramRenderFramgment
         </span>
     }
