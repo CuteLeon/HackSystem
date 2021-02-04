@@ -5,7 +5,7 @@ namespace HackSystem.Web.Scheduler.Program.Container
 {
     public interface IProgramContainer
     {
-        List<ProcessDetail> GetProcesses();
+        IEnumerable<ProcessDetail> GetProcesses();
 
         void AddProcess(ProcessDetail process);
         

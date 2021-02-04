@@ -44,14 +44,8 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
 
             this.logger.LogInformation($"程序启动器：Type={programComponentType.FullName}");
 
-            /* TODO: Leon: Big Bug: 程序层组件刷新时，会重新调用RenderBuilder委托，导致已实例化的组件引用被更新
-             * 重要发现：关闭某个窗口组件后，每次都仅重新渲染在其之后运行的窗口组件
-             */
             process.ProgramRenderFramgment = builder =>
             {
-                // 差分算法性能：Region 的序列号必须与程序ID对应
-                builder.OpenRegion(0x40000000 | process.PID);
-                // 差分算法稳定性：Region 内的序列号可以重新开始递增
                 builder.OpenComponent(0, programComponentType);
                 // Attribute 需要先于其他数据被添加
                 builder.AddAttribute(1, nameof(ProgramComponentBase.ProgramEntity), programEntity);
@@ -61,12 +55,8 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
                     this.logger.LogInformation($"进程 {process.ProgramComponentType.Name} PID={process.PID} 的组件引用由 {process.ProgramComponent?.GetHashCode():X} 更新为 {reference.GetHashCode():X}");
                     process.ProgramComponent = (ProgramComponentBase)reference;
                 });
-                // 差分算法性能：Component 的 @key 必须与程序ID对应
-                //builder.SetKey($"Process_{process.PID}");
                 builder.SetKey(0x40000000 | process.PID);
-                // 差分算法要求：标签开启和关闭必须对齐
                 builder.CloseComponent();
-                builder.CloseRegion();
             };
 
             this.logger.LogInformation($"程序启动器：添加进程到容器并广播消息...");

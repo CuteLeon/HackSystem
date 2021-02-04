@@ -7,8 +7,11 @@
 @inject IProgramScheduler programScheduler
 
 <div id="ProgramContainerInstance" class="position-fixed w-100 h-100 user-select-none overflow-hidden" style="pointer-events:none;">
-    @foreach (var renderFramgment in this.programContainer.GetProcesses().Select(process => process.ProgramRenderFramgment))
+    @foreach (var process in this.programContainer.GetProcesses())
     {
-        @renderFramgment
+        <!-- Fixed a big issue here. More details please navigate to https://github.com/dotnet/aspnetcore/issues/29176 -->
+        <span @key="@process.PID">
+            @process.ProgramRenderFramgment
+        </span>
     }
 </div>

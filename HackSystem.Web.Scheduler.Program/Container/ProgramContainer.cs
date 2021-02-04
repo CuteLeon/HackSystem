@@ -16,10 +16,10 @@ namespace HackSystem.Web.Scheduler.Program.Container
             this.logger = logger;
         }
 
-        public List<ProcessDetail> GetProcesses()
+        public IEnumerable<ProcessDetail> GetProcesses()
         {
             this.logger.LogInformation($"程序容器：获取进程集合=> {this.Processes.Count} 个");
-            return this.Processes.Values.ToList();
+            return this.Processes.Values.AsEnumerable();
         }
 
         public ProcessDetail GetProcess(int pID)
