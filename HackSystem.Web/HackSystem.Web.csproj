@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
@@ -45,5 +46,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="set fileName=blazor.webassembly.js&#xD;&#xA;set originPath=$(SolutionDir)BuildTools\%25fileName%25&#xD;&#xA;set destinationPath=$(TargetDir)wwwroot\_framework\%25fileName%25&#xD;&#xA;&#xD;&#xA;echo OriginPath=%25originPath%25&#xD;&#xA;echo DestinationPath=%25destinationPath%25&#xD;&#xA;XCOPY %25originPath%25 %25destinationPath%25 /Y" />
+  </Target>
 
 </Project>
