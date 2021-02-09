@@ -18,7 +18,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using HackSystem.Web.Services.API.Authentication;
 using HackSystem.Web.Extensions;
-using AutoMapper;
 using HackSystem.Observer;
 
 namespace HackSystem.Web
@@ -92,7 +91,7 @@ namespace HackSystem.Web
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
-        /// <remarks>可以有更优雅的方式外置这些代码，需要注意 Servcide 需要的 Options 的传递</remarks>
+        /// <remarks>可以有更优雅的方式外置这些代码，需要注意 Service 需要的 Options 的传递</remarks>
         public static WebAssemblyHostBuilder InitializeHackSystemServices(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
         {
             builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
