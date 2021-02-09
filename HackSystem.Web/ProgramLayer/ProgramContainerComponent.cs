@@ -14,6 +14,8 @@ namespace HackSystem.Web.ProgramLayer
     /// </remarks>
     public partial class ProgramContainerComponent : IDisposable
     {
+        private bool disposedValue;
+
         protected async override Task OnInitializedAsync()
         {
             this.programLaunchSubcriber.HandleMessage = this.HandleProgramLaunchMessage;
@@ -26,17 +28,33 @@ namespace HackSystem.Web.ProgramLayer
         {
             this.logger.LogInformation($"程序层容器接收到消息，重新渲染...");
             this.StateHasChanged();
+            await Task.CompletedTask;
         }
 
         private async Task HandleProgramCloseMessage(ProgramCloseMessage arg)
         {
             this.logger.LogInformation($"程序层容器接收到消息，重新渲染...");
             this.StateHasChanged();
+            await Task.CompletedTask;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    this.programLaunchSubcriber.Dispose();
+                }
+
+                disposedValue = true;
+            }
         }
 
         public void Dispose()
         {
-            this.programLaunchSubcriber.Dispose();
+            this.Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

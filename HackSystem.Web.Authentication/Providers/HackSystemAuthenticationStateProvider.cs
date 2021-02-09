@@ -44,17 +44,17 @@ namespace HackSystem.Web.Authentication.Providers
             var savedToken = await this.GetCurrentTokenAsync();
             if (string.IsNullOrWhiteSpace(savedToken))
             {
-                return await this.ReturnAnonymousState();
+                return this.ReturnAnonymousState();
             }
 
             var claimsIdentity = this.ParseClaimsIdentity(savedToken);
             if (!this.CheckClaimsIdentity(claimsIdentity))
             {
-                return await this.ReturnAnonymousState();
+                return this.ReturnAnonymousState();
             }
 
             var user = new ClaimsPrincipal(claimsIdentity);
-            return await this.ReturnAuthebticatedState(user);
+            return this.ReturnAuthebticatedState(user);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace HackSystem.Web.Authentication.Providers
         /// 返回匿名状态
         /// </summary>
         /// <returns></returns>
-        private async Task<AuthenticationState> ReturnAnonymousState()
+        private AuthenticationState ReturnAnonymousState()
         {
             this.logger.LogInformation("HackSystem Return Anonymous State.");
             return this.options.AnonymousState;
@@ -85,7 +85,7 @@ namespace HackSystem.Web.Authentication.Providers
         /// </summary>
         /// <param name="claimsPrincipal"></param>
         /// <returns></returns>
-        private async Task<AuthenticationState> ReturnAuthebticatedState(ClaimsPrincipal claimsPrincipal)
+        private AuthenticationState ReturnAuthebticatedState(ClaimsPrincipal claimsPrincipal)
         {
             this.logger.LogInformation("HackSystem Return Authebticated State.");
             return new AuthenticationState(claimsPrincipal);

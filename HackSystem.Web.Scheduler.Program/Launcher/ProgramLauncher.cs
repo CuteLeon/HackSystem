@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using HackSystem.Observer.Publisher;
 using HackSystem.Web.ProgramSDK.ProgramComponent;
 using HackSystem.Web.ProgramSDK.ProgramComponent.ProgramMessages;
@@ -30,7 +31,7 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
             this.processContainer = processContainer;
         }
 
-        public ProcessDetail LaunchProgram(QueryBasicProgramDTO basicProgram)
+        public Task<ProcessDetail> LaunchProgram(QueryBasicProgramDTO basicProgram)
         {
             var process = new ProcessDetail()
             {
@@ -61,7 +62,7 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
             this.logger.LogInformation($"程序启动器：添加进程到容器并广播消息...");
             this.processContainer.AddProcess(process);
             this.publisher.Publish(new ProgramLaunchMessage());
-            return process;
+            return Task.FromResult(process);
         }
 
         private static Type GetProgramComponentType(string assemblyName, string typeName)

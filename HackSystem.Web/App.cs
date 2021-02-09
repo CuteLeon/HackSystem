@@ -16,6 +16,7 @@ namespace HackSystem.Web
         protected async Task OnNavigateAsync(NavigationContext navigationContext)
         {
             this.logger.LogInformation($"Navigating to {navigationContext.Path}");
+            await Task.CompletedTask;
         }
     }
 }

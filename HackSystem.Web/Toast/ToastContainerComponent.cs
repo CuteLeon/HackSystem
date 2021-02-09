@@ -14,6 +14,7 @@ namespace HackSystem.Web.Toast
     public partial class ToastContainerComponent : IToastContainer, IDisposable
     {
         private DotNetObjectReference<IToastContainer> interopReference;
+        private bool disposedValue;
 
         public ToastContainerComponent()
         {
@@ -48,10 +49,24 @@ namespace HackSystem.Web.Toast
             this.Toasts.Remove(toastId);
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    this.Toasts.Clear();
+                    interopReference.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
         public void Dispose()
         {
-            this.Toasts.Clear();
-            interopReference.Dispose();
+            this.Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }
