@@ -73,19 +73,12 @@ namespace HackSystem.Web.Authentication.Services
             string text = base64;
             text = text.Replace('-', '+');
             text = text.Replace('_', '/');
-            switch (text.Length % 4)
+            text = (text.Length % 4) switch
             {
-                case 2:
-                    text += "==";
-                    break;
-                case 3:
-                    text += "=";
-                    break;
-                default:
-                    throw new FormatException("不合法的 Base64 字符串");
-                case 0:
-                    break;
-            }
+                0 => text,
+                int count when count is 2 or 3 => text.PadRight(text.Length + (4 - count), '='),
+                _ => throw new FormatException("Invilad Base64 string."),
+            };
 
             return Convert.FromBase64String(text);
         }

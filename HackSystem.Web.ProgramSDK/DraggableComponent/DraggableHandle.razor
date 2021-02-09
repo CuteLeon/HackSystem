@@ -1,4 +1,4 @@
-﻿<span onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget="@this.dragTarget" style="@(string.IsNullOrEmpty(this.cursor)?string.Empty:"cursor:move;")">
+﻿<span onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget="@this.dragTarget" style="@($"cursor:{(this.cursor is { Length: >0 }?this.cursor:"move")};")">
     @this.ChildContent
 </span>
 
