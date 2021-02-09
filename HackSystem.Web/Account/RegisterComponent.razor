@@ -24,11 +24,11 @@
                 </div>
             }
 
-            <EditForm Model="registerDto" OnValidSubmit="OnRegister">
+            <EditForm Model="registerDto" autofocus OnValidSubmit="OnRegister">
                 <DataAnnotationsValidator />
                 <div class="form-group">
                     <label for="username">用户名称</label>
-                    <InputText Id="userName" Class="form-control" @bind-Value="registerDto.UserName" />
+                    <InputText Id="userName" autofocus Class="form-control" @bind-Value="registerDto.UserName" />
                     <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.UserName)" /></small>
                 </div>
                 <div class="form-group">

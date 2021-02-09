@@ -22,12 +22,12 @@
                 </div>
             }
 
-            <EditForm Model="loginDto" OnValidSubmit="OnLogin">
+            <EditForm Model="loginDto" autofocus OnValidSubmit="OnLogin">
                 <DataAnnotationsValidator />
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="username">用户名称</label>
-                        <InputText Id="userName" Class="form-control" @bind-Value="loginDto.UserName" />
+                        <InputText Id="userName" autofocus Class="form-control" @bind-Value="loginDto.UserName" />
                         <small><ValidationMessage class="valid-feedback" For="@(() => loginDto.UserName)" /></small>
                     </div>
                     <div class="col-md-6 mb-3">
