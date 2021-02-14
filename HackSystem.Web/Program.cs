@@ -59,7 +59,7 @@ namespace HackSystem.Web
                 .AddAuthorizationCore()
                 .AddHackSystemAuthentication(options =>
                 {
-                    options.AnonymousState.User.Claims.Append(new Claim(ClaimTypes.Name, "Anonymous"));
+                    _ = options.AnonymousState.User.Claims.Append(new Claim(ClaimTypes.Name, "Anonymous"));
                     options.AuthenticationURL = apiConfiguration.APIURL;
                     options.TokenExpiryInMinutes = apiConfiguration.TokenExpiryInMinutes;
                     options.AuthenticationScheme = WebCommonSense.AuthenticationScheme;
