@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using HackSystem.Common;
 using HackSystem.Observer;
+using HackSystem.Cryptography;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Common;
 using HackSystem.Web.Configurations;
@@ -33,8 +34,8 @@ namespace HackSystem.Web
             var apiConfiguration = builder.Configuration.GetSection("APIConfiguration").Get<APIConfiguration>();
             builder
                 .InitializeConfiguration()
-                .InitializeBasicService(apiConfiguration)
-                .InitializeHackSystemServices(apiConfiguration)
+                .InitializeBasicService()
+                .InitializeHackSystemServices()
                 .InitializeAuthorizationPolicy();
 
             await builder
@@ -43,18 +44,12 @@ namespace HackSystem.Web
                 .RunAsync();
         }
 
-        public static WebAssemblyHostBuilder InitializeBasicService(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
+        public static WebAssemblyHostBuilder InitializeBasicService(this WebAssemblyHostBuilder builder)
         {
             builder.Services
                 .AddAutoMapper(typeof(Program).Assembly)
                 .AddLogging()
-                .AddHackSystemObserver()
                 .AddBlazoredLocalStorage()
-                .AddHackSystemProgramScheduler(options =>
-                {
-                    options.ProgramLayerStart = 200;
-                    options.TopProgramLayerStart = 850;
-                })
                 .AddCookieStorage()
                 .AddAuthorizationCore()
                 .AddHackSystemAuthentication(options =>
@@ -90,8 +85,36 @@ namespace HackSystem.Web
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public static WebAssemblyHostBuilder InitializeHackSystemServices(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
+        /// <remarks>可以有更优雅的方式外置这些代码，需要注意 Service 需要的 Options 的传递</remarks>
+        public static WebAssemblyHostBuilder InitializeHackSystemServices(this WebAssemblyHostBuilder builder)
         {
+            var apiConfiguration = builder.Configuration.GetSection("APIConfiguration").Get<APIConfiguration>();
+            var securityConfiguration = builder.Configuration.GetSection("SecurityConfiguration").Get<SecurityConfiguration>();
+
+            builder.Services
+                .AddRSACryptography(options =>
+                {
+                    options.RSAKeyParameters = securityConfiguration.RSAPublicKey;
+                })
+                .AddHackSystemObserver()
+                .AddHackSystemProgramScheduler(options =>
+                {
+                    options.ProgramLayerStart = 200;
+                    options.TopProgramLayerStart = 850;
+                })
+                .AddHackSystemAuthentication(options =>
+                {
+                    options.AnonymousState.User.Claims.Append(new Claim(ClaimTypes.Name, "Anonymous"));
+                    options.AuthenticationURL = apiConfiguration.APIURL;
+                    options.TokenExpiryInMinutes = apiConfiguration.TokenExpiryInMinutes;
+                    options.AuthenticationScheme = WebCommonSense.AuthenticationScheme;
+                    options.AuthenticationType = WebCommonSense.AuthenticationType;
+                    options.AuthTokenName = WebCommonSense.AuthTokenName;
+                    options.ExpiryClaimType = WebCommonSense.ExpiryClaimType;
+                    options.TokenRefreshInMinutes = apiConfiguration.TokenRefreshInMinutes;
+                })
+                .AddTransient(sp => new HttpClient { BaseAddress = new Uri(apiConfiguration.APIURL) });
+
             builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
             builder.Services.AddHttpClient<IBasicProgramService, BasicProgramService>(httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
 

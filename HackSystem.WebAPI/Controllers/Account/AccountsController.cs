@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using HackSystem.Cryptography.RSACryptography;
 using AutoMapper;
 using HackSystem.Common;
 using HackSystem.WebAPI.Authentication.Services;
@@ -22,6 +23,7 @@ namespace HackSystem.WebAPI.Controllers.Account
     {
         private readonly ILogger<AccountsController> logger;
         private readonly ITokenGenerator tokenGenerator;
+        private readonly IRSACryptographyService rsaCryptographyService;
         private readonly IAccountService accountService;
         private readonly IMapper mapper;
         private readonly SignInManager<HackSystemUser> signInManager;
@@ -30,6 +32,7 @@ namespace HackSystem.WebAPI.Controllers.Account
             ILogger<AccountsController> logger,
             ITokenGenerator tokenGenerator,
             IAccountService accountService,
+            IRSACryptographyService rsaCryptographyService,
             IMapper mapper,
             SignInManager<HackSystemUser> signInManager,
             RoleManager<HackSystemRole> roleManager,
@@ -39,6 +42,7 @@ namespace HackSystem.WebAPI.Controllers.Account
             this.logger = logger;
             this.tokenGenerator = tokenGenerator;
             this.accountService = accountService;
+            this.rsaCryptographyService = rsaCryptographyService;
             this.mapper = mapper;
             this.signInManager = signInManager;
         }
@@ -104,8 +108,13 @@ namespace HackSystem.WebAPI.Controllers.Account
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
+            this.logger.LogDebug($"登录账户: {login.UserName}");
+
+            login.UserName = this.rsaCryptographyService.RSADecrypt(login.UserName);
+            login.Password = this.rsaCryptographyService.RSADecrypt(login.Password);
             this.logger.LogInformation($"Login user: {login.UserName}");
             var result = await this.signInManager.PasswordSignInAsync(login.UserName, login.Password, true, false);
+
             if (!result.Succeeded)
             {
                 var errorMessage = result switch

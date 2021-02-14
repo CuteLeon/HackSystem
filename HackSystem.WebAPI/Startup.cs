@@ -11,9 +11,11 @@ using HackSystem.WebAPI.TaskServers.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using HackSystem.Cryptography;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using HackSystem.WebAPI.Configurations;
 
 namespace HackSystem.WebAPI
 {
@@ -67,8 +69,15 @@ namespace HackSystem.WebAPI
             var jwtConfiguration = this.Configuration.GetSection("JwtConfiguration").Get<JwtAuthenticationOptions>();
             var taskServerConfiguration = this.Configuration.GetSection("TaskServerConfiguration").Get<TaskServerOptions>();
             var mockServerConfiguration = this.Configuration.GetSection("MockServerConfiguration").Get<MockServerOptions>();
+            var securityConfiguration = this.Configuration.GetSection("SecurityConfiguration").Get<SecurityConfiguration>();
             services
                 .AddAutoMapper(typeof(Startup).Assembly)
+                .AddRSACryptography(options =>
+                {
+                    options.RSAKeyParameters = securityConfiguration.RSAPrivateKey;
+                })
+                .AddAPIServices()
+                .AddAPIAuthentication(jwtConfiguration);
                 .AttachTaskServer(taskServerConfiguration)
                 .AttachMockServer(mockServerConfiguration)
                 .AddHttpClient()
