@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using HackSystem.Cryptography.RSACryptography;
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebDataTransfer.Account;
 using HackSystem.Common;
@@ -20,12 +21,14 @@ namespace HackSystem.WebAPI.Controllers.Account
     {
         private readonly ILogger<AccountsController> logger;
         private readonly ITokenGenerator tokenGenerator;
+        private readonly IRSACryptographyService rsaCryptographyService;
         private readonly IMapper mapper;
         private readonly SignInManager<HackSystemUser> signInManager;
 
         public AccountsController(
             ILogger<AccountsController> logger,
             ITokenGenerator tokenGenerator,
+            IRSACryptographyService rsaCryptographyService,
             IMapper mapper,
             SignInManager<HackSystemUser> signInManager,
             RoleManager<HackSystemRole> roleManager,
@@ -34,6 +37,7 @@ namespace HackSystem.WebAPI.Controllers.Account
         {
             this.logger = logger;
             this.tokenGenerator = tokenGenerator;
+            this.rsaCryptographyService = rsaCryptographyService;
             this.mapper = mapper;
             this.signInManager = signInManager;
         }
@@ -96,7 +100,11 @@ namespace HackSystem.WebAPI.Controllers.Account
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
             this.logger.LogDebug($"登录账户: {login.UserName}");
+
+            login.UserName = this.rsaCryptographyService.RSADecrypt(login.UserName);
+            login.Password = this.rsaCryptographyService.RSADecrypt(login.Password);
             var result = await this.signInManager.PasswordSignInAsync(login.UserName, login.Password, true, false);
+
             if (!result.Succeeded)
             {
                 var errorMessage = result switch

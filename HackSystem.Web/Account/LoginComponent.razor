@@ -1,6 +1,7 @@
 ﻿@page "/Login"
 
 @inject ILogger<LoginComponent> logger
+@inject IRSACryptographyService rsaCryptographyService
 @inject IAuthenticationService authenticationService
 @inject IHackSystemAuthenticationStateHandler authenticationStateHandler
 @inject NavigationManager navigationManager

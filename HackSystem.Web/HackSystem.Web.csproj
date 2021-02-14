@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
+    <ProjectReference Include="..\HackSystem.Cryptography\HackSystem.Cryptography.csproj" />
     <ProjectReference Include="..\HackSystem.Observer\HackSystem.Observer.csproj" />
     <ProjectReference Include="..\HackSystem.Web.Authentication\HackSystem.Web.Authentication.csproj" />
     <ProjectReference Include="..\HackSystem.Web.Common\HackSystem.Web.Common.csproj" />

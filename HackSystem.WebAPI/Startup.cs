@@ -6,10 +6,11 @@ using HackSystem.WebAPI.Services.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
+using HackSystem.Cryptography;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using HackSystem.WebAPI.Configurations;
 
 namespace HackSystem.WebAPI
 {
@@ -61,8 +62,13 @@ namespace HackSystem.WebAPI
 
             // ≈‰÷√∑˛ŒÒ
             var jwtConfiguration = this.Configuration.GetSection("JwtConfiguration").Get<JwtAuthenticationOptions>();
+            var securityConfiguration = this.Configuration.GetSection("SecurityConfiguration").Get<SecurityConfiguration>();
             services
                 .AddAutoMapper(typeof(Startup).Assembly)
+                .AddRSACryptography(options =>
+                {
+                    options.RSAKeyParameters = securityConfiguration.RSAPrivateKey;
+                })
                 .AddAPIServices()
                 .AddAPIAuthentication(jwtConfiguration);
 
