@@ -71,12 +71,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.CryptographyTest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebTests", "HackSystem.WebTests\HackSystem.WebTests.csproj", "{7538EBE4-EE84-4A04-AA25-B9645D8E3121}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.Web.AuthenticationTests", "HackSystem.Web.AuthenticationTests\HackSystem.Web.AuthenticationTests.csproj", "{E49F7DFF-3453-44F6-9DC1-F3A5743F3E3E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7E8F6440-5B4F-4686-AA3F-DB9E1D40944B}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.AuthenticationTests", "HackSystem.Web.AuthenticationTests\HackSystem.Web.AuthenticationTests.csproj", "{E49F7DFF-3453-44F6-9DC1-F3A5743F3E3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
