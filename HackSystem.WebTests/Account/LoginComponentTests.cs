@@ -1,13 +1,11 @@
-﻿using Xunit;
+﻿using System;
 using Bunit;
-using System;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using HackSystem.Web.Authentication.Providers;
+using HackSystem.Web.Authentication.Extensions;
+using HackSystem.Web.CookieStorage;
 using HackSystem.Web.Services.API.Authentication;
 using HackSystem.Web.Services.Authentication;
-using Microsoft.Extensions.Options;
-using HackSystem.Web.Authentication.Options;
+using Microsoft.Extensions.DependencyInjection;
+using Xunit;
 
 namespace HackSystem.Web.Account.Tests
 {
@@ -16,30 +14,28 @@ namespace HackSystem.Web.Account.Tests
         [Fact()]
         public void LoginComponentTest()
         {
+            const string AuthenticationURL = "https://localhost:4237";
             using var ctx = new TestContext();
-            ctx.Services.Add(new ServiceDescriptor(typeof(ILogger<>), typeof(Logger<>), ServiceLifetime.Scoped));
-            ctx.Services.Add(new ServiceDescriptor(typeof(IHackSystemAuthenticationStateHandler), typeof(HackSystemAuthenticationStateHandler), ServiceLifetime.Scoped));
-            ctx.Services.Add(new ServiceDescriptor(typeof(IAuthenticationService), typeof(AuthenticationService), ServiceLifetime.Scoped));
-            ctx.Services.Add(new ServiceDescriptor(typeof(IOptionsMonitor<>), typeof(OptionsMonitor<>), ServiceLifetime.Scoped));
-            ctx.Services.Add(new ServiceDescriptor(typeof(IOptionsFactory<>), typeof(OptionsFactory<>), ServiceLifetime.Scoped));
-            ctx.Services.Add(new ServiceDescriptor(typeof(IPostConfigureOptions<>), typeof(PostConfigureOptions<>), ServiceLifetime.Scoped));
-            ctx.Services.Add(new ServiceDescriptor(typeof(IOptionsChangeTokenSource<>), null));
-            ctx.Services.Add(new ServiceDescriptor(typeof(IOptionsMonitorCache<>), null));
-
-            ctx.Services.Add(new ServiceDescriptor(typeof(IConfigureOptions<>), typeof(ConfigureOptions<>), ServiceLifetime.Scoped));
+            ctx.Services.AddLogging()
+                .AddCookieStorage()
+                .AddAuthorizationCore()
+                .AddHackSystemAuthentication(options =>
+                {
+                    options.AuthenticationURL = AuthenticationURL;
+                })
+                .AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(AuthenticationURL)); ;
 
             var loginComponent = ctx.RenderComponent<LoginComponent>();
             var userNameInput = loginComponent.Find("#userName");
             var passwordInput = loginComponent.Find("#password");
-            var loginButton = loginComponent.Find("#loginButton");
+            var loginForm = loginComponent.Find("#loginForm");
 
             userNameInput.Change("IamLeon");
             passwordInput.Change("FakePassword");
+            loginForm.Submit();
 
-            loginButton.Click();
             var loginComponentBackUp = ctx.RenderComponent<LoginComponent>();
             var diff = loginComponent.CompareTo(loginComponentBackUp);
-            //loginComponent.WaitForState();
         }
     }
 }
