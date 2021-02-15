@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,10 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="bunit" Version="1.0.0-preview-01" />
-    <PackageReference Include="bunit.core" Version="1.0.0-preview-01" />
-    <PackageReference Include="bunit.web" Version="1.0.0-preview-01" />
-    <PackageReference Include="bunit.xunit" Version="1.0.0-preview-01" />
+    <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="5.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
@@ -26,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HackSystem.Web\HackSystem.Web.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.Authentication\HackSystem.Web.Authentication.csproj" />
   </ItemGroup>
 
 </Project>

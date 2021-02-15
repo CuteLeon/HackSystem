@@ -17,7 +17,7 @@ namespace HackSystem.Web.Authentication.Extensions
 
             if (!long.TryParse(expiryClaim.Value, out var expiryTimeStamp))
             {
-                return false;
+                return true;
             }
 
             var localExpiredTime = TimeZoneInfo.ConvertTimeFromUtc(
