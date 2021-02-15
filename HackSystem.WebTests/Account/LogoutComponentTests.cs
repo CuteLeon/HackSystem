@@ -1,5 +1,6 @@
 ﻿using System;
 using Bunit;
+using HackSystem.Web.Account;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.CookieStorage;
 using HackSystem.Web.Services.API.Authentication;
@@ -7,12 +8,12 @@ using HackSystem.Web.Services.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace HackSystem.Web.Account.Tests
+namespace HackSystem.WebTests.Account
 {
-    public class LoginComponentTests
+    public class LogoutComponentTests
     {
         [Fact()]
-        public void LoginComponentTest()
+        public void LogoutComponentTest()
         {
             const string AuthenticationURL = "https://localhost:4237";
             using var ctx = new TestContext();
@@ -25,18 +26,7 @@ namespace HackSystem.Web.Account.Tests
                 })
                 .AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(AuthenticationURL)); ;
 
-            using var loginComponent = ctx.RenderComponent<LoginComponent>();
-            loginComponent.SaveSnapshot();
-
-            var userNameInput = loginComponent.Find("#userName");
-            var passwordInput = loginComponent.Find("#password");
-            var loginForm = loginComponent.Find("#loginForm");
-
-            userNameInput.Change("IamLeon");
-            passwordInput.Change("FakePassword");
-            loginForm.Submit();
-
-            var diff = loginComponent.GetChangesSinceSnapshot();
+            using var logoutComponent = ctx.RenderComponent<LogoutComponent>();
         }
     }
 }
