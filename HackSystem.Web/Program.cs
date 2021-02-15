@@ -4,22 +4,22 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
+using HackSystem.Common;
 using HackSystem.Cryptography;
+using HackSystem.Observer;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Common;
 using HackSystem.Web.Configurations;
 using HackSystem.Web.CookieStorage;
+using HackSystem.Web.Extensions;
 using HackSystem.Web.Scheduler.Program;
-using HackSystem.Web.Services.Authentication;
+using HackSystem.Web.Services.API.Authentication;
 using HackSystem.Web.Services.API.Program;
+using HackSystem.Web.Services.Authentication;
 using HackSystem.Web.Services.Program;
-using HackSystem.Common;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using HackSystem.Web.Services.API.Authentication;
-using HackSystem.Web.Extensions;
-using HackSystem.Observer;
 
 namespace HackSystem.Web
 {
@@ -91,7 +91,6 @@ namespace HackSystem.Web
                 })
                 .AddHackSystemAuthentication(options =>
                 {
-                    options.AnonymousState.User.Claims.Append(new Claim(ClaimTypes.Name, "Anonymous"));
                     options.AuthenticationURL = apiConfiguration.APIURL;
                     options.TokenExpiryInMinutes = apiConfiguration.TokenExpiryInMinutes;
                     options.AuthenticationScheme = WebCommonSense.AuthenticationScheme;
