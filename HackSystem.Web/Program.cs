@@ -5,6 +5,7 @@ using Blazored.LocalStorage;
 using HackSystem.Common;
 using HackSystem.Observer;
 using HackSystem.Cryptography;
+using HackSystem.Observer;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Common;
 using HackSystem.Web.Configurations;
@@ -104,7 +105,6 @@ namespace HackSystem.Web
                 })
                 .AddHackSystemAuthentication(options =>
                 {
-                    options.AnonymousState.User.Claims.Append(new Claim(ClaimTypes.Name, "Anonymous"));
                     options.AuthenticationURL = apiConfiguration.APIURL;
                     options.TokenExpiryInMinutes = apiConfiguration.TokenExpiryInMinutes;
                     options.AuthenticationScheme = WebCommonSense.AuthenticationScheme;
