@@ -3,12 +3,12 @@ using System.Security.Claims;
 using HackSystem.Web.Authentication.Options;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Authentication.Services;
-using HackSystem.Web.AuthenticationTests.Extensions.Mock;
 using HackSystem.Web.CookieStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
+using Moq;
 using Xunit;
 
 namespace HackSystem.Web.Authentication.Extensions.Tests
@@ -19,11 +19,12 @@ namespace HackSystem.Web.Authentication.Extensions.Tests
         public void AddHackSystemAuthenticationTest()
         {
             IServiceCollection serviceDescriptors = new ServiceCollection();
+            var mockJSService = new Mock<IJSRuntime>();
             serviceDescriptors
                 .AddLogging()
                 .AddCookieStorage()
                 .AddHttpClient()
-                .AddSingleton<IJSRuntime>(new MockJSRuntime())
+                .AddSingleton(mockJSService.Object)
                 .AddHackSystemAuthentication(options =>
                 {
                     options.AuthenticationURL = "https://FakeAuth.url";
