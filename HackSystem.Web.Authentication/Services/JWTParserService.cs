@@ -63,7 +63,7 @@ namespace HackSystem.Web.Authentication.Services
             return claims;
         }
 
-        public byte[] DecodeBase64(string base64)
+        private byte[] DecodeBase64(string base64)
         {
             if (string.IsNullOrWhiteSpace(base64))
             {

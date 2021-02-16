@@ -24,7 +24,7 @@ namespace HackSystem.WebTests.Account
                 {
                     options.AuthenticationURL = AuthenticationURL;
                 })
-                .AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(AuthenticationURL)); ;
+                .AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(AuthenticationURL));
 
             using var logoutComponent = ctx.RenderComponent<LogoutComponent>();
         }

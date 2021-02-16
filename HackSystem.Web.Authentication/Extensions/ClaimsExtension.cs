@@ -7,12 +7,12 @@ namespace HackSystem.Web.Authentication.Extensions
 {
     public static class ClaimsExtension
     {
-        public static bool IsUnexpired(this IEnumerable<Claim> claims, string expiryClaimType)
+        public static bool IsExpired(this IEnumerable<Claim> claims, string expiryClaimType)
         {
             var expiryClaim = claims.FirstOrDefault(claim => string.Equals(claim.Type, expiryClaimType, StringComparison.OrdinalIgnoreCase));
             if (expiryClaim == null)
             {
-                return true;
+                return false;
             }
 
             if (!long.TryParse(expiryClaim.Value, out var expiryTimeStamp))
@@ -23,7 +23,7 @@ namespace HackSystem.Web.Authentication.Extensions
             var localExpiredTime = TimeZoneInfo.ConvertTimeFromUtc(
                 new DateTime(1970, 1, 1) + TimeSpan.FromSeconds(expiryTimeStamp),
                 TimeZoneInfo.Local);
-            return localExpiredTime >= DateTime.Now;
+            return DateTime.Now > localExpiredTime;
         }
     }
 }

@@ -129,7 +129,7 @@ namespace HackSystem.Web.Authentication.Providers
         public bool CheckClaimsIdentity(ClaimsIdentity claimsIdentity)
         {
             this.logger.LogDebug("HackSystem Check Claims Identity...");
-            return claimsIdentity.Claims.IsUnexpired(this.options.ExpiryClaimType);
+            return !claimsIdentity.Claims.IsExpired(this.options.ExpiryClaimType);
         }
         #endregion
     }
