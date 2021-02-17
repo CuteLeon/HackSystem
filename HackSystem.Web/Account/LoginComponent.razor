@@ -13,7 +13,7 @@
             @if (ShowErrors)
             {
                 @* 不要使用 Bootstrap 自带的关闭警告窗功能，因为自带功能将会销毁元素，而Blazor自动销毁时将找不到被销毁的元素 *@
-                <div class="alert alert-warning fade show" role="alert" style="text-shadow:none;">
+                <div id="errorAlert" class="alert alert-warning fade show" role="alert" style="text-shadow:none;">
                     <strong>登录失败！</strong>
                     <button type="button" class="close" aria-label="Close" @onclick="OnCloseAlert">
                         <span aria-hidden="true">&times;</span>
@@ -65,7 +65,7 @@
 @code {
     private bool ShowErrors { get; set; }
     private string Error { get; set; }
-    private bool Logging { get; set; } = false;
+    public bool Logging { get; private set; } = false;
     private readonly LoginDTO loginDto = new LoginDTO();
 
     public void OnCloseAlert() => this.ShowErrors = false;
