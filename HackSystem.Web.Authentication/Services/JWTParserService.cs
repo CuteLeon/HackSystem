@@ -23,13 +23,13 @@ namespace HackSystem.Web.Authentication.Services
         {
             if (string.IsNullOrWhiteSpace(token))
             {
-                throw new ArgumentException($"“{nameof(token)}”不能为 Null 或空白", nameof(token));
+                throw new ArgumentNullException(nameof(token));
             }
 
             var parts = token.Split('.');
 
             return parts?.Length != 3 ?
-                throw new FormatException($"“{nameof(token)}”不符合 JWT 格式") :
+                throw new FormatException($"Invalid {nameof(token)}") :
                 this.ParseJWTPayload(parts[1]);
         }
 
@@ -38,7 +38,7 @@ namespace HackSystem.Web.Authentication.Services
             this.logger.LogDebug($"解析 JWT Payload: {payload}");
             if (string.IsNullOrWhiteSpace(payload))
             {
-                throw new ArgumentException($"“{nameof(payload)}”不能为 Null 或空白", nameof(payload));
+                throw new ArgumentNullException(nameof(payload));
             }
 
             var claims = new List<Claim>();
