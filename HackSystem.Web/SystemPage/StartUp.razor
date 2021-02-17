@@ -9,15 +9,13 @@
 
     protected async override Task OnInitializedAsync()
     {
-        var authState = await authenticationStateTask;
-        var user = authState.User;
-        if (user?.Identity?.IsAuthenticated ?? false)
-        {
-            this.NavigationManager.NavigateTo("Desktop");
-        }
-        else
+        if (authenticationStateTask == null ||
+            (!(await authenticationStateTask)?.User?.Identity?.IsAuthenticated ?? false))
         {
             this.NavigationManager.NavigateTo("Login");
+            return;
         }
+
+        this.NavigationManager.NavigateTo("Desktop");
     }
 }

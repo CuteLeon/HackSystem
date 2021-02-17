@@ -20,5 +20,7 @@ namespace HackSystem.WebTests.Mocks
             this.Uri = this.ToAbsoluteUri(uri).AbsoluteUri;
             this.NavigationHistory.Add(uri);
         }
+
+        public void ClearHistory() => this.NavigationHistory.Clear();
     }
 }
