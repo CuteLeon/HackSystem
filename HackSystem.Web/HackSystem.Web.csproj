@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
@@ -10,17 +10,17 @@
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.3" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.3" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.3" PrivateAssets="all" />
-	  <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0-preview.1.21103.6" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0-preview.1.21103.6" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0-preview.1.21103.6" PrivateAssets="all" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0-preview.1.21102.12" />
+	  <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0-preview.1.21102.12" />
+	  <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0-preview.1.21102.12" />
+	  <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0-preview.1.21102.12" />
+	  <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0-preview.1.21102.12" />
 	  <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1-beta1" />
-    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="6.0.0-preview.1.21102.12" />
   </ItemGroup>
 
   <ItemGroup>

@@ -73,7 +73,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebTests", "Hack
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.AuthenticationTests", "HackSystem.Web.AuthenticationTests\HackSystem.Web.AuthenticationTests.csproj", "{E49F7DFF-3453-44F6-9DC1-F3A5743F3E3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.Web.Scheduler.ProgramTests", "HackSystem.Web.Scheduler.ProgramTests\HackSystem.Web.Scheduler.ProgramTests.csproj", "{0C7175E5-8797-46D7-8763-078D4AFE339E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.Scheduler.ProgramTests", "HackSystem.Web.Scheduler.ProgramTests\HackSystem.Web.Scheduler.ProgramTests.csproj", "{0C7175E5-8797-46D7-8763-078D4AFE339E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildTools", "BuildTools", "{C50E112A-8BED-411F-84ED-3223C3D55D94}"
+	ProjectSection(SolutionItems) = preProject
+		BuildTools\blazor.webassembly.js = BuildTools\blazor.webassembly.js
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
