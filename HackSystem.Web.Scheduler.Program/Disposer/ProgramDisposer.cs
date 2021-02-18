@@ -33,8 +33,7 @@ namespace HackSystem.Web.Scheduler.Program.Disposer
         private async Task HandleProgramCloseMessage(ProgramCloseMessage message)
         {
             this.logger.LogInformation($"程序释放器接收到消息并广播消息，结束进程：{message.PID}");
-            var process = this.processContainer.RemoveProcess(message.PID);
-            process.ProgramComponent.Dispose();
+            _ = this.processContainer.RemoveProcess(message.PID);
             await this.programClosePublisher.Publish(message);
             GC.Collect();
         }

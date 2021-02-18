@@ -33,35 +33,24 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
 
         public Task<ProcessDetail> LaunchProgram(QueryBasicProgramDTO basicProgram)
         {
+            var programEntity = new ProgramEntity()
+            {
+                Name = basicProgram.Name,
+                ProgramComponentType = GetProgramComponentType(basicProgram.AssemblyName, basicProgram.TypeName),
+            };
+            this.logger.LogInformation($"程序启动器：Type={programEntity.ProgramComponentType.FullName}");
+
             var process = new ProcessDetail()
             {
                 PID = this.pIDGenerator.GetAvailablePID(),
+                ProgramEntity = programEntity,
             };
             this.logger.LogInformation($"程序启动器：Name={basicProgram.Name} ({process.PID})");
 
-            var programComponentType = GetProgramComponentType(basicProgram.AssemblyName, basicProgram.TypeName);
-            var programEntity = new ProgramEntity() { Name = basicProgram.Name };
-            process.ProgramComponentType = programComponentType;
-
-            this.logger.LogInformation($"程序启动器：Type={programComponentType.FullName}");
-
-            process.ProgramRenderFramgment = builder =>
-            {
-                builder.OpenComponent(0, programComponentType);
-                // Attribute 需要先于其他数据被添加
-                builder.AddAttribute(1, nameof(ProgramComponentBase.ProgramEntity), programEntity);
-                builder.AddAttribute(2, nameof(ProgramComponentBase.PID), process.PID);
-                builder.AddComponentReferenceCapture(3, reference =>
-                {
-                    this.logger.LogInformation($"进程 {process.ProgramComponentType.Name} PID={process.PID} 的组件引用由 {process.ProgramComponent?.GetHashCode():X} 更新为 {reference.GetHashCode():X}");
-                    process.ProgramComponent = (ProgramComponentBase)reference;
-                });
-                builder.CloseComponent();
-            };
-
-            this.logger.LogInformation($"程序启动器：添加进程到容器并广播消息...");
             this.processContainer.AddProcess(process);
             this.publisher.Publish(new ProgramLaunchMessage());
+            this.logger.LogInformation($"程序启动器：添加进程到容器并广播消息");
+
             return Task.FromResult(process);
         }
 

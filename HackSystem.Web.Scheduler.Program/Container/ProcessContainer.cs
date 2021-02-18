@@ -30,7 +30,7 @@ namespace HackSystem.Web.Scheduler.Program.Container
 
         public void AddProcess(ProcessDetail process)
         {
-            this.logger.LogInformation($"进程容器：增加进程=> {process.PID} ({process.ProgramComponent?.GetHashCode().ToString("X")})");
+            this.logger.LogInformation($"进程容器：增加进程=> {process.PID} ({process.DynamicProgramComponent?.GetHashCode().ToString("X")})");
             this.Processes.Add(process.PID, process);
             this.logger.LogInformation($"进程容器：当前进程集合=> {this.Processes.Count} 个");
         }
@@ -38,7 +38,7 @@ namespace HackSystem.Web.Scheduler.Program.Container
         public ProcessDetail RemoveProcess(int pID)
         {
             var process = this.GetProcess(pID);
-            this.logger.LogInformation($"进程容器：移除进程=> {pID}  ({process.ProgramComponent?.GetHashCode().ToString("X")})");
+            this.logger.LogInformation($"进程容器：移除进程=> {pID}  ({process.DynamicProgramComponent?.GetHashCode().ToString("X")})");
             this.Processes.Remove(pID);
             this.logger.LogInformation($"进程容器：当前进程集合=> {this.Processes.Count} 个");
             return process;

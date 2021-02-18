@@ -10,8 +10,10 @@ namespace HackSystem.Web.ProgramSDK.ProgramComponent
         [Inject]
         public IPublisher<ProgramCloseMessage> ProgramClosePublisher { get; set; }
 
+        private int pID;
+
         [Parameter]
-        public int PID { get; set; }
+        public int PID { get => pID; set => pID = value; }
 
         private ProgramEntity programEntity;
 
