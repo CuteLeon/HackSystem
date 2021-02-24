@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using HackSystem.Observer.Publisher;
 using HackSystem.Web.ProgramSDK.ProgramComponent;
-using HackSystem.Web.ProgramSDK.ProgramComponent.ProgramMessages;
+using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
 using HackSystem.Web.Scheduler.Program.Container;
 using HackSystem.Web.Scheduler.Program.IDGenerator;
 using HackSystem.Web.Scheduler.Program.Model;
@@ -38,18 +38,18 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
                 Name = basicProgram.Name,
                 ProgramComponentType = GetProgramComponentType(basicProgram.AssemblyName, basicProgram.TypeName),
             };
-            this.logger.LogInformation($"程序启动器：Type={programEntity.ProgramComponentType.FullName}");
+            this.logger.LogInformation($"Program launcher: Type={programEntity.ProgramComponentType.FullName}");
 
             var process = new ProcessDetail()
             {
                 PID = this.pIDGenerator.GetAvailablePID(),
                 ProgramEntity = programEntity,
             };
-            this.logger.LogInformation($"程序启动器：Name={basicProgram.Name} ({process.PID})");
+            this.logger.LogInformation($"Program launcher: Name={basicProgram.Name} ({process.PID})");
 
             this.processContainer.AddProcess(process);
             this.publisher.Publish(new ProgramLaunchMessage());
-            this.logger.LogInformation($"程序启动器：添加进程到容器并广播消息");
+            this.logger.LogInformation($"Program launcher: Add processs and broadcast notification.");
 
             return Task.FromResult(process);
         }

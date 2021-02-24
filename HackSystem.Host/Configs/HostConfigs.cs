@@ -3,7 +3,7 @@
 namespace HackSystem.Host.Configs
 {
     /// <summary>
-    /// 宿主配置
+    /// Configuration of Host
     /// </summary>
     public static class HostConfigs
     {

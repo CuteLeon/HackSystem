@@ -11,7 +11,7 @@ namespace HackSystem.WebAPI.DataAccess
     public static class DatabaseInitializer
     {
         /// <summary>
-        /// 初始化数据库
+        /// Initinalize database
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
@@ -36,20 +36,20 @@ namespace HackSystem.WebAPI.DataAccess
 
             try
             {
-                logger.LogDebug($"检查数据库创建...");
+                logger.LogDebug($"Ensure database created...");
                 await dbContext.Database.EnsureCreatedAsync();
-                logger.LogDebug($"检查数据库迁移...");
+                logger.LogDebug($"Check database pending migrations...");
                 var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
                 if (pendingMigrations.Any())
                 {
-                    logger.LogInformation($"需要合并的被挂起迁移：\n\t{string.Join("、", pendingMigrations)}");
+                    logger.LogInformation($"Pending database migration should be combined: \n\t{string.Join(",", pendingMigrations)}");
                     await dbContext.Database.MigrateAsync();
                 }
-                logger.LogDebug($"数据库检查完成");
+                logger.LogDebug($"Database check finished.");
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, $"数据库检查失败：");
+                logger.LogError(ex, $"Database check failed.");
             }
         }
     }

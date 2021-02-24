@@ -28,7 +28,7 @@ namespace HackSystem.Web.ProgramDrawer
 
         public async Task OnDoubleClickIcon(ProgramDrawerIconMouseEventArgs args)
         {
-            this.logger.LogInformation($"双击启动程序：{args.UserBasicProgramMap.BasicProgram.Name}");
+            this.logger.LogInformation($"Double click to luanch program: {args.UserBasicProgramMap.BasicProgram.Name}");
             await this.programLauncher.LaunchProgram(args.UserBasicProgramMap.BasicProgram);
         }
     }

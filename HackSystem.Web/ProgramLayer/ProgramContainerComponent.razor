@@ -1,8 +1,8 @@
 ﻿@inject ILogger<ProgramContainerComponent> logger
 @inject IProcessContainer processContainer
 @inject ISubscriber<ProgramLaunchMessage> programLaunchSubcriber
-@inject ISubscriber<ProgramCloseMessage> programCloseSubscriber
-@inject IProgramDisposer programDisposer
+@inject ISubscriber<ProcessCloseMessage> processCloseSubscriber
+@inject IProcessDisposer processDisposer
 @inject IProgramScheduler programScheduler
 
 <div id="ProgramContainerInstance" class="position-fixed w-100 h-100 user-select-none overflow-hidden" style="pointer-events:none;">

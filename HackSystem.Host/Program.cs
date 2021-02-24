@@ -7,7 +7,7 @@ namespace HackSystem.Host
     static class Program
     {
         /// <summary>
-        /// 应用程序的主入口点。
+        /// Main entry of program
         /// </summary>
         [STAThread]
         static void Main()

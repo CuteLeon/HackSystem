@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HackSystem.Web.ProgramSDK.ProgramComponent.ProgramMessages;
+using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.ProgramLayer
 {
     /// <summary>
-    /// 程序容器组件
+    /// Program container component
     /// </summary>
     /// <remarks>
-    /// 引用外部 .Net Core Razor Class Library 项目中的 Razor 组件
-    /// 详细请参考：https://github.com/dotnet/aspnetcore/issues/26228
+    /// Reference external Razor components from a .Net Core Razor Class Library
+    /// For more details https://github.com/dotnet/aspnetcore/issues/26228
     /// </remarks>
     public partial class ProgramContainerComponent : IDisposable
     {
@@ -19,21 +19,21 @@ namespace HackSystem.Web.ProgramLayer
         protected async override Task OnInitializedAsync()
         {
             this.programLaunchSubcriber.HandleMessage = this.HandleProgramLaunchMessage;
-            this.programCloseSubscriber.HandleMessage = this.HandleProgramCloseMessage;
+            this.processCloseSubscriber.HandleMessage = this.HandleProcessCloseMessage;
 
             await base.OnInitializedAsync();
         }
 
         private async Task HandleProgramLaunchMessage(ProgramLaunchMessage message)
         {
-            this.logger.LogInformation($"程序层容器接收到消息，重新渲染...");
+            this.logger.LogInformation($"Program launched, program container component rendering...");
             this.StateHasChanged();
             await Task.CompletedTask;
         }
 
-        private async Task HandleProgramCloseMessage(ProgramCloseMessage arg)
+        private async Task HandleProcessCloseMessage(ProcessCloseMessage arg)
         {
-            this.logger.LogInformation($"程序层容器接收到消息，重新渲染...");
+            this.logger.LogInformation($"Program closed, program container component rendering...");
             this.StateHasChanged();
             await Task.CompletedTask;
         }

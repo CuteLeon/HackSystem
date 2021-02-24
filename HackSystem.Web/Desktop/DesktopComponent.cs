@@ -18,11 +18,11 @@ namespace HackSystem.Web.Desktop
 
         private void OnTest()
         {
-            this.GetDesktopToastContainer().PopToast("Hack System", "此消息将在 1 秒自动关闭。", Icons.Information, true, 1000);
-            this.GetDesktopToastContainer().PopToast("Hack System", "此消息将在 2 秒自动关闭。", Icons.Question, true, 2000);
-            this.GetDesktopToastContainer().PopToast("Hack System", "此消息将在 3 秒自动关闭。", Icons.Warning, true, 3000);
-            this.GetDesktopToastContainer().PopToast("Hack System", "此消息需要处理后手动关闭。", Icons.Error, false);
-            this.GetDesktopToastContainer().PopToast("Hack System", "欢迎进入 Hack System。", Icons.HackSystem, false);
+            this.GetDesktopToastContainer().PopToast("Hack System", "Will be closed automatically in 1 second.", Icons.Information, true, 1000);
+            this.GetDesktopToastContainer().PopToast("Hack System", "Will be closed automatically in 2 second.", Icons.Question, true, 2000);
+            this.GetDesktopToastContainer().PopToast("Hack System", "Will be closed automatically in 3 second.", Icons.Warning, true, 3000);
+            this.GetDesktopToastContainer().PopToast("Hack System", "Should be closed manually.", Icons.Error, false);
+            this.GetDesktopToastContainer().PopToast("Hack System", "Welcome to access Hack System.", Icons.HackSystem, false);
         }
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
@@ -60,11 +60,11 @@ namespace HackSystem.Web.Desktop
                     this.ProgramDrawerComponent.ClearProgramDrawer();
                     this.BasicProgramMaps.Clear();
                 }
-                this.GetDesktopToastContainer().PopToast("获取程序映射成功", $"获取程序映射信息成功！共 {this.BasicProgramMaps.Count} 个。", Icons.Information, true, 3000);
+                this.GetDesktopToastContainer().PopToast("Query programs successfully", $"Query programs successfully, total of {this.BasicProgramMaps.Count}.", Icons.Information, true, 3000);
             }
             catch (Exception ex)
             {
-                this.GetDesktopToastContainer().PopToast("获取程序映射失败", $"获取程序映射失败:{ex.Message}", Icons.Error, false);
+                this.GetDesktopToastContainer().PopToast("Failed to query programs", $"Failed to query programs: {ex.Message}", Icons.Error, false);
             }
         }
     }

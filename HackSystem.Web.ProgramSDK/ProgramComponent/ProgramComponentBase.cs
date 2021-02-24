@@ -1,6 +1,6 @@
 ﻿using System;
 using HackSystem.Observer.Publisher;
-using HackSystem.Web.ProgramSDK.ProgramComponent.ProgramMessages;
+using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
 using Microsoft.AspNetCore.Components;
 
 namespace HackSystem.Web.ProgramSDK.ProgramComponent
@@ -8,7 +8,7 @@ namespace HackSystem.Web.ProgramSDK.ProgramComponent
     public abstract class ProgramComponentBase : ComponentBase, IDisposable
     {
         [Inject]
-        public IPublisher<ProgramCloseMessage> ProgramClosePublisher { get; set; }
+        public IPublisher<ProcessCloseMessage> ProcessClosePublisher { get; set; }
 
         private int pID;
 
@@ -22,7 +22,7 @@ namespace HackSystem.Web.ProgramSDK.ProgramComponent
 
         public virtual void OnClose()
         {
-            this.ProgramClosePublisher.Publish(new ProgramCloseMessage(this.PID));
+            this.ProcessClosePublisher.Publish(new ProcessCloseMessage(this.PID));
         }
 
         public abstract void Dispose();

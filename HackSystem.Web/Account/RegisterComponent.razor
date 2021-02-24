@@ -7,13 +7,13 @@
 <div class="row container-fluid m-0 p-0 position-fixed img-fluid" style="width: 100%; height: 100%; background-image: url(images/RegisterBackground.jpg); background-size: cover; background-position-x: center;">
     <div class="card col-10 col-md-6 flex-column mx-auto my-auto shadow-lg" style="filter:1rem;">
         <div class="card-body">
-            <h4 class="card-title">注册</h4>
+            <h4 class="card-title">Register</h4>
 
             @if (ShowErrors)
             {
-                @* 不要使用 Bootstrap 自带的关闭警告窗功能，因为自带功能将会销毁元素，而Blazor自动销毁时将找不到被销毁的元素 *@
+                @* Do not close alert by method of Bootstrap, cause this will destory element and make Blazor works incorrectly. *@
                 <div class="alert alert-warning fade show" role="alert">
-                    <strong>注册失败！</strong>
+                    <strong>Register failed!</strong>
                     <button type="button" class="close" aria-label="Close" @onclick="OnCloseAlert">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -27,31 +27,31 @@
             <EditForm Model="registerDto" autofocus OnValidSubmit="OnRegister">
                 <DataAnnotationsValidator />
                 <div class="form-group">
-                    <label for="username">用户名称</label>
+                    <label for="username">User Name</label>
                     <InputText Id="userName" autofocus Class="form-control" @bind-Value="registerDto.UserName" />
                     <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.UserName)" /></small>
                 </div>
                 <div class="form-group">
-                    <label for="email">邮箱</label>
+                    <label for="email">Email</label>
                     <InputText Id="email" Class="form-control" @bind-Value="registerDto.Email" />
                     <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.Email)" /></small>
                 </div>
                 <div class="form-group">
-                    <label for="password">密码</label>
+                    <label for="password">Password</label>
                     <InputText Id="password" type="password" Class="form-control" @bind-Value="registerDto.Password" />
                     <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.Password)" /></small>
                 </div>
                 <div class="form-group">
-                    <label for="confirmpassword">确认密码</label>
+                    <label for="confirmpassword">Confirm Password</label>
                     <InputText Id="confirmpassword" type="password" Class="form-control" @bind-Value="registerDto.ConfirmPassword" />
                     <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.ConfirmPassword)" /></small>
                 </div>
                 <div class="form-row">
                     <div class="col-12 col-md-6 text-right text-md-left">
-                        <a class="btn btn-link" href="/Login">直接登录</a>
+                        <a class="btn btn-link" href="/Login">Back to Login</a>
                     </div>
                     <div class="col-12 col-md-6">
-                        <button type="submit" class="btn btn-block btn-primary">注册</button>
+                        <button type="submit" class="btn btn-block btn-primary">Register</button>
                     </div>
                 </div>
             </EditForm>

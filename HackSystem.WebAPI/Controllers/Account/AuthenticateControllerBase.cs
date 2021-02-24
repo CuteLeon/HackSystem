@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -25,13 +26,13 @@ namespace HackSystem.WebAPI.Controllers.Account
         {
             if (string.IsNullOrWhiteSpace(userName))
             {
-                throw new System.ArgumentException($"“{nameof(userName)}”不能为 Null 或空白", nameof(userName));
+                throw new ArgumentNullException(nameof(userName));
             }
 
             var user = await this.userManager.FindByNameAsync(userName);
             if (user == null)
             {
-                throw new System.ArgumentException($"“{nameof(userName)}”不能为 Null 或空白", nameof(userName));
+                throw new InvalidOperationException($"Can not find user '{userName}'");
             }
 
             var claims = new List<Claim>

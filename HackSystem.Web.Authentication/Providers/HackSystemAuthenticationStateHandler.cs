@@ -27,10 +27,10 @@ namespace HackSystem.Web.Authentication.Providers
             this.authenticationStateProvider = authenticationStateProvider as IHackSystemAuthenticationStateProvider;
         }
 
-        #region 获取认证信息
+        #region Get authentication information
 
         /// <summary>
-        /// 获取用户身份认证状态
+        /// Get current user's authentication state
         /// </summary>
         /// <returns></returns>
         public Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -39,7 +39,7 @@ namespace HackSystem.Web.Authentication.Providers
         }
 
         /// <summary>
-        /// 获取当前 Token
+        /// Get current token
         /// </summary>
         /// <returns></returns>
         public async ValueTask<string> GetCurrentTokenAsync()
@@ -48,10 +48,10 @@ namespace HackSystem.Web.Authentication.Providers
         }
         #endregion
 
-        #region 更新认证信息
+        #region Update authentication information
 
         /// <summary>
-        /// 更新认证状态
+        /// Update current user's authentication state
         /// </summary>
         /// <param name="token"></param>
         public async Task UpdateAuthenticattionStateAsync(string token)
@@ -75,7 +75,7 @@ namespace HackSystem.Web.Authentication.Providers
         }
 
         /// <summary>
-        /// 认证成功
+        /// Authenticate successfully
         /// </summary>
         private async Task AuthenticateSuccessfully(ClaimsIdentity claimsIdentity, string token)
         {
@@ -87,7 +87,7 @@ namespace HackSystem.Web.Authentication.Providers
         }
 
         /// <summary>
-        /// 认证失败
+        /// Authenticate failed
         /// </summary>
         private async Task AuthenticateFailed()
         {
@@ -98,10 +98,10 @@ namespace HackSystem.Web.Authentication.Providers
         }
         #endregion
 
-        #region 解析和检查
+        #region Parse and check
 
         /// <summary>
-        /// 解析声明组合证件
+        /// Parse claims identity
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
@@ -111,7 +111,7 @@ namespace HackSystem.Web.Authentication.Providers
         }
 
         /// <summary>
-        /// 检查声明组合证件
+        /// Check claims identity
         /// </summary>
         /// <param name="claimsIdentity"></param>
         /// <returns></returns>

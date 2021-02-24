@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 namespace HackSystem.Web.Authentication.Providers
 {
     /// <summary>
-    /// 用户身份认证状态提供者
+    /// User authentication state provider
     /// </summary>
     public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider, IHackSystemAuthenticationStateProvider
     {
@@ -32,10 +32,10 @@ namespace HackSystem.Web.Authentication.Providers
             this.cookieStorageService = cookieStorageService;
         }
 
-        #region 获取认证信息
+        #region Get Authentication Information
 
         /// <summary>
-        /// 获取用户身份认证状态
+        /// Get current user's authentication state
         /// </summary>
         /// <returns></returns>
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -58,7 +58,7 @@ namespace HackSystem.Web.Authentication.Providers
         }
 
         /// <summary>
-        /// 获取当前 Token
+        /// Get current token
         /// </summary>
         /// <returns></returns>
         public async ValueTask<string> GetCurrentTokenAsync()
@@ -68,10 +68,10 @@ namespace HackSystem.Web.Authentication.Providers
         }
         #endregion
 
-        #region 返回认证状态
+        #region Return authentication state
 
         /// <summary>
-        /// 返回匿名状态
+        /// Return anonymous state
         /// </summary>
         /// <returns></returns>
         private AuthenticationState ReturnAnonymousState()
@@ -81,7 +81,7 @@ namespace HackSystem.Web.Authentication.Providers
         }
 
         /// <summary>
-        /// 返回已认证状态
+        /// Return authebticated state
         /// </summary>
         /// <param name="claimsPrincipal"></param>
         /// <returns></returns>
@@ -93,10 +93,10 @@ namespace HackSystem.Web.Authentication.Providers
 
         #endregion
 
-        #region 更新认证信息
+        #region Update authentication information
 
         /// <summary>
-        /// 通知认证状态改变
+        /// Notify authentication state changed
         /// </summary>
         /// <param name="authenticationState"></param>
         /// <returns></returns>
@@ -107,10 +107,10 @@ namespace HackSystem.Web.Authentication.Providers
         }
         #endregion
 
-        #region 解析和检查
+        #region Parse and check
 
         /// <summary>
-        /// 解析声明组合证件
+        /// Parse claims identity
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
@@ -122,7 +122,7 @@ namespace HackSystem.Web.Authentication.Providers
         }
 
         /// <summary>
-        /// 检查声明组合证件
+        /// Check claims identity
         /// </summary>
         /// <param name="claimsIdentity"></param>
         /// <returns></returns>

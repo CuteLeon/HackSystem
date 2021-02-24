@@ -22,7 +22,7 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
         }
 
         /// <summary>
-        /// 初始化身份信息
+        /// Initinalize identity data
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
@@ -33,7 +33,7 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
             var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<HackSystemUser>>();
             var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<HackSystemRole>>();
 
-            // 初始化角色
+            // Initinal roles
             foreach (string roleName in new string[]
             {
                 CommonSense.Roles.CommanderRole,
@@ -49,21 +49,21 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
 
                         if (result.Succeeded)
                         {
-                            logger.LogInformation($"添加角色成功：{role.Name}");
+                            logger.LogInformation($"Add role => {role.Name}");
                         }
                         else
                         {
-                            logger.LogError($"添加角色失败：{role.Name} \t异常如下：\n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
+                            logger.LogError($"Failed to add role {role.Name}. \tException: \n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError($"初始化角色遇到异常：{ex.Message}");
+                    logger.LogError($"Exception when add role: {ex.Message}");
                 }
             }
 
-            // 初始化用户
+            // Initinalize users
             foreach ((string userName, string email, string password, string[] roles) in new[]
             {
                 ("CMD", "commander@hack.com", "12345@Qq", new[]{ CommonSense.Roles.CommanderRole }),
@@ -79,41 +79,41 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
                         var result = await userManager.CreateAsync(user);
                         if (result.Succeeded)
                         {
-                            logger.LogInformation($"添加用户成功：{user.UserName}");
+                            logger.LogInformation($"Add user => {user.UserName}");
                         }
                         else
                         {
-                            logger.LogWarning($"添加用户失败：{user.UserName} \t异常如下：\n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
+                            logger.LogWarning($"Failed to add user {user.UserName}. \tException: \n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
                         }
 
                         result = await userManager.AddPasswordAsync(user, password);
                         if (result.Succeeded)
                         {
-                            logger.LogInformation($"修改密码成功");
+                            logger.LogInformation($"Update user password successfully.");
                         }
                         else
                         {
-                            logger.LogWarning($"修改密码失败，异常如下：\n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
+                            logger.LogWarning($"Failed to update password. Exception: \n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
                         }
 
                         result = await userManager.AddToRolesAsync(user, roles);
                         if (result.Succeeded)
                         {
-                            logger.LogInformation($"加入角色 {string.Join("、", roles)} 成功");
+                            logger.LogInformation($"Add user {user.UserName} to roles {string.Join(",", roles)} successfully");
                         }
                         else
                         {
-                            logger.LogWarning($"加入角色失败，异常如下：\n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
+                            logger.LogWarning($"Add user {user.UserName} to roles {string.Join(",", roles)} failed. Exception: \n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWarning($"初始化用户遇到异常：{ex.Message}");
+                    logger.LogWarning($"Exception when initinalize users: {ex.Message}");
                 }
             }
 
-            // 添加用户声明
+            // Ass user claims
             foreach ((string userName, Claim[] claims) in new[]
             {
                 ("Leon", new[]{ new Claim(CommonSense.Claims.ProfessionalClaim, "true") }),
@@ -148,22 +148,22 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
                             var result = await userManager.AddClaimsAsync(user, addClaims);
                             if (result.Succeeded)
                             {
-                                logger.LogInformation($"添加用户声明成功：{user.UserName}");
+                                logger.LogInformation($"Add user claims successfully: {user.UserName}");
                             }
                             else
                             {
-                                logger.LogWarning($"添加用户声明失败：{user.UserName} \t异常如下：\n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
+                                logger.LogWarning($"Failed to add user claims {user.UserName}. \tException: \n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
                             }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWarning($"添加用户声明遇到异常：{ex.Message}");
+                    logger.LogWarning($"Exception when add user claims: {ex.Message}");
                 }
             }
 
-            // 添加角色声明
+            // Add role claims
             foreach ((string roleName, Claim[] claims) in new[]
             {
                 (CommonSense.Roles.CommanderRole, new[]{ new Claim(CommonSense.Claims.ProfessionalClaim, "true") }),
@@ -201,11 +201,11 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
                                 var result = await roleManager.AddClaimAsync(role, claim);
                                 if (result.Succeeded)
                                 {
-                                    logger.LogInformation($"添加角色声明成功：{role.Name}");
+                                    logger.LogInformation($"Add role claims successfully: {role.Name}");
                                 }
                                 else
                                 {
-                                    logger.LogWarning($"添加角色声明失败：{role.Name} \t异常如下：\n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
+                                    logger.LogWarning($"Failed to add role claims {role.Name}. \tException: \n\t{string.Join("\n\t", result.Errors.Select(error => error.Description))}");
                                 }
                             }
                         }
@@ -213,7 +213,7 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWarning($"添加角色声明遇到异常：{ex.Message}");
+                    logger.LogWarning($"Exception when initinalize role claims: {ex.Message}");
                 }
             }
         }

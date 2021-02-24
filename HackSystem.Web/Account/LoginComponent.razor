@@ -8,13 +8,13 @@
 <div class="row container-fluid m-0 p-0 position-fixed img-fluid overflow-hidden" style="width: 100%; height: 100%; background-image: url(images/LoginBackground.jpg); background-size: cover; background-position-x: center;">
     <div class="card col-10 col-md-8 d-flex mx-auto mt-auto mb-5 fixed-bottom bg-transparent shadow-lg" style="backdrop-filter: blur(10px);">
         <div class="card-body text-white" style="text-shadow:0 0 10px #000">
-            <h4 class="card-title">登录</h4>
+            <h4 class="card-title">Login</h4>
 
             @if (ShowErrors)
             {
-                @* 不要使用 Bootstrap 自带的关闭警告窗功能，因为自带功能将会销毁元素，而Blazor自动销毁时将找不到被销毁的元素 *@
+                @* Do not close alert by method of Bootstrap, cause this will destory element and make Blazor works incorrectly. *@
                 <div id="errorAlert" class="alert alert-warning fade show" role="alert" style="text-shadow:none;">
-                    <strong>登录失败！</strong>
+                    <strong>Login failed!</strong>
                     <button type="button" class="close" aria-label="Close" @onclick="OnCloseAlert">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -26,20 +26,20 @@
                 <DataAnnotationsValidator />
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
-                        <label for="username">用户名称</label>
+                        <label for="username">User Name</label>
                         <InputText Id="userName" autofocus Class="form-control" @bind-Value="loginDto.UserName" />
                         <small><ValidationMessage class="valid-feedback" For="@(() => loginDto.UserName)" /></small>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="password">密码</label>
+                        <label for="password">Password</label>
                         <InputText Id="password" type="password" Class="form-control" @bind-Value="loginDto.Password" />
                         <small><ValidationMessage class="valid-feedback" For="@(() => loginDto.Password)" /></small>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-12 col-md-6 text-right text-md-left">
-                        <a class="btn btn-link" href="/Register">注册</a>
-                        <a class="btn btn-link" href="#">忘记密码</a>
+                        <a class="btn btn-link" href="/Register">Register</a>
+                        <a class="btn btn-link" href="#">Forgot password</a>
                     </div>
                     <div class="col-12 col-md-6">
                         @if (this.Logging)
@@ -51,7 +51,7 @@
                         else
                         {
                             <button id="loginButton" type="submit" class="btn btn-block btn-primary">
-                                <text>登录</text>
+                                <text>Login</text>
                             </button>
                         }
 

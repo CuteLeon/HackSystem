@@ -36,7 +36,7 @@ namespace HackSystem.WebAPI.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // 这个和无参构造函数用于设计时生成数据库迁移
+            // Use to generate database migrations when design time
             base.OnConfiguring(optionsBuilder.UseSqlite("DATA SOURCE=HackSystem.db"));
         }
     }

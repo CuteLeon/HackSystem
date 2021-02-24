@@ -3,7 +3,7 @@
 @inject NavigationManager NavigationManager
 
 @code{
-    // <AuthorizeRouteView> 组件提供的级联参数，<AuthorizeView> 组件使用此参数确定用户的身份认证状态
+    // Cascading parameter from <AuthorizeRouteView> component, <AuthorizeView> component use this to check authorization state.
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
 

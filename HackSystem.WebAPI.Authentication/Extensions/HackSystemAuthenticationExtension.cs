@@ -40,7 +40,7 @@ namespace HackSystem.Web.Authentication.Extensions
                     options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
-                        // 修正过期时间偏移
+                        // Correction of expiration time's offset
                         ClockSkew = TimeSpan.Zero,
                         ValidateIssuer = true,
                         ValidateAudience = true,

@@ -2,13 +2,13 @@
 
 <AuthorizeView>
     <Authorized>
-        <p class="mb-0 fas fa-user-astronaut text-primary" data-container="body" data-toggle="tooltip" data-placement="bottom" title="用户信息">
+        <p class="mb-0 fas fa-user-astronaut text-primary" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Account information">
             <span class="px-1">@context.User.Identity.Name</span>
         </p>
-        <a class="fas fa-sign-out-alt text-danger text-decoration-none" href="/logout" onclick="tooltips.hideTooltips()" data-container="body" data-toggle="tooltip" data-placement="bottom" title="注销"></a>
+        <a class="fas fa-sign-out-alt text-danger text-decoration-none" href="/logout" onclick="tooltips.hideTooltips()" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Logout"></a>
     </Authorized>
     <NotAuthorized>
-        <a class="fas fa-sign-in-alt text-info text-decoration-none" href="/Register" onclick="tooltips.hideTooltips()" data-container="body" data-toggle="tooltip" data-placement="bottom" title="注册"><span class="px-1 font-weight-normal">注册</span></a>
-        <a class="fas fa-sign-in-alt text-success text-decoration-none" href="/Login" onclick="tooltips.hideTooltips()" data-container="body" data-toggle="tooltip" data-placement="bottom" title="登录"><span class="px-1 font-weight-normal">登录</span></a>
+        <a class="fas fa-sign-in-alt text-info text-decoration-none" href="/Register" onclick="tooltips.hideTooltips()" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Register"><span class="px-1 font-weight-normal">Register</span></a>
+        <a class="fas fa-sign-in-alt text-success text-decoration-none" href="/Login" onclick="tooltips.hideTooltips()" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Login"><span class="px-1 font-weight-normal">Login</span></a>
     </NotAuthorized>
 </AuthorizeView>

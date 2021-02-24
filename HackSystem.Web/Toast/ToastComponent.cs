@@ -15,7 +15,7 @@ namespace HackSystem.Web.Toast
             this.logger.LogDebug($"After render Toast: {this.ToastDetail.Title}({this.ToastDetail.Id})");
             await base.OnAfterRenderAsync(firstRender);
 
-            // 魔法！勿动！Blazor 每次重新渲染此组件后，此组件将会丢失由 Bootstrap 初始化方法赋予的状态，每次渲染吼都必须重新初始化
+            // MAGIC! DO NOT TOUCH! This component is losing the status which from Bootstrap's initial method after each time renderred, have to re-initial after that.
             await this.jsRuntime.InvokeVoidAsync("toasts.popToast", this.ToastContainerInterop, this.ToastDetail.Id, this.ToastDetail.AutoHide, this.ToastDetail.HideDelay);
         }
     }

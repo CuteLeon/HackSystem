@@ -4,20 +4,20 @@ namespace HackSystem.WebDataTransfer.Account
 {
     public class RegisterDTO
     {
-        [Required(ErrorMessage = "用户名称是必要的")]
+        [Required(ErrorMessage = "User name is required")]
         public string UserName { get; set; }
 
-        [EmailAddress(ErrorMessage ="用户邮箱需要符合邮箱格式")]
-        [Required(ErrorMessage = "用户邮箱是必要的")]
+        [EmailAddress(ErrorMessage ="User Email should match Email format")]
+        [Required(ErrorMessage = "User Email is required")]
         public string Email { get; set; }
 
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "登录密码是必要的")]
+        [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "确认密码是必要的")]
-        [Compare(nameof(Password), ErrorMessage = "密码与确认密码不一致")]
+        [Required(ErrorMessage = "Confirm password is required")]
+        [Compare(nameof(Password), ErrorMessage = "Confirm password does not match with Password.")]
         public string ConfirmPassword { get; set; }
     }
 }

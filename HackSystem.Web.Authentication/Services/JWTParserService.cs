@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace HackSystem.Web.Authentication.Services
 {
     /// <summary>
-    /// 从 JWT 解析 Claims
+    /// Parse claims from JWT
     /// </summary>
     public class JWTParserService : IJWTParserService
     {
@@ -35,7 +35,7 @@ namespace HackSystem.Web.Authentication.Services
 
         public IEnumerable<Claim> ParseJWTPayload(string payload)
         {
-            this.logger.LogDebug($"解析 JWT Payload: {payload}");
+            this.logger.LogDebug($"Parse JWT Payload: {payload}");
             if (string.IsNullOrWhiteSpace(payload))
             {
                 throw new ArgumentNullException(nameof(payload));
@@ -47,7 +47,7 @@ namespace HackSystem.Web.Authentication.Services
 
             foreach (var pair in dictionary)
             {
-                // 相同 Type 的多个 Claim 会被合并在一起，需要按照 JSON 数组的格式分拆为多个
+                // Claims with the same type are combined, should split via JSON format.
                 if (pair.Value is JsonElement jsonElement &&
                     jsonElement.ValueKind == JsonValueKind.Array)
                 {
@@ -59,7 +59,7 @@ namespace HackSystem.Web.Authentication.Services
                 }
             }
 
-            this.logger.LogDebug($"解析 Claim: \n\t{string.Join("\n\t", claims.Select(claim => $"{claim.Type} = {claim.Value}"))}");
+            this.logger.LogDebug($"Parse Claim: \n\t{string.Join("\n\t", claims.Select(claim => $"{claim.Type} = {claim.Value}"))}");
             return claims;
         }
 

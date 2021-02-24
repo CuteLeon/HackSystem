@@ -18,7 +18,7 @@ namespace HackSystem.Web.Scheduler.Program
                 .AddSingleton<IPIDGenerator, PIDGenerator>()
                 .AddSingleton<IProcessContainer, ProcessContainer>()
                 .AddSingleton<IProgramLauncher, ProgramLauncher>()
-                .AddSingleton<IProgramDisposer, ProgramDisposer>()
+                .AddSingleton<IProcessDisposer, ProcessDisposer>()
                 .AddSingleton<IProgramScheduler, ProgramScheduler>();
 
             return services;

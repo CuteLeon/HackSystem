@@ -22,13 +22,13 @@ namespace HackSystem.WebAPI.Services.DataServices
         {
             this.logger = logger;
             this.hackSystemDBContext = hackSystemDBContext;
-            this.logger.LogDebug($"构造数据持久化服务：{this.GetType().FullName} ({this.GetHashCode():X})");
+            this.logger.LogDebug($"Create data service: {this.GetType().FullName} ({this.GetHashCode():X})");
         }
 
-        #region 增加
+        #region Add
 
         /// <summary>
-        /// 添加实体
+        /// Add entity
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -40,7 +40,7 @@ namespace HackSystem.WebAPI.Services.DataServices
         }
 
         /// <summary>
-        /// 添加实体集合
+        /// Add entities
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
@@ -52,10 +52,10 @@ namespace HackSystem.WebAPI.Services.DataServices
         }
         #endregion
 
-        #region 更新
+        #region Update
 
         /// <summary>
-        /// 更新实体
+        /// Update entity
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -67,7 +67,7 @@ namespace HackSystem.WebAPI.Services.DataServices
         }
 
         /// <summary>
-        /// 更新实体集合
+        /// Update entities
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
@@ -79,10 +79,10 @@ namespace HackSystem.WebAPI.Services.DataServices
         }
         #endregion
 
-        #region 删除
+        #region Delete
 
         /// <summary>
-        /// 移除实体
+        /// Remove entity
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -94,7 +94,7 @@ namespace HackSystem.WebAPI.Services.DataServices
         }
 
         /// <summary>
-        /// 移除实体集合
+        /// Remove entities
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
@@ -106,26 +106,26 @@ namespace HackSystem.WebAPI.Services.DataServices
         }
         #endregion
 
-        #region 加载
+        #region Load
 
         /// <summary>
-        /// 加载
+        /// Load
         /// </summary>
         public virtual void Load()
             => this.hackSystemDBContext.Set<TEntity>().Load();
 
         /// <summary>
-        /// 加载
+        /// Load
         /// </summary>
         /// <returns></returns>
         public virtual Task LoadAsync()
             => this.hackSystemDBContext.Set<TEntity>().LoadAsync();
         #endregion
 
-        #region 遍历
+        #region For each
 
         /// <summary>
-        /// 全部
+        /// All
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -133,7 +133,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AllAsync(expression);
 
         /// <summary>
-        /// 任一
+        /// Any
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -141,7 +141,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AnyAsync(expression);
 
         /// <summary>
-        /// 遍历
+        /// For each
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
@@ -149,38 +149,38 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().ForEachAsync(action);
         #endregion
 
-        #region 极值
+        #region Extremum
 
         /// <summary>
-        /// 最大值
+        /// Max
         /// </summary>
-        /// <typeparam name="TResult">结果类型</typeparam>
+        /// <typeparam name="TResult">Type</typeparam>
         /// <param name="expression"></param>
         /// <returns></returns>
         public virtual Task<TResult> MaxAsync<TResult>(Expression<Func<TEntity, TResult>> expression)
             => this.hackSystemDBContext.Set<TEntity>().MaxAsync(expression);
 
         /// <summary>
-        /// 最小值
+        /// Min
         /// </summary>
-        /// <typeparam name="TResult">结果类型</typeparam>
+        /// <typeparam name="TResult">Type</typeparam>
         /// <param name="expression"></param>
         /// <returns></returns>
         public virtual Task<TResult> MinAsync<TResult>(Expression<Func<TEntity, TResult>> expression)
             => this.hackSystemDBContext.Set<TEntity>().MinAsync(expression);
         #endregion
 
-        #region 计数
+        #region Count
 
         /// <summary>
-        /// 计算数量
+        /// Count
         /// </summary>
         /// <returns></returns>
         public virtual Task<int> CountAsync()
             => this.hackSystemDBContext.Set<TEntity>().CountAsync();
 
         /// <summary>
-        /// 计算数量
+        /// Count
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -188,10 +188,10 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().CountAsync(expression);
         #endregion
 
-        #region 包含
+        #region Contain
 
         /// <summary>
-        /// 包含
+        /// Contain
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -199,19 +199,19 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().ContainsAsync(entity);
         #endregion
 
-        #region 主键查询
+        #region Search by primary key
 
         /// <summary>
-        /// 查找
+        /// Find
         /// </summary>
         /// <param name="keys"></param>
         /// <returns></returns>
-        /// <remarks>Find 方法会优先在内存中搜索是否存在已经缓存的实体，内存中不存在时才会查询数据库</remarks>
+        /// <remarks>Find method will try to search object in memory first, and search in database when not exist in memory</remarks>
         public virtual TEntity Find(params object[] keys)
             => this.hackSystemDBContext.Set<TEntity>().Find(keys);
 
         /// <summary>
-        /// 查找
+        /// Find
         /// </summary>
         /// <param name="keys"></param>
         /// <returns></returns>
@@ -219,17 +219,17 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().FindAsync(keys).AsTask();
         #endregion
 
-        #region 单值查找
+        #region First
 
         /// <summary>
-        /// 第一个元素
+        /// First
         /// </summary>
         /// <returns></returns>
         public virtual Task<TEntity> FirstAsync()
             => this.hackSystemDBContext.Set<TEntity>().FirstAsync();
 
         /// <summary>
-        /// 第一个元素
+        /// First
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -237,14 +237,14 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().FirstAsync(expression);
 
         /// <summary>
-        /// 第一个或默认元素
+        /// First or default
         /// </summary>
         /// <returns></returns>
         public virtual Task<TEntity> FirstOrDefaultAsync()
             => this.hackSystemDBContext.Set<TEntity>().FirstOrDefaultAsync();
 
         /// <summary>
-        /// 第一个或默认元素
+        /// First or default
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -252,14 +252,14 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().FirstOrDefaultAsync(expression);
 
         /// <summary>
-        /// 唯一的元素
+        /// Single
         /// </summary>
         /// <returns></returns>
         public virtual Task<TEntity> SingleAsync()
             => this.hackSystemDBContext.Set<TEntity>().SingleAsync();
 
         /// <summary>
-        /// 唯一的元素
+        /// Single
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -267,14 +267,14 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().SingleAsync(expression);
 
         /// <summary>
-        /// 唯一的或默认元素
+        /// Single or default
         /// </summary>
         /// <returns></returns>
         public virtual Task<TEntity> SingleOrDefaultAsync()
             => this.hackSystemDBContext.Set<TEntity>().SingleOrDefaultAsync();
 
         /// <summary>
-        /// 唯一的或默认元素
+        /// Single or default
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -285,7 +285,7 @@ namespace HackSystem.WebAPI.Services.DataServices
         #region SQL
 
         /// <summary>
-        /// 执行SQL命令
+        /// Execute SQL command
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -294,57 +294,57 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Database.ExecuteSqlRaw(sql, parameters);
         #endregion
 
-        #region 集合转换
+        #region Collection cast
 
         /// <summary>
-        /// 返回 IQueryable
+        /// Return IQueryable
         /// </summary>
         /// <returns></returns>
         public virtual IQueryable<TEntity> AsQueryable()
             => this.hackSystemDBContext.Set<TEntity>().AsQueryable();
 
         /// <summary>
-        /// 返回 IEnumerable
+        /// Return IEnumerable
         /// </summary>
         /// <returns></returns>
         public virtual IEnumerable<TEntity> AsEnumerable()
             => this.hackSystemDBContext.Set<TEntity>().AsEnumerable();
 
         /// <summary>
-        /// 返回 ParallelQuery
+        /// Return ParallelQuery
         /// </summary>
         /// <returns></returns>
         public virtual ParallelQuery<TEntity> AsParallel()
             => this.hackSystemDBContext.Set<TEntity>().AsParallel();
 
         /// <summary>
-        /// 返回数组
+        /// Return Array
         /// </summary>
         /// <returns></returns>
         public virtual Task<TEntity[]> ToArrayAsync()
             => this.hackSystemDBContext.Set<TEntity>().ToArrayAsync();
 
         /// <summary>
-        /// 返回字典
+        /// Return Dictionary
         /// </summary>
-        /// <typeparam name="TKey">字典键类型</typeparam>
+        /// <typeparam name="TKey">Type of Key</typeparam>
         /// <param name="keySelector"></param>
         /// <returns></returns>
         public virtual Task<Dictionary<TKey, TEntity>> ToDictionaryAsync<TKey>(Func<TEntity, TKey> keySelector)
             => this.hackSystemDBContext.Set<TEntity>().ToDictionaryAsync(keySelector);
 
         /// <summary>
-        /// 返回列表
+        /// Return List
         /// </summary>
         /// <returns></returns>
         public virtual Task<List<TEntity>> ToListAsync()
             => this.hackSystemDBContext.Set<TEntity>().ToListAsync();
         #endregion
 
-        #region 跳跃取值
+        #region Skip and take
 
         /// <summary>
-        /// 跳过
+        /// Skip
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
@@ -352,7 +352,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().Skip(count);
 
         /// <summary>
-        /// 取值
+        /// Take
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
@@ -360,10 +360,10 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().Take(count);
         #endregion
 
-        #region 累加
+        #region Sum
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -371,7 +371,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().SumAsync(expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -379,7 +379,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().SumAsync(expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -387,7 +387,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().SumAsync(expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -395,7 +395,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().SumAsync(expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -403,7 +403,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().SumAsync(expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -411,7 +411,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().SumAsync(expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -419,7 +419,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().SumAsync(expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -427,7 +427,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().SumAsync(expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -435,7 +435,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().SumAsync(expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -443,10 +443,10 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().SumAsync(expression);
         #endregion
 
-        #region 平均值
+        #region Average
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -454,7 +454,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AverageAsync(expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -462,7 +462,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AverageAsync(expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -470,7 +470,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AverageAsync(expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -478,7 +478,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AverageAsync(expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -486,7 +486,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AverageAsync(expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -494,7 +494,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AverageAsync(expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -502,7 +502,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AverageAsync(expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -510,7 +510,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AverageAsync(expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -518,7 +518,7 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AverageAsync(expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -526,30 +526,30 @@ namespace HackSystem.WebAPI.Services.DataServices
             => this.hackSystemDBContext.Set<TEntity>().AverageAsync(expression);
         #endregion
 
-        #region 保存
+        #region Save
 
         /// <summary>
-        /// 保存变化
+        /// Save changes
         /// </summary>
         /// <returns></returns>
         public int SaveChanges()
             => this.hackSystemDBContext.SaveChanges();
 
         /// <summary>
-        /// 保存变化
+        /// Save changes
         /// </summary>
         /// <returns></returns>
         public Task<int> SaveChangesAsync()
             => this.hackSystemDBContext.SaveChangesAsync();
         #endregion
 
-        #region 事务
+        #region Transact
 
         /// <summary>
-        /// 执行事务
+        /// Execute transact
         /// </summary>
-        /// <typeparam name="TDelegate">委托类型</typeparam>
-        /// <typeparam name="TResult">返回值类型</typeparam>
+        /// <typeparam name="TDelegate">Type of delegate</typeparam>
+        /// <typeparam name="TResult">Type of result</typeparam>
         /// <param name="delegate"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>

@@ -8,9 +8,9 @@ using static HackSystem.Web.Toast.Model.ToastDetail;
 namespace HackSystem.Web.Toast
 {
     /// <summary>
-    /// Toast 容器组件
+    /// Toast container component
     /// </summary>
-    /// <remarks> 需要配合 blazor.toast.js 使用 </remarks>
+    /// <remarks> Should works with blazor.toast.js </remarks>
     public partial class ToastContainerComponent : IToastContainer, IDisposable
     {
         private DotNetObjectReference<IToastContainer> interopReference;

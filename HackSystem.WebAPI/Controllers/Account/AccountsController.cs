@@ -39,14 +39,14 @@ namespace HackSystem.WebAPI.Controllers.Account
         }
 
         /// <summary>
-        /// 注册
+        /// Register
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterDTO register)
         {
-            this.logger.LogDebug($"注册新账户: {register.UserName}");
+            this.logger.LogDebug($"Register new user: {register.UserName}");
             var newUser = new HackSystemUser
             {
                 UserName = register.UserName,
@@ -56,8 +56,8 @@ namespace HackSystem.WebAPI.Controllers.Account
             var result = await this.userManager.CreateAsync(newUser, register.Password);
             if (!result.Succeeded)
             {
-                this.logger.LogError(new Exception(string.Join("\n", result.Errors)), $"注册账户失败: {register.UserName} ({result.Errors.Count()} 个错误)");
-                var errors = result.Errors.Select(x => $"(代码:{x.Code}) {x.Description}");
+                this.logger.LogError(new Exception(string.Join("\n", result.Errors)), $"Failed to register: {register.UserName} ({result.Errors.Count()} errors)");
+                var errors = result.Errors.Select(x => $"(Code:{x.Code}) {x.Description}");
                 var failedResult = new RegisterResultDTO
                 {
                     Successful = false,
@@ -69,8 +69,8 @@ namespace HackSystem.WebAPI.Controllers.Account
             result = await this.userManager.AddToRoleAsync(newUser, CommonSense.Roles.HackerRole);
             if (!result.Succeeded)
             {
-                this.logger.LogError(new Exception(string.Join("\n", result.Errors)), $"配置账户角色失败: {register.UserName} ({result.Errors.Count()} 个错误)");
-                var errors = result.Errors.Select(x => $"(代码:{x.Code}) {x.Description}");
+                this.logger.LogError(new Exception(string.Join("\n", result.Errors)), $"Setup user's roles failed: {register.UserName} ({result.Errors.Count()} errors)");
+                var errors = result.Errors.Select(x => $"(Code:{x.Code}) {x.Description}");
                 var failedResult = new RegisterResultDTO
                 {
                     Successful = false,
@@ -79,7 +79,7 @@ namespace HackSystem.WebAPI.Controllers.Account
                 return this.BadRequest(failedResult);
             }
 
-            this.logger.LogDebug($"注册账户成功: {register.UserName}");
+            this.logger.LogDebug($"Register successfully: {register.UserName}");
             var registerResult = new RegisterResultDTO()
             {
                 Successful = true
@@ -88,26 +88,26 @@ namespace HackSystem.WebAPI.Controllers.Account
         }
 
         /// <summary>
-        /// 登录
+        /// Login
         /// </summary>
         /// <param name="login"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
-            this.logger.LogDebug($"登录账户: {login.UserName}");
+            this.logger.LogDebug($"Login user: {login.UserName}");
             var result = await this.signInManager.PasswordSignInAsync(login.UserName, login.Password, true, false);
             if (!result.Succeeded)
             {
                 var errorMessage = result switch
                 {
-                    { } when result.IsLockedOut => "账户被锁定",
-                    { } when result.IsNotAllowed => "账户被禁用",
-                    { } when result.RequiresTwoFactor => "账户需要验证",
-                    _ => "邮箱或密码无效"
+                    { } when result.IsLockedOut => "Account locked out",
+                    { } when result.IsNotAllowed => "Account not allowed",
+                    { } when result.RequiresTwoFactor => "Account requires two factor",
+                    _ => "Invalid user information"
                 };
 
-                this.logger.LogDebug($"登录账户失败: {login.UserName} ({errorMessage})");
+                this.logger.LogDebug($"Login failed: {login.UserName} ({errorMessage})");
                 var failedResul = new LoginResultDTO
                 {
                     Successful = false,
@@ -124,25 +124,25 @@ namespace HackSystem.WebAPI.Controllers.Account
                 Token = token
             };
 
-            this.logger.LogDebug($"登录账户成功: {login.UserName}");
+            this.logger.LogDebug($"Login successfully: {login.UserName}");
             return this.Ok(loginResul);
         }
 
         /// <summary>
-        /// 注销
+        /// Logout
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Logout()
         {
-            this.logger.LogDebug($"注销账户...");
+            this.logger.LogDebug($"Logout current user...");
             await this.signInManager.SignOutAsync();
             return this.Ok();
         }
 
         /// <summary>
-        /// 获取账户信息
+        /// Get account information
         /// </summary>
         /// <returns></returns>
         [HttpGet]

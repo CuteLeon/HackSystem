@@ -21,7 +21,7 @@ namespace HackSystem.Host.EventHandlers
             if (e.ErrorCode == CefErrorCode.Aborted) return;
 
             Console.WriteLine($"{nameof(ChromiumWebBrowserLoadHandler)}: {nameof(DoLoadError)} => {e.FailedUrl} {e.ErrorCode} {e.ErrorText}");
-            // 加载失败时使用静态页面显示错误信息
+            // Show error message in static page when load failed.
             var htmlContent = ChromiumRegisterResourceHandler.GetStartUpPageHtml($"Load Error. (Code = {e.ErrorCode})", $"{e.FailedUrl}<br/>{e.ErrorText}");
             e.Frame.LoadHtml(htmlContent, true);
         }

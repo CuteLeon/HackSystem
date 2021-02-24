@@ -3,22 +3,21 @@
     ViewData["Title"] = "Error";
 }
 
-<h1 class="text-danger">错误</h1>
-<h2 class="text-danger">处理请求时遇到错误</h2>
+<h1 class="text-danger">Error</h1>
+<h2 class="text-danger">Error when process request.</h2>
 
 @if (Model.ShowRequestId)
 {
     <p>
-        <strong>请求 ID:</strong> <code>@Model.RequestId</code>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
     </p>
 }
 
-<h3>开发模式</h3>
+<h3>Develop Mode</h3>
 <p>
-    <strong>开发</strong> 环境会显示更多关于错误的信息
+    <strong>Develop</strong> environment will show more detail for debugging.
 </p>
 <p>
-    <strong>部署程序不应该使用开发模式</strong>
-    它可能导致向最终用户显示异常的敏感信息。
-    用于本地调试, 通过设置 <strong>ASPNETCORE_ENVIRONMENT</strong> 环境变量为 <strong>Development</strong> 并重启应用程序以启用开发环境
+    <strong>Do not user Develop Mode when deploy.</strong>
+    Edit <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable as <strong>Development</strong> to turn on Develop mode.
 </p>

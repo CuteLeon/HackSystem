@@ -28,26 +28,26 @@ namespace HackSystem.Web.Services.Authentication
         }
 
         /// <summary>
-        /// 注册用户
+        /// Register new user
         /// </summary>
         /// <param name="register"></param>
         /// <returns></returns>
         public async Task<RegisterResultDTO> Register(RegisterDTO register)
         {
-            logger.LogDebug($"请求注册用户：{register.UserName}");
+            logger.LogDebug($"Register new user: {register.UserName}");
             var response = await httpClient.PostAsJsonAsync("api/accounts/register", register);
             var registerResult = JsonConvert.DeserializeObject<RegisterResultDTO>(await response.Content.ReadAsStringAsync());
             return registerResult;
         }
 
         /// <summary>
-        /// 登录
+        /// Login user
         /// </summary>
         /// <param name="login"></param>
         /// <returns></returns>
         public async Task<LoginResultDTO> Login(LoginDTO login)
         {
-            logger.LogDebug($"请求登录用户：{login.UserName}");
+            logger.LogDebug($"Login user: {login.UserName}");
             var response = await httpClient.PostAsJsonAsync("api/accounts/login", login);
             var loginResult = JsonConvert.DeserializeObject<LoginResultDTO>(await response.Content.ReadAsStringAsync());
             if (!response.IsSuccessStatusCode)
@@ -60,12 +60,12 @@ namespace HackSystem.Web.Services.Authentication
         }
 
         /// <summary>
-        /// 获取账户信息
+        /// Get account information
         /// </summary>
         /// <returns></returns>
         public async Task<string> GetAccountInfo()
         {
-            logger.LogDebug($"请求用户信息...");
+            logger.LogDebug($"Get account information...");
 
             var currentToken = await this.hackSystemAuthenticationStateHandler.GetCurrentTokenAsync();
             httpClient.AddAuthorizationHeader(currentToken);
@@ -80,12 +80,12 @@ namespace HackSystem.Web.Services.Authentication
         }
 
         /// <summary>
-        /// 注销
+        /// Logout
         /// </summary>
         /// <returns></returns>
         public async Task Logout()
         {
-            logger.LogDebug($"请求注销用户");
+            logger.LogDebug($"Logout current user...");
 
             try
             {

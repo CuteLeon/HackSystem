@@ -6,7 +6,7 @@
         <div class="modal-content border-danger overflow-hidden" style="height: 100%;">
             <DraggableHandle DragTarget=".position-fixed">
                 <div class="modal-header border-0 py-2">
-                    <h5 class="modal-title" id="exampleModalLabel">设置</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
                     <button type="button" class="close" @onclick="this.OnClose">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -17,11 +17,11 @@
                     <div class="d-inline-block d-flex bg-light align-items-center">
                         <div class="nav d-flex border-right border-secondary flex-column text-right" style="width:200px;">
                             <a class="nav-link active">Hack System</a>
-                            <a class="nav-link">网络</a>
-                            <a class="nav-link">显示</a>
-                            <a class="nav-link">程序</a>
-                            <a class="nav-link">账户</a>
-                            <a class="nav-link">关于</a>
+                            <a class="nav-link">Network</a>
+                            <a class="nav-link">Display</a>
+                            <a class="nav-link">Program</a>
+                            <a class="nav-link">Account</a>
+                            <a class="nav-link">About</a>
                         </div>
                     </div>
                     <div class="d-inline-block w-100 h-100 p-5">
@@ -37,12 +37,12 @@
 @code{
     public override void Dispose()
     {
-        this.logger.LogInformation($"释放 Setting 程序...");
+        this.logger.LogInformation($"Dispose Setting component...");
     }
 
     public override void OnClose()
     {
-        this.logger.LogInformation($"关闭 Setting 程序...");
+        this.logger.LogInformation($"Close Setting component...");
         base.OnClose();
     }
 }

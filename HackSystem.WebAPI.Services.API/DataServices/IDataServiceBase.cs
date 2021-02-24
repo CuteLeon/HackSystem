@@ -8,207 +8,207 @@ namespace HackSystem.WebAPI.Services.API.DataServices
 {
     public interface IDataServiceBase<TEntity> where TEntity : class
     {
-        #region 增加
+        #region Add
 
         /// <summary>
-        /// 添加实体
+        /// Add entity
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         Task<TEntity> AddAsync(TEntity entity);
 
         /// <summary>
-        /// 添加实体集合
+        /// Add entities
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
         Task<int> AddRangeAsync(IEnumerable<TEntity> entities);
         #endregion
 
-        #region 更新
+        #region Update
 
         /// <summary>
-        /// 更新实体
+        /// Update entity
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         Task<TEntity> UpdateAsync(TEntity entity);
 
         /// <summary>
-        /// 更新实体集合
+        /// Update entities
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
         Task<int> UpdateRangeAsync(IEnumerable<TEntity> entities);
         #endregion
 
-        #region 删除
+        #region Delete
 
         /// <summary>
-        /// 移除实体
+        /// Remove entity
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         Task<TEntity> RemoveAsync(TEntity entity);
 
         /// <summary>
-        /// 移除实体集合
+        /// Remove entities
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
         Task<int> RemoveRangeAsync(IEnumerable<TEntity> entities);
         #endregion
 
-        #region 加载
+        #region Load
 
         /// <summary>
-        /// 加载
+        /// Load
         /// </summary>
         void Load();
 
         /// <summary>
-        /// 加载
+        /// Load
         /// </summary>
         /// <returns></returns>
         Task LoadAsync();
         #endregion
 
-        #region 遍历
+        #region For each
 
         /// <summary>
-        /// 全部
+        /// All
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<bool> AllAsync(Expression<Func<TEntity, bool>> expression);
 
         /// <summary>
-        /// 任一
+        /// Any
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression);
 
         /// <summary>
-        /// 遍历
+        /// For each
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
         Task ForEachAsync(Action<TEntity> action);
         #endregion
 
-        #region 极值
+        #region Extremum
 
         /// <summary>
-        /// 最大值
+        /// Max
         /// </summary>
-        /// <typeparam name="TResult">结果类型</typeparam>
+        /// <typeparam name="TResult">Type</typeparam>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<TResult> MaxAsync<TResult>(Expression<Func<TEntity, TResult>> expression);
 
         /// <summary>
-        /// 最小值
+        /// Min
         /// </summary>
-        /// <typeparam name="TResult">结果类型</typeparam>
+        /// <typeparam name="TResult">Type</typeparam>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<TResult> MinAsync<TResult>(Expression<Func<TEntity, TResult>> expression);
         #endregion
 
-        #region 计数
+        #region Count
 
         /// <summary>
-        /// 计算数量
+        /// Count
         /// </summary>
         /// <returns></returns>
         Task<int> CountAsync();
 
         /// <summary>
-        /// 计算数量
+        /// Count
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<int> CountAsync(Expression<Func<TEntity, bool>> expression);
         #endregion
 
-        #region 包含
+        #region Contain
 
         /// <summary>
-        /// 包含
+        /// Contain
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         Task<bool> ContainsAsync(TEntity entity);
         #endregion
 
-        #region 主键查询
+        #region Find by primary key
 
         /// <summary>
-        /// 查找
+        /// Find
         /// </summary>
         /// <param name="keys"></param>
         /// <returns></returns>
-        /// <remarks>Find 方法会优先在内存中搜索是否存在已经缓存的实体，内存中不存在时才会查询数据库</remarks>
+        /// <remarks>Find method will try to search object in memory first, and search in database when not exist in memory</remarks>
         TEntity Find(params object[] keys);
 
         /// <summary>
-        /// 查找
+        /// Find
         /// </summary>
         /// <param name="keys"></param>
         /// <returns></returns>
         Task<TEntity> FindAsync(params object[] keys);
         #endregion
 
-        #region 单值查找
+        #region First
 
         /// <summary>
-        /// 第一个元素
+        /// First
         /// </summary>
         /// <returns></returns>
         Task<TEntity> FirstAsync();
 
         /// <summary>
-        /// 第一个元素
+        /// First
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> expression);
 
         /// <summary>
-        /// 第一个或默认元素
+        /// First or default
         /// </summary>
         /// <returns></returns>
         Task<TEntity> FirstOrDefaultAsync();
 
         /// <summary>
-        /// 第一个或默认元素
+        /// First or default
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> expression);
 
         /// <summary>
-        /// 唯一的元素
+        /// Single
         /// </summary>
         /// <returns></returns>
         Task<TEntity> SingleAsync();
 
         /// <summary>
-        /// 唯一的元素
+        /// Single
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> expression);
 
         /// <summary>
-        /// 唯一的或默认元素
+        /// Single or default
         /// </summary>
         /// <returns></returns>
         Task<TEntity> SingleOrDefaultAsync();
 
         /// <summary>
-        /// 唯一的或默认元素
+        /// Single or default
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -218,7 +218,7 @@ namespace HackSystem.WebAPI.Services.API.DataServices
         #region SQL
 
         /// <summary>
-        /// 执行SQL命令
+        /// Execute SQL command
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -226,232 +226,232 @@ namespace HackSystem.WebAPI.Services.API.DataServices
         int ExecuteSqlRaw(string sql, params object[] parameters);
         #endregion
 
-        #region 集合转换
+        #region Collection cast
 
         /// <summary>
-        /// 返回 IQueryable
+        /// Return IQueryable
         /// </summary>
         /// <returns></returns>
         IQueryable<TEntity> AsQueryable();
 
         /// <summary>
-        /// 返回 IEnumerable
+        /// Return IEnumerable
         /// </summary>
         /// <returns></returns>
         IEnumerable<TEntity> AsEnumerable();
 
         /// <summary>
-        /// 返回 ParallelQuery
+        /// Return ParallelQuery
         /// </summary>
         /// <returns></returns>
         ParallelQuery<TEntity> AsParallel();
 
         /// <summary>
-        /// 返回数组
+        /// Return Array
         /// </summary>
         /// <returns></returns>
         Task<TEntity[]> ToArrayAsync();
 
         /// <summary>
-        /// 返回字典
+        /// Return Dictionary
         /// </summary>
-        /// <typeparam name="TKey">字典键类型</typeparam>
+        /// <typeparam name="TKey">Type</typeparam>
         /// <param name="keySelector"></param>
         /// <returns></returns>
         Task<Dictionary<TKey, TEntity>> ToDictionaryAsync<TKey>(Func<TEntity, TKey> keySelector);
 
         /// <summary>
-        /// 返回列表
+        /// Return List
         /// </summary>
         /// <returns></returns>
         Task<List<TEntity>> ToListAsync();
         #endregion
 
-        #region 跳跃取值
+        #region Skip and take
 
         /// <summary>
-        /// 跳过
+        /// Skip
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
         IQueryable<TEntity> Skip(int count);
 
         /// <summary>
-        /// 取值
+        /// Take
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
         IQueryable<TEntity> Take(int count);
         #endregion
 
-        #region 累加
+        #region Sum
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<decimal> SumAsync(Expression<Func<TEntity, decimal>> expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<decimal?> SumAsync(Expression<Func<TEntity, decimal?>> expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<double> SumAsync(Expression<Func<TEntity, double>> expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<double?> SumAsync(Expression<Func<TEntity, double?>> expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<float> SumAsync(Expression<Func<TEntity, float>> expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<float?> SumAsync(Expression<Func<TEntity, float?>> expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<long> SumAsync(Expression<Func<TEntity, long>> expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<long?> SumAsync(Expression<Func<TEntity, long?>> expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<int> SumAsync(Expression<Func<TEntity, int>> expression);
 
         /// <summary>
-        /// 累加
+        /// Sum
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<int?> SumAsync(Expression<Func<TEntity, int?>> expression);
         #endregion
 
-        #region 平均值
+        #region Average
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<decimal> AverageAsync(Expression<Func<TEntity, decimal>> expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<decimal?> AverageAsync(Expression<Func<TEntity, decimal?>> expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<double> AverageAsync(Expression<Func<TEntity, double>> expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<double?> AverageAsync(Expression<Func<TEntity, double?>> expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<float> AverageAsync(Expression<Func<TEntity, float>> expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<float?> AverageAsync(Expression<Func<TEntity, float?>> expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<double> AverageAsync(Expression<Func<TEntity, long>> expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<double?> AverageAsync(Expression<Func<TEntity, long?>> expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<double> AverageAsync(Expression<Func<TEntity, int>> expression);
 
         /// <summary>
-        /// 平均值
+        /// Average
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
         Task<double?> AverageAsync(Expression<Func<TEntity, int?>> expression);
         #endregion
 
-        #region 保存
+        #region Save
 
         /// <summary>
-        /// 保存变化
+        /// Save changes
         /// </summary>
         /// <returns></returns>
         int SaveChanges();
 
         /// <summary>
-        /// 保存变化
+        /// Save changes
         /// </summary>
         /// <returns></returns>
         Task<int> SaveChangesAsync();
         #endregion
 
-        #region 事务
+        #region Transact
 
         /// <summary>
-        /// 执行事务
+        /// Execute transact
         /// </summary>
-        /// <typeparam name="TDelegate">委托类型</typeparam>
-        /// <typeparam name="TResult">返回值类型</typeparam>
+        /// <typeparam name="TDelegate">Type of delegate</typeparam>
+        /// <typeparam name="TResult">Type of result</typeparam>
         /// <param name="delegate"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>

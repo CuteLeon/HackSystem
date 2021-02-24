@@ -27,7 +27,7 @@ namespace HackSystem.WebAPI.DataAccess.SeedData
                 {
                     if (await dbContext.UserBasicProgramMaps.FindAsync(user.Id, program.Id) == null)
                     {
-                        logger.LogInformation($"为用户 {user.Id} 和程序 {program.Id} 添加关系 Map...");
+                        logger.LogInformation($"Add mapping between user {user.Id} and program {program.Id}...");
                         await dbContext.UserBasicProgramMaps.AddAsync(new UserBasicProgramMap()
                         {
                             UserId = user.Id,

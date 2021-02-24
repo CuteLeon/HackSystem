@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Components.Authorization;
 namespace HackSystem.Web.Authentication.Providers
 {
     /// <summary>
-    /// HackSystem 认证状态提供者接口
+    /// Authentication state provider interface
     /// </summary>
     /// <remarks>
-    /// 不要尝试将此接口注入DI，并以此接口获取 HackSystemAuthenticationStateProvider 服务，
-    /// 否则将在认证时发生莫名的错误（Provider的覆写方法可以返回正确的认证状态，但所有的认证视图组件依旧我行我素）,
-    /// 继续使用 AuthenticationStateProvider 类型注册和获取 HackSystemAuthenticationStateProvider 服务,
-    /// 因为这个问题上熬夜到 01/09/2020 3:00 AM
+    /// Do not inject this interface into DI, and not try to get HackSystemAuthenticationStateProvider service via this interface.
+    /// Otherwise, auth service can not works well: provider can offer correct, but components having incorrect behaviors.
+    /// Keep on registing and getting HackSystemAuthenticationStateProvider service via AuthenticationStateProvider type.
+    /// Stayed up late till 01/09/2020 3:00 AM for this issue.
     /// </remarks>
     public interface IHackSystemAuthenticationStateProvider
     {
