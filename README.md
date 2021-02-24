@@ -5,8 +5,8 @@
 
 ## How to launch?
 
-1. Install .Net 5.0 SDK.
-2. Download source code and open in Visual Studio 2019 (16.2+).
+1. Install .Net 6.0 SDK.
+2. Download source code and open in Visual Studio 2019 (16.8+).
 3. Set `HackSystem.WebHost` and `HackSystem.WebAPI` as startup projects.
 4. Press F5 to run.
 5. Navigate to https://localhost:2473
