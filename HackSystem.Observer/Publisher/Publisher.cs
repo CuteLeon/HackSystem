@@ -27,6 +27,11 @@ namespace HackSystem.Observer.Publisher
 
         public IDisposable Subscribe(IObserver<TMessage> observer)
         {
+            if (this.observers.ContainsKey(observer))
+            {
+                throw new InvalidOperationException($"{messageType} observer ({observer.GetHashCode():X}) has been subscribed.");
+            }
+
             var disposable = this.observable.Subscribe(observer);
             this.observers.Add(observer, disposable);
             this.logger.LogInformation($"Publisher of {this.messageType}, observer ({observer.GetHashCode():X}) subscribed.");
@@ -35,7 +40,15 @@ namespace HackSystem.Observer.Publisher
 
         public void UnSubsciber(IObserver<TMessage> observer)
         {
-            this.observers.GetValueOrDefault(observer)?.Dispose();
+            if (!this.observers.TryGetValue(observer, out var disposable))
+            {
+                throw new InvalidOperationException($"{messageType} observer ({observer.GetHashCode():X}) has not been subscribed.");
+            }
+
+            // Unsubscribe automatically when dispose.
+            disposable.Dispose();
+            this.observers.Remove(observer);
+            this.logger.LogWarning(disposable.ToString());
             this.logger.LogInformation($"Publisher of {this.messageType}, observer ({observer.GetHashCode():X}) unsubscribed.");
         }
 
