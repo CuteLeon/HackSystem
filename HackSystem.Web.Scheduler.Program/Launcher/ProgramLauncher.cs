@@ -31,7 +31,7 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
             this.processContainer = processContainer;
         }
 
-        public Task<ProcessDetail> LaunchProgram(QueryBasicProgramDTO basicProgram)
+        public async Task<ProcessDetail> LaunchProgram(QueryBasicProgramDTO basicProgram)
         {
             var programEntity = new ProgramEntity()
             {
@@ -48,10 +48,10 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
             this.logger.LogInformation($"Program launcher: Name={basicProgram.Name} ({process.PID})");
 
             this.processContainer.AddProcess(process);
-            this.publisher.Publish(new ProgramLaunchMessage());
+            await this.publisher.Publish(new ProgramLaunchMessage() { PID = process.PID });
             this.logger.LogInformation($"Program launcher: Add processs and broadcast notification.");
 
-            return Task.FromResult(process);
+            return process;
         }
 
         private static Type GetProgramComponentType(string assemblyName, string typeName)

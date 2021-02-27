@@ -1,41 +1,60 @@
 ﻿using System;
 using System.Threading.Tasks;
+using HackSystem.Observer.Message;
 using HackSystem.Observer.Publisher;
+using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Observer.Subscriber
 {
     public class Subscriber<TMessage> : ISubscriber<TMessage>
+        where TMessage : MessageBase
     {
+        private readonly ILogger<ISubscriber<TMessage>> logger;
         private readonly IPublisher<TMessage> publisher;
+        protected readonly string messageType = typeof(TMessage).Name;
 
         public Func<TMessage, Task> HandleMessage { get; set; }
 
-        public Subscriber(IPublisher<TMessage> publisher)
+        public Subscriber(
+            ILogger<ISubscriber<TMessage>> logger,
+            IPublisher<TMessage> publisher)
         {
+            this.logger = logger;
             this.publisher = publisher;
 
             this.Subscibe();
         }
 
-        public async Task ReceiveMessage(TMessage message)
-        {
-            await this.HandleMessage?.Invoke(message);
-        }
-
         public void Subscibe()
         {
-            this.publisher?.AddSubsciber(this);
+            this.publisher?.Subscribe(this);
         }
 
         public void Unsubscibe()
         {
-            this.publisher?.RemoveSubsciber(this);
+            this.publisher?.UnSubsciber(this);
         }
 
         public void Dispose()
         {
             this.HandleMessage = null;
             this.Unsubscibe();
+        }
+
+        public void OnCompleted()
+        {
+            this.logger.LogInformation($"Subscriber of {this.messageType}, completed.");
+        }
+
+        public void OnError(Exception error)
+        {
+            this.logger.LogInformation($"Subscriber of {this.messageType}, exception: {error.Message}");
+        }
+
+        public void OnNext(TMessage message)
+        {
+            this.logger.LogInformation($"Subscriber of {this.messageType}, received message: {message}");
+            this.HandleMessage?.Invoke(message);
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages
+﻿using HackSystem.Observer.Message;
+
+namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages
 {
-    public class ProcessCloseMessage
+    public class ProcessCloseMessage : MessageBase
     {
         public int PID { get; set; }
 
@@ -8,5 +10,8 @@
         {
             this.PID = pID;
         }
+
+        public override string ToString()
+            => $"Process Close Message => {this.PID} ID";
     }
 }

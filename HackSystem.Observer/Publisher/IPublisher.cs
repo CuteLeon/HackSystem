@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HackSystem.Observer.Subscriber;
+using HackSystem.Observer.Message;
 
 namespace HackSystem.Observer.Publisher
 {
-    public interface IPublisher<TMessage> : IDisposable
+    public interface IPublisher<TMessage> : IObservable<TMessage>, IDisposable
+        where TMessage : MessageBase
     {
-        void AddSubsciber(ISubscriber<TMessage> subscriber);
-
-        void RemoveSubsciber(ISubscriber<TMessage> subscriber);
+        void UnSubsciber(IObserver<TMessage> subscriber);
 
         Task Publish(TMessage message);
     }

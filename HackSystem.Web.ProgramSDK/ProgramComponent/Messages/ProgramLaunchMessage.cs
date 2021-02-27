@@ -1,6 +1,12 @@
-﻿namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages
+﻿using HackSystem.Observer.Message;
+
+namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages
 {
-    public class ProgramLaunchMessage
+    public class ProgramLaunchMessage : MessageBase
     {
+        public int PID { get; set; }
+
+        public override string ToString()
+            => $"Process Launch Message => {this.PID} ID";
     }
 }
