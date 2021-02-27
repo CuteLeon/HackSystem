@@ -2,7 +2,7 @@
 
 namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages
 {
-    public class ProcessCloseMessage : MessageBase
+    public record ProcessCloseMessage : MessageBase
     {
         public int PID { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages
 {
-    public class ProgramLaunchMessage : MessageBase
+    public record ProgramLaunchMessage : MessageBase
     {
         public int PID { get; set; }
 
