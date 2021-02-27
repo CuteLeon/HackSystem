@@ -48,7 +48,6 @@ namespace HackSystem.Observer.Publisher
             // Unsubscribe automatically when dispose.
             disposable.Dispose();
             this.observers.Remove(observer);
-            this.logger.LogWarning(disposable.ToString());
             this.logger.LogInformation($"Publisher of {this.messageType}, observer ({observer.GetHashCode():X}) unsubscribed.");
         }
 
