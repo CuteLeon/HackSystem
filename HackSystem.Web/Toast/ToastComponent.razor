@@ -39,4 +39,7 @@
 
     [Parameter]
     public DotNetObjectReference<IToastContainer> ToastContainerInterop { get; set; }
+
+    [CascadingParameter(Name = "ToastJSObjectReference")]
+    public IJSObjectReference ToastJSObjectReference { get; set; }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using static HackSystem.Web.Toast.Model.ToastDetail;
 
 namespace HackSystem.Web.Desktop
@@ -18,6 +19,7 @@ namespace HackSystem.Web.Desktop
 
         private void OnTest()
         {
+            this.logger.LogInformation("On Test ...");
             this.GetDesktopToastContainer().PopToast("Hack System", "Will be closed automatically in 1 second.", Icons.Information, true, 1000);
             this.GetDesktopToastContainer().PopToast("Hack System", "Will be closed automatically in 2 second.", Icons.Question, true, 2000);
             this.GetDesktopToastContainer().PopToast("Hack System", "Will be closed automatically in 3 second.", Icons.Warning, true, 3000);

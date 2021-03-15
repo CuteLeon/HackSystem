@@ -16,7 +16,7 @@ namespace HackSystem.Web.Toast
             await base.OnAfterRenderAsync(firstRender);
 
             // MAGIC! DO NOT TOUCH! This component is losing the status which from Bootstrap's initial method after each time renderred, have to re-initial after that.
-            await this.jsRuntime.InvokeVoidAsync("toasts.popToast", this.ToastContainerInterop, this.ToastDetail.Id, this.ToastDetail.AutoHide, this.ToastDetail.HideDelay);
+            await this.ToastJSObjectReference.InvokeVoidAsync("toasts.popToast", this.ToastContainerInterop, this.ToastDetail.Id, this.ToastDetail.AutoHide, this.ToastDetail.HideDelay);
         }
     }
 }

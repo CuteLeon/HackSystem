@@ -1,4 +1,4 @@
-﻿window.toasts = {
+﻿export let toasts = {
     popToast: function (interop, id, autohide = true, delay = 3000) {
         let toast = $(`#${id}`);
         toast.toast({

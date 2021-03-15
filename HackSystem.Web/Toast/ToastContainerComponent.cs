@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using HackSystem.Web.Toast.Model;
 using HackSystem.Web.Toast.Handler;
 using Microsoft.Extensions.Logging;
@@ -14,6 +15,7 @@ namespace HackSystem.Web.Toast
     public partial class ToastContainerComponent : IToastContainer, IDisposable
     {
         private DotNetObjectReference<IToastContainer> interopReference;
+        private IJSObjectReference toastJSObjectReference;
         private bool disposedValue;
 
         public ToastContainerComponent()
@@ -23,8 +25,17 @@ namespace HackSystem.Web.Toast
         protected override void OnInitialized()
         {
             base.OnInitialized();
+            this.interopReference = DotNetObjectReference.Create<IToastContainer>(this);
+        }
 
-            interopReference = DotNetObjectReference.Create<IToastContainer>(this);
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                this.toastJSObjectReference = await this.jsRuntime.InvokeAsync<IJSObjectReference>("import", "./js/hacksystem.toast.js");
+            }
         }
 
         public void PopToast(string title, string message, Icons icon = Icons.HackSystem, bool autoHide = true, int hideDelay = 3000)
