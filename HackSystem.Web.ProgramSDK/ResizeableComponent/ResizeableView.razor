@@ -1,4 +1,6 @@
-﻿<div class="position-fixed user-select-none flex-nowrap text-nowrap"
+﻿@inject IJSRuntime jsRuntime
+
+<div class="position-fixed user-select-none flex-nowrap text-nowrap"
      style="padding:@(resizeableOption.BorderSize)px; left:@(resizeableOption.Left)rem;top:@(resizeableOption.Top)rem;pointer-events:auto;
             @(resizeableOption.Width.HasValue?$"width:{resizeableOption.Width}px;":string.Empty)
             @(resizeableOption.Height.HasValue?$"height:{resizeableOption.Height}px;":string.Empty)">
@@ -30,4 +32,14 @@
     private ResizeableOption resizeableOption;
     [Parameter]
     public ResizeableOption ResizeableOption { get => this.resizeableOption; set => this.resizeableOption = value; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "/js/blazor.resizeable.js");
+        }
+    }
 }
