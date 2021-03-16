@@ -1,4 +1,7 @@
-﻿@if (this.BasicProgramMaps.Count > 0)
+﻿@inject IJSRuntime jsRuntime
+@inject ILogger<ProgramDockComponent> logger
+
+@if (this.BasicProgramMaps.Count > 0)
 {
     <div class="border-bottom border-white px-5 rounded-pill shadow" style="pointer-events: auto; backdrop-filter: blur(10px);">
         <div class="d-flex justify-content-center user-select-none">

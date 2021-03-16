@@ -1,4 +1,6 @@
-﻿<span onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget="@this.dragTarget" style="@($"cursor:{(this.cursor is { Length: >0 }?this.cursor:"move")};")">
+﻿@inject IJSRuntime jsRuntime
+
+<span onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget="@this.dragTarget" style="@($"cursor:{(this.cursor is { Length: >0 }?this.cursor:"move")};")">
     @this.ChildContent
 </span>
 
@@ -13,4 +15,14 @@
     private string cursor;
     [Parameter]
     public string Cursor { get => this.cursor; set => this.cursor = value; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./js/blazor.draggable.js");
+        }
+    }
 }

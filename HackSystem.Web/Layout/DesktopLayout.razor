@@ -12,9 +12,10 @@
     private Func<IToastContainer> GetDesktopToastContainer { get; set; }
     private ToastContainerComponent ToastContainer { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
+        this.logger.LogInformation("Initialize Desktop Layout ...");
+        await base.OnInitializedAsync();
 
         /* @ref instruction will be executed after compent rendered, so ToastContainer parameter will be null when transform to Cascading parameter.
          * A flexible solution is that make the reference to be lazy, create a delegate to get Cascading parameter.

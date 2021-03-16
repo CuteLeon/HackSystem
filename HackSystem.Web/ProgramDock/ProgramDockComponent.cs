@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using HackSystem.WebDataTransfer.Program;
+using Microsoft.JSInterop;
 
 namespace HackSystem.Web.ProgramDock
 {
@@ -20,6 +22,16 @@ namespace HackSystem.Web.ProgramDock
                 this.BasicProgramMaps.Add(map.BasicProgram.Id, map);
             }
             this.StateHasChanged();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./js/hacksystem.programdock.js");
+            }
         }
     }
 }
