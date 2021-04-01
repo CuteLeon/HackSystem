@@ -23,24 +23,24 @@ namespace HackSystem.WebAPI
         public IConfiguration Configuration { get; }
 
         /// <summary>
-        /// 配置服务
+        /// Configure Services
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // 配置 CORS
+            // Config CORS
             services.AddCors(options => options.AddPolicy("AllowAny", builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()));
 
-            // 配置数据库交互
+            // Config Database context
             services.AddDbContext<HackSystemDBContext>(options =>
                     options
                         .UseSqlite(this.Configuration.GetConnectionString("HSDB"))
                         .UseLazyLoadingProxies());
 
-            // 注册 Identity 服务及配置
+            // Register Identity service and options
             services
                 .AddIdentity<HackSystemUser, HackSystemRole>(options =>
                 {
@@ -59,7 +59,7 @@ namespace HackSystem.WebAPI
                 })
                 .AddEntityFrameworkStores<HackSystemDBContext>();
 
-            // 配置服务
+            // Config Jwt
             var jwtConfiguration = this.Configuration.GetSection("JwtConfiguration").Get<JwtAuthenticationOptions>();
             services
                 .AddAutoMapper(typeof(Startup).Assembly)
@@ -73,7 +73,7 @@ namespace HackSystem.WebAPI
         }
 
         /// <summary>
-        /// 配置请求处理管道
+        /// Config Request channel
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
@@ -96,9 +96,9 @@ namespace HackSystem.WebAPI
 
             app.UseRouting();
 
-            // 用户认证
+            // Authentication
             app.UseAuthentication();
-            // 用户授权
+            // Authorization
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

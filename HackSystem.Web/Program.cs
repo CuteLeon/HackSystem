@@ -72,7 +72,7 @@ namespace HackSystem.Web
         }
 
         /// <summary>
-        /// 初始化配置
+        /// Initialize Configuration
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
@@ -84,11 +84,10 @@ namespace HackSystem.Web
         }
 
         /// <summary>
-        /// 注册服务
+        /// Initialize Services
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
-        /// <remarks>可以有更优雅的方式外置这些代码，需要注意 Service 需要的 Options 的传递</remarks>
         public static WebAssemblyHostBuilder InitializeHackSystemServices(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
         {
             builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
@@ -98,13 +97,9 @@ namespace HackSystem.Web
         }
 
         /// <summary>
-        /// 配置授权策略
+        /// Initialize Authorization Policy
         /// </summary>
         /// <param name="builder"></param>
-        /// <remarks>
-        /// 需要满足策略的所有需求才可以获得此策略，
-        /// 可以在 Authorize 特性的 Policy 验证需要的策略
-        /// </remarks>
         /// <returns></returns>
         public static WebAssemblyHostBuilder InitializeAuthorizationPolicy(this WebAssemblyHostBuilder builder)
         {
