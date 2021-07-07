@@ -1,19 +1,18 @@
 ﻿/* Have to modify {PublishDir}/wwwroot/_framework/blazor.webassembly.js file Manually!
-e.prototype.loadResources = function (e, t, n) {var r = this;var resourcesCount = Object.keys(e).length, index = 0;console.log(`Blazor WebAssembly => Loading ${resourcesCount} resources...`);return Object.keys(e).map((function (o) {var p = r.loadResource(o, t(o), e[o], n);p.response.then((x) => {if (typeof window.loadResourceCallback === "function") {window.loadResourceCallback(++index, resourcesCount, o);}});return p;}))},
-e.prototype.loadResources = function (e, t, n) {
-    var r = this;
-    var resourcesCount = Object.keys(e).length, index = 0; // Added new logic
-    console.log(`Blazor WebAssembly => Loading ${resourcesCount} resources...`); // Added new logic
-    return Object.keys(e).map((function (o) {
-        var p = r.loadResource(o, t(o), e[o], n);
-        p.response.then((x) => { // Added new logic
-            if (typeof window.loadResourceCallback === "function") { // Added new logic
-                window.loadResourceCallback(++index, resourcesCount, o); // Added new logic
-            }
-        });
-        return p;
-    }))
-},
+    loadResources(e, t, n) {let resourcesCount = Object.keys(e).length, index = 0; console.log(`Blazor WebAssembly => Loading ${resourcesCount} resources...`); return Object.keys(e).map((r => { var resource = this.loadResource(r, t(r), e[r], n); resource.response.then((x) => {if (typeof window.loadResourceCallback === "function") {window.loadResourceCallback(++index, resourcesCount, r)}}); return resource;}))}
+    loadResources(e, t, n) {
+        let resourcesCount = Object.keys(e).length, index = 0;
+        console.log(`Blazor WebAssembly => Loading ${resourcesCount} resources...`);
+        return Object.keys(e).map((r => {
+            var resource = this.loadResource(r, t(r), e[r], n);
+            resource.response.then((x) => {
+                if (typeof window.loadResourceCallback === "function") {
+                    window.loadResourceCallback(++index, resourcesCount, r);
+                }
+            })
+            return resource;
+        }))
+    }
  */
 let setupProgressIndexLabel = $('#setupProgressIndexLabel'),
     setupProgressCurrentLabel = $('#setupProgressCurrentLabel'),
