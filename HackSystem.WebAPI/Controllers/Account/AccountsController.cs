@@ -2,15 +2,16 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using HackSystem.WebAPI.Model.Identity;
-using HackSystem.WebDataTransfer.Account;
+using AutoMapper;
 using HackSystem.Common;
+using HackSystem.WebAPI.Authentication.Services;
+using HackSystem.WebAPI.Model.Identity;
+using HackSystem.WebAPI.Services.API.Account;
+using HackSystem.WebDataTransfer.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using HackSystem.WebAPI.Authentication.Services;
-using AutoMapper;
 
 namespace HackSystem.WebAPI.Controllers.Account
 {
@@ -20,12 +21,14 @@ namespace HackSystem.WebAPI.Controllers.Account
     {
         private readonly ILogger<AccountsController> logger;
         private readonly ITokenGenerator tokenGenerator;
+        private readonly IAccountService accountService;
         private readonly IMapper mapper;
         private readonly SignInManager<HackSystemUser> signInManager;
 
         public AccountsController(
             ILogger<AccountsController> logger,
             ITokenGenerator tokenGenerator,
+            IAccountService accountService,
             IMapper mapper,
             SignInManager<HackSystemUser> signInManager,
             RoleManager<HackSystemRole> roleManager,
@@ -34,6 +37,7 @@ namespace HackSystem.WebAPI.Controllers.Account
         {
             this.logger = logger;
             this.tokenGenerator = tokenGenerator;
+            this.accountService = accountService;
             this.mapper = mapper;
             this.signInManager = signInManager;
         }
@@ -78,6 +82,8 @@ namespace HackSystem.WebAPI.Controllers.Account
                 };
                 return this.BadRequest(failedResult);
             }
+
+            await accountService.InitialUser(newUser);
 
             this.logger.LogDebug($"Register successfully: {register.UserName}");
             var registerResult = new RegisterResultDTO()

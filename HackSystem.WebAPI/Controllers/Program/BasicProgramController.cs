@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Security.Authentication;
-using System.Security.Principal;
 using System.Threading.Tasks;
 using AutoMapper;
 using HackSystem.Common;
 using HackSystem.WebAPI.Model.Identity;
-using HackSystem.WebAPI.Services.API.DataServices.Program;
+using HackSystem.WebAPI.Services.API.Program;
 using HackSystem.WebDataTransfer.Program;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

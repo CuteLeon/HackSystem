@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using HackSystem.WebAPI.Model.Map.UserMap;
+using HackSystem.WebAPI.Services.API.DataServices;
 
-namespace HackSystem.WebAPI.Services.API.DataServices.Program
+namespace HackSystem.WebAPI.Services.API.Program
 {
     public interface IUserBasicProgramMapDataService : IDataServiceBase<UserBasicProgramMap>
     {

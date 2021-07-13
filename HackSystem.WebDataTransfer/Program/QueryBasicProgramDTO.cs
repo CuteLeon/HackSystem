@@ -14,6 +14,8 @@
 
         public string AssemblyName { get; set; }
 
+        public bool Integral { get; set; }
+
         public string TypeName { get; set; }
     }
 }

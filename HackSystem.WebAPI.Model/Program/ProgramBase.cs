@@ -25,6 +25,8 @@ namespace HackSystem.WebAPI.Model.Program
 
         public string TypeName { get; set; }
 
+        public bool Integral { get; set; }
+
         public virtual IList<UserBasicProgramMap> UserProgramMaps { get; set; }
     }
 }
