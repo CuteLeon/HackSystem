@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="set fileName=blazor.webassembly.js&#xD;&#xA;set originPath=$(SolutionDir)BuildTools\%25fileName%25&#xD;&#xA;set destinationPath=$(TargetDir)wwwroot\_framework\%25fileName%25&#xD;&#xA;&#xD;&#xA;echo OriginPath=%25originPath%25&#xD;&#xA;echo DestinationPath=%25destinationPath%25&#xD;&#xA;XCOPY %25originPath%25 %25destinationPath%25 /Y" />
+    <Exec Command="set solutionDir=$(SolutionDir)&#xD;&#xA;set splitChar=%25solutionDir:~-1%25&#xD;&#xA;set fileName=blazor.webassembly.js&#xD;&#xA;set originPath=$(SolutionDir)BuildTools%25splitChar%25%25fileName%25&#xD;&#xA;set destinationPath=$(TargetDir)wwwroot%25splitChar%25_framework%25splitChar%25%25fileName%25&#xD;&#xA;&#xD;&#xA;echo OriginPath=%25originPath%25&#xD;&#xA;echo DestinationPath=%25destinationPath%25&#xD;&#xA;XCOPY %25originPath%25 %25destinationPath%25 /Y" />
   </Target>
 
 </Project>
