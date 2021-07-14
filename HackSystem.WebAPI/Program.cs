@@ -3,7 +3,9 @@ using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.DataAccess.SeedData;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
+using NLog.Web;
 
 namespace HackSystem.WebAPI
 {
@@ -28,7 +30,16 @@ namespace HackSystem.WebAPI
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                        .UseStartup<Startup>()
+                        .ConfigureLogging(builder =>
+                        {
+                            builder.ClearProviders();
+                            builder.AddConsole();
+                            builder.AddDebug();
+                            builder.SetMinimumLevel(LogLevel.Trace);
+                        })
+                        .UseNLog();
                 });
     }
 }

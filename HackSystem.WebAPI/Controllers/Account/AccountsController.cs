@@ -50,7 +50,7 @@ namespace HackSystem.WebAPI.Controllers.Account
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterDTO register)
         {
-            this.logger.LogDebug($"Register new user: {register.UserName}");
+            this.logger.LogInformation($"Register new user: {register.UserName}");
             var newUser = new HackSystemUser
             {
                 UserName = register.UserName,
@@ -85,7 +85,7 @@ namespace HackSystem.WebAPI.Controllers.Account
 
             await accountService.InitialUser(newUser);
 
-            this.logger.LogDebug($"Register successfully: {register.UserName}");
+            this.logger.LogInformation($"Register successfully: {register.UserName}");
             var registerResult = new RegisterResultDTO()
             {
                 Successful = true
@@ -101,7 +101,7 @@ namespace HackSystem.WebAPI.Controllers.Account
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
-            this.logger.LogDebug($"Login user: {login.UserName}");
+            this.logger.LogInformation($"Login user: {login.UserName}");
             var result = await this.signInManager.PasswordSignInAsync(login.UserName, login.Password, true, false);
             if (!result.Succeeded)
             {
@@ -113,7 +113,7 @@ namespace HackSystem.WebAPI.Controllers.Account
                     _ => "Invalid user information"
                 };
 
-                this.logger.LogDebug($"Login failed: {login.UserName} ({errorMessage})");
+                this.logger.LogWarning($"Login failed: {login.UserName} ({errorMessage})");
                 var failedResul = new LoginResultDTO
                 {
                     Successful = false,
@@ -130,7 +130,7 @@ namespace HackSystem.WebAPI.Controllers.Account
                 Token = token
             };
 
-            this.logger.LogDebug($"Login successfully: {login.UserName}");
+            this.logger.LogInformation($"Login successfully: {login.UserName}");
             return this.Ok(loginResul);
         }
 
@@ -142,7 +142,7 @@ namespace HackSystem.WebAPI.Controllers.Account
         [Authorize]
         public async Task<IActionResult> Logout()
         {
-            this.logger.LogDebug($"Logout current user...");
+            this.logger.LogInformation($"Logout current user...");
             await this.signInManager.SignOutAsync();
             return this.Ok();
         }

@@ -4,16 +4,27 @@ using HackSystem.WebAPI.Model.Map.UserMap;
 using HackSystem.WebAPI.Model.Program;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.DataAccess
 {
     public class HackSystemDBContext : IdentityDbContext<HackSystemUser, HackSystemRole, string>
     {
+        private readonly ILogger<HackSystemDBContext> logger;
+
         public HackSystemDBContext() { }
 
         public HackSystemDBContext(DbContextOptions<HackSystemDBContext> options)
             : base(options)
         {
+        }
+
+        public HackSystemDBContext(
+            ILogger<HackSystemDBContext> logger,
+            DbContextOptions<HackSystemDBContext> options)
+            : base(options)
+        {
+            this.logger = logger;
         }
 
         public virtual DbSet<BasicProgram> BasicPrograms { get; set; }
@@ -29,6 +40,7 @@ namespace HackSystem.WebAPI.DataAccess
             builder.Entity<UserBasicProgramMap>().HasKey(map => new { map.UserId, map.ProgramId });
 
             builder.Entity<BasicProgram>().HasIndex(program => new { program.Id, program.Name }, $"{nameof(BasicProgram)}_Index");
+            builder.Entity<UserBasicProgramMap>().HasIndex(map => map.UserId, $"{nameof(UserBasicProgramMap)}_{nameof(UserBasicProgramMap.UserId)}_Index");
             builder.Entity<UserBasicProgramMap>().HasIndex(map => new { map.UserId, map.ProgramId }, $"{nameof(UserBasicProgramMap)}_Index");
 
             builder.InitializeBasicProgramData();
@@ -36,8 +48,13 @@ namespace HackSystem.WebAPI.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.LogTo(this.Log);
+
             // Use to generate database migrations when design time
             base.OnConfiguring(optionsBuilder.UseSqlite("DATA SOURCE=HackSystem.db"));
         }
+
+        private void Log(string message)
+            => this.logger.LogDebug(message);
     }
 }
