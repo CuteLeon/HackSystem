@@ -22,7 +22,7 @@ namespace HackSystem.WebAPI.Controllers.Account
             this.userManager = userManager;
         }
 
-        public async Task<IEnumerable<Claim>> GetClaimsAsync(string userName)
+        protected async Task<IEnumerable<Claim>> GetClaimsAsync(string userName)
         {
             if (string.IsNullOrWhiteSpace(userName))
             {

@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.Controllers.Account
 {
+    [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class AccountsController : AuthenticateControllerBase
@@ -48,6 +49,7 @@ namespace HackSystem.WebAPI.Controllers.Account
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterDTO register)
         {
             this.logger.LogInformation($"Register new user: {register.UserName}");
@@ -99,6 +101,7 @@ namespace HackSystem.WebAPI.Controllers.Account
         /// <param name="login"></param>
         /// <returns></returns>
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
             this.logger.LogInformation($"Login user: {login.UserName}");
@@ -139,7 +142,6 @@ namespace HackSystem.WebAPI.Controllers.Account
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Logout()
         {
             this.logger.LogInformation($"Logout current user...");
@@ -152,7 +154,6 @@ namespace HackSystem.WebAPI.Controllers.Account
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetAccountInfo()
         {
             var userName = this.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value ??
