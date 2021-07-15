@@ -52,7 +52,7 @@
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(OS)' != 'Windows_NT'">
-    <Exec Command="echo TestCIOutPut=${SolutionDir}" />
+    <Exec Command="echo TestCIOutPut=$(SolutionDir)" />
   </Target>
 
 </Project>
