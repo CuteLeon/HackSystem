@@ -52,7 +52,7 @@
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(OS)' != 'Windows_NT'">
-    <Exec Command="echo TestCIOutPut=$(SolutionDir)" />
+    <Exec Command="fileName=blazor.webassembly.js&#xD;&#xA;originPath=$(SolutionDir)BuildTools/${fileName}&#xD;&#xA;destinationPath=$(TargetDir)wwwroot/_framework/${fileName}&#xD;&#xA;&#xD;&#xA;echo OriginPath=${originPath}&#xD;&#xA;echo DestinationPath=${destinationPath}&#xD;&#xA;cp /f originPath destinationPath" />
   </Target>
 
 </Project>
