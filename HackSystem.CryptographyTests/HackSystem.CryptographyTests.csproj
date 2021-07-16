@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-preview.5.21301.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-preview.6.21352.12" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0-release-20210626-04" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.5" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.5" />

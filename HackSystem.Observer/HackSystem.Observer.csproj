@@ -6,8 +6,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0-preview.5.21301.5" />
-		<PackageReference Include="System.Threading.Tasks.Dataflow" Version="6.0.0-preview.5.21301.5" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0-preview.6.21352.12" />
+		<PackageReference Include="System.Threading.Tasks.Dataflow" Version="6.0.0-preview.6.21352.12" />
 	</ItemGroup>
 
 </Project>
