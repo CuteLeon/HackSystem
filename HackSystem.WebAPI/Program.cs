@@ -15,7 +15,7 @@ namespace HackSystem.WebAPI
         {
             CreateHostBuilder(args)
                 .Build()
-                //.InitializeDatabase()
+                .InitializeDatabase()
                 //.InitializeIdentityData()
                 //.InitializeUserProgramMapData()
                 .Run();
