@@ -76,10 +76,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildTools", "BuildTools", 
 		BuildTools\blazor.webassembly.js = BuildTools\blazor.webassembly.js
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientHost", "ClientHost", "{CB75BDD7-3BAE-4D05-8C9E-C3D6CCECBBC5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.Host", "HackSystem.Host\HackSystem.Host.csproj", "{6FDC3E30-9967-4EFB-8366-6612D97930B9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -390,18 +386,6 @@ Global
 		{0C7175E5-8797-46D7-8763-078D4AFE339E}.Release|x64.Build.0 = Release|Any CPU
 		{0C7175E5-8797-46D7-8763-078D4AFE339E}.Release|x86.ActiveCfg = Release|Any CPU
 		{0C7175E5-8797-46D7-8763-078D4AFE339E}.Release|x86.Build.0 = Release|Any CPU
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Debug|x64.ActiveCfg = Debug|x64
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Debug|x64.Build.0 = Debug|x64
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Debug|x86.ActiveCfg = Debug|x86
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Debug|x86.Build.0 = Debug|x86
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Release|x64.ActiveCfg = Release|x64
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Release|x64.Build.0 = Release|x64
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Release|x86.ActiveCfg = Release|x86
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -432,7 +416,6 @@ Global
 		{7538EBE4-EE84-4A04-AA25-B9645D8E3121} = {84BC04A1-1007-4467-BB7D-D05C7F6A3986}
 		{E49F7DFF-3453-44F6-9DC1-F3A5743F3E3E} = {84BC04A1-1007-4467-BB7D-D05C7F6A3986}
 		{0C7175E5-8797-46D7-8763-078D4AFE339E} = {84BC04A1-1007-4467-BB7D-D05C7F6A3986}
-		{6FDC3E30-9967-4EFB-8366-6612D97930B9} = {CB75BDD7-3BAE-4D05-8C9E-C3D6CCECBBC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79BC620D-A9A9-41B2-835E-E6CAF80E9902}
