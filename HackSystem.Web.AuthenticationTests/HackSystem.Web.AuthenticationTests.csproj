@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="6.0.0-preview.1.21103.6" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.0-preview-20210127-04" />
-    <PackageReference Include="Moq" Version="4.16.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.2.0-preview-20210115-03" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.2.0-preview-20210115-03" />
-    <PackageReference Include="coverlet.collector" Version="3.0.2">
+    <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="6.0.0-preview.6.21355.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0-release-20210626-04" />
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.5" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.5" />
+    <PackageReference Include="coverlet.collector" Version="3.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
