@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
-using HackSystem.WebAPI.Services.API.DataServices;
-using HackSystem.WebAPI.DataAccess;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
+using HackSystem.WebAPI.DataAccess.API.DataServices;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.Services.DataServices
+namespace HackSystem.WebAPI.DataAccess.DataServices
 {
     public class DataServiceBase<TEntity> : IDataServiceBase<TEntity>
         where TEntity : class

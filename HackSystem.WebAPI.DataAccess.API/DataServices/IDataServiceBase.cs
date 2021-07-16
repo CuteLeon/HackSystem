@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace HackSystem.WebAPI.Services.API.DataServices
+namespace HackSystem.WebAPI.DataAccess.API.DataServices
 {
     public interface IDataServiceBase<TEntity> where TEntity : class
     {
