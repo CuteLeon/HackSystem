@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentScheduler" Version="5.5.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-preview.6.21352.12" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0-preview.6.21352.12" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0-preview.6.21352.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HackSystem.WebAPI.DataAccess.API\HackSystem.WebAPI.DataAccess.API.csproj" />
+    <ProjectReference Include="..\HackSystem.WebAPI.DataAccess\HackSystem.WebAPI.DataAccess.csproj" />
+    <ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
+  </ItemGroup>
+
+</Project>

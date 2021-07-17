@@ -3,10 +3,11 @@ using HackSystem.WebAPI.Authentication.Configurations;
 using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Services.Extensions;
+using HackSystem.WebAPI.TaskServers.Configurations;
+using HackSystem.WebAPI.TaskServers.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -61,10 +62,12 @@ namespace HackSystem.WebAPI
 
             // Config Jwt
             var jwtConfiguration = this.Configuration.GetSection("JwtConfiguration").Get<JwtAuthenticationOptions>();
+            var taskServerConfiguration = this.Configuration.GetSection("TaskServerConfiguration").Get<TaskServerOptions>();
             services
                 .AddAutoMapper(typeof(Startup).Assembly)
-                .AddAPIServices()
-                .AddAPIAuthentication(jwtConfiguration);
+                .AttachTaskServer(taskServerConfiguration)
+                .AddAPIAuthentication(jwtConfiguration)
+                .AddAPIServices();
 
             services
                 .AddResponseCompression()

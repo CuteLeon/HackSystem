@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
     <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,6 +41,7 @@
     <ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Services.API\HackSystem.WebAPI.Services.API.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Services\HackSystem.WebAPI.Services.csproj" />
+    <ProjectReference Include="..\HackSystem.WebAPI.TaskServers\HackSystem.WebAPI.TaskServers.csproj" />
     <ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
   </ItemGroup>
 
