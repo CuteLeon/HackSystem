@@ -3,14 +3,16 @@ using System;
 using HackSystem.WebAPI.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HackSystem.WebAPI.DataAccess.Migrations
 {
     [DbContext(typeof(HackSystemDBContext))]
-    partial class HackSystemDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210716180916_HackSystemDBContextModelSnapshot2")]
+    partial class HackSystemDBContextModelSnapshot2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,10 +138,9 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex(new[] { "UserId", "ProgramId" }, "UserBasicProgramMap_Index");
 
-                    b.HasIndex("UserId", "ProgramId")
-                        .IsUnique();
+                    b.HasIndex(new[] { "UserId" }, "UserBasicProgramMap_UserId_Index");
 
                     b.ToTable("UserBasicProgramMaps");
                 });
@@ -173,7 +174,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id", "Name");
+                    b.HasIndex(new[] { "Id", "Name" }, "BasicProgram_Index");
 
                     b.ToTable("BasicPrograms");
 
@@ -281,17 +282,11 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.Property<DateTime>("ExecuteDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<TimeSpan>("FirstInterval")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Parameters")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProcedureName")
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("Reentrant")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int>("TaskFrequency")
                         .HasColumnType("INTEGER");
@@ -301,10 +296,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 
                     b.HasKey("TaskID");
 
-                    b.HasIndex("TaskName")
-                        .IsUnique();
-
-                    b.HasIndex("TaskName", "ExecuteDateTime");
+                    b.HasIndex(new[] { "TaskID", "ExecuteDateTime" }, "TaskDetail_Index");
 
                     b.ToTable("TaskDetails");
                 });

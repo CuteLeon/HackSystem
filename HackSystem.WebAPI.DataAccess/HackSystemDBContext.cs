@@ -2,6 +2,7 @@
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Model.Map.UserMap;
 using HackSystem.WebAPI.Model.Program;
+using HackSystem.WebAPI.Model.Task;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -31,6 +32,8 @@ namespace HackSystem.WebAPI.DataAccess
 
         public virtual DbSet<UserBasicProgramMap> UserBasicProgramMaps { get; set; }
 
+        public virtual DbSet<TaskDetail> TaskDetails { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -39,9 +42,11 @@ namespace HackSystem.WebAPI.DataAccess
             builder.Entity<UserBasicProgramMap>().HasOne(map => map.User).WithMany(user => user.UserProgramMaps).HasForeignKey(map => map.UserId).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<UserBasicProgramMap>().HasKey(map => new { map.UserId, map.ProgramId });
 
-            builder.Entity<BasicProgram>().HasIndex(program => new { program.Id, program.Name }, $"{nameof(BasicProgram)}_Index");
-            builder.Entity<UserBasicProgramMap>().HasIndex(map => map.UserId, $"{nameof(UserBasicProgramMap)}_{nameof(UserBasicProgramMap.UserId)}_Index");
-            builder.Entity<UserBasicProgramMap>().HasIndex(map => new { map.UserId, map.ProgramId }, $"{nameof(UserBasicProgramMap)}_Index");
+            builder.Entity<BasicProgram>().HasIndex(nameof(BasicProgram.Id), nameof(BasicProgram.Name));
+            builder.Entity<UserBasicProgramMap>().HasIndex(nameof(UserBasicProgramMap.UserId));
+            builder.Entity<UserBasicProgramMap>().HasIndex(nameof(UserBasicProgramMap.UserId), nameof(UserBasicProgramMap.ProgramId)).IsUnique();
+            builder.Entity<TaskDetail>().HasIndex(nameof(TaskDetail.TaskName)).IsUnique();
+            builder.Entity<TaskDetail>().HasIndex(nameof(TaskDetail.TaskName), nameof(TaskDetail.ExecuteDateTime));
 
             builder.InitializeBasicProgramData();
         }
