@@ -222,4 +222,3 @@ $zindex-modal:             1050 !default;
 $zindex-popover:           1060 !default;
 $zindex-tooltip:           1070 !default;
 ```
-
