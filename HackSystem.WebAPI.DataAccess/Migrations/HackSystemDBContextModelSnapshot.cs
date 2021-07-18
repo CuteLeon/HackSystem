@@ -144,6 +144,45 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.ToTable("UserBasicProgramMaps");
                 });
 
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Option.GenericOption", b =>
+                {
+                    b.Property<int>("OptionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("TEXT")
+                        .UseCollation("NOCASE");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ModifyTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OptionName")
+                        .HasColumnType("TEXT")
+                        .UseCollation("NOCASE");
+
+                    b.Property<string>("OptionValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OwnerLevel")
+                        .HasColumnType("TEXT")
+                        .UseCollation("NOCASE");
+
+                    b.HasKey("OptionID");
+
+                    b.HasIndex("OptionName");
+
+                    b.HasIndex("OwnerLevel", "OptionName");
+
+                    b.HasIndex("OwnerLevel", "Category", "OptionName")
+                        .IsUnique();
+
+                    b.ToTable("GenericOptions");
+                });
+
             modelBuilder.Entity("HackSystem.WebAPI.Model.Program.BasicProgram", b =>
                 {
                     b.Property<string>("Id")
@@ -263,6 +302,9 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("AssemblyName")
+                        .HasColumnType("TEXT");
+
                     b.Property<TimeSpan>("AutomaticInterval")
                         .HasColumnType("TEXT");
 
@@ -307,6 +349,45 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.HasIndex("TaskName", "ExecuteDateTime");
 
                     b.ToTable("TaskDetails");
+                });
+
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Task.TaskLogDetail", b =>
+                {
+                    b.Property<int>("TaskLogID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Exception")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("FinishDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Parameters")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TaskID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TaskLogStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Trigger")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("TriggerDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TaskLogID");
+
+                    b.HasIndex("TaskID");
+
+                    b.HasIndex("TaskID", "TaskLogStatus");
+
+                    b.ToTable("TaskLogDetails");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -428,6 +509,15 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.Navigation("BasicProgram");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Task.TaskLogDetail", b =>
+                {
+                    b.HasOne("HackSystem.WebAPI.Model.Task.TaskDetail", null)
+                        .WithMany()
+                        .HasForeignKey("TaskID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

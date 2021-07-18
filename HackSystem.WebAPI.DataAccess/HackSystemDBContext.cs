@@ -1,6 +1,7 @@
 ﻿using HackSystem.WebAPI.DataAccess.DataSeed;
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Model.Map.UserMap;
+using HackSystem.WebAPI.Model.Option;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebAPI.Model.Task;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -34,6 +35,10 @@ namespace HackSystem.WebAPI.DataAccess
 
         public virtual DbSet<TaskDetail> TaskDetails { get; set; }
 
+        public virtual DbSet<TaskLogDetail> TaskLogDetails { get; set; }
+
+        public virtual DbSet<GenericOption> GenericOptions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -41,12 +46,24 @@ namespace HackSystem.WebAPI.DataAccess
             builder.Entity<UserBasicProgramMap>().HasOne(map => map.BasicProgram).WithMany(program => program.UserProgramMaps).HasForeignKey(map => map.ProgramId).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<UserBasicProgramMap>().HasOne(map => map.User).WithMany(user => user.UserProgramMaps).HasForeignKey(map => map.UserId).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<UserBasicProgramMap>().HasKey(map => new { map.UserId, map.ProgramId });
+            builder.Entity<TaskDetail>().HasMany<TaskLogDetail>().WithOne().HasForeignKey(l => l.TaskID).IsRequired();
 
             builder.Entity<BasicProgram>().HasIndex(nameof(BasicProgram.Id), nameof(BasicProgram.Name));
             builder.Entity<UserBasicProgramMap>().HasIndex(nameof(UserBasicProgramMap.UserId));
             builder.Entity<UserBasicProgramMap>().HasIndex(nameof(UserBasicProgramMap.UserId), nameof(UserBasicProgramMap.ProgramId)).IsUnique();
             builder.Entity<TaskDetail>().HasIndex(nameof(TaskDetail.TaskName)).IsUnique();
             builder.Entity<TaskDetail>().HasIndex(nameof(TaskDetail.TaskName), nameof(TaskDetail.ExecuteDateTime));
+
+            builder.Entity<TaskLogDetail>().HasIndex(nameof(TaskLogDetail.TaskID));
+            builder.Entity<TaskLogDetail>().HasIndex(nameof(TaskLogDetail.TaskID), nameof(TaskLogDetail.TaskLogStatus));
+
+            builder.Entity<GenericOption>().HasIndex(nameof(GenericOption.OptionName));
+            builder.Entity<GenericOption>().HasIndex(nameof(GenericOption.OwnerLevel), nameof(GenericOption.OptionName));
+            builder.Entity<GenericOption>().HasIndex(nameof(GenericOption.OwnerLevel), nameof(GenericOption.Category), nameof(GenericOption.OptionName)).IsUnique();
+
+            builder.Entity<GenericOption>().Property(nameof(GenericOption.OptionName)).UseCollation("NOCASE");
+            builder.Entity<GenericOption>().Property(nameof(GenericOption.Category)).UseCollation("NOCASE");
+            builder.Entity<GenericOption>().Property(nameof(GenericOption.OwnerLevel)).UseCollation("NOCASE");
 
             builder.InitializeBasicProgramData();
         }

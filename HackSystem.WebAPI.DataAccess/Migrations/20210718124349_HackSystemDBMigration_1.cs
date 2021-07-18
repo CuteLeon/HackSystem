@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HackSystem.WebAPI.DataAccess.Migrations
 {
-    public partial class HackSystemDBContextModelSnapshot1 : Migration
+    public partial class HackSystemDBMigration_1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,6 +64,48 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BasicPrograms", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GenericOptions",
+                columns: table => new
+                {
+                    OptionID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    OptionName = table.Column<string>(type: "TEXT", nullable: true, collation: "NOCASE"),
+                    OptionValue = table.Column<string>(type: "TEXT", nullable: true),
+                    Category = table.Column<string>(type: "TEXT", nullable: true, collation: "NOCASE"),
+                    OwnerLevel = table.Column<string>(type: "TEXT", nullable: true, collation: "NOCASE"),
+                    CreateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ModifyTime = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GenericOptions", x => x.OptionID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TaskDetails",
+                columns: table => new
+                {
+                    TaskID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TaskName = table.Column<string>(type: "TEXT", nullable: true),
+                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ExecuteDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    FirstInterval = table.Column<TimeSpan>(type: "TEXT", nullable: false),
+                    AutomaticInterval = table.Column<TimeSpan>(type: "TEXT", nullable: false),
+                    TaskFrequency = table.Column<int>(type: "INTEGER", nullable: false),
+                    Reentrant = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ClassName = table.Column<string>(type: "TEXT", nullable: true),
+                    ProcedureName = table.Column<string>(type: "TEXT", nullable: true),
+                    Parameters = table.Column<string>(type: "TEXT", nullable: true),
+                    Category = table.Column<string>(type: "TEXT", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TaskDetails", x => x.TaskID);
                 });
 
             migrationBuilder.CreateTable(
@@ -200,6 +242,32 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TaskLogDetails",
+                columns: table => new
+                {
+                    TaskLogID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TaskID = table.Column<int>(type: "INTEGER", nullable: false),
+                    Parameters = table.Column<string>(type: "TEXT", nullable: true),
+                    TriggerDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    StartDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    FinishDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    TaskLogStatus = table.Column<int>(type: "INTEGER", nullable: false),
+                    Trigger = table.Column<string>(type: "TEXT", nullable: true),
+                    Exception = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TaskLogDetails", x => x.TaskLogID);
+                    table.ForeignKey(
+                        name: "FK_TaskLogDetails_TaskDetails_TaskID",
+                        column: x => x.TaskID,
+                        principalTable: "TaskDetails",
+                        principalColumn: "TaskID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "BasicPrograms",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Integral", "IsSingleton", "Name", "TypeName" },
@@ -273,9 +341,46 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "BasicProgram_Index",
+                name: "IX_BasicPrograms_Id_Name",
                 table: "BasicPrograms",
                 columns: new[] { "Id", "Name" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GenericOptions_OptionName",
+                table: "GenericOptions",
+                column: "OptionName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GenericOptions_OwnerLevel_Category_OptionName",
+                table: "GenericOptions",
+                columns: new[] { "OwnerLevel", "Category", "OptionName" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GenericOptions_OwnerLevel_OptionName",
+                table: "GenericOptions",
+                columns: new[] { "OwnerLevel", "OptionName" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskDetails_TaskName",
+                table: "TaskDetails",
+                column: "TaskName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskDetails_TaskName_ExecuteDateTime",
+                table: "TaskDetails",
+                columns: new[] { "TaskName", "ExecuteDateTime" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskLogDetails_TaskID",
+                table: "TaskLogDetails",
+                column: "TaskID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskLogDetails_TaskID_TaskLogStatus",
+                table: "TaskLogDetails",
+                columns: new[] { "TaskID", "TaskLogStatus" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserBasicProgramMaps_ProgramId",
@@ -283,14 +388,15 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                 column: "ProgramId");
 
             migrationBuilder.CreateIndex(
-                name: "UserBasicProgramMap_Index",
-                table: "UserBasicProgramMaps",
-                columns: new[] { "UserId", "ProgramId" });
-
-            migrationBuilder.CreateIndex(
-                name: "UserBasicProgramMap_UserId_Index",
+                name: "IX_UserBasicProgramMaps_UserId",
                 table: "UserBasicProgramMaps",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserBasicProgramMaps_UserId_ProgramId",
+                table: "UserBasicProgramMaps",
+                columns: new[] { "UserId", "ProgramId" },
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -311,10 +417,19 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "GenericOptions");
+
+            migrationBuilder.DropTable(
+                name: "TaskLogDetails");
+
+            migrationBuilder.DropTable(
                 name: "UserBasicProgramMaps");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "TaskDetails");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

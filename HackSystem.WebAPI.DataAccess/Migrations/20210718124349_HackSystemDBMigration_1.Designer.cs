@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackSystem.WebAPI.DataAccess.Migrations
 {
     [DbContext(typeof(HackSystemDBContext))]
-    [Migration("20210713152055_HackSystemDBContextModelSnapshot1")]
-    partial class HackSystemDBContextModelSnapshot1
+    [Migration("20210718124349_HackSystemDBMigration_1")]
+    partial class HackSystemDBMigration_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0-preview.1.21102.2");
+                .HasAnnotation("ProductVersion", "6.0.0-preview.6.21352.1");
 
             modelBuilder.Entity("HackSystem.WebAPI.Model.Identity.HackSystemRole", b =>
                 {
@@ -44,7 +44,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("HackSystem.WebAPI.Model.Identity.HackSystemUser", b =>
@@ -111,7 +111,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("HackSystem.WebAPI.Model.Map.UserMap.UserBasicProgramMap", b =>
@@ -138,11 +138,51 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.HasIndex(new[] { "UserId", "ProgramId" }, "UserBasicProgramMap_Index");
+                    b.HasIndex("UserId");
 
-                    b.HasIndex(new[] { "UserId" }, "UserBasicProgramMap_UserId_Index");
+                    b.HasIndex("UserId", "ProgramId")
+                        .IsUnique();
 
                     b.ToTable("UserBasicProgramMaps");
+                });
+
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Option.GenericOption", b =>
+                {
+                    b.Property<int>("OptionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("TEXT")
+                        .UseCollation("NOCASE");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ModifyTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OptionName")
+                        .HasColumnType("TEXT")
+                        .UseCollation("NOCASE");
+
+                    b.Property<string>("OptionValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OwnerLevel")
+                        .HasColumnType("TEXT")
+                        .UseCollation("NOCASE");
+
+                    b.HasKey("OptionID");
+
+                    b.HasIndex("OptionName");
+
+                    b.HasIndex("OwnerLevel", "OptionName");
+
+                    b.HasIndex("OwnerLevel", "Category", "OptionName")
+                        .IsUnique();
+
+                    b.ToTable("GenericOptions");
                 });
 
             modelBuilder.Entity("HackSystem.WebAPI.Model.Program.BasicProgram", b =>
@@ -174,7 +214,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "Id", "Name" }, "BasicProgram_Index");
+                    b.HasIndex("Id", "Name");
 
                     b.ToTable("BasicPrograms");
 
@@ -258,6 +298,97 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Task.TaskDetail", b =>
+                {
+                    b.Property<int>("TaskID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<TimeSpan>("AutomaticInterval")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClassName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("ExecuteDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<TimeSpan>("FirstInterval")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Parameters")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProcedureName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Reentrant")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TaskFrequency")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TaskName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TaskID");
+
+                    b.HasIndex("TaskName")
+                        .IsUnique();
+
+                    b.HasIndex("TaskName", "ExecuteDateTime");
+
+                    b.ToTable("TaskDetails");
+                });
+
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Task.TaskLogDetail", b =>
+                {
+                    b.Property<int>("TaskLogID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Exception")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("FinishDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Parameters")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TaskID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TaskLogStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Trigger")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("TriggerDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TaskLogID");
+
+                    b.HasIndex("TaskID");
+
+                    b.HasIndex("TaskID", "TaskLogStatus");
+
+                    b.ToTable("TaskLogDetails");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -278,7 +409,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -301,7 +432,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -323,7 +454,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -338,7 +469,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -357,7 +488,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("HackSystem.WebAPI.Model.Map.UserMap.UserBasicProgramMap", b =>
@@ -377,6 +508,15 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.Navigation("BasicProgram");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HackSystem.WebAPI.Model.Task.TaskLogDetail", b =>
+                {
+                    b.HasOne("HackSystem.WebAPI.Model.Task.TaskDetail", null)
+                        .WithMany()
+                        .HasForeignKey("TaskID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
