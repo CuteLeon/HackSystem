@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentScheduler;
 using HackSystem.WebAPI.Model.Task;
 using HackSystem.WebAPI.TaskServers.Configurations;
@@ -15,22 +16,22 @@ namespace HackSystem.WebAPI.TaskServers.Services
         private readonly ITaskLoader taskLoader;
         private readonly ITaskScheduleWrapper taskScheduleWrapper;
         private readonly TaskServerOptions taskServerOptions;
+        private readonly IServiceProvider serviceProvider;
 
         public HackSystemTaskServer(
             ILogger<HackSystemTaskServer> logger,
             IOptionsMonitor<TaskServerOptions> optionsMonitor,
             IServiceScopeFactory serviceScopeFactory)
         {
-            var serviceScope = serviceScopeFactory.CreateScope();
-
             this.logger = logger;
             this.taskServerOptions = optionsMonitor.CurrentValue;
-            this.taskLoader = serviceScope.ServiceProvider.GetRequiredService<ITaskLoader>();
-            this.taskScheduleWrapper = serviceScope.ServiceProvider.GetRequiredService<ITaskScheduleWrapper>();
+            this.serviceProvider = serviceScopeFactory.CreateScope().ServiceProvider;
+            this.taskLoader = this.serviceProvider.GetRequiredService<ITaskLoader>();
+            this.taskScheduleWrapper = this.serviceProvider.GetRequiredService<ITaskScheduleWrapper>();
 
-            JobManager.JobStart += (e) => logger.LogInformation($"Job {e.Name} starts at {e.StartTime}...");
-            JobManager.JobEnd += (e) => logger.LogInformation($"Job {e.Name} ends, duration is {e.Duration.TotalMilliseconds} ms, next runs at {e.NextRun}.");
-            JobManager.JobException += (e) => logger.LogError(e.Exception, $"Job {e.Name} throws exception.");
+            JobManager.JobStart += (e) => logger.LogInformation($"{nameof(JobManager)}.{nameof(JobManager.JobStart)} => Job [{e.Name}] starts at {e.StartTime}...");
+            JobManager.JobEnd += (e) => logger.LogInformation($"{nameof(JobManager)}.{nameof(JobManager.JobStart)} => Job [{e.Name}] ends, duration is {e.Duration.TotalMilliseconds} ms, next runs at {e.NextRun}.");
+            JobManager.JobException += (e) => logger.LogError(e.Exception, $"{nameof(JobManager)}.{nameof(JobManager.JobStart)} => Job [{e.Name}] throws exception.");
         }
 
         public void Launch()
@@ -58,24 +59,24 @@ namespace HackSystem.WebAPI.TaskServers.Services
 
         public void LoadTask(TaskDetail taskDetail)
         {
-            this.logger.LogInformation($"Load Task {taskDetail.TaskName} on {taskServerOptions.TaskServerHost}...");
+            this.logger.LogInformation($"Load Task [{taskDetail.TaskName}] on {taskServerOptions.TaskServerHost}...");
 
             this.UnloadTask(taskDetail);
             var taskSchedule = this.taskScheduleWrapper.WrapTaskSchedule(taskDetail);
-            JobManager.AddJob(
-                new TaskGenericJob(taskSchedule.TaskDetail),
-                taskSchedule.ScheduleAction);
+            var taskJob = this.serviceProvider.GetRequiredService<TaskGenericJob>();
+            taskJob.TaskDetail = taskDetail;
+            JobManager.AddJob(taskJob, taskSchedule.ScheduleAction);
 
-            this.logger.LogInformation($"Task {taskDetail.TaskName} loaded.");
+            this.logger.LogInformation($"Task [{taskDetail.TaskName}] loaded.");
         }
 
         public void UnloadTask(TaskDetail taskDetail)
         {
-            this.logger.LogInformation($"Unload Task {taskDetail.TaskName} on {taskServerOptions.TaskServerHost}...");
+            this.logger.LogInformation($"Unload Task [{taskDetail.TaskName}] on {taskServerOptions.TaskServerHost}...");
 
             JobManager.RemoveJob(taskDetail.TaskName);
 
-            this.logger.LogInformation($"Task {taskDetail.TaskName} unloaded.");
+            this.logger.LogInformation($"Task [{taskDetail.TaskName}] unloaded.");
         }
 
         public void UnloadTasks()
