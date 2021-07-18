@@ -37,6 +37,9 @@ namespace HackSystem.WebAPI
             }
             finally
             {
+                // HackSystemTaskServerExtension.ShutdownTaskServer();
+                logger.Info($"{assemblyName.Name} shutdown, Version={assemblyName.Version}");
+                NLog.LogManager.Shutdown();
             }
         }
 
