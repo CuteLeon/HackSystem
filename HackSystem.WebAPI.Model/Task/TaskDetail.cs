@@ -26,6 +26,8 @@ namespace HackSystem.WebAPI.Model.Task
 
         public bool Reentrant { get; set; }
 
+        public string AssemblyName { get; set; }
+
         public string ClassName { get; set; }
 
         public string ProcedureName { get; set; }
