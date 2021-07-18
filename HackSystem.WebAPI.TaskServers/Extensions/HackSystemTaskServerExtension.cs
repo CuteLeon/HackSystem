@@ -1,6 +1,7 @@
 ﻿using System;
 using HackSystem.WebAPI.TaskServers.Configurations;
 using HackSystem.WebAPI.TaskServers.DataServices;
+using HackSystem.WebAPI.TaskServers.Jobs;
 using HackSystem.WebAPI.TaskServers.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,8 +22,10 @@ namespace HackSystem.WebAPI.TaskServers.Extensions
                 }))
                 .AddSingleton<IHackSystemTaskServer, HackSystemTaskServer>()
                 .AddScoped<ITaskDataService, TaskDataService>()
+                .AddScoped<ITaskLogDataService, TaskLogDataService>()
                 .AddScoped<ITaskLoader, TaskLoader>()
-                .AddScoped<ITaskScheduleWrapper, TaskScheduleWrapper>();
+                .AddScoped<ITaskScheduleWrapper, TaskScheduleWrapper>()
+                .AddTransient<TaskGenericJob>();
 
             return services;
         }
@@ -34,6 +37,17 @@ namespace HackSystem.WebAPI.TaskServers.Extensions
 
             taskServerLauncher.Launch();
             taskServerLauncher.LoadTasks();
+
+            return host;
+        }
+
+        public static IHost ShutdownTaskServer(this IHost host)
+        {
+            using var scope = host.Services.CreateScope();
+            var taskServerLauncher = scope.ServiceProvider.GetRequiredService<IHackSystemTaskServer>();
+
+            taskServerLauncher.UnloadTasks();
+            taskServerLauncher.Shutdown();
 
             return host;
         }
