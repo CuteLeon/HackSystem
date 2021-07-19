@@ -31,7 +31,7 @@
 
 > Click image below to watch video.
 
-[![CuteLeon/HackSystem](https://i2.hdslb.com/bfs/archive/e656c696dd64c8e4104d1792cbbe35c6192381cc.jpg)](https://www.bilibili.com/video/BV1di4y177TH/ "CuteLeon/HackSystem")
+[![CuteLeon/HackSystem](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/VideoSplash.jpg)](https://www.bilibili.com/video/BV1di4y177TH/ "CuteLeon/HackSystem")
 
 # Screen
 
