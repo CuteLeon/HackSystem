@@ -70,6 +70,7 @@ namespace HackSystem.WebAPI
                 .AddAutoMapper(typeof(Startup).Assembly)
                 .AttachTaskServer(taskServerConfiguration)
                 .AttachMockServer(mockServerConfiguration)
+                .AddHttpClient()
                 .AddAPIAuthentication(jwtConfiguration)
                 .AddAPIServices();
 
