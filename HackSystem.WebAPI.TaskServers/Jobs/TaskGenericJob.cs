@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.TaskServers.Jobs
 {
-    public class TaskGenericJob : TaskJobBase
+    public class TaskGenericJob : TaskJobBase, ITaskGenericJob
     {
         private readonly IServiceProvider serviceProvider;
 

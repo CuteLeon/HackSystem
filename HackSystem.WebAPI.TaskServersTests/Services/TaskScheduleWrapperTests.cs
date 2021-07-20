@@ -10,7 +10,6 @@ namespace HackSystem.WebAPI.TaskServers.Services.Tests
     public class TaskScheduleWrapperTests
     {
         [Theory]
-        [STAThread]
         [InlineData("Task_Name_1", true, 1, 1, 1, default, default, default, default, default, TaskFrequency.Automatically, false)]
         [InlineData("Task_Name_2", true, 1, 1, 1, default, default, default, default, default, TaskFrequency.Automatically, false)]
         [InlineData("Task_Name_3", true, 1, 1, 1, default, default, default, default, default, TaskFrequency.Manually, true)]

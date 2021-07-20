@@ -3,6 +3,7 @@ using System.Linq;
 using FluentScheduler;
 using HackSystem.WebAPI.Model.Task;
 using HackSystem.WebAPI.TaskServers.Configurations;
+using HackSystem.WebAPI.TaskServers.Jobs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -26,9 +27,12 @@ namespace HackSystem.WebAPI.TaskServers.Services.Tests
             var mockTaskScheduleWrapper = new Mock<ITaskScheduleWrapper>();
             mockTaskScheduleWrapper.Setup(w => w.WrapTaskSchedule(It.IsAny<TaskDetail>())).Returns(new Func<TaskDetail, (TaskDetail TaskDetail, Action<Schedule> ScheduleAction)>(
                 taskDetail => (taskDetail, new Action<Schedule>(s => s.WithName(taskDetail.TaskName).ToRunOnceIn(1).Days()))));
+            var mockTaskGenericJob = new Mock<ITaskGenericJob>();
+            mockTaskGenericJob.Setup(j => j.Execute()).Verifiable();
             var mockServiceProvider = new Mock<IServiceProvider>();
             mockServiceProvider.Setup(p => p.GetService(It.Is<Type>(type => type == typeof(ITaskLoader)))).Returns(mockTaskLoader.Object);
             mockServiceProvider.Setup(p => p.GetService(It.Is<Type>(type => type == typeof(ITaskScheduleWrapper)))).Returns(mockTaskScheduleWrapper.Object);
+            mockServiceProvider.Setup(p => p.GetService(It.Is<Type>(type => type == typeof(ITaskGenericJob)))).Returns(mockTaskGenericJob.Object);
             var mockServiceScope = new Mock<IServiceScope>();
             mockServiceScope.SetupGet(s => s.ServiceProvider).Returns(mockServiceProvider.Object);
             var mockServiceScopeFactory = new Mock<IServiceScopeFactory>();
@@ -51,7 +55,7 @@ namespace HackSystem.WebAPI.TaskServers.Services.Tests
             Assert.Equal(taskDetails.Count(), JobManager.AllSchedules.Count());
 
             hackSystemTaskServer.UnloadTasks();
-            Assert.Equal(0, JobManager.AllSchedules.Count());
+            Assert.Empty(JobManager.AllSchedules);
         }
     }
 }

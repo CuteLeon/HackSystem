@@ -63,7 +63,7 @@ namespace HackSystem.WebAPI.TaskServers.Services
 
             this.UnloadTask(taskDetail);
             var taskSchedule = this.taskScheduleWrapper.WrapTaskSchedule(taskDetail);
-            var taskJob = this.serviceProvider.GetRequiredService<TaskGenericJob>();
+            var taskJob = this.serviceProvider.GetRequiredService<ITaskGenericJob>();
             taskJob.TaskDetail = taskDetail;
             JobManager.AddJob(taskJob, taskSchedule.ScheduleAction);
 

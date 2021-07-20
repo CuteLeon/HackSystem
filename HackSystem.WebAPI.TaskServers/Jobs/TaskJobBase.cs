@@ -1,5 +1,4 @@
 ﻿using System;
-using FluentScheduler;
 using HackSystem.WebAPI.Model.Task;
 using HackSystem.WebAPI.TaskServers.DataServices;
 using HackSystem.WebAPI.TaskServers.Services;
@@ -7,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.TaskServers.Jobs
 {
-    public abstract class TaskJobBase : IJob
+    public abstract class TaskJobBase : ITaskJobBase
     {
         private readonly ILogger<TaskJobBase> logger;
         private readonly ITaskLogDataService taskLogDataService;
@@ -22,7 +21,7 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
             this.taskLogDataService = taskLogDataService;
         }
 
-        public void Execute()
+        public virtual void Execute()
         {
             var taskLog = new TaskLogDetail
             {
