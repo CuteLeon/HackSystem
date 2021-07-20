@@ -3,14 +3,16 @@ using System;
 using HackSystem.WebAPI.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HackSystem.WebAPI.DataAccess.Migrations
 {
     [DbContext(typeof(HackSystemDBContext))]
-    partial class HackSystemDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210720081011_HackSystemDBMigration_3")]
+    partial class HackSystemDBMigration_3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,9 +212,6 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.Property<int>("RouteLogID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("ConnectionID")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Exception")
                         .HasColumnType("TEXT");
