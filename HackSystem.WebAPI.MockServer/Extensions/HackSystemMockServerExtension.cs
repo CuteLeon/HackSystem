@@ -1,5 +1,6 @@
 ﻿using System;
 using HackSystem.WebAPI.MockServer.Middlewares;
+using HackSystem.WebAPI.MockServer.Services;
 using HackSystem.WebAPI.MockServers.Configurations;
 using HackSystem.WebAPI.MockServers.DataServices;
 using Microsoft.AspNetCore.Builder;
@@ -20,7 +21,9 @@ namespace HackSystem.WebAPI.MockServers.Extensions
                     options.MockServerHost = configuration.MockServerHost;
                 }))
                 .AddScoped<IMockRouteDataService, MockRouteDataService>()
-                .AddScoped<IMockRouteLogDataService, MockRouteLogDataService>();
+                .AddScoped<IMockRouteLogDataService, MockRouteLogDataService>()
+                .AddScoped<IMockRouteResponseWrapper, MockRouteResponseWrapper>()
+                .AddScoped<IMockForwardRequestWrapper, MockForwardRequestWrapper>();
 
             return services;
         }
