@@ -1,6 +1,8 @@
-using HackSystem.Web.Authentication.Extensions;
+﻿using HackSystem.Web.Authentication.Extensions;
 using HackSystem.WebAPI.Authentication.Configurations;
 using HackSystem.WebAPI.DataAccess;
+using HackSystem.WebAPI.MockServers.Configurations;
+using HackSystem.WebAPI.MockServers.Extensions;
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Services.Extensions;
 using HackSystem.WebAPI.TaskServers.Configurations;
@@ -63,9 +65,11 @@ namespace HackSystem.WebAPI
             // Config Jwt
             var jwtConfiguration = this.Configuration.GetSection("JwtConfiguration").Get<JwtAuthenticationOptions>();
             var taskServerConfiguration = this.Configuration.GetSection("TaskServerConfiguration").Get<TaskServerOptions>();
+            var mockServerConfiguration = this.Configuration.GetSection("MockServerConfiguration").Get<MockServerOptions>();
             services
                 .AddAutoMapper(typeof(Startup).Assembly)
                 .AttachTaskServer(taskServerConfiguration)
+                .AttachMockServer(mockServerConfiguration)
                 .AddAPIAuthentication(jwtConfiguration)
                 .AddAPIServices();
 
@@ -110,6 +114,8 @@ namespace HackSystem.WebAPI
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseMockServer();
         }
     }
 }
