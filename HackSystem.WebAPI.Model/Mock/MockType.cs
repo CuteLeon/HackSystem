@@ -2,7 +2,7 @@
 {
     public enum MockType
     {
-        GenerateResponse,
-        ReturnRequestDirectly,
+        GenerateByTemplate,
+        ReadFromPayload,
     }
 }

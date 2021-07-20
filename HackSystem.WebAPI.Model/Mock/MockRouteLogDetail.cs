@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Net;
 
 namespace HackSystem.WebAPI.Model.Mock
 {
@@ -14,11 +15,11 @@ namespace HackSystem.WebAPI.Model.Mock
 
         public string ConnectionID { get; set; }
 
-        public string MockURI { get; set; }
+        public string URI { get; set; }
 
-        public string MockMethod { get; set; }
+        public string Method { get; set; }
 
-        public string MockSourceHost { get; set; }
+        public string SourceHost { get; set; }
 
         public int StatusCode { get; set; }
 
@@ -30,9 +31,11 @@ namespace HackSystem.WebAPI.Model.Mock
 
         public string ForwardAddress { get; set; }
 
-        public int ForwardStatusCode { get; set; }
+        public string ForwardMethod { get; set; }
 
-        public string ForwardRequestBody { get; set; }
+        public string ForwardRequestBodyTemplate { get; set; }
+
+        public HttpStatusCode ForwardResponseStatusCode { get; set; }
 
         public string ForwardResponseBody { get; set; }
 

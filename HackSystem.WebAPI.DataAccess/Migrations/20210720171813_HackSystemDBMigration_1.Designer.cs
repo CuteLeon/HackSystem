@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackSystem.WebAPI.DataAccess.Migrations
 {
     [DbContext(typeof(HackSystemDBContext))]
-    [Migration("20210720081011_HackSystemDBMigration_3")]
-    partial class HackSystemDBMigration_3
+    [Migration("20210720171813_HackSystemDBMigration_1")]
+    partial class HackSystemDBMigration_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,17 +161,14 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.Property<string>("ForwardAddress")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ForwardDelayDuration")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ForwardMethod")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("ForwardMockType")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ForwardResponseBodyTemplate")
+                    b.Property<string>("ForwardRequestBodyTemplate")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("ForwardStatusCode")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("MockMethod")
                         .HasColumnType("TEXT")
@@ -213,6 +210,9 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ConnectionID")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Exception")
                         .HasColumnType("TEXT");
 
@@ -225,32 +225,29 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.Property<DateTime>("ForwardDateTime")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ForwardMethod")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("ForwardMockType")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ForwardRequestBody")
+                    b.Property<string>("ForwardRequestBodyTemplate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ForwardResponseBody")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ForwardStatusCode")
+                    b.Property<int>("ForwardResponseStatusCode")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("MockMethod")
+                    b.Property<string>("Method")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("MockRouteLogStatus")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("MockSourceHost")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("MockType")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("MockURI")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("RequestBody")
                         .HasColumnType("TEXT");
@@ -261,17 +258,23 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.Property<int>("RouteID")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("SourceHost")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("StartDateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("StatusCode")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("URI")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("RouteLogID");
 
                     b.HasIndex("RouteID");
 
-                    b.HasIndex("MockURI", "MockMethod", "MockSourceHost", "MockType");
+                    b.HasIndex("URI", "Method", "SourceHost", "MockType");
 
                     b.ToTable("MockRouteLogDetails");
                 });

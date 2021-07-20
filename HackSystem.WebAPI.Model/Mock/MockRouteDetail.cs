@@ -29,11 +29,9 @@ namespace HackSystem.WebAPI.Model.Mock
 
         public string ForwardAddress { get; set; }
 
-        public int ForwardDelayDuration { get; set; }
+        public string ForwardMethod { get; set; }
 
-        public int ForwardStatusCode { get; set; }
-
-        public string ForwardResponseBodyTemplate { get; set; }
+        public string ForwardRequestBodyTemplate { get; set; }
 
         public MockType ForwardMockType { get; set; }
     }

@@ -67,7 +67,7 @@ namespace HackSystem.WebAPI.DataAccess
             builder.Entity<MockRouteDetail>().HasIndex(nameof(MockRouteDetail.Enabled));
             builder.Entity<MockRouteDetail>().HasIndex(nameof(MockRouteDetail.MockURI), nameof(MockRouteDetail.MockMethod), nameof(MockRouteDetail.MockSourceHost)).IsUnique();
             builder.Entity<MockRouteLogDetail>().HasIndex(nameof(MockRouteLogDetail.RouteID));
-            builder.Entity<MockRouteLogDetail>().HasIndex(nameof(MockRouteLogDetail.MockURI), nameof(MockRouteLogDetail.MockMethod), nameof(MockRouteLogDetail.MockSourceHost), nameof(MockRouteLogDetail.MockType));
+            builder.Entity<MockRouteLogDetail>().HasIndex(nameof(MockRouteLogDetail.URI), nameof(MockRouteLogDetail.Method), nameof(MockRouteLogDetail.SourceHost), nameof(MockRouteLogDetail.MockType));
 
             builder.Entity<MockRouteDetail>().Property(nameof(MockRouteDetail.MockURI)).UseCollation("NOCASE");
             builder.Entity<MockRouteDetail>().Property(nameof(MockRouteDetail.MockMethod)).UseCollation("NOCASE");
