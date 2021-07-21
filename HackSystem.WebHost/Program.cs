@@ -1,4 +1,3 @@
-using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -16,10 +15,11 @@ namespace HackSystem.WebHost
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureHostConfiguration(options =>
+                .ConfigureAppConfiguration((hostBuilderContext, configuration) =>
                 {
-                    options.SetBasePath(Directory.GetCurrentDirectory())
-                           .AddJsonFile("hosting.json", optional: true);
+                    var env = hostBuilderContext.HostingEnvironment;
+                    configuration.AddJsonFile("appsettings.json", true, true)
+                                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

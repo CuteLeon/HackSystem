@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.DataAccess.SeedData;
 using HackSystem.WebAPI.TaskServers.Extensions;
@@ -45,10 +44,11 @@ namespace HackSystem.WebAPI
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureHostConfiguration(options =>
+                .ConfigureAppConfiguration((hostBuilderContext, configuration) =>
                 {
-                    options.SetBasePath(Directory.GetCurrentDirectory())
-                           .AddJsonFile("hosting.json", optional: true);
+                    var env = hostBuilderContext.HostingEnvironment;
+                    configuration.AddJsonFile("appsettings.json", true, true)
+                                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

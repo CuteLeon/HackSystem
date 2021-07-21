@@ -25,10 +25,12 @@ namespace HackSystem.Web
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            var apiConfiguration = builder.Configuration.GetSection("APIConfiguration").Get<APIConfiguration>();
-
+            builder.Configuration
+                .AddJsonFile("appsettings.json", true, false)
+                .AddJsonFile($"appsettings.{builder.HostEnvironment.Environment}.json", true, false);
             builder.RootComponents.Add<App>("#app");
 
+            var apiConfiguration = builder.Configuration.GetSection("APIConfiguration").Get<APIConfiguration>();
             builder
                 .InitializeConfiguration()
                 .InitializeBasicService(apiConfiguration)
