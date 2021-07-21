@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HackSystem.WebAPI.DataAccess;
@@ -39,52 +38,20 @@ namespace HackSystem.WebAPI.MockServers.DataServices
             uri = uri.StartsWith("/") ? uri : $"/{uri}";
             uri = uri.EndsWith("/") ? uri.Remove(uri.Length - 1) : uri;
             var mockRoute = await this.AsQueryable()
-                .Where(m => m.MockURI == uri && m.MockMethod == method && m.MockSourceHost == sourceHost && m.Enabled)
+                .Where(m =>
+                    m.MockURI == uri &&
+                    (m.MockMethod == null ||
+                        m.MockMethod == string.Empty ||
+                        m.MockMethod == method) &&
+                    (m.MockSourceHost == null ||
+                        m.MockSourceHost == "" ||
+                        sourceHost.StartsWith(m.MockSourceHost) ||
+                        m.MockSourceHost == sourceHost) &&
+                    m.Enabled)
+                .OrderByDescending(m => m.MockMethod)
+                .ThenByDescending(m => m.MockSourceHost)
                 .FirstOrDefaultAsync();
-            if (mockRoute != null)
-                return mockRoute;
-
-            var query = this.AsQueryable().Where(m => m.MockURI == uri && m.MockMethod == method && m.Enabled);
-            var mockRoutes = await query.ToArrayAsync();
-            if (mockRoutes.Any())
-            {
-                mockRoute = FindBestMatchMockRoute(mockRoutes, sourceHost);
-                if (mockRoute != null)
-                    return mockRoute;
-            }
-
-            query = this.AsQueryable().Where(m => m.MockURI == uri && (m.MockMethod == null || m.MockMethod == string.Empty) && m.Enabled);
-            mockRoutes = await query.ToArrayAsync();
-            if (mockRoutes.Any())
-            {
-                mockRoute = FindBestMatchMockRoute(mockRoutes, sourceHost);
-                if (mockRoute != null)
-                    return mockRoute;
-            }
-
-            return default;
-        }
-
-        private MockRouteDetail FindBestMatchMockRoute(IEnumerable<MockRouteDetail> mockRoutePool, string sourceHost)
-        {
-            MockRouteDetail theEqual = default, theStartWith = default, theEmpty = default;
-            foreach (var mockRoute in mockRoutePool)
-            {
-                if (string.IsNullOrWhiteSpace(mockRoute.MockSourceHost))
-                {
-                    theEmpty = mockRoute;
-                }
-                else if (mockRoute.MockSourceHost.Equals(sourceHost, StringComparison.OrdinalIgnoreCase))
-                {
-                    theEqual = mockRoute;
-                }
-                else if (sourceHost.StartsWith(mockRoute.MockSourceHost))
-                {
-                    theStartWith = mockRoute;
-                }
-            }
-
-            return theEqual ?? theStartWith ?? theEmpty;
+            return mockRoute;
         }
     }
 }
