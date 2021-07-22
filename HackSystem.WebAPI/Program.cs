@@ -1,6 +1,5 @@
 using System;
 using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.DataAccess.SeedData;
 using HackSystem.WebAPI.TaskServers.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,8 +24,6 @@ namespace HackSystem.WebAPI
                 CreateHostBuilder(args)
                     .Build()
                     .InitializeDatabase()
-                    //.InitializeIdentityData()
-                    //.InitializeUserProgramMapData()
                     .LaunchTaskServer()
                     .Run();
             }

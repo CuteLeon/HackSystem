@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackSystem.WebAPI.DataAccess.Migrations
 {
     [DbContext(typeof(HackSystemDBContext))]
-    [Migration("20210720171813_HackSystemDBMigration_1")]
+    [Migration("20210722033150_HackSystemDBMigration_1")]
     partial class HackSystemDBMigration_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,24 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "msaspnet-core-role-hack-system000001",
+                            ConcurrencyStamp = "8ef3768d-cdd3-43a4-9338-c549cec56942",
+                            Level = 0,
+                            Name = "Hacker",
+                            NormalizedName = "HACKER"
+                        },
+                        new
+                        {
+                            Id = "msaspnet-core-role-hack-system000002",
+                            ConcurrencyStamp = "43daf209-df6b-499c-83e5-94ea05cf8997",
+                            Level = 0,
+                            Name = "Commander",
+                            NormalizedName = "COMMANDER"
+                        });
                 });
 
             modelBuilder.Entity("HackSystem.WebAPI.Model.Identity.HackSystemUser", b =>
@@ -112,6 +130,59 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "msaspnet-core-user-hack-system000001",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "baeb86b5-116c-43ae-ade7-489dabd07012",
+                            Email = "leon@hack.com",
+                            EmailConfirmed = true,
+                            Level = 0,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "LEON@HACK.COM",
+                            NormalizedUserName = "LEON",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBpsyxgzjSNJvSIm6y3I1jqvKN4iV/IkvwmMrrYR5X8a6pEXza2RwA9xxSXidOiGkQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SU6NODNYTSGYJ5NXXYIA7I2M542MLV2V",
+                            TwoFactorEnabled = false,
+                            UserName = "Leon"
+                        },
+                        new
+                        {
+                            Id = "msaspnet-core-user-hack-system000002",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a3e94fcc-39cf-4a2f-8b23-f08424042cb8",
+                            Email = "commander@hack.com",
+                            EmailConfirmed = true,
+                            Level = 0,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "COMMANDER@HACK.COM",
+                            NormalizedUserName = "CMD",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBLD9HIQLb2pLRH1Vrv1PnOuab+diYEwtCoWFyIx/S+C2nynO4S9NMBUjdQUcVWFrg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "GMGJIR7MWWVSLB2IYMAP445FXWPKZQE5",
+                            TwoFactorEnabled = false,
+                            UserName = "CMD"
+                        },
+                        new
+                        {
+                            Id = "msaspnet-core-user-hack-system000003",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "93cdc1b8-0c84-4f52-9245-d6ae4bbe5f59",
+                            Email = "mathilda@hack.com",
+                            EmailConfirmed = true,
+                            Level = 0,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "MATHILDA@HACK.COM",
+                            NormalizedUserName = "MATHILDA",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDjIsjVamUxv4OQ06Ur/7YnsqddYfO2eQP7UK/Adjs38RIkmBpgTldrfCXZ5QHP1vQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2NGFUDFGMLPCBN5U67CHXJEYIDBWQPO3",
+                            TwoFactorEnabled = false,
+                            UserName = "Mathilda"
+                        });
                 });
 
             modelBuilder.Entity("HackSystem.WebAPI.Model.Map.UserMap.UserBasicProgramMap", b =>
@@ -144,6 +215,224 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("UserBasicProgramMaps");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000001",
+                            ProgramId = "program0-icon-0828-hack-system000001",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000001",
+                            ProgramId = "program0-icon-0828-hack-system000002",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000001",
+                            ProgramId = "program0-icon-0828-hack-system000003",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000001",
+                            ProgramId = "program0-icon-0828-hack-system000004",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000001",
+                            ProgramId = "program0-icon-0828-hack-system000005",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000001",
+                            ProgramId = "program0-icon-0828-hack-system000006",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000001",
+                            ProgramId = "program0-icon-0828-hack-system000007",
+                            Hide = false,
+                            PinToDock = false,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000001",
+                            ProgramId = "program0-icon-0828-hack-system000008",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000001",
+                            ProgramId = "program0-icon-0828-hack-system000009",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000002",
+                            ProgramId = "program0-icon-0828-hack-system000001",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000002",
+                            ProgramId = "program0-icon-0828-hack-system000002",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000002",
+                            ProgramId = "program0-icon-0828-hack-system000003",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000002",
+                            ProgramId = "program0-icon-0828-hack-system000004",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000002",
+                            ProgramId = "program0-icon-0828-hack-system000005",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000002",
+                            ProgramId = "program0-icon-0828-hack-system000006",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000002",
+                            ProgramId = "program0-icon-0828-hack-system000007",
+                            Hide = false,
+                            PinToDock = false,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000002",
+                            ProgramId = "program0-icon-0828-hack-system000008",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000002",
+                            ProgramId = "program0-icon-0828-hack-system000009",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000003",
+                            ProgramId = "program0-icon-0828-hack-system000001",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000003",
+                            ProgramId = "program0-icon-0828-hack-system000002",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000003",
+                            ProgramId = "program0-icon-0828-hack-system000003",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000003",
+                            ProgramId = "program0-icon-0828-hack-system000004",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000003",
+                            ProgramId = "program0-icon-0828-hack-system000005",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000003",
+                            ProgramId = "program0-icon-0828-hack-system000006",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000003",
+                            ProgramId = "program0-icon-0828-hack-system000007",
+                            Hide = false,
+                            PinToDock = false,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000003",
+                            ProgramId = "program0-icon-0828-hack-system000008",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000003",
+                            ProgramId = "program0-icon-0828-hack-system000009",
+                            Hide = false,
+                            PinToDock = true,
+                            PinToTop = false
+                        });
                 });
 
             modelBuilder.Entity("HackSystem.WebAPI.Model.Mock.MockRouteDetail", b =>
@@ -380,7 +669,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
                             IconUri = "/image/Icon/BorwserProgram.png",
-                            Integral = false,
+                            Integral = true,
                             IsSingleton = false,
                             Name = "Borwser",
                             TypeName = "HackSystem.Web.SystemProgram.Borwser.BorwserComponent"
@@ -428,6 +717,28 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                             IsSingleton = true,
                             Name = "Weather",
                             TypeName = "HackSystem.Web.SystemProgram.Weather.WeatherComponent"
+                        },
+                        new
+                        {
+                            Id = "program0-icon-0828-hack-system000008",
+                            AssemblyName = "HackSystem.Web.SystemProgram",
+                            Enabled = true,
+                            IconUri = "/image/Icon/TaskServerProgram.png",
+                            Integral = true,
+                            IsSingleton = true,
+                            Name = "TaskServer",
+                            TypeName = "HackSystem.Web.SystemProgram.TaskServer.TaskServerComponent"
+                        },
+                        new
+                        {
+                            Id = "program0-icon-0828-hack-system000009",
+                            AssemblyName = "HackSystem.Web.SystemProgram",
+                            Enabled = true,
+                            IconUri = "/image/Icon/MockServerProgram.png",
+                            Integral = true,
+                            IsSingleton = true,
+                            Name = "MockServer",
+                            TypeName = "HackSystem.Web.SystemProgram.MockServer.MockServerComponent"
                         });
                 });
 
@@ -571,6 +882,15 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "Professional",
+                            ClaimValue = "true",
+                            UserId = "msaspnet-core-user-hack-system000001"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -608,6 +928,28 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000001",
+                            RoleId = "msaspnet-core-role-hack-system000001"
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000001",
+                            RoleId = "msaspnet-core-role-hack-system000002"
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000002",
+                            RoleId = "msaspnet-core-role-hack-system000002"
+                        },
+                        new
+                        {
+                            UserId = "msaspnet-core-user-hack-system000003",
+                            RoleId = "msaspnet-core-role-hack-system000001"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
