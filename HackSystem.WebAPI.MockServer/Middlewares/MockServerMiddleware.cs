@@ -40,24 +40,27 @@ namespace HackSystem.WebAPI.MockServer.Middlewares
         {
             var uri = context.Request.Path.ToUriComponent();
             var method = context.Request.Method;
-            var sourceHost = context.Request.Host.Host;
+            var sourceHost = context.Connection.RemoteIpAddress.ToString();
             var mockRoute = await this.mockRouteDataService.QueryMockRoute(uri, method, sourceHost);
             if (mockRoute == null)
             {
                 await this.next(context);
                 return;
             }
-
+            foreach (var item in context.Features)
+            {
+                System.Diagnostics.Debug.WriteLine($"{item.Key} => {item.Value.ToString()}");
+            }
             using var requestStreamReader = new StreamReader(context.Request.Body);
             var requestContent = await requestStreamReader.ReadToEndAsync();
             var mockRouteLog = new MockRouteLogDetail
             {
                 RouteID = mockRoute.RouteID,
-                URI = uri,
+                URI = $"{uri}{context.Request.QueryString}",
                 Method = method,
-                SourceHost = sourceHost,
+                SourceHost = $"{sourceHost}:{context.Connection.RemotePort}",
                 StartDateTime = DateTime.Now,
-                ConnectionID = context.Connection.Id,
+                ConnectionID = context.TraceIdentifier,
                 RequestBody = requestContent,
                 MockType = mockRoute.MockType,
                 MockRouteLogStatus = MockRouteLogStatus.Processing,
