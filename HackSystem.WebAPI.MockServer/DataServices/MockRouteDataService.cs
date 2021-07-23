@@ -44,7 +44,7 @@ namespace HackSystem.WebAPI.MockServers.DataServices
                         m.MockMethod == string.Empty ||
                         m.MockMethod == method) &&
                     (m.MockSourceHost == null ||
-                        m.MockSourceHost == "" ||
+                        m.MockSourceHost == string.Empty ||
                         sourceHost.StartsWith(m.MockSourceHost) ||
                         m.MockSourceHost == sourceHost) &&
                     m.Enabled)
