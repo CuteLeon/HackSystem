@@ -3,12 +3,12 @@
 @inject IProgramLauncher programLauncher
 
 <div class="d-flex flex-column flex-wrap align-content-start user-select-none w-100 h-100 overflow-hidden">
-    @foreach (var programMap in this.BasicProgramMaps.Values)
-    {
-        <ProgramDrawerIconComponent @key="@programMap.BasicProgram.Id" UserBasicProgramMap="programMap" OnIconDoubleClick="this.OnDoubleClickIcon" />
-    }
+	@foreach (var pair in this.BasicProgramMaps)
+	{
+		<ProgramDrawerIconComponent @key="@pair.Key" UserBasicProgramMap="pair.Value" OnIconDoubleClick="this.OnDoubleClickIcon" />
+	}
 </div>
 
-@code{
-    protected Dictionary<string, QueryUserBasicProgramMapDTO> BasicProgramMaps { get; set; } = new Dictionary<string, QueryUserBasicProgramMapDTO>();
+@code {
+	protected Dictionary<string, QueryUserBasicProgramMapDTO> BasicProgramMaps { get; set; } = new Dictionary<string, QueryUserBasicProgramMapDTO>();
 }

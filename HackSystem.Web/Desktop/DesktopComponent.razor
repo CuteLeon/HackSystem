@@ -6,7 +6,7 @@
 @inject IOptionsMonitor<APIConfiguration> apiConfiguration
 @inject IBasicProgramService basicProgramService
 
-<div id="DesktopInstance" class="container-fluid">
+<div id="DesktopInstance" class="container-fluid w-100 h-100">
     <TopBarView @ref="TopBarView">
         <ProgramMenuView>
             <DesktopMenuComponent OnTest="this.OnTest"></DesktopMenuComponent>
