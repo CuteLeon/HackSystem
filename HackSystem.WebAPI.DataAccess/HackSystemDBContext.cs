@@ -5,6 +5,7 @@ using HackSystem.WebAPI.Model.Mock;
 using HackSystem.WebAPI.Model.Option;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebAPI.Model.Task;
+using HackSystem.WebAPI.Model.WebLog;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -42,6 +43,8 @@ namespace HackSystem.WebAPI.DataAccess
 
         public virtual DbSet<MockRouteLogDetail> MockRouteLogDetails { get; set; }
 
+        public virtual DbSet<WebAPILog> WebAPILogs { get; set; }
+
         public virtual DbSet<GenericOption> GenericOptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -68,6 +71,8 @@ namespace HackSystem.WebAPI.DataAccess
             builder.Entity<MockRouteDetail>().HasIndex(nameof(MockRouteDetail.MockURI), nameof(MockRouteDetail.MockMethod), nameof(MockRouteDetail.MockSourceHost)).IsUnique();
             builder.Entity<MockRouteLogDetail>().HasIndex(nameof(MockRouteLogDetail.RouteID));
             builder.Entity<MockRouteLogDetail>().HasIndex(nameof(MockRouteLogDetail.URI), nameof(MockRouteLogDetail.Method), nameof(MockRouteLogDetail.SourceHost), nameof(MockRouteLogDetail.MockType));
+
+            builder.Entity<WebAPILog>().HasIndex(nameof(WebAPILog.RequestURI), nameof(WebAPILog.SourceHost), nameof(WebAPILog.IdentityName), nameof(WebAPILog.StartDateTime));
 
             builder.Entity<MockRouteDetail>().Property(nameof(MockRouteDetail.MockURI)).UseCollation("NOCASE");
             builder.Entity<MockRouteDetail>().Property(nameof(MockRouteDetail.MockMethod)).UseCollation("NOCASE");

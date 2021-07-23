@@ -1,6 +1,7 @@
 ﻿using HackSystem.Web.Authentication.Extensions;
 using HackSystem.WebAPI.Authentication.Configurations;
 using HackSystem.WebAPI.DataAccess;
+using HackSystem.WebAPI.Extensions;
 using HackSystem.WebAPI.MockServers.Configurations;
 using HackSystem.WebAPI.MockServers.Extensions;
 using HackSystem.WebAPI.Model.Identity;
@@ -51,8 +52,8 @@ namespace HackSystem.WebAPI
                     options.Password.RequiredLength = 8;
                     options.Password.RequiredUniqueChars = 4;
                     options.Password.RequireLowercase = true;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
 
                     options.Lockout.AllowedForNewUsers = true;
 
@@ -71,6 +72,7 @@ namespace HackSystem.WebAPI
                 .AttachTaskServer(taskServerConfiguration)
                 .AttachMockServer(mockServerConfiguration)
                 .AddHttpClient()
+                .AddHackSystemWebAPIExtensions()
                 .AddAPIAuthentication(jwtConfiguration)
                 .AddAPIServices();
 
@@ -108,6 +110,8 @@ namespace HackSystem.WebAPI
             app.UseAuthentication();
             // Authorization
             app.UseAuthorization();
+
+            app.UseHackSystemWebAPIExtensions();
 
             app.UseEndpoints(endpoints =>
             {
