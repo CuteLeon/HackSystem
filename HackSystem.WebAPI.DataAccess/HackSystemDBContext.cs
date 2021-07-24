@@ -87,7 +87,8 @@ namespace HackSystem.WebAPI.DataAccess
             builder.Entity<GenericOption>().Property(nameof(GenericOption.OwnerLevel)).UseCollation("NOCASE");
 
             builder.InitializeBasicProgramData()
-                   .InitializeIdentityData();
+                   .InitializeIdentityData()
+                   .InitializeTaskData();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
