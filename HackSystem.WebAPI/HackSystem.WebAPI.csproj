@@ -49,7 +49,7 @@
 
   <ItemGroup>
     <None Update="HackSystem.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="HS.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
