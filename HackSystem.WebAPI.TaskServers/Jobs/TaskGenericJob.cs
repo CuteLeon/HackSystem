@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using HackSystem.WebAPI.TaskServers.DataServices;
+using HackSystem.WebAPI.TaskServers.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -10,6 +12,7 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
     public class TaskGenericJob : TaskJobBase, ITaskGenericJob
     {
         private readonly IServiceProvider serviceProvider;
+        private readonly ITaskParameterWrapper taskParameterWrapper;
 
         public TaskGenericJob(
             ILogger<TaskGenericJob> logger,
@@ -18,6 +21,7 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
             : base(logger, taskLogDataService)
         {
             this.serviceProvider = serviceScopeFactory.CreateScope().ServiceProvider;
+            this.taskParameterWrapper = this.serviceProvider.GetRequiredService<ITaskParameterWrapper>();
         }
 
         protected override void ExecuteTask()
@@ -40,9 +44,16 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
 
             var taskInstance = this.serviceProvider.GetRequiredService(taskType);
             var parameterInfos = taskMethod.GetParameters();
+            var lazyParameterDictionary = new Lazy<Dictionary<string, string>>(
+                () => this.taskParameterWrapper.WrapTaskParameters(this.TaskDetail.Parameters));
             var parameters = parameterInfos
                 .OrderBy(info => info.Position)
-                .Select(info => info.HasDefaultValue ? info.DefaultValue : Activator.CreateInstance(info.ParameterType))
+                .Select(info => info switch
+                {
+                    _ when info.HasDefaultValue => info.DefaultValue,
+                    _ when info.ParameterType == typeof(Dictionary<string, string>) => lazyParameterDictionary.Value,
+                    _ => Activator.CreateInstance(info.ParameterType),
+                })
                 .ToArray();
             var result = taskMethod.Invoke(taskInstance, parameters);
         }

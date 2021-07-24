@@ -1,4 +1,5 @@
 ﻿using System;
+using HackSystem.WebAPI.Tasks;
 using HackSystem.WebAPI.TaskServers.Configurations;
 using HackSystem.WebAPI.TaskServers.DataServices;
 using HackSystem.WebAPI.TaskServers.Jobs;
@@ -25,7 +26,9 @@ namespace HackSystem.WebAPI.TaskServers.Extensions
                 .AddScoped<ITaskLogDataService, TaskLogDataService>()
                 .AddScoped<ITaskLoader, TaskLoader>()
                 .AddScoped<ITaskScheduleWrapper, TaskScheduleWrapper>()
-                .AddTransient<ITaskGenericJob, TaskGenericJob>();
+                .AddScoped<ITaskParameterWrapper, TaskParameterWrapper>()
+                .AddTransient<ITaskGenericJob, TaskGenericJob>()
+                .AddWebAPITasks();
 
             return services;
         }
