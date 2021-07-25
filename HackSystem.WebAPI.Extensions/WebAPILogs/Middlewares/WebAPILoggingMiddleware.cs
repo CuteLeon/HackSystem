@@ -30,7 +30,6 @@ namespace HackSystem.WebAPI.Extensions.WebAPILogs.Middleware
             this.next = next ?? throw new ArgumentNullException(nameof(next));
         }
 
-        /// <returns></returns>HttpResponseLog.cs
         public async Task Invoke(HttpContext context)
         {
             var watcher = new Stopwatch();

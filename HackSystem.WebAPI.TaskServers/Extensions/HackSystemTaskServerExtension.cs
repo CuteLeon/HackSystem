@@ -26,7 +26,7 @@ namespace HackSystem.WebAPI.TaskServers.Extensions
                 .AddScoped<ITaskLogDataService, TaskLogDataService>()
                 .AddScoped<ITaskLoader, TaskLoader>()
                 .AddScoped<ITaskScheduleWrapper, TaskScheduleWrapper>()
-                .AddScoped<ITaskParameterWrapper, TaskParameterWrapper>()
+                .AddTransient<ITaskParameterWrapper, TaskParameterWrapper>()
                 .AddTransient<ITaskGenericJob, TaskGenericJob>()
                 .AddWebAPITasks();
 
