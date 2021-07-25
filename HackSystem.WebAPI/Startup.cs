@@ -111,7 +111,7 @@ namespace HackSystem.WebAPI
             // Authorization
             app.UseAuthorization();
 
-            app.UseHackSystemWebAPIExtensions();
+            app.UseWebAPILogging();
 
             app.UseEndpoints(endpoints =>
             {

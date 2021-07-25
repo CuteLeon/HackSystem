@@ -8,7 +8,7 @@ namespace HackSystem.WebAPI.Extensions
 {
     public static class HackSystemExtensions
     {
-        public static IApplicationBuilder UseHackSystemWebAPIExtensions(this IApplicationBuilder app)
+        public static IApplicationBuilder UseWebAPILogging(this IApplicationBuilder app)
         {
             app.UseMiddleware<WebAPILoggingMiddleware>();
             return app;
