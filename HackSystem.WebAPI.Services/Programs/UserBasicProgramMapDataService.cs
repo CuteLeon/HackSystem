@@ -29,7 +29,7 @@ namespace HackSystem.WebAPI.Services.Programs
 
         public async Task<IEnumerable<UserBasicProgramMap>> QueryUserBasicProgramMaps(string userId)
         {
-            return await this.AsQueryable().Where(map => map.UserId == userId).ToListAsync();
+            return await this.AsQueryable().AsNoTracking().Where(map => map.UserId == userId).ToListAsync();
         }
 
         public async Task<bool> SetUserBasicProgramHide(string userId, string programId, bool hide)

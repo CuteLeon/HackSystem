@@ -5,6 +5,7 @@ using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.DataAccess.DataServices;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebAPI.Services.API.Program;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.Services.Programs
@@ -19,6 +20,6 @@ namespace HackSystem.WebAPI.Services.Programs
         }
 
         public async Task<IEnumerable<BasicProgram>> QueryIntegralBasicPrograms()
-            => this.AsQueryable().Where(p => p.Integral);
+            => this.AsQueryable().AsNoTracking().Where(p => p.Integral);
     }
 }

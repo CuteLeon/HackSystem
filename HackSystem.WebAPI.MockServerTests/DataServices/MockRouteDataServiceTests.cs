@@ -1,15 +1,12 @@
-﻿using Xunit;
-using HackSystem.WebAPI.MockServers.DataServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HackSystem.WebAPI.DataAccess;
-using Microsoft.EntityFrameworkCore;
 using HackSystem.WebAPI.Model.Mock;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
+using Xunit;
 
 namespace HackSystem.WebAPI.MockServers.DataServices.Tests
 {
