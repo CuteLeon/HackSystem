@@ -4,18 +4,22 @@ using System.Threading.Tasks;
 using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.DataAccess.DataServices;
 using HackSystem.WebAPI.Model.Mock;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.MockServers.DataServices
 {
     public class MockRouteDataService : DataServiceBase<MockRouteDetail>, IMockRouteDataService
     {
+        private readonly IMemoryCache memoryCache;
+
         public MockRouteDataService(
             ILogger<MockRouteDataService> logger,
+            IMemoryCache memoryCache,
             HackSystemDBContext hackSystemDBContext)
             : base(logger, hackSystemDBContext)
         {
+            this.memoryCache = memoryCache;
         }
 
         public async Task<MockRouteDetail> QueryMockRoute(string uri, string method, string sourceHost)
@@ -37,7 +41,12 @@ namespace HackSystem.WebAPI.MockServers.DataServices
 
             uri = uri.StartsWith("/") ? uri : $"/{uri}";
             uri = uri.EndsWith("/") ? uri.Remove(uri.Length - 1) : uri;
-            var mockRoute = await this.AsQueryable()
+
+            var mockRoutes = await this.memoryCache.GetOrCreateAsync(
+                nameof(MockRouteDetail),
+                cache => Task.Factory.StartNew(() => this.AsQueryable().Where(m => m.Enabled).ToDictionary(m => m.RouteID, m => m)));
+
+            var mockRoute = mockRoutes.Values.AsQueryable()
                 .Where(m =>
                     m.MockURI == uri &&
                     (m.MockMethod == null ||
@@ -50,7 +59,7 @@ namespace HackSystem.WebAPI.MockServers.DataServices
                     m.Enabled)
                 .OrderByDescending(m => m.MockMethod)
                 .ThenByDescending(m => m.MockSourceHost)
-                .FirstOrDefaultAsync();
+                .FirstOrDefault();
             return mockRoute;
         }
     }

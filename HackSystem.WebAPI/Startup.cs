@@ -72,6 +72,7 @@ namespace HackSystem.WebAPI
                 .AttachTaskServer(taskServerConfiguration)
                 .AttachMockServer(mockServerConfiguration)
                 .AddHttpClient()
+                .AddMemoryCache()
                 .AddHackSystemWebAPIExtensions()
                 .AddAPIAuthentication(jwtConfiguration)
                 .AddAPIServices();

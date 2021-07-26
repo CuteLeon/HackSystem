@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using HackSystem.WebAPI.DataAccess;
+using HackSystem.WebAPI.MockServers.Configurations;
+using HackSystem.WebAPI.MockServers.Extensions;
 using HackSystem.WebAPI.Model.Mock;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Moq;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace HackSystem.WebAPI.MockServers.DataServices.Tests
@@ -29,21 +30,23 @@ namespace HackSystem.WebAPI.MockServers.DataServices.Tests
                 new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Post", MockSourceHost = "loc", ResponseBodyTemplate = "URI_Post_loc_Only" },
                 new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Post", MockSourceHost = "localho", ResponseBodyTemplate = "URI_Post_localho_Only" },
             };
-            var dbContext = new HackSystemDBContext(
-                new DbContextOptionsBuilder<HackSystemDBContext>()
-                .UseLazyLoadingProxies()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options);
 
+            var serviceCollection = new ServiceCollection()
+                .AddLogging()
+                .AddMemoryCache()
+                .AddDbContext<HackSystemDBContext>(options => options
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                    .UseLazyLoadingProxies())
+                .AttachMockServer(new MockServerOptions());
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            var dbContext = serviceProvider.GetRequiredService<HackSystemDBContext>();
             dbContext.AddRange(mockRoutes);
             dbContext.SaveChanges();
 
             var count = dbContext.Set<MockRouteDetail>().Count();
             Assert.Equal(mockRoutes.Count, count);
-
-            var logger = new Mock<ILogger<MockRouteDataService>>();
-            logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<EventId>(), It.IsAny<object>(), It.IsAny<Exception?>(), It.IsAny<Func<object, Exception?, string>>())).Verifiable();
-            IMockRouteDataService mockRouteDataService = new MockRouteDataService(logger.Object, dbContext);
+            var mockRouteDataService = serviceProvider.GetRequiredService<IMockRouteDataService>();
 
             Assert.ThrowsAsync<ArgumentNullException>(() => mockRouteDataService.QueryMockRoute(string.Empty, "Get", "localhost"));
             Assert.ThrowsAsync<ArgumentNullException>(() => mockRouteDataService.QueryMockRoute("/Mock", string.Empty, "localhost"));
