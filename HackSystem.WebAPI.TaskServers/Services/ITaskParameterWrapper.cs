@@ -4,6 +4,6 @@ namespace HackSystem.WebAPI.TaskServers.Services
 {
     public interface ITaskParameterWrapper
     {
-        Dictionary<string, string> WrapTaskParameters(string taskParameters);
+        Dictionary<string, string>? WrapTaskParameters(string taskParameters);
     }
 }

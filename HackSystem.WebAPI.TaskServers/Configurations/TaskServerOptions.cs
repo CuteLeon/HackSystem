@@ -2,6 +2,6 @@
 {
     public class TaskServerOptions
     {
-        public string TaskServerHost { get; set; }
+        public string? TaskServerHost { get; set; }
     }
 }

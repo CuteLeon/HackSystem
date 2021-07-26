@@ -44,7 +44,7 @@ namespace HackSystem.Web.Scheduler.Program.Container
             }
             else
             {
-                this.logger.LogInformation($"Process container, remove process => {pID} ID ({process.DynamicProgramComponent.GetHashCode().ToString("X")})");
+                this.logger.LogInformation($"Process container, remove process => {pID} ID ({process.DynamicProgramComponent.GetHashCode():X})");
                 this.Processes.Remove(pID);
                 this.logger.LogInformation($"Process container, current total of process => {this.Processes.Count} count");
             }

@@ -15,7 +15,7 @@ namespace HackSystem.Web.Authentication.Options
 
         public int TokenRefreshInMinutes { get; set; } = 25;
 
-        public readonly AuthenticationState AnonymousState = new AuthenticationState(new ClaimsPrincipal(new[]
+        public readonly AuthenticationState AnonymousState = new(new ClaimsPrincipal(new[]
         {
             new ClaimsIdentity(new []
             {

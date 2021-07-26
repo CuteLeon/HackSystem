@@ -35,17 +35,6 @@ namespace HackSystem.WebAPI.Extensions.WebAPILogs.Middleware
             var watcher = new Stopwatch();
             watcher.Start();
 
-            string requestBody = null;
-            if (context.Request.Body.CanRead)
-            {
-                context.Request.EnableBuffering();
-                await using var requestStream = this.recyclableMemoryStreamManager.GetStream();
-                await context.Request.Body.CopyToAsync(requestStream);
-                using var requestStreamReader = new StreamReader(requestStream);
-                requestStream.Seek(0, SeekOrigin.Begin);
-                requestBody = await requestStreamReader.ReadToEndAsync();
-                context.Request.Body.Seek(0, SeekOrigin.Begin);
-            }
             var webAPILog = new WebAPILog
             {
                 RequestURI = context.Request.Path.ToUriComponent(),
@@ -56,9 +45,18 @@ namespace HackSystem.WebAPI.Extensions.WebAPILogs.Middleware
                 TraceIdentifier = context.TraceIdentifier,
                 IsAuthenticated = context.User.Identity?.IsAuthenticated ?? false,
                 IdentityName = context.User.Identity?.Name,
-                RequestBody = requestBody,
                 StartDateTime = DateTime.Now,
             };
+            if (context.Request.Body.CanRead)
+            {
+                context.Request.EnableBuffering();
+                await using var requestStream = this.recyclableMemoryStreamManager.GetStream();
+                await context.Request.Body.CopyToAsync(requestStream);
+                using var requestStreamReader = new StreamReader(requestStream);
+                requestStream.Seek(0, SeekOrigin.Begin);
+                webAPILog.RequestBody = await requestStreamReader.ReadToEndAsync();
+                context.Request.Body.Seek(0, SeekOrigin.Begin);
+            }
             await this.webAPILogDataService.AddAsync(webAPILog);
 
             try
@@ -91,6 +89,7 @@ namespace HackSystem.WebAPI.Extensions.WebAPILogs.Middleware
                 webAPILog.FinishDateTime = DateTime.Now;
                 webAPILog.ElapsedTime = watcher.ElapsedMilliseconds;
                 await this.webAPILogDataService.UpdateAsync(webAPILog);
+                this.logger.LogInformation($"Web API of {webAPILog.IdentityName} from {webAPILog.SourceHost} in {webAPILog.ElapsedTime} ms: [{webAPILog.Method}]=>{webAPILog.RequestURI} [{webAPILog.StatusCode}]");
             }
         }
     }

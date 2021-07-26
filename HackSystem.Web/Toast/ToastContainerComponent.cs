@@ -68,7 +68,7 @@ namespace HackSystem.Web.Toast
                 {
                     this.Toasts.Clear();
                     this.interopReference.Dispose();
-                    this.toastJSObjectReference.DisposeAsync();
+                    this.toastJSObjectReference.DisposeAsync().AsTask().ConfigureAwait(false);
                 }
 
                 this.disposedValue = true;

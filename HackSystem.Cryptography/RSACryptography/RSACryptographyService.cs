@@ -35,12 +35,9 @@ namespace HackSystem.Cryptography.RSACryptography
 
         public byte[] RSADecrypt(byte[] source)
         {
-            if (this.rsaCryptoServiceProvider.PublicOnly)
-            {
-                throw new InvalidOperationException("Can not decrypt data when has only public key. Please just sign data at server side and verify sign at client side.");
-            }
-
-            return this.rsaCryptoServiceProvider.Decrypt(source, false);
+            return this.rsaCryptoServiceProvider.PublicOnly
+                ? throw new InvalidOperationException("Can not decrypt data when has only public key. Please just sign data at server side and verify sign at client side.")
+                : this.rsaCryptoServiceProvider.Decrypt(source, false);
         }
 
         public string RSAEncrypt(string source)

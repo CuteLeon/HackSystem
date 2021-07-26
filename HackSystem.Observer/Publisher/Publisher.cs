@@ -70,6 +70,7 @@ namespace HackSystem.Observer.Publisher
             {
                 this.UnSubsciber(subscriber);
             }
+            GC.SuppressFinalize(this);
         }
     }
 }

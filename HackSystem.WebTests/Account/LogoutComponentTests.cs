@@ -21,8 +21,8 @@ namespace HackSystem.WebTests.Account
         [Fact()]
         public void LogoutComponentTest()
         {
-            Uri baseUri = new Uri("https://localhost:4237/");
-            Uri logoutUri = new Uri(baseUri, "/api/accounts/logout");
+            Uri baseUri = new("https://localhost:4237/");
+            Uri logoutUri = new(baseUri, "/api/accounts/logout");
             var mockHttpMessageHandler = new Mock<HttpMessageHandler>();
             var mockHttpClient = mockHttpMessageHandler.CreateClient();
             mockHttpMessageHandler.SetupAnyRequest().Throws(new HttpRequestException("Not allowed request than testing request."));

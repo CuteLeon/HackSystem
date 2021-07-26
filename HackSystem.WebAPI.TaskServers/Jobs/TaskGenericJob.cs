@@ -44,7 +44,7 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
 
             var taskInstance = this.serviceProvider.GetRequiredService(taskType);
             var parameterInfos = taskMethod.GetParameters();
-            var lazyParameterDictionary = new Lazy<Dictionary<string, string>>(
+            var lazyParameterDictionary = new Lazy<Dictionary<string, string>?>(
                 () => this.taskParameterWrapper.WrapTaskParameters(this.TaskDetail.Parameters));
             var parameters = parameterInfos
                 .OrderBy(info => info.Position)

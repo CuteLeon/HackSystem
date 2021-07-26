@@ -39,6 +39,7 @@ namespace HackSystem.Observer.Subscriber
         {
             this.HandleMessage = null;
             this.Unsubscibe();
+            GC.SuppressFinalize(this);
         }
 
         public void OnCompleted()

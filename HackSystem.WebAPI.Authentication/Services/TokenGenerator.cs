@@ -14,7 +14,7 @@ namespace HackSystem.WebAPI.Authentication.Services
         private readonly JwtAuthenticationOptions configuration;
         private readonly SymmetricSecurityKey securityKey;
         private readonly SigningCredentials signingCredentials;
-        private readonly JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+        private readonly JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
 
         public TokenGenerator(
             IOptionsMonitor<JwtAuthenticationOptions> optionsMonitor)

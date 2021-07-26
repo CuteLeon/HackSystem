@@ -22,21 +22,21 @@ namespace HackSystem.WebAPI.MockServers.DataServices
             this.memoryCache = memoryCache;
         }
 
-        public async Task<MockRouteDetail> QueryMockRoute(string uri, string method, string sourceHost)
+        public async Task<MockRouteDetail?> QueryMockRoute(string uri, string method, string sourceHost)
         {
             if (string.IsNullOrWhiteSpace(uri))
             {
-                throw new ArgumentNullException($"'{nameof(uri)}' cannot be null or whitespace.", nameof(uri));
+                throw new ArgumentNullException(nameof(uri), $"'{nameof(uri)}' cannot be null or whitespace.");
             }
 
             if (string.IsNullOrWhiteSpace(method))
             {
-                throw new ArgumentNullException($"'{nameof(method)}' cannot be null or whitespace.", nameof(method));
+                throw new ArgumentNullException(nameof(method), $"'{nameof(method)}' cannot be null or whitespace.");
             }
 
             if (string.IsNullOrWhiteSpace(sourceHost))
             {
-                throw new ArgumentNullException($"'{nameof(sourceHost)}' cannot be null or whitespace.", nameof(sourceHost));
+                throw new ArgumentNullException(nameof(sourceHost), $"'{nameof(sourceHost)}' cannot be null or whitespace.");
             }
 
             uri = uri.StartsWith("/") ? uri : $"/{uri}";

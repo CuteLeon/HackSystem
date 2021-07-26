@@ -28,8 +28,8 @@ namespace HackSystem.Web.Account.Tests
         [InlineData("<Fake Token>", true, true)]
         public void LoginComponentTest(string message, bool connection, bool loginResult)
         {
-            Uri baseUri = new Uri("https://localhost:4237/");
-            Uri logoutUri = new Uri(baseUri, "/api/accounts/login");
+            Uri baseUri = new("https://localhost:4237/");
+            Uri logoutUri = new(baseUri, "/api/accounts/login");
             var mockHttpMessageHandler = new Mock<HttpMessageHandler>();
             mockHttpMessageHandler.SetupAnyRequest().Throws(new HttpRequestException(message));
             mockHttpMessageHandler.SetupRequest(HttpMethod.Post, logoutUri).ReturnsAsync(() =>

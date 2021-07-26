@@ -47,10 +47,8 @@ namespace HackSystem.WebAPI.MockServer.Middlewares
                 await this.next(context);
                 return;
             }
-            foreach (var item in context.Features)
-            {
-                System.Diagnostics.Debug.WriteLine($"{item.Key} => {item.Value.ToString()}");
-            }
+
+            this.logger.LogInformation($"Mock Route for {sourceHost} in template {mockRoute.RouteName}({mockRoute.RouteID}): [{method}]=>{uri}");
             using var requestStreamReader = new StreamReader(context.Request.Body);
             var requestContent = await requestStreamReader.ReadToEndAsync();
             var mockRouteLog = new MockRouteLogDetail
@@ -108,6 +106,7 @@ namespace HackSystem.WebAPI.MockServer.Middlewares
                     mockRouteLog.MockRouteLogStatus = MockRouteLogStatus.Complete;
                 mockRouteLog.FinishDateTime = DateTime.Now;
                 await this.mockRouteLogDataService.UpdateAsync(mockRouteLog);
+                this.logger.LogInformation($"Mocked Route from {sourceHost} in template {mockRoute.RouteName}({mockRoute.RouteID}): [{method}]=>{uri}");
             }
         }
     }

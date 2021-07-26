@@ -258,7 +258,7 @@ namespace HackSystem.WebAPI.DataAccess.API.DataServices
         /// <typeparam name="TKey">Type</typeparam>
         /// <param name="keySelector"></param>
         /// <returns></returns>
-        Task<Dictionary<TKey, TEntity>> ToDictionaryAsync<TKey>(Func<TEntity, TKey> keySelector);
+        Task<Dictionary<TKey, TEntity>> ToDictionaryAsync<TKey>(Func<TEntity, TKey> keySelector) where TKey : notnull;
 
         /// <summary>
         /// Return List

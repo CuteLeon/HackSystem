@@ -16,6 +16,7 @@ namespace HackSystem.WebAPI.Controllers
 
         public IActionResult Index()
         {
+            this.logger.LogInformation($"{this.HttpContext.User.Identity?.Name} access Home page.");
             return this.View();
         }
 

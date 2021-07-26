@@ -14,7 +14,7 @@ namespace HackSystem.WebAPI.TaskServers.Services
         /// Shouldn't have '=' or '|' in parameter name.
         /// Shouldn't have '|' in value, to support BASE64 value.
         /// </remarks>
-        public Dictionary<string, string> WrapTaskParameters(string taskParameters)
+        public Dictionary<string, string>? WrapTaskParameters(string taskParameters)
         {
             if (string.IsNullOrWhiteSpace(taskParameters))
             {

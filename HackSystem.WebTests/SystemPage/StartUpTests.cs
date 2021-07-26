@@ -14,7 +14,7 @@ namespace HackSystem.WebTests.SystemPage
         [Fact()]
         public void StartUpTest()
         {
-            Uri baseUri = new Uri("https://localhost:4237/");
+            Uri baseUri = new("https://localhost:4237/");
             var mockNavigationManager = new MockNavigationManager(baseUri.AbsoluteUri, baseUri.AbsoluteUri);
 
             using var ctx = new TestContext();

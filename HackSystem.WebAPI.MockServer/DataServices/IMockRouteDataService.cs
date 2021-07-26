@@ -6,6 +6,6 @@ namespace HackSystem.WebAPI.MockServers.DataServices
 {
     public interface IMockRouteDataService : IDataServiceBase<MockRouteDetail>
     {
-        Task<MockRouteDetail> QueryMockRoute(string uri, string method, string sourceHost);
+        Task<MockRouteDetail?> QueryMockRoute(string uri, string method, string sourceHost);
     }
 }

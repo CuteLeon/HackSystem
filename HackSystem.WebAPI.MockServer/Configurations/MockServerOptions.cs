@@ -2,6 +2,6 @@
 {
     public class MockServerOptions
     {
-        public string MockServerHost { get; set; }
+        public string? MockServerHost { get; set; }
     }
 }

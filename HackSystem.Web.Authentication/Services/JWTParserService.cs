@@ -42,7 +42,7 @@ namespace HackSystem.Web.Authentication.Services
             }
 
             var claims = new List<Claim>();
-            var contentBytes = this.DecodeBase64(payload);
+            var contentBytes = DecodeBase64(payload);
             var dictionary = JsonSerializer.Deserialize<Dictionary<string, object>>(contentBytes);
 
             foreach (var pair in dictionary)
@@ -63,7 +63,7 @@ namespace HackSystem.Web.Authentication.Services
             return claims;
         }
 
-        private byte[] DecodeBase64(string base64)
+        private static byte[] DecodeBase64(string base64)
         {
             if (string.IsNullOrWhiteSpace(base64))
             {

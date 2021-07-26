@@ -15,7 +15,7 @@ namespace HackSystem.WebAPI.TaskServers.Services
 
         public (TaskDetail TaskDetail, Action<Schedule> ScheduleAction) WrapTaskSchedule(TaskDetail taskDetail)
         {
-            Action<Schedule> scheduleAction = schedule =>
+            void scheduleAction(Schedule schedule)
             {
                 schedule.WithName(taskDetail.TaskName);
 
@@ -91,8 +91,8 @@ namespace HackSystem.WebAPI.TaskServers.Services
 
                 if (taskDetail.Enabled) schedule.Enable(); else schedule.Disable();
                 if (!taskDetail.Reentrant) schedule.NonReentrant();
-            };
-            return (taskDetail, scheduleAction);
+            }
+            return (taskDetail, (Action<Schedule>)scheduleAction);
         }
     }
 }
