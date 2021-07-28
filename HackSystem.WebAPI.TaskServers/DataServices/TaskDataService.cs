@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.DataAccess.DataServices;
 using HackSystem.WebAPI.Model.Task;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.TaskServers.DataServices
@@ -20,7 +19,7 @@ namespace HackSystem.WebAPI.TaskServers.DataServices
 
         public async Task<IEnumerable<TaskDetail>> QueryEnabledTasks()
         {
-            return this.AsQueryable().AsNoTracking().Where(task => task.Enabled);
+            return this.AsQueryable().Where(task => task.Enabled);
         }
     }
 }

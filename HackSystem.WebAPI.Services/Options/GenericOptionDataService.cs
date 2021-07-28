@@ -19,12 +19,12 @@ namespace HackSystem.WebAPI.Services.Options
         }
 
         public async Task<IEnumerable<GenericOption>> QueryGenericOptionsByName(string optionName)
-            => this.AsQueryable().AsNoTracking().Where(o => o.OptionName == optionName && (o.Category == null || o.Category == string.Empty) && (o.OwnerLevel == null || o.OwnerLevel == string.Empty));
+            => this.AsQueryable().Where(o => o.OptionName == optionName && (o.Category == null || o.Category == string.Empty) && (o.OwnerLevel == null || o.OwnerLevel == string.Empty));
 
         public async Task<GenericOption> QueryGenericOptionsByOwnerAndCategoryAndName(string owner, string category, string optionName)
-            => await this.AsQueryable().AsNoTracking().FirstOrDefaultAsync(o => o.OptionName == optionName && o.OwnerLevel == owner && o.Category == category);
+            => await this.AsQueryable().FirstOrDefaultAsync(o => o.OptionName == optionName && o.OwnerLevel == owner && o.Category == category);
 
         public async Task<IEnumerable<GenericOption>> QueryGenericOptionsByOwnerAndName(string owner, string optionName)
-            => this.AsQueryable().AsNoTracking().Where(o => o.OptionName == optionName && o.OwnerLevel == owner && o.Category == null);
+            => this.AsQueryable().Where(o => o.OptionName == optionName && o.OwnerLevel == owner && o.Category == null);
     }
 }
