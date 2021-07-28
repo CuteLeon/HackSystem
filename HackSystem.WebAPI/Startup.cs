@@ -96,7 +96,7 @@ namespace HackSystem.WebAPI
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/HackSystemError");
                 app.UseHsts();
             }
 

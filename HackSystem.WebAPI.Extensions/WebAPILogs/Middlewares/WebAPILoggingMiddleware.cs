@@ -73,7 +73,10 @@ namespace HackSystem.WebAPI.Extensions.WebAPILogs.Middleware
                 responseBodyStream.Seek(0, SeekOrigin.Begin);
                 webAPILog.ResponseBody = responseBody;
                 webAPILog.StatusCode = context.Response.StatusCode;
-                await responseBodyStream.CopyToAsync(originalResponseStream);
+                if (originalResponseStream.CanWrite)
+                {
+                    await responseBodyStream.CopyToAsync(originalResponseStream);
+                }
 
                 await this.webAPILogDataService.UpdateAsync(webAPILog);
             }

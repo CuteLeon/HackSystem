@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using HackSystem.WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -16,14 +15,15 @@ namespace HackSystem.WebAPI.Controllers
 
         public IActionResult Index()
         {
-            this.logger.LogInformation($"{this.HttpContext.User.Identity?.Name} access Home page.");
             return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult HackSystemError()
         {
-            return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
+            return this.Problem(
+                detail: Activity.Current?.Id ?? this.HttpContext.TraceIdentifier,
+                title: "Hack System Error");
         }
     }
 }
