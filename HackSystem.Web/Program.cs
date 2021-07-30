@@ -5,6 +5,8 @@ using Blazored.LocalStorage;
 using HackSystem.Common;
 using HackSystem.Cryptography;
 using HackSystem.Observer;
+using HackSystem.Cryptography;
+using HackSystem.Observer;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Common;
 using HackSystem.Web.Configurations;
@@ -56,11 +58,6 @@ namespace HackSystem.Web
                 })
                 .AddHackSystemObserver()
                 .AddBlazoredLocalStorage()
-                .AddHackSystemProgramScheduler(options =>
-                {
-                    options.ProgramLayerStart = 200;
-                    options.TopProgramLayerStart = 850;
-                })
                 .AddCookieStorage()
                 .AddAuthorizationCore()
                 .AddHackSystemAuthentication(options =>
