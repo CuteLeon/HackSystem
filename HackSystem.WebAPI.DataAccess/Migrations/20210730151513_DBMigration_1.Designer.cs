@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackSystem.WebAPI.DataAccess.Migrations
 {
     [DbContext(typeof(HackSystemDBContext))]
-    [Migration("20210723173953_HackSystemDBMigration_2")]
-    partial class HackSystemDBMigration_2
+    [Migration("20210730151513_DBMigration_1")]
+    partial class DBMigration_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -646,7 +646,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                             Id = "program0-icon-0828-hack-system000001",
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
-                            IconUri = "/image/Icon/HomeProgram.png",
+                            IconUri = "/images/ProgramIcons/HomeProgram.png",
                             Integral = true,
                             IsSingleton = true,
                             Name = "Home",
@@ -657,7 +657,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                             Id = "program0-icon-0828-hack-system000002",
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
-                            IconUri = "/image/Icon/ExplorerProgram.png",
+                            IconUri = "/images/ProgramIcons/ExplorerProgram.png",
                             Integral = true,
                             IsSingleton = false,
                             Name = "Explorer",
@@ -668,7 +668,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                             Id = "program0-icon-0828-hack-system000003",
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
-                            IconUri = "/image/Icon/BorwserProgram.png",
+                            IconUri = "/images/ProgramIcons/BorwserProgram.png",
                             Integral = true,
                             IsSingleton = false,
                             Name = "Borwser",
@@ -679,7 +679,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                             Id = "program0-icon-0828-hack-system000004",
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
-                            IconUri = "/image/Icon/ProfileProgram.png",
+                            IconUri = "/images/ProgramIcons/ProfileProgram.png",
                             Integral = true,
                             IsSingleton = true,
                             Name = "Profile",
@@ -690,7 +690,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                             Id = "program0-icon-0828-hack-system000005",
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
-                            IconUri = "/image/Icon/SettingProgram.png",
+                            IconUri = "/images/ProgramIcons/SettingProgram.png",
                             Integral = true,
                             IsSingleton = true,
                             Name = "Setting",
@@ -701,7 +701,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                             Id = "program0-icon-0828-hack-system000006",
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
-                            IconUri = "/image/Icon/AppStoreProgram.png",
+                            IconUri = "/images/ProgramIcons/AppStoreProgram.png",
                             Integral = true,
                             IsSingleton = true,
                             Name = "AppStore",
@@ -712,7 +712,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                             Id = "program0-icon-0828-hack-system000007",
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
-                            IconUri = "/image/Icon/WeatherProgram.png",
+                            IconUri = "/images/ProgramIcons/WeatherProgram.png",
                             Integral = false,
                             IsSingleton = true,
                             Name = "Weather",
@@ -723,7 +723,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                             Id = "program0-icon-0828-hack-system000008",
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
-                            IconUri = "/image/Icon/TaskServerProgram.png",
+                            IconUri = "/images/ProgramIcons/TaskServerProgram.png",
                             Integral = true,
                             IsSingleton = true,
                             Name = "TaskServer",
@@ -734,7 +734,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                             Id = "program0-icon-0828-hack-system000009",
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
-                            IconUri = "/image/Icon/MockServerProgram.png",
+                            IconUri = "/images/ProgramIcons/MockServerProgram.png",
                             Integral = true,
                             IsSingleton = true,
                             Name = "MockServer",
@@ -797,6 +797,25 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     b.HasIndex("TaskName", "ExecuteDateTime");
 
                     b.ToTable("TaskDetails");
+
+                    b.HasData(
+                        new
+                        {
+                            TaskID = 1,
+                            AssemblyName = "HackSystem.WebAPI.Tasks",
+                            AutomaticInterval = new TimeSpan(0, 0, 0, 0, 0),
+                            Category = "HackSystem",
+                            ClassName = "HackSystem.WebAPI.Tasks.DatabaseBackup.IDatabaseBackupTask",
+                            CreateTime = new DateTime(2021, 7, 24, 14, 3, 30, 0, DateTimeKind.Unspecified),
+                            Enabled = true,
+                            ExecuteDateTime = new DateTime(2021, 7, 24, 5, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstInterval = new TimeSpan(0, 0, 0, 0, 0),
+                            Parameters = "OriginDB=DATA SOURCE=.\\HackSystem.db|BackupDB=DATA SOURCE=.\\HackSystem_backup_{0}.db",
+                            ProcedureName = "Execute",
+                            Reentrant = false,
+                            TaskFrequency = 3,
+                            TaskName = "Database Auto Backup"
+                        });
                 });
 
             modelBuilder.Entity("HackSystem.WebAPI.Model.Task.TaskLogDetail", b =>

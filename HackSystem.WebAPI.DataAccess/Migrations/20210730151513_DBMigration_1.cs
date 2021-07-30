@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HackSystem.WebAPI.DataAccess.Migrations
 {
-    public partial class HackSystemDBMigration_1 : Migration
+    public partial class DBMigration_1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -132,6 +132,33 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TaskDetails", x => x.TaskID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WebAPILogs",
+                columns: table => new
+                {
+                    WebAPILogID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RequestURI = table.Column<string>(type: "TEXT", nullable: true),
+                    QueryString = table.Column<string>(type: "TEXT", nullable: true),
+                    Method = table.Column<string>(type: "TEXT", nullable: true),
+                    SourceHost = table.Column<string>(type: "TEXT", nullable: true),
+                    UserAgent = table.Column<string>(type: "TEXT", nullable: true),
+                    TraceIdentifier = table.Column<string>(type: "TEXT", nullable: true),
+                    IsAuthenticated = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IdentityName = table.Column<string>(type: "TEXT", nullable: true),
+                    RequestBody = table.Column<string>(type: "TEXT", nullable: true),
+                    ResponseBody = table.Column<string>(type: "TEXT", nullable: true),
+                    StatusCode = table.Column<int>(type: "INTEGER", nullable: false),
+                    StartDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    FinishDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ElapsedTime = table.Column<long>(type: "INTEGER", nullable: false),
+                    Exception = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WebAPILogs", x => x.WebAPILogID);
                 });
 
             migrationBuilder.CreateTable(
@@ -360,47 +387,52 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "BasicPrograms",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Integral", "IsSingleton", "Name", "TypeName" },
-                values: new object[] { "program0-icon-0828-hack-system000001", "HackSystem.Web.SystemProgram", true, "/image/Icon/HomeProgram.png", true, true, "Home", "HackSystem.Web.SystemProgram.Home.HomeComponent" });
+                values: new object[] { "program0-icon-0828-hack-system000001", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/HomeProgram.png", true, true, "Home", "HackSystem.Web.SystemProgram.Home.HomeComponent" });
 
             migrationBuilder.InsertData(
                 table: "BasicPrograms",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Integral", "IsSingleton", "Name", "TypeName" },
-                values: new object[] { "program0-icon-0828-hack-system000002", "HackSystem.Web.SystemProgram", true, "/image/Icon/ExplorerProgram.png", true, false, "Explorer", "HackSystem.Web.SystemProgram.Explorer.ExplorerComponent" });
+                values: new object[] { "program0-icon-0828-hack-system000002", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/ExplorerProgram.png", true, false, "Explorer", "HackSystem.Web.SystemProgram.Explorer.ExplorerComponent" });
 
             migrationBuilder.InsertData(
                 table: "BasicPrograms",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Integral", "IsSingleton", "Name", "TypeName" },
-                values: new object[] { "program0-icon-0828-hack-system000003", "HackSystem.Web.SystemProgram", true, "/image/Icon/BorwserProgram.png", true, false, "Borwser", "HackSystem.Web.SystemProgram.Borwser.BorwserComponent" });
+                values: new object[] { "program0-icon-0828-hack-system000003", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/BorwserProgram.png", true, false, "Borwser", "HackSystem.Web.SystemProgram.Borwser.BorwserComponent" });
 
             migrationBuilder.InsertData(
                 table: "BasicPrograms",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Integral", "IsSingleton", "Name", "TypeName" },
-                values: new object[] { "program0-icon-0828-hack-system000004", "HackSystem.Web.SystemProgram", true, "/image/Icon/ProfileProgram.png", true, true, "Profile", "HackSystem.Web.SystemProgram.Profile.ProfileComponent" });
+                values: new object[] { "program0-icon-0828-hack-system000004", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/ProfileProgram.png", true, true, "Profile", "HackSystem.Web.SystemProgram.Profile.ProfileComponent" });
 
             migrationBuilder.InsertData(
                 table: "BasicPrograms",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Integral", "IsSingleton", "Name", "TypeName" },
-                values: new object[] { "program0-icon-0828-hack-system000005", "HackSystem.Web.SystemProgram", true, "/image/Icon/SettingProgram.png", true, true, "Setting", "HackSystem.Web.SystemProgram.Setting.SettingComponent" });
+                values: new object[] { "program0-icon-0828-hack-system000005", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/SettingProgram.png", true, true, "Setting", "HackSystem.Web.SystemProgram.Setting.SettingComponent" });
 
             migrationBuilder.InsertData(
                 table: "BasicPrograms",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Integral", "IsSingleton", "Name", "TypeName" },
-                values: new object[] { "program0-icon-0828-hack-system000006", "HackSystem.Web.SystemProgram", true, "/image/Icon/AppStoreProgram.png", true, true, "AppStore", "HackSystem.Web.SystemProgram.AppStore.AppStoreComponent" });
+                values: new object[] { "program0-icon-0828-hack-system000006", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/AppStoreProgram.png", true, true, "AppStore", "HackSystem.Web.SystemProgram.AppStore.AppStoreComponent" });
 
             migrationBuilder.InsertData(
                 table: "BasicPrograms",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Integral", "IsSingleton", "Name", "TypeName" },
-                values: new object[] { "program0-icon-0828-hack-system000007", "HackSystem.Web.SystemProgram", true, "/image/Icon/WeatherProgram.png", false, true, "Weather", "HackSystem.Web.SystemProgram.Weather.WeatherComponent" });
+                values: new object[] { "program0-icon-0828-hack-system000007", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/WeatherProgram.png", false, true, "Weather", "HackSystem.Web.SystemProgram.Weather.WeatherComponent" });
 
             migrationBuilder.InsertData(
                 table: "BasicPrograms",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Integral", "IsSingleton", "Name", "TypeName" },
-                values: new object[] { "program0-icon-0828-hack-system000008", "HackSystem.Web.SystemProgram", true, "/image/Icon/TaskServerProgram.png", true, true, "TaskServer", "HackSystem.Web.SystemProgram.TaskServer.TaskServerComponent" });
+                values: new object[] { "program0-icon-0828-hack-system000008", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/TaskServerProgram.png", true, true, "TaskServer", "HackSystem.Web.SystemProgram.TaskServer.TaskServerComponent" });
 
             migrationBuilder.InsertData(
                 table: "BasicPrograms",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Integral", "IsSingleton", "Name", "TypeName" },
-                values: new object[] { "program0-icon-0828-hack-system000009", "HackSystem.Web.SystemProgram", true, "/image/Icon/MockServerProgram.png", true, true, "MockServer", "HackSystem.Web.SystemProgram.MockServer.MockServerComponent" });
+                values: new object[] { "program0-icon-0828-hack-system000009", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/MockServerProgram.png", true, true, "MockServer", "HackSystem.Web.SystemProgram.MockServer.MockServerComponent" });
+
+            migrationBuilder.InsertData(
+                table: "TaskDetails",
+                columns: new[] { "TaskID", "AssemblyName", "AutomaticInterval", "Category", "ClassName", "CreateTime", "Enabled", "ExecuteDateTime", "FirstInterval", "Parameters", "ProcedureName", "Reentrant", "TaskFrequency", "TaskName" },
+                values: new object[] { 1, "HackSystem.WebAPI.Tasks", new TimeSpan(0, 0, 0, 0, 0), "HackSystem", "HackSystem.WebAPI.Tasks.DatabaseBackup.IDatabaseBackupTask", new DateTime(2021, 7, 24, 14, 3, 30, 0, DateTimeKind.Unspecified), true, new DateTime(2021, 7, 24, 5, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0), "OriginDB=DATA SOURCE=.\\HackSystem.db|BackupDB=DATA SOURCE=.\\HackSystem_backup_{0}.db", "Execute", false, 3, "Database Auto Backup" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserClaims",
@@ -682,6 +714,11 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                 table: "UserBasicProgramMaps",
                 columns: new[] { "UserId", "ProgramId" },
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WebAPILogs_RequestURI_SourceHost_IdentityName_StartDateTime",
+                table: "WebAPILogs",
+                columns: new[] { "RequestURI", "SourceHost", "IdentityName", "StartDateTime" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -712,6 +749,9 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserBasicProgramMaps");
+
+            migrationBuilder.DropTable(
+                name: "WebAPILogs");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
