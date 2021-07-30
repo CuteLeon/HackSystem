@@ -18,8 +18,6 @@ namespace HackSystem.Web.Account
 
             try
             {
-                loginDto.UserName = this.rsaCryptographyService.RSAEncrypt(loginDto.UserName);
-                loginDto.Password = this.rsaCryptographyService.RSAEncrypt(loginDto.Password);
                 var result = await this.authenticationService.Login(this.loginDto);
                 this.logger.LogDebug($"Login result: {(result.Successful ? "Success" : "Fail")}");
 
