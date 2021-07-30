@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
+    <ProjectReference Include="..\HackSystem.Cryptography\HackSystem.Cryptography.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Authentication\HackSystem.WebAPI.Authentication.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Common\HackSystem.WebAPI.Common.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.DataAccess\HackSystem.WebAPI.DataAccess.csproj" />

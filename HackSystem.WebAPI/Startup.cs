@@ -1,5 +1,7 @@
-﻿using HackSystem.Web.Authentication.Extensions;
+﻿using HackSystem.Cryptography;
+using HackSystem.Web.Authentication.Extensions;
 using HackSystem.WebAPI.Authentication.Configurations;
+using HackSystem.WebAPI.Configurations;
 using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.Extensions;
 using HackSystem.WebAPI.MockServers.Configurations;
@@ -67,15 +69,20 @@ namespace HackSystem.WebAPI
             var jwtConfiguration = this.Configuration.GetSection("JwtConfiguration").Get<JwtAuthenticationOptions>();
             var taskServerConfiguration = this.Configuration.GetSection("TaskServerConfiguration").Get<TaskServerOptions>();
             var mockServerConfiguration = this.Configuration.GetSection("MockServerConfiguration").Get<MockServerOptions>();
+            var securityConfiguration = this.Configuration.GetSection("SecurityConfiguration").Get<SecurityConfiguration>();
             services
                 .AddAutoMapper(typeof(Startup).Assembly)
+                .AddRSACryptography(options =>
+                {
+                    options.RSAKeyParameters = securityConfiguration.RSAPrivateKey;
+                })
                 .AttachTaskServer(taskServerConfiguration)
                 .AttachMockServer(mockServerConfiguration)
                 .AddHttpClient()
                 .AddMemoryCache()
                 .AddHackSystemWebAPIExtensions()
                 .AddAPIAuthentication(jwtConfiguration)
-                .AddAPIServices();
+                .AddWebAPIServices();
 
             services
                 .AddResponseCompression()
@@ -107,13 +114,10 @@ namespace HackSystem.WebAPI
 
             app.UseRouting();
 
-            // Authentication
             app.UseAuthentication();
-            // Authorization
             app.UseAuthorization();
 
             app.UseWebAPILogging();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

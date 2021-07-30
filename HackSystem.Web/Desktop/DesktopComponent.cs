@@ -45,14 +45,7 @@ namespace HackSystem.Web.Desktop
                 var maps = await this.basicProgramService.QueryUserBasicProgramMaps();
                 if (maps?.Any() ?? false)
                 {
-                    this.BasicProgramMaps = maps
-                        .Select(map =>
-                        {
-                            map.BasicProgram.IconUri = new Uri(new Uri(this.apiConfiguration.CurrentValue.APIURL), map.BasicProgram.IconUri).AbsoluteUri;
-                            return map;
-                        })
-                        .ToDictionary(map => map.BasicProgram.Id, map => map);
-
+                    this.BasicProgramMaps = maps.ToDictionary(map => map.BasicProgram.Id, map => map);
                     this.ProgramDrawerComponent.LoadProgramDrawer(maps);
                     this.ProgramDockComponent.LoadProgramDock(maps.Where(map => map.PinToDock));
                 }

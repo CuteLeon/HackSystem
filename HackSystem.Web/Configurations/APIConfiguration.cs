@@ -2,7 +2,7 @@
 {
     public class APIConfiguration
     {
-        public string APIURL { get; set; }
+        public string APIHost { get; set; }
 
         public int TokenExpiryInMinutes { get; set; }
 
