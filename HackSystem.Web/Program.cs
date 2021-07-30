@@ -10,6 +10,7 @@ using HackSystem.Web.Common;
 using HackSystem.Web.Configurations;
 using HackSystem.Web.CookieStorage;
 using HackSystem.Web.Extensions;
+using HackSystem.Web.Scheduler.Program;
 using HackSystem.Web.Services.Configurations;
 using HackSystem.Web.Services.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -45,6 +46,13 @@ namespace HackSystem.Web
             builder.Services
                 .AddAutoMapper(typeof(Program).Assembly)
                 .AddLogging()
+                .AddHackSystemObserver()
+                .AddBlazoredLocalStorage()
+                .AddHackSystemProgramScheduler(options =>
+                {
+                    options.ProgramLayerStart = 200;
+                    options.TopProgramLayerStart = 850;
+                })
                 .AddRSACryptography(options =>
                 {
                     options.RSAKeyParameters = securityConfiguration.RSAPublicKey;
@@ -53,8 +61,6 @@ namespace HackSystem.Web
                 {
                     APIHost = apiConfiguration.APIHost,
                 })
-                .AddHackSystemObserver()
-                .AddBlazoredLocalStorage()
                 .AddCookieStorage()
                 .AddAuthorizationCore()
                 .AddHackSystemAuthentication(options =>
