@@ -9,7 +9,7 @@ namespace HackSystem.WebAPI.Services.Extensions
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection AddAPIServices(this IServiceCollection services)
+        public static IServiceCollection AddWebAPIServices(this IServiceCollection services)
         {
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IBasicProgramDataService, BasicProgramDataService>();

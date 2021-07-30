@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using HackSystem.Common;
+using HackSystem.Cryptography;
 using HackSystem.Observer;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Common;
@@ -10,10 +11,8 @@ using HackSystem.Web.Configurations;
 using HackSystem.Web.CookieStorage;
 using HackSystem.Web.Extensions;
 using HackSystem.Web.Scheduler.Program;
-using HackSystem.Web.Services.API.Authentication;
-using HackSystem.Web.Services.API.Program;
-using HackSystem.Web.Services.Authentication;
-using HackSystem.Web.Services.Program;
+using HackSystem.Web.Services.Configurations;
+using HackSystem.Web.Services.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,11 +29,8 @@ namespace HackSystem.Web
                 .AddJsonFile($"appsettings.{builder.HostEnvironment.Environment}.json", true, false);
             builder.RootComponents.Add<App>("#app");
 
-            var apiConfiguration = builder.Configuration.GetSection("APIConfiguration").Get<APIConfiguration>();
             builder
-                .InitializeConfiguration()
-                .InitializeBasicService(apiConfiguration)
-                .InitializeHackSystemServices(apiConfiguration)
+                .InitializeBasicService()
                 .InitializeAuthorizationPolicy();
 
             await builder
@@ -43,11 +39,21 @@ namespace HackSystem.Web
                 .RunAsync();
         }
 
-        public static WebAssemblyHostBuilder InitializeBasicService(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
+        public static WebAssemblyHostBuilder InitializeBasicService(this WebAssemblyHostBuilder builder)
         {
+            var apiConfiguration = builder.Configuration.GetSection("APIConfiguration").Get<APIConfiguration>();
+            var securityConfiguration = builder.Configuration.GetSection("SecurityConfiguration").Get<SecurityConfiguration>();
             builder.Services
                 .AddAutoMapper(typeof(Program).Assembly)
                 .AddLogging()
+                .AddRSACryptography(options =>
+                {
+                    options.RSAKeyParameters = securityConfiguration.RSAPublicKey;
+                })
+                .AddWebServices(new WebServiceOptions()
+                {
+                    APIHost = apiConfiguration.APIHost,
+                })
                 .AddHackSystemObserver()
                 .AddBlazoredLocalStorage()
                 .AddHackSystemProgramScheduler(options =>
@@ -59,7 +65,7 @@ namespace HackSystem.Web
                 .AddAuthorizationCore()
                 .AddHackSystemAuthentication(options =>
                 {
-                    options.AuthenticationURL = apiConfiguration.APIURL;
+                    options.AuthenticationURL = apiConfiguration.APIHost;
                     options.TokenExpiryInMinutes = apiConfiguration.TokenExpiryInMinutes;
                     options.AuthenticationScheme = WebCommonSense.AuthenticationScheme;
                     options.AuthenticationType = WebCommonSense.AuthenticationType;
@@ -67,33 +73,8 @@ namespace HackSystem.Web
                     options.ExpiryClaimType = WebCommonSense.ExpiryClaimType;
                     options.TokenRefreshInMinutes = apiConfiguration.TokenRefreshInMinutes;
                 })
-                .AddTransient(sp => new HttpClient { BaseAddress = new Uri(apiConfiguration.APIURL) })
+                .AddTransient(sp => new HttpClient { BaseAddress = new Uri(apiConfiguration.APIHost) })
                 .AddHttpClient("LocalHttpClient", httpClient => httpClient.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
-
-            return builder;
-        }
-
-        /// <summary>
-        /// Initialize Configuration
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        public static WebAssemblyHostBuilder InitializeConfiguration(this WebAssemblyHostBuilder builder)
-        {
-            builder.Services.Configure<APIConfiguration>(builder.Configuration.GetSection("APIConfiguration"));
-
-            return builder;
-        }
-
-        /// <summary>
-        /// Initialize Services
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        public static WebAssemblyHostBuilder InitializeHackSystemServices(this WebAssemblyHostBuilder builder, APIConfiguration apiConfiguration)
-        {
-            builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
-            builder.Services.AddHttpClient<IBasicProgramService, BasicProgramService>(httpClient => httpClient.BaseAddress = new Uri(apiConfiguration.APIURL));
 
             return builder;
         }
