@@ -41,10 +41,11 @@ namespace HackSystem.WebAPI
                 .AllowAnyHeader()));
 
             // Config Database context
-            services.AddDbContext<HackSystemDBContext>(options =>
-                    options
-                        .UseSqlite(this.Configuration.GetConnectionString("HSDB"))
-                        .UseLazyLoadingProxies());
+            services.AddDbContext<HackSystemDBContext>(
+                options => options
+                    .UseSqlite(this.Configuration.GetConnectionString("HSDB"))
+                    .UseLazyLoadingProxies(),
+                ServiceLifetime.Scoped);
 
             // Register Identity service and options
             services

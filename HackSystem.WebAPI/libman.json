@@ -8,10 +8,7 @@
     },
     {
       "library": "jquery@3.5.1",
-      "destination": "wwwroot/libs/jquery/",
-      "files": [
-        "jquery.js"
-      ]
+      "destination": "wwwroot/libs/jquery/"
     },
     {
       "library": "font-awesome@5.14.0",
