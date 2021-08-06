@@ -24,10 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\libs\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
     <ProjectReference Include="..\HackSystem.Cryptography\HackSystem.Cryptography.csproj" />
     <ProjectReference Include="..\HackSystem.Observer\HackSystem.Observer.csproj" />
