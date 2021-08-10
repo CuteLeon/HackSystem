@@ -40,7 +40,7 @@ namespace HackSystem.WebAPI.Services.Options.Tests
             logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<EventId>(), It.IsAny<object>(), It.IsAny<Exception?>(), It.IsAny<Func<object, Exception?, string>>())).Verifiable();
             IGenericOptionDataService genericOptionDataService = new GenericOptionDataService(logger.Object, GetDBContext());
 
-            var optionValue = genericOptionDataService.QueryGenericOptionsByName("OptionName").Result.FirstOrDefault();
+            var optionValue = genericOptionDataService.QueryGenericOptions("OptionName").Result;
             Assert.Equal("OptionValue", optionValue.OptionValue);
         }
 
@@ -51,7 +51,7 @@ namespace HackSystem.WebAPI.Services.Options.Tests
             logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<EventId>(), It.IsAny<object>(), It.IsAny<Exception?>(), It.IsAny<Func<object, Exception?, string>>())).Verifiable();
             IGenericOptionDataService genericOptionDataService = new GenericOptionDataService(logger.Object, GetDBContext());
 
-            var optionValue = genericOptionDataService.QueryGenericOptionsByOwnerAndCategoryAndName("HackSystem", "Generic", "OptionName").Result;
+            var optionValue = genericOptionDataService.QueryGenericOptions("HackSystem", "Generic", "OptionName").Result;
             Assert.Equal("HackSystemGenericOptionValue", optionValue.OptionValue);
         }
 
@@ -62,7 +62,7 @@ namespace HackSystem.WebAPI.Services.Options.Tests
             logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<EventId>(), It.IsAny<object>(), It.IsAny<Exception?>(), It.IsAny<Func<object, Exception?, string>>())).Verifiable();
             IGenericOptionDataService genericOptionDataService = new GenericOptionDataService(logger.Object, GetDBContext());
 
-            var optionValue = genericOptionDataService.QueryGenericOptionsByOwnerAndName("HackSystem", "OptionName").Result.FirstOrDefault();
+            var optionValue = genericOptionDataService.QueryGenericOptions("HackSystem", "OptionName").Result;
             Assert.Equal("HackSystemOptionValue", optionValue.OptionValue);
         }
     }
