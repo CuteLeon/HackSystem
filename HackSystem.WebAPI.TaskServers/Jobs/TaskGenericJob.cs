@@ -12,7 +12,8 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
     public class TaskGenericJob : TaskJobBase, ITaskGenericJob
     {
         private readonly IServiceProvider serviceProvider;
-        private readonly ITaskParameterWrapper taskParameterWrapper;
+        private readonly ITaskPairParameterWrapper taskPairParameterWrapper;
+        private readonly ITaskJsonParameterWrapper taskJsonParameterWrapper;
 
         public TaskGenericJob(
             ILogger<TaskGenericJob> logger,
@@ -21,7 +22,8 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
             : base(logger, taskLogDataService)
         {
             this.serviceProvider = serviceScopeFactory.CreateScope().ServiceProvider;
-            this.taskParameterWrapper = this.serviceProvider.GetRequiredService<ITaskParameterWrapper>();
+            this.taskPairParameterWrapper = this.serviceProvider.GetRequiredService<ITaskPairParameterWrapper>();
+            this.taskJsonParameterWrapper = this.serviceProvider.GetRequiredService<ITaskJsonParameterWrapper>();
         }
 
         protected override void ExecuteTask()
@@ -44,15 +46,15 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
 
             var taskInstance = this.serviceProvider.GetRequiredService(taskType);
             var parameterInfos = taskMethod.GetParameters();
-            var lazyParameterDictionary = new Lazy<Dictionary<string, string>?>(
-                () => this.taskParameterWrapper.WrapTaskParameters(this.TaskDetail.Parameters));
+            var lazyPairParameterDictionary = new Lazy<IDictionary<string, string>?>(
+                () => this.taskPairParameterWrapper.WrapTaskParameters(this.TaskDetail.Parameters));
             var parameters = parameterInfos
                 .OrderBy(info => info.Position)
                 .Select(info => info switch
                 {
                     _ when info.HasDefaultValue => info.DefaultValue,
-                    _ when info.ParameterType == typeof(Dictionary<string, string>) => lazyParameterDictionary.Value,
-                    _ => Activator.CreateInstance(info.ParameterType),
+                    _ when typeof(IDictionary<string, string>).IsAssignableFrom(info.ParameterType) => lazyPairParameterDictionary.Value,
+                    _ => this.taskJsonParameterWrapper.WrapTaskParameters(this.TaskDetail.Parameters, info.ParameterType),
                 })
                 .ToArray();
             var result = taskMethod.Invoke(taskInstance, parameters);

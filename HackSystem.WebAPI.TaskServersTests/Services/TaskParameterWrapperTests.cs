@@ -51,7 +51,7 @@ namespace HackSystem.WebAPI.TaskServers.Services.Tests
             string name_3,
             string value_3)
         {
-            var parameterDictionary = new TaskParameterWrapper().WrapTaskParameters(taskParameters);
+            var parameterDictionary = new TaskPairParameterWrapper().WrapTaskParameters(taskParameters);
             Assert.Equal(expectedCount, parameterDictionary?.Count ?? 0);
             if (parameterDictionary != null)
             {
