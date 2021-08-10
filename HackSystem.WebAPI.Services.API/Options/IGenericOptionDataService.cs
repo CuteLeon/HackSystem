@@ -7,10 +7,16 @@ namespace HackSystem.WebAPI.Services.Options
 {
     public interface IGenericOptionDataService : IDataServiceBase<GenericOption>
     {
-        Task<IEnumerable<GenericOption>> QueryGenericOptionsByName(string optionName);
+        Task<GenericOption> QueryGenericOptions(string optionName);
 
-        Task<IEnumerable<GenericOption>> QueryGenericOptionsByOwnerAndName(string owner, string optionName);
+        Task<GenericOption> QueryGenericOptions(string optionName, string owner);
 
-        Task<GenericOption> QueryGenericOptionsByOwnerAndCategoryAndName(string owner, string category, string optionName);
+        Task<GenericOption> QueryGenericOptions(string optionName, string owner, string category);
+
+        Task<IEnumerable<GenericOption>> QueryGenericOptions(IEnumerable<string> optionNames);
+
+        Task<IEnumerable<GenericOption>> QueryGenericOptions(IEnumerable<string> optionNames, string owner);
+
+        Task<IEnumerable<GenericOption>> QueryGenericOptions(IEnumerable<string> optionNames, string owner, string category);
     }
 }
