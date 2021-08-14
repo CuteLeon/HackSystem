@@ -18,7 +18,8 @@ namespace HackSystem.WebAPI.Services.Options.Tests
             {
                 new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_0" },
                 new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_1", OwnerLevel = "HackSystem",},
-                new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_2", OwnerLevel = "HackSystem", Category = "Generic" },
+                new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_2", OwnerLevel = "HackSystem", Category = "GenericCategory" },
+                new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_3", Category = "GenericCategory" },
             };
             var dbContext = new HackSystemDBContext(
                 new DbContextOptionsBuilder<HackSystemDBContext>()
@@ -34,20 +35,41 @@ namespace HackSystem.WebAPI.Services.Options.Tests
         }
 
         [Fact()]
-        public void QueryGenericOptionsByNameTest()
+        public void QueryGenericOptionsTest()
         {
             var logger = new Mock<ILogger<GenericOptionDataService>>();
             logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<EventId>(), It.IsAny<object>(), It.IsAny<Exception?>(), It.IsAny<Func<object, Exception?, string>>())).Verifiable();
             IGenericOptionDataService genericOptionDataService = new GenericOptionDataService(logger.Object, GetDBContext());
 
-            var optionValue = genericOptionDataService.QueryGenericOptions("OptionName").Result;
+            var optionValue = genericOptionDataService.QueryGenericOption("OtherOptionName").Result;
+            Assert.Null(optionValue);
+
+            optionValue = genericOptionDataService.QueryGenericOption("OptionName").Result;
             Assert.Equal("OptionValue_0", optionValue.OptionValue);
 
-            optionValue = genericOptionDataService.QueryGenericOptions("OptionName", "HackSystem").Result;
+            optionValue = genericOptionDataService.QueryGenericOption("OptionName", "HackSystem").Result;
             Assert.Equal("OptionValue_1", optionValue.OptionValue);
 
-            optionValue = genericOptionDataService.QueryGenericOptions("OptionName", "HackSystem", "Generic").Result;
+            optionValue = genericOptionDataService.QueryGenericOption("OptionName", "OtherSystem").Result;
+            Assert.Equal("OptionValue_0", optionValue.OptionValue);
+
+            optionValue = genericOptionDataService.QueryGenericOption("OptionName", category: "GenericCategory").Result;
+            Assert.Equal("OptionValue_3", optionValue.OptionValue);
+
+            optionValue = genericOptionDataService.QueryGenericOption("OptionName", category: "OtherCategory").Result;
+            Assert.Equal("OptionValue_0", optionValue.OptionValue);
+
+            optionValue = genericOptionDataService.QueryGenericOption("OptionName", "HackSystem", "GenericCategory").Result;
             Assert.Equal("OptionValue_2", optionValue.OptionValue);
+
+            optionValue = genericOptionDataService.QueryGenericOption("OptionName", "OtherSystem", "GenericCategory").Result;
+            Assert.Equal("OptionValue_3", optionValue.OptionValue);
+
+            optionValue = genericOptionDataService.QueryGenericOption("OptionName", "HackSystem", "OtherCategory").Result;
+            Assert.Equal("OptionValue_1", optionValue.OptionValue);
+
+            optionValue = genericOptionDataService.QueryGenericOption("OptionName", "OtherSystem", "OtherCategory").Result;
+            Assert.Equal("OptionValue_0", optionValue.OptionValue);
         }
     }
 }

@@ -78,9 +78,7 @@ namespace HackSystem.WebAPI.DataAccess
             builder.Entity<MockRouteDetail>().Property(nameof(MockRouteDetail.MockMethod)).UseCollation("NOCASE");
             builder.Entity<MockRouteDetail>().Property(nameof(MockRouteDetail.MockSourceHost)).UseCollation("NOCASE");
 
-            builder.Entity<GenericOption>().HasIndex(nameof(GenericOption.OptionName));
-            builder.Entity<GenericOption>().HasIndex(nameof(GenericOption.OwnerLevel), nameof(GenericOption.OptionName));
-            builder.Entity<GenericOption>().HasIndex(nameof(GenericOption.OwnerLevel), nameof(GenericOption.Category), nameof(GenericOption.OptionName)).IsUnique();
+            builder.Entity<GenericOption>().HasIndex(nameof(GenericOption.OptionName), nameof(GenericOption.Category), nameof(GenericOption.OwnerLevel)).IsUnique();
 
             builder.Entity<GenericOption>().Property(nameof(GenericOption.OptionName)).UseCollation("NOCASE");
             builder.Entity<GenericOption>().Property(nameof(GenericOption.Category)).UseCollation("NOCASE");
