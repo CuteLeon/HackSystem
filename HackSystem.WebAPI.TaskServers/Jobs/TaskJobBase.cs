@@ -1,5 +1,4 @@
-﻿using System;
-using HackSystem.WebAPI.Model.Task;
+﻿using HackSystem.WebAPI.Model.Task;
 using HackSystem.WebAPI.TaskServers.DataServices;
 using HackSystem.WebAPI.TaskServers.Services;
 using Microsoft.Extensions.Logging;
@@ -34,6 +33,7 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
             };
             this.taskLogDataService.AddAsync(taskLog).ConfigureAwait(false);
 
+            this.logger.LogInformation($"Task Log ID: {taskLog.TaskLogID}, Task {this.TaskDetail.TaskName} [TaskID={this.TaskDetail.TaskID}] starts at {this.TaskDetail.ClassName}.{this.TaskDetail.ProcedureName} method...");
             try
             {
                 ExecuteTask();
@@ -42,7 +42,7 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
             {
                 taskLog.TaskLogStatus = TaskLogStatus.Failed;
                 taskLog.Exception = ex.ToString();
-
+                this.logger.LogError(ex, $"Task Log ID: {taskLog.TaskLogID}, Task {this.TaskDetail.TaskName} [TaskID={this.TaskDetail.TaskID}] failed.");
                 throw;
             }
             finally
@@ -51,6 +51,7 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
                     taskLog.TaskLogStatus = TaskLogStatus.Complete;
                 taskLog.FinishDateTime = DateTime.Now;
                 this.taskLogDataService.UpdateAsync(taskLog).ConfigureAwait(false);
+                this.logger.LogInformation($"Task Log ID: {taskLog.TaskLogID}, Task {this.TaskDetail.TaskName} [TaskID={this.TaskDetail.TaskID}] finished, elapsed: {(taskLog.FinishDateTime - taskLog.StartDateTime).TotalMilliseconds} ms.");
             }
         }
 
