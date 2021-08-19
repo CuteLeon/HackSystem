@@ -91,7 +91,7 @@ namespace HackSystem.WebAPI.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.LogTo(this.Log);
+            // optionsBuilder.LogTo(this.Log);
         }
 
         private void Log(string message)

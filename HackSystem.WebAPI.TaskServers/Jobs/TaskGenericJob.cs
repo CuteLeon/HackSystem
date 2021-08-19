@@ -54,7 +54,14 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
                     _ => this.taskJsonParameterWrapper.WrapTaskParameters(this.TaskDetail.Parameters, info.ParameterType),
                 })
                 .ToArray();
+
             var result = taskMethod.Invoke(taskInstance, parameters);
+            if (result is Task asyncTask)
+            {
+                asyncTask.ConfigureAwait(false).GetAwaiter().GetResult();
+                if (asyncTask.Exception != null)
+                    throw asyncTask.Exception;
+            }
         }
     }
 }
