@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HackSystem.WebAPI.DataAccess;
+﻿using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.Model.Option;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,14 +11,14 @@ namespace HackSystem.WebAPI.Services.Options.Tests
     {
         private HackSystemDBContext GetDBContext()
         {
-            var genericOptions = new List<GenericOption>()
+            List<GenericOption> genericOptions = new List<GenericOption>()
             {
                 new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_0" },
                 new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_1", OwnerLevel = "HackSystem",},
                 new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_2", OwnerLevel = "HackSystem", Category = "GenericCategory" },
                 new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_3", Category = "GenericCategory" },
             };
-            var dbContext = new HackSystemDBContext(
+            HackSystemDBContext dbContext = new HackSystemDBContext(
                 new DbContextOptionsBuilder<HackSystemDBContext>()
                 .UseLazyLoadingProxies()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
