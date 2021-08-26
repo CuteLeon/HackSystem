@@ -3,6 +3,6 @@ using HackSystem.WebAPI.Model.Task;
 
 namespace HackSystem.WebAPI.TaskServers.DataServices;
 
-    public interface ITaskLogDataService : IDataServiceBase<TaskLogDetail>
-    {
-    }
+public interface ITaskLogDataService : IDataServiceBase<TaskLogDetail>
+{
+}

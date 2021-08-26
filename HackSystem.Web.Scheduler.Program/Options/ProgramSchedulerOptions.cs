@@ -1,9 +1,8 @@
-﻿namespace HackSystem.Web.Scheduler.Program.Options
-{
-    public class ProgramSchedulerOptions
-    {
-        public int ProgramLayerStart { get; set; } = 200;
+﻿namespace HackSystem.Web.Scheduler.Program.Options;
 
-        public int TopProgramLayerStart { get; set; } = 850;
-    }
+public class ProgramSchedulerOptions
+{
+    public int ProgramLayerStart { get; set; } = 200;
+
+    public int TopProgramLayerStart { get; set; } = 850;
 }

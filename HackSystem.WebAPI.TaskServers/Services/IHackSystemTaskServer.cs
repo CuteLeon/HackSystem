@@ -2,17 +2,17 @@
 
 namespace HackSystem.WebAPI.TaskServers.Services;
 
-    public interface IHackSystemTaskServer
-    {
-        void Launch();
+public interface IHackSystemTaskServer
+{
+    void Launch();
 
-        void LoadTasks();
+    void LoadTasks();
 
-        void LoadTask(TaskDetail taskDetail);
+    void LoadTask(TaskDetail taskDetail);
 
-        void UnloadTask(TaskDetail taskDetail);
+    void UnloadTask(TaskDetail taskDetail);
 
-        void UnloadTasks();
+    void UnloadTasks();
 
-        void Shutdown();
-    }
+    void Shutdown();
+}

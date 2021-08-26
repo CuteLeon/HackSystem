@@ -9,15 +9,15 @@ using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.Services.Programs;
 
-    public class BasicProgramDataService : DataServiceBase<BasicProgram>, IBasicProgramDataService
+public class BasicProgramDataService : DataServiceBase<BasicProgram>, IBasicProgramDataService
+{
+    public BasicProgramDataService(
+        ILogger<BasicProgramDataService> logger,
+        HackSystemDBContext hackSystemDBContext)
+        : base(logger, hackSystemDBContext)
     {
-        public BasicProgramDataService(
-            ILogger<BasicProgramDataService> logger,
-            HackSystemDBContext hackSystemDBContext)
-            : base(logger, hackSystemDBContext)
-        {
-        }
-
-        public async Task<IEnumerable<BasicProgram>> QueryIntegralBasicPrograms()
-            => this.AsQueryable().Where(p => p.Integral);
     }
+
+    public async Task<IEnumerable<BasicProgram>> QueryIntegralBasicPrograms()
+        => this.AsQueryable().Where(p => p.Integral);
+}

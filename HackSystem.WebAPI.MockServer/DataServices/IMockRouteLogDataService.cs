@@ -3,6 +3,6 @@ using HackSystem.WebAPI.Model.Mock;
 
 namespace HackSystem.WebAPI.MockServers.DataServices;
 
-    public interface IMockRouteLogDataService : IDataServiceBase<MockRouteLogDetail>
-    {
-    }
+public interface IMockRouteLogDataService : IDataServiceBase<MockRouteLogDetail>
+{
+}

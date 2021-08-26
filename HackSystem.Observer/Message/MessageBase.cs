@@ -1,5 +1,5 @@
 ﻿namespace HackSystem.Observer.Message;
 
-    public record MessageBase
-    {
-    }
+public record MessageBase
+{
+}

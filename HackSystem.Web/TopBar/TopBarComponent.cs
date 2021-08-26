@@ -2,6 +2,6 @@
 
 namespace HackSystem.Web.TopBar;
 
-    public partial class TopBarComponent
-    {
-    }
+public partial class TopBarComponent
+{
+}

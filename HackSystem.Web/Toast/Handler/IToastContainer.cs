@@ -2,7 +2,7 @@
 
 namespace HackSystem.Web.Toast.Handler;
 
-    public interface IToastContainer
-    {
-        void PopToast(string title, string message, Icons icon, bool autoHide = true, int hideDelay = 3000);
-    }
+public interface IToastContainer
+{
+    void PopToast(string title, string message, Icons icon, bool autoHide = true, int hideDelay = 3000);
+}

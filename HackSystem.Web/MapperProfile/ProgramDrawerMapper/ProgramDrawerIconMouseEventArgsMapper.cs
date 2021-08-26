@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace HackSystem.Web.MapperProfile.ProgramDrawerMapper;
 
-    public class ProgramDrawerIconMouseEventArgsMapper : Profile
+public class ProgramDrawerIconMouseEventArgsMapper : Profile
+{
+    public ProgramDrawerIconMouseEventArgsMapper()
     {
-        public ProgramDrawerIconMouseEventArgsMapper()
-        {
-            this.CreateMap<MouseEventArgs, ProgramDrawerIconMouseEventArgs>();
-        }
+        this.CreateMap<MouseEventArgs, ProgramDrawerIconMouseEventArgs>();
     }
+}

@@ -5,12 +5,12 @@ using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.Extensions.WebAPILogs.DataServices;
 
-    public class WebAPILogDataService : DataServiceBase<WebAPILog>, IWebAPILogDataService
+public class WebAPILogDataService : DataServiceBase<WebAPILog>, IWebAPILogDataService
+{
+    public WebAPILogDataService(
+        ILogger<WebAPILogDataService> logger,
+        HackSystemDBContext hackSystemDBContext)
+        : base(logger, hackSystemDBContext)
     {
-        public WebAPILogDataService(
-            ILogger<WebAPILogDataService> logger,
-            HackSystemDBContext hackSystemDBContext)
-            : base(logger, hackSystemDBContext)
-        {
-        }
     }
+}

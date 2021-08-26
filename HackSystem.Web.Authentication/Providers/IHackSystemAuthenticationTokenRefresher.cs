@@ -2,13 +2,13 @@
 
 namespace HackSystem.Web.Authentication.Providers;
 
-    public interface IHackSystemAuthenticationTokenRefresher
-    {
-        bool IsRunning { get; }
+public interface IHackSystemAuthenticationTokenRefresher
+{
+    bool IsRunning { get; }
 
-        void StartRefresher();
+    void StartRefresher();
 
-        void StopRefresher();
+    void StopRefresher();
 
-        Task<string> RefreshTokenAsync();
-    }
+    Task<string> RefreshTokenAsync();
+}

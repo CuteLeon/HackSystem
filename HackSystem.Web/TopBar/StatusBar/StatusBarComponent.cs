@@ -3,12 +3,12 @@ using Microsoft.JSInterop;
 
 namespace HackSystem.Web.TopBar.StatusBar;
 
-    public partial class StatusBarComponent
+public partial class StatusBarComponent
+{
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
+        await base.OnAfterRenderAsync(firstRender);
 
-            await this.jsRuntime.InvokeVoidAsync("tooltips.initTooltips");
-        }
+        await this.jsRuntime.InvokeVoidAsync("tooltips.initTooltips");
     }
+}

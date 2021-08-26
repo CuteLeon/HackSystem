@@ -4,23 +4,23 @@ using System.Threading.Tasks;
 
 namespace HackSystem.Web.CookieStorage;
 
-    public interface ICookieStorageService
-    {
-        event EventHandler<CookieChangedEventArgs> CookieChanged;
+public interface ICookieStorageService
+{
+    event EventHandler<CookieChangedEventArgs> CookieChanged;
 
-        ValueTask RemoveCookieAsync(string name);
+    ValueTask RemoveCookieAsync(string name);
 
-        void RemoveCookie(string name);
+    void RemoveCookie(string name);
 
-        ValueTask<Dictionary<string, string>> GetAllAsync();
+    ValueTask<Dictionary<string, string>> GetAllAsync();
 
-        Dictionary<string, string> GetAll();
+    Dictionary<string, string> GetAll();
 
-        ValueTask SaveCookieAsync(string name, string value, long expiresInSecond = -1);
+    ValueTask SaveCookieAsync(string name, string value, long expiresInSecond = -1);
 
-        void SaveCookie(string name, string value, long expiresInSecond = -1);
+    void SaveCookie(string name, string value, long expiresInSecond = -1);
 
-        ValueTask<string> GetCookieAsync(string name);
+    ValueTask<string> GetCookieAsync(string name);
 
-        string GetCookie(string name);
-    }
+    string GetCookie(string name);
+}

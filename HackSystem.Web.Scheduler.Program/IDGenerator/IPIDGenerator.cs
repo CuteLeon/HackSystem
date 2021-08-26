@@ -1,6 +1,6 @@
 ﻿namespace HackSystem.Web.Scheduler.Program.IDGenerator;
 
-    public interface IPIDGenerator
-    {
-        int GetAvailablePID();
-    }
+public interface IPIDGenerator
+{
+    int GetAvailablePID();
+}

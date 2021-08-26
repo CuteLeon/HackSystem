@@ -1,5 +1,5 @@
 ﻿namespace HackSystem.Web.Scheduler.Program.Scheduler;
 
-    public interface IProgramScheduler
-    {
-    }
+public interface IProgramScheduler
+{
+}

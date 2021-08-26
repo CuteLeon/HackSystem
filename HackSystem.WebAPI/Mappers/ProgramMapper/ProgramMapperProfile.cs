@@ -5,14 +5,14 @@ using HackSystem.WebDataTransfer.Program;
 
 namespace HackSystem.WebAPI.Mappers.ProgramMapper;
 
-    public class ProgramMapperProfile : Profile
+public class ProgramMapperProfile : Profile
+{
+    public ProgramMapperProfile()
     {
-        public ProgramMapperProfile()
-        {
-            this.CreateMap<QueryBasicProgramDTO, BasicProgram>();
-            this.CreateMap<BasicProgram, QueryBasicProgramDTO>()
-                .ForMember(dto => dto.IconUri, map => map.MapFrom(program => program.IconUri));
+        this.CreateMap<QueryBasicProgramDTO, BasicProgram>();
+        this.CreateMap<BasicProgram, QueryBasicProgramDTO>()
+            .ForMember(dto => dto.IconUri, map => map.MapFrom(program => program.IconUri));
 
-            this.CreateMap<UserBasicProgramMap, QueryUserBasicProgramMapDTO>();
-        }
+        this.CreateMap<UserBasicProgramMap, QueryUserBasicProgramMapDTO>();
     }
+}

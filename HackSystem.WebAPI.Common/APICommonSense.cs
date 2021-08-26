@@ -1,5 +1,5 @@
 ﻿namespace HackSystem.WebAPI.Common;
 
-    public static class APICommonSense
-    {
-    }
+public static class APICommonSense
+{
+}

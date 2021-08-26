@@ -8,12 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace HackSystem.Web.Services.Extensions;
 
-    public static class ServiceCollectionExtension
+public static class ServiceCollectionExtension
+{
+    public static IServiceCollection AddWebServices(this IServiceCollection services, WebServiceOptions webServiceOptions)
     {
-        public static IServiceCollection AddWebServices(this IServiceCollection services, WebServiceOptions webServiceOptions)
-        {
-            services.AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(webServiceOptions.APIHost));
-            services.AddHttpClient<IBasicProgramService, BasicProgramService>(httpClient => httpClient.BaseAddress = new Uri(webServiceOptions.APIHost));
-            return services;
-        }
+        services.AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(webServiceOptions.APIHost));
+        services.AddHttpClient<IBasicProgramService, BasicProgramService>(httpClient => httpClient.BaseAddress = new Uri(webServiceOptions.APIHost));
+        return services;
     }
+}

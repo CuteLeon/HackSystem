@@ -4,7 +4,7 @@ using HackSystem.WebAPI.Model.Mock;
 
 namespace HackSystem.WebAPI.MockServers.DataServices;
 
-    public interface IMockRouteDataService : IDataServiceBase<MockRouteDetail>
-    {
-        Task<MockRouteDetail?> QueryMockRoute(string uri, string method, string sourceHost);
-    }
+public interface IMockRouteDataService : IDataServiceBase<MockRouteDetail>
+{
+    Task<MockRouteDetail?> QueryMockRoute(string uri, string method, string sourceHost);
+}

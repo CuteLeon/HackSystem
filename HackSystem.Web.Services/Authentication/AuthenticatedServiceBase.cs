@@ -7,24 +7,24 @@ using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.Services.Authentication;
 
-    public class AuthenticatedServiceBase
+public class AuthenticatedServiceBase
+{
+    protected readonly ILogger logger;
+    protected readonly IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler;
+    protected readonly HttpClient httpClient;
+
+    public AuthenticatedServiceBase(
+        ILogger logger,
+        IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler,
+        HttpClient httpClient)
     {
-        protected readonly ILogger logger;
-        protected readonly IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler;
-        protected readonly HttpClient httpClient;
-
-        public AuthenticatedServiceBase(
-            ILogger logger,
-            IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler,
-            HttpClient httpClient)
-        {
-            this.logger = logger;
-            this.hackSystemAuthenticationStateHandler = hackSystemAuthenticationStateHandler;
-            this.httpClient = httpClient;
-        }
-
-        protected async Task AddAuthorizationHeaderAsync()
-        {
-            this.httpClient.AddAuthorizationHeader(await hackSystemAuthenticationStateHandler.GetCurrentTokenAsync());
-        }
+        this.logger = logger;
+        this.hackSystemAuthenticationStateHandler = hackSystemAuthenticationStateHandler;
+        this.httpClient = httpClient;
     }
+
+    protected async Task AddAuthorizationHeaderAsync()
+    {
+        this.httpClient.AddAuthorizationHeader(await hackSystemAuthenticationStateHandler.GetCurrentTokenAsync());
+    }
+}

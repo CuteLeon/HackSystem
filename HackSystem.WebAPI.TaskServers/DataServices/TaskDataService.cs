@@ -8,17 +8,17 @@ using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.TaskServers.DataServices;
 
-    public class TaskDataService : DataServiceBase<TaskDetail>, ITaskDataService
+public class TaskDataService : DataServiceBase<TaskDetail>, ITaskDataService
+{
+    public TaskDataService(
+        ILogger<TaskDataService> logger,
+        HackSystemDBContext hackSystemDBContext)
+        : base(logger, hackSystemDBContext)
     {
-        public TaskDataService(
-            ILogger<TaskDataService> logger,
-            HackSystemDBContext hackSystemDBContext)
-            : base(logger, hackSystemDBContext)
-        {
-        }
-
-        public async Task<IEnumerable<TaskDetail>> QueryEnabledTasks()
-        {
-            return this.AsQueryable().Where(task => task.Enabled);
-        }
     }
+
+    public async Task<IEnumerable<TaskDetail>> QueryEnabledTasks()
+    {
+        return this.AsQueryable().Where(task => task.Enabled);
+    }
+}

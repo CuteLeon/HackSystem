@@ -5,7 +5,7 @@ using HackSystem.WebAPI.Model.Task;
 
 namespace HackSystem.WebAPI.TaskServers.DataServices;
 
-    public interface ITaskDataService : IDataServiceBase<TaskDetail>
-    {
-        Task<IEnumerable<TaskDetail>> QueryEnabledTasks();
-    }
+public interface ITaskDataService : IDataServiceBase<TaskDetail>
+{
+    Task<IEnumerable<TaskDetail>> QueryEnabledTasks();
+}

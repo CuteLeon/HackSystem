@@ -1,5 +1,5 @@
 ﻿namespace HackSystem.WebAPI.TaskServers.Services;
 
-    public interface ITaskParameterWrapper
-    {
-    }
+public interface ITaskParameterWrapper
+{
+}

@@ -3,6 +3,6 @@ using HackSystem.WebAPI.Model.WebLog;
 
 namespace HackSystem.WebAPI.Extensions.WebAPILogs.DataServices;
 
-    public interface IWebAPILogDataService : IDataServiceBase<WebAPILog>
-    {
-    }
+public interface IWebAPILogDataService : IDataServiceBase<WebAPILog>
+{
+}

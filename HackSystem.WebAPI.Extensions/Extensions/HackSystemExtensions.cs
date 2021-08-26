@@ -6,20 +6,20 @@ using Microsoft.IO;
 
 namespace HackSystem.WebAPI.Extensions;
 
-    public static class HackSystemExtensions
+public static class HackSystemExtensions
+{
+    public static IApplicationBuilder UseWebAPILogging(this IApplicationBuilder app)
     {
-        public static IApplicationBuilder UseWebAPILogging(this IApplicationBuilder app)
-        {
-            app.UseMiddleware<WebAPILoggingMiddleware>();
-            return app;
-        }
-
-        public static IServiceCollection AddHackSystemWebAPIExtensions(this IServiceCollection services)
-        {
-            services
-                .AddScoped<IWebAPILogDataService, WebAPILogDataService>()
-                .AddScoped<RecyclableMemoryStreamManager>();
-
-            return services;
-        }
+        app.UseMiddleware<WebAPILoggingMiddleware>();
+        return app;
     }
+
+    public static IServiceCollection AddHackSystemWebAPIExtensions(this IServiceCollection services)
+    {
+        services
+            .AddScoped<IWebAPILogDataService, WebAPILogDataService>()
+            .AddScoped<RecyclableMemoryStreamManager>();
+
+        return services;
+    }
+}

@@ -4,10 +4,10 @@ using HackSystem.WebDataTransfer.Account;
 
 namespace HackSystem.WebAPI.Mappers.Account;
 
-    public class AccountMapperProfile : Profile
+public class AccountMapperProfile : Profile
+{
+    public AccountMapperProfile()
     {
-        public AccountMapperProfile()
-        {
-            this.CreateMap<HackSystemUser, AccountInfoDTO>();
-        }
+        this.CreateMap<HackSystemUser, AccountInfoDTO>();
     }
+}

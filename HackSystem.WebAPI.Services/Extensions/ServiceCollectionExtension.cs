@@ -7,15 +7,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace HackSystem.WebAPI.Services.Extensions;
 
-    public static class ServiceCollectionExtension
+public static class ServiceCollectionExtension
+{
+    public static IServiceCollection AddWebAPIServices(this IServiceCollection services)
     {
-        public static IServiceCollection AddWebAPIServices(this IServiceCollection services)
-        {
-            services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<IBasicProgramDataService, BasicProgramDataService>();
-            services.AddScoped<IUserBasicProgramMapDataService, UserBasicProgramMapDataService>();
-            services.AddScoped<IGenericOptionDataService, GenericOptionDataService>();
+        services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<IBasicProgramDataService, BasicProgramDataService>();
+        services.AddScoped<IUserBasicProgramMapDataService, UserBasicProgramMapDataService>();
+        services.AddScoped<IGenericOptionDataService, GenericOptionDataService>();
 
-            return services;
-        }
+        return services;
     }
+}
