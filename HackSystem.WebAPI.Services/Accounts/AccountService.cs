@@ -6,8 +6,8 @@ using HackSystem.WebAPI.Services.API.Account;
 using HackSystem.WebAPI.Services.API.Program;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.Services.Accounts
-{
+namespace HackSystem.WebAPI.Services.Accounts;
+
     public class AccountService : IAccountService
     {
         private readonly ILogger<AccountService> logger;
@@ -40,4 +40,3 @@ namespace HackSystem.WebAPI.Services.Accounts
             this.logger.LogDebug($"Initial successfully: {user.UserName}");
         }
     }
-}

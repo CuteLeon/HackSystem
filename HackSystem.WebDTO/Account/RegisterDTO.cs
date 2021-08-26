@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HackSystem.WebDTO.Account
-{
+namespace HackSystem.WebDTO.Account;
+
     public class RegisterDTO
     {
         [Required]
@@ -23,4 +23,3 @@ namespace HackSystem.WebDTO.Account
         [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
     }
-}

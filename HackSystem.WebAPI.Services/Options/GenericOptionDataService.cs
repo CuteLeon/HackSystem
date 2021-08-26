@@ -4,8 +4,8 @@ using HackSystem.WebAPI.Model.Option;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.Services.Options
-{
+namespace HackSystem.WebAPI.Services.Options;
+
     public class GenericOptionDataService : DataServiceBase<GenericOption>, IGenericOptionDataService
     {
         public GenericOptionDataService(
@@ -26,4 +26,3 @@ namespace HackSystem.WebAPI.Services.Options
                 .ThenByDescending(o => o.Category)
                 .FirstOrDefaultAsync();
     }
-}

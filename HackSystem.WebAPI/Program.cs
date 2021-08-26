@@ -7,8 +7,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using NLog.Web;
 
-namespace HackSystem.WebAPI
-{
+namespace HackSystem.WebAPI;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -61,4 +61,3 @@ namespace HackSystem.WebAPI
                         .UseNLog();
                 });
     }
-}

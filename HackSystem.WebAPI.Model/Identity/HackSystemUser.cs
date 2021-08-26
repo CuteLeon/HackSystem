@@ -3,8 +3,8 @@ using System.ComponentModel;
 using HackSystem.WebAPI.Model.Map.UserMap;
 using Microsoft.AspNetCore.Identity;
 
-namespace HackSystem.WebAPI.Model.Identity
-{
+namespace HackSystem.WebAPI.Model.Identity;
+
     public class HackSystemUser : IdentityUser
     {
         public HackSystemUser()
@@ -22,4 +22,3 @@ namespace HackSystem.WebAPI.Model.Identity
 
         public virtual IList<UserBasicProgramMap> UserProgramMaps { get; set; }
     }
-}

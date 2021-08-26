@@ -7,8 +7,8 @@ using HackSystem.Web.Scheduler.Program.Options;
 using HackSystem.Web.Scheduler.Program.Scheduler;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HackSystem.Web.Scheduler.Program
-{
+namespace HackSystem.Web.Scheduler.Program;
+
     public static class ProgramSchedulerExtension
     {
         public static IServiceCollection AddHackSystemProgramScheduler(this IServiceCollection services, Action<ProgramSchedulerOptions> configure)
@@ -24,4 +24,3 @@ namespace HackSystem.Web.Scheduler.Program
             return services;
         }
     }
-}

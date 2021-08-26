@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using HackSystem.Observer.Message;
 
-namespace HackSystem.Observer.Publisher
-{
+namespace HackSystem.Observer.Publisher;
+
     public interface IPublisher<TMessage> : IObservable<TMessage>, IDisposable
         where TMessage : MessageBase
     {
@@ -11,4 +11,3 @@ namespace HackSystem.Observer.Publisher
 
         Task Publish(TMessage message);
     }
-}

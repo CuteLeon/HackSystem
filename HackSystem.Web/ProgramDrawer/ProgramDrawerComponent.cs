@@ -6,8 +6,8 @@ using HackSystem.WebDataTransfer.Program;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 
-namespace HackSystem.Web.ProgramDrawer
-{
+namespace HackSystem.Web.ProgramDrawer;
+
     public partial class ProgramDrawerComponent
     {
         public void ClearProgramDrawer()
@@ -43,4 +43,3 @@ namespace HackSystem.Web.ProgramDrawer
             await this.programLauncher.LaunchProgram(args.UserBasicProgramMap.BasicProgram);
         }
     }
-}

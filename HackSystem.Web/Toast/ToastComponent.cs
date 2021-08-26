@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 
-namespace HackSystem.Web.Toast
-{
+namespace HackSystem.Web.Toast;
+
     public partial class ToastComponent
     {
         public ToastComponent()
@@ -19,4 +19,3 @@ namespace HackSystem.Web.Toast
             await this.ToastJSObjectReference.InvokeVoidAsync("toasts.popToast", this.ToastContainerInterop, this.ToastDetail.Id, this.ToastDetail.AutoHide, this.ToastDetail.HideDelay);
         }
     }
-}

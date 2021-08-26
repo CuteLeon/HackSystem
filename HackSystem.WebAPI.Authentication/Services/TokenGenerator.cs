@@ -7,8 +7,8 @@ using HackSystem.WebAPI.Authentication.Configurations;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace HackSystem.WebAPI.Authentication.Services
-{
+namespace HackSystem.WebAPI.Authentication.Services;
+
     public class TokenGenerator : ITokenGenerator
     {
         private readonly JwtAuthenticationOptions configuration;
@@ -38,4 +38,3 @@ namespace HackSystem.WebAPI.Authentication.Services
             return this.jwtSecurityTokenHandler.WriteToken(token);
         }
     }
-}

@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace HackSystem.Web.Authentication.Extensions
-{
+namespace HackSystem.Web.Authentication.Extensions;
+
     public static class HackSystemAuthenticationExtension
     {
         public static IServiceCollection AddAPIAuthentication(
@@ -55,4 +55,3 @@ namespace HackSystem.Web.Authentication.Extensions
             return services;
         }
     }
-}

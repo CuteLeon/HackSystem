@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HackSystem.WebDataTransfer.Account
-{
+namespace HackSystem.WebDataTransfer.Account;
+
     public class RegisterDTO
     {
         [Required(ErrorMessage = "User name is required")]
@@ -20,4 +20,3 @@ namespace HackSystem.WebDataTransfer.Account
         [Compare(nameof(Password), ErrorMessage = "Confirm password does not match with Password.")]
         public string ConfirmPassword { get; set; }
     }
-}

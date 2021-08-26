@@ -1,5 +1,5 @@
-﻿namespace HackSystem.WebAPI.Model.Task
-{
+﻿namespace HackSystem.WebAPI.Model.Task;
+
     public enum TaskLogStatus
     {
         Pending,
@@ -9,4 +9,3 @@
         Failed,
         Complete,
     }
-}

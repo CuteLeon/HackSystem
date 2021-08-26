@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace HackSystem.WebTests.SystemPage
-{
+namespace HackSystem.WebTests.SystemPage;
+
     public class StartUpTests
     {
         [Fact()]
@@ -47,4 +47,3 @@ namespace HackSystem.WebTests.SystemPage
             mockNavigationManager.ClearHistory();
         }
     }
-}

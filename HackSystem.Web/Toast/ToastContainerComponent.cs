@@ -6,8 +6,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using static HackSystem.Web.Toast.Model.ToastDetail;
 
-namespace HackSystem.Web.Toast
-{
+namespace HackSystem.Web.Toast;
+
     /// <summary>
     /// Toast container component
     /// </summary>
@@ -81,4 +81,3 @@ namespace HackSystem.Web.Toast
             GC.SuppressFinalize(this);
         }
     }
-}

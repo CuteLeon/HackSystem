@@ -3,8 +3,8 @@ using HackSystem.Observer.Publisher;
 using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
 using Microsoft.AspNetCore.Components;
 
-namespace HackSystem.Web.ProgramSDK.ProgramComponent
-{
+namespace HackSystem.Web.ProgramSDK.ProgramComponent;
+
     public abstract class ProgramComponentBase : ComponentBase, IDisposable
     {
         // TODO: [LEON] Should modify reference relationship between projects: Reference IProcessDisposer here to dispose process, and publish message in IProcessDisposer
@@ -28,4 +28,3 @@ namespace HackSystem.Web.ProgramSDK.ProgramComponent
 
         public abstract void Dispose();
     }
-}

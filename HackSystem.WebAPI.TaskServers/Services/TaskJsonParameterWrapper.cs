@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text.Json;
 
-namespace HackSystem.WebAPI.TaskServers.Services
-{
+namespace HackSystem.WebAPI.TaskServers.Services;
+
     public class TaskJsonParameterWrapper : ITaskJsonParameterWrapper
     {
         public object? WrapTaskParameters(string taskParameters, Type type)
@@ -18,4 +18,3 @@ namespace HackSystem.WebAPI.TaskServers.Services
             }
         }
     }
-}

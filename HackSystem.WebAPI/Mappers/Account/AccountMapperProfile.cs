@@ -2,8 +2,8 @@
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebDataTransfer.Account;
 
-namespace HackSystem.WebAPI.Mappers.Account
-{
+namespace HackSystem.WebAPI.Mappers.Account;
+
     public class AccountMapperProfile : Profile
     {
         public AccountMapperProfile()
@@ -11,4 +11,3 @@ namespace HackSystem.WebAPI.Mappers.Account
             this.CreateMap<HackSystemUser, AccountInfoDTO>();
         }
     }
-}

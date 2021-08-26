@@ -2,8 +2,8 @@
 using HackSystem.WebAPI.Model.Task;
 using Microsoft.EntityFrameworkCore;
 
-namespace HackSystem.WebAPI.DataAccess.DataSeed
-{
+namespace HackSystem.WebAPI.DataAccess.DataSeed;
+
     public static class TaskDatabaseInitializer
     {
         public static ModelBuilder InitializeTaskData(this ModelBuilder builder)
@@ -32,4 +32,3 @@ namespace HackSystem.WebAPI.DataAccess.DataSeed
             return builder;
         }
     }
-}

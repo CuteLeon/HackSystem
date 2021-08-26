@@ -1,8 +1,8 @@
 ﻿using HackSystem.WebAPI.Tasks.DatabaseBackup;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HackSystem.WebAPI.Tasks
-{
+namespace HackSystem.WebAPI.Tasks;
+
     public static class HackSystemTaskExtension
     {
         public static IServiceCollection AddWebAPITasks(
@@ -14,4 +14,3 @@ namespace HackSystem.WebAPI.Tasks
             return services;
         }
     }
-}

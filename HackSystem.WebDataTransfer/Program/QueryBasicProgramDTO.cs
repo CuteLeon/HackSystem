@@ -1,5 +1,5 @@
-﻿namespace HackSystem.WebDataTransfer.Program
-{
+﻿namespace HackSystem.WebDataTransfer.Program;
+
     public class QueryBasicProgramDTO
     {
         public string Id { get; set; }
@@ -18,4 +18,3 @@
 
         public string TypeName { get; set; }
     }
-}

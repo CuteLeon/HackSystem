@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 
-namespace HackSystem.Web.Scheduler.Program.IDGenerator
-{
+namespace HackSystem.Web.Scheduler.Program.IDGenerator;
+
     public class PIDGenerator : IPIDGenerator
     {
         private int availablePID = 1;
@@ -9,4 +9,3 @@ namespace HackSystem.Web.Scheduler.Program.IDGenerator
         public int GetAvailablePID()
             => Interlocked.Increment(ref availablePID);
     }
-}

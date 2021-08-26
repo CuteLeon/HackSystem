@@ -1,7 +1,7 @@
 ﻿using HackSystem.Observer.Message;
 
-namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages
-{
+namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
+
     public record ProcessCloseMessage : MessageBase
     {
         public int PID { get; set; }
@@ -14,4 +14,3 @@ namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages
         public override string ToString()
             => $"Process Close Message => {this.PID} ID";
     }
-}

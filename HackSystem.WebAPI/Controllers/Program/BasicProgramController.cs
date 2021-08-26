@@ -12,8 +12,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.Controllers.Program
-{
+namespace HackSystem.WebAPI.Controllers.Program;
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize(Roles = CommonSense.Roles.HackerRole)]
@@ -101,4 +101,3 @@ namespace HackSystem.WebAPI.Controllers.Program
             return result ? this.Ok(result) : this.BadRequest(result);
         }
     }
-}

@@ -2,8 +2,8 @@
 using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace HackSystem.Web.MapperProfile.ProgramDrawerMapper
-{
+namespace HackSystem.Web.MapperProfile.ProgramDrawerMapper;
+
     public class ProgramDrawerIconMouseEventArgsMapper : Profile
     {
         public ProgramDrawerIconMouseEventArgsMapper()
@@ -11,4 +11,3 @@ namespace HackSystem.Web.MapperProfile.ProgramDrawerMapper
             this.CreateMap<MouseEventArgs, ProgramDrawerIconMouseEventArgs>();
         }
     }
-}

@@ -3,8 +3,8 @@ using HackSystem.WebAPI.Model.Map.UserMap;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebDataTransfer.Program;
 
-namespace HackSystem.WebAPI.Mappers.ProgramMapper
-{
+namespace HackSystem.WebAPI.Mappers.ProgramMapper;
+
     public class ProgramMapperProfile : Profile
     {
         public ProgramMapperProfile()
@@ -16,4 +16,3 @@ namespace HackSystem.WebAPI.Mappers.ProgramMapper
             this.CreateMap<UserBasicProgramMap, QueryUserBasicProgramMapDTO>();
         }
     }
-}

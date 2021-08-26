@@ -1,5 +1,5 @@
-﻿namespace HackSystem.Web.ProgramSDK.ResizeableComponent
-{
+﻿namespace HackSystem.Web.ProgramSDK.ResizeableComponent;
+
     public class ResizeableOption
     {
         public int Left { get; set; }
@@ -18,4 +18,3 @@
 
         public int Z_Index { get; set; }
     }
-}

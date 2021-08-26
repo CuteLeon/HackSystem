@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using static HackSystem.Web.Toast.Model.ToastDetail;
 
-namespace HackSystem.Web.Desktop
-{
+namespace HackSystem.Web.Desktop;
+
     public partial class DesktopComponent
     {
         public DesktopComponent()
@@ -63,4 +63,3 @@ namespace HackSystem.Web.Desktop
             }
         }
     }
-}

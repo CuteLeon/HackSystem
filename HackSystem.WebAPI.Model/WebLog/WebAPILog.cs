@@ -2,8 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HackSystem.WebAPI.Model.WebLog
-{
+namespace HackSystem.WebAPI.Model.WebLog;
+
     public class WebAPILog
     {
         [Key]
@@ -40,4 +40,3 @@ namespace HackSystem.WebAPI.Model.WebLog
 
         public string Exception { get; set; }
     }
-}

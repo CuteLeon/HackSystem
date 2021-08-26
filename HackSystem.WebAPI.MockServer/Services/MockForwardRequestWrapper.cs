@@ -3,8 +3,8 @@ using System.Net.Http;
 using HackSystem.WebAPI.Model.Mock;
 using Microsoft.AspNetCore.Http;
 
-namespace HackSystem.WebAPI.MockServer.Services
-{
+namespace HackSystem.WebAPI.MockServer.Services;
+
     public class MockForwardRequestWrapper : IMockForwardRequestWrapper
     {
         public HttpRequestMessage WrapForwardRequest(HttpContext context, MockRouteDetail mockRoute, in string requestContent, out string forwardRequestContent)
@@ -28,4 +28,3 @@ namespace HackSystem.WebAPI.MockServer.Services
             return request;
         }
     }
-}

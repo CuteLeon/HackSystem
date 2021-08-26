@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.Tasks.DatabaseBackup
-{
+namespace HackSystem.WebAPI.Tasks.DatabaseBackup;
+
     public class DatabaseBackupTask : IDatabaseBackupTask
     {
         private readonly ILogger<DatabaseBackupTask> logger;
@@ -37,4 +37,3 @@ namespace HackSystem.WebAPI.Tasks.DatabaseBackup
             this.logger.LogInformation($"Database backuped: {originConnection.DataSource} => {backupConnection.DataSource}");
         }
     }
-}

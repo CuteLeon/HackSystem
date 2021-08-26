@@ -17,8 +17,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HackSystem.Web
-{
+namespace HackSystem.Web;
+
     public static class Program
     {
         public static async Task Main(string[] args)
@@ -106,4 +106,3 @@ namespace HackSystem.Web
             return builder;
         }
     }
-}

@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Authorization;
 
-namespace HackSystem.Web.Authentication.Providers
-{
+namespace HackSystem.Web.Authentication.Providers;
+
     public interface IHackSystemAuthenticationStateHandler
     {
         Task<AuthenticationState> GetAuthenticationStateAsync();
@@ -16,4 +16,3 @@ namespace HackSystem.Web.Authentication.Providers
 
         bool CheckClaimsIdentity(ClaimsIdentity claimsIdentity);
     }
-}

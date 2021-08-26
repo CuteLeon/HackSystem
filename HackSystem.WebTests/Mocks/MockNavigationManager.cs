@@ -2,8 +2,8 @@
 using System.Linq;
 using Microsoft.AspNetCore.Components;
 
-namespace HackSystem.WebTests.Mocks
-{
+namespace HackSystem.WebTests.Mocks;
+
     public class MockNavigationManager : NavigationManager
     {
         public MockNavigationManager(string baseUri, string uri)
@@ -23,4 +23,3 @@ namespace HackSystem.WebTests.Mocks
 
         public void ClearHistory() => this.NavigationHistory.Clear();
     }
-}

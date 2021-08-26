@@ -51,7 +51,7 @@ namespace HackSystem.WebAPI.TaskServers.Services.Tests
             var taskScheduleWrapper = new TaskScheduleWrapper();
             var taskSchedule = taskScheduleWrapper.WrapTaskSchedule(taskDetail);
 
-            JobManager.AddJob(Job, taskSchedule.ScheduleAction);
+            JobManager.AddJob(this.Job, taskSchedule.ScheduleAction);
             if ((taskFrequency == TaskFrequency.Manually) ||
                 (taskFrequency == TaskFrequency.Once &&
                  ((taskDetail.ExecuteDateTime != default && taskDetail.ExecuteDateTime < DateTime.Now) ||

@@ -6,8 +6,8 @@ using System.Threading.Tasks.Dataflow;
 using HackSystem.Observer.Message;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Observer.Publisher
-{
+namespace HackSystem.Observer.Publisher;
+
     public class Publisher<TMessage> : IPublisher<TMessage>
         where TMessage : MessageBase
     {
@@ -73,4 +73,3 @@ namespace HackSystem.Observer.Publisher
             GC.SuppressFinalize(this);
         }
     }
-}

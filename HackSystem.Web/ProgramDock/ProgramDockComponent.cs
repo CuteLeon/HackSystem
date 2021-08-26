@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using HackSystem.WebDataTransfer.Program;
 using Microsoft.JSInterop;
 
-namespace HackSystem.Web.ProgramDock
-{
+namespace HackSystem.Web.ProgramDock;
+
     public partial class ProgramDockComponent
     {
         public void ClearProgramDock()
@@ -34,4 +34,3 @@ namespace HackSystem.Web.ProgramDock
             }
         }
     }
-}

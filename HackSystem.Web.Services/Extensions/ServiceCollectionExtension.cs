@@ -6,8 +6,8 @@ using HackSystem.Web.Services.Configurations;
 using HackSystem.Web.Services.Program;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HackSystem.Web.Services.Extensions
-{
+namespace HackSystem.Web.Services.Extensions;
+
     public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddWebServices(this IServiceCollection services, WebServiceOptions webServiceOptions)
@@ -17,4 +17,3 @@ namespace HackSystem.Web.Services.Extensions
             return services;
         }
     }
-}

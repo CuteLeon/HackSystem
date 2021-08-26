@@ -1,6 +1,5 @@
-﻿namespace HackSystem.WebAPI.TaskServers.Jobs
-{
+﻿namespace HackSystem.WebAPI.TaskServers.Jobs;
+
     public interface ITaskGenericJob : ITaskJobBase
     {
     }
-}

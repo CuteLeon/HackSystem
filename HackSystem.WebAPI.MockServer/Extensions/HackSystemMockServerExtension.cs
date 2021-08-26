@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.MockServers.Extensions
-{
+namespace HackSystem.WebAPI.MockServers.Extensions;
+
     public static class HackSystemMockServerExtension
     {
         public static IServiceCollection AttachMockServer(
@@ -34,4 +34,3 @@ namespace HackSystem.WebAPI.MockServers.Extensions
             return app;
         }
     }
-}

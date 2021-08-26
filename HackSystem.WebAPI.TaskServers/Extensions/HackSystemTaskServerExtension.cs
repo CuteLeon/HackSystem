@@ -8,8 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.TaskServers.Extensions
-{
+namespace HackSystem.WebAPI.TaskServers.Extensions;
+
     public static class HackSystemTaskServerExtension
     {
         public static IServiceCollection AttachTaskServer(
@@ -56,4 +56,3 @@ namespace HackSystem.WebAPI.TaskServers.Extensions
             return host;
         }
     }
-}

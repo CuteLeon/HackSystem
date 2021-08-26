@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using HackSystem.WebAPI.Model.Task;
 
-namespace HackSystem.WebAPI.TaskServers.Services
-{
+namespace HackSystem.WebAPI.TaskServers.Services;
+
     public interface ITaskLoader
     {
         IEnumerable<TaskDetail> GetTaskDetails();
     }
-}

@@ -10,8 +10,8 @@ using HackSystem.Web.Scheduler.Program.Model;
 using HackSystem.WebDataTransfer.Program;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.Scheduler.Program.Launcher
-{
+namespace HackSystem.Web.Scheduler.Program.Launcher;
+
     public class ProgramLauncher : IProgramLauncher
     {
         private readonly ILogger<ProgramLauncher> logger;
@@ -63,4 +63,3 @@ namespace HackSystem.Web.Scheduler.Program.Launcher
                 : type;
         }
     }
-}

@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using HackSystem.WebAPI.Model.Map.UserMap;
 
-namespace HackSystem.WebAPI.Model.Program
-{
+namespace HackSystem.WebAPI.Model.Program;
+
     public class ProgramBase
     {
         [Key]
@@ -29,4 +29,3 @@ namespace HackSystem.WebAPI.Model.Program
 
         public virtual IList<UserBasicProgramMap> UserProgramMaps { get; set; }
     }
-}

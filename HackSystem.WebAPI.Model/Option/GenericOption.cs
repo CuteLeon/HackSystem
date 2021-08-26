@@ -2,8 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HackSystem.WebAPI.Model.Option
-{
+namespace HackSystem.WebAPI.Model.Option;
+
     public class GenericOption
     {
         [Key]
@@ -22,4 +22,3 @@ namespace HackSystem.WebAPI.Model.Option
 
         public DateTime ModifyTime { get; set; }
     }
-}

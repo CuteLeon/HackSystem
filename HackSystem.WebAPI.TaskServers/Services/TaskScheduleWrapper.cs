@@ -4,8 +4,8 @@ using System.Linq;
 using FluentScheduler;
 using HackSystem.WebAPI.Model.Task;
 
-namespace HackSystem.WebAPI.TaskServers.Services
-{
+namespace HackSystem.WebAPI.TaskServers.Services;
+
     public class TaskScheduleWrapper : ITaskScheduleWrapper
     {
         public IEnumerable<(TaskDetail TaskDetail, Action<Schedule> ScheduleAction)> WrapTaskSchedules(IEnumerable<TaskDetail> taskDetails)
@@ -90,9 +90,8 @@ namespace HackSystem.WebAPI.TaskServers.Services
                 }
 
                 if (taskDetail.Enabled) schedule.Enable(); else schedule.Disable();
-                if (!taskDetail.Reentrant) schedule.NonReentrant();
+                if (!taskDetail.Reentrant) _ = schedule.NonReentrant();
             }
             return (taskDetail, (Action<Schedule>)scheduleAction);
         }
     }
-}

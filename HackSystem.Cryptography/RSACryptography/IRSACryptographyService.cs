@@ -1,7 +1,7 @@
 ﻿using System;
 
-namespace HackSystem.Cryptography.RSACryptography
-{
+namespace HackSystem.Cryptography.RSACryptography;
+
     public interface IRSACryptographyService : IDisposable
     {
         (string PublicKey, string PrivateKey) GenerateRSAKeys();
@@ -22,4 +22,3 @@ namespace HackSystem.Cryptography.RSACryptography
         
         bool VerifyData(string source, string sign);
     }
-}

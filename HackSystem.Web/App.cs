@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web
-{
+namespace HackSystem.Web;
+
     public partial class App
     {
         protected override async Task OnInitializedAsync()
@@ -19,4 +19,3 @@ namespace HackSystem.Web
             await Task.CompletedTask;
         }
     }
-}

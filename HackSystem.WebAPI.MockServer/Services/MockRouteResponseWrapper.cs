@@ -1,8 +1,8 @@
 ﻿using HackSystem.WebAPI.Model.Mock;
 using Microsoft.AspNetCore.Http;
 
-namespace HackSystem.WebAPI.MockServer.Services
-{
+namespace HackSystem.WebAPI.MockServer.Services;
+
     public class MockRouteResponseWrapper : IMockRouteResponseWrapper
     {
         public void WrapMockResponse(HttpContext context, MockRouteDetail mockRoute, in string requestContent, out string responseContent)
@@ -21,4 +21,3 @@ namespace HackSystem.WebAPI.MockServer.Services
             context.Response.WriteAsync(responseContent).ConfigureAwait(false);
         }
     }
-}

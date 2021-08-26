@@ -1,8 +1,8 @@
 ﻿using HackSystem.Web.ProgramSDK.ProgramComponent;
 using Microsoft.AspNetCore.Components;
 
-namespace HackSystem.Web.Scheduler.Program.Model
-{
+namespace HackSystem.Web.Scheduler.Program.Model;
+
     public class ProcessDetail
     {
         public int PID { get; set; }
@@ -11,4 +11,3 @@ namespace HackSystem.Web.Scheduler.Program.Model
 
         public ProgramEntity ProgramEntity { get; set; }
     }
-}

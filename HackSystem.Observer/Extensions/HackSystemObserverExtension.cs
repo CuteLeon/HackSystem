@@ -2,8 +2,8 @@
 using HackSystem.Observer.Subscriber;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HackSystem.Observer
-{
+namespace HackSystem.Observer;
+
     public static class HackSystemObserverExtension
     {
         public static IServiceCollection AddHackSystemObserver(this IServiceCollection services)
@@ -15,4 +15,3 @@ namespace HackSystem.Observer
             return services;
         }
     }
-}

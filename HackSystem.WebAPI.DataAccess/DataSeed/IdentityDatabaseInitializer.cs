@@ -3,8 +3,8 @@ using HackSystem.WebAPI.Model.Map.UserMap;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace HackSystem.WebAPI.DataAccess.DataSeed
-{
+namespace HackSystem.WebAPI.DataAccess.DataSeed;
+
     public static class IdentityDatabaseInitializer
     {
         public static ModelBuilder InitializeIdentityData(this ModelBuilder builder)
@@ -71,4 +71,3 @@ namespace HackSystem.WebAPI.DataAccess.DataSeed
             return builder;
         }
     }
-}

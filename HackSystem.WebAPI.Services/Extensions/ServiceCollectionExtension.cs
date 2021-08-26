@@ -5,8 +5,8 @@ using HackSystem.WebAPI.Services.Options;
 using HackSystem.WebAPI.Services.Programs;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HackSystem.WebAPI.Services.Extensions
-{
+namespace HackSystem.WebAPI.Services.Extensions;
+
     public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddWebAPIServices(this IServiceCollection services)
@@ -19,4 +19,3 @@ namespace HackSystem.WebAPI.Services.Extensions
             return services;
         }
     }
-}

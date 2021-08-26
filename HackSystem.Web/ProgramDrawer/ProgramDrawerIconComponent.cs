@@ -2,8 +2,8 @@
 using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace HackSystem.Web.ProgramDrawer
-{
+namespace HackSystem.Web.ProgramDrawer;
+
     public partial class ProgramDrawerIconComponent
     {
         public async Task OnDbClick(MouseEventArgs args)
@@ -18,4 +18,3 @@ namespace HackSystem.Web.ProgramDrawer
             await this.OnIconDoubleClick.InvokeAsync(eventArgs);
         }
     }
-}

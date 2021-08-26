@@ -7,8 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace HackSystem.Web.Authentication.Providers
-{
+namespace HackSystem.Web.Authentication.Providers;
+
     public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationTokenRefresher
     {
         private readonly ILogger<HackSystemAuthenticationTokenRefresher> logger;
@@ -78,4 +78,3 @@ namespace HackSystem.Web.Authentication.Providers
             return content;
         }
     }
-}

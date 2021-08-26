@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace HackSystem.Web.Desktop
-{
+namespace HackSystem.Web.Desktop;
+
     public partial class DesktopMenuComponent
     {
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -12,4 +12,3 @@ namespace HackSystem.Web.Desktop
             await this.jsRuntime.InvokeVoidAsync("submenus.initSubMenus");
         }
     }
-}

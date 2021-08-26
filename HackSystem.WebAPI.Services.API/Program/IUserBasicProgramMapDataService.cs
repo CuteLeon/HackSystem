@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using HackSystem.WebAPI.DataAccess.API.DataServices;
 using HackSystem.WebAPI.Model.Map.UserMap;
 
-namespace HackSystem.WebAPI.Services.API.Program
-{
+namespace HackSystem.WebAPI.Services.API.Program;
+
     public interface IUserBasicProgramMapDataService : IDataServiceBase<UserBasicProgramMap>
     {
         Task<IEnumerable<UserBasicProgramMap>> QueryUserBasicProgramMaps(string userId);
@@ -19,4 +19,3 @@ namespace HackSystem.WebAPI.Services.API.Program
 
         Task<bool> DeleteUserBasicProgramMap(string userId, string programId);
     }
-}

@@ -4,8 +4,8 @@ using HackSystem.Observer.Message;
 using HackSystem.Observer.Publisher;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Observer.Subscriber
-{
+namespace HackSystem.Observer.Subscriber;
+
     public class Subscriber<TMessage> : ISubscriber<TMessage>
         where TMessage : MessageBase
     {
@@ -58,4 +58,3 @@ namespace HackSystem.Observer.Subscriber
             this.HandleMessage?.Invoke(message);
         }
     }
-}

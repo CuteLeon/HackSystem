@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace HackSystem.Web.Authentication.Providers
-{
+namespace HackSystem.Web.Authentication.Providers;
+
     public class HackSystemAuthenticationStateHandler : IHackSystemAuthenticationStateHandler
     {
         private readonly ILogger<HackSystemAuthenticationStateHandler> logger;
@@ -121,4 +121,3 @@ namespace HackSystem.Web.Authentication.Providers
         }
         #endregion
     }
-}

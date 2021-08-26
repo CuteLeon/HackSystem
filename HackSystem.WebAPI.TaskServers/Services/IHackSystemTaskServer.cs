@@ -1,7 +1,7 @@
 ﻿using HackSystem.WebAPI.Model.Task;
 
-namespace HackSystem.WebAPI.TaskServers.Services
-{
+namespace HackSystem.WebAPI.TaskServers.Services;
+
     public interface IHackSystemTaskServer
     {
         void Launch();
@@ -16,4 +16,3 @@ namespace HackSystem.WebAPI.TaskServers.Services
 
         void Shutdown();
     }
-}

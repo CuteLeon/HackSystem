@@ -1,5 +1,5 @@
-﻿namespace HackSystem.Web.Common
-{
+﻿namespace HackSystem.Web.Common;
+
     public class WebCommonSense
     {
 
@@ -20,4 +20,3 @@
             public const string LeonPolicy = "LeonPolicy";
         }
     }
-}

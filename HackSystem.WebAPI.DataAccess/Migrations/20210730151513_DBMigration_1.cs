@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HackSystem.WebAPI.DataAccess.Migrations
-{
+namespace HackSystem.WebAPI.DataAccess.Migrations;
+
     public partial class DBMigration_1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -769,4 +769,3 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                 name: "BasicPrograms");
         }
     }
-}

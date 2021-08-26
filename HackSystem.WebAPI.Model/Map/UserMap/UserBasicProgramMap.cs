@@ -2,8 +2,8 @@
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Model.Program;
 
-namespace HackSystem.WebAPI.Model.Map.UserMap
-{
+namespace HackSystem.WebAPI.Model.Map.UserMap;
+
     public class UserBasicProgramMap
     {
         public string UserId { get; set; }
@@ -26,4 +26,3 @@ namespace HackSystem.WebAPI.Model.Map.UserMap
         [DefaultValue(null)]
         public string Rename { get; set; }
     }
-}

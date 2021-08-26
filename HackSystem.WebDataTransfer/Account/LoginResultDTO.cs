@@ -1,5 +1,5 @@
-﻿namespace HackSystem.WebDataTransfer.Account
-{
+﻿namespace HackSystem.WebDataTransfer.Account;
+
     public class LoginResultDTO
     {
         public bool Successful { get; set; }
@@ -8,4 +8,3 @@
 
         public string Token { get; set; }
     }
-}

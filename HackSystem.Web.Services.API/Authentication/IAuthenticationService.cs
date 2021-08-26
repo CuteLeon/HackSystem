@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using HackSystem.WebDataTransfer.Account;
 
-namespace HackSystem.Web.Services.API.Authentication
-{
+namespace HackSystem.Web.Services.API.Authentication;
+
     public interface IAuthenticationService
     {
         Task<RegisterResultDTO> Register(RegisterDTO registerModel);
@@ -13,4 +13,3 @@ namespace HackSystem.Web.Services.API.Authentication
 
         Task Logout();
     }
-}

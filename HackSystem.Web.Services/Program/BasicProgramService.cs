@@ -8,8 +8,8 @@ using HackSystem.Web.Services.Authentication;
 using HackSystem.WebDataTransfer.Program;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.Services.Program
-{
+namespace HackSystem.Web.Services.Program;
+
     public class BasicProgramService : AuthenticatedServiceBase, IBasicProgramService
     {
         public BasicProgramService(
@@ -67,4 +67,3 @@ namespace HackSystem.Web.Services.Program
             return response.IsSuccessStatusCode;
         }
     }
-}

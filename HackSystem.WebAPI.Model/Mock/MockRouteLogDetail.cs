@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
 
-namespace HackSystem.WebAPI.Model.Mock
-{
+namespace HackSystem.WebAPI.Model.Mock;
+
     public class MockRouteLogDetail
     {
         [Key]
@@ -51,4 +51,3 @@ namespace HackSystem.WebAPI.Model.Mock
 
         public string Exception { get; set; }
     }
-}

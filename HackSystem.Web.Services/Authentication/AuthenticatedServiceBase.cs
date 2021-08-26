@@ -5,8 +5,8 @@ using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Services.Extensions;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.Services.Authentication
-{
+namespace HackSystem.Web.Services.Authentication;
+
     public class AuthenticatedServiceBase
     {
         protected readonly ILogger logger;
@@ -28,4 +28,3 @@ namespace HackSystem.Web.Services.Authentication
             this.httpClient.AddAuthorizationHeader(await hackSystemAuthenticationStateHandler.GetCurrentTokenAsync());
         }
     }
-}

@@ -6,8 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace HackSystem.WebAPI.TaskServers.Services
-{
+namespace HackSystem.WebAPI.TaskServers.Services;
+
     public class HackSystemTaskServer : IHackSystemTaskServer
     {
         private readonly ILogger<HackSystemTaskServer> logger;
@@ -95,4 +95,3 @@ namespace HackSystem.WebAPI.TaskServers.Services
             this.logger.LogInformation($"Task Server shutdowned on {taskServerOptions.TaskServerHost}.");
         }
     }
-}

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HackSystem.WebDTO.Account
-{
+namespace HackSystem.WebDTO.Account;
+
     public class LoginDTO
     {
         [Required]
@@ -10,4 +10,3 @@ namespace HackSystem.WebDTO.Account
         [Required]
         public string Password { get; set; }
     }
-}

@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace HackSystem.WebAPI.DataAccess.Migrations
-{
+namespace HackSystem.WebAPI.DataAccess.Migrations;
+
     [DbContext(typeof(HackSystemDBContext))]
     partial class HackSystemDBContextModelSnapshot : ModelSnapshot
     {
@@ -1146,4 +1146,3 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 #pragma warning restore 612, 618
         }
     }
-}

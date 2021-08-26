@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.MockServer.Middlewares
-{
+namespace HackSystem.WebAPI.MockServer.Middlewares;
+
     public class MockServerMiddleware
     {
         private readonly ILogger<MockServerMiddleware> logger;
@@ -110,4 +110,3 @@ namespace HackSystem.WebAPI.MockServer.Middlewares
             }
         }
     }
-}

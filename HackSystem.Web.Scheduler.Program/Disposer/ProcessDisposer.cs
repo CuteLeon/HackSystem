@@ -6,8 +6,8 @@ using HackSystem.Web.Scheduler.Program.Container;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.Scheduler.Program.Disposer
-{
+namespace HackSystem.Web.Scheduler.Program.Disposer;
+
     public class ProcessDisposer : IProcessDisposer
     {
         private readonly ILogger<IProcessDisposer> logger;
@@ -34,4 +34,3 @@ namespace HackSystem.Web.Scheduler.Program.Disposer
             await Task.CompletedTask;
         }
     }
-}

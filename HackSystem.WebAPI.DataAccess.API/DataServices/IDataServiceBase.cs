@@ -4,8 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace HackSystem.WebAPI.DataAccess.API.DataServices
-{
+namespace HackSystem.WebAPI.DataAccess.API.DataServices;
+
     public interface IDataServiceBase<TEntity> where TEntity : class
     {
         #region Add
@@ -459,4 +459,3 @@ namespace HackSystem.WebAPI.DataAccess.API.DataServices
             where TDelegate : Delegate;
         #endregion
     }
-}

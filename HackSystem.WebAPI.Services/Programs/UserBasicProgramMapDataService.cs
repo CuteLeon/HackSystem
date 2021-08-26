@@ -8,8 +8,8 @@ using HackSystem.WebAPI.Services.API.Program;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.Services.Programs
-{
+namespace HackSystem.WebAPI.Services.Programs;
+
     public class UserBasicProgramMapDataService : DataServiceBase<UserBasicProgramMap>, IUserBasicProgramMapDataService
     {
         public UserBasicProgramMapDataService(
@@ -68,4 +68,3 @@ namespace HackSystem.WebAPI.Services.Programs
             return true;
         }
     }
-}

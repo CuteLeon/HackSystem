@@ -1,8 +1,8 @@
 ﻿using HackSystem.WebAPI.Model.Program;
 using Microsoft.EntityFrameworkCore;
 
-namespace HackSystem.WebAPI.DataAccess.DataSeed
-{
+namespace HackSystem.WebAPI.DataAccess.DataSeed;
+
     public static class ProgramDatabaseInitializer
     {
         public static ModelBuilder InitializeBasicProgramData(this ModelBuilder builder)
@@ -22,4 +22,3 @@ namespace HackSystem.WebAPI.DataAccess.DataSeed
             return builder;
         }
     }
-}

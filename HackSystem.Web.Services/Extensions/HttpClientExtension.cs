@@ -2,8 +2,8 @@
 using System.Net.Http.Headers;
 using HackSystem.Web.Common;
 
-namespace HackSystem.Web.Services.Extensions
-{
+namespace HackSystem.Web.Services.Extensions;
+
     public static class HttpClientExtension
     {
         public static HttpClient AddAuthorizationHeader(this HttpClient httpClient, string token)
@@ -12,4 +12,3 @@ namespace HackSystem.Web.Services.Extensions
             return httpClient;
         }
     }
-}

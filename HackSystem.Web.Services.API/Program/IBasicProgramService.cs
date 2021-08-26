@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using HackSystem.WebDataTransfer.Program;
 
-namespace HackSystem.Web.Services.API.Program
-{
+namespace HackSystem.Web.Services.API.Program;
+
     public interface IBasicProgramService
     {
         Task<IEnumerable<QueryUserBasicProgramMapDTO>> QueryUserBasicProgramMaps();
@@ -18,4 +18,3 @@ namespace HackSystem.Web.Services.API.Program
 
         Task<bool> DeleteUserBasicProgramMap(string programId);
     }
-}

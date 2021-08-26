@@ -9,8 +9,8 @@ using HackSystem.WebDataTransfer.Account;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace HackSystem.Web.Services.Authentication
-{
+namespace HackSystem.Web.Services.Authentication;
+
     public class AuthenticationService : IAuthenticationService
     {
         private readonly ILogger<AuthenticationService> logger;
@@ -101,4 +101,3 @@ namespace HackSystem.Web.Services.Authentication
             await this.hackSystemAuthenticationStateHandler.UpdateAuthenticattionStateAsync(string.Empty);
         }
     }
-}

@@ -6,8 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.DataAccess
-{
+namespace HackSystem.WebAPI.DataAccess;
+
     public static class DatabaseInitializer
     {
         /// <summary>
@@ -53,4 +53,3 @@ namespace HackSystem.WebAPI.DataAccess
             }
         }
     }
-}

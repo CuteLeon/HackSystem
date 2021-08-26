@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.ProgramLayer
-{
+namespace HackSystem.Web.ProgramLayer;
+
     /// <summary>
     /// Program container component
     /// </summary>
@@ -57,4 +57,3 @@ namespace HackSystem.Web.ProgramLayer
             GC.SuppressFinalize(this);
         }
     }
-}

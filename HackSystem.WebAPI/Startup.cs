@@ -17,8 +17,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace HackSystem.WebAPI
-{
+namespace HackSystem.WebAPI;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -129,4 +129,3 @@ namespace HackSystem.WebAPI
             app.UseMockServer();
         }
     }
-}

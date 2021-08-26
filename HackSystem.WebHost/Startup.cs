@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace HackSystem.WebHost
-{
+namespace HackSystem.WebHost;
+
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
@@ -36,4 +36,3 @@ namespace HackSystem.WebHost
             });
         }
     }
-}

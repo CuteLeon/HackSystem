@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.DataAccess
-{
+namespace HackSystem.WebAPI.DataAccess;
+
     public class HackSystemDBContext : IdentityDbContext<HackSystemUser, HackSystemRole, string>
     {
         private readonly ILogger<HackSystemDBContext> logger;
@@ -97,4 +97,3 @@ namespace HackSystem.WebAPI.DataAccess
         private void Log(string message)
             => this.logger?.LogDebug(message);
     }
-}

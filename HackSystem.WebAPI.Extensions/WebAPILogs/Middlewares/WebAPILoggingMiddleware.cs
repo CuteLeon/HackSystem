@@ -9,8 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IO;
 
-namespace HackSystem.WebAPI.Extensions.WebAPILogs.Middleware
-{
+namespace HackSystem.WebAPI.Extensions.WebAPILogs.Middleware;
+
     public class WebAPILoggingMiddleware
     {
         private readonly ILogger<WebAPILoggingMiddleware> logger;
@@ -96,4 +96,3 @@ namespace HackSystem.WebAPI.Extensions.WebAPILogs.Middleware
             }
         }
     }
-}

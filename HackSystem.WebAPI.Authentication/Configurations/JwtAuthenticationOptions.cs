@@ -1,5 +1,5 @@
-﻿namespace HackSystem.WebAPI.Authentication.Configurations
-{
+﻿namespace HackSystem.WebAPI.Authentication.Configurations;
+
     public class JwtAuthenticationOptions
     {
         public string JwtSecurityKey { get; set; }
@@ -10,4 +10,3 @@
 
         public int JwtExpiryInMinutes { get; set; }
     }
-}

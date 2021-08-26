@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HackSystem.WebDataTransfer.Account
-{
+namespace HackSystem.WebDataTransfer.Account;
+
     public class LoginDTO
     {
         [Required(ErrorMessage = "User name is required")]
@@ -10,4 +10,3 @@ namespace HackSystem.WebDataTransfer.Account
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
     }
-}

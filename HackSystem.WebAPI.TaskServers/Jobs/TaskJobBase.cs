@@ -3,8 +3,8 @@ using HackSystem.WebAPI.TaskServers.DataServices;
 using HackSystem.WebAPI.TaskServers.Services;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.TaskServers.Jobs
-{
+namespace HackSystem.WebAPI.TaskServers.Jobs;
+
     public abstract class TaskJobBase : ITaskJobBase
     {
         private readonly ILogger<TaskJobBase> logger;
@@ -36,7 +36,7 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
             this.logger.LogInformation($"Task Log ID: {taskLog.TaskLogID}, Task {this.TaskDetail.TaskName} [TaskID={this.TaskDetail.TaskID}] starts at {this.TaskDetail.ClassName}.{this.TaskDetail.ProcedureName} method...");
             try
             {
-                ExecuteTask();
+                this.ExecuteTask();
             }
             catch (Exception ex)
             {
@@ -57,4 +57,3 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
 
         protected abstract void ExecuteTask();
     }
-}

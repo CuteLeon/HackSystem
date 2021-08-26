@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using Microsoft.AspNetCore.Identity;
 
-namespace HackSystem.WebAPI.Model.Identity
-{
+namespace HackSystem.WebAPI.Model.Identity;
+
     public class HackSystemRole : IdentityRole
     {
         public HackSystemRole()
@@ -18,4 +18,3 @@ namespace HackSystem.WebAPI.Model.Identity
         [DefaultValue(0)]
         public int Level { get; set; }
     }
-}

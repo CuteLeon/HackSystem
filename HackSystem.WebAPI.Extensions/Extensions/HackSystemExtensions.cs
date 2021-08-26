@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IO;
 
-namespace HackSystem.WebAPI.Extensions
-{
+namespace HackSystem.WebAPI.Extensions;
+
     public static class HackSystemExtensions
     {
         public static IApplicationBuilder UseWebAPILogging(this IApplicationBuilder app)
@@ -23,4 +23,3 @@ namespace HackSystem.WebAPI.Extensions
             return services;
         }
     }
-}

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HackSystem.Web.CookieStorage
-{
+namespace HackSystem.Web.CookieStorage;
+
     public interface ICookieStorageService
     {
         event EventHandler<CookieChangedEventArgs> CookieChanged;
@@ -24,4 +24,3 @@ namespace HackSystem.Web.CookieStorage
 
         string GetCookie(string name);
     }
-}

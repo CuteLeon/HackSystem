@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using HackSystem.Web.Scheduler.Program.Model;
 
-namespace HackSystem.Web.Scheduler.Program.Container
-{
+namespace HackSystem.Web.Scheduler.Program.Container;
+
     public interface IProcessContainer
     {
         IEnumerable<ProcessDetail> GetProcesses();
@@ -13,4 +13,3 @@ namespace HackSystem.Web.Scheduler.Program.Container
 
         ProcessDetail GetProcess(int pID);
     }
-}

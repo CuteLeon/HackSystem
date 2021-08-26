@@ -2,8 +2,8 @@
 using HackSystem.Web.Authentication.Providers;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-namespace HackSystem.Web.Extensions
-{
+namespace HackSystem.Web.Extensions;
+
     /// <summary>
     /// Launch basic services
     /// </summary>
@@ -22,4 +22,3 @@ namespace HackSystem.Web.Extensions
             return host;
         }
     }
-}

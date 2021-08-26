@@ -1,7 +1,7 @@
 ﻿using System;
 
-namespace HackSystem.Web.ProgramSDK.ProgramComponent
-{
+namespace HackSystem.Web.ProgramSDK.ProgramComponent;
+
     public class ProgramEntity
     {
         public string Name { get; set; }
@@ -10,4 +10,3 @@ namespace HackSystem.Web.ProgramSDK.ProgramComponent
 
         public int Z_Index { get; set; }
     }
-}

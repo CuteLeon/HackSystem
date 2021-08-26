@@ -11,14 +11,14 @@ namespace HackSystem.WebAPI.Services.Options.Tests
     {
         private HackSystemDBContext GetDBContext()
         {
-            List<GenericOption> genericOptions = new List<GenericOption>()
+            var genericOptions = new List<GenericOption>()
             {
                 new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_0" },
                 new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_1", OwnerLevel = "HackSystem",},
                 new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_2", OwnerLevel = "HackSystem", Category = "GenericCategory" },
                 new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_3", Category = "GenericCategory" },
             };
-            HackSystemDBContext dbContext = new HackSystemDBContext(
+            var dbContext = new HackSystemDBContext(
                 new DbContextOptionsBuilder<HackSystemDBContext>()
                 .UseLazyLoadingProxies()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
@@ -36,7 +36,7 @@ namespace HackSystem.WebAPI.Services.Options.Tests
         {
             var logger = new Mock<ILogger<GenericOptionDataService>>();
             logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<EventId>(), It.IsAny<object>(), It.IsAny<Exception?>(), It.IsAny<Func<object, Exception?, string>>())).Verifiable();
-            IGenericOptionDataService genericOptionDataService = new GenericOptionDataService(logger.Object, GetDBContext());
+            IGenericOptionDataService genericOptionDataService = new GenericOptionDataService(logger.Object, this.GetDBContext());
 
             var optionValue = genericOptionDataService.QueryGenericOption("OtherOptionName").Result;
             Assert.Null(optionValue);

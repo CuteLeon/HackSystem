@@ -7,8 +7,8 @@ using HackSystem.WebAPI.Model.Mock;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.MockServers.DataServices
-{
+namespace HackSystem.WebAPI.MockServers.DataServices;
+
     public class MockRouteDataService : DataServiceBase<MockRouteDetail>, IMockRouteDataService
     {
         private readonly IMemoryCache memoryCache;
@@ -63,4 +63,3 @@ namespace HackSystem.WebAPI.MockServers.DataServices
             return mockRoute;
         }
     }
-}

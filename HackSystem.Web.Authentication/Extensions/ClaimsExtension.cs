@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace HackSystem.Web.Authentication.Extensions
-{
+namespace HackSystem.Web.Authentication.Extensions;
+
     public static class ClaimsExtension
     {
         public static bool IsExpired(this IEnumerable<Claim> claims, string expiryClaimType)
@@ -26,4 +26,3 @@ namespace HackSystem.Web.Authentication.Extensions
             return DateTime.Now > localExpiredTime;
         }
     }
-}

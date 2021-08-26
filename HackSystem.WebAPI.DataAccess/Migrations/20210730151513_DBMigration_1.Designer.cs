@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace HackSystem.WebAPI.DataAccess.Migrations
-{
+namespace HackSystem.WebAPI.DataAccess.Migrations;
+
     [DbContext(typeof(HackSystemDBContext))]
     [Migration("20210730151513_DBMigration_1")]
     partial class DBMigration_1
@@ -1148,4 +1148,3 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
 #pragma warning restore 612, 618
         }
     }
-}

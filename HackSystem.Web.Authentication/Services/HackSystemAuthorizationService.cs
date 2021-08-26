@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace HackSystem.Web.Authentication.Services
-{
+namespace HackSystem.Web.Authentication.Services;
+
     public class HackSystemAuthorizationService : DefaultAuthorizationService
     {
         private readonly ILogger<DefaultAuthorizationService> logger;
@@ -46,4 +46,3 @@ namespace HackSystem.Web.Authentication.Services
             return result;
         }
     }
-}

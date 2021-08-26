@@ -3,8 +3,8 @@ using System.Linq;
 using HackSystem.Web.Scheduler.Program.Model;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.Scheduler.Program.Container
-{
+namespace HackSystem.Web.Scheduler.Program.Container;
+
     public class ProcessContainer : IProcessContainer
     {
         private readonly ILogger<ProcessContainer> logger;
@@ -52,4 +52,3 @@ namespace HackSystem.Web.Scheduler.Program.Container
             return process;
         }
     }
-}

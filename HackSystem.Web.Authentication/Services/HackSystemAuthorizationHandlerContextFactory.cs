@@ -4,8 +4,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.Authentication.Services
-{
+namespace HackSystem.Web.Authentication.Services;
+
     public class HackSystemAuthorizationHandlerContextFactory : DefaultAuthorizationHandlerContextFactory, IAuthorizationHandlerContextFactory
     {
         private readonly ILogger<HackSystemAuthorizationHandlerContextFactory> logger;
@@ -29,4 +29,3 @@ namespace HackSystem.Web.Authentication.Services
             return result;
         }
     }
-}

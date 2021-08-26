@@ -1,7 +1,7 @@
 ﻿using System;
 
-namespace HackSystem.Web.Toast.Model
-{
+namespace HackSystem.Web.Toast.Model;
+
     public class ToastDetail
     {
         public enum Icons
@@ -27,4 +27,3 @@ namespace HackSystem.Web.Toast.Model
 
         public int HideDelay { get; set; } = 3000;
     }
-}

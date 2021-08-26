@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using HackSystem.WebDataTransfer.Program;
 
-namespace HackSystem.WebDataTransfer.Account
-{
+namespace HackSystem.WebDataTransfer.Account;
+
     public class AccountInfoDTO
     {
         public int Level { get; set; }
@@ -19,4 +19,3 @@ namespace HackSystem.WebDataTransfer.Account
 
         public virtual IList<QueryUserBasicProgramMapDTO> UserProgramMaps { get; set; }
     }
-}

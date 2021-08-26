@@ -2,8 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HackSystem.WebAPI.Model.Task
-{
+namespace HackSystem.WebAPI.Model.Task;
+
     public class TaskLogDetail
     {
         [Key]
@@ -26,4 +26,3 @@ namespace HackSystem.WebAPI.Model.Task
 
         public string Exception { get; set; }
     }
-}

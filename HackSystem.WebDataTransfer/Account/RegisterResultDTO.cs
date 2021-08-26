@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace HackSystem.WebDataTransfer.Account
-{
+namespace HackSystem.WebDataTransfer.Account;
+
     public class RegisterResultDTO
     {
         public bool Successful { get; set; }
 
         public IEnumerable<string> Errors { get; set; }
     }
-}

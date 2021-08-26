@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace HackSystem.WebAPI.TaskServers.Services
-{
+namespace HackSystem.WebAPI.TaskServers.Services;
+
     public class TaskParameterWrapper : ITaskParameterWrapper
     {
         protected Regex ParameterRegex { get; init; } = new Regex(
@@ -37,4 +37,3 @@ namespace HackSystem.WebAPI.TaskServers.Services
             return parameterDictionary;
         }
     }
-}

@@ -7,8 +7,8 @@ using HackSystem.WebAPI.DataAccess.API.DataServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.DataAccess.DataServices
-{
+namespace HackSystem.WebAPI.DataAccess.DataServices;
+
     public class DataServiceBase<TEntity> : IDataServiceBase<TEntity>
         where TEntity : class
     {
@@ -574,4 +574,3 @@ namespace HackSystem.WebAPI.DataAccess.DataServices
         }
         #endregion
     }
-}

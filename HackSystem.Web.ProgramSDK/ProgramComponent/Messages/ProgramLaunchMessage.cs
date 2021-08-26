@@ -1,7 +1,7 @@
 ﻿using HackSystem.Observer.Message;
 
-namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages
-{
+namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
+
     public record ProgramLaunchMessage : MessageBase
     {
         public int PID { get; set; }
@@ -9,4 +9,3 @@ namespace HackSystem.Web.ProgramSDK.ProgramComponent.Messages
         public override string ToString()
             => $"Process Launch Message => {this.PID} ID";
     }
-}

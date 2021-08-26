@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.Controllers
-{
+namespace HackSystem.WebAPI.Controllers;
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> logger;
@@ -26,4 +26,3 @@ namespace HackSystem.WebAPI.Controllers
                 title: "Hack System Error");
         }
     }
-}

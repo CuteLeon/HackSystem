@@ -1,5 +1,5 @@
-﻿namespace HackSystem.Web.Configurations
-{
+﻿namespace HackSystem.Web.Configurations;
+
     public class APIConfiguration
     {
         public string APIHost { get; set; }
@@ -8,4 +8,3 @@
 
         public int TokenRefreshInMinutes { get; set; }
     }
-}

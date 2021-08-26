@@ -14,8 +14,8 @@ using Moq;
 using Moq.Contrib.HttpClient;
 using Xunit;
 
-namespace HackSystem.WebTests.Account
-{
+namespace HackSystem.WebTests.Account;
+
     public class LogoutComponentTests
     {
         [Fact()]
@@ -47,4 +47,3 @@ namespace HackSystem.WebTests.Account
             Assert.EndsWith("/StartUp", mockNavigationManager.Uri, StringComparison.OrdinalIgnoreCase);
         }
     }
-}

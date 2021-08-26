@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace HackSystem.Web.Authentication.Providers
-{
+namespace HackSystem.Web.Authentication.Providers;
+
     /// <summary>
     /// User authentication state provider
     /// </summary>
@@ -133,4 +133,3 @@ namespace HackSystem.Web.Authentication.Providers
         }
         #endregion
     }
-}

@@ -4,8 +4,8 @@ using HackSystem.WebAPI.Model.Task;
 using HackSystem.WebAPI.TaskServers.DataServices;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.TaskServers.Services
-{
+namespace HackSystem.WebAPI.TaskServers.Services;
+
     public class TaskLoader : ITaskLoader
     {
         private readonly ILogger<TaskLoader> logger;
@@ -27,4 +27,3 @@ namespace HackSystem.WebAPI.TaskServers.Services
             return taskDetails;
         }
     }
-}

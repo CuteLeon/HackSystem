@@ -5,8 +5,8 @@ using System.Security.Claims;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.Authentication.Services
-{
+namespace HackSystem.Web.Authentication.Services;
+
     /// <summary>
     /// Parse claims from JWT
     /// </summary>
@@ -83,4 +83,3 @@ namespace HackSystem.Web.Authentication.Services
             return Convert.FromBase64String(text);
         }
     }
-}

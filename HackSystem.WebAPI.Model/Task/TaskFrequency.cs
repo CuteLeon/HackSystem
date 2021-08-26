@@ -1,5 +1,5 @@
-﻿namespace HackSystem.WebAPI.Model.Task
-{
+﻿namespace HackSystem.WebAPI.Model.Task;
+
     public enum TaskFrequency
     {
         Manually,
@@ -10,4 +10,3 @@
         Monthly,
         Yearly
     }
-}

@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.Controllers.Account
-{
+namespace HackSystem.WebAPI.Controllers.Account;
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]
@@ -41,4 +41,3 @@ namespace HackSystem.WebAPI.Controllers.Account
             return this.Ok(token);
         }
     }
-}

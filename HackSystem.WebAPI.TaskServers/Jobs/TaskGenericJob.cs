@@ -4,8 +4,8 @@ using HackSystem.WebAPI.TaskServers.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.TaskServers.Jobs
-{
+namespace HackSystem.WebAPI.TaskServers.Jobs;
+
     public class TaskGenericJob : TaskJobBase, ITaskGenericJob
     {
         private readonly IServiceProvider serviceProvider;
@@ -64,4 +64,3 @@ namespace HackSystem.WebAPI.TaskServers.Jobs
             }
         }
     }
-}

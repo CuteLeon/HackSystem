@@ -7,8 +7,8 @@ using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebAPI.Services.API.Program;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.WebAPI.Services.Programs
-{
+namespace HackSystem.WebAPI.Services.Programs;
+
     public class BasicProgramDataService : DataServiceBase<BasicProgram>, IBasicProgramDataService
     {
         public BasicProgramDataService(
@@ -21,4 +21,3 @@ namespace HackSystem.WebAPI.Services.Programs
         public async Task<IEnumerable<BasicProgram>> QueryIntegralBasicPrograms()
             => this.AsQueryable().Where(p => p.Integral);
     }
-}

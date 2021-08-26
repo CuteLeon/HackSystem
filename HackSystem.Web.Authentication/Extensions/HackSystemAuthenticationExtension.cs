@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HackSystem.Web.Authentication.Extensions
-{
+namespace HackSystem.Web.Authentication.Extensions;
+
     public static class HackSystemAuthenticationExtension
     {
         public static IServiceCollection AddHackSystemAuthentication(this IServiceCollection services, Action<HackSystemAuthenticationOptions> configure)
@@ -24,4 +24,3 @@ namespace HackSystem.Web.Authentication.Extensions
             return services;
         }
     }
-}

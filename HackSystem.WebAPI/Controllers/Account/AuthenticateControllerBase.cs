@@ -7,8 +7,8 @@ using HackSystem.WebAPI.Model.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HackSystem.WebAPI.Controllers.Account
-{
+namespace HackSystem.WebAPI.Controllers.Account;
+
     public abstract class AuthenticateControllerBase : Controller
     {
         protected readonly RoleManager<HackSystemRole> roleManager;
@@ -56,4 +56,3 @@ namespace HackSystem.WebAPI.Controllers.Account
             return claims;
         }
     }
-}

@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace HackSystem.WebHost
-{
+namespace HackSystem.WebHost;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -26,4 +26,3 @@ namespace HackSystem.WebHost
                     webBuilder.UseStartup<Startup>();
                 });
     }
-}
