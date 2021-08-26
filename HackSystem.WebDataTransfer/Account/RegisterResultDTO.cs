@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace HackSystem.WebDataTransfer.Account;
+﻿namespace HackSystem.WebDataTransfer.Account;
 
 public class RegisterResultDTO
 {

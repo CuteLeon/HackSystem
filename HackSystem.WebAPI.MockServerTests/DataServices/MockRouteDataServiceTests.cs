@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HackSystem.WebAPI.DataAccess;
+﻿using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.MockServers.Configurations;
 using HackSystem.WebAPI.MockServers.Extensions;
 using HackSystem.WebAPI.Model.Mock;

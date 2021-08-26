@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using HackSystem.Observer.Publisher;
 using HackSystem.Web.ProgramSDK.ProgramComponent;
 using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;

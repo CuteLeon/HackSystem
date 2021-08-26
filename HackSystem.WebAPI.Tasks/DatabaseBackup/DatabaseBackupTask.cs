@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.Tasks.DatabaseBackup;

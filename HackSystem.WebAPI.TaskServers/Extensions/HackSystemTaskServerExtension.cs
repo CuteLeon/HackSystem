@@ -1,5 +1,4 @@
-﻿using System;
-using HackSystem.WebAPI.Tasks;
+﻿using HackSystem.WebAPI.Tasks;
 using HackSystem.WebAPI.TaskServers.Configurations;
 using HackSystem.WebAPI.TaskServers.DataServices;
 using HackSystem.WebAPI.TaskServers.Jobs;
@@ -17,10 +16,7 @@ public static class HackSystemTaskServerExtension
         TaskServerOptions configuration)
     {
         services
-            .Configure(new Action<TaskServerOptions>(options =>
-            {
-                options.TaskServerHost = configuration.TaskServerHost;
-            }))
+            .Configure(new Action<TaskServerOptions>(options => options.TaskServerHost = configuration.TaskServerHost))
             .AddSingleton<IHackSystemTaskServer, HackSystemTaskServer>()
             .AddScoped<ITaskDataService, TaskDataService>()
             .AddScoped<ITaskLogDataService, TaskLogDataService>()

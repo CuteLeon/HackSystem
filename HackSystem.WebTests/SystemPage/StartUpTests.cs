@@ -1,5 +1,4 @@
-﻿using System;
-using Bunit;
+﻿using Bunit;
 using Bunit.TestDoubles;
 using HackSystem.Web.SystemPage;
 using HackSystem.WebTests.Mocks;

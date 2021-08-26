@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace HackSystem.Web.CookieStorage;
+﻿namespace HackSystem.Web.CookieStorage;
 
 public interface ICookieStorageService
 {

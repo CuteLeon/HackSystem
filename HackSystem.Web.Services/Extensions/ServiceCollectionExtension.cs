@@ -1,5 +1,4 @@
-﻿using System;
-using HackSystem.Web.Services.API.Authentication;
+﻿using HackSystem.Web.Services.API.Authentication;
 using HackSystem.Web.Services.API.Program;
 using HackSystem.Web.Services.Authentication;
 using HackSystem.Web.Services.Configurations;

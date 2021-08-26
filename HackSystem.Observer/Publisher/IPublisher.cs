@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using HackSystem.Observer.Message;
+﻿using HackSystem.Observer.Message;
 
 namespace HackSystem.Observer.Publisher;
 

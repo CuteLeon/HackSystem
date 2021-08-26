@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Json;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Services.API.Authentication;
 using HackSystem.Web.Services.Extensions;

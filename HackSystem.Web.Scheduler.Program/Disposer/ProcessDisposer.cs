@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using HackSystem.Observer.Subscriber;
+﻿using HackSystem.Observer.Subscriber;
 using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
 using HackSystem.Web.Scheduler.Program.Container;
 using Microsoft.Extensions.DependencyInjection;

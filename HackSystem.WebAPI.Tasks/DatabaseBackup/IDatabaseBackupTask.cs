@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace HackSystem.WebAPI.Tasks.DatabaseBackup;
+﻿namespace HackSystem.WebAPI.Tasks.DatabaseBackup;
 
 public interface IDatabaseBackupTask
 {

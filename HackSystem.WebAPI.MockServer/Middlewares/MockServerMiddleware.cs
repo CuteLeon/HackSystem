@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Net.Http;
-using System.Threading.Tasks;
-using HackSystem.WebAPI.MockServer.Services;
+﻿using HackSystem.WebAPI.MockServer.Services;
 using HackSystem.WebAPI.MockServers.DataServices;
 using HackSystem.WebAPI.Model.Mock;
 using Microsoft.AspNetCore.Http;
@@ -67,7 +63,7 @@ public class MockServerMiddleware
 
         try
         {
-            this.mockRouteResponseWrapper.WrapMockResponse(context, mockRoute, in requestContent, out string responseContent);
+            this.mockRouteResponseWrapper.WrapMockResponse(context, mockRoute, in requestContent, out var responseContent);
 
             mockRouteLog.StatusCode = context.Response.StatusCode;
             mockRouteLog.ResponseBody = responseContent;
@@ -77,7 +73,7 @@ public class MockServerMiddleware
 
             if (!string.IsNullOrWhiteSpace(mockRoute.ForwardAddress))
             {
-                var forwardRequest = this.mockForwardRequestWrapper.WrapForwardRequest(context, mockRoute, in requestContent, out string forwardRequestContent);
+                var forwardRequest = this.mockForwardRequestWrapper.WrapForwardRequest(context, mockRoute, in requestContent, out var forwardRequestContent);
                 mockRouteLog.ForwardAddress = forwardRequest.RequestUri?.AbsoluteUri;
                 mockRouteLog.ForwardDateTime = DateTime.Now;
                 mockRouteLog.ForwardMethod = forwardRequest.Method.ToString();

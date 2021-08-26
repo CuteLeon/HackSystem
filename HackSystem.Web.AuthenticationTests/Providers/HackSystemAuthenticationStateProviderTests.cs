@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using HackSystem.Web.Authentication.Options;
 using HackSystem.Web.Authentication.Services;
 using HackSystem.Web.CookieStorage;

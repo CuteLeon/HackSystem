@@ -1,5 +1,4 @@
-﻿using System;
-using HackSystem.Web.Scheduler.Program.Container;
+﻿using HackSystem.Web.Scheduler.Program.Container;
 using HackSystem.Web.Scheduler.Program.Disposer;
 using HackSystem.Web.Scheduler.Program.IDGenerator;
 using HackSystem.Web.Scheduler.Program.Launcher;

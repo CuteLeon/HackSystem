@@ -1,10 +1,6 @@
-using System;
 using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.TaskServers.Extensions;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Hosting;
 using NLog.Web;
 
 namespace HackSystem.WebAPI;

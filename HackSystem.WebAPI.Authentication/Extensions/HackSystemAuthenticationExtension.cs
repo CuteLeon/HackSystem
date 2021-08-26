@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using HackSystem.WebAPI.Authentication.Configurations;
 using HackSystem.WebAPI.Authentication.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

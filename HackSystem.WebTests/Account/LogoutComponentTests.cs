@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using Bunit;
 using HackSystem.Web.Account;
 using HackSystem.Web.Authentication.Extensions;

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using HackSystem.WebAPI.Authentication.Services;
+﻿using HackSystem.WebAPI.Authentication.Services;
 using HackSystem.WebAPI.Model.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

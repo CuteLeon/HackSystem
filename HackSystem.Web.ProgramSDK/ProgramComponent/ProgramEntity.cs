@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HackSystem.Web.ProgramSDK.ProgramComponent;
+﻿namespace HackSystem.Web.ProgramSDK.ProgramComponent;
 
 public class ProgramEntity
 {

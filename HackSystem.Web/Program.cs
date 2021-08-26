@@ -1,6 +1,3 @@
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using HackSystem.Common;
 using HackSystem.Cryptography;
@@ -14,7 +11,6 @@ using HackSystem.Web.Scheduler.Program;
 using HackSystem.Web.Services.Configurations;
 using HackSystem.Web.Services.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HackSystem.Web;

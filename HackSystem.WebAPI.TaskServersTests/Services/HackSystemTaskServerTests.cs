@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using FluentScheduler;
+﻿using FluentScheduler;
 using HackSystem.WebAPI.Model.Task;
 using HackSystem.WebAPI.TaskServers.Configurations;
 using HackSystem.WebAPI.TaskServers.Jobs;

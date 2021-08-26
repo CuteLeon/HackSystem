@@ -1,6 +1,4 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
-using HackSystem.Web.Authentication.Extensions;
+﻿using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Services.Extensions;
 using Microsoft.Extensions.Logging;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using HackSystem.WebDataTransfer.Program;
+﻿using HackSystem.WebDataTransfer.Program;
 
 namespace HackSystem.Web.Services.API.Program;
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using AutoMapper;
 using HackSystem.Common;
 using HackSystem.WebAPI.Authentication.Services;

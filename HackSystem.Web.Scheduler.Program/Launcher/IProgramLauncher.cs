@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using HackSystem.Web.Scheduler.Program.Model;
+﻿using HackSystem.Web.Scheduler.Program.Model;
 using HackSystem.WebDataTransfer.Program;
 
 namespace HackSystem.Web.Scheduler.Program.Launcher;

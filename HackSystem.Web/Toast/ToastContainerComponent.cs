@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using HackSystem.Web.Toast.Handler;
+﻿using HackSystem.Web.Toast.Handler;
 using HackSystem.Web.Toast.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using HackSystem.WebAPI.Model.Task;
+﻿using HackSystem.WebAPI.Model.Task;
 
 namespace HackSystem.WebAPI.TaskServers.Services;
 

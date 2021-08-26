@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using HackSystem.WebAPI.Extensions.WebAPILogs.DataServices;
 using HackSystem.WebAPI.Model.WebLog;
 using Microsoft.AspNetCore.Http;
