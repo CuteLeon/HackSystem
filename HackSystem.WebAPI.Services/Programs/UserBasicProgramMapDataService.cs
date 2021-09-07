@@ -24,6 +24,11 @@ public class UserBasicProgramMapDataService : DataServiceBase<UserBasicProgramMa
         return true;
     }
 
+    public async Task<bool> CheckUserBasicProgramMap(string userId, string programId)
+    {
+        return await this.AsQueryable().AnyAsync(map => map.UserId == userId && map.ProgramId == programId);
+    }
+
     public async Task<IEnumerable<UserBasicProgramMap>> QueryUserBasicProgramMaps(string userId)
     {
         return await this.AsQueryable().Where(map => map.UserId == userId).ToListAsync();

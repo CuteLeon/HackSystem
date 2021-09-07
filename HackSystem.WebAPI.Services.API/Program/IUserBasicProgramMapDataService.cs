@@ -5,6 +5,8 @@ namespace HackSystem.WebAPI.Services.API.Program;
 
 public interface IUserBasicProgramMapDataService : IDataServiceBase<UserBasicProgramMap>
 {
+    Task<bool> CheckUserBasicProgramMap(string userId, string programId);
+
     Task<IEnumerable<UserBasicProgramMap>> QueryUserBasicProgramMaps(string userId);
 
     Task<bool> SetUserBasicProgramHide(string userId, string programId, bool hide);
