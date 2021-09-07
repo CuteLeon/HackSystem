@@ -7,6 +7,7 @@ using HackSystem.WebAPI.Extensions;
 using HackSystem.WebAPI.MockServers.Configurations;
 using HackSystem.WebAPI.MockServers.Extensions;
 using HackSystem.WebAPI.Model.Identity;
+using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
 using HackSystem.WebAPI.Services.Extensions;
 using HackSystem.WebAPI.TaskServers.Configurations;
 using HackSystem.WebAPI.TaskServers.Extensions;
@@ -67,6 +68,7 @@ public class Startup
         var taskServerConfiguration = this.Configuration.GetSection("TaskServerConfiguration").Get<TaskServerOptions>();
         var mockServerConfiguration = this.Configuration.GetSection("MockServerConfiguration").Get<MockServerOptions>();
         var securityConfiguration = this.Configuration.GetSection("SecurityConfiguration").Get<SecurityConfiguration>();
+        var programAssetConfiguration = this.Configuration.GetSection("ProgramAssetConfiguration").Get<ProgramAssetOptions>();
         services
             .AddAutoMapper(typeof(Startup).Assembly)
             .AddRSACryptography(options =>
@@ -79,7 +81,13 @@ public class Startup
             .AddMemoryCache()
             .AddHackSystemWebAPIExtensions()
             .AddAPIAuthentication(jwtConfiguration)
-            .AddWebAPIServices();
+            .AddWebAPIServices()
+            .AddProgramAssetServices(options =>
+            {
+                options.FolderPath = Path.IsPathFullyQualified(programAssetConfiguration.FolderPath) ?
+                    programAssetConfiguration.FolderPath :
+                    Path.GetFullPath(programAssetConfiguration.FolderPath, AppContext.BaseDirectory);
+            });
 
         services
             .AddResponseCompression()
