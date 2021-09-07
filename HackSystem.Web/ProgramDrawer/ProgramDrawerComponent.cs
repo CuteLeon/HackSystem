@@ -23,7 +23,7 @@ public partial class ProgramDrawerComponent
         }
     }
 
-    public void LoadProgramDrawer(IEnumerable<QueryUserBasicProgramMapDTO> maps)
+    public void LoadProgramDrawer(IEnumerable<UserBasicProgramMapDTO> maps)
     {
         this.BasicProgramMaps.Clear();
 

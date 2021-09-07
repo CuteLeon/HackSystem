@@ -16,5 +16,5 @@ public class AccountInfoDTO
 
     public virtual bool PhoneNumberConfirmed { get; set; }
 
-    public virtual IList<QueryUserBasicProgramMapDTO> UserProgramMaps { get; set; }
+    public virtual IList<UserBasicProgramMapDTO> UserProgramMaps { get; set; }
 }

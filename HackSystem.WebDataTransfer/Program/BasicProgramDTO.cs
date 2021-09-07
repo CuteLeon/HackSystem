@@ -1,6 +1,6 @@
 ﻿namespace HackSystem.WebDataTransfer.Program;
 
-public class QueryBasicProgramDTO
+public class BasicProgramDTO
 {
     public string Id { get; set; }
 

@@ -9,10 +9,10 @@ public class ProgramMapperProfile : Profile
 {
     public ProgramMapperProfile()
     {
-        this.CreateMap<QueryBasicProgramDTO, BasicProgram>();
-        this.CreateMap<BasicProgram, QueryBasicProgramDTO>()
+        this.CreateMap<BasicProgramDTO, BasicProgram>();
+        this.CreateMap<BasicProgram, BasicProgramDTO>()
             .ForMember(dto => dto.IconUri, map => map.MapFrom(program => program.IconUri));
 
-        this.CreateMap<UserBasicProgramMap, QueryUserBasicProgramMapDTO>();
+        this.CreateMap<UserBasicProgramMap, UserBasicProgramMapDTO>();
     }
 }

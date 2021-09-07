@@ -4,7 +4,7 @@ namespace HackSystem.Web.Services.API.Program;
 
 public interface IBasicProgramService
 {
-    Task<IEnumerable<QueryUserBasicProgramMapDTO>> QueryUserBasicProgramMaps();
+    Task<IEnumerable<UserBasicProgramMapDTO>> QueryUserBasicProgramMaps();
 
     Task<bool> SetUserBasicProgramHide(SetUserProgramHideDTO hideDTO);
 

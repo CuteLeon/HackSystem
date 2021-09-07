@@ -5,5 +5,5 @@ namespace HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
 
 public class ProgramDrawerIconMouseEventArgs : MouseEventArgs
 {
-    public QueryUserBasicProgramMapDTO UserBasicProgramMap { get; set; }
+    public UserBasicProgramMapDTO UserBasicProgramMap { get; set; }
 }

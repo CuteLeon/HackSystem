@@ -11,7 +11,7 @@ public partial class ProgramDockComponent
         this.StateHasChanged();
     }
 
-    public void LoadProgramDock(IEnumerable<QueryUserBasicProgramMapDTO> maps)
+    public void LoadProgramDock(IEnumerable<UserBasicProgramMapDTO> maps)
     {
         this.BasicProgramMaps.Clear();
 

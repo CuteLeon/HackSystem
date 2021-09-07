@@ -5,5 +5,5 @@ namespace HackSystem.Web.Scheduler.Program.Launcher;
 
 public interface IProgramLauncher
 {
-    Task<ProcessDetail> LaunchProgram(QueryBasicProgramDTO basicProgram);
+    Task<ProcessDetail> LaunchProgram(BasicProgramDTO basicProgram);
 }

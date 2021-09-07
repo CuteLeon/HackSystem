@@ -17,10 +17,10 @@ public class BasicProgramService : AuthenticatedServiceBase, IBasicProgramServic
     {
     }
 
-    public async Task<IEnumerable<QueryUserBasicProgramMapDTO>> QueryUserBasicProgramMaps()
+    public async Task<IEnumerable<UserBasicProgramMapDTO>> QueryUserBasicProgramMaps()
     {
         await this.AddAuthorizationHeaderAsync();
-        var result = await this.httpClient.GetFromJsonAsync<IEnumerable<QueryUserBasicProgramMapDTO>>("api/basicprogram/QueryUserBasicProgramMaps");
+        var result = await this.httpClient.GetFromJsonAsync<IEnumerable<UserBasicProgramMapDTO>>("api/basicprogram/QueryUserBasicProgramMaps");
         return result;
     }
 

@@ -29,7 +29,7 @@ public class ProgramLauncher : IProgramLauncher
         this.processContainer = processContainer;
     }
 
-    public async Task<ProcessDetail> LaunchProgram(QueryBasicProgramDTO basicProgram)
+    public async Task<ProcessDetail> LaunchProgram(BasicProgramDTO basicProgram)
     {
         var programEntity = new ProgramEntity()
         {

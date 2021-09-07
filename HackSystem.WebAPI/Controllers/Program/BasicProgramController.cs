@@ -30,12 +30,11 @@ public class BasicProgramController : ControllerBase
         this.logger = logger;
         this.mapper = mapper;
         this.userManager = userManager;
-        this.userManager = userManager;
         this.basicProgramDataService = basicProgramDataService;
     }
 
     [HttpGet]
-    public async Task<IEnumerable<QueryUserBasicProgramMapDTO>> QueryUserBasicProgramMaps()
+    public async Task<IEnumerable<UserBasicProgramMapDTO>> QueryUserBasicProgramMaps()
     {
         this.logger.LogInformation($"Query user basic program maps...");
         var userName = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
@@ -44,7 +43,7 @@ public class BasicProgramController : ControllerBase
 
         var maps = await this.basicProgramDataService.QueryUserBasicProgramMaps(userId);
         this.logger.LogInformation($"Found {maps.Count()} basic program maps for user {user.UserName}.");
-        var dtos = this.mapper.Map<IEnumerable<QueryUserBasicProgramMapDTO>>(maps);
+        var dtos = this.mapper.Map<IEnumerable<UserBasicProgramMapDTO>>(maps);
         return dtos;
     }
 
