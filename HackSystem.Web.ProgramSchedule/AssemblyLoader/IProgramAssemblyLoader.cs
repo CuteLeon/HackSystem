@@ -6,8 +6,6 @@ namespace HackSystem.Web.ProgramSchedule.AssemblyLoader
     {
         bool CheckAssemblyLoaded(string assemblyName);
 
-        bool CheckProgramLoaded(string programId);
-
         Task<IEnumerable<Assembly>> LoadProgramAssembly(string programId);
     }
 }
