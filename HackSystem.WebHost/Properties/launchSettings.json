@@ -3,10 +3,13 @@
     "HackSystem.WebHost": {
       "commandName": "Project",
       "launchBrowser": true,
+      "dotnetRunMessages": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://0:2473"
+      "applicationUrl": "https://localhost:2473",
+      "launchUrl": "https://localhost:2473/StartUp",
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
     }
   }
 }
