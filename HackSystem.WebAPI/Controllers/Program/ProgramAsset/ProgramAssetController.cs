@@ -1,6 +1,7 @@
 ﻿using System.Security.Authentication;
 using AutoMapper;
 using HackSystem.Common;
+using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Services.API.Program;
 using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
@@ -51,6 +52,7 @@ public class ProgramAssetController : ControllerBase
     }
 
     [HttpGet]
+    [LogActionFilter(noLogResponseBody: true)]
     public async Task<IActionResult> QueryProgramAssetPackage(string programId)
     {
         if (!await CheckUserBasicProgramMap(programId))
@@ -65,6 +67,7 @@ public class ProgramAssetController : ControllerBase
     }
 
     [HttpPost]
+    [LogActionFilter(noLogResponseBody: true)]
     public async Task<IActionResult> QueryProgramAssetPackage(ProgramAssetPackageDTO packageDTO)
     {
         if (!await CheckUserBasicProgramMap(packageDTO.ProgramId))

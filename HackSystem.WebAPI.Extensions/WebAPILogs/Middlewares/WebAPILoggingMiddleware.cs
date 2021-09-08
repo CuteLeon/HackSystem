@@ -49,7 +49,6 @@ public class WebAPILoggingMiddleware
 
         try
         {
-
             var originalResponseStream = context.Response.Body;
             await using var responseBodyStream = this.recyclableMemoryStreamManager.GetStream();
             context.Response.Body = responseBodyStream;
@@ -67,20 +66,27 @@ public class WebAPILoggingMiddleware
                 await context.Request.Body.CopyToAsync(requestStream);
                 using var requestStreamReader = new StreamReader(requestStream);
                 requestStream.Seek(0, SeekOrigin.Begin);
-                webAPILog.RequestBody = await requestStreamReader.ReadToEndAsync();
+                var requestBody = await requestStreamReader.ReadToEndAsync();
+                webAPILog.RequestBody = string.IsNullOrEmpty(requestBody) ? default : requestBody;
             }
 
-            using var responseStreamReader = new StreamReader(responseBodyStream);
-            responseBodyStream.Seek(0, SeekOrigin.Begin);
-            var responseBody = await responseStreamReader.ReadToEndAsync();
-            responseBodyStream.Seek(0, SeekOrigin.Begin);
-            webAPILog.ResponseBody = responseBody;
-            webAPILog.StatusCode = context.Response.StatusCode;
-            if (originalResponseStream.CanWrite)
+            if (!noLogResponseBody)
             {
+                // Stream will be disposed together with Reader automatically.
+                using var responseStreamReader = new StreamReader(responseBodyStream);
+                responseBodyStream.Seek(0, SeekOrigin.Begin);
+                var responseBody = await responseStreamReader.ReadToEndAsync();
+                responseBodyStream.Seek(0, SeekOrigin.Begin);
+                webAPILog.ResponseBody = string.IsNullOrEmpty(responseBody) ? default : responseBody;
+                await responseBodyStream.CopyToAsync(originalResponseStream);
+            }
+            else
+            {
+                responseBodyStream.Seek(0, SeekOrigin.Begin);
                 await responseBodyStream.CopyToAsync(originalResponseStream);
             }
 
+            webAPILog.StatusCode = context.Response.StatusCode;
             await this.webAPILogDataService.UpdateAsync(webAPILog);
         }
         catch (Exception ex)
