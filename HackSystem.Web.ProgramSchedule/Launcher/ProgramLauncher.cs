@@ -35,6 +35,13 @@ public class ProgramLauncher : IProgramLauncher
 
     public async Task<ProcessDetail> LaunchProgram(BasicProgramDTO basicProgram)
     {
+        if (!this.programAssemblyLoader.CheckAssemblyLoaded(basicProgram.AssemblyName))
+        {
+            this.logger.LogInformation($"Lazy loading assembly {basicProgram.AssemblyName} for program {basicProgram.Id} as not loeaded...");
+            await this.programAssemblyLoader.LoadProgramAssembly(basicProgram.Id);
+            this.logger.LogInformation($"Lazy loaded assembly {basicProgram.AssemblyName} successfully.");
+        }
+
         var programEntity = new ProgramEntity()
         {
             Name = basicProgram.Name,

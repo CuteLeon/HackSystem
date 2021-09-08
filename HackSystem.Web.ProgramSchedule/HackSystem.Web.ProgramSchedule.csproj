@@ -14,6 +14,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\HackSystem.Observer\HackSystem.Observer.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.Services.API\HackSystem.Web.Services.API.csproj" />
 		<ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
 	</ItemGroup>
 
