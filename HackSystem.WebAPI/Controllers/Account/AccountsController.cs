@@ -100,7 +100,7 @@ public class AccountsController : AuthenticateControllerBase
     /// <returns></returns>
     [HttpPost]
     [AllowAnonymous]
-    [LogActionFilter(logRequestBody: false)]
+    [LogActionFilter(noLogRequestBody: true)]
     public async Task<IActionResult> Login([FromBody] LoginDTO login)
     {
         this.logger.LogInformation($"Login user: {login.UserName}");

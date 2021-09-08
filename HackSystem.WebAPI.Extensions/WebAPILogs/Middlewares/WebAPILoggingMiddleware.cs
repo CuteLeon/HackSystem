@@ -49,8 +49,6 @@ public class WebAPILoggingMiddleware
 
         try
         {
-            var logRequestBody = context.Request.Headers.ContainsKey(LogActionFilterAttribute.LogRequestBodyFlag);
-            //var logResponseBody = context.Request.Headers.ContainsKey(LogActionFilterAttribute.LogResponseBodyFlag);
 
             var originalResponseStream = context.Response.Body;
             await using var responseBodyStream = this.recyclableMemoryStreamManager.GetStream();
@@ -59,8 +57,10 @@ public class WebAPILoggingMiddleware
             context.Request.EnableBuffering();
             await this.next(context);
 
+            var noLogRequestBody = context.Request.Headers.ContainsKey(LogActionFilterAttribute.NoLogRequestBodyFlag);
+            var noLogResponseBody = context.Response.Headers.ContainsKey(LogActionFilterAttribute.NoLogResponseBodyFlag);
 
-            if (logRequestBody && context.Request.Body.CanRead)
+            if (!noLogRequestBody && context.Request.Body.CanRead)
             {
                 context.Request.Body.Seek(0, SeekOrigin.Begin);
                 await using var requestStream = this.recyclableMemoryStreamManager.GetStream();

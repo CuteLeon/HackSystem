@@ -5,23 +5,23 @@ namespace HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
 
 public class LogActionFilterAttribute : ActionFilterAttribute
 {
-    public const string LogResponseBodyFlag = "LogResponseBody";
-    public const string LogRequestBodyFlag = "LogRequestBody";
+    public const string NoLogResponseBodyFlag = "NoLogResponseBody";
+    public const string NoLogRequestBodyFlag = "NoLogRequestBody";
 
     private readonly StringValues TureHeaderValue = new(bool.TrueString);
-    private readonly bool logRequestBody;
-    private readonly bool logResponseBody;
+    private readonly bool noLogRequestBody;
+    private readonly bool noLogResponseBody;
 
-    public LogActionFilterAttribute(bool logRequestBody = true, bool logResponseBody = true)
+    public LogActionFilterAttribute(bool noLogRequestBody = false, bool noLogResponseBody = false)
     {
-        this.logRequestBody = logRequestBody;
-        this.logResponseBody = logResponseBody;
+        this.noLogRequestBody = noLogRequestBody;
+        this.noLogResponseBody = noLogResponseBody;
     }
 
     public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        if (this.logRequestBody) context.HttpContext.Response.Headers.Add(LogRequestBodyFlag, TureHeaderValue);
-        if (this.logResponseBody) context.HttpContext.Response.Headers.Add(LogResponseBodyFlag, TureHeaderValue);
+        if (this.noLogRequestBody) context.HttpContext.Request.Headers.Add(NoLogRequestBodyFlag, TureHeaderValue);
+        if (this.noLogResponseBody) context.HttpContext.Response.Headers.Add(NoLogResponseBodyFlag, TureHeaderValue);
         await base.OnActionExecutionAsync(context, next);
     }
 }
