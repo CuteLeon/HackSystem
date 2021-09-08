@@ -2,6 +2,7 @@
 using AutoMapper;
 using HackSystem.Common;
 using HackSystem.WebAPI.Authentication.Services;
+using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Services.API.Account;
 using HackSystem.WebDataTransfer.Account;
@@ -99,6 +100,7 @@ public class AccountsController : AuthenticateControllerBase
     /// <returns></returns>
     [HttpPost]
     [AllowAnonymous]
+    [LogActionFilter(logRequestBody: false)]
     public async Task<IActionResult> Login([FromBody] LoginDTO login)
     {
         this.logger.LogInformation($"Login user: {login.UserName}");

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
 using HackSystem.WebAPI.Extensions.WebAPILogs.DataServices;
 using HackSystem.WebAPI.Model.WebLog;
 using Microsoft.AspNetCore.Http;
@@ -44,25 +45,30 @@ public class WebAPILoggingMiddleware
             IdentityName = context.User.Identity?.Name,
             StartDateTime = DateTime.Now,
         };
-        if (context.Request.Body.CanRead)
-        {
-            context.Request.EnableBuffering();
-            await using var requestStream = this.recyclableMemoryStreamManager.GetStream();
-            await context.Request.Body.CopyToAsync(requestStream);
-            using var requestStreamReader = new StreamReader(requestStream);
-            requestStream.Seek(0, SeekOrigin.Begin);
-            webAPILog.RequestBody = await requestStreamReader.ReadToEndAsync();
-            context.Request.Body.Seek(0, SeekOrigin.Begin);
-        }
         await this.webAPILogDataService.AddAsync(webAPILog);
 
         try
         {
+            var logRequestBody = context.Request.Headers.ContainsKey(LogActionFilterAttribute.LogRequestBodyFlag);
+            //var logResponseBody = context.Request.Headers.ContainsKey(LogActionFilterAttribute.LogResponseBodyFlag);
+
             var originalResponseStream = context.Response.Body;
             await using var responseBodyStream = this.recyclableMemoryStreamManager.GetStream();
             context.Response.Body = responseBodyStream;
 
+            context.Request.EnableBuffering();
             await this.next(context);
+
+
+            if (logRequestBody && context.Request.Body.CanRead)
+            {
+                context.Request.Body.Seek(0, SeekOrigin.Begin);
+                await using var requestStream = this.recyclableMemoryStreamManager.GetStream();
+                await context.Request.Body.CopyToAsync(requestStream);
+                using var requestStreamReader = new StreamReader(requestStream);
+                requestStream.Seek(0, SeekOrigin.Begin);
+                webAPILog.RequestBody = await requestStreamReader.ReadToEndAsync();
+            }
 
             using var responseStreamReader = new StreamReader(responseBodyStream);
             responseBodyStream.Seek(0, SeekOrigin.Begin);
