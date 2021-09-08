@@ -1,7 +1,7 @@
-﻿using HackSystem.Web.Scheduler.Program.Model;
+﻿using HackSystem.Web.ProgramSchedule.Model;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.Scheduler.Program.Container;
+namespace HackSystem.Web.ProgramSchedule.Container;
 
 public class ProcessContainer : IProcessContainer
 {

@@ -2,13 +2,13 @@
 using HackSystem.Observer.Publisher;
 using HackSystem.Web.ProgramSDK.ProgramComponent;
 using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
-using HackSystem.Web.Scheduler.Program.Container;
-using HackSystem.Web.Scheduler.Program.IDGenerator;
-using HackSystem.Web.Scheduler.Program.Model;
+using HackSystem.Web.ProgramSchedule.Container;
+using HackSystem.Web.ProgramSchedule.IDGenerator;
+using HackSystem.Web.ProgramSchedule.Model;
 using HackSystem.WebDataTransfer.Program;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.Scheduler.Program.Launcher;
+namespace HackSystem.Web.ProgramSchedule.Launcher;
 
 public class ProgramLauncher : IProgramLauncher
 {

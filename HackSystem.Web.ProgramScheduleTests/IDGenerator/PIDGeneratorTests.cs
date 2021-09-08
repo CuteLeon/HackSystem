@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace HackSystem.Web.Scheduler.Program.IDGenerator.Tests;
+namespace HackSystem.Web.ProgramSchedule.IDGenerator.Tests;
 
 public class PIDGeneratorTests
 {

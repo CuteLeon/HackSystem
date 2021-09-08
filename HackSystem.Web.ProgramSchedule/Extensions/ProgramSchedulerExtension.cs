@@ -1,12 +1,12 @@
-﻿using HackSystem.Web.Scheduler.Program.Container;
-using HackSystem.Web.Scheduler.Program.Disposer;
-using HackSystem.Web.Scheduler.Program.IDGenerator;
-using HackSystem.Web.Scheduler.Program.Launcher;
-using HackSystem.Web.Scheduler.Program.Options;
-using HackSystem.Web.Scheduler.Program.Scheduler;
+﻿using HackSystem.Web.ProgramSchedule.Container;
+using HackSystem.Web.ProgramSchedule.Disposer;
+using HackSystem.Web.ProgramSchedule.IDGenerator;
+using HackSystem.Web.ProgramSchedule.Launcher;
+using HackSystem.Web.ProgramSchedule.Options;
+using HackSystem.Web.ProgramSchedule.Scheduler;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HackSystem.Web.Scheduler.Program;
+namespace HackSystem.Web.ProgramSchedule;
 
 public static class ProgramSchedulerExtension
 {

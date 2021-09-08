@@ -1,6 +1,6 @@
-﻿using HackSystem.Web.Scheduler.Program.Model;
+﻿using HackSystem.Web.ProgramSchedule.Model;
 
-namespace HackSystem.Web.Scheduler.Program.Container;
+namespace HackSystem.Web.ProgramSchedule.Container;
 
 public interface IProcessContainer
 {

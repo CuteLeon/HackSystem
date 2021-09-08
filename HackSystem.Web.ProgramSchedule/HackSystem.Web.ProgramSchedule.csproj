@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -12,9 +12,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\HackSystem.Observer\HackSystem.Observer.csproj" />
-	  <ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
-	  <ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
+		<ProjectReference Include="..\HackSystem.Observer\HackSystem.Observer.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
+		<ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
 	</ItemGroup>
 
 </Project>

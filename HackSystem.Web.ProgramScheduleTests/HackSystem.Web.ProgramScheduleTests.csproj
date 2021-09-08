@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HackSystem.Web.Scheduler.Program\HackSystem.Web.Scheduler.Program.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.ProgramSchedule\HackSystem.Web.ProgramSchedule.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using HackSystem.Web.ProgramSDK.ProgramComponent;
 using Microsoft.AspNetCore.Components;
 
-namespace HackSystem.Web.Scheduler.Program.Model;
+namespace HackSystem.Web.ProgramSchedule.Model;
 
 public class ProcessDetail
 {

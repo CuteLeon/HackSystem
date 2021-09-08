@@ -1,10 +1,10 @@
 ﻿using HackSystem.Observer.Subscriber;
 using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
-using HackSystem.Web.Scheduler.Program.Container;
+using HackSystem.Web.ProgramSchedule.Container;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.Scheduler.Program.Disposer;
+namespace HackSystem.Web.ProgramSchedule.Disposer;
 
 public class ProcessDisposer : IProcessDisposer
 {

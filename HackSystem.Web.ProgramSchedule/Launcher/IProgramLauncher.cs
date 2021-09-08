@@ -1,7 +1,7 @@
-﻿using HackSystem.Web.Scheduler.Program.Model;
+﻿using HackSystem.Web.ProgramSchedule.Model;
 using HackSystem.WebDataTransfer.Program;
 
-namespace HackSystem.Web.Scheduler.Program.Launcher;
+namespace HackSystem.Web.ProgramSchedule.Launcher;
 
 public interface IProgramLauncher
 {

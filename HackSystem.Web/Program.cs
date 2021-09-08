@@ -7,7 +7,7 @@ using HackSystem.Web.Common;
 using HackSystem.Web.Configurations;
 using HackSystem.Web.CookieStorage;
 using HackSystem.Web.Extensions;
-using HackSystem.Web.Scheduler.Program;
+using HackSystem.Web.ProgramSchedule;
 using HackSystem.Web.Services.Configurations;
 using HackSystem.Web.Services.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

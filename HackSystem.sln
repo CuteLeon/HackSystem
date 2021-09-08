@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{572BBA13-D65E-4B29-9BDE-E95E05BCA8FB}"
 	ProjectSection(SolutionItems) = preProject
@@ -55,7 +55,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.SystemProgra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.ProgramSDK", "HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj", "{059B5654-8BA9-4082-8ACF-F6B65B624C53}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.Scheduler.Program", "HackSystem.Web.Scheduler.Program\HackSystem.Web.Scheduler.Program.csproj", "{A57AA61E-780A-4C27-9E7C-A6D79F975221}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.ProgramSchedule", "HackSystem.Web.ProgramSchedule\HackSystem.Web.ProgramSchedule.csproj", "{A57AA61E-780A-4C27-9E7C-A6D79F975221}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Observer", "HackSystem.Observer\HackSystem.Observer.csproj", "{4BD58925-E729-445A-8EB0-504D0D6D144B}"
 EndProject
@@ -67,7 +67,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebTests", "Hack
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.AuthenticationTests", "HackSystem.Web.AuthenticationTests\HackSystem.Web.AuthenticationTests.csproj", "{E49F7DFF-3453-44F6-9DC1-F3A5743F3E3E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.Scheduler.ProgramTests", "HackSystem.Web.Scheduler.ProgramTests\HackSystem.Web.Scheduler.ProgramTests.csproj", "{0C7175E5-8797-46D7-8763-078D4AFE339E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.ProgramScheduleTests", "HackSystem.Web.ProgramScheduleTests\HackSystem.Web.ProgramScheduleTests.csproj", "{0C7175E5-8797-46D7-8763-078D4AFE339E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildTools", "BuildTools", "{C50E112A-8BED-411F-84ED-3223C3D55D94}"
 	ProjectSection(SolutionItems) = preProject
