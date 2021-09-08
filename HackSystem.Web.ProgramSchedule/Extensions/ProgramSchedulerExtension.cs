@@ -1,4 +1,5 @@
-﻿using HackSystem.Web.ProgramSchedule.Container;
+﻿using HackSystem.Web.ProgramSchedule.AssemblyLoader;
+using HackSystem.Web.ProgramSchedule.Container;
 using HackSystem.Web.ProgramSchedule.Disposer;
 using HackSystem.Web.ProgramSchedule.IDGenerator;
 using HackSystem.Web.ProgramSchedule.Launcher;
@@ -15,6 +16,7 @@ public static class ProgramSchedulerExtension
         services
             .Configure(configure)
             .AddSingleton<IPIDGenerator, PIDGenerator>()
+            .AddSingleton<IProgramAssemblyLoader, ProgramAssemblyLoader>()
             .AddSingleton<IProcessContainer, ProcessContainer>()
             .AddSingleton<IProgramLauncher, ProgramLauncher>()
             .AddSingleton<IProcessDisposer, ProcessDisposer>()

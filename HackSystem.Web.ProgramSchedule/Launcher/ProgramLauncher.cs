@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
 using HackSystem.Observer.Publisher;
-using HackSystem.Web.ProgramSDK.ProgramComponent;
-using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
+using HackSystem.Web.ProgramSchedule.AssemblyLoader;
 using HackSystem.Web.ProgramSchedule.Container;
 using HackSystem.Web.ProgramSchedule.IDGenerator;
 using HackSystem.Web.ProgramSchedule.Model;
+using HackSystem.Web.ProgramSDK.ProgramComponent;
+using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
 using HackSystem.WebDataTransfer.Program;
 using Microsoft.Extensions.Logging;
 
@@ -14,17 +15,20 @@ public class ProgramLauncher : IProgramLauncher
 {
     private readonly ILogger<ProgramLauncher> logger;
     private readonly IPublisher<ProgramLaunchMessage> publisher;
+    private readonly IProgramAssemblyLoader programAssemblyLoader;
     private readonly IPIDGenerator pIDGenerator;
     private readonly IProcessContainer processContainer;
 
     public ProgramLauncher(
         ILogger<ProgramLauncher> logger,
         IPublisher<ProgramLaunchMessage> publisher,
+        IProgramAssemblyLoader programAssemblyLoader,
         IPIDGenerator pIDGenerator,
         IProcessContainer processContainer)
     {
         this.logger = logger;
         this.publisher = publisher;
+        this.programAssemblyLoader = programAssemblyLoader;
         this.pIDGenerator = pIDGenerator;
         this.processContainer = processContainer;
     }
