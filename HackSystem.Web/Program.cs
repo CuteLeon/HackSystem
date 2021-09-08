@@ -11,7 +11,6 @@ using HackSystem.Web.ProgramSchedule;
 using HackSystem.Web.Services.Configurations;
 using HackSystem.Web.Services.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace HackSystem.Web;
 

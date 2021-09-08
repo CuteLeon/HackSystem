@@ -1,6 +1,5 @@
 using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.TaskServers.Extensions;
-using Microsoft.Extensions.Logging;
 using NLog.Web;
 
 namespace HackSystem.WebAPI;

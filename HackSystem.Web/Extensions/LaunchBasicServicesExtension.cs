@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using HackSystem.Web.Authentication.Providers;
+﻿using HackSystem.Web.Authentication.Providers;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace HackSystem.Web.Extensions;

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web;
 

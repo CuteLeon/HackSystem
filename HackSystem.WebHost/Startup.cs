@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.HttpLogging;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace HackSystem.WebHost;
 

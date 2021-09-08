@@ -12,7 +12,6 @@ using HackSystem.WebAPI.Services.Extensions;
 using HackSystem.WebAPI.TaskServers.Configurations;
 using HackSystem.WebAPI.TaskServers.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace HackSystem.WebAPI;
 
