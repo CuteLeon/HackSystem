@@ -8,6 +8,8 @@ public class ProgramAssertMapperProfile : Profile
     public ProgramAssertMapperProfile()
     {
         this.CreateMap<ProgramAsset, ProgramAssetDTO>();
+        this.CreateMap<ProgramAssetDTO, ProgramAsset>();
         this.CreateMap<ProgramAssetPackage, ProgramAssetPackageDTO>();
+        this.CreateMap<ProgramAssetPackageDTO, ProgramAssetPackage>();
     }
 }

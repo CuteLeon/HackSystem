@@ -37,7 +37,49 @@ public class ProgramAssetController : ControllerBase
     }
 
     [HttpGet]
+    public async Task<IActionResult> QueryProgramAssetList(string programId)
+    {
+        if (!await CheckUserBasicProgramMap(programId))
+        {
+            return this.Forbid();
+        }
+
+        var package = await this.programAssetService.QueryProgramAssetList(programId);
+        this.logger.LogInformation($"Found {package.ProgramAssets.Count()} program assets of program {programId}.");
+        var packageDTO = this.mapper.Map<ProgramAssetPackageDTO>(package);
+        return this.Ok(packageDTO);
+    }
+
+    [HttpGet]
     public async Task<IActionResult> QueryProgramAssetPackage(string programId)
+    {
+        if (!await CheckUserBasicProgramMap(programId))
+        {
+            return this.Forbid();
+        }
+
+        var package = await this.programAssetService.QueryProgramAssetPackage(programId);
+        this.logger.LogInformation($"Found {package.ProgramAssets.Count()} program assets of program {programId}.");
+        var packageDTO = this.mapper.Map<ProgramAssetPackageDTO>(package);
+        return this.Ok(packageDTO);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> QueryProgramAssetPackage(ProgramAssetPackageDTO packageDTO)
+    {
+        if (!await CheckUserBasicProgramMap(packageDTO.ProgramId))
+        {
+            return this.Forbid();
+        }
+
+        var package = this.mapper.Map<ProgramAssetPackage>(packageDTO);
+        package = await this.programAssetService.QueryProgramAssetPackage(package);
+        this.logger.LogInformation($"Found {packageDTO.ProgramAssets.Count()} program assets of program {packageDTO.ProgramId}.");
+        packageDTO = this.mapper.Map<ProgramAssetPackageDTO>(package);
+        return this.Ok(packageDTO);
+    }
+
+    private async Task<bool> CheckUserBasicProgramMap(string programId)
     {
         if (string.IsNullOrWhiteSpace(programId))
         {
@@ -52,14 +94,8 @@ public class ProgramAssetController : ControllerBase
         var hasAccess = await this.userBasicProgramMapDataService.CheckUserBasicProgramMap(userId, programId);
         if (!hasAccess)
         {
-            this.logger.LogInformation($"User {userName} has no access to program asset of program {programId}.");
-            return this.Forbid();
+            this.logger.LogWarning($"User {userName} has no access to program asset of program {programId}.");
         }
-
-        var package = await this.programAssetService.QueryProgramAssetPackage(programId);
-        this.logger.LogInformation($"Found {package.ProgramAssets.Count()} program assets of program {programId}.");
-        var packageDTO = this.mapper.Map<ProgramAssetPackageDTO>(package);
-        return this.Ok(packageDTO);
+        return hasAccess;
     }
 }
-

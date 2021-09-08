@@ -18,6 +18,25 @@ public class ProgramAssetService : IProgramAssetService
         this.programAssetOptions = options.Value;
     }
 
+    public async Task<ProgramAssetPackage> QueryProgramAssetList(string programId)
+    {
+        var programAssetFolder = Path.Combine(this.programAssetOptions.FolderPath, programId);
+        if (!Directory.Exists(programAssetFolder))
+        {
+            throw new DirectoryNotFoundException(programAssetFolder);
+        }
+
+        var package = new ProgramAssetPackage
+        {
+            ProgramId = programId,
+            ProgramAssets = Directory
+                .GetFiles(programAssetFolder, "*.dll", SearchOption.TopDirectoryOnly)
+                .Select(dll => new ProgramAssetModel { FileName = Path.GetFileNameWithoutExtension(dll) })
+                .ToArray()
+        };
+        return package;
+    }
+
     public async Task<ProgramAssetPackage> QueryProgramAssetPackage(string programId)
     {
         var programAssetFolder = Path.Combine(this.programAssetOptions.FolderPath, programId);
@@ -30,7 +49,7 @@ public class ProgramAssetService : IProgramAssetService
         var package = new ProgramAssetPackage
         {
             ProgramId = programId,
-            ProgramAssets = Directory.GetFiles(programAssetFolder, "*.dll", SearchOption.AllDirectories)
+            ProgramAssets = Directory.GetFiles(programAssetFolder, "*.dll", SearchOption.TopDirectoryOnly)
                 .Select(dll =>
                 {
                     var pdb = string.Concat(dll.AsSpan(0, dll.Length - extensionLength), ".pdb");
@@ -44,6 +63,25 @@ public class ProgramAssetService : IProgramAssetService
                 })
                 .ToArray()
         };
+        return package;
+    }
+
+    public async Task<ProgramAssetPackage> QueryProgramAssetPackage(ProgramAssetPackage package)
+    {
+        var programAssetFolder = Path.Combine(this.programAssetOptions.FolderPath, package.ProgramId);
+        if (!Directory.Exists(programAssetFolder))
+        {
+            throw new DirectoryNotFoundException(programAssetFolder);
+        }
+
+        foreach (var programAsset in package.ProgramAssets
+            .Where(x => !string.IsNullOrEmpty(x.FileName)))
+        {
+            var dllPath = Path.Combine(programAssetFolder, programAsset.FileName + ".dll");
+            var pdbPath = Path.Combine(programAssetFolder, programAsset.FileName + ".pdb");
+            programAsset.DLLBytes = File.Exists(dllPath) ? File.ReadAllBytes(dllPath) : default;
+            programAsset.PDBBytes = File.Exists(pdbPath) ? File.ReadAllBytes(pdbPath) : default;
+        }
         return package;
     }
 }
