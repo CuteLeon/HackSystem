@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
     <ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.Services\HackSystem.Web.Services.csproj" />
   </ItemGroup>
 
 </Project>
