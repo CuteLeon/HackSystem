@@ -36,9 +36,11 @@ public class ProgramAssemblyLoader : IProgramAssemblyLoader
         var newLoadAssemblies = newLoadPackage.ProgramAssets
             .Select(x =>
             {
-                var assembly = x.PDBBytes.Length == 0 ?
-                    AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(x.DLLBytes)) :
-                    AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(x.DLLBytes), new MemoryStream(x.PDBBytes));
+                // Secondary AppDomain not supported on this platform, so have to load assemblies to current AppDomain;
+                var assemblyLoadContext = AssemblyLoadContext.Default;
+                var assembly = assemblyLoadContext.LoadFromStream(
+                    new MemoryStream(x.DLLBytes),
+                    x.PDBBytes.Length == 0 ? null : new MemoryStream(x.PDBBytes));
                 this.loadedAssemblies.Add(x.FileName);
                 this.logger.LogInformation($"Loaded {x.FileName} assembly successfully.");
                 return assembly;
