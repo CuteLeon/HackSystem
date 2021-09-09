@@ -11,9 +11,9 @@ public class BasicProgramService : AuthenticatedServiceBase, IBasicProgramServic
 {
     public BasicProgramService(
         ILogger<BasicProgramService> logger,
-        IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler,
+        IHackSystemAuthenticationStateProvider hackSystemAuthenticationStateProvider,
         HttpClient httpClient)
-        : base(logger, hackSystemAuthenticationStateHandler, httpClient)
+        : base(logger, hackSystemAuthenticationStateProvider, httpClient)
     {
     }
 

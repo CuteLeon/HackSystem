@@ -8,21 +8,21 @@ namespace HackSystem.Web.Services.Authentication;
 public class AuthenticatedServiceBase
 {
     protected readonly ILogger logger;
-    protected readonly IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler;
+    protected readonly IHackSystemAuthenticationStateProvider hackSystemAuthenticationStateProvider;
     protected readonly HttpClient httpClient;
 
     public AuthenticatedServiceBase(
         ILogger logger,
-        IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler,
+        IHackSystemAuthenticationStateProvider hackSystemAuthenticationStateHandler,
         HttpClient httpClient)
     {
         this.logger = logger;
-        this.hackSystemAuthenticationStateHandler = hackSystemAuthenticationStateHandler;
+        this.hackSystemAuthenticationStateProvider = hackSystemAuthenticationStateHandler;
         this.httpClient = httpClient;
     }
 
     protected async Task AddAuthorizationHeaderAsync()
     {
-        this.httpClient.AddAuthorizationHeader(await hackSystemAuthenticationStateHandler.GetCurrentTokenAsync());
+        this.httpClient.AddAuthorizationHeader(await hackSystemAuthenticationStateProvider.GetCurrentTokenAsync());
     }
 }

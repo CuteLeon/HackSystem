@@ -12,9 +12,9 @@ public class ProgramAssetService : AuthenticatedServiceBase, IProgramAssetServic
 {
     public ProgramAssetService(
         ILogger<ProgramAssetService> logger,
-        IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler,
+        IHackSystemAuthenticationStateProvider hackSystemAuthenticationStateProvider,
         HttpClient httpClient)
-        : base(logger, hackSystemAuthenticationStateHandler, httpClient)
+        : base(logger, hackSystemAuthenticationStateProvider, httpClient)
     {
     }
 
