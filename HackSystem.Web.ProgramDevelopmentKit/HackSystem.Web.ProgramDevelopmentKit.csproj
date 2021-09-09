@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -14,6 +14,7 @@
     <ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
     <ProjectReference Include="..\HackSystem.Observer\HackSystem.Observer.csproj" />
     <ProjectReference Include="..\HackSystem.Web.Services\HackSystem.Web.Services.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.TaskSchedule\HackSystem.Web.TaskSchedule.csproj" />
   </ItemGroup>
 
 </Project>
