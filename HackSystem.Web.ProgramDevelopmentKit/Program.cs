@@ -1,10 +1,10 @@
 using HackSystem.Observer;
-using HackSystem.Web.Authentication.Extensions;
-using HackSystem.Web.Common;
 using HackSystem.Web.CookieStorage;
 using HackSystem.Web.ProgramDevelopmentKit;
+using HackSystem.Web.ProgramDevelopmentKit.Authentication;
 using HackSystem.Web.Services.Configurations;
 using HackSystem.Web.Services.Extensions;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var apiHost = "https://localhost:4237";
@@ -20,16 +20,7 @@ builder.Services
     })
     .AddCookieStorage()
     .AddAuthorizationCore()
-    .AddHackSystemAuthentication(options =>
-    {
-        options.AuthenticationURL = apiHost;
-        options.TokenExpiryInMinutes = int.MaxValue;
-        options.AuthenticationScheme = WebCommonSense.AuthenticationScheme;
-        options.AuthenticationType = WebCommonSense.AuthenticationType;
-        options.AuthTokenName = WebCommonSense.AuthTokenName;
-        options.ExpiryClaimType = WebCommonSense.ExpiryClaimType;
-        options.TokenRefreshInMinutes = int.MaxValue;
-    })
+    .AddScoped<AuthenticationStateProvider, DevelopmentKitAuthenticationStateProvider>()
     .AddTransient(sp => new HttpClient { BaseAddress = new Uri(apiHost) })
     .AddHttpClient("LocalHttpClient", httpClient => httpClient.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
