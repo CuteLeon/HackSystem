@@ -3,7 +3,7 @@ using HackSystem.WebAPI.Model.Map.UserMap;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebDataTransfer.Program;
 
-namespace HackSystem.WebAPI.Mappers.ProgramMapper;
+namespace HackSystem.WebAPI.Mappers.Program;
 
 public class ProgramMapperProfile : Profile
 {

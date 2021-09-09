@@ -2,7 +2,7 @@
 using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
 using HackSystem.WebDataTransfer.Program.ProgramAsset;
 
-namespace HackSystem.WebAPI.Mappers.ProgramMapper.ProgramAssertMapper;
+namespace HackSystem.WebAPI.Mappers.ProgramMapper.ProgramAssert;
 public class ProgramAssertMapperProfile : Profile
 {
     public ProgramAssertMapperProfile()

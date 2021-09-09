@@ -14,6 +14,11 @@ public class TaskDataService : DataServiceBase<TaskDetail>, ITaskDataService
     {
     }
 
+    public async Task<IEnumerable<TaskDetail>> QueryTasks()
+    {
+        return this.AsEnumerable();
+    }
+
     public async Task<IEnumerable<TaskDetail>> QueryEnabledTasks()
     {
         return this.AsQueryable().Where(task => task.Enabled);
