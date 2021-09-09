@@ -1,0 +1,37 @@
+﻿@inherits ProgramComponentBase
+
+<ResizeableView ResizeableOption="new ResizeableOption() { Width=640, Height=540, Z_Index=this.ProgramEntity.Z_Index }">
+    <div class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;">
+        <div class="modal-content border-danger overflow-hidden" style="height: 100%;">
+            <DraggableHandle DragTarget=".position-fixed">
+                <div class="modal-header border-0 py-2">
+                    <h5 class="modal-title" id="exampleModalLabel">Task Scheduler</h5>
+                    <button type="button" class="close" @onclick="this.OnClose">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </DraggableHandle>
+            <div class="modal-body text-center p-0">
+                <div class="d-flex h-100">
+                    <AuthorizeView Roles="@CommonSense.Roles.CommanderRole">
+                        <Authorized>
+                            <h1>Welcome! Commander!</h1>
+                        </Authorized>
+                        <NotAuthorized>
+                            <div class="d-inline-block w-100 h-100 p-5 text-center">
+                                <i class="fas fa-4x fa-user-astronaut text-primary my-3"></i>
+                                <p class="h4 text-secondary">Please login as a Commander!</p>
+                            </div>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </div>
+            </div>
+        </div>
+    </div>
+</ResizeableView>
+
+@code {
+    public override void Dispose()
+    {
+    }
+}

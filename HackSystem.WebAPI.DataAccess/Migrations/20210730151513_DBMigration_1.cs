@@ -422,7 +422,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations;
             migrationBuilder.InsertData(
                 table: "BasicPrograms",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Integral", "IsSingleton", "Name", "TypeName" },
-                values: new object[] { "program0-icon-0828-hack-system000008", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/TaskServerProgram.png", true, true, "TaskServer", "HackSystem.Web.SystemProgram.TaskServer.TaskServerComponent" });
+                values: new object[] { "program0-icon-0828-hack-system000008", "HackSystem.Web.TaskSchedule", true, "/images/ProgramIcons/TaskServerProgram.png", true, true, "TaskServer", "HackSystem.Web.TaskSchedule.TaskSchedulerComponent" });
 
             migrationBuilder.InsertData(
                 table: "BasicPrograms",

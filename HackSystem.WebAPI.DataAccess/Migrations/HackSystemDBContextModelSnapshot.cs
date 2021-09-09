@@ -719,13 +719,13 @@ namespace HackSystem.WebAPI.DataAccess.Migrations;
                         new
                         {
                             Id = "program0-icon-0828-hack-system000008",
-                            AssemblyName = "HackSystem.Web.SystemProgram",
+                            AssemblyName = "HackSystem.Web.TaskSchedule",
                             Enabled = true,
                             IconUri = "/images/ProgramIcons/TaskServerProgram.png",
                             Integral = true,
                             IsSingleton = true,
                             Name = "TaskServer",
-                            TypeName = "HackSystem.Web.SystemProgram.TaskServer.TaskServerComponent"
+                            TypeName = "HackSystem.Web.TaskSchedule.TaskSchedulerComponent"
                         },
                         new
                         {
