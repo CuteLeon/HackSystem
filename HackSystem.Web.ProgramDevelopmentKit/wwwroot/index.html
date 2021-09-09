@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Program Development Kit</title>
+    <base href="/" />
+
+    <script src="/libs/jquery/jquery.js"></script>
+    <script src="/js/blazor.jsTools.js"></script>
+    <script src="/js/blazor.cookie.js"></script>
+    <script src="/js/bootstrap.wrap.js"></script>
+
+    <link href="/libs/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="/libs/bootstrap-submenu/css/bootstrap-submenu.min.css" rel="stylesheet" />
+    <link href="/libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="/libs/font-awesome/css/regular.css" rel="stylesheet" />
+    <link href="/libs/font-awesome/css/brands.css" rel="stylesheet" />
+
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="manifest.json" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="LogoImage.png" />
+</head>
+
+<body>
+    <div id="app">
+        <div class="position-absolute gradual-background" style="overflow:hidden; top:0; bottom:0; left:0; right:0;">
+            <div class="text-center" style="position:absolute; transform: translate(-50%,-50%); left: 50%; top: 50%;">
+                <img src="LogoImage.png" class="img-fluid" />
+                <div class="progress-bar progress-bar-striped bg-dark progress-bar-animated w-100" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+
+                <p class="mb-0 text-white">
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span class="mx-1" id="setupProgressIndexLabel">Loading Program Development Kit ...</span>
+                </p>
+                <p class="small text-white" id="setupProgressCurrentLabel"></p>
+
+                <div class="progress bg-dark">
+                    <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" id="setupProgressBar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="js/hacksystem.startupprogress.js"></script>
+    <script src="/libs/twitter-bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/libs/bootstrap-submenu/js/bootstrap-submenu.min.js"></script>
+    <script src="js/hacksystem.launch.js"></script>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>

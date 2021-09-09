@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "twitter-bootstrap@4.5.2",
+      "destination": "wwwroot/libs/twitter-bootstrap/"
+    },
+    {
+      "library": "font-awesome@5.14.0",
+      "destination": "wwwroot/libs/font-awesome/"
+    },
+    {
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/libs/jquery/"
+    },
+    {
+      "library": "bootstrap-submenu@3.0.1",
+      "destination": "wwwroot/libs/bootstrap-submenu/"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+﻿<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(DesktopLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(DesktopLayout)">
+            <div class="modal show" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog" style="display: block;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">404 Not Found</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="fas fa-4x fa-info-circle text-primary m-2"></i>
+                                </div>
+                                <div class="col">
+                                    Not found this page.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="/" type="button" class="btn btn-block btn-primary">Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </LayoutView>
+    </NotFound>
+</Router>
