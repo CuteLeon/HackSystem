@@ -11,13 +11,17 @@
                     </button>
                 </div>
             </DraggableHandle>
-            <div class="modal-body p-0">
+            <div class="modal-body">
                 <div class="d-flex h-100">
                     <AuthorizeView Roles="@CommonSense.Roles.CommanderRole">
                         <Authorized>
+                            <div class="d-inline-block w-100 p-5 text-center">
+                                <i class="fas fa-4x fa-user-astronaut text-primary my-3"></i>
+                                <p class="h4 text-secondary">Welcome, Commander!</p>
+                            </div>
                         </Authorized>
                         <NotAuthorized>
-                            <div class="d-inline-block p-5 text-center">
+                            <div class="d-inline-block w-100 p-5 text-center">
                                 <i class="fas fa-4x fa-user-astronaut text-primary my-3"></i>
                                 <p class="h4 text-secondary">Please login as a Commander!</p>
                             </div>
