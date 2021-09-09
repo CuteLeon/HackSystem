@@ -24,6 +24,7 @@ public class TokenGenerator : ITokenGenerator
 
     public string GenerateSecurityToken(IEnumerable<Claim> claims)
     {
+        // var expiry = new DateTime(2038, 01, 19, 03, 14, 07);
         var expiry = DateTime.Now.AddMinutes(this.configuration.JwtExpiryInMinutes);
 
         var token = new JwtSecurityToken(
