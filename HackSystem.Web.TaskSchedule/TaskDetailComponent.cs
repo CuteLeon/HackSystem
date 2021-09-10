@@ -12,6 +12,10 @@ namespace HackSystem.Web.TaskSchedule
         {
         }
 
+        private async Task DeleteTask()
+        {
+        }
+
         private async Task EditTask()
         {
         }

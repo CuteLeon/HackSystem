@@ -31,8 +31,9 @@
     </div>
     <div class="card-footer p-1 row justify-content-center">
         <div class="col-auto px-0 btn-group btn-group-sm" role="group" aria-label="Task control button">
-            <button type="button" class="btn btn-primary" @onclick=@this.ExecuteTask>Execute</button>
-            <button type="button" class="btn btn-warning" @onclick=@this.EditTask>Edit</button>
+            <button type="button" class="btn btn-outline-warning" @onclick=@this.EditTask>Edit</button>
+            <button type="button" class="btn btn-primary" @onclick=@this.ExecuteTask><span class="fas fa-rocket"></span><span class="mx-1"></span>Execute</button>
+            <button type="button" class="btn btn-outline-danger" @onclick=@this.DeleteTask>Delete</button>
         </div>
     </div>
 </div>
