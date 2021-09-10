@@ -17,7 +17,8 @@ public static class HackSystemAuthenticationExtension
             // .AddScoped<IAuthorizationHandlerContextFactory, HackSystemAuthorizationHandlerContextFactory>()
             .AddSingleton<IHackSystemAuthenticationTokenRefresher, HackSystemAuthenticationTokenRefresher>()
             .AddScoped<IHackSystemAuthenticationStateHandler, HackSystemAuthenticationStateHandler>()
-            .AddScoped<AuthenticationStateProvider, HackSystemAuthenticationStateProvider>();
+            .AddScoped<AuthenticationStateProvider, HackSystemAuthenticationStateProvider>()
+            .AddScoped<IHackSystemAuthenticationStateProvider, HackSystemAuthenticationStateProvider>();
 
         return services;
     }
