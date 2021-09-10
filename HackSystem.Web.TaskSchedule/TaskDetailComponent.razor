@@ -1,8 +1,20 @@
 ﻿@using HackSystem.WebDataTransfer.TaskServer
 
+@inject ILogger<TaskDetailComponent> Logger
+
 <div class="card @(this.TaskDetail.Enabled?"shadow":"bg-light") overflow-hidden">
     <div class="card-body p-3">
-        <h6 class="card-title @(this.TaskDetail.Enabled?"h6":"text-muted") my-0 text-truncate">@this.TaskDetail.TaskName</h6>
+        <div class="row m-0 justify-content-between">
+            <div class="col-auto p-0">
+                <p class="card-title @(this.TaskDetail.Enabled?"h6":"text-muted") my-0 text-truncate">@this.TaskDetail.TaskName</p>
+            </div>
+            <div class="col-auto p-0">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" @bind=@this.TaskEnable name="switch_@this.TaskDetail.TaskID" id="switch_@this.TaskDetail.TaskID" />
+                    <label class="custom-control-label" for="switch_@this.TaskDetail.TaskID"></label>
+                </div>
+            </div>
+        </div>
         <hr class="my-1">
         <p class="text-wrap">
             <span class="badge badge-info">@this.TaskDetail.Category</span>
@@ -21,30 +33,39 @@
         <div class="col-auto px-0 btn-group btn-group-sm" role="group" aria-label="Task control button">
             <button type="button" class="btn btn-primary" @onclick=@this.ExecuteTask>Execute</button>
             <button type="button" class="btn btn-warning" @onclick=@this.EditTask>Edit</button>
-            <button type="button" class="btn btn-@(this.TaskDetail.Enabled?"success":"danger")" @onclick=@this.SwitchTaskEnable>@(this.TaskDetail.Enabled?"Disable":"Enable")</button>
         </div>
     </div>
 </div>
 
-@code {
+    @code {
     [Parameter]
     public TaskDetailDTO TaskDetail { get; set; }
 
-    private string GetExecuteTime()
-        => this.TaskDetail.TaskFrequency switch
+    public bool TaskEnable
+    {
+        get => this.TaskDetail.Enabled;
+        set
         {
-            TaskFrequency.Manually => "Manually",
-            TaskFrequency.Once => "Once",
-            TaskFrequency.Automatically => this.TaskDetail.AutomaticInterval switch
-            {
-                var interval when interval.TotalSeconds < 60 => $"{interval.TotalSeconds} S",
-                var interval when interval.TotalMinutes < 60 => $"{interval.TotalMinutes} M",
-                var interval when interval.TotalHours < 24 => $"{interval.TotalHours} H",
-                var interval => $"{interval.TotalDays} D"
-            },
-            TaskFrequency.Daily => this.TaskDetail.ExecuteDateTime.ToString("HH:mm:ss"),
-            TaskFrequency.Weekly => this.TaskDetail.ExecuteDateTime.ToString("HH:mm:ss"),
-            TaskFrequency.Monthly => $"{this.TaskDetail.ExecuteDateTime.DayOfWeek} {this.TaskDetail.ExecuteDateTime.ToString("dd HH:mm:ss")}",
-            TaskFrequency.Yearly => this.TaskDetail.ExecuteDateTime.ToString("MM-dd HH:mm:ss"),
-        };
-}
+            this.TaskDetail.Enabled = value;
+            this.SwitchTaskEnable(value).ConfigureAwait(false);
+        }
+    }
+
+    private string GetExecuteTime()
+    => this.TaskDetail.TaskFrequency switch
+    {
+        TaskFrequency.Manually => "Manually",
+        TaskFrequency.Once => "Once",
+        TaskFrequency.Automatically => this.TaskDetail.AutomaticInterval switch
+        {
+            var interval when interval.TotalSeconds < 60 => $"{interval.TotalSeconds} S",
+            var interval when interval.TotalMinutes < 60 => $"{interval.TotalMinutes} M",
+            var interval when interval.TotalHours < 24 => $"{interval.TotalHours} H",
+            var interval => $"{interval.TotalDays} D"
+        },
+        TaskFrequency.Daily => this.TaskDetail.ExecuteDateTime.ToString("HH:mm:ss"),
+        TaskFrequency.Weekly => this.TaskDetail.ExecuteDateTime.ToString("HH:mm:ss"),
+        TaskFrequency.Monthly => $"{this.TaskDetail.ExecuteDateTime.DayOfWeek} {this.TaskDetail.ExecuteDateTime.ToString("dd HH:mm:ss")}",
+        TaskFrequency.Yearly => this.TaskDetail.ExecuteDateTime.ToString("MM-dd HH:mm:ss"),
+    };
+    }

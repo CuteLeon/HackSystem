@@ -1,6 +1,7 @@
 ﻿@using HackSystem.Web.TaskSchedule.Services
 @using HackSystem.WebDataTransfer.TaskServer
 @inherits ProgramComponentBase
+@inject ILogger<TaskSchedulerComponent> Logger
 @inject IServiceScopeFactory ServiceScopeFactory
 
 <ResizeableView ResizeableOption="new ResizeableOption() { Left = 20, Top =10, Width=900, Height=600, Z_Index=this.ProgramEntity.Z_Index }">

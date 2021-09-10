@@ -1,4 +1,6 @@
-﻿namespace HackSystem.Web.TaskSchedule
+﻿using Microsoft.Extensions.Logging;
+
+namespace HackSystem.Web.TaskSchedule
 {
     public partial class TaskDetailComponent
     {
@@ -14,10 +16,9 @@
         {
         }
 
-        private async Task SwitchTaskEnable()
+        private async Task SwitchTaskEnable(bool enable)
         {
-            this.TaskDetail.Enabled = !this.TaskDetail.Enabled;
-            this.StateHasChanged();
+            this.Logger.LogInformation($"Switch Task {this.TaskDetail.TaskName} ({this.TaskDetail.TaskID}) Enable to {(enable ? "Enabled" : "Disabled")}...");
         }
     }
 }

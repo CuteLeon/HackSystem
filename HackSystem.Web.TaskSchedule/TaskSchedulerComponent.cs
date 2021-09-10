@@ -38,9 +38,11 @@ namespace HackSystem.Web.TaskSchedule
 
         private async Task LoadTasks()
         {
+            this.Logger.LogInformation($"Loading tasks...");
             await this.ClearTasks();
             var tasks = await this.taskDetailService.QueryTasks();
             this.TaskDetails.AddRange(tasks);
+            this.Logger.LogInformation($"Loaded {tasks.Count()} tasks.");
             this.StateHasChanged();
         }
 
