@@ -1,0 +1,50 @@
+﻿@using HackSystem.WebDataTransfer.TaskServer
+
+<div class="card shadow-sm overflow-hidden">
+    <div class="card-body p-3">
+        <h6 class="card-title @(this.TaskDetail.Enabled?string.Empty:"text-muted") my-0 text-truncate">@this.TaskDetail.TaskName</h6>
+        <hr class="my-1">
+        <p class="text-wrap">
+            <span class="badge badge-info">@this.TaskDetail.Category</span>
+            <span class="badge badge-@(this.TaskDetail.Enabled?"success":"danger")">@(this.TaskDetail.Enabled?"Enabled":"Disabled")</span>
+            <span class="badge badge-warning">@Path.GetExtension(this.TaskDetail.ClassName)</span>
+            <span class="badge badge-warning">@this.TaskDetail.ProcedureName</span>
+        </p>
+        <dl class="row">
+            <dt class="col-sm-4">Frequency:</dt>
+            <dd class="col-sm-8">@this.TaskDetail.TaskFrequency</dd>
+            <dt class="col-sm-4">Run Time:</dt>
+            <dd class="col-sm-8">@this.GetExecuteTime()</dd>
+        </dl>
+    </div>
+    <div class="card-footer p-1 row justify-content-center">
+        <div class="col-auto px-0 btn-group btn-group-sm" role="group" aria-label="Task control button">
+            <button type="button" class="btn btn-primary" @onclick=@this.ExecuteTask>Execute</button>
+            <button type="button" class="btn btn-warning" @onclick=@this.EditTask>Edit</button>
+            <button type="button" class="btn btn-@(this.TaskDetail.Enabled?"success":"danger")" @onclick=@this.SwitchTaskEnable>@(this.TaskDetail.Enabled?"Disable":"Enable")</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public TaskDetailDTO TaskDetail { get; set; }
+
+    private string GetExecuteTime()
+        => this.TaskDetail.TaskFrequency switch
+        {
+            TaskFrequency.Manually => "Manually",
+            TaskFrequency.Once => "Once",
+            TaskFrequency.Automatically => this.TaskDetail.AutomaticInterval switch
+            {
+                var interval when interval.TotalSeconds < 60 => $"{interval.TotalSeconds} S",
+                var interval when interval.TotalMinutes < 60 => $"{interval.TotalMinutes} M",
+                var interval when interval.TotalHours < 24 => $"{interval.TotalHours} H",
+                var interval => $"{interval.TotalDays} D"
+            },
+            TaskFrequency.Daily => this.TaskDetail.ExecuteDateTime.ToString("HH:mm:ss"),
+            TaskFrequency.Weekly => this.TaskDetail.ExecuteDateTime.ToString("HH:mm:ss"),
+            TaskFrequency.Monthly => $"{this.TaskDetail.ExecuteDateTime.DayOfWeek} {this.TaskDetail.ExecuteDateTime.ToString("dd HH:mm:ss")}",
+            TaskFrequency.Yearly => this.TaskDetail.ExecuteDateTime.ToString("MM-dd HH:mm:ss"),
+        };
+}

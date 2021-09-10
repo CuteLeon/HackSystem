@@ -4,7 +4,7 @@
 @inject IServiceScopeFactory ServiceScopeFactory
 
 <ResizeableView ResizeableOption="new ResizeableOption() { Left = 20, Top =10, Width=640, Height=540, Z_Index=this.ProgramEntity.Z_Index }">
-    <div class="modal-dialog m-0 flex-fill shadow" role="dialog" style="max-width:none;height:100%;">
+    <div class="modal-dialog m-0 flex-fill shadow modal-dialog-scrollable" role="dialog" style="max-width:none;max-height:none;height:100%;">
         <div class="modal-content border-primary overflow-hidden" style="height: 100%;">
             <DraggableHandle DragTarget=".position-fixed">
                 <div class="modal-header bg-light py-2">
@@ -15,29 +15,45 @@
                 </div>
             </DraggableHandle>
             <div class="modal-body">
-                <div class="d-flex h-100">
-                    <AuthorizeView Roles="@CommonSense.Roles.CommanderRole">
-                        <Authorized>
-                            <div class="d-inline-block w-100 p-5 text-center">
-                                <i class="fas fa-4x fa-user-astronaut text-primary my-3"></i>
-                                <p class="h4 text-secondary">Welcome, Commander!</p>
+                <AuthorizeView Roles="@CommonSense.Roles.CommanderRole">
+                    <Authorized>
+                        <div class="container-fluid">
+                            <!-- Top control button group -->
+                            <div class="row my-2 justify-content-between">
+                                <p class="col-auto h4">Tasks</p>
+                                <div class="col-auto">
+                                    <div class="btn-group btn-group-sm shadow-sm" role="group" aria-label="Task control button">
+                                        <button type="button" class="btn btn-info" @onclick=@this.LoadTasks>Refresh</button>
+                                        <button type="button" class="btn btn-primary" @onclick=@this.AddTasks>Create</button>
+                                        <button type="button" class="btn btn-danger" @onclick=@this.ClearTasks>Delete</button>
+                                    </div>
+                                </div>
                             </div>
-                        </Authorized>
-                        <NotAuthorized>
-                            <div class="d-inline-block w-100 p-5 text-center">
-                                <i class="fas fa-4x fa-user-astronaut text-primary my-3"></i>
-                                <p class="h4 text-secondary">Please login as a Commander!</p>
+                            <!-- Cards container -->
+                            <div class="row">
+                                @foreach (var task in this.TaskDetails)
+                                {
+                                    <div @key=@task.TaskID class="col p-1">
+                                        <TaskDetailComponent @key=@task.TaskID TaskDetail=@task></TaskDetailComponent>
+                                    </div>
+                                }
                             </div>
-                        </NotAuthorized>
-                    </AuthorizeView>
-                </div>
+                        </div>
+                    </Authorized>
+                    <NotAuthorized>
+                        <div class="d-inline-block w-100 p-5 text-center">
+                            <i class="fas fa-4x fa-user-astronaut text-primary my-3"></i>
+                            <p class="h4 text-secondary">Please login as a Commander!</p>
+                        </div>
+                    </NotAuthorized>
+                </AuthorizeView>
             </div>
         </div>
     </div>
 </ResizeableView>
 
 @code {
-    public Dictionary<string, List<TaskDetailDTO>> TaskDetailGroups { get; set; }
+    public List<TaskDetailDTO> TaskDetails { get; set; } = new();
 
     public override void Dispose()
     {

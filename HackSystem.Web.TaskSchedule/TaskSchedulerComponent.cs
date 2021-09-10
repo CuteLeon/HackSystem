@@ -33,16 +33,25 @@ namespace HackSystem.Web.TaskSchedule
             if (firstRender)
             {
                 await this.LoadTasks();
-                this.StateHasChanged();
             }
         }
 
         private async Task LoadTasks()
         {
+            await this.ClearTasks();
             var tasks = await this.taskDetailService.QueryTasks();
-            this.TaskDetailGroups = tasks
-                .GroupBy(x => x.Category)
-                .ToDictionary(g => g.Key, g => g.ToList());
+            this.TaskDetails.AddRange(tasks);
+            this.StateHasChanged();
+        }
+
+        private async Task ClearTasks()
+        {
+            this.TaskDetails.Clear();
+            this.StateHasChanged();
+        }
+
+        private async Task AddTasks()
+        {
         }
     }
 }

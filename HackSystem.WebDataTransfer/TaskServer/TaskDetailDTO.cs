@@ -12,6 +12,8 @@ public class TaskDetailDTO
 
     public TaskFrequency TaskFrequency { get; set; }
 
+    public TimeSpan AutomaticInterval { get; set; }
+
     public string ClassName { get; set; }
 
     public string ProcedureName { get; set; }
