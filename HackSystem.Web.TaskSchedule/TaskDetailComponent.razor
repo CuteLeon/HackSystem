@@ -7,7 +7,7 @@
         <p class="text-wrap">
             <span class="badge badge-info">@this.TaskDetail.Category</span>
             <span class="badge badge-@(this.TaskDetail.Enabled?"success":"danger")">@(this.TaskDetail.Enabled?"Enabled":"Disabled")</span>
-            <span class="badge badge-warning">@Path.GetExtension(this.TaskDetail.ClassName)</span>
+            <span class="badge badge-warning">@this.TaskDetail.ClassName.Substring(this.TaskDetail.ClassName.LastIndexOf('.')+1)</span>
             <span class="badge badge-warning">@this.TaskDetail.ProcedureName</span>
         </p>
         <dl class="row">
