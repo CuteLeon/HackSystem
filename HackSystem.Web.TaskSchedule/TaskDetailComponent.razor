@@ -23,17 +23,17 @@
             <span class="badge badge-warning">@this.TaskDetail.ProcedureName</span>
         </p>
         <dl class="row">
-            <dt class="col-sm-4">Frequency:</dt>
-            <dd class="col-sm-8">@this.TaskDetail.TaskFrequency</dd>
-            <dt class="col-sm-4">Run Time:</dt>
-            <dd class="col-sm-8">@this.GetExecuteTime()</dd>
+            <dt class="col-sm-6">Frequency:</dt>
+            <dd class="col-sm-6">@this.TaskDetail.TaskFrequency</dd>
+            <dt class="col-sm-6">Run Time:</dt>
+            <dd class="col-sm-6">@this.GetExecuteTime()</dd>
         </dl>
     </div>
     <div class="card-footer p-1 row justify-content-center">
         <div class="col-auto px-0 btn-group btn-group-sm" role="group" aria-label="Task control button">
-            <button type="button" class="btn btn-outline-warning" @onclick=@this.EditTask>Edit</button>
+            <button type="button" class="btn btn-warning" @onclick=@this.EditTask>Edit</button>
             <button type="button" class="btn btn-primary" @onclick=@this.ExecuteTask><span class="fas fa-rocket"></span><span class="mx-1"></span>Execute</button>
-            <button type="button" class="btn btn-outline-danger" @onclick=@this.DeleteTask>Delete</button>
+            <button type="button" class="btn btn-danger" @onclick=@this.DeleteTask>Delete</button>
         </div>
     </div>
 </div>
