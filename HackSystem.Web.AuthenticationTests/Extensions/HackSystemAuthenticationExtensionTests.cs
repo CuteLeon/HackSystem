@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using HackSystem.Web.Authentication.Options;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Authentication.Services;

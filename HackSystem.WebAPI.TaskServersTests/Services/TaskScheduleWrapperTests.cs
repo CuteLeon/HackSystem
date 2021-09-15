@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using FluentScheduler;
 using HackSystem.WebAPI.Model.Task;
 using Xunit;

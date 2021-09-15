@@ -1,4 +1,5 @@
-﻿using HackSystem.Web.ProgramSchedule.Model;
+﻿using System.Collections.Generic;
+using HackSystem.Web.ProgramSchedule.Model;
 
 namespace HackSystem.Web.ProgramSchedule.Container;
 

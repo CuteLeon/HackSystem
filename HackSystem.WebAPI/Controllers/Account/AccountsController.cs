@@ -1,4 +1,7 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using AutoMapper;
 using HackSystem.Common;
 using HackSystem.WebAPI.Authentication.Services;
@@ -9,6 +12,7 @@ using HackSystem.WebDataTransfer.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.Controllers.Account;
 

@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Linq;
+using System.Security.Claims;
 using HackSystem.Web.Authentication.Options;
 using Xunit;
 

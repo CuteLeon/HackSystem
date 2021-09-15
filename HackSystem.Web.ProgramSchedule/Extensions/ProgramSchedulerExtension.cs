@@ -1,4 +1,5 @@
-﻿using HackSystem.Web.ProgramSchedule.AssemblyLoader;
+﻿using System;
+using HackSystem.Web.ProgramSchedule.AssemblyLoader;
 using HackSystem.Web.ProgramSchedule.Container;
 using HackSystem.Web.ProgramSchedule.Disposer;
 using HackSystem.Web.ProgramSchedule.IDGenerator;

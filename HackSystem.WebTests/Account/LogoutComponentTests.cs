@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using System.Net.Http;
 using Bunit;
 using HackSystem.Web.Account;
 using HackSystem.Web.Authentication.Extensions;
@@ -41,7 +43,8 @@ public class LogoutComponentTests
             .AddSingleton(mockHttpClient);
 
         using var logoutComponent = ctx.RenderComponent<LogoutComponent>();
-        logoutComponent.WaitForState(() => mockNavigationManager.HasNavigated, TimeSpan.FromSeconds(5));
+        logoutComponent.WaitForState(
+            () => mockNavigationManager.HasNavigated, TimeSpan.FromSeconds(5));
         Assert.EndsWith("/StartUp", mockNavigationManager.Uri, StringComparison.OrdinalIgnoreCase);
     }
 }

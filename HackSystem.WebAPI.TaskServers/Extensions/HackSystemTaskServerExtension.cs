@@ -1,4 +1,5 @@
-﻿using HackSystem.WebAPI.Tasks;
+﻿using System;
+using HackSystem.WebAPI.Tasks;
 using HackSystem.WebAPI.TaskServers.Configurations;
 using HackSystem.WebAPI.TaskServers.DataServices;
 using HackSystem.WebAPI.TaskServers.Jobs;

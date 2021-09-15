@@ -1,4 +1,6 @@
-﻿namespace HackSystem.Cryptography.RSACryptography;
+﻿using System;
+
+namespace HackSystem.Cryptography.RSACryptography;
 
 public interface IRSACryptographyService : IDisposable
 {

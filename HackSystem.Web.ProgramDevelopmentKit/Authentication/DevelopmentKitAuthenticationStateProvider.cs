@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using HackSystem.Web.Authentication.Providers;
 using Microsoft.AspNetCore.Components.Authorization;
 

@@ -1,4 +1,6 @@
-﻿using HackSystem.Observer.Message;
+﻿using System;
+using System.Threading.Tasks;
+using HackSystem.Observer.Message;
 using HackSystem.Observer.Publisher;
 using Microsoft.Extensions.Logging;
 

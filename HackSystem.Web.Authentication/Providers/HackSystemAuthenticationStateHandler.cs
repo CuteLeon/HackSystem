@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using System.Threading.Tasks;
 using HackSystem.Web.Authentication.Options;
 using HackSystem.Web.CookieStorage;
 using Microsoft.AspNetCore.Components.Authorization;

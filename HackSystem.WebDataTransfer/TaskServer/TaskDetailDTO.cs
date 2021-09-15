@@ -1,4 +1,6 @@
-﻿namespace HackSystem.WebDataTransfer.TaskServer;
+﻿using System;
+
+namespace HackSystem.WebDataTransfer.TaskServer;
 
 public class TaskDetailDTO
 {

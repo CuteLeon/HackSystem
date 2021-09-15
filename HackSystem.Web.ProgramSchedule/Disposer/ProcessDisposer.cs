@@ -3,6 +3,8 @@ using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
 using HackSystem.Web.ProgramSchedule.Container;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using System;
 
 namespace HackSystem.Web.ProgramSchedule.Disposer;
 

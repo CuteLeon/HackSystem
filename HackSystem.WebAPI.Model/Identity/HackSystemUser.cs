@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using HackSystem.WebAPI.Model.Map.UserMap;
 using Microsoft.AspNetCore.Identity;
 

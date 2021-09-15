@@ -1,4 +1,7 @@
-﻿using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
+﻿using System;
+using System.Threading.Tasks;
+using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
+using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.ProgramLayer;
 

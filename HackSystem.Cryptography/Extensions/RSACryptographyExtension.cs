@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using HackSystem.Cryptography.Options;
 using HackSystem.Cryptography.RSACryptography;
 using Microsoft.Extensions.DependencyInjection;

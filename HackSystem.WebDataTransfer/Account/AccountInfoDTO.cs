@@ -1,4 +1,5 @@
-﻿using HackSystem.WebDataTransfer.Program;
+﻿using System.Collections.Generic;
+using HackSystem.WebDataTransfer.Program;
 
 namespace HackSystem.WebDataTransfer.Account;
 

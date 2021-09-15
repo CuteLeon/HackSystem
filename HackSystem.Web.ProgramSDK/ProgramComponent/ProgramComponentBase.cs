@@ -1,4 +1,5 @@
-﻿using HackSystem.Observer.Publisher;
+﻿using System;
+using HackSystem.Observer.Publisher;
 using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
 using Microsoft.AspNetCore.Components;
 

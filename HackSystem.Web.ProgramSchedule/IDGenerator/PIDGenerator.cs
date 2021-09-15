@@ -1,4 +1,6 @@
-﻿namespace HackSystem.Web.ProgramSchedule.IDGenerator;
+﻿using System.Threading;
+
+namespace HackSystem.Web.ProgramSchedule.IDGenerator;
 
 public class PIDGenerator : IPIDGenerator
 {

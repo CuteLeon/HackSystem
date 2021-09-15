@@ -1,28 +1,28 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
-namespace HackSystem.Web.TaskSchedule
+namespace HackSystem.Web.TaskSchedule;
+
+public partial class TaskDetailComponent
 {
-    public partial class TaskDetailComponent
+    public TaskDetailComponent()
     {
-        public TaskDetailComponent()
-        {
-        }
+    }
 
-        private async Task ExecuteTask()
-        {
-        }
+    private async Task ExecuteTask()
+    {
+    }
 
-        private async Task DeleteTask()
-        {
-        }
+    private async Task DeleteTask()
+    {
+    }
 
-        private async Task EditTask()
-        {
-        }
+    private async Task EditTask()
+    {
+    }
 
-        private async Task SwitchTaskEnable(bool enable)
-        {
-            this.Logger.LogInformation($"Switch Task {this.TaskDetail.TaskName} ({this.TaskDetail.TaskID}) Enable to {(enable ? "Enabled" : "Disabled")}...");
-        }
+    private async Task SwitchTaskEnable(bool enable)
+    {
+        this.Logger.LogInformation($"Switch Task {this.TaskDetail.TaskName} ({this.TaskDetail.TaskID}) Enable to {(enable ? "Enabled" : "Disabled")}...");
     }
 }

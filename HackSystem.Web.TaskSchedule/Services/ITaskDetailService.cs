@@ -1,9 +1,10 @@
-﻿using HackSystem.WebDataTransfer.TaskServer;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using HackSystem.WebDataTransfer.TaskServer;
 
-namespace HackSystem.Web.TaskSchedule.Services
+namespace HackSystem.Web.TaskSchedule.Services;
+
+public interface ITaskDetailService
 {
-    public interface ITaskDetailService
-    {
-        Task<IEnumerable<TaskDetailDTO>> QueryTasks();
-    }
+    Task<IEnumerable<TaskDetailDTO>> QueryTasks();
 }

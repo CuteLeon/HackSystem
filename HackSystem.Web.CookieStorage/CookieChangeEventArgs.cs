@@ -1,4 +1,6 @@
-﻿namespace HackSystem.Web.CookieStorage;
+﻿using System;
+
+namespace HackSystem.Web.CookieStorage;
 
 public class CookieChangedEventArgs : EventArgs
 {

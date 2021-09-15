@@ -1,3 +1,5 @@
+using System;
+using System.Net.Http;
 using HackSystem.Observer;
 using HackSystem.Web.CookieStorage;
 using HackSystem.Web.ProgramDevelopmentKit;
@@ -6,6 +8,7 @@ using HackSystem.Web.Services.Configurations;
 using HackSystem.Web.Services.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 var apiHost = "https://localhost:4237";
 var builder = WebAssemblyHostBuilder.CreateDefault(args);

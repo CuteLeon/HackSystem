@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace HackSystem.Web.ProgramSchedule.IDGenerator.Tests;
 
