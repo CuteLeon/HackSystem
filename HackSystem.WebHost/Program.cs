@@ -1,24 +1,36 @@
-namespace HackSystem.WebHost;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-public class Program
-{
-    public static void Main(string[] args)
+var builder = WebApplication.CreateBuilder(args);
+var env = builder.Environment;
+builder.Services
+    .AddLogging()
+    .AddHttpLogging(options =>
     {
-        CreateHostBuilder(args)
-            .Build()
-            .Run();
-    }
+        options.LoggingFields = HttpLoggingFields.All;
+    });
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((hostBuilderContext, configuration) =>
-            {
-                var env = hostBuilderContext.HostingEnvironment;
-                configuration.AddJsonFile("appsettings.json", true, true)
-                             .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
-            })
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
+builder.Configuration
+    .AddJsonFile("appsettings.json", true, true)
+    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
+
+var app = builder.Build();
+if (env.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage()
+        .UseWebAssemblyDebugging();
 }
+
+app.UseRouting()
+    .UseBlazorFrameworkFiles()
+    .UseStaticFiles()
+    .UseEndpoints(endpoints =>
+    {
+        endpoints.MapFallbackToFile("index.html");
+    });
+
+app.Run();

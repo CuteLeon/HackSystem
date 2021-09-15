@@ -1,58 +1,144 @@
+using System;
+using System.IO;
+using HackSystem.Cryptography;
+using HackSystem.Web.Authentication.Extensions;
+using HackSystem.WebAPI.Authentication.Configurations;
+using HackSystem.WebAPI.Configurations;
 using HackSystem.WebAPI.DataAccess;
+using HackSystem.WebAPI.Extensions;
+using HackSystem.WebAPI.MockServers.Configurations;
+using HackSystem.WebAPI.MockServers.Extensions;
+using HackSystem.WebAPI.Model.Identity;
+using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
+using HackSystem.WebAPI.Services.Extensions;
+using HackSystem.WebAPI.TaskServers.Configurations;
 using HackSystem.WebAPI.TaskServers.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using NLog.Web;
 
-namespace HackSystem.WebAPI;
+var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
+var assemblyName = typeof(Program).Assembly.GetName();
+var setupInformation = AppDomain.CurrentDomain.SetupInformation;
 
-public class Program
+try
 {
-    public static void Main(string[] args)
+    logger.Info($"{assemblyName.Name} launches, TargetFrameworkName={setupInformation.TargetFrameworkName}, Version={assemblyName.Version}");
+
+    var builder = WebApplication.CreateBuilder(args);
+    var env = builder.Environment;
+    var config = builder.Configuration;
+    var jwtConfiguration = config.GetSection("JwtConfiguration").Get<JwtAuthenticationOptions>();
+    var taskServerConfiguration = config.GetSection("TaskServerConfiguration").Get<TaskServerOptions>();
+    var mockServerConfiguration = config.GetSection("MockServerConfiguration").Get<MockServerOptions>();
+    var securityConfiguration = config.GetSection("SecurityConfiguration").Get<SecurityConfiguration>();
+    var programAssetConfiguration = config.GetSection("ProgramAssetConfiguration").Get<ProgramAssetOptions>();
+
+    builder.Configuration
+        .AddJsonFile("appsettings.json", true, true)
+        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
+
+    builder.Logging
+        .ClearProviders()
+        .AddConsole()
+        .AddDebug()
+        .SetMinimumLevel(LogLevel.Trace)
+        .AddNLogWeb();
+
+    builder.Services
+        .AddCors(options => options.AddPolicy("AllowAny", builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()))
+        .AddDbContext<HackSystemDBContext>(
+            options => options
+                .UseSqlite(config.GetConnectionString("HSDB"))
+                .UseLazyLoadingProxies(),
+            ServiceLifetime.Scoped)
+        .AddIdentity<HackSystemUser, HackSystemRole>(options =>
+        {
+            options.Password.RequireDigit = true;
+            options.Password.RequiredLength = 8;
+            options.Password.RequiredUniqueChars = 4;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireUppercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+
+            options.Lockout.AllowedForNewUsers = true;
+
+            options.SignIn.RequireConfirmedAccount = false;
+
+            options.User.RequireUniqueEmail = true;
+        })
+        .AddEntityFrameworkStores<HackSystemDBContext>();
+
+    builder.Services
+        .AddAutoMapper(typeof(Program).Assembly)
+        .AddRSACryptography(options =>
+        {
+            options.RSAKeyParameters = securityConfiguration.RSAPrivateKey;
+        })
+        .AttachTaskServer(taskServerConfiguration)
+        .AttachMockServer(mockServerConfiguration)
+        .AddHttpClient()
+        .AddMemoryCache()
+        .AddHackSystemWebAPIExtensions()
+        .AddAPIAuthentication(jwtConfiguration)
+        .AddWebAPIServices()
+        .AddProgramAssetServices(options =>
+        {
+            options.FolderPath = Path.IsPathFullyQualified(programAssetConfiguration.FolderPath) ?
+                programAssetConfiguration.FolderPath :
+                Path.GetFullPath(programAssetConfiguration.FolderPath, AppContext.BaseDirectory);
+        });
+
+    builder.Services
+        .AddResponseCompression()
+        .AddControllersWithViews()
+        .AddNewtonsoftJson();
+
+    var app = builder.Build();
+    if (env.IsDevelopment())
     {
-        var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
-        var assemblyName = typeof(Program).Assembly.GetName();
-        var setupInformation = AppDomain.CurrentDomain.SetupInformation;
-
-        try
-        {
-            logger.Info($"{assemblyName.Name} launches, TargetFrameworkName={setupInformation.TargetFrameworkName}, Version={assemblyName.Version}");
-
-            CreateHostBuilder(args)
-                .Build()
-                .InitializeDatabase()
-                .LaunchTaskServer()
-                .Run();
-        }
-        catch (Exception ex)
-        {
-            logger.Error(ex, $"{assemblyName.Name} launches failed.");
-        }
-        finally
-        {
-            // HackSystemTaskServerExtension.ShutdownTaskServer();
-            logger.Info($"{assemblyName.Name} shutdown, Version={assemblyName.Version}");
-            NLog.LogManager.Shutdown();
-        }
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        app.UseExceptionHandler("/Home/HackSystemError");
+        app.UseHsts();
     }
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((hostBuilderContext, configuration) =>
-            {
-                var env = hostBuilderContext.HostingEnvironment;
-                configuration.AddJsonFile("appsettings.json", true, true)
-                             .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
-            })
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder
-                    .UseStartup<Startup>()
-                    .ConfigureLogging(builder =>
-                    {
-                        builder.ClearProviders();
-                        builder.AddConsole();
-                        builder.AddDebug();
-                        builder.SetMinimumLevel(LogLevel.Trace);
-                    })
-                    .UseNLog();
-            });
+    app.UseCors("AllowAny")
+        .UseHttpsRedirection()
+        .UseStaticFiles()
+        .UseRouting()
+        .UseAuthentication()
+        .UseAuthorization()
+        .UseWebAPILogging()
+        .UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+        })
+        .UseMockServer();
+
+    app.InitializeDatabase()
+        .LaunchTaskServer()
+        .Run();
+}
+catch (Exception ex)
+{
+    logger.Error(ex, $"{assemblyName.Name} launches failed.");
+}
+finally
+{
+    // HackSystemTaskServerExtension.ShutdownTaskServer();
+    logger.Info($"{assemblyName.Name} shutdown, Version={assemblyName.Version}");
+    NLog.LogManager.Shutdown();
 }
