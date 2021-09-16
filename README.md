@@ -1,6 +1,6 @@
 # HackSystem
 
-![GitHub branch checks state](https://img.shields.io/github/checks-status/CuteLeon/HackSystem/master?label=Hack%20System)
+![Hack System](https://github.com/CuteLeon/HackSystem/workflows/.Net%20Build/badge.svg)
 ![GitHub](https://img.shields.io/github/license/CuteLeon/HackSystem)
 ![GitHub top language](https://img.shields.io/github/languages/top/CuteLeon/HackSystem)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/CuteLeon/HackSystem)
