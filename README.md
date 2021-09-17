@@ -1,22 +1,22 @@
 # HackSystem
 
-![Hack System](https://github.com/CuteLeon/HackSystem/workflows/.Net%20Build/badge.svg)
-![GitHub](https://img.shields.io/github/license/CuteLeon/HackSystem)
-![GitHub top language](https://img.shields.io/github/languages/top/CuteLeon/HackSystem)
-![GitHub repo file count](https://img.shields.io/github/directory-file-count/CuteLeon/HackSystem)
-![GitHub repo size](https://img.shields.io/github/repo-size/CuteLeon/HackSystem)
+[![Hack System](https://github.com/CuteLeon/HackSystem/workflows/.Net%20Build/badge.svg)](https://github.com/CuteLeon/HackSystem/actions/workflows/dotnet-core.yml)
+[![GitHub](https://img.shields.io/github/license/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/blob/master/LICENSE)
+[![GitHub top language](https://img.shields.io/github/languages/top/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/search?l=c%23)
+[![GitHub repo file count](https://img.shields.io/github/directory-file-count/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem)
+[![GitHub repo size](https://img.shields.io/github/repo-size/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/archive/refs/heads/master.zip)
 
-![GitHub issues](https://img.shields.io/github/issues/CuteLeon/HackSystem)
-![GitHub forks](https://img.shields.io/github/forks/CuteLeon/HackSystem)
-![GitHub Repo stars](https://img.shields.io/github/stars/CuteLeon/HackSystem)
-![GitHub watchers](https://img.shields.io/github/watchers/CuteLeon/HackSystem)
-![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/CuteLeon/HackSystem?include_prereleases)
-![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/CuteLeon/HackSystem)
+[![GitHub issues](https://img.shields.io/github/issues/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/issues?q=is%3Aopen+is%3Aissue)
+[![GitHub forks](https://img.shields.io/github/forks/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/network/members)
+[![GitHub Repo stars](https://img.shields.io/github/stars/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/stargazers)
+[![GitHub watchers](https://img.shields.io/github/watchers/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/watchers)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/CuteLeon/HackSystem?include_prereleases)](https://github.com/CuteLeon/HackSystem/releases)
+[![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/releases)
 
-![GitHub all releases](https://img.shields.io/github/downloads/CuteLeon/HackSystem/total)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/CuteLeon/HackSystem)
-![GitHub commits since latest release (by date including pre-releases)](https://img.shields.io/github/commits-since/CuteLeon/HackSystem/latest/master?include_prereleases)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/CuteLeon/HackSystem/master)
+[![GitHub all releases](https://img.shields.io/github/downloads/CuteLeon/HackSystem/total)](https://github.com/CuteLeon/HackSystem/archive/refs/heads/master.zip)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/tags)
+[![GitHub commits since latest release (by date including pre-releases)](https://img.shields.io/github/commits-since/CuteLeon/HackSystem/latest/master?include_prereleases)](https://github.com/CuteLeon/HackSystem/releases)
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/CuteLeon/HackSystem/master)](https://github.com/CuteLeon/HackSystem/commits/master)
 
 
 ![](https://raw.github.com/CuteLeon/HackSystem/master/HackSystem.Web/wwwroot/LogoImage.png)
