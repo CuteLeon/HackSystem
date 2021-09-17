@@ -7,8 +7,6 @@ using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebAPI.Model.Task;
 using HackSystem.WebAPI.Model.WebLog;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.DataAccess;
 

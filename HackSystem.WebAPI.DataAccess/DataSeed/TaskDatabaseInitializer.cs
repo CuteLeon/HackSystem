@@ -1,6 +1,4 @@
-﻿using System;
-using HackSystem.WebAPI.Model.Task;
-using Microsoft.EntityFrameworkCore;
+﻿using HackSystem.WebAPI.Model.Task;
 
 namespace HackSystem.WebAPI.DataAccess.DataSeed;
 

@@ -1,5 +1,4 @@
 ﻿using HackSystem.WebAPI.Model.Program;
-using Microsoft.EntityFrameworkCore;
 
 namespace HackSystem.WebAPI.DataAccess.DataSeed;
 

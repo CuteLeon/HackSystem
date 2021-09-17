@@ -1,7 +1,6 @@
 ﻿using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Model.Map.UserMap;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace HackSystem.WebAPI.DataAccess.DataSeed;
 
