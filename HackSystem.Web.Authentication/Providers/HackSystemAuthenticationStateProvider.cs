@@ -1,11 +1,9 @@
 ﻿using System.Security.Claims;
-using System.Threading.Tasks;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Authentication.Options;
 using HackSystem.Web.Authentication.Services;
 using HackSystem.Web.CookieStorage;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace HackSystem.Web.Authentication.Providers;

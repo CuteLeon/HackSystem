@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using HackSystem.Web.Authentication.Options;
+﻿using HackSystem.Web.Authentication.Options;
 using Xunit;
 
 namespace HackSystem.Web.Authentication.Extensions.Tests;

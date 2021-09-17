@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text.Json;
-using Microsoft.Extensions.Logging;
+﻿using System.Text.Json;
 using Moq;
 using Xunit;
 

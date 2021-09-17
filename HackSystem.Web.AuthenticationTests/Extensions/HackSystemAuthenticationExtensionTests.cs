@@ -1,11 +1,9 @@
-﻿using System;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using HackSystem.Web.Authentication.Options;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Authentication.Services;
 using HackSystem.Web.CookieStorage;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using Moq;
