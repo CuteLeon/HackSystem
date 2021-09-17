@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HackSystem.Web.ProgramSchedule.Model;
-using Microsoft.Extensions.Logging;
+﻿using HackSystem.Web.ProgramSchedule.Model;
 
 namespace HackSystem.Web.ProgramSchedule.Container;
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using HackSystem.Observer.Publisher;
 using HackSystem.Web.ProgramSchedule.AssemblyLoader;
 using HackSystem.Web.ProgramSchedule.Container;
@@ -9,7 +7,6 @@ using HackSystem.Web.ProgramSchedule.Model;
 using HackSystem.Web.ProgramSDK.ProgramComponent;
 using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
 using HackSystem.WebDataTransfer.Program;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.ProgramSchedule.Launcher;
 
