@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using HackSystem.WebDataTransfer.Program.ProgramAsset;
+﻿using HackSystem.WebDataTransfer.Program.ProgramAsset;
 
 namespace HackSystem.Web.Services.API.Program.ProgramAsset;
 

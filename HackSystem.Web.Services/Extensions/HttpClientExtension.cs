@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using HackSystem.Web.Common;
 
 namespace HackSystem.Web.Services.Extensions;

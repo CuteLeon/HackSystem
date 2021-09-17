@@ -1,12 +1,8 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Json;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Services.API.Program.ProgramAsset;
 using HackSystem.Web.Services.Authentication;
 using HackSystem.WebDataTransfer.Program.ProgramAsset;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace HackSystem.Web.Services.Program.ProgramAsset;

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using HackSystem.WebDataTransfer.Account;
+﻿using HackSystem.WebDataTransfer.Account;
 
 namespace HackSystem.Web.Services.API.Authentication;
 
