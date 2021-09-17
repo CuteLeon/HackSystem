@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using HackSystem.WebAPI.Model.Identity;
+﻿using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Model.Program;
 
 namespace HackSystem.WebAPI.Model.Map.UserMap;

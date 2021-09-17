@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace HackSystem.WebAPI.Model.Mock;
+﻿namespace HackSystem.WebAPI.Model.Mock;
 
 public class MockRouteDetail
 {

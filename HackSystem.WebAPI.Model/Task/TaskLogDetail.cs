@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace HackSystem.WebAPI.Model.Task;
+﻿namespace HackSystem.WebAPI.Model.Task;
 
 public class TaskLogDetail
 {

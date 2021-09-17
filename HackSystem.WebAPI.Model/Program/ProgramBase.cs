@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using HackSystem.WebAPI.Model.Map.UserMap;
+﻿using HackSystem.WebAPI.Model.Map.UserMap;
 
 namespace HackSystem.WebAPI.Model.Program;
 

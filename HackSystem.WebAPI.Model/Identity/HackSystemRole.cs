@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using Microsoft.AspNetCore.Identity;
-
-namespace HackSystem.WebAPI.Model.Identity;
+﻿namespace HackSystem.WebAPI.Model.Identity;
 
 public class HackSystemRole : IdentityRole
 {
