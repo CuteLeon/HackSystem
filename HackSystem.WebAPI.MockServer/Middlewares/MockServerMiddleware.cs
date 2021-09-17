@@ -1,13 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.IO;
 using HackSystem.WebAPI.MockServer.Services;
 using HackSystem.WebAPI.MockServers.DataServices;
 using HackSystem.WebAPI.Model.Mock;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.MockServer.Middlewares;
 

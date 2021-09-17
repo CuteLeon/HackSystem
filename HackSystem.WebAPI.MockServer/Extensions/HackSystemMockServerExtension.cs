@@ -1,11 +1,8 @@
-﻿using System;
-using HackSystem.WebAPI.MockServer.Middlewares;
+﻿using HackSystem.WebAPI.MockServer.Middlewares;
 using HackSystem.WebAPI.MockServer.Services;
 using HackSystem.WebAPI.MockServers.Configurations;
 using HackSystem.WebAPI.MockServers.DataServices;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.MockServers.Extensions;
 
