@@ -1,5 +1,4 @@
 ﻿using HackSystem.WebAPI.Tasks.DatabaseBackup;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace HackSystem.WebAPI.Tasks;
 
