@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace HackSystem.WebDataTransfer.Program.ProgramAsset;
+﻿namespace HackSystem.WebDataTransfer.Program.ProgramAsset;
 
 public class ProgramAssetPackageDTO
 {
