@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using HackSystem.WebAPI.DataAccess.API.DataServices;
+﻿using HackSystem.WebAPI.DataAccess.API.DataServices;
 using HackSystem.WebAPI.Model.Option;
 
 namespace HackSystem.WebAPI.Services.Options;

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HackSystem.WebAPI.DataAccess;
+﻿using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.Model.Option;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 

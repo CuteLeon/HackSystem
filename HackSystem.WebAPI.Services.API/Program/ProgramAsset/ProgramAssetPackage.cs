@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace HackSystem.WebAPI.Services.API.Program.ProgramAsset;
+﻿namespace HackSystem.WebAPI.Services.API.Program.ProgramAsset;
 
 public class ProgramAssetPackage
 {

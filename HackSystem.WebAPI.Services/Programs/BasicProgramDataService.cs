@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HackSystem.WebAPI.DataAccess;
+﻿using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.DataAccess.DataServices;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebAPI.Services.API.Program;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.Services.Programs;
 

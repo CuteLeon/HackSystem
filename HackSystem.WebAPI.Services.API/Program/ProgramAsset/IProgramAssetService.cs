@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace HackSystem.WebAPI.Services.API.Program.ProgramAsset;
+﻿namespace HackSystem.WebAPI.Services.API.Program.ProgramAsset;
 
 public interface IProgramAssetService
 {
