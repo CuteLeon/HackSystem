@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using HackSystem.WebAPI.Model.Map.UserMap;
+﻿using HackSystem.WebAPI.Model.Map.UserMap;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebDataTransfer.Program;
 

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
+﻿using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
 using HackSystem.WebDataTransfer.Program.ProgramAsset;
 
 namespace HackSystem.WebAPI.Mappers.ProgramMapper.ProgramAssert;

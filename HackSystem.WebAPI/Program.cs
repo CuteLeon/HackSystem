@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using HackSystem.Cryptography;
 using HackSystem.Web.Authentication.Extensions;
@@ -13,13 +12,7 @@ using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
 using HackSystem.WebAPI.Services.Extensions;
 using HackSystem.WebAPI.TaskServers.Configurations;
 using HackSystem.WebAPI.TaskServers.Extensions;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using NLog.Web;
 
 var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();

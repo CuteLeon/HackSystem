@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
     <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
@@ -53,5 +54,15 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+	<ItemGroup>
+		<Using Include="System.Linq" />
+		<Using Include="AutoMapper" />
+		<Using Include="Microsoft.AspNetCore.Authorization" />
+		<Using Include="Microsoft.Extensions.Configuration" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
+		<Using Include="Microsoft.Extensions.Logging" />
+		<Using Include="Microsoft.Extensions.Options" />
+	</ItemGroup>
 
 </Project>

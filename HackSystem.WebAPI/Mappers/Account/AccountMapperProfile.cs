@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using HackSystem.WebAPI.Model.Identity;
+﻿using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebDataTransfer.Account;
 
 namespace HackSystem.WebAPI.Mappers.Account;

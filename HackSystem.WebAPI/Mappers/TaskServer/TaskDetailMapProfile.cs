@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using HackSystem.WebAPI.Model.Task;
+﻿using HackSystem.WebAPI.Model.Task;
 using HackSystem.WebDataTransfer.TaskServer;
 
 namespace HackSystem.WebAPI.Mappers.TaskServer;

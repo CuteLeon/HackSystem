@@ -1,18 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Security.Authentication;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using System.Security.Authentication;
 using HackSystem.Common;
 using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Services.API.Program;
 using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
 using HackSystem.WebDataTransfer.Program.ProgramAsset;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.Controllers.Program.ProgramAsset;
 
