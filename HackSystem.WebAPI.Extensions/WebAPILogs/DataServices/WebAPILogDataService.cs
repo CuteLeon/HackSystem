@@ -1,7 +1,6 @@
 ﻿using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.DataAccess.DataServices;
 using HackSystem.WebAPI.Model.WebLog;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.Extensions.WebAPILogs.DataServices;
 
