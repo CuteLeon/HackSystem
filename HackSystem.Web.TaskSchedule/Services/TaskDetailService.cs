@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Json;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Services.Authentication;
 using HackSystem.WebDataTransfer.TaskServer;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.TaskSchedule.Services;
 

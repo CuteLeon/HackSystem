@@ -1,10 +1,5 @@
-﻿using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using HackSystem.Web.Authentication.Providers;
+﻿using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.TaskSchedule.Services;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.Web.TaskSchedule;
 

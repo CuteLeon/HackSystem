@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-
-namespace HackSystem.Web.TaskSchedule;
+﻿namespace HackSystem.Web.TaskSchedule;
 
 public partial class TaskDetailComponent
 {

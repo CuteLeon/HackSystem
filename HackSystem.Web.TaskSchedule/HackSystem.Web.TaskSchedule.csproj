@@ -1,24 +1,33 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
 
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0-rc.1.21452.15" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0-rc.1.21452.15" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0-rc.1.21452.15" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0-rc.1.21452.15" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
-    <ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
-    <ProjectReference Include="..\HackSystem.Web.Services\HackSystem.Web.Services.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.Services\HackSystem.Web.Services.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="System.Linq" />
+		<Using Include="Microsoft.Extensions.Configuration" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
+		<Using Include="Microsoft.Extensions.Logging" />
+		<Using Include="Microsoft.Extensions.Options" />
+	</ItemGroup>
 
 </Project>
