@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.JSInterop;
-
-namespace HackSystem.Web.CookieStorage;
+﻿namespace HackSystem.Web.CookieStorage;
 
 /// <summary>
 /// Cookie storage service
