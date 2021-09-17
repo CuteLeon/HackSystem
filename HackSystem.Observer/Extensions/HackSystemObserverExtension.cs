@@ -1,6 +1,5 @@
 ﻿using HackSystem.Observer.Publisher;
 using HackSystem.Observer.Subscriber;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace HackSystem.Observer;
 

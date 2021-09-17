@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -10,4 +11,8 @@
 		<PackageReference Include="System.Threading.Tasks.Dataflow" Version="6.0.0-rc.1.21451.13" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Using Include="Microsoft.Extensions.Logging" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
+	</ItemGroup>
 </Project>
