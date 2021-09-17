@@ -1,8 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Microsoft.JSInterop;
-
-namespace HackSystem.Web.Toast;
+﻿namespace HackSystem.Web.Toast;
 
 public partial class ToastComponent
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using static HackSystem.Web.Toast.Model.ToastDetail;
+﻿using static HackSystem.Web.Toast.Model.ToastDetail;
 
 namespace HackSystem.Web.Desktop;
 

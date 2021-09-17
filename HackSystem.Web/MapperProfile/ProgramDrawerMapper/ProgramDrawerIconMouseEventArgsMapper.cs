@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
+﻿using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace HackSystem.Web.MapperProfile.ProgramDrawerMapper;

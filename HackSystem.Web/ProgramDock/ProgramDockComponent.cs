@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using HackSystem.WebDataTransfer.Program;
-using Microsoft.JSInterop;
+﻿using HackSystem.WebDataTransfer.Program;
 
 namespace HackSystem.Web.ProgramDock;
 

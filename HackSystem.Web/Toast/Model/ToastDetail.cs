@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HackSystem.Web.Toast.Model;
+﻿namespace HackSystem.Web.Toast.Model;
 
 public class ToastDetail
 {

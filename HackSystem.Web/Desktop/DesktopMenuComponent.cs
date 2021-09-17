@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.JSInterop;
-
-namespace HackSystem.Web.Desktop;
+﻿namespace HackSystem.Web.Desktop;
 
 public partial class DesktopMenuComponent
 {

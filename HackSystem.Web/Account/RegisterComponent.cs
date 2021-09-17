@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-
-namespace HackSystem.Web.Account;
+﻿namespace HackSystem.Web.Account;
 
 public partial class RegisterComponent
 {

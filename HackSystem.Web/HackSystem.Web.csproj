@@ -1,58 +1,68 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
+		<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-    <PackageReference Include="Blazored.LocalStorage" Version="4.1.5" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0-rc.1.21452.15" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0-rc.1.21452.15" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0-rc.1.21452.15" PrivateAssets="all" />
-	  <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0-rc.1.21451.13" />
-	  <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0-rc.1.21451.13" />
-	  <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0-rc.1.21451.13" />
-	  <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0-rc.1.21451.13" />
-	  <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0-rc.1.21451.13" />
-	  <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="System.Net.Http.Json" Version="6.0.0-rc.1.21451.13" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+		<PackageReference Include="Blazored.LocalStorage" Version="4.1.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0-rc.1.21452.15" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0-rc.1.21452.15" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0-rc.1.21452.15" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0-rc.1.21451.13" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0-rc.1.21451.13" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0-rc.1.21451.13" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0-rc.1.21451.13" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0-rc.1.21451.13" />
+		<PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="System.Net.Http.Json" Version="6.0.0-rc.1.21451.13" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
-    <ProjectReference Include="..\HackSystem.Cryptography\HackSystem.Cryptography.csproj" />
-    <ProjectReference Include="..\HackSystem.Observer\HackSystem.Observer.csproj" />
-    <ProjectReference Include="..\HackSystem.Web.Authentication\HackSystem.Web.Authentication.csproj" />
-    <ProjectReference Include="..\HackSystem.Web.Common\HackSystem.Web.Common.csproj" />
-    <ProjectReference Include="..\HackSystem.Web.CookieStorage\HackSystem.Web.CookieStorage.csproj" />
-    <ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
-    <ProjectReference Include="..\HackSystem.Web.ProgramSchedule\HackSystem.Web.ProgramSchedule.csproj" />
-    <ProjectReference Include="..\HackSystem.Web.Services.API\HackSystem.Web.Services.API.csproj" />
-    <ProjectReference Include="..\HackSystem.Web.Services\HackSystem.Web.Services.csproj" />
-    <ProjectReference Include="..\HackSystem.Web.SystemProgram\HackSystem.Web.SystemProgram.csproj" />
-    <ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
+		<ProjectReference Include="..\HackSystem.Cryptography\HackSystem.Cryptography.csproj" />
+		<ProjectReference Include="..\HackSystem.Observer\HackSystem.Observer.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.Authentication\HackSystem.Web.Authentication.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.Common\HackSystem.Web.Common.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.CookieStorage\HackSystem.Web.CookieStorage.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule\HackSystem.Web.ProgramSchedule.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.Services.API\HackSystem.Web.Services.API.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.Services\HackSystem.Web.Services.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.SystemProgram\HackSystem.Web.SystemProgram.csproj" />
+		<ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Update="wwwroot\appsettings.Production.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Update="wwwroot\appsettings.Production.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="wwwroot\appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(OS)' == 'Windows_NT'">
-    <Exec Command="set fileName=blazor.webassembly.js&#xD;&#xA;set originPath=$(SolutionDir)BuildTools\%25fileName%25&#xD;&#xA;set destinationPath=$(TargetDir)wwwroot\_framework\%25fileName%25&#xD;&#xA;&#xD;&#xA;echo OriginPath=%25originPath%25&#xD;&#xA;echo DestinationPath=%25destinationPath%25&#xD;&#xA;XCOPY %25originPath%25 %25destinationPath%25 /Y" />
-  </Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(OS)' == 'Windows_NT'">
+		<Exec Command="set fileName=blazor.webassembly.js&#xD;&#xA;set originPath=$(SolutionDir)BuildTools\%25fileName%25&#xD;&#xA;set destinationPath=$(TargetDir)wwwroot\_framework\%25fileName%25&#xD;&#xA;&#xD;&#xA;echo OriginPath=%25originPath%25&#xD;&#xA;echo DestinationPath=%25destinationPath%25&#xD;&#xA;XCOPY %25originPath%25 %25destinationPath%25 /Y" />
+	</Target>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(OS)' != 'Windows_NT'">
-    <Exec Command="fileName=blazor.webassembly.js&#xD;&#xA;originPath=$(SolutionDir)BuildTools/${fileName}&#xD;&#xA;destinationPath=$(TargetDir)wwwroot/_framework/${fileName}&#xD;&#xA;&#xD;&#xA;echo OriginPath=${originPath}&#xD;&#xA;echo DestinationPath=${destinationPath}&#xD;&#xA;cp -f ${originPath} ${destinationPath}" />
-  </Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(OS)' != 'Windows_NT'">
+		<Exec Command="fileName=blazor.webassembly.js&#xD;&#xA;originPath=$(SolutionDir)BuildTools/${fileName}&#xD;&#xA;destinationPath=$(TargetDir)wwwroot/_framework/${fileName}&#xD;&#xA;&#xD;&#xA;echo OriginPath=${originPath}&#xD;&#xA;echo DestinationPath=${destinationPath}&#xD;&#xA;cp -f ${originPath} ${destinationPath}" />
+	</Target>
+
+	<ItemGroup>
+		<Using Include="AutoMapper" />
+		<Using Include="Microsoft.Extensions.Configuration" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
+		<Using Include="Microsoft.Extensions.Logging" />
+		<Using Include="Microsoft.Extensions.Options" />
+		<Using Include="Microsoft.JSInterop" />
+	</ItemGroup>
 
 </Project>

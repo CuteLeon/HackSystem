@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using Blazored.LocalStorage;
+﻿using Blazored.LocalStorage;
 using HackSystem.Common;
 using HackSystem.Cryptography;
 using HackSystem.Observer;
@@ -15,8 +13,6 @@ using HackSystem.Web.Services.Configurations;
 using HackSystem.Web.Services.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 var env = builder.HostEnvironment;
