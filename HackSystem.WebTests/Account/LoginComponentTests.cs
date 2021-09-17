@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using System.Text.Json;
 using Bunit;
 using HackSystem.Web.Authentication.Providers;
@@ -10,7 +8,6 @@ using HackSystem.Web.Services.Authentication;
 using HackSystem.WebDataTransfer.Account;
 using HackSystem.WebTests.Mocks;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Moq.Contrib.HttpClient;
 using Xunit;

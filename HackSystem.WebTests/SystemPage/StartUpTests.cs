@@ -1,10 +1,8 @@
-﻿using System;
-using Bunit;
+﻿using Bunit;
 using Bunit.TestDoubles;
 using HackSystem.Web.SystemPage;
 using HackSystem.WebTests.Mocks;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace HackSystem.WebTests.SystemPage;
