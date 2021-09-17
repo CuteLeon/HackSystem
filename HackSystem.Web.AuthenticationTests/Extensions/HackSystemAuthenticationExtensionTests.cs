@@ -4,7 +4,6 @@ using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Authentication.Services;
 using HackSystem.Web.CookieStorage;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using Moq;
 using Xunit;

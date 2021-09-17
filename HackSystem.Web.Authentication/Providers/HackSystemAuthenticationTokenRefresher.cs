@@ -1,6 +1,5 @@
 ﻿using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Authentication.Options;
-using Microsoft.Extensions.Options;
 
 namespace HackSystem.Web.Authentication.Providers;
 
