@@ -1,23 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentScheduler" Version="5.5.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-rc.1.21451.13" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0-rc.1.21451.13" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0-rc.1.21451.13" />
-    <PackageReference Include="System.Text.Json" Version="6.0.0-rc.1.21451.13" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentScheduler" Version="5.5.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-rc.1.21451.13" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0-rc.1.21451.13" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0-rc.1.21451.13" />
+		<PackageReference Include="System.Text.Json" Version="6.0.0-rc.1.21451.13" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HackSystem.WebAPI.DataAccess.API\HackSystem.WebAPI.DataAccess.API.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.DataAccess\HackSystem.WebAPI.DataAccess.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.Tasks\HackSystem.WebAPI.Tasks.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\HackSystem.WebAPI.DataAccess.API\HackSystem.WebAPI.DataAccess.API.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.DataAccess\HackSystem.WebAPI.DataAccess.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.Tasks\HackSystem.WebAPI.Tasks.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="System.Linq" />
+		<Using Include="Microsoft.Extensions.Configuration" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
+		<Using Include="Microsoft.Extensions.Logging" />
+		<Using Include="Microsoft.Extensions.Options" />
+	</ItemGroup>
 
 </Project>

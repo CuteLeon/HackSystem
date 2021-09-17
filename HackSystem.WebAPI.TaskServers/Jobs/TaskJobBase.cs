@@ -1,8 +1,6 @@
-﻿using System;
-using HackSystem.WebAPI.Model.Task;
+﻿using HackSystem.WebAPI.Model.Task;
 using HackSystem.WebAPI.TaskServers.DataServices;
 using HackSystem.WebAPI.TaskServers.Services;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.TaskServers.Jobs;
 

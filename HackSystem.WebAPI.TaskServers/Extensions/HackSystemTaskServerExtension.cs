@@ -1,12 +1,9 @@
-﻿using System;
-using HackSystem.WebAPI.Tasks;
+﻿using HackSystem.WebAPI.Tasks;
 using HackSystem.WebAPI.TaskServers.Configurations;
 using HackSystem.WebAPI.TaskServers.DataServices;
 using HackSystem.WebAPI.TaskServers.Jobs;
 using HackSystem.WebAPI.TaskServers.Services;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.TaskServers.Extensions;
 

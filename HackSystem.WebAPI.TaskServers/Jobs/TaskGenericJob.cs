@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using HackSystem.WebAPI.TaskServers.DataServices;
 using HackSystem.WebAPI.TaskServers.Services;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace HackSystem.WebAPI.TaskServers.Jobs;
 
