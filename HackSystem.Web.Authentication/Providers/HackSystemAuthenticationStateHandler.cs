@@ -9,17 +9,17 @@ public class HackSystemAuthenticationStateHandler : IHackSystemAuthenticationSta
 {
     private readonly ILogger<HackSystemAuthenticationStateHandler> logger;
     private readonly ICookieStorageService cookieStorageService;
-    private readonly HackSystemAuthenticationOptions options;
+    private readonly IOptionsSnapshot<HackSystemAuthenticationOptions> options;
     private readonly IHackSystemAuthenticationStateProvider authenticationStateProvider;
 
     public HackSystemAuthenticationStateHandler(
         ILogger<HackSystemAuthenticationStateHandler> logger,
-        IOptionsMonitor<HackSystemAuthenticationOptions> options,
+        IOptionsSnapshot<HackSystemAuthenticationOptions> options,
         AuthenticationStateProvider authenticationStateProvider,
         ICookieStorageService cookieStorageService)
     {
         this.logger = logger;
-        this.options = options.CurrentValue;
+        this.options = options;
         this.cookieStorageService = cookieStorageService;
         this.authenticationStateProvider = authenticationStateProvider as IHackSystemAuthenticationStateProvider;
     }
@@ -77,7 +77,7 @@ public class HackSystemAuthenticationStateHandler : IHackSystemAuthenticationSta
     private async Task AuthenticateSuccessfully(ClaimsIdentity claimsIdentity, string token)
     {
         this.logger.LogInformation("HackSystem Authenticate Successfully !");
-        await this.cookieStorageService.SaveCookieAsync(this.options.AuthTokenName, token, this.options.TokenExpiryInMinutes * 60);
+        await this.cookieStorageService.SaveCookieAsync(this.options.Value.AuthTokenName, token, this.options.Value.TokenExpiryInMinutes * 60);
         var authenticationState = new AuthenticationState(new ClaimsPrincipal(claimsIdentity));
 
         this.authenticationStateProvider.NotifyAuthenticationStateChanged(authenticationState);
@@ -89,9 +89,9 @@ public class HackSystemAuthenticationStateHandler : IHackSystemAuthenticationSta
     private async Task AuthenticateFailed()
     {
         this.logger.LogWarning("HackSystem Authenticate Failed !");
-        await this.cookieStorageService.RemoveCookieAsync(this.options.AuthTokenName);
+        await this.cookieStorageService.RemoveCookieAsync(this.options.Value.AuthTokenName);
 
-        this.authenticationStateProvider.NotifyAuthenticationStateChanged(this.options.AnonymousState);
+        this.authenticationStateProvider.NotifyAuthenticationStateChanged(this.options.Value.AnonymousState);
     }
     #endregion
 

@@ -12,11 +12,10 @@ public class RSACryptographyService : IRSACryptographyService
 
     public RSACryptographyService(
         RSACryptoServiceProvider rsaCryptoServiceProvider,
-        IOptions<RSACryptographyOptions> options)
+        IOptionsSnapshot<RSACryptographyOptions> options)
     {
         this.rsaCryptoServiceProvider = rsaCryptoServiceProvider;
         this.options = options;
-
         this.rsaCryptoServiceProvider.FromXmlString(this.options.Value.RSAKeyParameters);
     }
 
