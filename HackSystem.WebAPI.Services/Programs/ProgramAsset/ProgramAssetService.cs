@@ -1,5 +1,4 @@
-﻿using System.IO;
-using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
+﻿using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
 using ProgramAssetModel = HackSystem.WebAPI.Services.API.Program.ProgramAsset.ProgramAsset;
 
 namespace HackSystem.WebAPI.Services.Programs.ProgramAsset;

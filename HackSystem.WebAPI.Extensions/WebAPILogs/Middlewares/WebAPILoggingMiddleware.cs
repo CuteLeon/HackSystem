@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.IO;
 using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
 using HackSystem.WebAPI.Extensions.WebAPILogs.DataServices;
 using HackSystem.WebAPI.Model.WebLog;
