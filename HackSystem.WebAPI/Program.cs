@@ -1,4 +1,3 @@
-using System.IO;
 using HackSystem.Cryptography;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.WebAPI.Authentication.Configurations;
