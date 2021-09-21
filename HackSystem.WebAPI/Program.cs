@@ -3,8 +3,9 @@ using HackSystem.Web.Authentication.Extensions;
 using HackSystem.WebAPI.Authentication.Configurations;
 using HackSystem.WebAPI.Configurations;
 using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.Domain.Identity;
+using HackSystem.WebAPI.Domain.Entity.Identity;
 using HackSystem.WebAPI.Extensions;
+using HackSystem.WebAPI.Infrastructure.Extensions;
 using HackSystem.WebAPI.MockServer.Domain.Configurations;
 using HackSystem.WebAPI.MockServer.Extensions;
 using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
@@ -79,6 +80,7 @@ try
         .AddHackSystemWebAPIExtensions()
         .AddAPIAuthentication(jwtConfiguration)
         .AddWebAPIServices()
+        .AddProgramServices()
         .AddProgramAssetServices(options =>
         {
             options.FolderPath = Path.IsPathFullyQualified(programAssetConfiguration.FolderPath) ?

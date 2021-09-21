@@ -1,5 +1,5 @@
 ﻿using HackSystem.WebAPI.Authentication.Services;
-using HackSystem.WebAPI.Domain.Identity;
+using HackSystem.WebAPI.Domain.Entity.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

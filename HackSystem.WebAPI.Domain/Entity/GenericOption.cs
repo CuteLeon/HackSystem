@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebAPI.Model.Option;
+﻿namespace HackSystem.WebAPI.Domain.Entity;
 
 public class GenericOption
 {

@@ -1,18 +1,19 @@
-﻿using HackSystem.WebAPI.Domain.Identity;
+﻿using HackSystem.WebAPI.Application.Behaviors;
+using HackSystem.WebAPI.Domain.Entity.Identity;
 using HackSystem.WebAPI.Model.Map.UserMap;
-using HackSystem.WebAPI.Services.API.Account;
 using HackSystem.WebAPI.Services.API.Program;
 
-namespace HackSystem.WebAPI.Services.Accounts;
+namespace HackSystem.WebAPI.Infrastructure.Behaviors;
 
-public class AccountService : IAccountService
+// TODO: [Leon] Modify to monitor notification and process by MediatR
+public class AccountCreatedNotificationHandler : IAccountCreatedNotificationHandler
 {
-    private readonly ILogger<AccountService> logger;
+    private readonly ILogger<AccountCreatedNotificationHandler> logger;
     private readonly IBasicProgramDataService basicProgramDataService;
     private readonly IUserBasicProgramMapDataService basicProgramMapDataService;
 
-    public AccountService(
-        ILogger<AccountService> logger,
+    public AccountCreatedNotificationHandler(
+        ILogger<AccountCreatedNotificationHandler> logger,
         IBasicProgramDataService basicProgramDataService,
         IUserBasicProgramMapDataService basicProgramMapDataService)
     {

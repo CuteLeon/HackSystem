@@ -1,6 +1,6 @@
 ﻿using System.Security.Authentication;
 using HackSystem.Common;
-using HackSystem.WebAPI.Domain.Identity;
+using HackSystem.WebAPI.Domain.Entity.Identity;
 using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
 using HackSystem.WebAPI.Services.API.Program;
 using HackSystem.WebAPI.Services.API.Program.ProgramAsset;

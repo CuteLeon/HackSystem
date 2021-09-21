@@ -1,21 +1,24 @@
-﻿using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.Model.Option;
+﻿using HackSystem.WebAPI.Application.Repository;
+using HackSystem.WebAPI.DataAccess;
+using HackSystem.WebAPI.Domain.Entity;
+using HackSystem.WebAPI.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
 namespace HackSystem.WebAPI.Services.Options.Tests;
 
+// TODO: [Leon] Move unit test to related project
 public class GenericOptionDataServiceTests
 {
     private HackSystemDBContext GetDBContext()
     {
         var genericOptions = new List<GenericOption>()
         {
-            new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_0" },
-            new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_1", OwnerLevel = "HackSystem",},
+            new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_0", OwnerLevel = "", Category = ""  },
+            new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_1", OwnerLevel = "HackSystem", Category = "" },
             new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_2", OwnerLevel = "HackSystem", Category = "GenericCategory" },
-            new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_3", Category = "GenericCategory" },
+            new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_3", OwnerLevel = "", Category = "GenericCategory" },
         };
         var dbContext = new HackSystemDBContext(
             new DbContextOptionsBuilder<HackSystemDBContext>()
@@ -33,9 +36,9 @@ public class GenericOptionDataServiceTests
     [Fact()]
     public void QueryGenericOptionsTest()
     {
-        var logger = new Mock<ILogger<GenericOptionDataService>>();
+        var logger = new Mock<ILogger<GenericOptionRepository>>();
         logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<EventId>(), It.IsAny<object>(), It.IsAny<Exception?>(), It.IsAny<Func<object, Exception?, string>>())).Verifiable();
-        IGenericOptionDataService genericOptionDataService = new GenericOptionDataService(logger.Object, this.GetDBContext());
+        IGenericOptionRepository genericOptionDataService = new GenericOptionRepository(logger.Object, this.GetDBContext());
 
         var optionValue = genericOptionDataService.QueryGenericOption("OtherOptionName").Result;
         Assert.Null(optionValue);

@@ -1,4 +1,4 @@
-﻿using HackSystem.WebAPI.Domain.Identity;
+﻿using HackSystem.WebAPI.Domain.Entity.Identity;
 using HackSystem.WebAPI.Model.Map.UserMap;
 using Microsoft.AspNetCore.Identity;
 

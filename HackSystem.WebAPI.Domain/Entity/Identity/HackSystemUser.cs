@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebAPI.Domain.Identity;
+﻿namespace HackSystem.WebAPI.Domain.Entity.Identity;
 
 public class HackSystemUser : IdentityUser
 {

@@ -1,4 +1,4 @@
-﻿using HackSystem.WebAPI.Domain.Identity;
+﻿using HackSystem.WebAPI.Domain.Entity.Identity;
 using HackSystem.WebDataTransfer.Account;
 
 namespace HackSystem.WebAPI.Mappers.Account;

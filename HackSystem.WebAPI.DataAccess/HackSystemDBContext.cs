@@ -1,8 +1,8 @@
 ﻿using HackSystem.WebAPI.DataAccess.DataSeed;
-using HackSystem.WebAPI.Domain.Identity;
+using HackSystem.WebAPI.Domain.Entity;
+using HackSystem.WebAPI.Domain.Entity.Identity;
 using HackSystem.WebAPI.MockServer.Domain.Entity;
 using HackSystem.WebAPI.Model.Map.UserMap;
-using HackSystem.WebAPI.Model.Option;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebAPI.Model.WebLog;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;

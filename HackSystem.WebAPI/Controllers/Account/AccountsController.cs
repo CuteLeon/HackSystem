@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
 using HackSystem.Common;
+using HackSystem.WebAPI.Application.Behaviors;
 using HackSystem.WebAPI.Authentication.Services;
-using HackSystem.WebAPI.Domain.Identity;
+using HackSystem.WebAPI.Domain.Entity.Identity;
 using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
-using HackSystem.WebAPI.Services.API.Account;
 using HackSystem.WebDataTransfer.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,14 +17,14 @@ public class AccountsController : AuthenticateControllerBase
 {
     private readonly ILogger<AccountsController> logger;
     private readonly ITokenGenerator tokenGenerator;
-    private readonly IAccountService accountService;
+    private readonly IAccountCreatedNotificationHandler accountCreatedNotificationHandler;
     private readonly IMapper mapper;
     private readonly SignInManager<HackSystemUser> signInManager;
 
     public AccountsController(
         ILogger<AccountsController> logger,
         ITokenGenerator tokenGenerator,
-        IAccountService accountService,
+        IAccountCreatedNotificationHandler accountCreatedNotificationHandler,
         IMapper mapper,
         SignInManager<HackSystemUser> signInManager,
         RoleManager<HackSystemRole> roleManager,
@@ -33,7 +33,7 @@ public class AccountsController : AuthenticateControllerBase
     {
         this.logger = logger;
         this.tokenGenerator = tokenGenerator;
-        this.accountService = accountService;
+        this.accountCreatedNotificationHandler = accountCreatedNotificationHandler;
         this.mapper = mapper;
         this.signInManager = signInManager;
     }
@@ -80,7 +80,7 @@ public class AccountsController : AuthenticateControllerBase
             return this.BadRequest(failedResult);
         }
 
-        await accountService.InitialUser(newUser);
+        await this.accountCreatedNotificationHandler.InitialUser(newUser);
 
         this.logger.LogInformation($"Register successfully: {register.UserName}");
         var registerResult = new RegisterResultDTO()
