@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebAPI.Model.Identity;
+﻿namespace HackSystem.WebAPI.Domain.Identity;
 
 public class HackSystemRole : IdentityRole
 {
@@ -11,7 +11,4 @@ public class HackSystemRole : IdentityRole
         : base(roleName)
     {
     }
-
-    [DefaultValue(0)]
-    public int Level { get; set; }
 }

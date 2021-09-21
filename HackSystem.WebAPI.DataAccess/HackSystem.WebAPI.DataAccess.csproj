@@ -26,6 +26,7 @@
 		<ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.Common\HackSystem.WebAPI.Common.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.DataAccess.API\HackSystem.WebAPI.DataAccess.API.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.Domain\HackSystem.WebAPI.Domain.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.MockServer.Domain\HackSystem.WebAPI.MockServer.Domain.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.TaskServer.Domain\HackSystem.WebAPI.TaskServer.Domain.csproj" />
@@ -38,6 +39,10 @@
 		<Using Include="Microsoft.Extensions.DependencyInjection" />
 		<Using Include="Microsoft.Extensions.Logging" />
 		<Using Include="Microsoft.Extensions.Options" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
 	</ItemGroup>
 
 </Project>

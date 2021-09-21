@@ -1,4 +1,4 @@
-﻿using HackSystem.WebAPI.Model.Identity;
+﻿using HackSystem.WebAPI.Domain.Identity;
 using HackSystem.WebAPI.Model.Map.UserMap;
 using HackSystem.WebAPI.Services.API.Account;
 using HackSystem.WebAPI.Services.API.Program;

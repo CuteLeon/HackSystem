@@ -1,8 +1,8 @@
 ﻿using System.Security.Claims;
 using HackSystem.Common;
 using HackSystem.WebAPI.Authentication.Services;
+using HackSystem.WebAPI.Domain.Identity;
 using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
-using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Services.API.Account;
 using HackSystem.WebDataTransfer.Account;
 using Microsoft.AspNetCore.Identity;

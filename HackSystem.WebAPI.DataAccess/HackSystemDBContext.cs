@@ -1,6 +1,6 @@
 ﻿using HackSystem.WebAPI.DataAccess.DataSeed;
+using HackSystem.WebAPI.Domain.Identity;
 using HackSystem.WebAPI.MockServer.Domain.Entity;
-using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Model.Map.UserMap;
 using HackSystem.WebAPI.Model.Option;
 using HackSystem.WebAPI.Model.Program;

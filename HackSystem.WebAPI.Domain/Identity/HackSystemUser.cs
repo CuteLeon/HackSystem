@@ -1,6 +1,4 @@
-﻿using HackSystem.WebAPI.Model.Map.UserMap;
-
-namespace HackSystem.WebAPI.Model.Identity;
+﻿namespace HackSystem.WebAPI.Domain.Identity;
 
 public class HackSystemUser : IdentityUser
 {
@@ -15,7 +13,8 @@ public class HackSystemUser : IdentityUser
     }
 
     [DefaultValue(0)]
-    public int Level { get; set; }
+    public int ExperienceLevel { get; set; }
 
-    public virtual IList<UserBasicProgramMap> UserProgramMaps { get; set; }
+    [DefaultValue(0)]
+    public int ExperiencePoints { get; set; }
 }

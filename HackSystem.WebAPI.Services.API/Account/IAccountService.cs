@@ -1,4 +1,4 @@
-﻿using HackSystem.WebAPI.Model.Identity;
+﻿using HackSystem.WebAPI.Domain.Identity;
 
 namespace HackSystem.WebAPI.Services.API.Account;
 
