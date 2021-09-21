@@ -2,6 +2,8 @@
 using HackSystem.WebAPI.TaskServer.Application.Repository;
 using HackSystem.WebAPI.TaskServer.Application.Services;
 using HackSystem.WebAPI.TaskServer.Domain.Configuration;
+using HackSystem.WebAPI.TaskServer.Infrastructure.Extensions;
+using HackSystem.WebAPI.TaskServer.Interfaces;
 using HackSystem.WebAPI.TaskServer.Jobs;
 using HackSystem.WebAPI.TaskServer.Repository;
 using HackSystem.WebAPI.TaskServer.Services;
@@ -22,9 +24,8 @@ public static class HackSystemTaskServerExtension
             .AddScoped<ITaskLogRepository, TaskLogRepository>()
             .AddScoped<ITaskLoader, TaskLoader>()
             .AddScoped<ITaskScheduleWrapper, TaskScheduleWrapper>()
-            .AddTransient<ITaskPairParameterWrapper, TaskPairParameterWrapper>()
-            .AddTransient<ITaskJsonParameterWrapper, TaskJsonParameterWrapper>()
             .AddTransient<ITaskGenericJob, TaskGenericJob>()
+            .AttachTaskServerInfrastructure()
             .AddWebAPITasks();
 
         return services;

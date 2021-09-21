@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
-using HackSystem.WebAPI.TaskServer.Application.Services;
 
-namespace HackSystem.WebAPI.TaskServer.Services;
+namespace HackSystem.WebAPI.TaskServer.Infrastructure.Wrapper;
 
 public class TaskJsonParameterWrapper : ITaskJsonParameterWrapper
 {

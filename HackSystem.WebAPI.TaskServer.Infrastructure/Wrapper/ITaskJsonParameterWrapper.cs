@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebAPI.TaskServer.Application.Services;
+﻿namespace HackSystem.WebAPI.TaskServer.Infrastructure.Wrapper;
 
 public interface ITaskJsonParameterWrapper : ITaskParameterWrapper
 {

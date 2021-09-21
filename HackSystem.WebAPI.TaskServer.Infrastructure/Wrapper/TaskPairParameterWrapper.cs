@@ -1,9 +1,8 @@
 ﻿using System.Text.RegularExpressions;
-using HackSystem.WebAPI.TaskServer.Application.Services;
 
-namespace HackSystem.WebAPI.TaskServer.Services;
+namespace HackSystem.WebAPI.TaskServer.Infrastructure.Wrapper;
 
-public class TaskParameterWrapper : ITaskParameterWrapper
+public class TaskPairParameterWrapper : ITaskPairParameterWrapper
 {
     protected Regex ParameterRegex { get; init; } = new Regex(
         "\\|?(?<Name>[^=\\|]+)=(?<Value>[^\\|]+)",
@@ -13,7 +12,7 @@ public class TaskParameterWrapper : ITaskParameterWrapper
     /// Shouldn't have '=' or '|' in parameter name.
     /// Shouldn't have '|' in value, to support BASE64 value.
     /// </remarks>
-    public Dictionary<string, string>? WrapTaskParameters(string taskParameters)
+    public IDictionary<string, string>? WrapTaskParameters(string taskParameters)
     {
         if (string.IsNullOrWhiteSpace(taskParameters))
         {
