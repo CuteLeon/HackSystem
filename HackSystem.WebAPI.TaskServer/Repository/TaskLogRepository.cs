@@ -1,5 +1,6 @@
 ﻿using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.DataAccess.Repository;
+using HackSystem.WebAPI.TaskServer.Application.Repository;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
 
 namespace HackSystem.WebAPI.TaskServer.Repository;

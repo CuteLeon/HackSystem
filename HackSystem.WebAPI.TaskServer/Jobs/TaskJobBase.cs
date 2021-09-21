@@ -1,4 +1,4 @@
-﻿using HackSystem.WebAPI.TaskServer.Repository;
+﻿using HackSystem.WebAPI.TaskServer.Application.Repository;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
 using HackSystem.WebAPI.TaskServer.Services;
 
@@ -7,16 +7,16 @@ namespace HackSystem.WebAPI.TaskServer.Jobs;
 public abstract class TaskJobBase : ITaskJobBase
 {
     private readonly ILogger<TaskJobBase> logger;
-    private readonly ITaskLogRepository taskLogDataService;
+    private readonly ITaskLogRepository taskLogRepository;
 
     public TaskDetail TaskDetail { get; set; }
 
     public TaskJobBase(
         ILogger<TaskJobBase> logger,
-        ITaskLogRepository taskLogDataService)
+        ITaskLogRepository taskLogRepository)
     {
         this.logger = logger;
-        this.taskLogDataService = taskLogDataService;
+        this.taskLogRepository = taskLogRepository;
     }
 
     public virtual void Execute()
@@ -30,7 +30,7 @@ public abstract class TaskJobBase : ITaskJobBase
             TriggerDateTime = DateTime.Now,
             StartDateTime = DateTime.Now,
         };
-        this.taskLogDataService.AddAsync(taskLog).ConfigureAwait(false);
+        this.taskLogRepository.AddAsync(taskLog).ConfigureAwait(false);
 
         this.logger.LogInformation($"Task Log ID: {taskLog.TaskLogID}, Task {this.TaskDetail.TaskName} [TaskID={this.TaskDetail.TaskID}] starts at {this.TaskDetail.ClassName}.{this.TaskDetail.ProcedureName} method...");
         try
@@ -49,7 +49,7 @@ public abstract class TaskJobBase : ITaskJobBase
             if (taskLog.TaskLogStatus != TaskLogStatus.Failed)
                 taskLog.TaskLogStatus = TaskLogStatus.Complete;
             taskLog.FinishDateTime = DateTime.Now;
-            this.taskLogDataService.UpdateAsync(taskLog).ConfigureAwait(false);
+            this.taskLogRepository.UpdateAsync(taskLog).ConfigureAwait(false);
             this.logger.LogInformation($"Task Log ID: {taskLog.TaskLogID}, Task {this.TaskDetail.TaskName} [TaskID={this.TaskDetail.TaskID}] finished, elapsed: {(taskLog.FinishDateTime - taskLog.StartDateTime).TotalMilliseconds} ms.");
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using HackSystem.WebAPI.TaskServer.Repository;
-using HackSystem.WebAPI.TaskServer.Services;
+using HackSystem.WebAPI.TaskServer.Application.Repository;
+using HackSystem.WebAPI.TaskServer.Application.Services;
 
 namespace HackSystem.WebAPI.TaskServer.Jobs;
 
@@ -12,9 +12,9 @@ public class TaskGenericJob : TaskJobBase, ITaskGenericJob
 
     public TaskGenericJob(
         ILogger<TaskGenericJob> logger,
-        ITaskLogRepository taskLogDataService,
+        ITaskLogRepository taskLogRepository,
         IServiceScopeFactory serviceScopeFactory)
-        : base(logger, taskLogDataService)
+        : base(logger, taskLogRepository)
     {
         this.serviceProvider = serviceScopeFactory.CreateScope().ServiceProvider;
         this.taskPairParameterWrapper = this.serviceProvider.GetRequiredService<ITaskPairParameterWrapper>();
