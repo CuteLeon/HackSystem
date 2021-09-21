@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using FluentScheduler;
-using HackSystem.WebAPI.Model.Task;
+using HackSystem.WebAPI.TaskServers.Domain.Entity;
 using Xunit;
 
 namespace HackSystem.WebAPI.TaskServers.Services.Tests;

@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebAPI.Model.Task;
+﻿namespace HackSystem.WebAPI.TaskServers.Domain.Entity;
 
 public enum TaskLogStatus
 {

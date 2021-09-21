@@ -92,11 +92,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebAPI.Extension
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebAPI.Tasks", "HackSystem.WebAPI.Tasks\HackSystem.WebAPI.Tasks.csproj", "{B6B5A2BE-C5A3-42EE-82D4-060537DE794F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.Web.TaskSchedule", "HackSystem.Web.TaskSchedule\HackSystem.Web.TaskSchedule.csproj", "{3EA96FFD-9A41-4B23-AEF4-A8BF377311D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.TaskSchedule", "HackSystem.Web.TaskSchedule\HackSystem.Web.TaskSchedule.csproj", "{3EA96FFD-9A41-4B23-AEF4-A8BF377311D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevelopmentKit", "DevelopmentKit", "{146CF5F8-6D79-4287-A00D-309C7C091875}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.Web.ProgramDevelopmentKit", "HackSystem.Web.ProgramDevelopmentKit\HackSystem.Web.ProgramDevelopmentKit.csproj", "{0A11976D-48B7-4F32-BBFF-B6CDE405A1DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.ProgramDevelopmentKit", "HackSystem.Web.ProgramDevelopmentKit\HackSystem.Web.ProgramDevelopmentKit.csproj", "{0A11976D-48B7-4F32-BBFF-B6CDE405A1DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.WebAPI.TaskServers.Domain", "HackSystem.WebAPI.TaskServers.Domain\HackSystem.WebAPI.TaskServers.Domain.csproj", "{21228095-823B-441B-8E96-7ED59F03A3F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -528,6 +530,18 @@ Global
 		{0A11976D-48B7-4F32-BBFF-B6CDE405A1DD}.Release|x64.Build.0 = Release|Any CPU
 		{0A11976D-48B7-4F32-BBFF-B6CDE405A1DD}.Release|x86.ActiveCfg = Release|Any CPU
 		{0A11976D-48B7-4F32-BBFF-B6CDE405A1DD}.Release|x86.Build.0 = Release|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Debug|x64.Build.0 = Debug|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Debug|x86.Build.0 = Debug|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Release|x64.ActiveCfg = Release|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Release|x64.Build.0 = Release|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Release|x86.ActiveCfg = Release|Any CPU
+		{21228095-823B-441B-8E96-7ED59F03A3F6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -568,6 +582,7 @@ Global
 		{B6B5A2BE-C5A3-42EE-82D4-060537DE794F} = {C38BAE94-BA73-4A57-9826-1468FA22DDE8}
 		{3EA96FFD-9A41-4B23-AEF4-A8BF377311D5} = {AF1955FF-2836-4A59-A822-62EB7B6774CB}
 		{0A11976D-48B7-4F32-BBFF-B6CDE405A1DD} = {146CF5F8-6D79-4287-A00D-309C7C091875}
+		{21228095-823B-441B-8E96-7ED59F03A3F6} = {C38BAE94-BA73-4A57-9826-1468FA22DDE8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79BC620D-A9A9-41B2-835E-E6CAF80E9902}

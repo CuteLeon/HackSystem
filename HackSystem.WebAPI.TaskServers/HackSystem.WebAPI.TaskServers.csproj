@@ -18,6 +18,7 @@
 		<ProjectReference Include="..\HackSystem.WebAPI.DataAccess.API\HackSystem.WebAPI.DataAccess.API.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.DataAccess\HackSystem.WebAPI.DataAccess.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.TaskServers.Domain\HackSystem.WebAPI.TaskServers.Domain.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.Tasks\HackSystem.WebAPI.Tasks.csproj" />
 	</ItemGroup>
 

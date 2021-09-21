@@ -1,5 +1,5 @@
-﻿using HackSystem.WebAPI.Model.Task;
-using HackSystem.WebAPI.TaskServers.DataServices;
+﻿using HackSystem.WebAPI.TaskServers.DataServices;
+using HackSystem.WebAPI.TaskServers.Domain.Entity;
 using HackSystem.WebAPI.TaskServers.Services;
 
 namespace HackSystem.WebAPI.TaskServers.Jobs;

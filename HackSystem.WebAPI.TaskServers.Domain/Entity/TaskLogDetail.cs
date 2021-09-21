@@ -1,11 +1,11 @@
-﻿namespace HackSystem.WebAPI.Model.Task;
+﻿namespace HackSystem.WebAPI.TaskServers.Domain.Entity;
 
 public class TaskLogDetail
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int TaskLogID { get; set; }
-    
+
     public int TaskID { get; set; }
 
     public string Parameters { get; set; }

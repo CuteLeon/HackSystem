@@ -1,6 +1,6 @@
 ﻿using HackSystem.WebAPI.Tasks;
-using HackSystem.WebAPI.TaskServers.Configurations;
 using HackSystem.WebAPI.TaskServers.DataServices;
+using HackSystem.WebAPI.TaskServers.Domain.Configuration;
 using HackSystem.WebAPI.TaskServers.Jobs;
 using HackSystem.WebAPI.TaskServers.Services;
 using Microsoft.Extensions.Hosting;

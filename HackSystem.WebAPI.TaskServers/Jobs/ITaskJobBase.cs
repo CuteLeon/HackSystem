@@ -1,5 +1,5 @@
 ﻿using FluentScheduler;
-using HackSystem.WebAPI.Model.Task;
+using HackSystem.WebAPI.TaskServers.Domain.Entity;
 
 namespace HackSystem.WebAPI.TaskServers.Jobs;
 

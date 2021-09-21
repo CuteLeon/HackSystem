@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebAPI.TaskServers.Configurations;
+﻿namespace HackSystem.WebAPI.TaskServers.Domain.Configuration;
 
 public class TaskServerOptions
 {
