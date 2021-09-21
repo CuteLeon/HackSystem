@@ -23,8 +23,8 @@ var securityConfiguration = config.GetSection("SecurityConfiguration").Get<Secur
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Configuration
-    .AddJsonFile("appsettings.json", true, false)
-    .AddJsonFile($"appsettings.{builder.HostEnvironment.Environment}.json", true, false);
+    .AddJsonFile("appsettings.json", true, true)
+    .AddJsonFile($"appsettings.{builder.HostEnvironment.Environment}.json", true, true);
 
 builder.Services
     .AddAutoMapper(typeof(Program).Assembly)

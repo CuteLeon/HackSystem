@@ -18,8 +18,8 @@ public class HackSystemAuthenticationStateProviderTests
         var claimIdentity = new ClaimsIdentity(claimTypes.Zip(claimParameters, (type, parameter) => new Claim(type, parameter)));
         var options = new HackSystemAuthenticationOptions();
         var mockLogger = new Mock<ILogger<HackSystemAuthenticationStateProvider>>();
-        var mockOptions = new Mock<IOptionsMonitor<HackSystemAuthenticationOptions>>();
-        mockOptions.SetupGet(m => m.CurrentValue).Returns(options);
+        var mockOptions = new Mock<IOptionsSnapshot<HackSystemAuthenticationOptions>>();
+        mockOptions.SetupGet(m => m.Value).Returns(options);
         var jwtParserService = new JWTParserService(new Mock<ILogger<JWTParserService>>().Object);
         var mockCookieStorageService = new Mock<ICookieStorageService>();
 
@@ -43,8 +43,8 @@ public class HackSystemAuthenticationStateProviderTests
     {
         var options = new HackSystemAuthenticationOptions();
         var mockLogger = new Mock<ILogger<HackSystemAuthenticationStateProvider>>();
-        var mockOptions = new Mock<IOptionsMonitor<HackSystemAuthenticationOptions>>();
-        mockOptions.SetupGet(m => m.CurrentValue).Returns(options);
+        var mockOptions = new Mock<IOptionsSnapshot<HackSystemAuthenticationOptions>>();
+        mockOptions.SetupGet(m => m.Value).Returns(options);
         var jwtParserService = new JWTParserService(new Mock<ILogger<JWTParserService>>().Object);
         var mockCookieStorageService = new Mock<ICookieStorageService>();
         mockCookieStorageService.Setup(m => m.GetCookieAsync(It.Is<string>(s => s.Equals(options.AuthTokenName)))).ReturnsAsync(authToken);

@@ -14,17 +14,17 @@ public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider
 {
     private readonly ILogger<HackSystemAuthenticationStateProvider> logger;
     private readonly IJWTParserService jwtParser;
-    private readonly HackSystemAuthenticationOptions options;
+    private readonly IOptionsSnapshot<HackSystemAuthenticationOptions> options;
     private readonly ICookieStorageService cookieStorageService;
 
     public HackSystemAuthenticationStateProvider(
         ILogger<HackSystemAuthenticationStateProvider> logger,
-        IOptionsMonitor<HackSystemAuthenticationOptions> options,
+        IOptionsSnapshot<HackSystemAuthenticationOptions> options,
         IJWTParserService jwtParser,
         ICookieStorageService cookieStorageService)
     {
         this.logger = logger;
-        this.options = options.CurrentValue;
+        this.options = options;
         this.jwtParser = jwtParser;
         this.cookieStorageService = cookieStorageService;
     }
@@ -61,7 +61,7 @@ public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider
     public async ValueTask<string> GetCurrentTokenAsync()
     {
         this.logger.LogDebug("HackSystem Get Current Token.");
-        return await this.cookieStorageService.GetCookieAsync(this.options.AuthTokenName);
+        return await this.cookieStorageService.GetCookieAsync(this.options.Value.AuthTokenName);
     }
     #endregion
 
@@ -74,7 +74,7 @@ public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider
     private AuthenticationState ReturnAnonymousState()
     {
         this.logger.LogInformation("HackSystem Return Anonymous State.");
-        return this.options.AnonymousState;
+        return this.options.Value.AnonymousState;
     }
 
     /// <summary>
@@ -115,7 +115,7 @@ public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider
     {
         this.logger.LogDebug("HackSystem Get Claims Identity from Token...");
         var claims = this.jwtParser.ParseJWTToken(token);
-        return new ClaimsIdentity(claims, this.options.AuthenticationType);
+        return new ClaimsIdentity(claims, this.options.Value.AuthenticationType);
     }
 
     /// <summary>
@@ -126,7 +126,7 @@ public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider
     public bool CheckClaimsIdentity(ClaimsIdentity claimsIdentity)
     {
         this.logger.LogDebug("HackSystem Check Claims Identity...");
-        return !claimsIdentity.Claims.IsExpired(this.options.ExpiryClaimType);
+        return !claimsIdentity.Claims.IsExpired(this.options.Value.ExpiryClaimType);
     }
     #endregion
 }

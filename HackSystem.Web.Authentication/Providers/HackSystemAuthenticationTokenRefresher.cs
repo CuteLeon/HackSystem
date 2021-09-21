@@ -8,23 +8,23 @@ public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationT
     private readonly ILogger<HackSystemAuthenticationTokenRefresher> logger;
     private readonly IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler;
     private readonly Timer timer;
-    private readonly HackSystemAuthenticationOptions configuration;
+    private readonly IOptionsMonitor<HackSystemAuthenticationOptions> options;
     private readonly HttpClient httpClient;
     private readonly int period;
 
     public HackSystemAuthenticationTokenRefresher(
         ILogger<HackSystemAuthenticationTokenRefresher> logger,
         IServiceScopeFactory serviceScopeFactory,
-        IOptionsMonitor<HackSystemAuthenticationOptions> configure)
+        IOptionsMonitor<HackSystemAuthenticationOptions> options)
     {
         this.logger = logger;
-        this.configuration = configure.CurrentValue;
+        this.options = options;
 
         var scope = serviceScopeFactory.CreateScope();
         this.hackSystemAuthenticationStateHandler = scope.ServiceProvider.GetService<IHackSystemAuthenticationStateHandler>();
         this.httpClient = scope.ServiceProvider.GetService<HttpClient>();
 
-        this.period = this.configuration.TokenRefreshInMinutes * 1000 * 60;
+        this.period = this.options.CurrentValue.TokenRefreshInMinutes * 1000 * 60;
         this.timer = new Timer(new TimerCallback(this.RefreshTokenCallBack), null, Timeout.Infinite, period);
     }
 
@@ -59,7 +59,7 @@ public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationT
             return default;
         }
 
-        this.httpClient.AddAuthorizationHeader(this.configuration.AuthenticationScheme, currentToken);
+        this.httpClient.AddAuthorizationHeader(this.options.CurrentValue.AuthenticationScheme, currentToken);
         var response = await httpClient.GetAsync("api/token/refresh");
         var content = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)

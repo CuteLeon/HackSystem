@@ -13,7 +13,7 @@ public class HackSystemAuthorizationService : DefaultAuthorizationService
         ILogger<DefaultAuthorizationService> logger,
         IAuthorizationHandlerContextFactory contextFactory,
         IAuthorizationEvaluator evaluator,
-        IOptions<AuthorizationOptions> options)
+        IOptionsSnapshot<AuthorizationOptions> options)
         : base(policyProvider, handlers, logger, contextFactory, evaluator, options)
     {
         this.logger = logger;

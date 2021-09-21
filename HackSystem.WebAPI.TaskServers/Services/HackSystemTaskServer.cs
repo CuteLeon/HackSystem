@@ -10,16 +10,16 @@ public class HackSystemTaskServer : IHackSystemTaskServer
     private readonly ILogger<HackSystemTaskServer> logger;
     private readonly ITaskLoader taskLoader;
     private readonly ITaskScheduleWrapper taskScheduleWrapper;
-    private readonly TaskServerOptions taskServerOptions;
+    private readonly IOptionsMonitor<TaskServerOptions> options;
     private readonly IServiceProvider serviceProvider;
 
     public HackSystemTaskServer(
         ILogger<HackSystemTaskServer> logger,
-        IOptionsMonitor<TaskServerOptions> optionsMonitor,
+        IOptionsMonitor<TaskServerOptions> options,
         IServiceScopeFactory serviceScopeFactory)
     {
         this.logger = logger;
-        this.taskServerOptions = optionsMonitor.CurrentValue;
+        this.options = options;
         this.serviceProvider = serviceScopeFactory.CreateScope().ServiceProvider;
         this.taskLoader = this.serviceProvider.GetRequiredService<ITaskLoader>();
         this.taskScheduleWrapper = this.serviceProvider.GetRequiredService<ITaskScheduleWrapper>();
@@ -31,16 +31,16 @@ public class HackSystemTaskServer : IHackSystemTaskServer
 
     public void Launch()
     {
-        this.logger.LogInformation($"Launch Task Server on {taskServerOptions.TaskServerHost}...");
+        this.logger.LogInformation($"Launch Task Server on {options.CurrentValue.TaskServerHost}...");
 
         JobManager.Initialize();
 
-        this.logger.LogInformation($"Task Server launched on {taskServerOptions.TaskServerHost}.");
+        this.logger.LogInformation($"Task Server launched on {options.CurrentValue.TaskServerHost}.");
     }
 
     public void LoadTasks()
     {
-        this.logger.LogInformation($"Load Tasks on {taskServerOptions.TaskServerHost}...");
+        this.logger.LogInformation($"Load Tasks on {options.CurrentValue.TaskServerHost}...");
 
         this.UnloadTasks();
         var taskDetails = this.taskLoader.GetTaskDetails();
@@ -54,7 +54,7 @@ public class HackSystemTaskServer : IHackSystemTaskServer
 
     public void LoadTask(TaskDetail taskDetail)
     {
-        this.logger.LogInformation($"Load Task [{taskDetail.TaskName}] on {taskServerOptions.TaskServerHost}...");
+        this.logger.LogInformation($"Load Task [{taskDetail.TaskName}] on {options.CurrentValue.TaskServerHost}...");
 
         this.UnloadTask(taskDetail);
         var taskSchedule = this.taskScheduleWrapper.WrapTaskSchedule(taskDetail);
@@ -67,7 +67,7 @@ public class HackSystemTaskServer : IHackSystemTaskServer
 
     public void UnloadTask(TaskDetail taskDetail)
     {
-        this.logger.LogInformation($"Unload Task [{taskDetail.TaskName}] on {taskServerOptions.TaskServerHost}...");
+        this.logger.LogInformation($"Unload Task [{taskDetail.TaskName}] on {options.CurrentValue.TaskServerHost}...");
 
         JobManager.RemoveJob(taskDetail.TaskName);
 
@@ -76,7 +76,7 @@ public class HackSystemTaskServer : IHackSystemTaskServer
 
     public void UnloadTasks()
     {
-        this.logger.LogInformation($"Unload Tasks on {taskServerOptions.TaskServerHost}...");
+        this.logger.LogInformation($"Unload Tasks on {options.CurrentValue.TaskServerHost}...");
 
         JobManager.RemoveAllJobs();
 
@@ -85,10 +85,10 @@ public class HackSystemTaskServer : IHackSystemTaskServer
 
     public void Shutdown()
     {
-        this.logger.LogInformation($"Shutdown Task Server on {taskServerOptions.TaskServerHost}...");
+        this.logger.LogInformation($"Shutdown Task Server on {options.CurrentValue.TaskServerHost}...");
 
         JobManager.Stop();
 
-        this.logger.LogInformation($"Task Server shutdowned on {taskServerOptions.TaskServerHost}.");
+        this.logger.LogInformation($"Task Server shutdowned on {options.CurrentValue.TaskServerHost}.");
     }
 }

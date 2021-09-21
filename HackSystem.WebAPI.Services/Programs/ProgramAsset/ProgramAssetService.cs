@@ -6,19 +6,19 @@ namespace HackSystem.WebAPI.Services.Programs.ProgramAsset;
 public class ProgramAssetService : IProgramAssetService
 {
     private readonly ILogger<ProgramAssetService> logger;
-    private readonly ProgramAssetOptions programAssetOptions;
+    private readonly IOptionsSnapshot<ProgramAssetOptions> options;
 
     public ProgramAssetService(
         ILogger<ProgramAssetService> logger,
-        IOptions<ProgramAssetOptions> options)
+        IOptionsSnapshot<ProgramAssetOptions> options)
     {
         this.logger = logger;
-        this.programAssetOptions = options.Value;
+        this.options = options;
     }
 
     public async Task<ProgramAssetPackage> QueryProgramAssetList(string programId)
     {
-        var programAssetFolder = Path.Combine(this.programAssetOptions.FolderPath, programId);
+        var programAssetFolder = Path.Combine(this.options.Value.FolderPath, programId);
         if (!Directory.Exists(programAssetFolder))
         {
             throw new DirectoryNotFoundException(programAssetFolder);
@@ -37,7 +37,7 @@ public class ProgramAssetService : IProgramAssetService
 
     public async Task<ProgramAssetPackage> QueryProgramAssetPackage(string programId)
     {
-        var programAssetFolder = Path.Combine(this.programAssetOptions.FolderPath, programId);
+        var programAssetFolder = Path.Combine(this.options.Value.FolderPath, programId);
         if (!Directory.Exists(programAssetFolder))
         {
             throw new DirectoryNotFoundException(programAssetFolder);
@@ -66,7 +66,7 @@ public class ProgramAssetService : IProgramAssetService
 
     public async Task<ProgramAssetPackage> QueryProgramAssetPackage(ProgramAssetPackage package)
     {
-        var programAssetFolder = Path.Combine(this.programAssetOptions.FolderPath, package.ProgramId);
+        var programAssetFolder = Path.Combine(this.options.Value.FolderPath, package.ProgramId);
         if (!Directory.Exists(programAssetFolder))
         {
             throw new DirectoryNotFoundException(programAssetFolder);
