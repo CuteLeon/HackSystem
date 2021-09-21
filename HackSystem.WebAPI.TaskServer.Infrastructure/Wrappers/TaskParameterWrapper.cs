@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using HackSystem.WebAPI.TaskServer.Infrastructure.Wrapper;
+using HackSystem.WebAPI.TaskServer.Infrastructure.Wrappers;
 
 namespace HackSystem.WebAPI.TaskServer.Services;
 

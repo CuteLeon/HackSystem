@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using HackSystem.WebAPI.TaskServer.Application.Repository;
-using HackSystem.WebAPI.TaskServer.Infrastructure.Wrapper;
+using HackSystem.WebAPI.TaskServer.Infrastructure.Wrappers;
 
 namespace HackSystem.WebAPI.TaskServer.Jobs;
 

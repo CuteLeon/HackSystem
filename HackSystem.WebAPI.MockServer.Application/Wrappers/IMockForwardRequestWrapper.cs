@@ -1,7 +1,7 @@
-﻿using HackSystem.WebAPI.Model.Mock;
+﻿using HackSystem.WebAPI.MockServer.Domain.Entity;
 using Microsoft.AspNetCore.Http;
 
-namespace HackSystem.WebAPI.MockServer.Services;
+namespace HackSystem.WebAPI.MockServer.Application.Wrappers;
 
 public interface IMockForwardRequestWrapper
 {

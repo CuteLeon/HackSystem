@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebAPI.MockServers.Configurations;
+﻿namespace HackSystem.WebAPI.MockServer.Domain.Configurations;
 
 public class MockServerOptions
 {

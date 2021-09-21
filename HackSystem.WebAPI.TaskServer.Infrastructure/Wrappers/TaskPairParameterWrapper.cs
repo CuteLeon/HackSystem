@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace HackSystem.WebAPI.TaskServer.Infrastructure.Wrapper;
+namespace HackSystem.WebAPI.TaskServer.Infrastructure.Wrappers;
 
 public class TaskPairParameterWrapper : ITaskPairParameterWrapper
 {

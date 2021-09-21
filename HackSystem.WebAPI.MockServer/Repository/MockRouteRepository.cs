@@ -1,16 +1,17 @@
 ﻿using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.DataAccess.Repository;
-using HackSystem.WebAPI.Model.Mock;
+using HackSystem.WebAPI.MockServer.Application.Repository;
+using HackSystem.WebAPI.MockServer.Domain.Entity;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace HackSystem.WebAPI.MockServers.DataServices;
+namespace HackSystem.WebAPI.MockServer.Repository;
 
-public class MockRouteDataService : RepositoryBase<MockRouteDetail>, IMockRouteDataService
+public class MockRouteRepository : RepositoryBase<MockRouteDetail>, IMockRouteRepository
 {
     private readonly IMemoryCache memoryCache;
 
-    public MockRouteDataService(
-        ILogger<MockRouteDataService> logger,
+    public MockRouteRepository(
+        ILogger<MockRouteRepository> logger,
         IMemoryCache memoryCache,
         HackSystemDBContext hackSystemDBContext)
         : base(logger, hackSystemDBContext)

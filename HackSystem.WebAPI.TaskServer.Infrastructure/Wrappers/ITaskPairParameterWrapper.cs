@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebAPI.TaskServer.Infrastructure.Wrapper;
+﻿namespace HackSystem.WebAPI.TaskServer.Infrastructure.Wrappers;
 
 public interface ITaskPairParameterWrapper : ITaskParameterWrapper
 {

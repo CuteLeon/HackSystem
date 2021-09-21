@@ -1,11 +1,12 @@
 ﻿using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.MockServers.Configurations;
-using HackSystem.WebAPI.MockServers.Extensions;
-using HackSystem.WebAPI.Model.Mock;
+using HackSystem.WebAPI.MockServer.Application.Repository;
+using HackSystem.WebAPI.MockServer.Domain.Configurations;
+using HackSystem.WebAPI.MockServer.Domain.Entity;
+using HackSystem.WebAPI.MockServer.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace HackSystem.WebAPI.MockServers.DataServices.Tests;
+namespace HackSystem.WebAPI.MockServer.DataServices.Tests;
 
 public class MockRouteDataServiceTests
 {
@@ -42,7 +43,7 @@ public class MockRouteDataServiceTests
 
         var count = dbContext.Set<MockRouteDetail>().Count();
         Assert.Equal(mockRoutes.Count, count);
-        var mockRouteDataService = serviceProvider.GetRequiredService<IMockRouteDataService>();
+        var mockRouteDataService = serviceProvider.GetRequiredService<IMockRouteRepository>();
 
         Assert.ThrowsAsync<ArgumentNullException>(() => mockRouteDataService.QueryMockRoute(string.Empty, "Get", "localhost"));
         Assert.ThrowsAsync<ArgumentNullException>(() => mockRouteDataService.QueryMockRoute("/Mock", string.Empty, "localhost"));

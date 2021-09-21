@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace HackSystem.WebAPI.Model.Mock;
+namespace HackSystem.WebAPI.MockServer.Domain.Entity;
 
 public class MockRouteLogDetail
 {

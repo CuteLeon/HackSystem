@@ -1,15 +1,15 @@
-﻿using HackSystem.WebAPI.MockServer.Services;
-using HackSystem.WebAPI.MockServers.DataServices;
-using HackSystem.WebAPI.Model.Mock;
+﻿using HackSystem.WebAPI.MockServer.Application.Repository;
+using HackSystem.WebAPI.MockServer.Application.Wrappers;
+using HackSystem.WebAPI.MockServer.Domain.Entity;
 using Microsoft.AspNetCore.Http;
 
-namespace HackSystem.WebAPI.MockServer.Middlewares;
+namespace HackSystem.WebAPI.MockServer.Infrastructure.Middlewares;
 
 public class MockServerMiddleware
 {
     private readonly ILogger<MockServerMiddleware> logger;
-    private readonly IMockRouteDataService mockRouteDataService;
-    private readonly IMockRouteLogDataService mockRouteLogDataService;
+    private readonly IMockRouteRepository mockRouteRepository;
+    private readonly IMockRouteLogRepository mockRouteLogRepository;
     private readonly IMockRouteResponseWrapper mockRouteResponseWrapper;
     private readonly IMockForwardRequestWrapper mockForwardRequestWrapper;
     private readonly IHttpClientFactory httpClientFactory;
@@ -22,8 +22,8 @@ public class MockServerMiddleware
     {
         this.logger = logger;
         var serviceScope = serviceScopeFactory.CreateScope();
-        this.mockRouteDataService = serviceScope.ServiceProvider.GetRequiredService<IMockRouteDataService>();
-        this.mockRouteLogDataService = serviceScope.ServiceProvider.GetRequiredService<IMockRouteLogDataService>();
+        this.mockRouteRepository = serviceScope.ServiceProvider.GetRequiredService<IMockRouteRepository>();
+        this.mockRouteLogRepository = serviceScope.ServiceProvider.GetRequiredService<IMockRouteLogRepository>();
         this.mockRouteResponseWrapper = serviceScope.ServiceProvider.GetRequiredService<IMockRouteResponseWrapper>();
         this.mockForwardRequestWrapper = serviceScope.ServiceProvider.GetRequiredService<IMockForwardRequestWrapper>();
         this.httpClientFactory = serviceScope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
@@ -35,7 +35,7 @@ public class MockServerMiddleware
         var uri = context.Request.Path.ToUriComponent();
         var method = context.Request.Method;
         var sourceHost = context.Connection.RemoteIpAddress.ToString();
-        var mockRoute = await this.mockRouteDataService.QueryMockRoute(uri, method, sourceHost);
+        var mockRoute = await this.mockRouteRepository.QueryMockRoute(uri, method, sourceHost);
         if (mockRoute == null)
         {
             await this.next(context);
@@ -57,7 +57,7 @@ public class MockServerMiddleware
             MockType = mockRoute.MockType,
             MockRouteLogStatus = MockRouteLogStatus.Processing,
         };
-        await this.mockRouteLogDataService.AddAsync(mockRouteLog);
+        await this.mockRouteLogRepository.AddAsync(mockRouteLog);
 
         try
         {
@@ -65,7 +65,7 @@ public class MockServerMiddleware
 
             mockRouteLog.StatusCode = context.Response.StatusCode;
             mockRouteLog.ResponseBody = responseContent;
-            await mockRouteLogDataService.UpdateAsync(mockRouteLog);
+            await mockRouteLogRepository.UpdateAsync(mockRouteLog);
 
             await Task.Delay(mockRoute.DelayDuration);
 
@@ -76,7 +76,7 @@ public class MockServerMiddleware
                 mockRouteLog.ForwardDateTime = DateTime.Now;
                 mockRouteLog.ForwardMethod = forwardRequest.Method.ToString();
                 mockRouteLog.ForwardMockType = mockRoute.ForwardMockType;
-                await mockRouteLogDataService.UpdateAsync(mockRouteLog);
+                await mockRouteLogRepository.UpdateAsync(mockRouteLog);
 
                 var httpClient = this.httpClientFactory.CreateClient();
 
@@ -84,7 +84,7 @@ public class MockServerMiddleware
                 var forwardResponseContent = await forwardResponse.Content.ReadAsStringAsync();
                 mockRouteLog.ForwardResponseStatusCode = forwardResponse.StatusCode;
                 mockRouteLog.ForwardResponseBody = forwardResponseContent;
-                await mockRouteLogDataService.UpdateAsync(mockRouteLog);
+                await mockRouteLogRepository.UpdateAsync(mockRouteLog);
             }
         }
         catch (Exception ex)
@@ -99,7 +99,7 @@ public class MockServerMiddleware
             if (mockRouteLog.MockRouteLogStatus != MockRouteLogStatus.Failed)
                 mockRouteLog.MockRouteLogStatus = MockRouteLogStatus.Complete;
             mockRouteLog.FinishDateTime = DateTime.Now;
-            await this.mockRouteLogDataService.UpdateAsync(mockRouteLog);
+            await this.mockRouteLogRepository.UpdateAsync(mockRouteLog);
             this.logger.LogInformation($"Mocked Route from {sourceHost} in template {mockRoute.RouteName}({mockRoute.RouteID}): [{method}]=>{uri}");
         }
     }

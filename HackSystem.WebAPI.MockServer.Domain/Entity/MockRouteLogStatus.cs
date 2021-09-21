@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebAPI.Model.Mock;
+﻿namespace HackSystem.WebAPI.MockServer.Domain.Entity;
 
 public enum MockRouteLogStatus
 {

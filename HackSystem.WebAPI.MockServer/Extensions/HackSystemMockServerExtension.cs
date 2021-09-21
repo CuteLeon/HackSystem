@@ -1,10 +1,12 @@
-﻿using HackSystem.WebAPI.MockServer.Middlewares;
-using HackSystem.WebAPI.MockServer.Services;
-using HackSystem.WebAPI.MockServers.Configurations;
-using HackSystem.WebAPI.MockServers.DataServices;
+﻿using HackSystem.WebAPI.MockServer.Application.Repository;
+using HackSystem.WebAPI.MockServer.Application.Wrappers;
+using HackSystem.WebAPI.MockServer.Domain.Configurations;
+using HackSystem.WebAPI.MockServer.Infrastructure.Extensions;
+using HackSystem.WebAPI.MockServer.Repository;
+using HackSystem.WebAPI.MockServer.Wrappers;
 using Microsoft.AspNetCore.Builder;
 
-namespace HackSystem.WebAPI.MockServers.Extensions;
+namespace HackSystem.WebAPI.MockServer.Extensions;
 
 public static class HackSystemMockServerExtension
 {
@@ -14,8 +16,8 @@ public static class HackSystemMockServerExtension
     {
         services
             .Configure(new Action<MockServerOptions>(options => options.MockServerHost = configuration.MockServerHost))
-            .AddScoped<IMockRouteDataService, MockRouteDataService>()
-            .AddScoped<IMockRouteLogDataService, MockRouteLogDataService>()
+            .AddScoped<IMockRouteRepository, MockRouteRepository>()
+            .AddScoped<IMockRouteLogRepository, MockRouteLogRepository>()
             .AddScoped<IMockRouteResponseWrapper, MockRouteResponseWrapper>()
             .AddScoped<IMockForwardRequestWrapper, MockForwardRequestWrapper>();
 
@@ -24,7 +26,7 @@ public static class HackSystemMockServerExtension
 
     public static IApplicationBuilder UseMockServer(this IApplicationBuilder app)
     {
-        app.UseMiddleware<MockServerMiddleware>();
+        app.UseMockServerInfrastructure();
         return app;
     }
 }
