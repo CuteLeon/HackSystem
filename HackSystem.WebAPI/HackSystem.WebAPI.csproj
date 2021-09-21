@@ -45,7 +45,7 @@
     <ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Services.API\HackSystem.WebAPI.Services.API.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Services\HackSystem.WebAPI.Services.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.TaskServers\HackSystem.WebAPI.TaskServers.csproj" />
+    <ProjectReference Include="..\HackSystem.WebAPI.TaskServer\HackSystem.WebAPI.TaskServer.csproj" />
     <ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
   </ItemGroup>
 

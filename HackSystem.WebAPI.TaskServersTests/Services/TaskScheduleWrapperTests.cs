@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using FluentScheduler;
-using HackSystem.WebAPI.TaskServers.Domain.Entity;
+using HackSystem.WebAPI.TaskServer.Domain.Entity;
 using Xunit;
 
-namespace HackSystem.WebAPI.TaskServers.Services.Tests;
+namespace HackSystem.WebAPI.TaskServer.Services.Tests;
 
 public class TaskScheduleWrapperTests
 {

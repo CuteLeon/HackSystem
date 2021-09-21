@@ -9,8 +9,8 @@ using HackSystem.WebAPI.MockServers.Extensions;
 using HackSystem.WebAPI.Model.Identity;
 using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
 using HackSystem.WebAPI.Services.Extensions;
-using HackSystem.WebAPI.TaskServers.Domain.Configuration;
-using HackSystem.WebAPI.TaskServers.Extensions;
+using HackSystem.WebAPI.TaskServer.Domain.Configuration;
+using HackSystem.WebAPI.TaskServer.Extensions;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 

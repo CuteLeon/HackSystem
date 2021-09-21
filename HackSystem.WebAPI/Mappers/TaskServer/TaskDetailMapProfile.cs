@@ -1,4 +1,4 @@
-﻿using HackSystem.WebAPI.TaskServers.Domain.Entity;
+﻿using HackSystem.WebAPI.TaskServer.Domain.Entity;
 using HackSystem.WebDataTransfer.TaskServer;
 
 namespace HackSystem.WebAPI.Mappers.TaskServer;

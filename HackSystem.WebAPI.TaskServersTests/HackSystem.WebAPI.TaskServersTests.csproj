@@ -23,7 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\HackSystem.WebAPI.TaskServers\HackSystem.WebAPI.TaskServers.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.TaskServer\HackSystem.WebAPI.TaskServer.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

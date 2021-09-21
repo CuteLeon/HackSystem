@@ -1,5 +1,5 @@
 ﻿using HackSystem.Common;
-using HackSystem.WebAPI.TaskServers.DataServices;
+using HackSystem.WebAPI.TaskServer.Repository;
 using HackSystem.WebDataTransfer.TaskServer;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,12 +12,12 @@ public class TaskServerController : Controller
 {
     private readonly ILogger<TaskServerController> logger;
     private readonly IMapper mapper;
-    private readonly ITaskDataService taskDataService;
+    private readonly ITaskRepository taskDataService;
 
     public TaskServerController(
         ILogger<TaskServerController> logger,
         IMapper mapper,
-        ITaskDataService taskDataService)
+        ITaskRepository taskDataService)
     {
         this.logger = logger;
         this.mapper = mapper;

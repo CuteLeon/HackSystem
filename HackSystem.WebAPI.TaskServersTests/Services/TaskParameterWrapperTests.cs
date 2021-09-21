@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace HackSystem.WebAPI.TaskServers.Services.Tests;
+namespace HackSystem.WebAPI.TaskServer.Services.Tests;
 
 public class TaskParameterWrapperTests
 {

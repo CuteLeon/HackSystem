@@ -1,11 +1,11 @@
 ﻿using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.DataAccess.DataServices;
+using HackSystem.WebAPI.DataAccess.Repository;
 using HackSystem.WebAPI.Model.Option;
 using Microsoft.EntityFrameworkCore;
 
 namespace HackSystem.WebAPI.Services.Options;
 
-public class GenericOptionDataService : DataServiceBase<GenericOption>, IGenericOptionDataService
+public class GenericOptionDataService : RepositoryBase<GenericOption>, IGenericOptionDataService
 {
     public GenericOptionDataService(
         ILogger<GenericOptionDataService> logger,

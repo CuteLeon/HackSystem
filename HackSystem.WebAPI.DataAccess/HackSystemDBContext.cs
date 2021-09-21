@@ -5,7 +5,7 @@ using HackSystem.WebAPI.Model.Mock;
 using HackSystem.WebAPI.Model.Option;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebAPI.Model.WebLog;
-using HackSystem.WebAPI.TaskServers.Domain.Entity;
+using HackSystem.WebAPI.TaskServer.Domain.Entity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace HackSystem.WebAPI.DataAccess;

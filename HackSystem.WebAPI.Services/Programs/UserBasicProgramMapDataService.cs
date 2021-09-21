@@ -1,12 +1,12 @@
 ﻿using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.DataAccess.DataServices;
+using HackSystem.WebAPI.DataAccess.Repository;
 using HackSystem.WebAPI.Model.Map.UserMap;
 using HackSystem.WebAPI.Services.API.Program;
 using Microsoft.EntityFrameworkCore;
 
 namespace HackSystem.WebAPI.Services.Programs;
 
-public class UserBasicProgramMapDataService : DataServiceBase<UserBasicProgramMap>, IUserBasicProgramMapDataService
+public class UserBasicProgramMapDataService : RepositoryBase<UserBasicProgramMap>, IUserBasicProgramMapDataService
 {
     public UserBasicProgramMapDataService(
         ILogger<UserBasicProgramMapDataService> logger,

@@ -1,9 +1,9 @@
-﻿using HackSystem.WebAPI.DataAccess.API.DataServices;
+﻿using HackSystem.WebAPI.DataAccess.API.Repository;
 using HackSystem.WebAPI.Model.Map.UserMap;
 
 namespace HackSystem.WebAPI.Services.API.Program;
 
-public interface IUserBasicProgramMapDataService : IDataServiceBase<UserBasicProgramMap>
+public interface IUserBasicProgramMapDataService : IRepositoryBase<UserBasicProgramMap>
 {
     Task<bool> CheckUserBasicProgramMap(string userId, string programId);
 

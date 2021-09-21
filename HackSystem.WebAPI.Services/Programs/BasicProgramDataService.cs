@@ -1,11 +1,11 @@
 ﻿using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.DataAccess.DataServices;
+using HackSystem.WebAPI.DataAccess.Repository;
 using HackSystem.WebAPI.Model.Program;
 using HackSystem.WebAPI.Services.API.Program;
 
 namespace HackSystem.WebAPI.Services.Programs;
 
-public class BasicProgramDataService : DataServiceBase<BasicProgram>, IBasicProgramDataService
+public class BasicProgramDataService : RepositoryBase<BasicProgram>, IBasicProgramDataService
 {
     public BasicProgramDataService(
         ILogger<BasicProgramDataService> logger,

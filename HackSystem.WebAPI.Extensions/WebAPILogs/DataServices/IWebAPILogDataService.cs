@@ -1,8 +1,8 @@
-﻿using HackSystem.WebAPI.DataAccess.API.DataServices;
+﻿using HackSystem.WebAPI.DataAccess.API.Repository;
 using HackSystem.WebAPI.Model.WebLog;
 
 namespace HackSystem.WebAPI.Extensions.WebAPILogs.DataServices;
 
-public interface IWebAPILogDataService : IDataServiceBase<WebAPILog>
+public interface IWebAPILogDataService : IRepositoryBase<WebAPILog>
 {
 }

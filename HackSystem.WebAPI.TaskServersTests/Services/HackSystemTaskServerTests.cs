@@ -1,11 +1,11 @@
 ﻿using FluentScheduler;
-using HackSystem.WebAPI.TaskServers.Domain.Configuration;
-using HackSystem.WebAPI.TaskServers.Domain.Entity;
-using HackSystem.WebAPI.TaskServers.Jobs;
+using HackSystem.WebAPI.TaskServer.Domain.Configuration;
+using HackSystem.WebAPI.TaskServer.Domain.Entity;
+using HackSystem.WebAPI.TaskServer.Jobs;
 using Moq;
 using Xunit;
 
-namespace HackSystem.WebAPI.TaskServers.Services.Tests;
+namespace HackSystem.WebAPI.TaskServer.Services.Tests;
 
 public class HackSystemTaskServerTests
 {
