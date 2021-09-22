@@ -40,10 +40,9 @@ public class WebAPILoggingMiddleware
             UserAgent = context.Request.Headers.TryGetValue("User-Agent", out var userAgent) ? userAgent : string.Empty,
             TraceIdentifier = context.TraceIdentifier,
             IsAuthenticated = context.User.Identity?.IsAuthenticated ?? false,
-            IdentityName = context.User.Identity?.Name,
+            IdentityName = context.User.Identity?.Name ?? string.Empty,
             StartDateTime = DateTime.Now,
         };
-        await this.webAPILogDataService.AddAsync(webAPILog);
 
         try
         {
@@ -85,7 +84,6 @@ public class WebAPILoggingMiddleware
             }
 
             webAPILog.StatusCode = context.Response.StatusCode;
-            await this.webAPILogDataService.UpdateAsync(webAPILog);
         }
         catch (Exception ex)
         {
@@ -98,7 +96,7 @@ public class WebAPILoggingMiddleware
             watcher.Stop();
             webAPILog.FinishDateTime = DateTime.Now;
             webAPILog.ElapsedTime = watcher.ElapsedMilliseconds;
-            await this.webAPILogDataService.UpdateAsync(webAPILog);
+            await this.webAPILogDataService.AddAsync(webAPILog);
             this.logger.LogInformation($"Web API of {webAPILog.IdentityName} from {webAPILog.SourceHost} in {webAPILog.ElapsedTime} ms: [{webAPILog.Method}]=>{webAPILog.RequestURI} [{webAPILog.StatusCode}]");
         }
     }

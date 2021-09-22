@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackSystem.WebAPI.DataAccess.Migrations
 {
     [DbContext(typeof(HackSystemDBContext))]
-    [Migration("20210922071830_InitialMigration")]
+    [Migration("20210922073932_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -234,13 +234,13 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Exception")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("FinishDateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("IdentityName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsAuthenticated")
@@ -251,6 +251,7 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("QueryString")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RequestBody")
@@ -274,9 +275,11 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("TraceIdentifier")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("UserAgent")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("WebAPILogID");

@@ -127,20 +127,20 @@ namespace HackSystem.WebAPI.DataAccess.Migrations
                     WebAPILogID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RequestURI = table.Column<string>(type: "TEXT", nullable: false),
-                    QueryString = table.Column<string>(type: "TEXT", nullable: true),
+                    QueryString = table.Column<string>(type: "TEXT", nullable: false),
                     Method = table.Column<string>(type: "TEXT", nullable: false),
                     SourceHost = table.Column<string>(type: "TEXT", nullable: false),
-                    UserAgent = table.Column<string>(type: "TEXT", nullable: true),
-                    TraceIdentifier = table.Column<string>(type: "TEXT", nullable: true),
+                    UserAgent = table.Column<string>(type: "TEXT", nullable: false),
+                    TraceIdentifier = table.Column<string>(type: "TEXT", nullable: false),
                     IsAuthenticated = table.Column<bool>(type: "INTEGER", nullable: false),
-                    IdentityName = table.Column<string>(type: "TEXT", nullable: true),
+                    IdentityName = table.Column<string>(type: "TEXT", nullable: false),
                     RequestBody = table.Column<string>(type: "TEXT", nullable: true),
                     ResponseBody = table.Column<string>(type: "TEXT", nullable: true),
                     StatusCode = table.Column<int>(type: "INTEGER", nullable: false),
                     StartDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     FinishDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ElapsedTime = table.Column<long>(type: "INTEGER", nullable: false),
-                    Exception = table.Column<string>(type: "TEXT", nullable: false)
+                    Exception = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
