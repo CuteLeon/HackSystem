@@ -16,18 +16,18 @@ public class BasicProgramController : ControllerBase
     private readonly ILogger<BasicProgramController> logger;
     private readonly IMapper mapper;
     private readonly UserManager<HackSystemUser> userManager;
-    private readonly IUserBasicProgramMapDataService basicProgramDataService;
+    private readonly IUserBasicProgramMapRepository userBasicProgramMapRepository;
 
     public BasicProgramController(
         ILogger<BasicProgramController> logger,
         IMapper mapper,
         UserManager<HackSystemUser> userManager,
-        IUserBasicProgramMapDataService basicProgramDataService)
+        IUserBasicProgramMapRepository userBasicProgramMapRepository)
     {
         this.logger = logger;
         this.mapper = mapper;
         this.userManager = userManager;
-        this.basicProgramDataService = basicProgramDataService;
+        this.userBasicProgramMapRepository = userBasicProgramMapRepository;
     }
 
     [HttpGet]
@@ -38,7 +38,7 @@ public class BasicProgramController : ControllerBase
         var user = await this.userManager.FindByNameAsync(userName) ?? throw new AuthenticationException();
         var userId = user.Id;
 
-        var maps = await this.basicProgramDataService.QueryUserBasicProgramMaps(userId);
+        var maps = await this.userBasicProgramMapRepository.QueryUserBasicProgramMaps(userId);
         this.logger.LogInformation($"Found {maps.Count()} basic program maps for user {user.UserName}.");
         var dtos = this.mapper.Map<IEnumerable<UserBasicProgramMapDTO>>(maps);
         return dtos;
@@ -49,7 +49,7 @@ public class BasicProgramController : ControllerBase
     {
         this.logger.LogInformation($"Hide basic program {hideDTO.ProgramId} for user...");
         var userId = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
-        var result = await this.basicProgramDataService.SetUserBasicProgramHide(userId, hideDTO.ProgramId, hideDTO.Hide);
+        var result = await this.userBasicProgramMapRepository.SetUserBasicProgramHide(userId, hideDTO.ProgramId, hideDTO.Hide);
         this.logger.LogInformation($"Hide basic program {hideDTO.ProgramId} for user {userId} {(result ? "successfully" : "failed")}.");
         return result ? this.Ok(result) : this.BadRequest(result);
     }
@@ -59,7 +59,7 @@ public class BasicProgramController : ControllerBase
     {
         this.logger.LogInformation($"Pin basic program {pinToDockDTO.ProgramId} to dock for user...");
         var userId = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
-        var result = await this.basicProgramDataService.SetUserBasicProgramPinToDock(userId, pinToDockDTO.ProgramId, pinToDockDTO.PinToDock);
+        var result = await this.userBasicProgramMapRepository.SetUserBasicProgramPinToDock(userId, pinToDockDTO.ProgramId, pinToDockDTO.PinToDock);
         this.logger.LogInformation($"Pin basic program {pinToDockDTO.ProgramId} to dock for user {userId} {(result ? "successfully" : "failed")}.");
         return result ? this.Ok(result) : this.BadRequest(result);
     }
@@ -69,7 +69,7 @@ public class BasicProgramController : ControllerBase
     {
         this.logger.LogInformation($"Pin basic program {pinToTopDTO.ProgramId} to top for user...");
         var userId = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
-        var result = await this.basicProgramDataService.SetUserBasicProgramPinToTop(userId, pinToTopDTO.ProgramId, pinToTopDTO.PinToTop);
+        var result = await this.userBasicProgramMapRepository.SetUserBasicProgramPinToTop(userId, pinToTopDTO.ProgramId, pinToTopDTO.PinToTop);
         this.logger.LogInformation($"Pin basic program {pinToTopDTO.ProgramId} to top for user {userId} {(result ? "successfully" : "failed")}.");
         return result ? this.Ok(result) : this.BadRequest(result);
     }
@@ -79,7 +79,7 @@ public class BasicProgramController : ControllerBase
     {
         this.logger.LogInformation($"Rename basic program {renameDTO.ProgramId} for user...");
         var userId = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
-        var result = await this.basicProgramDataService.SetUserBasicProgramRename(userId, renameDTO.ProgramId, renameDTO.Rename);
+        var result = await this.userBasicProgramMapRepository.SetUserBasicProgramRename(userId, renameDTO.ProgramId, renameDTO.Rename);
         this.logger.LogInformation($"Rename basic program {renameDTO.ProgramId} for user {userId} {(result ? "successfully" : "failed")}.");
         return result ? this.Ok(result) : this.BadRequest(result);
     }
@@ -89,7 +89,7 @@ public class BasicProgramController : ControllerBase
     {
         this.logger.LogInformation($"Delete basic program {programId} for user...");
         var userId = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
-        var result = await this.basicProgramDataService.DeleteUserBasicProgramMap(userId, programId);
+        var result = await this.userBasicProgramMapRepository.DeleteUserBasicProgramMap(userId, programId);
         this.logger.LogInformation($"Delete basic program {programId} for user {userId} {(result ? "successfully" : "failed")}.");
         return result ? this.Ok(result) : this.BadRequest(result);
     }

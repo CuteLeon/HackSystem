@@ -3,7 +3,7 @@ using HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps;
 
 namespace HackSystem.WebAPI.ProgramServer.Application.Repository;
 
-public interface IUserBasicProgramMapDataService : IRepositoryBase<UserBasicProgramMap>
+public interface IUserBasicProgramMapRepository : IRepositoryBase<UserBasicProgramMap>
 {
     Task<bool> CheckUserBasicProgramMap(string userId, string programId);
 

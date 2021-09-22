@@ -11,8 +11,8 @@ public static class HackSystemProgramServerExtension
     public static IServiceCollection AddProgramServices(
         this IServiceCollection services)
     {
-        services.AddScoped<IBasicProgramDataService, BasicProgramDataService>();
-        services.AddScoped<IUserBasicProgramMapDataService, UserBasicProgramMapDataService>();
+        services.AddScoped<IBasicProgramRepository, BasicProgramRepository>();
+        services.AddScoped<IUserBasicProgramMapRepository, UserBasicProgramMapRepository>();
 
         return services;
     }

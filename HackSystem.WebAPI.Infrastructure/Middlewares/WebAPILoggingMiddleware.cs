@@ -10,7 +10,7 @@ namespace HackSystem.WebAPI.Infrastructure.Middleware;
 public class WebAPILoggingMiddleware
 {
     private readonly ILogger<WebAPILoggingMiddleware> logger;
-    private readonly IWebAPILogRepository webAPILogDataService;
+    private readonly IWebAPILogRepository webAPILogRepository;
     private readonly RecyclableMemoryStreamManager recyclableMemoryStreamManager;
     private readonly RequestDelegate next;
 
@@ -21,7 +21,7 @@ public class WebAPILoggingMiddleware
     {
         this.logger = logger;
         var serviceScope = serviceScopeFactory.CreateScope();
-        this.webAPILogDataService = serviceScope.ServiceProvider.GetRequiredService<IWebAPILogRepository>();
+        this.webAPILogRepository = serviceScope.ServiceProvider.GetRequiredService<IWebAPILogRepository>();
         this.recyclableMemoryStreamManager = serviceScope.ServiceProvider.GetRequiredService<RecyclableMemoryStreamManager>();
         this.next = next ?? throw new ArgumentNullException(nameof(next));
     }
@@ -96,7 +96,7 @@ public class WebAPILoggingMiddleware
             watcher.Stop();
             webAPILog.FinishDateTime = DateTime.Now;
             webAPILog.ElapsedTime = watcher.ElapsedMilliseconds;
-            await this.webAPILogDataService.AddAsync(webAPILog);
+            await this.webAPILogRepository.AddAsync(webAPILog);
             this.logger.LogInformation($"Web API of {webAPILog.IdentityName} from {webAPILog.SourceHost} in {webAPILog.ElapsedTime} ms: [{webAPILog.Method}]=>{webAPILog.RequestURI} [{webAPILog.StatusCode}]");
         }
     }

@@ -19,20 +19,20 @@ public class ProgramAssetController : ControllerBase
     private readonly ILogger<ProgramAssetController> logger;
     private readonly UserManager<HackSystemUser> userManager;
     private readonly IMapper mapper;
-    private readonly IUserBasicProgramMapDataService userBasicProgramMapDataService;
+    private readonly IUserBasicProgramMapRepository userBasicProgramMapRepository;
     private readonly IProgramAssetService programAssetService;
 
     public ProgramAssetController(
         ILogger<ProgramAssetController> logger,
         UserManager<HackSystemUser> userManager,
         IMapper mapper,
-        IUserBasicProgramMapDataService userBasicProgramMapDataService,
+        IUserBasicProgramMapRepository userBasicProgramMapRepository,
         IProgramAssetService programAssetService)
     {
         this.logger = logger;
         this.userManager = userManager;
         this.mapper = mapper;
-        this.userBasicProgramMapDataService = userBasicProgramMapDataService;
+        this.userBasicProgramMapRepository = userBasicProgramMapRepository;
         this.programAssetService = programAssetService;
     }
 
@@ -93,7 +93,7 @@ public class ProgramAssetController : ControllerBase
         var user = await this.userManager.FindByNameAsync(userName) ?? throw new AuthenticationException();
         var userId = user.Id;
 
-        var hasAccess = await this.userBasicProgramMapDataService.CheckUserBasicProgramMap(userId, programId);
+        var hasAccess = await this.userBasicProgramMapRepository.CheckUserBasicProgramMap(userId, programId);
         if (!hasAccess)
         {
             this.logger.LogWarning($"User {userName} has no access to program asset of program {programId}.");

@@ -5,10 +5,10 @@ using HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs;
 
 namespace HackSystem.WebAPI.ProgramServer.Infrastructure.Repository;
 
-public class BasicProgramDataService : RepositoryBase<BasicProgram>, IBasicProgramDataService
+public class BasicProgramRepository : RepositoryBase<BasicProgram>, IBasicProgramRepository
 {
-    public BasicProgramDataService(
-        ILogger<BasicProgramDataService> logger,
+    public BasicProgramRepository(
+        ILogger<BasicProgramRepository> logger,
         HackSystemDBContext hackSystemDBContext)
         : base(logger, hackSystemDBContext)
     {

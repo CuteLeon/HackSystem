@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HackSystem.WebAPI.ProgramServer.Infrastructure.Repository;
 
-public class UserBasicProgramMapDataService : RepositoryBase<UserBasicProgramMap>, IUserBasicProgramMapDataService
+public class UserBasicProgramMapRepository : RepositoryBase<UserBasicProgramMap>, IUserBasicProgramMapRepository
 {
-    public UserBasicProgramMapDataService(
-        ILogger<UserBasicProgramMapDataService> logger,
+    public UserBasicProgramMapRepository(
+        ILogger<UserBasicProgramMapRepository> logger,
         HackSystemDBContext hackSystemDBContext)
         : base(logger, hackSystemDBContext)
     {

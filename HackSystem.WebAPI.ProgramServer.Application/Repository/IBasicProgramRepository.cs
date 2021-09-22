@@ -3,7 +3,7 @@ using HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs;
 
 namespace HackSystem.WebAPI.ProgramServer.Application.Repository;
 
-public interface IBasicProgramDataService : IRepositoryBase<BasicProgram>
+public interface IBasicProgramRepository : IRepositoryBase<BasicProgram>
 {
     Task<IEnumerable<BasicProgram>> QueryIntegralBasicPrograms();
 }
