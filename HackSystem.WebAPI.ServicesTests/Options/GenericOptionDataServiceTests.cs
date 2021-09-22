@@ -1,6 +1,6 @@
 ﻿using HackSystem.WebAPI.Application.Repository;
-using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.Domain.Entity;
+using HackSystem.WebAPI.Infrastructure.DBContexts;
 using HackSystem.WebAPI.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Moq;
@@ -10,7 +10,7 @@ namespace HackSystem.WebAPI.Services.Options.Tests;
 
 public class GenericOptionDataServiceTests
 {
-    private HackSystemDBContext GetDBContext()
+    private HackSystemDbContext GetDBContext()
     {
         var genericOptions = new List<GenericOption>()
         {
@@ -19,8 +19,8 @@ public class GenericOptionDataServiceTests
             new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_2", OwnerLevel = "HackSystem", Category = "GenericCategory" },
             new GenericOption() { OptionName = "OptionName", OptionValue = "OptionValue_3", OwnerLevel = "", Category = "GenericCategory" },
         };
-        var dbContext = new HackSystemDBContext(
-            new DbContextOptionsBuilder<HackSystemDBContext>()
+        var dbContext = new HackSystemDbContext(
+            new DbContextOptionsBuilder<HackSystemDbContext>()
             .UseLazyLoadingProxies()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options);

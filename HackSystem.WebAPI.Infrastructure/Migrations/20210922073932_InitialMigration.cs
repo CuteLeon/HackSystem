@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace HackSystem.WebAPI.DataAccess.Migrations
+namespace HackSystem.WebAPI.Infrastructure.Migrations
 {
     public partial class InitialMigration : Migration
     {

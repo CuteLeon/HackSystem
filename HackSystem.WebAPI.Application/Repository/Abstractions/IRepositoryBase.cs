@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace HackSystem.WebAPI.DataAccess.API.Repository;
+namespace HackSystem.WebAPI.Application.Repository.Abstractions;
 
 public interface IRepositoryBase<TEntity> where TEntity : class
 {

@@ -1,6 +1,6 @@
 ﻿using HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs;
 
-namespace HackSystem.WebAPI.DataAccess.DataSeed;
+namespace HackSystem.WebAPI.Infrastructure.DataSeed;
 
 public static class ProgramDatabaseInitializer
 {

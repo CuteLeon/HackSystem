@@ -1,7 +1,7 @@
-﻿using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.DataAccess.Repository;
+﻿using HackSystem.WebAPI.Application.Repository.Abstractions;
 using HackSystem.WebAPI.MockServer.Application.Repository;
 using HackSystem.WebAPI.MockServer.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace HackSystem.WebAPI.MockServer.Infrastructure.Repository;
 
@@ -9,8 +9,8 @@ public class MockRouteLogRepository : RepositoryBase<MockRouteLogDetail>, IMockR
 {
     public MockRouteLogRepository(
         ILogger<MockRouteLogRepository> logger,
-        HackSystemDBContext hackSystemDBContext)
-        : base(logger, hackSystemDBContext)
+        DbContext dbContext)
+        : base(logger, dbContext)
     {
     }
 }

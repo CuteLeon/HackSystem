@@ -1,6 +1,6 @@
-﻿using HackSystem.WebAPI.DataAccess.DataSeed;
-using HackSystem.WebAPI.Domain.Entity;
+﻿using HackSystem.WebAPI.Domain.Entity;
 using HackSystem.WebAPI.Domain.Entity.Identity;
+using HackSystem.WebAPI.Infrastructure.DataSeed;
 using HackSystem.WebAPI.MockServer.Domain.Entity;
 using HackSystem.WebAPI.ProgramServer.Domain.Entity;
 using HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps;
@@ -8,22 +8,22 @@ using HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace HackSystem.WebAPI.DataAccess;
+namespace HackSystem.WebAPI.Infrastructure.DBContexts;
 
-public class HackSystemDBContext : IdentityDbContext<HackSystemUser, HackSystemRole, string>
+public class HackSystemDbContext : IdentityDbContext<HackSystemUser, HackSystemRole, string>
 {
-    private readonly ILogger<HackSystemDBContext> logger;
+    private readonly ILogger<HackSystemDbContext> logger;
 
-    public HackSystemDBContext() { }
+    public HackSystemDbContext() { }
 
-    public HackSystemDBContext(DbContextOptions<HackSystemDBContext> options)
+    public HackSystemDbContext(DbContextOptions<HackSystemDbContext> options)
         : base(options)
     {
     }
 
-    public HackSystemDBContext(
-        ILogger<HackSystemDBContext> logger,
-        DbContextOptions<HackSystemDBContext> options)
+    public HackSystemDbContext(
+        ILogger<HackSystemDbContext> logger,
+        DbContextOptions<HackSystemDbContext> options)
         : base(options)
     {
         this.logger = logger;

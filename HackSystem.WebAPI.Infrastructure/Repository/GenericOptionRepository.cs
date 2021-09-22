@@ -1,6 +1,5 @@
 ﻿using HackSystem.WebAPI.Application.Repository;
-using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.DataAccess.Repository;
+using HackSystem.WebAPI.Application.Repository.Abstractions;
 using HackSystem.WebAPI.Domain.Entity;
 
 namespace HackSystem.WebAPI.Infrastructure.Repository;
@@ -9,8 +8,8 @@ public class GenericOptionRepository : RepositoryBase<GenericOption>, IGenericOp
 {
     public GenericOptionRepository(
         ILogger<GenericOptionRepository> logger,
-        HackSystemDBContext hackSystemDBContext)
-        : base(logger, hackSystemDBContext)
+        DbContext dbContext)
+        : base(logger, dbContext)
     {
     }
 

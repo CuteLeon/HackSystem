@@ -25,6 +25,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\HackSystem.WebAPI.Infrastructure\HackSystem.WebAPI.Infrastructure.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.MockServer\HackSystem.WebAPI.MockServer.csproj" />
 	</ItemGroup>
 

@@ -1,7 +1,7 @@
-﻿using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.DataAccess.Repository;
+﻿using HackSystem.WebAPI.Application.Repository.Abstractions;
 using HackSystem.WebAPI.ProgramServer.Application.Repository;
 using HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs;
+using Microsoft.EntityFrameworkCore;
 
 namespace HackSystem.WebAPI.ProgramServer.Infrastructure.Repository;
 
@@ -9,8 +9,8 @@ public class BasicProgramRepository : RepositoryBase<BasicProgram>, IBasicProgra
 {
     public BasicProgramRepository(
         ILogger<BasicProgramRepository> logger,
-        HackSystemDBContext hackSystemDBContext)
-        : base(logger, hackSystemDBContext)
+        DbContext dbContext)
+        : base(logger, dbContext)
     {
     }
 

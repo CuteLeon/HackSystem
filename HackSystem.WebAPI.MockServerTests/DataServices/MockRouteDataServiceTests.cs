@@ -1,4 +1,4 @@
-﻿using HackSystem.WebAPI.DataAccess;
+﻿using HackSystem.WebAPI.Infrastructure.DBContexts;
 using HackSystem.WebAPI.MockServer.Application.Repository;
 using HackSystem.WebAPI.MockServer.Domain.Configurations;
 using HackSystem.WebAPI.MockServer.Domain.Entity;
@@ -37,13 +37,13 @@ public class MockRouteDataServiceTests
         var serviceCollection = new ServiceCollection()
             .AddLogging()
             .AddMemoryCache()
-            .AddDbContext<HackSystemDBContext>(options => options
+            .AddDbContext<HackSystemDbContext>(options => options
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .UseLazyLoadingProxies())
             .AttachMockServer(new MockServerOptions());
         var serviceProvider = serviceCollection.BuildServiceProvider();
 
-        var dbContext = serviceProvider.GetRequiredService<HackSystemDBContext>();
+        var dbContext = serviceProvider.GetRequiredService<HackSystemDbContext>();
         dbContext.AddRange(mockRoutes);
         dbContext.SaveChanges();
 

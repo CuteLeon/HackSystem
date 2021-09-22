@@ -12,7 +12,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\HackSystem.WebAPI.DataAccess\HackSystem.WebAPI.DataAccess.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.ProgramServer.Application\HackSystem.WebAPI.ProgramServer.Application.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.ProgramServer.Domain\HackSystem.WebAPI.ProgramServer.Domain.csproj" />
 	</ItemGroup>

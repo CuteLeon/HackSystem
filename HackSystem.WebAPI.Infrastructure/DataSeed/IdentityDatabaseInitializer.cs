@@ -3,7 +3,7 @@ using HackSystem.WebAPI.ProgramServer.Domain.Entity;
 using HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps;
 using Microsoft.AspNetCore.Identity;
 
-namespace HackSystem.WebAPI.DataAccess.DataSeed;
+namespace HackSystem.WebAPI.Infrastructure.DataSeed;
 
 public static class IdentityDatabaseInitializer
 {

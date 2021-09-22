@@ -1,7 +1,7 @@
-﻿using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.DataAccess.Repository;
+﻿using HackSystem.WebAPI.Application.Repository.Abstractions;
 using HackSystem.WebAPI.MockServer.Application.Repository;
 using HackSystem.WebAPI.MockServer.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace HackSystem.WebAPI.MockServer.Infrastructure.Repository;
@@ -13,8 +13,8 @@ public class MockRouteRepository : RepositoryBase<MockRouteDetail>, IMockRouteRe
     public MockRouteRepository(
         ILogger<MockRouteRepository> logger,
         IMemoryCache memoryCache,
-        HackSystemDBContext hackSystemDBContext)
-        : base(logger, hackSystemDBContext)
+        DbContext dbContext)
+        : base(logger, dbContext)
     {
         this.memoryCache = memoryCache;
     }

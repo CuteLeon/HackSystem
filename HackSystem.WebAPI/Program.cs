@@ -2,16 +2,17 @@ using HackSystem.Cryptography;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.WebAPI.Authentication.Configurations;
 using HackSystem.WebAPI.Configurations;
-using HackSystem.WebAPI.DataAccess;
+using HackSystem.WebAPI.Domain.Configuration;
 using HackSystem.WebAPI.Domain.Entity.Identity;
-using HackSystem.WebAPI.Infrastructure.Extensions;
+using HackSystem.WebAPI.Extensions;
+using HackSystem.WebAPI.Infrastructure.DataSeed;
+using HackSystem.WebAPI.Infrastructure.DBContexts;
 using HackSystem.WebAPI.MockServer.Domain.Configurations;
 using HackSystem.WebAPI.MockServer.Extensions;
 using HackSystem.WebAPI.ProgramServer.Domain.Configurations;
 using HackSystem.WebAPI.ProgramServer.Extensions;
 using HackSystem.WebAPI.TaskServer.Domain.Configuration;
 using HackSystem.WebAPI.TaskServer.Extensions;
-using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 
 var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
@@ -47,11 +48,7 @@ try
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()))
-        .AddDbContext<HackSystemDBContext>(
-            options => options
-                .UseSqlite(config.GetConnectionString("HSDB"))
-                .UseLazyLoadingProxies(),
-            ServiceLifetime.Scoped)
+
         .AddIdentity<HackSystemUser, HackSystemRole>(options =>
         {
             options.Password.RequireDigit = true;
@@ -64,7 +61,7 @@ try
             options.SignIn.RequireConfirmedAccount = false;
             options.User.RequireUniqueEmail = true;
         })
-        .AddEntityFrameworkStores<HackSystemDBContext>();
+        .AddEntityFrameworkStores<HackSystemDbContext>();
 
     builder.Services
         .AddAutoMapper(typeof(Program).Assembly)
@@ -77,7 +74,11 @@ try
         .AddHttpClient()
         .AddMemoryCache()
         .AddAPIAuthentication(jwtConfiguration)
-        .AddWebAPIServices()
+        .AddHackSystemDbContext(new HackSystemDbContextOptions
+        {
+            ConnectionString = config.GetConnectionString("HSDB"),
+        })
+        .AddHackSystemWebAPIServices()
         .AddProgramServices()
         .AddProgramAssetServices(options =>
         {
@@ -108,7 +109,7 @@ try
         .UseRouting()
         .UseAuthentication()
         .UseAuthorization()
-        .UseWebAPILogging()
+        .UseHackSystemWebAPILogging()
         .UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(

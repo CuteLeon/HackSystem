@@ -1,7 +1,7 @@
-﻿using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.DataAccess.Repository;
+﻿using HackSystem.WebAPI.Application.Repository.Abstractions;
 using HackSystem.WebAPI.TaskServer.Application.Repository;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace HackSystem.WebAPI.TaskServer.Infrastructure.Repository;
 
@@ -9,8 +9,8 @@ public class TaskRepository : RepositoryBase<TaskDetail>, ITaskRepository
 {
     public TaskRepository(
         ILogger<TaskRepository> logger,
-        HackSystemDBContext hackSystemDBContext)
-        : base(logger, hackSystemDBContext)
+        DbContext dbContext)
+        : base(logger, dbContext)
     {
     }
 

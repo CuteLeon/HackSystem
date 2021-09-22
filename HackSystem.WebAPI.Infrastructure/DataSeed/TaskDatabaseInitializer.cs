@@ -1,6 +1,6 @@
 ﻿using HackSystem.WebAPI.TaskServer.Domain.Entity;
 
-namespace HackSystem.WebAPI.DataAccess.DataSeed;
+namespace HackSystem.WebAPI.Infrastructure.DataSeed;
 
 public static class TaskDatabaseInitializer
 {

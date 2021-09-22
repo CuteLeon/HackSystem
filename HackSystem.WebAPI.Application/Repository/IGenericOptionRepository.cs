@@ -1,4 +1,4 @@
-﻿using HackSystem.WebAPI.DataAccess.API.Repository;
+﻿using HackSystem.WebAPI.Application.Repository.Abstractions;
 using HackSystem.WebAPI.Domain.Entity;
 
 namespace HackSystem.WebAPI.Application.Repository;

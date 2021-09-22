@@ -1,5 +1,4 @@
-﻿using HackSystem.WebAPI.DataAccess;
-using HackSystem.WebAPI.DataAccess.Repository;
+﻿using HackSystem.WebAPI.Application.Repository.Abstractions;
 using HackSystem.WebAPI.ProgramServer.Application.Repository;
 using HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +9,8 @@ public class UserBasicProgramMapRepository : RepositoryBase<UserBasicProgramMap>
 {
     public UserBasicProgramMapRepository(
         ILogger<UserBasicProgramMapRepository> logger,
-        HackSystemDBContext hackSystemDBContext)
-        : base(logger, hackSystemDBContext)
+        DbContext dbContext)
+        : base(logger, dbContext)
     {
     }
 

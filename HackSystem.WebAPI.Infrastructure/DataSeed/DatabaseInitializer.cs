@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using HackSystem.WebAPI.Infrastructure.DBContexts;
+using Microsoft.Extensions.Hosting;
 
-namespace HackSystem.WebAPI.DataAccess;
+namespace HackSystem.WebAPI.Infrastructure.DataSeed;
 
 public static class DatabaseInitializer
 {
@@ -26,7 +27,7 @@ public static class DatabaseInitializer
         using var scope = host.Services.CreateScope();
         var services = scope.ServiceProvider;
         var logger = services.GetRequiredService<ILogger<IHost>>();
-        var dbContext = services.GetRequiredService<HackSystemDBContext>();
+        var dbContext = services.GetRequiredService<HackSystemDbContext>();
 
         try
         {
