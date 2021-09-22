@@ -12,9 +12,9 @@ public class MockRouteDetail
 
     public string MockURI { get; set; }
 
-    public string MockMethod { get; set; }
+    public string? MockMethod { get; set; }
 
-    public string MockSourceHost { get; set; }
+    public string? MockSourceHost { get; set; }
 
     public int DelayDuration { get; set; }
 
@@ -24,11 +24,11 @@ public class MockRouteDetail
 
     public MockType MockType { get; set; }
 
-    public string ForwardAddress { get; set; }
+    public string? ForwardAddress { get; set; }
 
-    public string ForwardMethod { get; set; }
+    public string? ForwardMethod { get; set; }
 
-    public string ForwardRequestBodyTemplate { get; set; }
+    public string? ForwardRequestBodyTemplate { get; set; }
 
-    public MockType ForwardMockType { get; set; }
+    public MockType? ForwardMockType { get; set; }
 }

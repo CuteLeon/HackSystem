@@ -15,14 +15,14 @@ public class MockRouteDataServiceTests
     {
         var mockRoutes = new List<MockRouteDetail>()
         {
-            new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "", MockSourceHost = "", ResponseBodyTemplate = "URI_Only" },
-            new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Get", MockSourceHost = "", ResponseBodyTemplate = "URI_Get_Only" },
+            new MockRouteDetail() { Enabled = true, MockURI = "/Mock", ResponseBodyTemplate = "URI_Only" },
+            new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Get", ResponseBodyTemplate = "URI_Get_Only" },
             new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Get", MockSourceHost = "localhost", ResponseBodyTemplate = "URI_Get_localhost_Only" },
             new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Get", MockSourceHost = "192.168.", ResponseBodyTemplate = "URI_Get_192_168_Only" },
             new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Get", MockSourceHost = "192.168.10.200", ResponseBodyTemplate = "URI_Get_192_168_10_200_Only" },
             new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Get", MockSourceHost = "192.168.20.", ResponseBodyTemplate = "URI_Get_192_168_20_Only" },
             new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Get", MockSourceHost = "192.168.20.255", ResponseBodyTemplate = "URI_Get_192_168_20_255_Only" },
-            new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Post", MockSourceHost = "",ResponseBodyTemplate = "URI_Post_Only" },
+            new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Post", ResponseBodyTemplate = "URI_Post_Only" },
             new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Post", MockSourceHost = "local", ResponseBodyTemplate = "URI_Post_local_Only" },
             new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Post", MockSourceHost = "loc", ResponseBodyTemplate = "URI_Post_loc_Only" },
             new MockRouteDetail() { Enabled = true, MockURI = "/Mock", MockMethod = "Post", MockSourceHost = "localho", ResponseBodyTemplate = "URI_Post_localho_Only" },

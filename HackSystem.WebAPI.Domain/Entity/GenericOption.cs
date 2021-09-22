@@ -10,9 +10,9 @@ public class GenericOption
 
     public string OptionValue { get; set; }
 
-    public string Category { get; set; }
+    public string? Category { get; set; }
 
-    public string OwnerLevel { get; set; }
+    public string? OwnerLevel { get; set; }
 
     public DateTime CreateTime { get; set; }
 

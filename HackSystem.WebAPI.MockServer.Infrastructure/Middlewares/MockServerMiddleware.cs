@@ -75,7 +75,7 @@ public class MockServerMiddleware
                 mockRouteLog.ForwardAddress = forwardRequest.RequestUri?.AbsoluteUri;
                 mockRouteLog.ForwardDateTime = DateTime.Now;
                 mockRouteLog.ForwardMethod = forwardRequest.Method.ToString();
-                mockRouteLog.ForwardMockType = mockRoute.ForwardMockType;
+                mockRouteLog.ForwardMockType = mockRoute.ForwardMockType.Value;
                 await mockRouteLogRepository.UpdateAsync(mockRouteLog);
 
                 var httpClient = this.httpClientFactory.CreateClient();

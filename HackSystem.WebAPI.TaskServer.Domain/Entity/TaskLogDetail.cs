@@ -8,7 +8,7 @@ public class TaskLogDetail
 
     public int TaskID { get; set; }
 
-    public string Parameters { get; set; }
+    public string? Parameters { get; set; }
 
     public DateTime TriggerDateTime { get; set; }
 
@@ -20,5 +20,5 @@ public class TaskLogDetail
 
     public string Trigger { get; set; }
 
-    public string Exception { get; set; }
+    public string? Exception { get; set; }
 }

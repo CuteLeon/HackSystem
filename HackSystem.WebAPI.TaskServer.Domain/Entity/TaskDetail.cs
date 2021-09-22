@@ -27,9 +27,9 @@ public class TaskDetail
 
     public string ProcedureName { get; set; }
 
-    public string Parameters { get; set; }
+    public string? Parameters { get; set; }
 
-    public string Category { get; set; }
+    public string? Category { get; set; }
 
     public DateTime CreateTime { get; set; }
 }

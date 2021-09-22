@@ -26,25 +26,23 @@ public class MockRouteLogDetail
 
     public MockType MockType { get; set; }
 
-    public string ForwardAddress { get; set; }
+    public string? ForwardAddress { get; set; }
 
-    public string ForwardMethod { get; set; }
-
-    public string ForwardRequestBodyTemplate { get; set; }
+    public string? ForwardMethod { get; set; }
 
     public HttpStatusCode ForwardResponseStatusCode { get; set; }
 
-    public string ForwardResponseBody { get; set; }
+    public string? ForwardResponseBody { get; set; }
 
-    public MockType ForwardMockType { get; set; }
+    public MockType? ForwardMockType { get; set; }
 
     public DateTime StartDateTime { get; set; }
 
-    public DateTime ForwardDateTime { get; set; }
+    public DateTime? ForwardDateTime { get; set; }
 
     public DateTime FinishDateTime { get; set; }
 
     public MockRouteLogStatus MockRouteLogStatus { get; set; }
 
-    public string Exception { get; set; }
+    public string? Exception { get; set; }
 }

@@ -22,5 +22,5 @@ public class UserBasicProgramMap
     public bool PinToTop { get; set; }
 
     [DefaultValue(null)]
-    public string Rename { get; set; }
+    public string? Rename { get; set; }
 }
