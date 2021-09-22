@@ -1,4 +1,5 @@
-﻿using HackSystem.WebAPI.TaskServer.Infrastructure.Wrappers;
+﻿using HackSystem.WebAPI.TaskServer.Application.ParameterWrappers;
+using HackSystem.WebAPI.TaskServer.Infrastructure.ParameterWrappers;
 
 namespace HackSystem.WebAPI.TaskServer.Infrastructure.Extensions;
 

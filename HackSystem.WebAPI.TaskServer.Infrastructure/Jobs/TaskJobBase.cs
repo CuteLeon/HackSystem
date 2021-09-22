@@ -1,8 +1,9 @@
-﻿using HackSystem.WebAPI.TaskServer.Application.Repository;
+﻿using HackSystem.WebAPI.TaskServer.Application.Jobs;
+using HackSystem.WebAPI.TaskServer.Application.Repository;
+using HackSystem.WebAPI.TaskServer.Application.Services;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
-using HackSystem.WebAPI.TaskServer.Services;
 
-namespace HackSystem.WebAPI.TaskServer.Jobs;
+namespace HackSystem.WebAPI.TaskServer.Infrastructure.Jobs;
 
 public abstract class TaskJobBase : ITaskJobBase
 {
@@ -25,7 +26,7 @@ public abstract class TaskJobBase : ITaskJobBase
         {
             TaskID = this.TaskDetail.TaskID,
             Parameters = this.TaskDetail.Parameters,
-            Trigger = nameof(HackSystemTaskServer),
+            Trigger = nameof(IHackSystemTaskServer),
             TaskLogStatus = TaskLogStatus.Running,
             TriggerDateTime = DateTime.Now,
             StartDateTime = DateTime.Now,

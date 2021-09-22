@@ -3,7 +3,7 @@ using HackSystem.WebAPI.DataAccess.Repository;
 using HackSystem.WebAPI.TaskServer.Application.Repository;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
 
-namespace HackSystem.WebAPI.TaskServer.Repository;
+namespace HackSystem.WebAPI.TaskServer.Infrastructure.Repository;
 
 public class TaskLogRepository : RepositoryBase<TaskLogDetail>, ITaskLogRepository
 {

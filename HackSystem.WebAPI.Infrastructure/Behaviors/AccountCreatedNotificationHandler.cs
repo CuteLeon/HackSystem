@@ -5,7 +5,6 @@ using HackSystem.WebAPI.Services.API.Program;
 
 namespace HackSystem.WebAPI.Infrastructure.Behaviors;
 
-// TODO: [Leon] Modify to monitor notification and process by MediatR
 public class AccountCreatedNotificationHandler : IAccountCreatedNotificationHandler
 {
     private readonly ILogger<AccountCreatedNotificationHandler> logger;

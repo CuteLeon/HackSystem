@@ -1,8 +1,9 @@
 ﻿using System.Reflection;
+using HackSystem.WebAPI.TaskServer.Application.Jobs;
 using HackSystem.WebAPI.TaskServer.Application.Repository;
-using HackSystem.WebAPI.TaskServer.Infrastructure.Wrappers;
+using HackSystem.WebAPI.TaskServer.Application.ParameterWrappers;
 
-namespace HackSystem.WebAPI.TaskServer.Jobs;
+namespace HackSystem.WebAPI.TaskServer.Infrastructure.Jobs;
 
 public class TaskGenericJob : TaskJobBase, ITaskGenericJob
 {

@@ -1,11 +1,12 @@
 ﻿using FluentScheduler;
+using HackSystem.WebAPI.TaskServer.Application.Jobs;
+using HackSystem.WebAPI.TaskServer.Application.ScheduleWrappers;
 using HackSystem.WebAPI.TaskServer.Application.Services;
 using HackSystem.WebAPI.TaskServer.Domain.Configuration;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
-using HackSystem.WebAPI.TaskServer.Interfaces;
-using HackSystem.WebAPI.TaskServer.Jobs;
+using Microsoft.Extensions.Options;
 
-namespace HackSystem.WebAPI.TaskServer.Services;
+namespace HackSystem.WebAPI.TaskServer.Infrastructure.Services;
 
 public class HackSystemTaskServer : IHackSystemTaskServer
 {

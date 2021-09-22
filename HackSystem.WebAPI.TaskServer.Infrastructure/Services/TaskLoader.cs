@@ -2,7 +2,7 @@
 using HackSystem.WebAPI.TaskServer.Application.Services;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
 
-namespace HackSystem.WebAPI.TaskServer.Services;
+namespace HackSystem.WebAPI.TaskServer.Infrastructure.Services;
 
 public class TaskLoader : ITaskLoader
 {

@@ -1,4 +1,4 @@
-﻿using HackSystem.WebAPI.TaskServer.Infrastructure.Wrappers;
+﻿using HackSystem.WebAPI.TaskServer.Infrastructure.ParameterWrappers;
 using Xunit;
 
 namespace HackSystem.WebAPI.TaskServer.Services.Tests;

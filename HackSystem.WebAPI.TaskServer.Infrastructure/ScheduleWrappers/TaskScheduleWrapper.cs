@@ -1,8 +1,8 @@
 ﻿using FluentScheduler;
+using HackSystem.WebAPI.TaskServer.Application.ScheduleWrappers;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
-using HackSystem.WebAPI.TaskServer.Interfaces;
 
-namespace HackSystem.WebAPI.TaskServer.Services;
+namespace HackSystem.WebAPI.TaskServer.Infrastructure.ScheduleWrappers;
 
 public class TaskScheduleWrapper : ITaskScheduleWrapper
 {

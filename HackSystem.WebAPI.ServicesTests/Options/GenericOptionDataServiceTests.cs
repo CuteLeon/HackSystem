@@ -8,7 +8,6 @@ using Xunit;
 
 namespace HackSystem.WebAPI.Services.Options.Tests;
 
-// TODO: [Leon] Move unit test to related project
 public class GenericOptionDataServiceTests
 {
     private HackSystemDBContext GetDBContext()

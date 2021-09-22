@@ -1,12 +1,14 @@
 ﻿using HackSystem.WebAPI.Tasks;
+using HackSystem.WebAPI.TaskServer.Application.Jobs;
 using HackSystem.WebAPI.TaskServer.Application.Repository;
+using HackSystem.WebAPI.TaskServer.Application.ScheduleWrappers;
 using HackSystem.WebAPI.TaskServer.Application.Services;
 using HackSystem.WebAPI.TaskServer.Domain.Configuration;
 using HackSystem.WebAPI.TaskServer.Infrastructure.Extensions;
-using HackSystem.WebAPI.TaskServer.Interfaces;
-using HackSystem.WebAPI.TaskServer.Jobs;
-using HackSystem.WebAPI.TaskServer.Repository;
-using HackSystem.WebAPI.TaskServer.Services;
+using HackSystem.WebAPI.TaskServer.Infrastructure.Jobs;
+using HackSystem.WebAPI.TaskServer.Infrastructure.Repository;
+using HackSystem.WebAPI.TaskServer.Infrastructure.ScheduleWrappers;
+using HackSystem.WebAPI.TaskServer.Infrastructure.Services;
 using Microsoft.Extensions.Hosting;
 
 namespace HackSystem.WebAPI.TaskServer.Extensions;
