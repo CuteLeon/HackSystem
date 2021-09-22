@@ -1,5 +1,5 @@
-﻿using HackSystem.WebAPI.Model.Map.UserMap;
-using HackSystem.WebAPI.Model.Program;
+﻿using HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps;
+using HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs;
 using HackSystem.WebDataTransfer.Program;
 
 namespace HackSystem.WebAPI.Mappers.Program;

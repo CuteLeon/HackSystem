@@ -1,13 +1,12 @@
-﻿using HackSystem.WebAPI.Model.Map;
-using HackSystem.WebAPI.Model.Program;
+﻿using HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs;
 
-namespace HackSystem.WebAPI.Model.Map.UserMap;
+namespace HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps;
 
 public class UserBasicProgramMap
 {
     public string UserId { get; set; }
 
-    public virtual ProgramUser User { get; set; }
+    public virtual ProgramUser ProgramUser { get; set; }
 
     public string ProgramId { get; set; }
 

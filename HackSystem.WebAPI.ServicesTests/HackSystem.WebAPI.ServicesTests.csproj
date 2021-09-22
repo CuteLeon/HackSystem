@@ -25,7 +25,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\HackSystem.WebAPI.Infrastructure\HackSystem.WebAPI.Infrastructure.csproj" />
-		<ProjectReference Include="..\HackSystem.WebAPI.Services\HackSystem.WebAPI.Services.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

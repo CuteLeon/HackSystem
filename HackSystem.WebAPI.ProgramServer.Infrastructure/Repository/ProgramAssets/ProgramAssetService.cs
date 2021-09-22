@@ -1,7 +1,10 @@
-﻿using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
-using ProgramAssetModel = HackSystem.WebAPI.Services.API.Program.ProgramAsset.ProgramAsset;
+﻿using HackSystem.WebAPI.ProgramServer.Application.Repository.ProgramAssets;
+using HackSystem.WebAPI.ProgramServer.Domain.Configurations;
+using HackSystem.WebAPI.ProgramServer.Domain.Entity.ProgramAssets;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
-namespace HackSystem.WebAPI.Services.Programs.ProgramAsset;
+namespace HackSystem.WebAPI.ProgramServer.Infrastructure.Repository.ProgramAssets;
 
 public class ProgramAssetService : IProgramAssetService
 {
@@ -29,7 +32,7 @@ public class ProgramAssetService : IProgramAssetService
             ProgramId = programId,
             ProgramAssets = Directory
                 .GetFiles(programAssetFolder, "*.dll", SearchOption.TopDirectoryOnly)
-                .Select(dll => new ProgramAssetModel { FileName = Path.GetFileNameWithoutExtension(dll) })
+                .Select(dll => new ProgramAsset { FileName = Path.GetFileNameWithoutExtension(dll) })
                 .ToArray()
         };
         return package;
@@ -51,7 +54,7 @@ public class ProgramAssetService : IProgramAssetService
                 .Select(dll =>
                 {
                     var pdb = string.Concat(dll.AsSpan(0, dll.Length - extensionLength), ".pdb");
-                    var asset = new ProgramAssetModel
+                    var asset = new ProgramAsset
                     {
                         FileName = Path.GetFileNameWithoutExtension(dll),
                         DLLBytes = File.ReadAllBytes(dll),

@@ -1,7 +1,7 @@
 ﻿using HackSystem.WebAPI.Application.Behaviors;
 using HackSystem.WebAPI.Domain.Entity.Identity;
-using HackSystem.WebAPI.Model.Map.UserMap;
-using HackSystem.WebAPI.Services.API.Program;
+using HackSystem.WebAPI.ProgramServer.Application.Repository;
+using HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps;
 
 namespace HackSystem.WebAPI.Infrastructure.Behaviors;
 

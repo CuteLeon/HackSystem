@@ -1,7 +1,7 @@
 ﻿using System.Security.Authentication;
 using HackSystem.Common;
 using HackSystem.WebAPI.Domain.Entity.Identity;
-using HackSystem.WebAPI.Services.API.Program;
+using HackSystem.WebAPI.ProgramServer.Application.Repository;
 using HackSystem.WebDataTransfer.Program;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

@@ -1,7 +1,7 @@
 ﻿using HackSystem.WebAPI.DataAccess.API.Repository;
-using HackSystem.WebAPI.Model.Program;
+using HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs;
 
-namespace HackSystem.WebAPI.Services.API.Program;
+namespace HackSystem.WebAPI.ProgramServer.Application.Repository;
 
 public interface IBasicProgramDataService : IRepositoryBase<BasicProgram>
 {

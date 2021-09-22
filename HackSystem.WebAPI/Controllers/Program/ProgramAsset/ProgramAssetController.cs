@@ -2,8 +2,9 @@
 using HackSystem.Common;
 using HackSystem.WebAPI.Domain.Attributes;
 using HackSystem.WebAPI.Domain.Entity.Identity;
-using HackSystem.WebAPI.Services.API.Program;
-using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
+using HackSystem.WebAPI.ProgramServer.Application.Repository;
+using HackSystem.WebAPI.ProgramServer.Application.Repository.ProgramAssets;
+using HackSystem.WebAPI.ProgramServer.Domain.Entity.ProgramAssets;
 using HackSystem.WebDataTransfer.Program.ProgramAsset;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

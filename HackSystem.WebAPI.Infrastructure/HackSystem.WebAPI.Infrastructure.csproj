@@ -13,7 +13,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\HackSystem.WebAPI.Application\HackSystem.WebAPI.Application.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.DataAccess\HackSystem.WebAPI.DataAccess.csproj" />
-		<ProjectReference Include="..\HackSystem.WebAPI.Services.API\HackSystem.WebAPI.Services.API.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.ProgramServer.Application\HackSystem.WebAPI.ProgramServer.Application.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

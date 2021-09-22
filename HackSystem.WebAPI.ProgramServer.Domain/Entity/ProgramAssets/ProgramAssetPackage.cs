@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebAPI.Services.API.Program.ProgramAsset;
+﻿namespace HackSystem.WebAPI.ProgramServer.Domain.Entity.ProgramAssets;
 
 public class ProgramAssetPackage
 {

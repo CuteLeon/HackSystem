@@ -1,11 +1,12 @@
-﻿using HackSystem.WebAPI.Services.API.Program;
-using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
-using HackSystem.WebAPI.Services.Programs;
-using HackSystem.WebAPI.Services.Programs.ProgramAsset;
+﻿using HackSystem.WebAPI.ProgramServer.Application.Repository;
+using HackSystem.WebAPI.ProgramServer.Application.Repository.ProgramAssets;
+using HackSystem.WebAPI.ProgramServer.Domain.Configurations;
+using HackSystem.WebAPI.ProgramServer.Infrastructure.Repository;
+using HackSystem.WebAPI.ProgramServer.Infrastructure.Repository.ProgramAssets;
 
-namespace HackSystem.WebAPI.Services.Extensions;
+namespace HackSystem.WebAPI.ProgramServer.Extensions;
 
-public static class ServiceCollectionExtension
+public static class HackSystemProgramServerExtension
 {
     public static IServiceCollection AddProgramServices(
         this IServiceCollection services)

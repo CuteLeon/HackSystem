@@ -1,4 +1,6 @@
-﻿namespace HackSystem.WebAPI.Services.API.Program.ProgramAsset;
+﻿using HackSystem.WebAPI.ProgramServer.Domain.Entity.ProgramAssets;
+
+namespace HackSystem.WebAPI.ProgramServer.Application.Repository.ProgramAssets;
 
 public interface IProgramAssetService
 {

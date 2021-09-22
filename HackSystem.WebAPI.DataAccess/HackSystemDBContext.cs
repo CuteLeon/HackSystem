@@ -2,8 +2,9 @@
 using HackSystem.WebAPI.Domain.Entity;
 using HackSystem.WebAPI.Domain.Entity.Identity;
 using HackSystem.WebAPI.MockServer.Domain.Entity;
-using HackSystem.WebAPI.Model.Map.UserMap;
-using HackSystem.WebAPI.Model.Program;
+using HackSystem.WebAPI.ProgramServer.Domain.Entity;
+using HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps;
+using HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -30,6 +31,8 @@ public class HackSystemDBContext : IdentityDbContext<HackSystemUser, HackSystemR
 
     public virtual DbSet<BasicProgram> BasicPrograms { get; set; }
 
+    public virtual DbSet<ProgramUser> ProgramUsers { get; set; }
+
     public virtual DbSet<UserBasicProgramMap> UserBasicProgramMaps { get; set; }
 
     public virtual DbSet<TaskDetail> TaskDetails { get; set; }
@@ -49,11 +52,12 @@ public class HackSystemDBContext : IdentityDbContext<HackSystemUser, HackSystemR
         base.OnModelCreating(builder);
 
         builder.Entity<UserBasicProgramMap>().HasOne(map => map.BasicProgram).WithMany(program => program.UserProgramMaps).HasForeignKey(map => map.ProgramId).OnDelete(DeleteBehavior.Cascade);
-        builder.Entity<UserBasicProgramMap>().HasOne(map => map.User).WithMany(user => user.UserProgramMaps).HasForeignKey(map => map.UserId).OnDelete(DeleteBehavior.Cascade);
+        builder.Entity<UserBasicProgramMap>().HasOne(map => map.ProgramUser).WithMany(user => user.UserProgramMaps).HasForeignKey(map => map.UserId).OnDelete(DeleteBehavior.Cascade);
         builder.Entity<UserBasicProgramMap>().HasKey(map => new { map.UserId, map.ProgramId });
         builder.Entity<TaskDetail>().HasMany<TaskLogDetail>().WithOne().HasForeignKey(l => l.TaskID).IsRequired();
         builder.Entity<MockRouteDetail>().HasMany<MockRouteLogDetail>().WithOne().HasForeignKey(l => l.RouteID).IsRequired();
 
+        builder.Entity<HackSystemUser>().HasOne<ProgramUser>().WithOne().HasForeignKey<HackSystemUser>(u => u.Id).IsRequired();
         builder.Entity<BasicProgram>().HasIndex(nameof(BasicProgram.Id), nameof(BasicProgram.Name));
         builder.Entity<UserBasicProgramMap>().HasIndex(nameof(UserBasicProgramMap.UserId));
         builder.Entity<UserBasicProgramMap>().HasIndex(nameof(UserBasicProgramMap.UserId), nameof(UserBasicProgramMap.ProgramId)).IsUnique();

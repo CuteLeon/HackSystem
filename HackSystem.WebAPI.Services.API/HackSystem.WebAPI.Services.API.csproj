@@ -8,7 +8,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\HackSystem.WebAPI.DataAccess.API\HackSystem.WebAPI.DataAccess.API.csproj" />
 		<ProjectReference Include="..\HackSystem.WebAPI.Domain\HackSystem.WebAPI.Domain.csproj" />
-		<ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

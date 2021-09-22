@@ -1,4 +1,4 @@
-﻿using HackSystem.WebAPI.Model.Program;
+﻿using HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs;
 
 namespace HackSystem.WebAPI.DataAccess.DataSeed;
 

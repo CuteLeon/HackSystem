@@ -1,5 +1,6 @@
 ﻿using HackSystem.WebAPI.Domain.Entity.Identity;
-using HackSystem.WebAPI.Model.Map.UserMap;
+using HackSystem.WebAPI.ProgramServer.Domain.Entity;
+using HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps;
 using Microsoft.AspNetCore.Identity;
 
 namespace HackSystem.WebAPI.DataAccess.DataSeed;
@@ -32,6 +33,13 @@ public static class IdentityDatabaseInitializer
         builder.Entity<IdentityUserClaim<string>>().HasData(new[]
         {
             new IdentityUserClaim<string> { Id = 1, UserId = "msaspnet-core-user-hack-system000001", ClaimType = "Professional", ClaimValue = "true" }
+        });
+
+        builder.Entity<ProgramUser>().HasData(new[]
+        {
+            new ProgramUser() { Id = "msaspnet-core-user-hack-system000001" },
+            new ProgramUser() { Id = "msaspnet-core-user-hack-system000002" },
+            new ProgramUser() { Id = "msaspnet-core-user-hack-system000003" }
         });
 
         builder.Entity<UserBasicProgramMap>().HasData(new[]
