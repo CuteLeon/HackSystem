@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebAPI.Model.WebLog;
+﻿namespace HackSystem.WebAPI.Domain.Entity;
 
 public class WebAPILog
 {

@@ -4,7 +4,6 @@ using HackSystem.WebAPI.Authentication.Configurations;
 using HackSystem.WebAPI.Configurations;
 using HackSystem.WebAPI.DataAccess;
 using HackSystem.WebAPI.Domain.Entity.Identity;
-using HackSystem.WebAPI.Extensions;
 using HackSystem.WebAPI.Infrastructure.Extensions;
 using HackSystem.WebAPI.MockServer.Domain.Configurations;
 using HackSystem.WebAPI.MockServer.Extensions;
@@ -77,7 +76,6 @@ try
         .AttachMockServer(mockServerConfiguration)
         .AddHttpClient()
         .AddMemoryCache()
-        .AddHackSystemWebAPIExtensions()
         .AddAPIAuthentication(jwtConfiguration)
         .AddWebAPIServices()
         .AddProgramServices()

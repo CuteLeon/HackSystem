@@ -4,7 +4,6 @@ using HackSystem.WebAPI.Domain.Entity.Identity;
 using HackSystem.WebAPI.MockServer.Domain.Entity;
 using HackSystem.WebAPI.Model.Map.UserMap;
 using HackSystem.WebAPI.Model.Program;
-using HackSystem.WebAPI.Model.WebLog;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 

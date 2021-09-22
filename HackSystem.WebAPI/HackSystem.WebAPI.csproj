@@ -39,7 +39,6 @@
     <ProjectReference Include="..\HackSystem.Cryptography\HackSystem.Cryptography.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Authentication\HackSystem.WebAPI.Authentication.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.DataAccess\HackSystem.WebAPI.DataAccess.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.Extensions\HackSystem.WebAPI.Extensions.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Infrastructure\HackSystem.WebAPI.Infrastructure.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.MockServer\HackSystem.WebAPI.MockServer.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />

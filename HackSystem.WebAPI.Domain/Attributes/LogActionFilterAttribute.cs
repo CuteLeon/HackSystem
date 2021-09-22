@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Primitives;
 
-namespace HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
+namespace HackSystem.WebAPI.Domain.Attributes;
 
 public class LogActionFilterAttribute : ActionFilterAttribute
 {

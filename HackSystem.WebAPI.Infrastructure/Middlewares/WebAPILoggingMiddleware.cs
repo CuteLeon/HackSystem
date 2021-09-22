@@ -1,16 +1,16 @@
 ﻿using System.Diagnostics;
-using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
-using HackSystem.WebAPI.Extensions.WebAPILogs.DataServices;
-using HackSystem.WebAPI.Model.WebLog;
+using HackSystem.WebAPI.Application.Repository;
+using HackSystem.WebAPI.Domain.Entity;
+using HackSystem.WebAPI.Domain.Attributes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IO;
 
-namespace HackSystem.WebAPI.Extensions.WebAPILogs.Middleware;
+namespace HackSystem.WebAPI.Infrastructure.Middleware;
 
 public class WebAPILoggingMiddleware
 {
     private readonly ILogger<WebAPILoggingMiddleware> logger;
-    private readonly IWebAPILogDataService webAPILogDataService;
+    private readonly IWebAPILogRepository webAPILogDataService;
     private readonly RecyclableMemoryStreamManager recyclableMemoryStreamManager;
     private readonly RequestDelegate next;
 
@@ -21,7 +21,7 @@ public class WebAPILoggingMiddleware
     {
         this.logger = logger;
         var serviceScope = serviceScopeFactory.CreateScope();
-        this.webAPILogDataService = serviceScope.ServiceProvider.GetRequiredService<IWebAPILogDataService>();
+        this.webAPILogDataService = serviceScope.ServiceProvider.GetRequiredService<IWebAPILogRepository>();
         this.recyclableMemoryStreamManager = serviceScope.ServiceProvider.GetRequiredService<RecyclableMemoryStreamManager>();
         this.next = next ?? throw new ArgumentNullException(nameof(next));
     }

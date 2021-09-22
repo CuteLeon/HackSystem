@@ -2,8 +2,8 @@
 using HackSystem.Common;
 using HackSystem.WebAPI.Application.Behaviors;
 using HackSystem.WebAPI.Authentication.Services;
+using HackSystem.WebAPI.Domain.Attributes;
 using HackSystem.WebAPI.Domain.Entity.Identity;
-using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
 using HackSystem.WebDataTransfer.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
