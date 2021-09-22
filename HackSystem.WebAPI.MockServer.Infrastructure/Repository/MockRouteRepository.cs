@@ -4,7 +4,7 @@ using HackSystem.WebAPI.MockServer.Application.Repository;
 using HackSystem.WebAPI.MockServer.Domain.Entity;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace HackSystem.WebAPI.MockServer.Repository;
+namespace HackSystem.WebAPI.MockServer.Infrastructure.Repository;
 
 public class MockRouteRepository : RepositoryBase<MockRouteDetail>, IMockRouteRepository
 {

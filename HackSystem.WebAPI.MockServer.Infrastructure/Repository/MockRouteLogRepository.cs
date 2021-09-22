@@ -3,7 +3,7 @@ using HackSystem.WebAPI.DataAccess.Repository;
 using HackSystem.WebAPI.MockServer.Application.Repository;
 using HackSystem.WebAPI.MockServer.Domain.Entity;
 
-namespace HackSystem.WebAPI.MockServer.Repository;
+namespace HackSystem.WebAPI.MockServer.Infrastructure.Repository;
 
 public class MockRouteLogRepository : RepositoryBase<MockRouteLogDetail>, IMockRouteLogRepository
 {

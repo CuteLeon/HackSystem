@@ -2,7 +2,7 @@
 using HackSystem.WebAPI.MockServer.Domain.Entity;
 using Microsoft.AspNetCore.Http;
 
-namespace HackSystem.WebAPI.MockServer.Wrappers;
+namespace HackSystem.WebAPI.MockServer.Infrastructure.Wrappers;
 
 public class MockRouteResponseWrapper : IMockRouteResponseWrapper
 {
