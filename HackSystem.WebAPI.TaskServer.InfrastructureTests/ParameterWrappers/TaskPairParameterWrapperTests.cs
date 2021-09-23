@@ -1,9 +1,8 @@
-﻿using HackSystem.WebAPI.TaskServer.Infrastructure.ParameterWrappers;
-using Xunit;
+﻿using Xunit;
 
-namespace HackSystem.WebAPI.TaskServer.Services.Tests;
+namespace HackSystem.WebAPI.TaskServer.Infrastructure.ParameterWrappers.Tests;
 
-public class TaskParameterWrapperTests
+public class TaskPairParameterWrapperTests
 {
     [Theory]
     [InlineData(null, 0, null, null, null, null, null, null)]

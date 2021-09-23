@@ -4,11 +4,10 @@ using HackSystem.WebAPI.TaskServer.Application.ScheduleWrappers;
 using HackSystem.WebAPI.TaskServer.Application.Services;
 using HackSystem.WebAPI.TaskServer.Domain.Configuration;
 using HackSystem.WebAPI.TaskServer.Domain.Entity;
-using HackSystem.WebAPI.TaskServer.Infrastructure.Services;
 using Moq;
 using Xunit;
 
-namespace HackSystem.WebAPI.TaskServer.Services.Tests;
+namespace HackSystem.WebAPI.TaskServer.Infrastructure.Services.Tests;
 
 public class HackSystemTaskServerTests
 {

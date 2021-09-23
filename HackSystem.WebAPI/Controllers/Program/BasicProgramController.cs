@@ -49,7 +49,7 @@ public class BasicProgramController : ControllerBase
     {
         this.logger.LogInformation($"Hide basic program {hideRequest.ProgramId} for user...");
         var userId = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
-        var result = await this.userBasicProgramMapRepository.SetUserBasicProgramHide(userId, hideRequest.ProgramId, hideRequest.PinToDesktop.Value);
+        var result = await this.userBasicProgramMapRepository.SetUserBasicProgramPinToDesktop(userId, hideRequest.ProgramId, hideRequest.PinToDesktop.Value);
         this.logger.LogInformation($"Hide basic program {hideRequest.ProgramId} for user {userId} {(result ? "successfully" : "failed")}.");
         return result ? this.Ok(result) : this.BadRequest(result);
     }
