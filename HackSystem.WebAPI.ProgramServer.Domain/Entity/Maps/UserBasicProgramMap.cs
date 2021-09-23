@@ -12,8 +12,8 @@ public class UserBasicProgramMap
 
     public virtual BasicProgram BasicProgram { get; set; }
 
-    [DefaultValue(false)]
-    public bool Hide { get; set; }
+    [DefaultValue(true)]
+    public bool PinToDesktop { get; set; }
 
     [DefaultValue(false)]
     public bool PinToDock { get; set; }

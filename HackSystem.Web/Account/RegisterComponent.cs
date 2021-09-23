@@ -11,11 +11,11 @@ public partial class RegisterComponent
         this.ShowErrors = false;
 
         this.ShowErrors = false;
-        this.logger.LogDebug($"Try to Register: {this.registerDto.UserName}");
+        this.logger.LogDebug($"Try to Register: {this.registerRequest.UserName}");
 
         try
         {
-            var result = await this.authenticationService.Register(this.registerDto);
+            var result = await this.authenticationService.Register(this.registerRequest);
             this.logger.LogDebug($"Register result: {(result.Successful ? "Success" : "Fail")}");
 
             if (result.Successful)

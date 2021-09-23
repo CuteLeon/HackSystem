@@ -1,9 +1,9 @@
 ﻿using HackSystem.Web.ProgramSchedule.Model;
-using HackSystem.WebDataTransfer.Program;
+using HackSystem.DataTransferObjects.Programs;
 
 namespace HackSystem.Web.ProgramSchedule.Launcher;
 
 public interface IProgramLauncher
 {
-    Task<ProcessDetail> LaunchProgram(BasicProgramDTO basicProgram);
+    Task<ProcessDetail> LaunchProgram(BasicProgramResponse basicProgram);
 }

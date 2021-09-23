@@ -1,10 +1,10 @@
-﻿using HackSystem.WebDataTransfer.Program.ProgramAsset;
+﻿using HackSystem.DataTransferObjects.Programs.ProgramAssets;
 
 namespace HackSystem.Web.Services.API.Program.ProgramAsset;
 
 public interface IProgramAssetService
 {
-    Task<ProgramAssetPackageDTO> QueryProgramAssetList(string programId);
+    Task<ProgramAssetPackageResponse> QueryProgramAssetList(string programId);
 
-    Task<ProgramAssetPackageDTO> QueryProgramAssetPackage(ProgramAssetPackageDTO packageDTO);
+    Task<ProgramAssetPackageResponse> QueryProgramAssetPackage(ProgramAssetPackageRequest packageDTO);
 }

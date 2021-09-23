@@ -1,6 +1,6 @@
 ﻿using HackSystem.Common;
 using HackSystem.WebAPI.TaskServer.Application.Repository;
-using HackSystem.WebDataTransfer.TaskServer;
+using HackSystem.DataTransferObjects.TaskServer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HackSystem.WebAPI.Controllers.TaskServer;
@@ -25,12 +25,12 @@ public class TaskServerController : Controller
     }
 
     [HttpGet]
-    public async Task<IEnumerable<TaskDetailDTO>> QueryTasks()
+    public async Task<IEnumerable<TaskDetailResponse>> QueryTasks()
     {
         this.logger.LogInformation($"Query tasks...");
         var tasks = await this.taskRepository.QueryTasks();
         this.logger.LogInformation($"Found {tasks.Count()} tasks.");
-        var dtos = this.mapper.Map<IEnumerable<TaskDetailDTO>>(tasks);
+        var dtos = this.mapper.Map<IEnumerable<TaskDetailResponse>>(tasks);
         return dtos;
     }
 }

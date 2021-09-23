@@ -1,6 +1,6 @@
-﻿namespace HackSystem.WebDataTransfer.Program.ProgramAsset;
+﻿namespace HackSystem.DataTransferObjects.Programs.ProgramAssets;
 
-public class ProgramAssetDTO
+public class ProgramAssetRequest
 {
     public string FileName { get; set; }
 

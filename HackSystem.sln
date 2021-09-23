@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.Common", "Ha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Common", "HackSystem.Common\HackSystem.Common.csproj", "{833CE192-CB3D-4BB4-863B-4D82C6AA150D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebDataTransfer", "HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj", "{D8E24332-D011-4AE9-8069-7D53C33FAAB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.DataTransferObjects", "HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj", "{D8E24332-D011-4AE9-8069-7D53C33FAAB9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebAPI.Authentication", "HackSystem.WebAPI.Authentication\HackSystem.WebAPI.Authentication.csproj", "{DBBEAD4F-B6D7-42A3-BA89-D5B8F2F231E2}"
 EndProject

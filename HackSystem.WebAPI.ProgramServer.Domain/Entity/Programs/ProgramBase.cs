@@ -15,13 +15,13 @@ public class ProgramBase
     [DefaultValue(true)]
     public bool Enabled { get; set; }
 
-    public bool IsSingleton { get; set; }
+    public bool SingleInstance { get; set; }
 
     public string AssemblyName { get; set; }
 
     public string TypeName { get; set; }
 
-    public bool Integral { get; set; }
+    public bool Mandatory { get; set; }
 
     public virtual IList<UserBasicProgramMap> UserProgramMaps { get; set; }
 }

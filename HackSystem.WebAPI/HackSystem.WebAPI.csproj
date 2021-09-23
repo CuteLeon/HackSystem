@@ -32,7 +32,7 @@
     <ProjectReference Include="..\HackSystem.WebAPI.MockServer\HackSystem.WebAPI.MockServer.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.ProgramServer\HackSystem.WebAPI.ProgramServer.csproj" />
     <ProjectReference Include="..\HackSystem.WebAPI.TaskServer\HackSystem.WebAPI.TaskServer.csproj" />
-    <ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
+    <ProjectReference Include="..\HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,7 +9,7 @@ public interface IUserBasicProgramMapRepository : IRepositoryBase<UserBasicProgr
 
     Task<IEnumerable<UserBasicProgramMap>> QueryUserBasicProgramMaps(string userId);
 
-    Task<bool> SetUserBasicProgramHide(string userId, string programId, bool hide);
+    Task<bool> SetUserBasicProgramHide(string userId, string programId, bool pinToDesktop);
 
     Task<bool> SetUserBasicProgramPinToDock(string userId, string programId, bool pinToDock);
 

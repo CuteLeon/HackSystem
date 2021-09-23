@@ -24,27 +24,27 @@
                 </div>
             }
 
-            <EditForm Model="registerDto" autofocus OnValidSubmit="OnRegister">
+            <EditForm Model="registerRequest" autofocus OnValidSubmit="OnRegister">
                 <DataAnnotationsValidator />
                 <div class="form-group">
                     <label for="username">User Name</label>
-                    <InputText Id="userName" autofocus Class="form-control" @bind-Value="registerDto.UserName" />
-                    <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.UserName)" /></small>
+                    <InputText Id="userName" autofocus Class="form-control" @bind-Value="registerRequest.UserName" />
+                    <small><ValidationMessage class="valid-feedback" For="@(() => registerRequest.UserName)" /></small>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <InputText Id="email" Class="form-control" @bind-Value="registerDto.Email" />
-                    <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.Email)" /></small>
+                    <InputText Id="email" Class="form-control" @bind-Value="registerRequest.Email" />
+                    <small><ValidationMessage class="valid-feedback" For="@(() => registerRequest.Email)" /></small>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <InputText Id="password" type="password" Class="form-control" @bind-Value="registerDto.Password" />
-                    <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.Password)" /></small>
+                    <InputText Id="password" type="password" Class="form-control" @bind-Value="registerRequest.Password" />
+                    <small><ValidationMessage class="valid-feedback" For="@(() => registerRequest.Password)" /></small>
                 </div>
                 <div class="form-group">
                     <label for="confirmpassword">Confirm Password</label>
-                    <InputText Id="confirmpassword" type="password" Class="form-control" @bind-Value="registerDto.ConfirmPassword" />
-                    <small><ValidationMessage class="valid-feedback" For="@(() => registerDto.ConfirmPassword)" /></small>
+                    <InputText Id="confirmpassword" type="password" Class="form-control" @bind-Value="registerRequest.ConfirmPassword" />
+                    <small><ValidationMessage class="valid-feedback" For="@(() => registerRequest.ConfirmPassword)" /></small>
                 </div>
                 <div class="form-row">
                     <div class="col-12 col-md-6 text-right text-md-left">
@@ -62,7 +62,7 @@
 @code {
     private bool ShowErrors { get; set; }
     private IEnumerable<string> Errors;
-    private readonly RegisterDTO registerDto = new RegisterDTO();
+    private readonly RegisterRequest registerRequest = new RegisterRequest();
 
     public void OnCloseAlert() => this.ShowErrors = false;
 }

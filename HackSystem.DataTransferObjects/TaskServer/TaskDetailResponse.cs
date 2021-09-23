@@ -1,6 +1,6 @@
-﻿namespace HackSystem.WebDataTransfer.TaskServer;
+﻿namespace HackSystem.DataTransferObjects.TaskServer;
 
-public class TaskDetailDTO
+public class TaskDetailResponse
 {
     public int TaskID { get; set; }
 

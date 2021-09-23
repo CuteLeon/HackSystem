@@ -2,7 +2,7 @@
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Services.API.Program;
 using HackSystem.Web.Services.Authentication;
-using HackSystem.WebDataTransfer.Program;
+using HackSystem.DataTransferObjects.Programs;
 
 namespace HackSystem.Web.Services.Program;
 
@@ -16,41 +16,41 @@ public class BasicProgramService : AuthenticatedServiceBase, IBasicProgramServic
     {
     }
 
-    public async Task<IEnumerable<UserBasicProgramMapDTO>> QueryUserBasicProgramMaps()
+    public async Task<IEnumerable<UserBasicProgramMapResponse>> QueryUserBasicProgramMaps()
     {
         await this.AddAuthorizationHeaderAsync();
-        var result = await this.httpClient.GetFromJsonAsync<IEnumerable<UserBasicProgramMapDTO>>("api/basicprogram/QueryUserBasicProgramMaps");
+        var result = await this.httpClient.GetFromJsonAsync<IEnumerable<UserBasicProgramMapResponse>>("api/basicprogram/QueryUserBasicProgramMaps");
         return result;
     }
 
-    public async Task<bool> SetUserBasicProgramHide(SetUserProgramHideDTO hideDTO)
+    public async Task<bool> SetUserBasicProgramHide(UserBasicProgramMapRequest hideRequest)
     {
         await this.AddAuthorizationHeaderAsync();
-        var response = await this.httpClient.PutAsJsonAsync("api/basicprogram/SetUserBasicProgramHide", hideDTO);
+        var response = await this.httpClient.PutAsJsonAsync("api/basicprogram/SetUserBasicProgramHide", hideRequest);
         response.EnsureSuccessStatusCode();
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<bool> SetUserBasicProgramPinToDock(SetUserBasicProgramPinToDockDTO pinToDockDTO)
+    public async Task<bool> SetUserBasicProgramPinToDock(UserBasicProgramMapRequest pinToDockRequest)
     {
         await this.AddAuthorizationHeaderAsync();
-        var response = await this.httpClient.PutAsJsonAsync("api/basicprogram/SetUserBasicProgramPinToDock", pinToDockDTO);
+        var response = await this.httpClient.PutAsJsonAsync("api/basicprogram/SetUserBasicProgramPinToDock", pinToDockRequest);
         response.EnsureSuccessStatusCode();
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<bool> SetUserBasicProgramPinToTop(SetUserBasicProgramPinToTopDTO pinToTopDTO)
+    public async Task<bool> SetUserBasicProgramPinToTop(UserBasicProgramMapRequest pinToTopRequest)
     {
         await this.AddAuthorizationHeaderAsync();
-        var response = await this.httpClient.PutAsJsonAsync("api/basicprogram/SetUserBasicProgramPinToTop", pinToTopDTO);
+        var response = await this.httpClient.PutAsJsonAsync("api/basicprogram/SetUserBasicProgramPinToTop", pinToTopRequest);
         response.EnsureSuccessStatusCode();
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<bool> SetUserBasicProgramRename(SetUserBasicProgramRenameDTO renameDTO)
+    public async Task<bool> SetUserBasicProgramRename(UserBasicProgramMapRequest renameRequest)
     {
         await this.AddAuthorizationHeaderAsync();
-        var response = await this.httpClient.PutAsJsonAsync("api/basicprogram/SetUserBasicProgramRename", renameDTO);
+        var response = await this.httpClient.PutAsJsonAsync("api/basicprogram/SetUserBasicProgramRename", renameRequest);
         response.EnsureSuccessStatusCode();
         return response.IsSuccessStatusCode;
     }

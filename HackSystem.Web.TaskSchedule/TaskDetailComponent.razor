@@ -1,4 +1,4 @@
-﻿@using HackSystem.WebDataTransfer.TaskServer
+﻿@using HackSystem.DataTransferObjects.TaskServer
 
 @inject ILogger<TaskDetailComponent> Logger
 
@@ -40,7 +40,7 @@
 
     @code {
     [Parameter]
-    public TaskDetailDTO TaskDetail { get; set; }
+    public TaskDetailResponse TaskDetail { get; set; }
 
     public bool TaskEnable
     {

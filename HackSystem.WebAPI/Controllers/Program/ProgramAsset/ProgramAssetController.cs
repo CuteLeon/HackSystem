@@ -5,7 +5,7 @@ using HackSystem.WebAPI.Domain.Entity.Identity;
 using HackSystem.WebAPI.ProgramServer.Application.Repository;
 using HackSystem.WebAPI.ProgramServer.Application.Repository.ProgramAssets;
 using HackSystem.WebAPI.ProgramServer.Domain.Entity.ProgramAssets;
-using HackSystem.WebDataTransfer.Program.ProgramAsset;
+using HackSystem.DataTransferObjects.Programs.ProgramAssets;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,7 +46,7 @@ public class ProgramAssetController : ControllerBase
 
         var package = await this.programAssetService.QueryProgramAssetList(programId);
         this.logger.LogInformation($"Found {package.ProgramAssets.Count()} program assets of program {programId}.");
-        var packageDTO = this.mapper.Map<ProgramAssetPackageDTO>(package);
+        var packageDTO = this.mapper.Map<ProgramAssetPackageResponse>(package);
         return this.Ok(packageDTO);
     }
 
@@ -61,13 +61,13 @@ public class ProgramAssetController : ControllerBase
 
         var package = await this.programAssetService.QueryProgramAssetPackage(programId);
         this.logger.LogInformation($"Found {package.ProgramAssets.Count()} program assets of program {programId}.");
-        var packageDTO = this.mapper.Map<ProgramAssetPackageDTO>(package);
+        var packageDTO = this.mapper.Map<ProgramAssetPackageResponse>(package);
         return this.Ok(packageDTO);
     }
 
     [HttpPost]
     [LogActionFilter(noLogResponseBody: true)]
-    public async Task<IActionResult> QueryProgramAssetPackage(ProgramAssetPackageDTO packageDTO)
+    public async Task<IActionResult> QueryProgramAssetPackage(ProgramAssetPackageRequest packageDTO)
     {
         if (!await CheckUserBasicProgramMap(packageDTO.ProgramId))
         {
@@ -77,8 +77,8 @@ public class ProgramAssetController : ControllerBase
         var package = this.mapper.Map<ProgramAssetPackage>(packageDTO);
         package = await this.programAssetService.QueryProgramAssetPackage(package);
         this.logger.LogInformation($"Found {packageDTO.ProgramAssets.Count()} program assets of program {packageDTO.ProgramId}.");
-        packageDTO = this.mapper.Map<ProgramAssetPackageDTO>(package);
-        return this.Ok(packageDTO);
+        var packageResult = this.mapper.Map<ProgramAssetPackageResponse>(package);
+        return this.Ok(packageResult);
     }
 
     private async Task<bool> CheckUserBasicProgramMap(string programId)

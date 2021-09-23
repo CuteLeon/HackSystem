@@ -1,6 +1,6 @@
-﻿namespace HackSystem.WebDataTransfer.Program;
+﻿namespace HackSystem.DataTransferObjects.Programs;
 
-public class BasicProgramDTO
+public class BasicProgramResponse
 {
     public string Id { get; set; }
 
@@ -10,11 +10,11 @@ public class BasicProgramDTO
 
     public bool Enabled { get; set; }
 
-    public bool IsSingleton { get; set; }
+    public bool SingleInstance { get; set; }
 
     public string AssemblyName { get; set; }
 
-    public bool Integral { get; set; }
+    public bool Mandatory { get; set; }
 
     public string TypeName { get; set; }
 }

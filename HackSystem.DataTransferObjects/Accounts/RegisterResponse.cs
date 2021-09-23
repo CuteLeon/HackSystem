@@ -1,6 +1,6 @@
-﻿namespace HackSystem.WebDataTransfer.Account;
+﻿namespace HackSystem.DataTransferObjects.Accounts;
 
-public class RegisterResultDTO
+public class RegisterResponse
 {
     public bool Successful { get; set; }
 

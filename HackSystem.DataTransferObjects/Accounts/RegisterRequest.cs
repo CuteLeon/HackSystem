@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HackSystem.WebDataTransfer.Account;
+namespace HackSystem.DataTransferObjects.Accounts;
 
-public class RegisterDTO
+public class RegisterRequest
 {
     [Required(ErrorMessage = "User name is required")]
     public string UserName { get; set; }

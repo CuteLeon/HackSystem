@@ -32,11 +32,11 @@ public class UserBasicProgramMapRepository : RepositoryBase<UserBasicProgramMap>
         return await this.AsQueryable().Where(map => map.UserId == userId).ToListAsync();
     }
 
-    public async Task<bool> SetUserBasicProgramHide(string userId, string programId, bool hide)
+    public async Task<bool> SetUserBasicProgramHide(string userId, string programId, bool pinToDesktop)
     {
         var map = await this.FindAsync(userId, programId);
         if (map == null) return false;
-        map.Hide = hide;
+        map.PinToDesktop = pinToDesktop;
         await this.UpdateAsync(map);
         return true;
     }

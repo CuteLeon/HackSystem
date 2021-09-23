@@ -1,5 +1,5 @@
 ﻿@using HackSystem.Web.TaskSchedule.Services
-@using HackSystem.WebDataTransfer.TaskServer
+@using HackSystem.DataTransferObjects.TaskServer
 @inherits ProgramComponentBase
 @inject ILogger<TaskSchedulerComponent> Logger
 @inject IServiceScopeFactory ServiceScopeFactory
@@ -54,7 +54,7 @@
 </ResizeableView>
 
 @code {
-    public List<TaskDetailDTO> TaskDetails { get; set; } = new();
+    public List<TaskDetailResponse> TaskDetails { get; set; } = new();
 
     public override void Dispose()
     {

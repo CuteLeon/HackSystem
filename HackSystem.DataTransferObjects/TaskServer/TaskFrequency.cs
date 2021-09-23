@@ -1,4 +1,4 @@
-﻿namespace HackSystem.WebDataTransfer.TaskServer;
+﻿namespace HackSystem.DataTransferObjects.TaskServer;
 
 public enum TaskFrequency
 {

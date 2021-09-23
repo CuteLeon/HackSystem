@@ -15,7 +15,7 @@
 		<ProjectReference Include="..\HackSystem.Web.Common\HackSystem.Web.Common.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.CookieStorage\HackSystem.Web.CookieStorage.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.Services.API\HackSystem.Web.Services.API.csproj" />
-		<ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
+		<ProjectReference Include="..\HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
