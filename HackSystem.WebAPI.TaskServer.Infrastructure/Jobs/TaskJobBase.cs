@@ -52,6 +52,7 @@ public abstract class TaskJobBase : ITaskJobBase
             taskLog.FinishDateTime = DateTime.Now;
             this.taskLogRepository.UpdateAsync(taskLog).ConfigureAwait(false);
             this.logger.LogInformation($"Task Log ID: {taskLog.TaskLogID}, Task {this.TaskDetail.TaskName} [TaskID={this.TaskDetail.TaskID}] finished, elapsed: {(taskLog.FinishDateTime - taskLog.StartDateTime).TotalMilliseconds} ms.");
+            GC.Collect();
         }
     }
 
