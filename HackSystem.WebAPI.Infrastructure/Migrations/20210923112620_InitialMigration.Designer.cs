@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackSystem.WebAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(HackSystemDbContext))]
-    [Migration("20210922073932_InitialMigration")]
+    [Migration("20210923112620_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -436,7 +436,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                     b.Property<string>("ProgramId")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Hide")
+                    b.Property<bool>("PinToDesktop")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("PinToDock")
@@ -464,7 +464,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000001",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -472,7 +472,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000002",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -480,7 +480,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000003",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -488,7 +488,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000004",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -496,7 +496,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000005",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -504,7 +504,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000006",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -512,7 +512,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000007",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = false,
                             PinToTop = false
                         },
@@ -520,7 +520,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000008",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -528,7 +528,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000009",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -536,7 +536,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000001",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -544,7 +544,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000002",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -552,7 +552,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000003",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -560,7 +560,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000004",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -568,7 +568,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000005",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -576,7 +576,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000006",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -584,7 +584,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000007",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = false,
                             PinToTop = false
                         },
@@ -592,7 +592,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000008",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -600,7 +600,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000009",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -608,7 +608,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000001",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -616,7 +616,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000002",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -624,7 +624,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000003",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -632,7 +632,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000004",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -640,7 +640,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000005",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -648,7 +648,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000006",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -656,7 +656,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000007",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = false,
                             PinToTop = false
                         },
@@ -664,7 +664,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000008",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         },
@@ -672,7 +672,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000009",
-                            Hide = false,
+                            PinToDesktop = true,
                             PinToDock = true,
                             PinToTop = false
                         });
@@ -695,15 +695,15 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Integral")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("IsSingleton")
+                    b.Property<bool>("Mandatory")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("SingleInstance")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("TypeName")
                         .IsRequired()
@@ -722,9 +722,9 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
                             IconUri = "/images/ProgramIcons/HomeProgram.png",
-                            Integral = true,
-                            IsSingleton = true,
+                            Mandatory = true,
                             Name = "Home",
+                            SingleInstance = true,
                             TypeName = "HackSystem.Web.SystemProgram.Home.HomeComponent"
                         },
                         new
@@ -733,9 +733,9 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
                             IconUri = "/images/ProgramIcons/ExplorerProgram.png",
-                            Integral = true,
-                            IsSingleton = false,
+                            Mandatory = true,
                             Name = "Explorer",
+                            SingleInstance = false,
                             TypeName = "HackSystem.Web.SystemProgram.Explorer.ExplorerComponent"
                         },
                         new
@@ -744,9 +744,9 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
                             IconUri = "/images/ProgramIcons/BorwserProgram.png",
-                            Integral = true,
-                            IsSingleton = false,
+                            Mandatory = true,
                             Name = "Borwser",
+                            SingleInstance = false,
                             TypeName = "HackSystem.Web.SystemProgram.Borwser.BorwserComponent"
                         },
                         new
@@ -755,9 +755,9 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
                             IconUri = "/images/ProgramIcons/ProfileProgram.png",
-                            Integral = true,
-                            IsSingleton = true,
+                            Mandatory = true,
                             Name = "Profile",
+                            SingleInstance = true,
                             TypeName = "HackSystem.Web.SystemProgram.Profile.ProfileComponent"
                         },
                         new
@@ -766,9 +766,9 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
                             IconUri = "/images/ProgramIcons/SettingProgram.png",
-                            Integral = true,
-                            IsSingleton = true,
+                            Mandatory = true,
                             Name = "Setting",
+                            SingleInstance = true,
                             TypeName = "HackSystem.Web.SystemProgram.Setting.SettingComponent"
                         },
                         new
@@ -777,9 +777,9 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
                             IconUri = "/images/ProgramIcons/AppStoreProgram.png",
-                            Integral = true,
-                            IsSingleton = true,
+                            Mandatory = true,
                             Name = "AppStore",
+                            SingleInstance = true,
                             TypeName = "HackSystem.Web.SystemProgram.AppStore.AppStoreComponent"
                         },
                         new
@@ -788,9 +788,9 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
                             IconUri = "/images/ProgramIcons/WeatherProgram.png",
-                            Integral = false,
-                            IsSingleton = true,
+                            Mandatory = false,
                             Name = "Weather",
+                            SingleInstance = true,
                             TypeName = "HackSystem.Web.SystemProgram.Weather.WeatherComponent"
                         },
                         new
@@ -799,9 +799,9 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             AssemblyName = "HackSystem.Web.TaskSchedule",
                             Enabled = true,
                             IconUri = "/images/ProgramIcons/TaskServerProgram.png",
-                            Integral = true,
-                            IsSingleton = true,
+                            Mandatory = true,
                             Name = "TaskServer",
+                            SingleInstance = true,
                             TypeName = "HackSystem.Web.TaskSchedule.TaskSchedulerComponent"
                         },
                         new
@@ -810,9 +810,9 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
                             IconUri = "/images/ProgramIcons/MockServerProgram.png",
-                            Integral = true,
-                            IsSingleton = true,
+                            Mandatory = true,
                             Name = "MockServer",
+                            SingleInstance = true,
                             TypeName = "HackSystem.Web.SystemProgram.MockServer.MockServerComponent"
                         });
                 });
