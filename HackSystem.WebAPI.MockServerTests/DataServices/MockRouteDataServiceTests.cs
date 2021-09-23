@@ -37,13 +37,13 @@ public class MockRouteDataServiceTests
         var serviceCollection = new ServiceCollection()
             .AddLogging()
             .AddMemoryCache()
-            .AddDbContext<HackSystemDbContext>(options => options
+            .AddDbContext<DbContext, HackSystemDbContext>(options => options
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .UseLazyLoadingProxies())
             .AttachMockServer(new MockServerOptions());
         var serviceProvider = serviceCollection.BuildServiceProvider();
 
-        var dbContext = serviceProvider.GetRequiredService<HackSystemDbContext>();
+        var dbContext = serviceProvider.GetRequiredService<DbContext>();
         dbContext.AddRange(mockRoutes);
         dbContext.SaveChanges();
 
