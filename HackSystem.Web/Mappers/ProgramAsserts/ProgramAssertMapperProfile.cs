@@ -6,7 +6,9 @@ public class ProgramAssertMapperProfile : Profile
 {
     public ProgramAssertMapperProfile()
     {
-        this.CreateMap<ProgramAssetPackageRequest, ProgramAssetPackageRequest>();
-        this.CreateMap<ProgramAssetPackageResponse, ProgramAssetPackageResponse>();
+        this.CreateMap<ProgramAssetRequest, ProgramAssetResponse>();
+        this.CreateMap<ProgramAssetResponse, ProgramAssetRequest>();
+        this.CreateMap<ProgramAssetPackageRequest, ProgramAssetPackageResponse>();
+        this.CreateMap<ProgramAssetPackageResponse, ProgramAssetPackageRequest>();
     }
 }
