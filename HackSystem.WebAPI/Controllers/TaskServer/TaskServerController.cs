@@ -1,6 +1,6 @@
 ﻿using HackSystem.Common;
-using HackSystem.WebAPI.TaskServers.DataServices;
-using HackSystem.WebDataTransfer.TaskServer;
+using HackSystem.WebAPI.TaskServer.Application.Repository;
+using HackSystem.DataTransferObjects.TaskServer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HackSystem.WebAPI.Controllers.TaskServer;
@@ -12,25 +12,25 @@ public class TaskServerController : Controller
 {
     private readonly ILogger<TaskServerController> logger;
     private readonly IMapper mapper;
-    private readonly ITaskDataService taskDataService;
+    private readonly ITaskRepository taskRepository;
 
     public TaskServerController(
         ILogger<TaskServerController> logger,
         IMapper mapper,
-        ITaskDataService taskDataService)
+        ITaskRepository taskRepository)
     {
         this.logger = logger;
         this.mapper = mapper;
-        this.taskDataService = taskDataService;
+        this.taskRepository = taskRepository;
     }
 
     [HttpGet]
-    public async Task<IEnumerable<TaskDetailDTO>> QueryTasks()
+    public async Task<IEnumerable<TaskDetailResponse>> QueryTasks()
     {
         this.logger.LogInformation($"Query tasks...");
-        var tasks = await this.taskDataService.QueryTasks();
+        var tasks = await this.taskRepository.QueryTasks();
         this.logger.LogInformation($"Found {tasks.Count()} tasks.");
-        var dtos = this.mapper.Map<IEnumerable<TaskDetailDTO>>(tasks);
+        var dtos = this.mapper.Map<IEnumerable<TaskDetailResponse>>(tasks);
         return dtos;
     }
 }

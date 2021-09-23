@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
 using HackSystem.Common;
+using HackSystem.WebAPI.Application.Behaviors;
 using HackSystem.WebAPI.Authentication.Services;
-using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
-using HackSystem.WebAPI.Model.Identity;
-using HackSystem.WebAPI.Services.API.Account;
-using HackSystem.WebDataTransfer.Account;
+using HackSystem.WebAPI.Domain.Attributes;
+using HackSystem.WebAPI.Domain.Entity.Identity;
+using HackSystem.DataTransferObjects.Accounts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,14 +17,14 @@ public class AccountsController : AuthenticateControllerBase
 {
     private readonly ILogger<AccountsController> logger;
     private readonly ITokenGenerator tokenGenerator;
-    private readonly IAccountService accountService;
+    private readonly IAccountCreatedNotificationHandler accountCreatedNotificationHandler;
     private readonly IMapper mapper;
     private readonly SignInManager<HackSystemUser> signInManager;
 
     public AccountsController(
         ILogger<AccountsController> logger,
         ITokenGenerator tokenGenerator,
-        IAccountService accountService,
+        IAccountCreatedNotificationHandler accountCreatedNotificationHandler,
         IMapper mapper,
         SignInManager<HackSystemUser> signInManager,
         RoleManager<HackSystemRole> roleManager,
@@ -33,7 +33,7 @@ public class AccountsController : AuthenticateControllerBase
     {
         this.logger = logger;
         this.tokenGenerator = tokenGenerator;
-        this.accountService = accountService;
+        this.accountCreatedNotificationHandler = accountCreatedNotificationHandler;
         this.mapper = mapper;
         this.signInManager = signInManager;
     }
@@ -45,7 +45,7 @@ public class AccountsController : AuthenticateControllerBase
     /// <returns></returns>
     [HttpPost]
     [AllowAnonymous]
-    public async Task<IActionResult> Register([FromBody] RegisterDTO register)
+    public async Task<IActionResult> Register([FromBody] RegisterRequest register)
     {
         this.logger.LogInformation($"Register new user: {register.UserName}");
         var newUser = new HackSystemUser
@@ -59,7 +59,7 @@ public class AccountsController : AuthenticateControllerBase
         {
             this.logger.LogError(new Exception(string.Join("\n", result.Errors)), $"Failed to register: {register.UserName} ({result.Errors.Count()} errors)");
             var errors = result.Errors.Select(x => $"(Code:{x.Code}) {x.Description}");
-            var failedResult = new RegisterResultDTO
+            var failedResult = new RegisterResponse
             {
                 Successful = false,
                 Errors = errors
@@ -72,7 +72,7 @@ public class AccountsController : AuthenticateControllerBase
         {
             this.logger.LogError(new Exception(string.Join("\n", result.Errors)), $"Setup user's roles failed: {register.UserName} ({result.Errors.Count()} errors)");
             var errors = result.Errors.Select(x => $"(Code:{x.Code}) {x.Description}");
-            var failedResult = new RegisterResultDTO
+            var failedResult = new RegisterResponse
             {
                 Successful = false,
                 Errors = errors
@@ -80,10 +80,10 @@ public class AccountsController : AuthenticateControllerBase
             return this.BadRequest(failedResult);
         }
 
-        await accountService.InitialUser(newUser);
+        await this.accountCreatedNotificationHandler.InitialUser(newUser);
 
         this.logger.LogInformation($"Register successfully: {register.UserName}");
-        var registerResult = new RegisterResultDTO()
+        var registerResult = new RegisterResponse()
         {
             Successful = true
         };
@@ -98,7 +98,7 @@ public class AccountsController : AuthenticateControllerBase
     [HttpPost]
     [AllowAnonymous]
     [LogActionFilter(noLogRequestBody: true)]
-    public async Task<IActionResult> Login([FromBody] LoginDTO login)
+    public async Task<IActionResult> Login([FromBody] LoginRequest login)
     {
         this.logger.LogInformation($"Login user: {login.UserName}");
         var result = await this.signInManager.PasswordSignInAsync(login.UserName, login.Password, true, false);
@@ -113,7 +113,7 @@ public class AccountsController : AuthenticateControllerBase
             };
 
             this.logger.LogWarning($"Login failed: {login.UserName} ({errorMessage})");
-            var failedResul = new LoginResultDTO
+            var failedResul = new LoginResponse
             {
                 Successful = false,
                 Error = errorMessage
@@ -123,7 +123,7 @@ public class AccountsController : AuthenticateControllerBase
 
         var claims = await this.GetClaimsAsync(login.UserName);
         var token = this.tokenGenerator.GenerateSecurityToken(claims);
-        var loginResul = new LoginResultDTO
+        var loginResul = new LoginResponse
         {
             Successful = true,
             Token = token
@@ -156,7 +156,7 @@ public class AccountsController : AuthenticateControllerBase
             throw new ArgumentException(nameof(ClaimTypes.Name));
 
         var user = await userManager.FindByNameAsync(userName);
-        var result = this.mapper.Map<AccountInfoDTO>(user);
+        var result = this.mapper.Map<UserResponse>(user);
         return this.Ok(result);
     }
 }

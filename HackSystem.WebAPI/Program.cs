@@ -2,16 +2,17 @@ using HackSystem.Cryptography;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.WebAPI.Authentication.Configurations;
 using HackSystem.WebAPI.Configurations;
-using HackSystem.WebAPI.DataAccess;
+using HackSystem.WebAPI.Domain.Configuration;
+using HackSystem.WebAPI.Domain.Entity.Identity;
 using HackSystem.WebAPI.Extensions;
-using HackSystem.WebAPI.MockServers.Configurations;
-using HackSystem.WebAPI.MockServers.Extensions;
-using HackSystem.WebAPI.Model.Identity;
-using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
-using HackSystem.WebAPI.Services.Extensions;
-using HackSystem.WebAPI.TaskServers.Configurations;
-using HackSystem.WebAPI.TaskServers.Extensions;
-using Microsoft.EntityFrameworkCore;
+using HackSystem.WebAPI.Infrastructure.DataSeed;
+using HackSystem.WebAPI.Infrastructure.DBContexts;
+using HackSystem.WebAPI.MockServer.Domain.Configurations;
+using HackSystem.WebAPI.MockServer.Extensions;
+using HackSystem.WebAPI.ProgramServer.Domain.Configurations;
+using HackSystem.WebAPI.ProgramServer.Extensions;
+using HackSystem.WebAPI.TaskServer.Domain.Configuration;
+using HackSystem.WebAPI.TaskServer.Extensions;
 using NLog.Web;
 
 var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
@@ -47,11 +48,7 @@ try
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()))
-        .AddDbContext<HackSystemDBContext>(
-            options => options
-                .UseSqlite(config.GetConnectionString("HSDB"))
-                .UseLazyLoadingProxies(),
-            ServiceLifetime.Scoped)
+
         .AddIdentity<HackSystemUser, HackSystemRole>(options =>
         {
             options.Password.RequireDigit = true;
@@ -60,14 +57,11 @@ try
             options.Password.RequireLowercase = true;
             options.Password.RequireUppercase = false;
             options.Password.RequireNonAlphanumeric = false;
-
             options.Lockout.AllowedForNewUsers = true;
-
             options.SignIn.RequireConfirmedAccount = false;
-
             options.User.RequireUniqueEmail = true;
         })
-        .AddEntityFrameworkStores<HackSystemDBContext>();
+        .AddEntityFrameworkStores<HackSystemDbContext>();
 
     builder.Services
         .AddAutoMapper(typeof(Program).Assembly)
@@ -79,9 +73,13 @@ try
         .AttachMockServer(mockServerConfiguration)
         .AddHttpClient()
         .AddMemoryCache()
-        .AddHackSystemWebAPIExtensions()
         .AddAPIAuthentication(jwtConfiguration)
-        .AddWebAPIServices()
+        .AddHackSystemDbContext(new HackSystemDbContextOptions
+        {
+            ConnectionString = config.GetConnectionString("HSDB"),
+        })
+        .AddHackSystemWebAPIServices()
+        .AddProgramServices()
         .AddProgramAssetServices(options =>
         {
             options.FolderPath = Path.IsPathFullyQualified(programAssetConfiguration.FolderPath) ?
@@ -111,7 +109,7 @@ try
         .UseRouting()
         .UseAuthentication()
         .UseAuthorization()
-        .UseWebAPILogging()
+        .UseHackSystemWebAPILogging()
         .UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(

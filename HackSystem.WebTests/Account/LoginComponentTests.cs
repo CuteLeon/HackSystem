@@ -5,7 +5,7 @@ using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.CookieStorage;
 using HackSystem.Web.Services.API.Authentication;
 using HackSystem.Web.Services.Authentication;
-using HackSystem.WebDataTransfer.Account;
+using HackSystem.DataTransferObjects.Accounts;
 using HackSystem.WebTests.Mocks;
 using Microsoft.AspNetCore.Components;
 using Moq;
@@ -35,7 +35,7 @@ public class LoginComponentTests
             {
                 throw new HttpRequestException(message);
             }
-            var responseJson = JsonSerializer.Serialize(new LoginResultDTO()
+            var responseJson = JsonSerializer.Serialize(new LoginResponse()
             {
                 Successful = loginResult,
                 Error = loginResult ? string.Empty : message,

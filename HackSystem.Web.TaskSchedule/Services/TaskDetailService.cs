@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Services.Authentication;
-using HackSystem.WebDataTransfer.TaskServer;
+using HackSystem.DataTransferObjects.TaskServer;
 
 namespace HackSystem.Web.TaskSchedule.Services;
 
@@ -15,10 +15,10 @@ public class TaskDetailService : AuthenticatedServiceBase, ITaskDetailService
     {
     }
 
-    public async Task<IEnumerable<TaskDetailDTO>> QueryTasks()
+    public async Task<IEnumerable<TaskDetailResponse>> QueryTasks()
     {
         await this.AddAuthorizationHeaderAsync();
-        var result = await this.httpClient.GetFromJsonAsync<IEnumerable<TaskDetailDTO>>("api/taskserver/QueryTasks");
+        var result = await this.httpClient.GetFromJsonAsync<IEnumerable<TaskDetailResponse>>("api/taskserver/QueryTasks");
         return result;
     }
 }

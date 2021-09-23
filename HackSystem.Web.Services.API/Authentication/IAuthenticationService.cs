@@ -1,12 +1,12 @@
-﻿using HackSystem.WebDataTransfer.Account;
+﻿using HackSystem.DataTransferObjects.Accounts;
 
 namespace HackSystem.Web.Services.API.Authentication;
 
 public interface IAuthenticationService
 {
-    Task<RegisterResultDTO> Register(RegisterDTO registerModel);
+    Task<RegisterResponse> Register(RegisterRequest registerModel);
 
-    Task<LoginResultDTO> Login(LoginDTO loginModel);
+    Task<LoginResponse> Login(LoginRequest loginModel);
 
     Task<string> GetAccountInfo();
 

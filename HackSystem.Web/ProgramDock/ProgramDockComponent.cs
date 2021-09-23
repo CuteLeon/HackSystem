@@ -1,4 +1,4 @@
-﻿using HackSystem.WebDataTransfer.Program;
+﻿using HackSystem.DataTransferObjects.Programs;
 
 namespace HackSystem.Web.ProgramDock;
 
@@ -10,7 +10,7 @@ public partial class ProgramDockComponent
         this.StateHasChanged();
     }
 
-    public void LoadProgramDock(IEnumerable<UserBasicProgramMapDTO> maps)
+    public void LoadProgramDock(IEnumerable<UserBasicProgramMapResponse> maps)
     {
         this.BasicProgramMaps.Clear();
 

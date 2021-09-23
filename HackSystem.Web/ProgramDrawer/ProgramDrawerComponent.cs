@@ -1,5 +1,5 @@
 ﻿using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
-using HackSystem.WebDataTransfer.Program;
+using HackSystem.DataTransferObjects.Programs;
 
 namespace HackSystem.Web.ProgramDrawer;
 
@@ -21,7 +21,7 @@ public partial class ProgramDrawerComponent
         }
     }
 
-    public void LoadProgramDrawer(IEnumerable<UserBasicProgramMapDTO> maps)
+    public void LoadProgramDrawer(IEnumerable<UserBasicProgramMapResponse> maps)
     {
         this.BasicProgramMaps.Clear();
 

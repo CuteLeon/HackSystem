@@ -1,10 +1,11 @@
 ﻿using System.Security.Authentication;
 using HackSystem.Common;
-using HackSystem.WebAPI.Extensions.WebAPILogs.Attributes;
-using HackSystem.WebAPI.Model.Identity;
-using HackSystem.WebAPI.Services.API.Program;
-using HackSystem.WebAPI.Services.API.Program.ProgramAsset;
-using HackSystem.WebDataTransfer.Program.ProgramAsset;
+using HackSystem.WebAPI.Domain.Attributes;
+using HackSystem.WebAPI.Domain.Entity.Identity;
+using HackSystem.WebAPI.ProgramServer.Application.Repository;
+using HackSystem.WebAPI.ProgramServer.Application.Repository.ProgramAssets;
+using HackSystem.WebAPI.ProgramServer.Domain.Entity.ProgramAssets;
+using HackSystem.DataTransferObjects.Programs.ProgramAssets;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,20 +19,20 @@ public class ProgramAssetController : ControllerBase
     private readonly ILogger<ProgramAssetController> logger;
     private readonly UserManager<HackSystemUser> userManager;
     private readonly IMapper mapper;
-    private readonly IUserBasicProgramMapDataService userBasicProgramMapDataService;
+    private readonly IUserBasicProgramMapRepository userBasicProgramMapRepository;
     private readonly IProgramAssetService programAssetService;
 
     public ProgramAssetController(
         ILogger<ProgramAssetController> logger,
         UserManager<HackSystemUser> userManager,
         IMapper mapper,
-        IUserBasicProgramMapDataService userBasicProgramMapDataService,
+        IUserBasicProgramMapRepository userBasicProgramMapRepository,
         IProgramAssetService programAssetService)
     {
         this.logger = logger;
         this.userManager = userManager;
         this.mapper = mapper;
-        this.userBasicProgramMapDataService = userBasicProgramMapDataService;
+        this.userBasicProgramMapRepository = userBasicProgramMapRepository;
         this.programAssetService = programAssetService;
     }
 
@@ -45,8 +46,8 @@ public class ProgramAssetController : ControllerBase
 
         var package = await this.programAssetService.QueryProgramAssetList(programId);
         this.logger.LogInformation($"Found {package.ProgramAssets.Count()} program assets of program {programId}.");
-        var packageDTO = this.mapper.Map<ProgramAssetPackageDTO>(package);
-        return this.Ok(packageDTO);
+        var packageRequest = this.mapper.Map<ProgramAssetPackageResponse>(package);
+        return this.Ok(packageRequest);
     }
 
     [HttpGet]
@@ -60,24 +61,24 @@ public class ProgramAssetController : ControllerBase
 
         var package = await this.programAssetService.QueryProgramAssetPackage(programId);
         this.logger.LogInformation($"Found {package.ProgramAssets.Count()} program assets of program {programId}.");
-        var packageDTO = this.mapper.Map<ProgramAssetPackageDTO>(package);
-        return this.Ok(packageDTO);
+        var packageRequest = this.mapper.Map<ProgramAssetPackageResponse>(package);
+        return this.Ok(packageRequest);
     }
 
     [HttpPost]
     [LogActionFilter(noLogResponseBody: true)]
-    public async Task<IActionResult> QueryProgramAssetPackage(ProgramAssetPackageDTO packageDTO)
+    public async Task<IActionResult> QueryProgramAssetPackage(ProgramAssetPackageRequest packageRequest)
     {
-        if (!await CheckUserBasicProgramMap(packageDTO.ProgramId))
+        if (!await CheckUserBasicProgramMap(packageRequest.ProgramId))
         {
             return this.Forbid();
         }
 
-        var package = this.mapper.Map<ProgramAssetPackage>(packageDTO);
+        var package = this.mapper.Map<ProgramAssetPackage>(packageRequest);
         package = await this.programAssetService.QueryProgramAssetPackage(package);
-        this.logger.LogInformation($"Found {packageDTO.ProgramAssets.Count()} program assets of program {packageDTO.ProgramId}.");
-        packageDTO = this.mapper.Map<ProgramAssetPackageDTO>(package);
-        return this.Ok(packageDTO);
+        this.logger.LogInformation($"Found {packageRequest.ProgramAssets.Count()} program assets of program {packageRequest.ProgramId}.");
+        var packageResult = this.mapper.Map<ProgramAssetPackageResponse>(package);
+        return this.Ok(packageResult);
     }
 
     private async Task<bool> CheckUserBasicProgramMap(string programId)
@@ -92,7 +93,7 @@ public class ProgramAssetController : ControllerBase
         var user = await this.userManager.FindByNameAsync(userName) ?? throw new AuthenticationException();
         var userId = user.Id;
 
-        var hasAccess = await this.userBasicProgramMapDataService.CheckUserBasicProgramMap(userId, programId);
+        var hasAccess = await this.userBasicProgramMapRepository.CheckUserBasicProgramMap(userId, programId);
         if (!hasAccess)
         {
             this.logger.LogWarning($"User {userName} has no access to program asset of program {programId}.");

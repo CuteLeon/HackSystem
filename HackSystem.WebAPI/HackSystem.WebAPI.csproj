@@ -1,59 +1,49 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
-    <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+		<ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
+		<AssemblyVersion>1.0.0.1</AssemblyVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0-rc.1.21452.15" />
-	  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0-rc.1.21452.15" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.0-rc.1.21452.15" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.0-rc.1.21452.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0-rc.1.21452.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0-rc.1.21452.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.0-rc.1.21452.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0-rc.1.21452.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0-rc.1.21452.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0-rc.1.21451.13" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0-rc.1.21451.13" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0-rc.1.21464.1" />
-    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
-    <PackageReference Include="NLog" Version="5.0.0-preview.1" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0-rc.1.21452.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0-rc.1.21452.15" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0-rc.1.21452.15" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.0-rc.1.21452.15" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.0-rc.1.21452.15" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0-rc.1.21451.13" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0-rc.1.21451.13" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0-rc.1.21464.1" />
+		<PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
+		<PackageReference Include="NLog" Version="5.0.0-preview.1" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
-    <ProjectReference Include="..\HackSystem.Cryptography\HackSystem.Cryptography.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.Authentication\HackSystem.WebAPI.Authentication.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.Common\HackSystem.WebAPI.Common.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.DataAccess\HackSystem.WebAPI.DataAccess.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.Extensions\HackSystem.WebAPI.Extensions.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.MockServer\HackSystem.WebAPI.MockServer.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.Model\HackSystem.WebAPI.Model.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.Services.API\HackSystem.WebAPI.Services.API.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.Services\HackSystem.WebAPI.Services.csproj" />
-    <ProjectReference Include="..\HackSystem.WebAPI.TaskServers\HackSystem.WebAPI.TaskServers.csproj" />
-    <ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
+		<ProjectReference Include="..\HackSystem.Cryptography\HackSystem.Cryptography.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.Authentication\HackSystem.WebAPI.Authentication.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.Domain\HackSystem.WebAPI.Domain.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.Infrastructure\HackSystem.WebAPI.Infrastructure.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.MockServer\HackSystem.WebAPI.MockServer.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.ProgramServer\HackSystem.WebAPI.ProgramServer.csproj" />
+		<ProjectReference Include="..\HackSystem.WebAPI.TaskServer\HackSystem.WebAPI.TaskServer.csproj" />
+		<ProjectReference Include="..\HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="HackSystem.db">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="HackSystem.db">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 	<ItemGroup>
 		<Using Include="System.Linq" />

@@ -84,3 +84,27 @@
 ## Task Scheduler
 
 ![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/TaskScheduler.jpg)
+
+
+
+# Database Migration
+
+## Setup
+
+1. Select HackSystem.WebAPI as Startup project;
+2. Open Package Manager Console in Visual Studio;
+3. Select HackSystem.WebAPI.Infrastructure as Default project in Package Manager Console;
+4. Input commands and execute;
+
+## Commands
+
+| Command                  | Description                                                  |
+| ------------------------ | ------------------------------------------------------------ |
+| Get-Help entityframework | Displays information about entity framework commands.        |
+| Add-Migration            | Creates a migration by adding a migration snapshot.          |
+| Remove-Migration         | Removes the last migration snapshot.                         |
+| Update-Database          | Updates the database schema based on the last migration snapshot. |
+| Script-Migration         | Generates a SQL script using all the migration snapshots.    |
+| Scaffold-DbContext       | Generates a DbContext and entity type classes for a specified database. This is called reverse engineering. |
+| Get-DbContext            | Gets information about a DbContext type.                     |
+| Drop-Database            | Drops the database.                                          |

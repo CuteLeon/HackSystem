@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HackSystem.WebDataTransfer\HackSystem.WebDataTransfer.csproj" />
+    <ProjectReference Include="..\HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj" />
   </ItemGroup>
 
 </Project>

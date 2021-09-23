@@ -3,7 +3,7 @@ using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Services.API.Authentication;
 using HackSystem.Web.Services.Extensions;
-using HackSystem.WebDataTransfer.Account;
+using HackSystem.DataTransferObjects.Accounts;
 using Newtonsoft.Json;
 
 namespace HackSystem.Web.Services.Authentication;
@@ -29,11 +29,11 @@ public class AuthenticationService : IAuthenticationService
     /// </summary>
     /// <param name="register"></param>
     /// <returns></returns>
-    public async Task<RegisterResultDTO> Register(RegisterDTO register)
+    public async Task<RegisterResponse> Register(RegisterRequest register)
     {
         logger.LogDebug($"Register new user: {register.UserName}");
         var response = await httpClient.PostAsJsonAsync("api/accounts/register", register);
-        var registerResult = JsonConvert.DeserializeObject<RegisterResultDTO>(await response.Content.ReadAsStringAsync());
+        var registerResult = JsonConvert.DeserializeObject<RegisterResponse>(await response.Content.ReadAsStringAsync());
         return registerResult;
     }
 
@@ -42,11 +42,11 @@ public class AuthenticationService : IAuthenticationService
     /// </summary>
     /// <param name="login"></param>
     /// <returns></returns>
-    public async Task<LoginResultDTO> Login(LoginDTO login)
+    public async Task<LoginResponse> Login(LoginRequest login)
     {
         logger.LogDebug($"Login user: {login.UserName}");
         var response = await httpClient.PostAsJsonAsync("api/accounts/login", login);
-        var loginResult = JsonConvert.DeserializeObject<LoginResultDTO>(await response.Content.ReadAsStringAsync());
+        var loginResult = JsonConvert.DeserializeObject<LoginResponse>(await response.Content.ReadAsStringAsync());
         if (!response.IsSuccessStatusCode)
         {
             return loginResult;

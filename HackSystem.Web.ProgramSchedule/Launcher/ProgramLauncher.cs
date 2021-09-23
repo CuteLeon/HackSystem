@@ -6,7 +6,7 @@ using HackSystem.Web.ProgramSchedule.IDGenerator;
 using HackSystem.Web.ProgramSchedule.Model;
 using HackSystem.Web.ProgramSDK.ProgramComponent;
 using HackSystem.Web.ProgramSDK.ProgramComponent.Messages;
-using HackSystem.WebDataTransfer.Program;
+using HackSystem.DataTransferObjects.Programs;
 
 namespace HackSystem.Web.ProgramSchedule.Launcher;
 
@@ -32,7 +32,7 @@ public class ProgramLauncher : IProgramLauncher
         this.processContainer = processContainer;
     }
 
-    public async Task<ProcessDetail> LaunchProgram(BasicProgramDTO basicProgram)
+    public async Task<ProcessDetail> LaunchProgram(BasicProgramResponse basicProgram)
     {
         if (!this.programAssemblyLoader.CheckAssemblyLoaded(basicProgram.AssemblyName))
         {

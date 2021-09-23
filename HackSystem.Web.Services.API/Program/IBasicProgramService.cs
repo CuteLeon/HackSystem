@@ -1,18 +1,18 @@
-﻿using HackSystem.WebDataTransfer.Program;
+﻿using HackSystem.DataTransferObjects.Programs;
 
 namespace HackSystem.Web.Services.API.Program;
 
 public interface IBasicProgramService
 {
-    Task<IEnumerable<UserBasicProgramMapDTO>> QueryUserBasicProgramMaps();
+    Task<IEnumerable<UserBasicProgramMapResponse>> QueryUserBasicProgramMaps();
 
-    Task<bool> SetUserBasicProgramHide(SetUserProgramHideDTO hideDTO);
+    Task<bool> SetUserBasicProgramHide(UserBasicProgramMapRequest hideRequest);
 
-    Task<bool> SetUserBasicProgramPinToDock(SetUserBasicProgramPinToDockDTO pinToDockDTO);
+    Task<bool> SetUserBasicProgramPinToDock(UserBasicProgramMapRequest pinToDockRequest);
 
-    Task<bool> SetUserBasicProgramPinToTop(SetUserBasicProgramPinToTopDTO pinToTopDTO);
+    Task<bool> SetUserBasicProgramPinToTop(UserBasicProgramMapRequest pinToTopRequest);
 
-    Task<bool> SetUserBasicProgramRename(SetUserBasicProgramRenameDTO renameDTO);
+    Task<bool> SetUserBasicProgramRename(UserBasicProgramMapRequest renameRequest);
 
     Task<bool> DeleteUserBasicProgramMap(string programId);
 }

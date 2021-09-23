@@ -10,11 +10,11 @@ public partial class LoginComponent
     {
         this.Logging = true;
         this.ShowErrors = false;
-        this.logger.LogDebug($"User try to Login: {this.loginDto.UserName}");
+        this.logger.LogDebug($"User try to Login: {this.loginRequest.UserName}");
 
         try
         {
-            var result = await this.authenticationService.Login(this.loginDto);
+            var result = await this.authenticationService.Login(this.loginRequest);
             this.logger.LogDebug($"Login result: {(result.Successful ? "Success" : "Fail")}");
 
             if (result.Successful)

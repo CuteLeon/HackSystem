@@ -22,18 +22,18 @@
                 </div>
             }
 
-            <EditForm id="loginForm" Model="loginDto" autofocus OnValidSubmit="OnLogin">
+            <EditForm id="loginForm" Model="loginRequest" autofocus OnValidSubmit="OnLogin">
                 <DataAnnotationsValidator />
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="username">User Name</label>
-                        <InputText Id="userName" autofocus Class="form-control" @bind-Value="loginDto.UserName" />
-                        <small><ValidationMessage class="valid-feedback" For="@(() => loginDto.UserName)" /></small>
+                        <InputText Id="userName" autofocus Class="form-control" @bind-Value="loginRequest.UserName" />
+                        <small><ValidationMessage class="valid-feedback" For="@(() => loginRequest.UserName)" /></small>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="password">Password</label>
-                        <InputText Id="password" type="password" Class="form-control" @bind-Value="loginDto.Password" />
-                        <small><ValidationMessage class="valid-feedback" For="@(() => loginDto.Password)" /></small>
+                        <InputText Id="password" type="password" Class="form-control" @bind-Value="loginRequest.Password" />
+                        <small><ValidationMessage class="valid-feedback" For="@(() => loginRequest.Password)" /></small>
                     </div>
                 </div>
                 <div class="form-row">
@@ -66,7 +66,7 @@
     private bool ShowErrors { get; set; }
     private string Error { get; set; }
     public bool Logging { get; private set; } = false;
-    private readonly LoginDTO loginDto = new LoginDTO();
+    private readonly LoginRequest loginRequest = new LoginRequest();
 
     public void OnCloseAlert() => this.ShowErrors = false;
 }
