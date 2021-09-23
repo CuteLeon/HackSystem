@@ -24,13 +24,13 @@ public class ProgramAssetService : AuthenticatedServiceBase, IProgramAssetServic
         return result;
     }
 
-    public async Task<ProgramAssetPackageResponse> QueryProgramAssetPackage(ProgramAssetPackageRequest packageDTO)
+    public async Task<ProgramAssetPackageResponse> QueryProgramAssetPackage(ProgramAssetPackageRequest packageRequest)
     {
         await this.AddAuthorizationHeaderAsync();
-        var response = await this.httpClient.PostAsJsonAsync("api/programasset/QueryProgramAssetPackage", packageDTO);
+        var response = await this.httpClient.PostAsJsonAsync("api/programasset/QueryProgramAssetPackage", packageRequest);
         if (!response.IsSuccessStatusCode)
         {
-            throw new InvalidOperationException($"Invalid operation exception ({response.StatusCode}) when requesting program asset package of program {packageDTO.ProgramId}.");
+            throw new InvalidOperationException($"Invalid operation exception ({response.StatusCode}) when requesting program asset package of program {packageRequest.ProgramId}.");
         }
 
         var packageResult = JsonConvert.DeserializeObject<ProgramAssetPackageResponse>(await response.Content.ReadAsStringAsync());

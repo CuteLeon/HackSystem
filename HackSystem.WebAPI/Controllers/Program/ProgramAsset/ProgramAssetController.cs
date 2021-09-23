@@ -46,8 +46,8 @@ public class ProgramAssetController : ControllerBase
 
         var package = await this.programAssetService.QueryProgramAssetList(programId);
         this.logger.LogInformation($"Found {package.ProgramAssets.Count()} program assets of program {programId}.");
-        var packageDTO = this.mapper.Map<ProgramAssetPackageResponse>(package);
-        return this.Ok(packageDTO);
+        var packageRequest = this.mapper.Map<ProgramAssetPackageResponse>(package);
+        return this.Ok(packageRequest);
     }
 
     [HttpGet]
@@ -61,22 +61,22 @@ public class ProgramAssetController : ControllerBase
 
         var package = await this.programAssetService.QueryProgramAssetPackage(programId);
         this.logger.LogInformation($"Found {package.ProgramAssets.Count()} program assets of program {programId}.");
-        var packageDTO = this.mapper.Map<ProgramAssetPackageResponse>(package);
-        return this.Ok(packageDTO);
+        var packageRequest = this.mapper.Map<ProgramAssetPackageResponse>(package);
+        return this.Ok(packageRequest);
     }
 
     [HttpPost]
     [LogActionFilter(noLogResponseBody: true)]
-    public async Task<IActionResult> QueryProgramAssetPackage(ProgramAssetPackageRequest packageDTO)
+    public async Task<IActionResult> QueryProgramAssetPackage(ProgramAssetPackageRequest packageRequest)
     {
-        if (!await CheckUserBasicProgramMap(packageDTO.ProgramId))
+        if (!await CheckUserBasicProgramMap(packageRequest.ProgramId))
         {
             return this.Forbid();
         }
 
-        var package = this.mapper.Map<ProgramAssetPackage>(packageDTO);
+        var package = this.mapper.Map<ProgramAssetPackage>(packageRequest);
         package = await this.programAssetService.QueryProgramAssetPackage(package);
-        this.logger.LogInformation($"Found {packageDTO.ProgramAssets.Count()} program assets of program {packageDTO.ProgramId}.");
+        this.logger.LogInformation($"Found {packageRequest.ProgramAssets.Count()} program assets of program {packageRequest.ProgramId}.");
         var packageResult = this.mapper.Map<ProgramAssetPackageResponse>(package);
         return this.Ok(packageResult);
     }

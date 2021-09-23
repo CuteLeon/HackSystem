@@ -6,5 +6,5 @@ public interface IProgramAssetService
 {
     Task<ProgramAssetPackageResponse> QueryProgramAssetList(string programId);
 
-    Task<ProgramAssetPackageResponse> QueryProgramAssetPackage(ProgramAssetPackageRequest packageDTO);
+    Task<ProgramAssetPackageResponse> QueryProgramAssetPackage(ProgramAssetPackageRequest packageRequest);
 }
