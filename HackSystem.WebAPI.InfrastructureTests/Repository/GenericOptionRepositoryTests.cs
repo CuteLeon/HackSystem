@@ -1,14 +1,13 @@
 ﻿using HackSystem.WebAPI.Application.Repository;
 using HackSystem.WebAPI.Domain.Entity;
 using HackSystem.WebAPI.Infrastructure.DBContexts;
-using HackSystem.WebAPI.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
-namespace HackSystem.WebAPI.Services.Options.Tests;
+namespace HackSystem.WebAPI.Infrastructure.Repository.Tests;
 
-public class GenericOptionDataServiceTests
+public class GenericOptionRepositoryTests
 {
     private HackSystemDbContext GetDBContext()
     {
