@@ -6,9 +6,9 @@ using HackSystem.WebAPI.MockServer.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace HackSystem.WebAPI.MockServer.DataServices.Tests;
+namespace HackSystem.WebAPI.MockServer.Infrastructure.Repository.Tests;
 
-public class MockRouteDataServiceTests
+public class MockRouteRepositoryTests
 {
     [Fact()]
     public void QueryMockRouteTest()
@@ -30,9 +30,9 @@ public class MockRouteDataServiceTests
         mockRoutes.ForEach(route =>
         {
             route.RouteName = "Test Route";
-            route.ForwardRequestBodyTemplate = String.Empty;
-            route.ForwardMethod = String.Empty;
-            route.ForwardAddress = String.Empty;
+            route.ForwardRequestBodyTemplate = string.Empty;
+            route.ForwardMethod = string.Empty;
+            route.ForwardAddress = string.Empty;
         });
         var serviceCollection = new ServiceCollection()
             .AddLogging()

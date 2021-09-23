@@ -70,7 +70,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebAPI.TaskServe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebAPI.MockServer", "HackSystem.WebAPI.MockServer\HackSystem.WebAPI.MockServer.csproj", "{5EA486D3-DF1A-4A2C-852A-40914215D223}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebAPI.MockServerTests", "HackSystem.WebAPI.MockServerTests\HackSystem.WebAPI.MockServerTests.csproj", "{91C78F24-82F1-4284-894D-4FCD018EB7D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.WebAPI.MockServer.InfrastructureTests", "HackSystem.WebAPI.MockServer.InfrastructureTests\HackSystem.WebAPI.MockServer.InfrastructureTests.csproj", "{91C78F24-82F1-4284-894D-4FCD018EB7D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{18D743E0-6FF7-4BE6-B40F-5ABC19547342}"
 EndProject
