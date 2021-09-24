@@ -1,4 +1,5 @@
 using HackSystem.Cryptography;
+using HackSystem.Intermediary.Extensions;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.WebAPI.Authentication.Configurations;
 using HackSystem.WebAPI.Configurations;
@@ -73,6 +74,7 @@ try
         .AttachMockServer(mockServerConfiguration)
         .AddHttpClient()
         .AddMemoryCache()
+        .AddHackSystemIntermediary()
         .AddAPIAuthentication(jwtConfiguration)
         .AddHackSystemDbContext(new HackSystemDbContextOptions
         {
