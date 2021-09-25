@@ -28,10 +28,7 @@ public static class HackSystemIntermediaryExtension
         ServiceLifetime lifetime)
         where TRequestHandler : IIntermediaryRequestHandler<TRequest, ValueTuple>
         where TRequest : IIntermediaryRequest<ValueTuple>
-    {
-        services.Add(new ServiceDescriptor(typeof(IRequestHandler<TRequest, ValueTuple>), typeof(TRequestHandler), lifetime));
-        return services;
-    }
+        => services.AddHackSystemRequestHandler<TRequestHandler, TRequest, ValueTuple>(lifetime);
 
     public static IServiceCollection AddHackSystemRequestHandler<TRequestHandler, TRequest, TResponse>(
         this IServiceCollection services,
