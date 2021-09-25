@@ -1,9 +1,10 @@
-﻿using HackSystem.WebAPI.Application.Behaviors;
+﻿using HackSystem.Intermediary.Extensions;
 using HackSystem.WebAPI.Application.Repository;
 using HackSystem.WebAPI.Domain.Configuration;
-using HackSystem.WebAPI.Infrastructure.Behaviors;
+using HackSystem.WebAPI.Domain.Notifications;
 using HackSystem.WebAPI.Infrastructure.DBContexts;
 using HackSystem.WebAPI.Infrastructure.Middleware;
+using HackSystem.WebAPI.Infrastructure.NotificationHandlers;
 using HackSystem.WebAPI.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IO;
@@ -16,7 +17,7 @@ public static class HackSystemInfrastructureExtension
         this IServiceCollection services)
     {
         services
-            .AddScoped<IAccountCreatedNotificationHandler, AccountCreatedNotificationHandler>()
+            .AddHackSystemNotificationHandler<CreateAccountNotificationHandler, CreateAccountNotification>()
             .AddScoped<IGenericOptionRepository, GenericOptionRepository>()
             .AddScoped<IWebAPILogRepository, WebAPILogRepository>()
             .AddScoped<RecyclableMemoryStreamManager>();

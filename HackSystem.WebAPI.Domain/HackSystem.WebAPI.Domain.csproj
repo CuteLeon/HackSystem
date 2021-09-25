@@ -12,6 +12,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\HackSystem.Intermediary.Abstractions\HackSystem.Intermediary.Abstractions.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Using Include="Microsoft.AspNetCore.Identity" />
 		<Using Include="System.ComponentModel" />
 		<Using Include="System.ComponentModel.DataAnnotations" />

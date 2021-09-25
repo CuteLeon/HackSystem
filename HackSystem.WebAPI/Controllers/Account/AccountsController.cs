@@ -1,10 +1,11 @@
 ﻿using System.Security.Claims;
 using HackSystem.Common;
-using HackSystem.WebAPI.Application.Behaviors;
+using HackSystem.DataTransferObjects.Accounts;
+using HackSystem.Intermediary.Application;
 using HackSystem.WebAPI.Authentication.Services;
 using HackSystem.WebAPI.Domain.Attributes;
 using HackSystem.WebAPI.Domain.Entity.Identity;
-using HackSystem.DataTransferObjects.Accounts;
+using HackSystem.WebAPI.Domain.Notifications;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,15 +18,15 @@ public class AccountsController : AuthenticateControllerBase
 {
     private readonly ILogger<AccountsController> logger;
     private readonly ITokenGenerator tokenGenerator;
-    private readonly IAccountCreatedNotificationHandler accountCreatedNotificationHandler;
     private readonly IMapper mapper;
+    private readonly IIntermediaryNotificationPublisher notificationPublisher;
     private readonly SignInManager<HackSystemUser> signInManager;
 
     public AccountsController(
         ILogger<AccountsController> logger,
         ITokenGenerator tokenGenerator,
-        IAccountCreatedNotificationHandler accountCreatedNotificationHandler,
         IMapper mapper,
+        IIntermediaryNotificationPublisher notificationPublisher,
         SignInManager<HackSystemUser> signInManager,
         RoleManager<HackSystemRole> roleManager,
         UserManager<HackSystemUser> userManager)
@@ -33,8 +34,8 @@ public class AccountsController : AuthenticateControllerBase
     {
         this.logger = logger;
         this.tokenGenerator = tokenGenerator;
-        this.accountCreatedNotificationHandler = accountCreatedNotificationHandler;
         this.mapper = mapper;
+        this.notificationPublisher = notificationPublisher;
         this.signInManager = signInManager;
     }
 
@@ -80,7 +81,7 @@ public class AccountsController : AuthenticateControllerBase
             return this.BadRequest(failedResult);
         }
 
-        await this.accountCreatedNotificationHandler.InitialUser(newUser);
+        await this.notificationPublisher.Publish(new CreateAccountNotification { User = newUser });
 
         this.logger.LogInformation($"Register successfully: {register.UserName}");
         var registerResult = new RegisterResponse()
