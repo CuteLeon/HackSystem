@@ -5,36 +5,38 @@ using Xunit;
 
 namespace HackSystem.Intermediary.Infrastructure.Tests
 {
+    // TODO: Test process behavior;
+    // TODO: Test Singleton or Transient request handler's behavior;
     public class IntermediaryNotificationPublisherTests
     {
         class TestNotification : IIntermediaryNotification { public int Value { get; set; } }
 
         class TestNotification_Transient1_Handler : IIntermediaryNotificationHandler<TestNotification>
         {
-            public static HashSet<string> TransientHandlerInstances = new();
+            public static HashSet<string> HandlerInstances = new();
             public async Task Handle(TestNotification notification, CancellationToken cancellationToken)
-                => TransientHandlerInstances.Add(this.GetHashCode().ToString("X"));
+                => HandlerInstances.Add(this.GetHashCode().ToString("X"));
         }
 
         class TestNotification_Transient2_Handler : IIntermediaryNotificationHandler<TestNotification>
         {
-            public static HashSet<string> TransientHandlerInstances = new();
+            public static HashSet<string> HandlerInstances = new();
             public async Task Handle(TestNotification notification, CancellationToken cancellationToken)
-                => TransientHandlerInstances.Add(this.GetHashCode().ToString("X"));
+                => HandlerInstances.Add(this.GetHashCode().ToString("X"));
         }
 
         class TestNotification_Singleton1_Handler : IIntermediaryNotificationHandler<TestNotification>
         {
-            public static HashSet<string> TransientHandlerInstances = new();
+            public static HashSet<string> HandlerInstances = new();
             public async Task Handle(TestNotification notification, CancellationToken cancellationToken)
-                => TransientHandlerInstances.Add(this.GetHashCode().ToString("X"));
+                => HandlerInstances.Add(this.GetHashCode().ToString("X"));
         }
 
         class TestNotification_Singleton2_Handler : IIntermediaryNotificationHandler<TestNotification>
         {
-            public static HashSet<string> TransientHandlerInstances = new();
+            public static HashSet<string> HandlerInstances = new();
             public async Task Handle(TestNotification notification, CancellationToken cancellationToken)
-                => TransientHandlerInstances.Add(this.GetHashCode().ToString("X"));
+                => HandlerInstances.Add(this.GetHashCode().ToString("X"));
         }
 
         [Fact()]
@@ -55,10 +57,10 @@ namespace HackSystem.Intermediary.Infrastructure.Tests
                 await publisher.Publish(new TestNotification() { Value = index });
             }
 
-            Assert.Equal(10, TestNotification_Transient1_Handler.TransientHandlerInstances.Count());
-            Assert.Equal(10, TestNotification_Transient2_Handler.TransientHandlerInstances.Count());
-            Assert.Equal(1, TestNotification_Singleton1_Handler.TransientHandlerInstances.Count());
-            Assert.Equal(1, TestNotification_Singleton2_Handler.TransientHandlerInstances.Count());
+            Assert.Equal(10, TestNotification_Transient1_Handler.HandlerInstances.Count());
+            Assert.Equal(10, TestNotification_Transient2_Handler.HandlerInstances.Count());
+            Assert.Equal(1, TestNotification_Singleton1_Handler.HandlerInstances.Count());
+            Assert.Equal(1, TestNotification_Singleton2_Handler.HandlerInstances.Count());
         }
     }
 }

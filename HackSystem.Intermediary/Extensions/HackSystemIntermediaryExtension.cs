@@ -11,6 +11,7 @@ public static class HackSystemIntermediaryExtension
             .AddMediatR(typeof(HackSystemIntermediaryExtension).Assembly)
             .AddTransient(typeof(IPipelineBehavior<,>), typeof(IntermediaryPipelineBehavior<,>))
             .AddTransient<IIntermediaryNotificationPublisher, IntermediaryNotificationPublisher>()
+            .AddTransient<IIntermediaryCommandSender, IntermediaryCommandSender>()
             .AddTransient<IIntermediaryRequestSender, IntermediaryRequestSender>();
 
     public static IServiceCollection AddHackSystemNotificationHandler<TNotificationHandler, TNotification>(
@@ -23,16 +24,16 @@ public static class HackSystemIntermediaryExtension
         return services;
     }
 
-    public static IServiceCollection AddHackSystemRequestHandler<TRequestHandler, TRequest>(
+    public static IServiceCollection AddHackSystemCommandHandler<TCommandHandler, TCommand>(
         this IServiceCollection services,
-        ServiceLifetime lifetime)
-        where TRequestHandler : IIntermediaryRequestHandler<TRequest, ValueTuple>
-        where TRequest : IIntermediaryRequest<ValueTuple>
-        => services.AddHackSystemRequestHandler<TRequestHandler, TRequest, ValueTuple>(lifetime);
+        ServiceLifetime lifetime = ServiceLifetime.Transient)
+        where TCommandHandler : IIntermediaryRequestHandler<TCommand, ValueTuple>
+        where TCommand : IIntermediaryRequest<ValueTuple>
+        => services.AddHackSystemRequestHandler<TCommandHandler, TCommand, ValueTuple>(lifetime);
 
     public static IServiceCollection AddHackSystemRequestHandler<TRequestHandler, TRequest, TResponse>(
         this IServiceCollection services,
-        ServiceLifetime lifetime)
+        ServiceLifetime lifetime = ServiceLifetime.Transient)
         where TRequestHandler : IIntermediaryRequestHandler<TRequest, TResponse>
         where TRequest : IIntermediaryRequest<TResponse>
     {
