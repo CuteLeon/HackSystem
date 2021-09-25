@@ -14,6 +14,6 @@ public class BasicProgramRepository : RepositoryBase<BasicProgram>, IBasicProgra
     {
     }
 
-    public async Task<IEnumerable<BasicProgram>> QueryIntegralBasicPrograms()
+    public async Task<IEnumerable<BasicProgram>> QueryMandatoryBasicPrograms()
         => this.AsQueryable().Where(p => p.Mandatory);
 }

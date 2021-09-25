@@ -5,5 +5,5 @@ namespace HackSystem.WebAPI.ProgramServer.Application.Repository;
 
 public interface IBasicProgramRepository : IRepositoryBase<BasicProgram>
 {
-    Task<IEnumerable<BasicProgram>> QueryIntegralBasicPrograms();
+    Task<IEnumerable<BasicProgram>> QueryMandatoryBasicPrograms();
 }
