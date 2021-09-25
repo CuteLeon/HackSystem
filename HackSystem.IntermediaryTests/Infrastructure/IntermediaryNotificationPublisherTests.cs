@@ -5,8 +5,6 @@ using Xunit;
 
 namespace HackSystem.Intermediary.Infrastructure.Tests
 {
-    // TODO: Test process behavior;
-    // TODO: Test Singleton or Transient request handler's behavior;
     public class IntermediaryNotificationPublisherTests
     {
         class TestNotification : IIntermediaryNotification { public int Value { get; set; } }

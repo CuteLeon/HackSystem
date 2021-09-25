@@ -14,7 +14,7 @@ public class CommonSense
         public const string CommanderRole = "Commander";
 
         /// <summary>
-        /// Hack Role
+        /// Hacker Role
         /// </summary>
         public const string HackerRole = "Hacker";
     }
