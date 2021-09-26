@@ -1,16 +1,16 @@
 ﻿using System.Security.Claims;
 using System.Text.Json;
 
-namespace HackSystem.Web.Authentication.Services;
+namespace HackSystem.Web.Authentication.TokenHandlers;
 
 /// <summary>
 /// Parse claims from JWT
 /// </summary>
-public class JWTParserService : IJWTParserService
+public class JsonWebTokenParser : IJsonWebTokenParser
 {
-    private readonly ILogger<JWTParserService> logger;
+    private readonly ILogger<JsonWebTokenParser> logger;
 
-    public JWTParserService(ILogger<JWTParserService> logger)
+    public JsonWebTokenParser(ILogger<JsonWebTokenParser> logger)
     {
         this.logger = logger;
     }

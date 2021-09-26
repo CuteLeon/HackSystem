@@ -1,4 +1,4 @@
-﻿using HackSystem.Web.Authentication.Providers;
+﻿using HackSystem.Web.Authentication.TokenHandlers;
 using HackSystem.Web.TaskSchedule.Services;
 
 namespace HackSystem.Web.TaskSchedule;
@@ -19,7 +19,7 @@ public partial class TaskSchedulerComponent
         this.serviceScope = this.ServiceScopeFactory.CreateScope();
         this.taskDetailService = new TaskDetailService(
             this.serviceScope.ServiceProvider.GetRequiredService<ILogger<TaskDetailService>>(),
-            this.serviceScope.ServiceProvider.GetRequiredService<IHackSystemAuthenticationStateProvider>(),
+            this.serviceScope.ServiceProvider.GetRequiredService<IHackSystemAuthenticationTokenHandler>(),
             this.serviceScope.ServiceProvider.GetRequiredService<HttpClient>());
     }
 

@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
-namespace HackSystem.Web.Authentication.Services;
+namespace HackSystem.Web.Authentication.MockDefault;
 
 public class HackSystemAuthorizationService : DefaultAuthorizationService
 {

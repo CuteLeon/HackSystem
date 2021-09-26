@@ -1,6 +1,9 @@
-﻿using HackSystem.Web.Authentication.Options;
-using HackSystem.Web.Authentication.Providers;
-using HackSystem.Web.Authentication.Services;
+﻿using HackSystem.Web.Authentication.AuthorizationStateHandlers;
+using HackSystem.Web.Authentication.ClaimsIdentityHandlers;
+using HackSystem.Web.Authentication.MockDefault;
+using HackSystem.Web.Authentication.Options;
+using HackSystem.Web.Authentication.TokenHandlers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace HackSystem.Web.Authentication.Extensions;
@@ -11,13 +14,14 @@ public static class HackSystemAuthenticationExtension
     {
         services
             .Configure(configure)
-            .AddScoped<IJWTParserService, JWTParserService>()
-            // .AddScoped<IAuthorizationService, HackSystemAuthorizationService>()
-            // .AddScoped<IAuthorizationHandlerContextFactory, HackSystemAuthorizationHandlerContextFactory>()
-            .AddSingleton<IHackSystemAuthenticationTokenRefresher, HackSystemAuthenticationTokenRefresher>()
+            //.AddScoped<IAuthorizationService, HackSystemAuthorizationService>()
+            //.AddScoped<IAuthorizationHandlerContextFactory, HackSystemAuthorizationHandlerContextFactory>()
+            .AddScoped<IJsonWebTokenParser, JsonWebTokenParser>()
+            .AddScoped<IHackSystemClaimsIdentityValidator, HackSystemClaimsIdentityValidator>()
+            .AddScoped<IHackSystemAuthenticationTokenHandler, HackSystemAuthenticationTokenHandler>()
+            .AddScoped<AuthenticationStateProvider, HackSystemAuthenticationStateHandler>()
             .AddScoped<IHackSystemAuthenticationStateHandler, HackSystemAuthenticationStateHandler>()
-            .AddScoped<AuthenticationStateProvider, HackSystemAuthenticationStateProvider>()
-            .AddScoped<IHackSystemAuthenticationStateProvider, HackSystemAuthenticationStateProvider>();
+            .AddSingleton<IHackSystemAuthenticationTokenRefresher, HackSystemAuthenticationTokenRefresher>();
 
         return services;
     }

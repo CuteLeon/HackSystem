@@ -1,38 +1,13 @@
-﻿using System.Security.Claims;
+﻿using HackSystem.Web.Authentication.ClaimsIdentityHandlers;
 using HackSystem.Web.Authentication.Options;
-using HackSystem.Web.Authentication.Services;
-using HackSystem.Web.CookieStorage;
-using Microsoft.AspNetCore.Components.Authorization;
+using HackSystem.Web.Authentication.TokenHandlers;
 using Moq;
 using Xunit;
 
-namespace HackSystem.Web.Authentication.Providers.Tests;
+namespace HackSystem.Web.Authentication.AuthorizationStateHandlers.Tests;
 
-public class HackSystemAuthenticationStateProviderTests
+public class HackSystemAuthenticationStateHandlerTests
 {
-    [Theory]
-    [InlineData(new[] { ClaimTypes.Name, "exp" }, new[] { "Leon", "253400000800" }, true)]
-    [InlineData(new[] { ClaimTypes.Name, "exp" }, new[] { "Leon", "1" }, false)]
-    public void CheckClaimsIdentityTest(string[] claimTypes, string[] claimParameters, bool expectedValidity)
-    {
-        var claimIdentity = new ClaimsIdentity(claimTypes.Zip(claimParameters, (type, parameter) => new Claim(type, parameter)));
-        var options = new HackSystemAuthenticationOptions();
-        var mockLogger = new Mock<ILogger<HackSystemAuthenticationStateProvider>>();
-        var mockOptions = new Mock<IOptionsSnapshot<HackSystemAuthenticationOptions>>();
-        mockOptions.SetupGet(m => m.Value).Returns(options);
-        var jwtParserService = new JWTParserService(new Mock<ILogger<JWTParserService>>().Object);
-        var mockCookieStorageService = new Mock<ICookieStorageService>();
-
-        var serviceInstance = new HackSystemAuthenticationStateProvider(
-            mockLogger.Object,
-            mockOptions.Object,
-            jwtParserService,
-            mockCookieStorageService.Object);
-        var validity = serviceInstance.CheckClaimsIdentity(claimIdentity);
-
-        Assert.Equal(expectedValidity, validity);
-    }
-
     [Theory]
     [InlineData(null, false, null)]
     [InlineData("", false, null)]
@@ -42,18 +17,21 @@ public class HackSystemAuthenticationStateProviderTests
     public async Task GetAuthenticationStateAsyncTest(string authToken, bool isAuthenticated, string authenticationType)
     {
         var options = new HackSystemAuthenticationOptions();
-        var mockLogger = new Mock<ILogger<HackSystemAuthenticationStateProvider>>();
         var mockOptions = new Mock<IOptionsSnapshot<HackSystemAuthenticationOptions>>();
         mockOptions.SetupGet(m => m.Value).Returns(options);
-        var jwtParserService = new JWTParserService(new Mock<ILogger<JWTParserService>>().Object);
-        var mockCookieStorageService = new Mock<ICookieStorageService>();
-        mockCookieStorageService.Setup(m => m.GetCookieAsync(It.Is<string>(s => s.Equals(options.AuthTokenName)))).ReturnsAsync(authToken);
 
-        AuthenticationStateProvider serviceInstance = new HackSystemAuthenticationStateProvider(
+        var mockLogger = new Mock<ILogger<HackSystemAuthenticationStateHandler>>();
+        var jwtParserService = new JsonWebTokenParser(new Mock<ILogger<JsonWebTokenParser>>().Object);
+        var claimsIdentityValidator = new HackSystemClaimsIdentityValidator(new Mock<ILogger<HackSystemClaimsIdentityValidator>>().Object, mockOptions.Object);
+        var mockTokenHandler = new Mock<HackSystemAuthenticationTokenHandler>();
+        mockTokenHandler.Setup(m => m.GetTokenAsync()).ReturnsAsync(authToken);
+
+        IHackSystemAuthenticationStateHandler serviceInstance = new HackSystemAuthenticationStateHandler(
             mockLogger.Object,
             mockOptions.Object,
+            mockTokenHandler.Object,
             jwtParserService,
-            mockCookieStorageService.Object);
+            claimsIdentityValidator);
         var authState = await serviceInstance.GetAuthenticationStateAsync();
 
         Assert.Equal(authenticationType, authState.User.Identity.AuthenticationType);

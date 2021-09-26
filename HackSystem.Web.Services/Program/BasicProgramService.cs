@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Json;
-using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Services.API.Program;
 using HackSystem.Web.Services.Authentication;
 using HackSystem.DataTransferObjects.Programs;
+using HackSystem.Web.Authentication.TokenHandlers;
 
 namespace HackSystem.Web.Services.Program;
 
@@ -10,9 +10,9 @@ public class BasicProgramService : AuthenticatedServiceBase, IBasicProgramServic
 {
     public BasicProgramService(
         ILogger<BasicProgramService> logger,
-        IHackSystemAuthenticationStateProvider hackSystemAuthenticationStateProvider,
+        IHackSystemAuthenticationTokenHandler authenticationTokenHandler,
         HttpClient httpClient)
-        : base(logger, hackSystemAuthenticationStateProvider, httpClient)
+        : base(logger, authenticationTokenHandler, httpClient)
     {
     }
 

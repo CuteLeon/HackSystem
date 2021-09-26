@@ -13,6 +13,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\HackSystem.Web.Authentication.Abstractions\HackSystem.Web.Authentication.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.CookieStorage\HackSystem.Web.CookieStorage.csproj" />
 	</ItemGroup>
 

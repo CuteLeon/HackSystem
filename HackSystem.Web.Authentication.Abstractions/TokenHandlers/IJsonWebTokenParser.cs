@@ -1,8 +1,8 @@
 ﻿using System.Security.Claims;
 
-namespace HackSystem.Web.Authentication.Services;
+namespace HackSystem.Web.Authentication.TokenHandlers;
 
-public interface IJWTParserService
+public interface IJsonWebTokenParser
 {
     IEnumerable<Claim> ParseJWTToken(string token);
 

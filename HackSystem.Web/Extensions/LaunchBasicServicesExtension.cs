@@ -1,4 +1,4 @@
-﻿using HackSystem.Web.Authentication.Providers;
+﻿using HackSystem.Web.Authentication.TokenHandlers;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace HackSystem.Web.Extensions;

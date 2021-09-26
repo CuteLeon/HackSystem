@@ -1,7 +1,8 @@
 ﻿using System.Security.Claims;
+using HackSystem.Web.Authentication.AuthorizationStateHandlers;
+using HackSystem.Web.Authentication.ClaimsIdentityHandlers;
 using HackSystem.Web.Authentication.Options;
-using HackSystem.Web.Authentication.Providers;
-using HackSystem.Web.Authentication.Services;
+using HackSystem.Web.Authentication.TokenHandlers;
 using HackSystem.Web.CookieStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Moq;
@@ -39,9 +40,13 @@ public class HackSystemAuthenticationExtensionTests
         Assert.Equal(25, optionsInstance.Value.TokenRefreshInMinutes);
         Assert.True(optionsInstance.Value.AnonymousState.User.HasClaim(c => c.Type == ClaimTypes.Name && c.Value == "Anonymous"));
 
-        object serviceInstance = serviceProvider.GetRequiredService<IJWTParserService>();
+        object serviceInstance = serviceProvider.GetRequiredService<IJsonWebTokenParser>();
         Assert.NotNull(serviceInstance);
-        Assert.IsType<JWTParserService>(serviceInstance);
+        Assert.IsType<JsonWebTokenParser>(serviceInstance);
+
+        serviceInstance = serviceProvider.GetRequiredService<IHackSystemClaimsIdentityValidator>();
+        Assert.NotNull(serviceInstance);
+        Assert.IsType<HackSystemClaimsIdentityValidator>(serviceInstance);
 
         serviceInstance = serviceProvider.GetRequiredService<IHackSystemAuthenticationTokenRefresher>();
         Assert.NotNull(serviceInstance);
@@ -53,6 +58,10 @@ public class HackSystemAuthenticationExtensionTests
 
         serviceInstance = serviceProvider.GetRequiredService<AuthenticationStateProvider>();
         Assert.NotNull(serviceInstance);
-        Assert.IsType<HackSystemAuthenticationStateProvider>(serviceInstance);
+        Assert.IsType<HackSystemAuthenticationStateHandler>(serviceInstance);
+
+        serviceInstance = serviceProvider.GetRequiredService<IHackSystemAuthenticationTokenHandler>();
+        Assert.NotNull(serviceInstance);
+        Assert.IsType<HackSystemAuthenticationTokenHandler>(serviceInstance);
     }
 }

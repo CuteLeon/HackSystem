@@ -1,10 +1,11 @@
 ﻿using System.Net.Http.Json;
 using HackSystem.Web.Authentication.Extensions;
-using HackSystem.Web.Authentication.Providers;
 using HackSystem.Web.Services.API.Authentication;
 using HackSystem.Web.Services.Extensions;
 using HackSystem.DataTransferObjects.Accounts;
 using Newtonsoft.Json;
+using HackSystem.Web.Authentication.TokenHandlers;
+using HackSystem.Web.Authentication.AuthorizationStateHandlers;
 
 namespace HackSystem.Web.Services.Authentication;
 
@@ -12,16 +13,19 @@ public class AuthenticationService : IAuthenticationService
 {
     private readonly ILogger<AuthenticationService> logger;
     private readonly HttpClient httpClient;
-    private readonly IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler;
+    private readonly IHackSystemAuthenticationTokenHandler authenticationTokenHandler;
+    private readonly IHackSystemAuthenticationStateHandler authenticationStateHandler;
 
     public AuthenticationService(
         ILogger<AuthenticationService> logger,
         HttpClient httpClient,
-        IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler)
+        IHackSystemAuthenticationTokenHandler authenticationTokenHandler,
+        IHackSystemAuthenticationStateHandler authenticationStateHandler)
     {
         this.logger = logger;
         this.httpClient = httpClient;
-        this.hackSystemAuthenticationStateHandler = hackSystemAuthenticationStateHandler;
+        this.authenticationTokenHandler = authenticationTokenHandler;
+        this.authenticationStateHandler = authenticationStateHandler;
     }
 
     /// <summary>
@@ -52,7 +56,7 @@ public class AuthenticationService : IAuthenticationService
             return loginResult;
         }
 
-        await this.hackSystemAuthenticationStateHandler.UpdateAuthenticattionStateAsync(loginResult.Token);
+        await this.authenticationStateHandler.UpdateAuthenticattionStateAsync(loginResult.Token);
         return loginResult;
     }
 
@@ -64,7 +68,7 @@ public class AuthenticationService : IAuthenticationService
     {
         logger.LogDebug($"Get account information...");
 
-        var currentToken = await this.hackSystemAuthenticationStateHandler.GetCurrentTokenAsync();
+        var currentToken = await this.authenticationTokenHandler.GetTokenAsync();
         httpClient.AddAuthorizationHeader(currentToken);
         var response = await httpClient.GetAsync("api/accounts/GetAccountInfo");
         if (!response.IsSuccessStatusCode)
@@ -86,7 +90,7 @@ public class AuthenticationService : IAuthenticationService
 
         try
         {
-            var currentToken = await this.hackSystemAuthenticationStateHandler.GetCurrentTokenAsync();
+            var currentToken = await this.authenticationTokenHandler.GetTokenAsync();
             httpClient.AddAuthorizationHeader(currentToken);
             await httpClient.GetAsync("api/accounts/logout");
         }
@@ -95,6 +99,6 @@ public class AuthenticationService : IAuthenticationService
             logger.LogWarning($"Logout Failed: {ex.Message}");
         }
 
-        await this.hackSystemAuthenticationStateHandler.UpdateAuthenticattionStateAsync(string.Empty);
+        await this.authenticationStateHandler.UpdateAuthenticattionStateAsync(string.Empty);
     }
 }

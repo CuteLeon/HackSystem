@@ -1,12 +1,14 @@
-﻿using HackSystem.Web.Authentication.Extensions;
+﻿using HackSystem.Web.Authentication.AuthorizationStateHandlers;
+using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Authentication.Options;
 
-namespace HackSystem.Web.Authentication.Providers;
+namespace HackSystem.Web.Authentication.TokenHandlers;
 
 public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationTokenRefresher
 {
     private readonly ILogger<HackSystemAuthenticationTokenRefresher> logger;
     private readonly IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler;
+    private readonly IHackSystemAuthenticationTokenHandler hackSystemAuthenticationTokenHandler;
     private readonly Timer timer;
     private readonly IOptionsMonitor<HackSystemAuthenticationOptions> options;
     private readonly HttpClient httpClient;
@@ -19,13 +21,13 @@ public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationT
     {
         this.logger = logger;
         this.options = options;
-
-        var scope = serviceScopeFactory.CreateScope();
-        this.hackSystemAuthenticationStateHandler = scope.ServiceProvider.GetService<IHackSystemAuthenticationStateHandler>();
-        this.httpClient = scope.ServiceProvider.GetService<HttpClient>();
-
-        this.period = this.options.CurrentValue.TokenRefreshInMinutes * 1000 * 60;
+        this.period = options.CurrentValue.TokenRefreshInMinutes * 1000 * 60;
         this.timer = new Timer(new TimerCallback(this.RefreshTokenCallBack), null, Timeout.Infinite, period);
+
+        var provider = serviceScopeFactory.CreateScope().ServiceProvider;
+        this.httpClient = provider.GetService<HttpClient>();
+        this.hackSystemAuthenticationStateHandler = provider.GetService<IHackSystemAuthenticationStateHandler>();
+        this.hackSystemAuthenticationTokenHandler = provider.GetService<IHackSystemAuthenticationTokenHandler>();
     }
 
     public bool IsRunning { get; private set; }
@@ -51,11 +53,11 @@ public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationT
 
     public virtual async Task<string> RefreshTokenAsync()
     {
-        this.logger.LogDebug($"Trying to refresh Token ...");
-        var currentToken = await this.hackSystemAuthenticationStateHandler.GetCurrentTokenAsync();
+        this.logger.LogDebug($"Hack System refresh Token ...");
+        var currentToken = await this.hackSystemAuthenticationTokenHandler.GetTokenAsync();
         if (string.IsNullOrWhiteSpace(currentToken))
         {
-            this.logger.LogDebug($"Got empty Token, skipping refrsh...");
+            this.logger.LogDebug($"Current Token is empty, skipping refresh token ...");
             return default;
         }
 

@@ -1,4 +1,4 @@
-﻿namespace HackSystem.Web.Authentication.Providers;
+﻿namespace HackSystem.Web.Authentication.TokenHandlers;
 
 public interface IHackSystemAuthenticationTokenRefresher
 {

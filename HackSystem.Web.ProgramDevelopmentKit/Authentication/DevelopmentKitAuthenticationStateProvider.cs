@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
-using HackSystem.Web.Authentication.Providers;
+using HackSystem.Web.Authentication.AuthorizationStateHandlers;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace HackSystem.Web.ProgramDevelopmentKit.Authentication;
 
-public class DevelopmentKitAuthenticationStateProvider : AuthenticationStateProvider, IHackSystemAuthenticationStateProvider
+public class DevelopmentKitAuthenticationStateProvider : AuthenticationStateProvider, IHackSystemAuthenticationStateHandler
 {
     public AuthenticationState AuthenticationState { get; set; }
 
@@ -34,23 +34,8 @@ public class DevelopmentKitAuthenticationStateProvider : AuthenticationStateProv
         return this.AuthenticationState;
     }
 
-    public async ValueTask<string> GetCurrentTokenAsync()
+    public Task UpdateAuthenticattionStateAsync(string token)
     {
-        return this.Token;
-    }
-
-    public void NotifyAuthenticationStateChanged(AuthenticationState authenticationState)
-    {
-        throw new NotSupportedException();
-    }
-
-    public ClaimsIdentity ParseClaimsIdentity(string token)
-    {
-        throw new NotSupportedException();
-    }
-
-    public bool CheckClaimsIdentity(ClaimsIdentity claimsIdentity)
-    {
-        throw new NotSupportedException();
+        throw new NotImplementedException();
     }
 }
