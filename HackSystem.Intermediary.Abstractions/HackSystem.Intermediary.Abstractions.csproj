@@ -13,9 +13,11 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>HackSystem</PackageTags>
 		<NeutralLanguage>en</NeutralLanguage>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="..\LICENSE" Pack="true" PackagePath=""/>
 		<None Include="..\HackSystem.Web\wwwroot\LogoImageIcon.png">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
