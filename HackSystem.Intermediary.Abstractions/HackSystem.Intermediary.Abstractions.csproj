@@ -8,10 +8,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="MediatR" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0-rc.1.21451.13" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Using Include="MediatR"/>
+		<Using Include="MediatR" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
 	</ItemGroup>
 
 </Project>
