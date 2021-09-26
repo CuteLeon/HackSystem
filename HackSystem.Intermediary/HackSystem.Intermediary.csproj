@@ -14,6 +14,7 @@
 		<PackageTags>HackSystem</PackageTags>
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<Description>Intermediary component of Hack System.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
