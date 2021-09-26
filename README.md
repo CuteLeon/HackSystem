@@ -18,8 +18,12 @@
 [![GitHub commits since latest release (by date including pre-releases)](https://img.shields.io/github/commits-since/CuteLeon/HackSystem/latest/master?include_prereleases)](https://github.com/CuteLeon/HackSystem/releases)
 [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/CuteLeon/HackSystem/master)](https://github.com/CuteLeon/HackSystem/commits/master)
 
-
 ![](https://raw.github.com/CuteLeon/HackSystem/master/HackSystem.Web/wwwroot/LogoImage.png)
+
+## Nuget Packages
+
+![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/HackSystem.Intermediary?label=HackSystem.Intermediary&style=flat-square)
+![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/HackSystem.Intermediary.Abstractions?label=HackSystem.Intermediary.Abstractions&style=flat-square)
 
 ## How to launch?
 
