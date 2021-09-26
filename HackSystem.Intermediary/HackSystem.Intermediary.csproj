@@ -15,6 +15,8 @@
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Description>Intermediary component of Hack System.</Description>
+		<AssemblyVersion>1.0.0.1</AssemblyVersion>
+		<Version>$(AssemblyVersion)</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
