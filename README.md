@@ -91,9 +91,9 @@
 
 ## Setup
 
-1. Select HackSystem.WebAPI as Startup project;
+1. Select `HackSystem.WebAPI` as Startup project;
 2. Open Package Manager Console in Visual Studio;
-3. Select HackSystem.WebAPI.Infrastructure as Default project in Package Manager Console;
+3. Select `HackSystem.WebAPI.Infrastructure` as Default project in Package Manager Console;
 4. Input commands and execute;
 
 ## Commands
