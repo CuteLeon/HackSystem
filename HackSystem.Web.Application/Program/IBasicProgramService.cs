@@ -1,6 +1,6 @@
 ﻿using HackSystem.DataTransferObjects.Programs;
 
-namespace HackSystem.Web.Services.API.Program;
+namespace HackSystem.Web.Application.Program;
 
 public interface IBasicProgramService
 {

@@ -1,13 +1,12 @@
 ﻿using System.Net.Http.Json;
-using HackSystem.Web.Authentication.Extensions;
-using HackSystem.Web.Services.API.Authentication;
-using HackSystem.Web.Services.Extensions;
 using HackSystem.DataTransferObjects.Accounts;
-using Newtonsoft.Json;
-using HackSystem.Web.Authentication.TokenHandlers;
+using HackSystem.Web.Application.Authentication;
 using HackSystem.Web.Authentication.AuthorizationStateHandlers;
+using HackSystem.Web.Authentication.TokenHandlers;
+using HackSystem.Web.Infrastructure.Extensions;
+using Newtonsoft.Json;
 
-namespace HackSystem.Web.Services.Authentication;
+namespace HackSystem.Web.Infrastructure.Authentication;
 
 public class AuthenticationService : IAuthenticationService
 {

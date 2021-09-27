@@ -1,9 +1,9 @@
 using HackSystem.Observer;
 using HackSystem.Web.CookieStorage;
+using HackSystem.Web.Domain.Configurations;
+using HackSystem.Web.Infrastructure.Extensions;
 using HackSystem.Web.ProgramDevelopmentKit;
 using HackSystem.Web.ProgramDevelopmentKit.Authentication;
-using HackSystem.Web.Services.Configurations;
-using HackSystem.Web.Services.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

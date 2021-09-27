@@ -1,11 +1,11 @@
 ﻿using System.Net.Http.Json;
 using HackSystem.DataTransferObjects.Programs.ProgramAssets;
 using HackSystem.Web.Authentication.TokenHandlers;
-using HackSystem.Web.Services.API.Program.ProgramAsset;
-using HackSystem.Web.Services.Authentication;
+using HackSystem.Web.Application.Program.ProgramAsset;
+using HackSystem.Web.Infrastructure.Authentication;
 using Newtonsoft.Json;
 
-namespace HackSystem.Web.Services.Program.ProgramAsset;
+namespace HackSystem.Web.Infrastructure.Program.ProgramAsset;
 
 public class ProgramAssetService : AuthenticatedServiceBase, IProgramAssetService
 {

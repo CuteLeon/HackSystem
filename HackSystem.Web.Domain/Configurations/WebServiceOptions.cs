@@ -1,4 +1,4 @@
-﻿namespace HackSystem.Web.Services.Configurations;
+﻿namespace HackSystem.Web.Domain.Configurations;
 
 public class WebServiceOptions
 {

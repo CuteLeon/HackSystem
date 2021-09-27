@@ -1,10 +1,10 @@
 ﻿using System.Net.Http.Json;
-using HackSystem.Web.Services.API.Program;
-using HackSystem.Web.Services.Authentication;
+using HackSystem.Web.Application.Program;
+using HackSystem.Web.Infrastructure.Authentication;
 using HackSystem.DataTransferObjects.Programs;
 using HackSystem.Web.Authentication.TokenHandlers;
 
-namespace HackSystem.Web.Services.Program;
+namespace HackSystem.Web.Infrastructure.Program;
 
 public class BasicProgramService : AuthenticatedServiceBase, IBasicProgramService
 {

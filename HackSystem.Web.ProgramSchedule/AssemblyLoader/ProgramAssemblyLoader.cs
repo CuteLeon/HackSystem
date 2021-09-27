@@ -2,7 +2,7 @@
 using System.Runtime.Loader;
 using AutoMapper;
 using HackSystem.DataTransferObjects.Programs.ProgramAssets;
-using HackSystem.Web.Services.API.Program.ProgramAsset;
+using HackSystem.Web.Application.Program.ProgramAsset;
 
 namespace HackSystem.Web.ProgramSchedule.AssemblyLoader;
 

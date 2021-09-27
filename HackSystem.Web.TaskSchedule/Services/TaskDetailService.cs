@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
 using HackSystem.DataTransferObjects.TaskServer;
 using HackSystem.Web.Authentication.TokenHandlers;
-using HackSystem.Web.Services.Authentication;
+using HackSystem.Web.Infrastructure.Authentication;
 
 namespace HackSystem.Web.TaskSchedule.Services;
 

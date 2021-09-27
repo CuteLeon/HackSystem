@@ -1,8 +1,7 @@
-﻿using HackSystem.Web.Authentication.Extensions;
-using HackSystem.Web.Authentication.TokenHandlers;
-using HackSystem.Web.Services.Extensions;
+﻿using HackSystem.Web.Authentication.TokenHandlers;
+using HackSystem.Web.Infrastructure.Extensions;
 
-namespace HackSystem.Web.Services.Authentication;
+namespace HackSystem.Web.Infrastructure.Authentication;
 
 public class AuthenticatedServiceBase
 {

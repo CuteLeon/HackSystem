@@ -1,6 +1,6 @@
 ﻿using HackSystem.DataTransferObjects.Accounts;
 
-namespace HackSystem.Web.Services.API.Authentication;
+namespace HackSystem.Web.Application.Authentication;
 
 public interface IAuthenticationService
 {

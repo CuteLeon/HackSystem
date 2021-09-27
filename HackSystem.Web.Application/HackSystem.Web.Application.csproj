@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.Authentication.Abstractions\HackSystem.Web.Authentication.Abstractions.csproj" />
+    <ProjectReference Include="..\HackSystem.Web.Domain\HackSystem.Web.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

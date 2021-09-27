@@ -1,12 +1,12 @@
-﻿using HackSystem.Web.Services.API.Authentication;
-using HackSystem.Web.Services.API.Program;
-using HackSystem.Web.Services.API.Program.ProgramAsset;
-using HackSystem.Web.Services.Authentication;
-using HackSystem.Web.Services.Configurations;
-using HackSystem.Web.Services.Program;
-using HackSystem.Web.Services.Program.ProgramAsset;
+﻿using HackSystem.Web.Application.Authentication;
+using HackSystem.Web.Application.Program;
+using HackSystem.Web.Application.Program.ProgramAsset;
+using HackSystem.Web.Domain.Configurations;
+using HackSystem.Web.Infrastructure.Authentication;
+using HackSystem.Web.Infrastructure.Program;
+using HackSystem.Web.Infrastructure.Program.ProgramAsset;
 
-namespace HackSystem.Web.Services.Extensions;
+namespace HackSystem.Web.Infrastructure.Extensions;
 
 public static class ServiceCollectionExtension
 {

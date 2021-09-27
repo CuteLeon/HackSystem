@@ -1,6 +1,6 @@
 ﻿using HackSystem.DataTransferObjects.Programs.ProgramAssets;
 
-namespace HackSystem.Web.Services.API.Program.ProgramAsset;
+namespace HackSystem.Web.Application.Program.ProgramAsset;
 
 public interface IProgramAssetService
 {
