@@ -59,7 +59,7 @@ public class LoginComponentTests
         ctx.Services
             .AddLogging()
             .AddSingleton<NavigationManager>(mockNavigationManager)
-            .AddSingleton(new Mock<ICookieStorageService>().Object)
+            .AddSingleton(new Mock<ICookieStorageHandler>().Object)
             .AddSingleton(mockTokenHandler.Object)
             .AddSingleton(mockStateHandler.Object)
             .AddScoped<IAuthenticationService, AuthenticationService>()

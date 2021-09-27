@@ -4,12 +4,12 @@
 /// Cookie storage service
 /// </summary>
 /// <remarks> Should work with blazor.cookie.js </remarks>
-public class CookieStorageService : ICookieStorageService
+public class CookieStorageHandler : ICookieStorageHandler
 {
     public event EventHandler<CookieChangedEventArgs> CookieChanged;
     private readonly IJSInProcessRuntime jsInProcessRuntime;
 
-    public CookieStorageService(IJSRuntime jsRuntime)
+    public CookieStorageHandler(IJSRuntime jsRuntime)
     {
         this.jsInProcessRuntime = (jsRuntime as IJSInProcessRuntime);
     }

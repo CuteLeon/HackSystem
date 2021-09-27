@@ -31,7 +31,7 @@ public class LogoutComponentTests
         ctx.Services
             .AddLogging()
             .AddSingleton<NavigationManager>(mockNavigationManager)
-            .AddSingleton(new Mock<ICookieStorageService>().Object)
+            .AddSingleton(new Mock<ICookieStorageHandler>().Object)
             .AddHackSystemAuthentication(options =>
             {
                 options.AuthenticationURL = baseUri.AbsoluteUri;

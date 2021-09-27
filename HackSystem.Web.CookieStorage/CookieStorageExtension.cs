@@ -3,5 +3,5 @@
 public static class CookieStorageExtension
 {
     public static IServiceCollection AddCookieStorage(this IServiceCollection services)
-        => services.AddScoped<ICookieStorageService, CookieStorageService>();
+        => services.AddScoped<ICookieStorageHandler, CookieStorageHandler>();
 }

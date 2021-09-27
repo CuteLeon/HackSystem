@@ -1,6 +1,6 @@
 ﻿namespace HackSystem.Web.CookieStorage;
 
-public interface ICookieStorageService
+public interface ICookieStorageHandler
 {
     event EventHandler<CookieChangedEventArgs> CookieChanged;
 

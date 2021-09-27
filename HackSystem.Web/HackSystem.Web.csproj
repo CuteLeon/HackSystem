@@ -30,6 +30,7 @@
 		<ProjectReference Include="..\HackSystem.Observer\HackSystem.Observer.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.Authentication\HackSystem.Web.Authentication.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.Common\HackSystem.Web.Common.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.CookieStorage.Abstractions\HackSystem.Web.CookieStorage.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.CookieStorage\HackSystem.Web.CookieStorage.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule\HackSystem.Web.ProgramSchedule.csproj" />
