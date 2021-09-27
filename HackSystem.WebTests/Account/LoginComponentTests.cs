@@ -1,19 +1,17 @@
 ﻿using System.Net;
 using System.Text.Json;
 using Bunit;
+using HackSystem.DataTransferObjects.Accounts;
+using HackSystem.Web.Authentication.AuthorizationStateHandlers;
+using HackSystem.Web.Authentication.TokenHandlers;
 using HackSystem.Web.CookieStorage;
 using HackSystem.Web.Services.API.Authentication;
 using HackSystem.Web.Services.Authentication;
-using HackSystem.DataTransferObjects.Accounts;
 using HackSystem.WebTests.Mocks;
 using Microsoft.AspNetCore.Components;
 using Moq;
 using Moq.Contrib.HttpClient;
 using Xunit;
-using HackSystem.Web.Authentication.AuthorizationStateHandlers;
-using System;
-using Microsoft.Extensions.DependencyInjection;
-using System.Net.Http;
 
 namespace HackSystem.Web.Account.Tests;
 
@@ -54,14 +52,16 @@ public class LoginComponentTests
         var mockHttpClient = mockHttpMessageHandler.CreateClient();
         mockHttpClient.BaseAddress = baseUri;
         var mockNavigationManager = new MockNavigationManager(baseUri.AbsoluteUri, logoutUri.AbsoluteUri);
-        var mockHackSystemAuthenticationStateHandler = new Mock<IHackSystemAuthenticationStateHandler>();
+        var mockTokenHandler = new Mock<IHackSystemAuthenticationTokenHandler>();
+        var mockStateHandler = new Mock<IHackSystemAuthenticationStateHandler>();
 
         using var ctx = new TestContext();
         ctx.Services
             .AddLogging()
             .AddSingleton<NavigationManager>(mockNavigationManager)
             .AddSingleton(new Mock<ICookieStorageService>().Object)
-            .AddSingleton(mockHackSystemAuthenticationStateHandler.Object)
+            .AddSingleton(mockTokenHandler.Object)
+            .AddSingleton(mockStateHandler.Object)
             .AddScoped<IAuthenticationService, AuthenticationService>()
             .AddSingleton(mockHttpClient);
 
