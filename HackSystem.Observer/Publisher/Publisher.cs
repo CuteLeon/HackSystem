@@ -3,6 +3,7 @@ using HackSystem.Observer.Message;
 
 namespace HackSystem.Observer.Publisher;
 
+[Obsolete]
 public class Publisher<TMessage> : IPublisher<TMessage>
     where TMessage : MessageBase
 {
@@ -12,6 +13,7 @@ public class Publisher<TMessage> : IPublisher<TMessage>
     protected readonly ILogger<IPublisher<TMessage>> logger;
     protected readonly string messageType = typeof(TMessage).Name;
 
+    [Obsolete]
     public Publisher(ILogger<IPublisher<TMessage>> logger)
     {
         this.logger = logger;
@@ -20,6 +22,7 @@ public class Publisher<TMessage> : IPublisher<TMessage>
         this.observable = this.messageBufferBlock.AsObservable();
     }
 
+    [Obsolete]
     public IDisposable Subscribe(IObserver<TMessage> observer)
     {
         if (this.observers.ContainsKey(observer))
@@ -33,6 +36,7 @@ public class Publisher<TMessage> : IPublisher<TMessage>
         return disposable;
     }
 
+    [Obsolete]
     public void UnSubsciber(IObserver<TMessage> observer)
     {
         if (!this.observers.TryGetValue(observer, out var disposable))
@@ -46,6 +50,7 @@ public class Publisher<TMessage> : IPublisher<TMessage>
         this.logger.LogInformation($"Publisher of {this.messageType}, observer ({observer.GetHashCode():X}) unsubscribed.");
     }
 
+    [Obsolete]
     public async Task Publish(TMessage message)
     {
         this.logger.LogInformation($"Publisher of {this.messageType}, publish message: {message}.");
@@ -59,6 +64,7 @@ public class Publisher<TMessage> : IPublisher<TMessage>
         await Task.CompletedTask;
     }
 
+    [Obsolete]
     public void Dispose()
     {
         foreach (var subscriber in this.observers.Keys)

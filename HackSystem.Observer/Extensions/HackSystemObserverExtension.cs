@@ -3,8 +3,10 @@ using HackSystem.Observer.Subscriber;
 
 namespace HackSystem.Observer;
 
+[Obsolete]
 public static class HackSystemObserverExtension
 {
+    [Obsolete]
     public static IServiceCollection AddHackSystemObserver(this IServiceCollection services)
     {
         services
