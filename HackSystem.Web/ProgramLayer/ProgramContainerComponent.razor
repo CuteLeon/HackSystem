@@ -1,7 +1,5 @@
 ﻿@inject ILogger<ProgramContainerComponent> logger
 @inject IProcessContainer processContainer
-@inject ISubscriber<ProgramLaunchMessage> programLaunchSubcriber
-@inject ISubscriber<ProcessCloseMessage> processCloseSubscriber
 @inject IProcessDisposer processDisposer
 @inject IProgramScheduler programScheduler
 
@@ -11,12 +9,12 @@
         <!-- Fixed a big issue here. More details please navigate to https://github.com/dotnet/aspnetcore/issues/29176 -->
         var key = $"Process_{process.PID}";
         <DynamicComponent @key="key"
-                          Type="process.ProgramEntity.ProgramComponentType"
+                          Type="process.ProgramDetail.ProgramComponentType"
                           @ref="process.DynamicProgramComponent"
                           Parameters="new Dictionary<string, object>
                                       {
                                           { nameof(ProgramComponentBase.PID), process.PID },
-                                          { nameof(ProgramComponentBase.ProgramEntity), process.ProgramEntity },
+                                          { nameof(ProgramComponentBase.ProgramDetail), process.ProgramDetail},
                                       }">
         </DynamicComponent>
     }

@@ -1,7 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using HackSystem.Common;
 using HackSystem.Cryptography;
-using HackSystem.Observer;
 using HackSystem.Web;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Common;
@@ -29,7 +28,6 @@ builder.Configuration
 builder.Services
     .AddAutoMapper(typeof(Program).Assembly)
     .AddLogging()
-    .AddHackSystemObserver()
     .AddBlazoredLocalStorage()
     .AddHackSystemProgramScheduler(options =>
     {

@@ -1,5 +1,6 @@
 ﻿using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
 using HackSystem.DataTransferObjects.Programs;
+using HackSystem.Web.ProgramSchedule.Domain.Entity;
 
 namespace HackSystem.Web.ProgramDrawer;
 
@@ -35,6 +36,7 @@ public partial class ProgramDrawerComponent
     public async Task OnDoubleClickIcon(ProgramDrawerIconMouseEventArgs args)
     {
         this.logger.LogInformation($"Double click to luanch program: {args.UserBasicProgramMap.BasicProgram.Name}");
-        await this.programLauncher.LaunchProgram(args.UserBasicProgramMap.BasicProgram);
+        var programDetail = this.mapper.Map<BasicProgramResponse, ProgramDetail>(args.UserBasicProgramMap.BasicProgram);
+        await this.programLauncher.LaunchProgram(programDetail);
     }
 }

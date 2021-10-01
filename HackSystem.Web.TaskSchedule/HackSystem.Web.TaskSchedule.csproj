@@ -21,7 +21,8 @@
 		<ProjectReference Include="..\HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.Authentication.Abstractions\HackSystem.Web.Authentication.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.Infrastructure\HackSystem.Web.Infrastructure.csproj" />
-		<ProjectReference Include="..\HackSystem.Web.ProgramSDK\HackSystem.Web.ProgramSDK.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform.Abstractions\HackSystem.Web.ProgramPlatform.Abstractions.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform\HackSystem.Web.ProgramPlatform.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

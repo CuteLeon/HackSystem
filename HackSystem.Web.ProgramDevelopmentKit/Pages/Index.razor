@@ -6,23 +6,23 @@
 
 @code {
     Type ProgramType { get; set; }
-    ProgramEntity ProgramEntity { get; set; }
+    ProgramDetail ProgramDetail { get; set; }
     Dictionary<string, object> ComponentParameter { get; set; }
 
     protected override void OnInitialized()
     {
         this.ProgramType = typeof(HackSystem.Web.TaskSchedule.TaskSchedulerComponent);
-        this.ProgramEntity = new()
-        {
-            Name = this.ProgramType.Name,
-            ProgramComponentType = this.ProgramType,
-            Z_Index = 1,
-        };
+        this.ProgramDetail = new()
+            {
+                Name = this.ProgramType.Name,
+                ProgramComponentType = this.ProgramType,
+                Z_Index = 1,
+            };
         this.ComponentParameter = new()
-        {
-            { nameof(ProgramComponentBase.PID), 1 },
-            { nameof(ProgramComponentBase.ProgramEntity), this.ProgramEntity },
-        };
+            {
+                { nameof(ProgramComponentBase.PID), 1 },
+                { nameof(ProgramComponentBase.ProgramDetail), this.ProgramDetail },
+            };
 
         base.OnInitialized();
     }

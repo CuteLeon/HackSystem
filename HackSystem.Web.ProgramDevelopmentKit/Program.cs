@@ -1,4 +1,3 @@
-using HackSystem.Observer;
 using HackSystem.Web.CookieStorage;
 using HackSystem.Web.Domain.Configurations;
 using HackSystem.Web.Infrastructure.Extensions;
@@ -13,7 +12,6 @@ builder.RootComponents.Add<App>("#app");
 
 builder.Services
     .AddLogging()
-    .AddHackSystemObserver()
     .AddWebServices(new WebServiceOptions()
     {
         APIHost = apiHost,

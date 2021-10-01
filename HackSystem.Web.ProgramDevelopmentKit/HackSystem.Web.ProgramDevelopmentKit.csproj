@@ -13,7 +13,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
-		<ProjectReference Include="..\HackSystem.Observer\HackSystem.Observer.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.CookieStorage\HackSystem.Web.CookieStorage.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.TaskSchedule\HackSystem.Web.TaskSchedule.csproj" />
 	</ItemGroup>
