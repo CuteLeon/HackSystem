@@ -11,8 +11,6 @@ namespace HackSystem.Web.ProgramLayer;
 /// </remarks>
 public partial class ProgramContainerComponent : IProgramContainer
 {
-    private bool disposedValue;
-
     protected async override Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();

@@ -44,7 +44,15 @@ public class ProgramAssetController : ControllerBase
             return this.Forbid();
         }
 
-        var package = await this.programAssetService.QueryProgramAssetList(programId);
+        ProgramAssetPackage package = default;
+        try
+        {
+            package = await this.programAssetService.QueryProgramAssetList(programId);
+        }
+        catch (DirectoryNotFoundException)
+        {
+            return this.NotFound();
+        }
         this.logger.LogInformation($"Found {package.ProgramAssets.Count()} program assets of program {programId}.");
         var packageRequest = this.mapper.Map<ProgramAssetPackageResponse>(package);
         return this.Ok(packageRequest);
