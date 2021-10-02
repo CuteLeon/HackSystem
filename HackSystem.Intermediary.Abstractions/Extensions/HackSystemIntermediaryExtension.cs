@@ -3,7 +3,7 @@ using HackSystem.Intermediary.Domain;
 
 namespace HackSystem.Intermediary.Extensions;
 
-public static class HackSystemIntermediaryExtension
+public static class HackSystemIntermediaryHandlerExtension
 {
     public static IServiceCollection AddHackSystemNotificationHandler<TNotificationHandler, TNotification>(
         this IServiceCollection services,

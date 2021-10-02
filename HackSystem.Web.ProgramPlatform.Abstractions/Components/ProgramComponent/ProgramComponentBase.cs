@@ -7,7 +7,7 @@ namespace HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
 public abstract class ProgramComponentBase : ComponentBase, IDisposable
 {
     [Inject]
-    public IIntermediaryNotificationPublisher notificationPublisher { get; set; }
+    public IIntermediaryNotificationPublisher NotificationPublisher { get; set; }
 
     private int pID;
 
@@ -21,7 +21,7 @@ public abstract class ProgramComponentBase : ComponentBase, IDisposable
 
     public virtual void OnClose()
     {
-        this.notificationPublisher.Publish(new ProcessCloseNotification(this.pID));
+        this.NotificationPublisher.Publish(new ProcessCloseNotification(this.pID));
     }
 
     public abstract void Dispose();

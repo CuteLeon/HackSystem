@@ -108,13 +108,7 @@ public class CookieStorageHandler : ICookieStorageHandler
 
     private void RaiseOnChanged(string name, string oldValue, string newValue)
     {
-        var eventArgs = new CookieChangedEventArgs
-        {
-            Name = name,
-            OldValue = oldValue,
-            NewValue = newValue
-        };
-
+        var eventArgs = new CookieChangedEventArgs(name, newValue, oldValue);
         this.CookieChanged?.Invoke(this, eventArgs);
     }
 }
