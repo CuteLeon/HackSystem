@@ -9,27 +9,23 @@ namespace HackSystem.Web.ProgramLayer;
 /// Reference external Razor components from a .Net Core Razor Class Library
 /// For more details https://github.com/dotnet/aspnetcore/issues/26228
 /// </remarks>
-public partial class ProgramContainerComponent
+public partial class ProgramContainerComponent : IProgramContainer
 {
     private bool disposedValue;
 
     protected async override Task OnInitializedAsync()
     {
-        // TODO: LEON: Render after launch or close process;
-        //this.programLaunchSubcriber.HandleMessage = this.HandleProgramLaunchMessage;
-        //this.processCloseSubscriber.HandleMessage = this.HandleProcessCloseMessage;
-
         await base.OnInitializedAsync();
     }
 
-    private async Task HandleProgramLaunchMessage(ProgramLaunchNotification notification)
+    public async Task Handle(ProgramLaunchNotification notification, CancellationToken cancellationToken)
     {
         this.logger.LogInformation($"Program launched, program container component rendering...");
         this.StateHasChanged();
         await Task.CompletedTask;
     }
 
-    private async Task HandleProcessCloseMessage(ProcessCloseNotification notification)
+    public async Task Handle(ProcessDisposeNotification notification, CancellationToken cancellationToken)
     {
         this.logger.LogInformation($"Program closed, program container component rendering...");
         this.StateHasChanged();

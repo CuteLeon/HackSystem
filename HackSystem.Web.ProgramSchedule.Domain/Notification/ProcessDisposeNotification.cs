@@ -2,11 +2,11 @@
 
 namespace HackSystem.Web.ProgramSchedule.Domain.Notification;
 
-public record ProcessCloseNotification : IIntermediaryNotification
+public record ProcessDisposeNotification : IIntermediaryNotification
 {
     public int PID { get; set; }
 
-    public ProcessCloseNotification(int pID)
+    public ProcessDisposeNotification(int pID)
     {
         this.PID = pID;
     }

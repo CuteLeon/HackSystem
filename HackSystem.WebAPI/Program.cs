@@ -49,7 +49,6 @@ try
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()))
-
         .AddIdentity<HackSystemUser, HackSystemRole>(options =>
         {
             options.Password.RequireDigit = true;

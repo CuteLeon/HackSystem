@@ -12,11 +12,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Application\HackSystem.Web.ProgramSchedule.Application.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Domain\HackSystem.Web.ProgramSchedule.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Using Include="Microsoft.AspNetCore.Components"/>
+		<Using Include="Microsoft.AspNetCore.Components" />
 	</ItemGroup>
 
 </Project>

@@ -1,18 +1,17 @@
-﻿using HackSystem.Intermediary.Application;
+﻿using HackSystem.Web.ProgramSchedule.Application.Disposer;
 using HackSystem.Web.ProgramSchedule.Domain.Entity;
-using HackSystem.Web.ProgramSchedule.Domain.Notification;
 
 namespace HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
 
 public abstract class ProgramComponentBase : ComponentBase, IDisposable
 {
     [Inject]
-    public IIntermediaryNotificationPublisher NotificationPublisher { get; set; }
+    public IProcessDisposer ProcessDisposer { get; set; }
 
-    private int pID;
+    private int processID;
 
     [Parameter]
-    public int PID { get => pID; set => pID = value; }
+    public int PID { get => processID; set => processID = value; }
 
     private ProgramDetail programDetail;
 
@@ -21,7 +20,7 @@ public abstract class ProgramComponentBase : ComponentBase, IDisposable
 
     public virtual void OnClose()
     {
-        this.NotificationPublisher.Publish(new ProcessCloseNotification(this.pID));
+        this.ProcessDisposer.DisposeProcess(this.processID);
     }
 
     public abstract void Dispose();
