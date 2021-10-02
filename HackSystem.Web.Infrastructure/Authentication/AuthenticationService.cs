@@ -13,18 +13,18 @@ public class AuthenticationService : IAuthenticationService
     private readonly ILogger<AuthenticationService> logger;
     private readonly HttpClient httpClient;
     private readonly IHackSystemAuthenticationTokenHandler authenticationTokenHandler;
-    private readonly IHackSystemAuthenticationStateHandler authenticationStateHandler;
+    private readonly IHackSystemAuthenticationStateUpdater authenticationStateUpdater;
 
     public AuthenticationService(
         ILogger<AuthenticationService> logger,
         HttpClient httpClient,
         IHackSystemAuthenticationTokenHandler authenticationTokenHandler,
-        IHackSystemAuthenticationStateHandler authenticationStateHandler)
+        IHackSystemAuthenticationStateUpdater authenticationStateUpdater)
     {
         this.logger = logger;
         this.httpClient = httpClient;
         this.authenticationTokenHandler = authenticationTokenHandler;
-        this.authenticationStateHandler = authenticationStateHandler;
+        this.authenticationStateUpdater = authenticationStateUpdater;
     }
 
     /// <summary>
@@ -55,7 +55,7 @@ public class AuthenticationService : IAuthenticationService
             return loginResult;
         }
 
-        await this.authenticationStateHandler.UpdateAuthenticattionStateAsync(loginResult.Token);
+        await this.authenticationStateUpdater.UpdateAuthenticattionStateAsync(loginResult.Token);
         return loginResult;
     }
 
@@ -98,6 +98,6 @@ public class AuthenticationService : IAuthenticationService
             logger.LogWarning($"Logout Failed: {ex.Message}");
         }
 
-        await this.authenticationStateHandler.UpdateAuthenticattionStateAsync(string.Empty);
+        await this.authenticationStateUpdater.UpdateAuthenticattionStateAsync(string.Empty);
     }
 }

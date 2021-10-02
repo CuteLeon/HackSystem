@@ -53,7 +53,7 @@ public class LoginComponentTests
         mockHttpClient.BaseAddress = baseUri;
         var mockNavigationManager = new MockNavigationManager(baseUri.AbsoluteUri, logoutUri.AbsoluteUri);
         var mockTokenHandler = new Mock<IHackSystemAuthenticationTokenHandler>();
-        var mockStateHandler = new Mock<IHackSystemAuthenticationStateHandler>();
+        var mockStateHandler = new Mock<IHackSystemAuthenticationStateUpdater>();
 
         using var ctx = new TestContext();
         ctx.Services

@@ -52,13 +52,16 @@ public class HackSystemAuthenticationExtensionTests
         Assert.NotNull(serviceInstance);
         Assert.IsType<HackSystemAuthenticationTokenRefresher>(serviceInstance);
 
-        serviceInstance = serviceProvider.GetRequiredService<IHackSystemAuthenticationStateHandler>();
+        serviceInstance = serviceProvider.GetService<IHackSystemAuthenticationStateProvider>();
+        Assert.Null(serviceInstance);
+
+        serviceInstance = serviceProvider.GetService<IHackSystemAuthenticationStateUpdater>();
         Assert.NotNull(serviceInstance);
-        Assert.IsType<HackSystemAuthenticationStateHandler>(serviceInstance);
+        Assert.IsType<HackSystemAuthenticationStateUpdater>(serviceInstance);
 
         serviceInstance = serviceProvider.GetRequiredService<AuthenticationStateProvider>();
         Assert.NotNull(serviceInstance);
-        Assert.IsType<HackSystemAuthenticationStateHandler>(serviceInstance);
+        Assert.IsType<HackSystemAuthenticationStateProvider>(serviceInstance);
 
         serviceInstance = serviceProvider.GetRequiredService<IHackSystemAuthenticationTokenHandler>();
         Assert.NotNull(serviceInstance);

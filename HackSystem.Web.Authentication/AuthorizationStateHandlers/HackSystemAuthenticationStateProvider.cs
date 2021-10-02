@@ -9,16 +9,19 @@ namespace HackSystem.Web.Authentication.AuthorizationStateHandlers;
 /// <summary>
 /// User authentication state provider
 /// </summary>
-public class HackSystemAuthenticationStateHandler : AuthenticationStateProvider, IHackSystemAuthenticationStateHandler
+/// <remarks>
+/// Have to inject by AuthenticationStateProvider type!
+/// </remarks>
+public class HackSystemAuthenticationStateProvider : AuthenticationStateProvider, IHackSystemAuthenticationStateProvider
 {
-    private readonly ILogger<HackSystemAuthenticationStateHandler> logger;
+    private readonly ILogger<HackSystemAuthenticationStateProvider> logger;
     private readonly IHackSystemAuthenticationTokenHandler hackSystemAuthenticationTokenHandler;
     private readonly IOptionsSnapshot<HackSystemAuthenticationOptions> options;
     private readonly IJsonWebTokenParser jsonWebTokenParser;
     private readonly IHackSystemClaimsIdentityValidator hackSystemClaimsIdentityValidator;
 
-    public HackSystemAuthenticationStateHandler(
-        ILogger<HackSystemAuthenticationStateHandler> logger,
+    public HackSystemAuthenticationStateProvider(
+        ILogger<HackSystemAuthenticationStateProvider> logger,
         IOptionsSnapshot<HackSystemAuthenticationOptions> options,
         IHackSystemAuthenticationTokenHandler hackSystemAuthenticationTokenHandler,
         IJsonWebTokenParser jsonWebTokenParser,
@@ -31,7 +34,7 @@ public class HackSystemAuthenticationStateHandler : AuthenticationStateProvider,
         this.hackSystemClaimsIdentityValidator = hackSystemClaimsIdentityValidator;
     }
 
-    protected bool ParseValidateClaimsIdentity(string token, out ClaimsIdentity claimsIdentity)
+    public bool ParseValidateClaimsIdentity(string token, out ClaimsIdentity claimsIdentity)
     {
         var claims = this.jsonWebTokenParser.ParseJWTToken(token);
         claimsIdentity = new ClaimsIdentity(claims, this.options.Value.AuthenticationType);
@@ -60,6 +63,11 @@ public class HackSystemAuthenticationStateHandler : AuthenticationStateProvider,
         return this.ReturnAuthenticatedState(user);
     }
 
+    public void NotifyAuthenticationStateChanged(AuthenticationState authenticationState)
+    {
+        this.NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
+    }
+
     #region Return authentication state
 
     /// <summary>
@@ -83,47 +91,5 @@ public class HackSystemAuthenticationStateHandler : AuthenticationStateProvider,
         return new AuthenticationState(claimsPrincipal);
     }
 
-    #endregion
-
-
-    /// <summary>
-    /// Update current user's authentication state
-    /// </summary>
-    /// <param name="token"></param>
-    public async Task UpdateAuthenticattionStateAsync(string token)
-    {
-        this.logger.LogInformation("HackSystem Update Authentication State...");
-        if (string.IsNullOrWhiteSpace(token) ||
-            !ParseValidateClaimsIdentity(token, out var claimsIdentity))
-        {
-            await this.AuthenticateFailed();
-            return;
-        }
-
-        await this.AuthenticateSuccessfully(token, claimsIdentity);
-    }
-
-    #region Update authentication information
-
-    /// <summary>
-    /// Authenticate successfully
-    /// </summary>
-    private async Task AuthenticateSuccessfully(string token, ClaimsIdentity claimsIdentity)
-    {
-        this.logger.LogWarning("HackSystem Authenticate Successfully !");
-        await this.hackSystemAuthenticationTokenHandler.UpdateTokenAsync(token);
-        var authenticationState = new AuthenticationState(new ClaimsPrincipal(claimsIdentity));
-        this.NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
-    }
-
-    /// <summary>
-    /// Authenticate failed
-    /// </summary>
-    private async Task AuthenticateFailed()
-    {
-        this.logger.LogWarning("HackSystem Authenticate Failed !");
-        await this.hackSystemAuthenticationTokenHandler.RemoveTokenAsync();
-        this.NotifyAuthenticationStateChanged(Task.FromResult(this.options.Value.AnonymousState));
-    }
     #endregion
 }

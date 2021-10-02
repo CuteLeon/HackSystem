@@ -1,13 +1,14 @@
 ﻿using HackSystem.Web.Authentication.AuthorizationStateHandlers;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Authentication.Options;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace HackSystem.Web.Authentication.TokenHandlers;
 
 public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationTokenRefresher
 {
     private readonly ILogger<HackSystemAuthenticationTokenRefresher> logger;
-    private readonly IHackSystemAuthenticationStateHandler hackSystemAuthenticationStateHandler;
+    private readonly IHackSystemAuthenticationStateUpdater hackSystemAuthenticationStateHandler;
     private readonly IHackSystemAuthenticationTokenHandler hackSystemAuthenticationTokenHandler;
     private readonly Timer timer;
     private readonly IOptionsMonitor<HackSystemAuthenticationOptions> options;
@@ -26,7 +27,7 @@ public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationT
 
         var provider = serviceScopeFactory.CreateScope().ServiceProvider;
         this.httpClient = provider.GetService<HttpClient>();
-        this.hackSystemAuthenticationStateHandler = provider.GetService<IHackSystemAuthenticationStateHandler>();
+        this.hackSystemAuthenticationStateHandler = provider.GetService<AuthenticationStateProvider>() as IHackSystemAuthenticationStateUpdater;
         this.hackSystemAuthenticationTokenHandler = provider.GetService<IHackSystemAuthenticationTokenHandler>();
     }
 

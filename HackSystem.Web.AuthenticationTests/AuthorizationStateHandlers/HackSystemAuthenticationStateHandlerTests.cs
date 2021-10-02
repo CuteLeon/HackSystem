@@ -20,13 +20,13 @@ public class HackSystemAuthenticationStateHandlerTests
         var mockOptions = new Mock<IOptionsSnapshot<HackSystemAuthenticationOptions>>();
         mockOptions.SetupGet(m => m.Value).Returns(options);
 
-        var mockLogger = new Mock<ILogger<HackSystemAuthenticationStateHandler>>();
+        var mockLogger = new Mock<ILogger<HackSystemAuthenticationStateProvider>>();
         var jwtParserService = new JsonWebTokenParser(new Mock<ILogger<JsonWebTokenParser>>().Object);
         var claimsIdentityValidator = new HackSystemClaimsIdentityValidator(new Mock<ILogger<HackSystemClaimsIdentityValidator>>().Object, mockOptions.Object);
         var mockTokenHandler = new Mock<IHackSystemAuthenticationTokenHandler>();
         mockTokenHandler.Setup(m => m.GetTokenAsync()).ReturnsAsync(authToken);
 
-        IHackSystemAuthenticationStateHandler serviceInstance = new HackSystemAuthenticationStateHandler(
+        IHackSystemAuthenticationStateProvider serviceInstance = new HackSystemAuthenticationStateProvider(
             mockLogger.Object,
             mockOptions.Object,
             mockTokenHandler.Object,

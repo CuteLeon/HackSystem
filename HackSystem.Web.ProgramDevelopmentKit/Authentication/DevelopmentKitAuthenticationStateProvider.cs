@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace HackSystem.Web.ProgramDevelopmentKit.Authentication;
 
-public class DevelopmentKitAuthenticationStateProvider : AuthenticationStateProvider, IHackSystemAuthenticationStateHandler
+public class DevelopmentKitAuthenticationStateProvider : AuthenticationStateProvider, IHackSystemAuthenticationStateUpdater
 {
     public AuthenticationState AuthenticationState { get; set; }
 
