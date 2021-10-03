@@ -1,4 +1,4 @@
-﻿using HackSystem.Web.ProgramSchedule.Application.Disposer;
+﻿using HackSystem.Web.ProgramSchedule.Application.Destroyer;
 using HackSystem.Web.ProgramSchedule.Domain.Entity;
 
 namespace HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
@@ -6,7 +6,7 @@ namespace HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
 public abstract class ProgramComponentBase : ComponentBase, IDisposable
 {
     [Inject]
-    public IProcessDisposer ProcessDisposer { get; set; }
+    public IProcessDestroyer ProcessDestroyer { get; set; }
 
     private int processID;
 
@@ -20,7 +20,7 @@ public abstract class ProgramComponentBase : ComponentBase, IDisposable
 
     public virtual void OnClose()
     {
-        this.ProcessDisposer.DisposeProcess(this.processID);
+        this.ProcessDestroyer.DisposeProcess(this.processID);
     }
 
     public abstract void Dispose();

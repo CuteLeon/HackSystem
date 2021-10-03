@@ -1,6 +1,5 @@
-﻿namespace HackSystem.Intermediary.Domain
+﻿namespace HackSystem.Intermediary.Domain;
+
+public interface IIntermediaryCommand : IIntermediaryRequest<ValueTuple>
 {
-    public interface IIntermediaryCommand : IIntermediaryRequest<ValueTuple>
-    {
-    }
 }

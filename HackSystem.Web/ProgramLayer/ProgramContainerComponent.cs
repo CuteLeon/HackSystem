@@ -1,4 +1,5 @@
-﻿using HackSystem.Web.ProgramSchedule.Domain.Notification;
+﻿using HackSystem.Web.ProgramSchedule.Domain.Entity;
+using HackSystem.Web.ProgramSchedule.Domain.Enums;
 
 namespace HackSystem.Web.ProgramLayer;
 
@@ -9,24 +10,22 @@ namespace HackSystem.Web.ProgramLayer;
 /// Reference external Razor components from a .Net Core Razor Class Library
 /// For more details https://github.com/dotnet/aspnetcore/issues/26228
 /// </remarks>
-public partial class ProgramContainerComponent : IProgramContainer
+public partial class ProgramContainerComponent : IDisposable
 {
     protected async override Task OnInitializedAsync()
     {
+        this.processContainer.ProcessChanged += ProcessChangedHandler;
         await base.OnInitializedAsync();
     }
 
-    public async Task Handle(ProgramLaunchNotification notification, CancellationToken cancellationToken)
+    private void ProcessChangedHandler(ProcessChangeStates states, ProcessDetail processDetail)
     {
-        this.logger.LogInformation($"Program launched, program container component rendering...");
+        this.logger.LogInformation($"Process {processDetail.PID} {states.ToString()}...");
         this.StateHasChanged();
-        await Task.CompletedTask;
     }
 
-    public async Task Handle(ProcessDisposeNotification notification, CancellationToken cancellationToken)
+    public void Dispose()
     {
-        this.logger.LogInformation($"Program closed, program container component rendering...");
-        this.StateHasChanged();
-        await Task.CompletedTask;
+        this.processContainer.ProcessChanged -= ProcessChangedHandler;
     }
 }

@@ -1,32 +1,27 @@
 ﻿using System.Reflection;
-using HackSystem.Intermediary.Application;
 using HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
 using HackSystem.Web.ProgramSchedule.Application.AssemblyLoader;
 using HackSystem.Web.ProgramSchedule.Application.Container;
 using HackSystem.Web.ProgramSchedule.Application.IDGenerator;
 using HackSystem.Web.ProgramSchedule.Application.Launcher;
 using HackSystem.Web.ProgramSchedule.Domain.Entity;
-using HackSystem.Web.ProgramSchedule.Domain.Notification;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.Launcher;
 
 public class ProgramLauncher : IProgramLauncher
 {
     private readonly ILogger<ProgramLauncher> logger;
-    private readonly IIntermediaryNotificationPublisher notificationPublisher;
     private readonly IProgramAssemblyLoader programAssemblyLoader;
     private readonly IPIDGenerator pIDGenerator;
     private readonly IProcessContainer processContainer;
 
     public ProgramLauncher(
         ILogger<ProgramLauncher> logger,
-        IIntermediaryNotificationPublisher notificationPublisher,
         IProgramAssemblyLoader programAssemblyLoader,
         IPIDGenerator pIDGenerator,
         IProcessContainer processContainer)
     {
         this.logger = logger;
-        this.notificationPublisher = notificationPublisher;
         this.programAssemblyLoader = programAssemblyLoader;
         this.pIDGenerator = pIDGenerator;
         this.processContainer = processContainer;
@@ -51,8 +46,7 @@ public class ProgramLauncher : IProgramLauncher
         };
         this.logger.LogInformation($"Program launcher: Name={programDetail.Name} ({process.PID})");
 
-        this.processContainer.AddProcess(process);
-        await this.notificationPublisher.Publish(new ProgramLaunchNotification() { PID = process.PID });
+        this.processContainer.LaunchProcess(process);
         this.logger.LogInformation($"Program launcher: Add processs and broadcast notification.");
 
         return process;
