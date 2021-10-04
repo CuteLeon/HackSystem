@@ -52,10 +52,6 @@
 </ResizeableView>
 
 @code {
-
-    [CascadingParameter(Name = "DesktopToastContainer")]
-    private Func<IToastContainer> GetDesktopToastContainer { get; set; }
-
     public List<TaskDetailResponse> TaskDetails { get; set; } = new();
 
     public override void Dispose()

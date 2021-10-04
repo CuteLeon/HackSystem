@@ -41,7 +41,7 @@ public partial class TaskSchedulerComponent
         var tasks = await this.taskDetailService.QueryTasks();
         this.TaskDetails.AddRange(tasks);
         this.Logger.LogInformation($"Loaded {tasks.Count()} tasks.");
-        this.GetDesktopToastContainer()?.PopToast("Load Tasks Successfully!", $"Load {tasks.Count()} tasks successfully.", ToastIcons.Information);
+        this.DesktopToastContainer?.PopToast("Load Tasks Successfully!", $"Load {tasks.Count()} tasks successfully.", ToastIcons.Information);
         this.StateHasChanged();
     }
 
