@@ -48,9 +48,9 @@ public class IntermediaryCommandSenderTests
         services
             .AddLogging()
             .AddHackSystemIntermediary()
-            .AddHackSystemCommandHandler<SingletonTestCommandHandler, SingletonTestCommand>(ServiceLifetime.Singleton)
-            .AddHackSystemCommandHandler<TestOverridedCommandHandler, TestCommand>()
-            .AddHackSystemCommandHandler<TestCommandHandler, TestCommand>();
+            .AddIntermediaryCommandHandler<SingletonTestCommandHandler, SingletonTestCommand>(ServiceLifetime.Singleton)
+            .AddIntermediaryCommandHandler<TestOverridedCommandHandler, TestCommand>()
+            .AddIntermediaryCommandHandler<TestCommandHandler, TestCommand>();
         IServiceProvider provider = services.BuildServiceProvider();
         var sender = provider.GetRequiredService<IIntermediaryCommandSender>();
         for (int index = 0; index < 10; index++)

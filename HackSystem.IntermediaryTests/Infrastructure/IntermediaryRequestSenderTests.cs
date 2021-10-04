@@ -48,9 +48,9 @@ public class IntermediaryRequestSenderTests
         services
             .AddLogging()
             .AddHackSystemIntermediary()
-            .AddHackSystemRequestHandler<SingletonTestRequestHandler, SingletonTestRequest, int>(ServiceLifetime.Singleton)
-            .AddHackSystemRequestHandler<TestOverridedRequestHandler, TestRequest, int>()
-            .AddHackSystemRequestHandler<TestRequestHandler, TestRequest, int>();
+            .AddIntermediaryRequestHandler<SingletonTestRequestHandler, SingletonTestRequest, int>(ServiceLifetime.Singleton)
+            .AddIntermediaryRequestHandler<TestOverridedRequestHandler, TestRequest, int>()
+            .AddIntermediaryRequestHandler<TestRequestHandler, TestRequest, int>();
         IServiceProvider provider = services.BuildServiceProvider();
         var sender = provider.GetRequiredService<IIntermediaryRequestSender>();
         for (int index = 0; index < 10; index++)

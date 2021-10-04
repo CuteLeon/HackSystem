@@ -5,7 +5,7 @@ namespace HackSystem.Intermediary.Extensions;
 
 public static class HackSystemIntermediaryHandlerExtension
 {
-    public static IServiceCollection AddHackSystemNotificationHandler<TNotificationHandler, TNotification>(
+    public static IServiceCollection AddIntermediaryNotificationHandler<TNotificationHandler, TNotification>(
         this IServiceCollection services,
         ServiceLifetime lifetime = ServiceLifetime.Transient)
         where TNotificationHandler : IIntermediaryNotificationHandler<TNotification>
@@ -15,14 +15,14 @@ public static class HackSystemIntermediaryHandlerExtension
         return services;
     }
 
-    public static IServiceCollection AddHackSystemCommandHandler<TCommandHandler, TCommand>(
+    public static IServiceCollection AddIntermediaryCommandHandler<TCommandHandler, TCommand>(
         this IServiceCollection services,
         ServiceLifetime lifetime = ServiceLifetime.Transient)
         where TCommandHandler : IIntermediaryRequestHandler<TCommand, ValueTuple>
         where TCommand : IIntermediaryRequest<ValueTuple>
-        => services.AddHackSystemRequestHandler<TCommandHandler, TCommand, ValueTuple>(lifetime);
+        => services.AddIntermediaryRequestHandler<TCommandHandler, TCommand, ValueTuple>(lifetime);
 
-    public static IServiceCollection AddHackSystemRequestHandler<TRequestHandler, TRequest, TResponse>(
+    public static IServiceCollection AddIntermediaryRequestHandler<TRequestHandler, TRequest, TResponse>(
         this IServiceCollection services,
         ServiceLifetime lifetime = ServiceLifetime.Transient)
         where TRequestHandler : IIntermediaryRequestHandler<TRequest, TResponse>

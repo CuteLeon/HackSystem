@@ -19,7 +19,7 @@ public static class HackSystemInfrastructureExtension
         this IServiceCollection services)
     {
         services
-            .AddHackSystemNotificationHandler<CreateAccountNotificationHandler, CreateAccountNotification>()
+            .AddIntermediaryNotificationHandler<CreateAccountNotificationHandler, CreateAccountNotification>()
             .AddScoped<IGenericOptionRepository, GenericOptionRepository>()
             .AddScoped<IWebAPILogRepository, WebAPILogRepository>()
             .AddScoped<IProgramUserRepository, ProgramUserRepository>()

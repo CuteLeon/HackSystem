@@ -44,10 +44,10 @@ namespace HackSystem.Intermediary.Infrastructure.Tests
             services
                 .AddLogging()
                 .AddHackSystemIntermediary()
-                .AddHackSystemNotificationHandler<TestNotification_Transient1_Handler, TestNotification>()
-                .AddHackSystemNotificationHandler<TestNotification_Transient2_Handler, TestNotification>()
-                .AddHackSystemNotificationHandler<TestNotification_Singleton1_Handler, TestNotification>(ServiceLifetime.Singleton)
-                .AddHackSystemNotificationHandler<TestNotification_Singleton2_Handler, TestNotification>(ServiceLifetime.Singleton);
+                .AddIntermediaryNotificationHandler<TestNotification_Transient1_Handler, TestNotification>()
+                .AddIntermediaryNotificationHandler<TestNotification_Transient2_Handler, TestNotification>()
+                .AddIntermediaryNotificationHandler<TestNotification_Singleton1_Handler, TestNotification>(ServiceLifetime.Singleton)
+                .AddIntermediaryNotificationHandler<TestNotification_Singleton2_Handler, TestNotification>(ServiceLifetime.Singleton);
             IServiceProvider provider = services.BuildServiceProvider();
             var publisher = provider.GetRequiredService<IIntermediaryNotificationPublisher>();
             for (int index = 0; index < 10; index++)
