@@ -12,8 +12,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Application\HackSystem.Web.ProgramSchedule.Application.csproj" />
-		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Domain\HackSystem.Web.ProgramSchedule.Domain.csproj" />
+	  <ProjectReference Include="..\HackSystem.Intermediary.Abstractions\HackSystem.Intermediary.Abstractions.csproj" />
+	  <ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Domain\HackSystem.Web.ProgramSchedule.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

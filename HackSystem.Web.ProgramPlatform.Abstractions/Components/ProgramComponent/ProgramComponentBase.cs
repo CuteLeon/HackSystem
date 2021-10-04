@@ -1,26 +1,24 @@
-﻿using HackSystem.Web.ProgramSchedule.Application.Destroyer;
+﻿using HackSystem.Intermediary.Application;
 using HackSystem.Web.ProgramSchedule.Domain.Entity;
+using HackSystem.Web.ProgramSchedule.Domain.Intermediary;
 
 namespace HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
 
 public abstract class ProgramComponentBase : ComponentBase, IDisposable
 {
+    private ProcessDetail processDetail;
+
     [Inject]
-    public IProcessDestroyer ProcessDestroyer { get; set; }
-
-    private int processID;
+    IIntermediaryCommandSender CommandSender { get; set; }
 
     [Parameter]
-    public int PID { get => processID; set => processID = value; }
+    public ProcessDetail ProcessDetail { get => processDetail; set => processDetail = value; }
 
-    private ProgramDetail programDetail;
-
-    [Parameter]
-    public ProgramDetail ProgramDetail { get => programDetail; set => programDetail = value; }
+    public ProgramDetail ProgramDetail { get => this.processDetail.ProgramDetail; }
 
     public virtual void OnClose()
     {
-        this.ProcessDestroyer.DestroyProcess(this.processID);
+        this.CommandSender.Send(new ProcessDestroyCommand() { ProcessDetail = this.processDetail });
     }
 
     public abstract void Dispose();
