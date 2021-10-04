@@ -1,5 +1,6 @@
 ﻿@inject IJSRuntime jsRuntime
 @inject ILogger<ProgramDockComponent> logger
+@inject IIntermediaryRequestSender intermediaryRequestSender
 
 @if (this.UserProgramMaps.Count > 0)
 {
@@ -7,7 +8,7 @@
         <div class="d-flex justify-content-center user-select-none">
             @foreach (var programMap in this.UserProgramMaps.Values)
             {
-                <ProgramDockIconComponent @key="@programMap.Program.Id" UserProgramMap="programMap" />
+                <ProgramDockIconComponent @key="@programMap.Program.Id" UserProgramMap="programMap" OnIconClick="@this.OnClickIcon" />
             }
         </div>
     </div>

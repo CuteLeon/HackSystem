@@ -1,12 +1,11 @@
 ﻿@inject IJSRuntime jsRuntime
-@inject IMapper mapper
 @inject ILogger<ProgramDrawerComponent> logger
 @inject IIntermediaryRequestSender intermediaryRequestSender
 
 <div class="d-flex flex-column flex-wrap align-content-start user-select-none w-100 h-100 overflow-hidden">
-    @foreach (var pair in this.UserProgramMaps)
+    @foreach (var programMap in this.UserProgramMaps.Values)
     {
-        <ProgramDrawerIconComponent @key="@pair.Key" UserProgramMap="pair.Value" OnIconDoubleClick="this.OnDoubleClickIcon" />
+        <ProgramDrawerIconComponent @key="@programMap.Program.Id" UserProgramMap="programMap" OnIconDoubleClick="this.OnDoubleClickIcon" />
     }
 </div>
 

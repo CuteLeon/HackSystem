@@ -1,4 +1,6 @@
-﻿using HackSystem.Web.ProgramSchedule.Domain.Entity;
+﻿using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
+using HackSystem.Web.ProgramSchedule.Domain.Entity;
+using HackSystem.Web.ProgramSchedule.Domain.Intermediary;
 
 namespace HackSystem.Web.ProgramDock;
 
@@ -29,5 +31,12 @@ public partial class ProgramDockComponent
         {
             await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./js/hacksystem.programdock.js");
         }
+    }
+
+    public async Task OnClickIcon(ProgramIconMouseEventArgs args)
+    {
+        var programDetail = args.UserProgramMap.Program;
+        this.logger.LogInformation($"Click to luanch program: {programDetail.Name}");
+        await this.intermediaryRequestSender.Send(new ProgramLaunchRequest() { ProgramDetail = programDetail });
     }
 }
