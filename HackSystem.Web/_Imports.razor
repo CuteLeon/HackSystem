@@ -32,9 +32,12 @@
 @using HackSystem.Web.ProgramDrawer
 @using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs
 @using HackSystem.Web.ProgramLayer
+@using HackSystem.Web.ProgramPlatform.Abstractions.Entity
+@using HackSystem.Web.ProgramPlatform.Abstractions.Enums
 @using HackSystem.Web.ProgramPlatform.Components.DraggableComponent
 @using HackSystem.Web.ProgramPlatform.Components.ResizeableComponent
 @using HackSystem.Web.ProgramPlatform.Components.ProgramComponent
+@using HackSystem.Web.ProgramPlatform.Components.ToastComponent
 @using HackSystem.Web.ProgramSchedule.Application.Container;
 @using HackSystem.Web.ProgramSchedule.Domain.Entity;
 @using HackSystem.Web.ProgramSchedule.Domain.Options;
@@ -47,8 +50,5 @@
 @using HackSystem.Web.TopBar.MenuBar
 @using HackSystem.Web.TopBar.StatusBar
 @using HackSystem.Web.Toast
-@using HackSystem.Web.Toast.Handler
-@using HackSystem.Web.Toast.Model
 @using HackSystem.DataTransferObjects.Accounts
 @using HackSystem.DataTransferObjects.Programs
-@using static HackSystem.Web.Toast.Model.ToastDetail

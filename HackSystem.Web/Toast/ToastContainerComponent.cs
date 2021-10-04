@@ -1,6 +1,6 @@
-﻿using HackSystem.Web.Toast.Handler;
-using HackSystem.Web.Toast.Model;
-using static HackSystem.Web.Toast.Model.ToastDetail;
+﻿using HackSystem.Web.ProgramPlatform.Abstractions.Entity;
+using HackSystem.Web.ProgramPlatform.Abstractions.Enums;
+using HackSystem.Web.ProgramPlatform.Components.ToastComponent;
 
 namespace HackSystem.Web.Toast;
 
@@ -34,7 +34,7 @@ public partial class ToastContainerComponent : IToastContainer, IDisposable
         }
     }
 
-    public void PopToast(string title, string message, Icons icon = Icons.HackSystem, bool autoHide = true, int hideDelay = 3000)
+    public void PopToast(string title, string message, ToastIcons icon = ToastIcons.HackSystem, bool autoHide = true, int hideDelay = 3000)
     {
         this.logger.LogDebug($"Pop a Toast: {title}");
         var toast = new ToastDetail()

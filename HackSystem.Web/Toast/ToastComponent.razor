@@ -5,20 +5,20 @@
     <div class="toast-header">
         @switch (this.ToastDetail.Icon)
         {
-            case Icons.Information:
+            case ToastIcons.Information:
                 <span class="fas fa-info-circle text-success mr-2" style="font-size:20px;"></span>
                 break;
-            case Icons.Question:
+            case ToastIcons.Question:
                 <span class="fas fa-question-circle text-primary mr-2" style="font-size:20px;"></span>
                 break;
-            case Icons.Warning:
+            case ToastIcons.Warning:
                 <span class="fas fa-exclamation-circle text-warning mr-2" style="font-size:20px;"></span>
                 break;
-            case Icons.Error:
+            case ToastIcons.Error:
                 <span class="fas fa-times-circle text-danger mr-2" style="font-size:20px;"></span>
                 break;
             default:
-            case Icons.HackSystem:
+            case ToastIcons.HackSystem:
                 <img src="/LogoImageSmall.png" class="rounded mr-2" />
                 break;
         }

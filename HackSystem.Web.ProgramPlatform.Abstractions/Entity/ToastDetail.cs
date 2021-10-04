@@ -1,16 +1,9 @@
-﻿namespace HackSystem.Web.Toast.Model;
+﻿using HackSystem.Web.ProgramPlatform.Abstractions.Enums;
+
+namespace HackSystem.Web.ProgramPlatform.Abstractions.Entity;
 
 public class ToastDetail
 {
-    public enum Icons
-    {
-        HackSystem = 0,
-        Information = 1,
-        Question = 2,
-        Warning = 3,
-        Error = 4
-    }
-
     public DateTime CreateTime { get; protected set; } = DateTime.Now;
 
     public string Id { get; protected set; } = $"toast_{Guid.NewGuid():N}";
@@ -19,7 +12,7 @@ public class ToastDetail
 
     public string Message { get; set; } = "Hack System Toast Message.";
 
-    public Icons Icon { get; set; }
+    public ToastIcons Icon { get; set; }
 
     public bool AutoHide { get; set; } = true;
 

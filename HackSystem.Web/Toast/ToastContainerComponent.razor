@@ -7,13 +7,13 @@
         <CascadingValue IsFixed="true" Name="ToastJSObjectReference" TValue="IJSObjectReference" Value="this.toastJSObjectReference">
             @foreach (var toast in this.Toasts.Values.OrderBy(detail => detail.CreateTime).ThenByDescending(detail => detail.Icon))
             {
-                <ToastComponent ToastContainerInterop="this.interopReference" ToastDetail="toast" />
+                <ToastComponent @key="@toast.Id" ToastContainerInterop="this.interopReference" ToastDetail="toast" />
             }
         </CascadingValue>
     </div>
 </div>
 
-@code{
+@code {
     private int z_Index = 512;
     private int top = 0;
     private int bottom = 0;

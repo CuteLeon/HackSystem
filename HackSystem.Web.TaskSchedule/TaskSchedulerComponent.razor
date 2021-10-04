@@ -1,6 +1,4 @@
-﻿@using HackSystem.Web.TaskSchedule.Services
-@using HackSystem.DataTransferObjects.TaskServer
-@inherits ProgramComponentBase
+﻿@inherits ProgramComponentBase
 @inject ILogger<TaskSchedulerComponent> Logger
 @inject IServiceScopeFactory ServiceScopeFactory
 
@@ -54,6 +52,10 @@
 </ResizeableView>
 
 @code {
+
+    [CascadingParameter(Name = "DesktopToastContainer")]
+    private Func<IToastContainer> GetDesktopToastContainer { get; set; }
+
     public List<TaskDetailResponse> TaskDetails { get; set; } = new();
 
     public override void Dispose()
