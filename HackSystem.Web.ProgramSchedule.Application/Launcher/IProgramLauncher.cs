@@ -4,5 +4,5 @@ namespace HackSystem.Web.ProgramSchedule.Application.Launcher;
 
 public interface IProgramLauncher
 {
-    Task<ProcessDetail> LaunchProgram(ProgramDetail programDetail);
+    Task<ProcessDetail?> LaunchProgram(ProgramDetail programDetail);
 }

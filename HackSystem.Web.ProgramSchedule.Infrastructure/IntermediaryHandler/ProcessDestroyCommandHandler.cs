@@ -20,7 +20,7 @@ public class ProcessDestroyCommandHandler : IIntermediaryCommandHandler<ProcessD
     public async Task<ValueTuple> Handle(ProcessDestroyCommand request, CancellationToken cancellationToken)
     {
         this.logger.LogInformation($"Handle Process destroy command {request.ProcessDetail.PID} ...");
-        await this.processDestroyer.DestroyProcess(request.ProcessDetail.PID);
+        _ = await this.processDestroyer.DestroyProcess(request.ProcessDetail.PID);
         this.logger.LogInformation($"Process destroy command handled, PID={request.ProcessDetail.PID}.");
         return ValueTuple.Create();
     }

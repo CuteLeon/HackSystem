@@ -11,7 +11,7 @@ public interface IProcessContainer
 
     IEnumerable<ProcessDetail> GetProcesses();
 
-    void LaunchProcess(ProcessDetail processDetail);
+    bool LaunchProcess(ProcessDetail processDetail);
 
     ProcessDetail? GetProcess(int processID);
 

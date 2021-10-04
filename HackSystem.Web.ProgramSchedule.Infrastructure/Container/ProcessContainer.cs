@@ -32,18 +32,25 @@ public class ProcessContainer : IProcessContainer
         return this.Processes.TryGetValue(processID, out ProcessDetail? process) ? process : default;
     }
 
-    public void LaunchProcess(ProcessDetail processDetail)
+    public bool LaunchProcess(ProcessDetail processDetail)
     {
         this.logger.LogInformation($"Process container, add process => {processDetail.PID} ID");
-        this.Processes.TryAdd(processDetail.PID, processDetail);
-        this.ProcessChanged?.Invoke(ProcessChangeStates.Launch, processDetail);
+        var result = this.Processes.TryAdd(processDetail.PID, processDetail);
+        if (result)
+        {
+            this.ProcessChanged?.Invoke(ProcessChangeStates.Launch, processDetail);
+        }
+        return result;
     }
 
     public bool DestroyProcess(int processID, out ProcessDetail? processDetail)
     {
         this.logger.LogInformation($"Process container, remove process => {processID} ID");
         var result = this.Processes.TryRemove(processID, out processDetail);
-        this.ProcessChanged?.Invoke(ProcessChangeStates.Destroy, processDetail);
+        if (result && ProcessChanged != null)
+        {
+            this.ProcessChanged?.Invoke(ProcessChangeStates.Destroy, processDetail);
+        }
         return result;
     }
 }

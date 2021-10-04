@@ -27,7 +27,7 @@ public class ProgramLauncher : IProgramLauncher
         this.processContainer = processContainer;
     }
 
-    public async Task<ProcessDetail> LaunchProgram(ProgramDetail programDetail)
+    public async Task<ProcessDetail?> LaunchProgram(ProgramDetail programDetail)
     {
         if (!this.programAssemblyLoader.CheckAssemblyLoaded(programDetail.AssemblyName))
         {
@@ -37,18 +37,23 @@ public class ProgramLauncher : IProgramLauncher
         }
 
         programDetail.ProgramComponentType = GetProgramComponentType(programDetail.AssemblyName, programDetail.TypeName);
-        this.logger.LogInformation($"Program launcher: Type={programDetail.ProgramComponentType.FullName}");
+        this.logger.LogInformation($"Launching program of Type={programDetail.ProgramComponentType.FullName}");
 
         var process = new ProcessDetail()
         {
             PID = this.pIDGenerator.GetAvailablePID(),
             ProgramDetail = programDetail,
         };
-        this.logger.LogInformation($"Program launcher: Name={programDetail.Name} ({process.PID})");
+        this.logger.LogInformation($"Creating process of program with Name={programDetail.Name} ({process.PID})");
 
-        this.processContainer.LaunchProcess(process);
-        this.logger.LogInformation($"Program launcher: Add processs and broadcast notification.");
+        var result = this.processContainer.LaunchProcess(process);
+        if (!result)
+        {
+            this.logger.LogWarning($"Didn't launch program.");
+            return default;
+        }
 
+        this.logger.LogInformation($"Launched process and broadcast notification.");
         return process;
     }
 
