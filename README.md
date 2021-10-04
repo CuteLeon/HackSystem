@@ -26,6 +26,8 @@
 [![Nuget](https://img.shields.io/nuget/vpre/HackSystem.Intermediary.Abstractions?label=HackSystem.Intermediary.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Intermediary.Abstractions/)
 [![Nuget](https://img.shields.io/nuget/vpre/HackSystem.Web.CookieStorage?label=HackSystem.Web.CookieStorage&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.CookieStorage/)
 [![Nuget](https://img.shields.io/nuget/vpre/HackSystem.Web.CookieStorage.Abstractions?label=HackSystem.Web.CookieStorage.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.CookieStorage.Abstractions/)
+[![Nuget](https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramPlatform?label=HackSystem.Web.ProgramPlatform&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.ProgramPlatform/)
+[![Nuget](https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramPlatform.Abstractions?label=HackSystem.Web.ProgramPlatform.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.ProgramPlatform.Abstractions/)
 
 ## How to launch?
 

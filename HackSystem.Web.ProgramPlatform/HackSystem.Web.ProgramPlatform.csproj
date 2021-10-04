@@ -3,7 +3,32 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>CuteLeon</Authors>
+		<PackageIcon>LogoImageIcon.png</PackageIcon>
+		<PackageProjectUrl>https://github.com/CuteLeon/HackSystem/</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/CuteLeon/HackSystem/</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>HackSystem</PackageTags>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<Description>Web Program Platform component of Hack System.</Description>
+		<AssemblyVersion>1.0.0.2</AssemblyVersion>
+		<Version>$(AssemblyVersion)</Version>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\LICENSE" Pack="true" PackagePath=""/>
+		<None Include="..\HackSystem.Web\wwwroot\LogoImageIcon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0-rc.1.21452.15" />
@@ -11,8 +36,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\HackSystem.Web.ProgramPlatform.Abstractions\HackSystem.Web.ProgramPlatform.Abstractions.csproj" />
-	  <ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Domain\HackSystem.Web.ProgramSchedule.Domain.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform.Abstractions\HackSystem.Web.ProgramPlatform.Abstractions.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Domain\HackSystem.Web.ProgramSchedule.Domain.csproj" />
 	</ItemGroup>
 
 </Project>
