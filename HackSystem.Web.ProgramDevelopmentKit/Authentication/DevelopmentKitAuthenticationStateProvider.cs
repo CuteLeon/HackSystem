@@ -1,14 +1,11 @@
 ﻿using System.Security.Claims;
-using HackSystem.Web.Authentication.AuthorizationStateHandlers;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace HackSystem.Web.ProgramDevelopmentKit.Authentication;
 
-public class DevelopmentKitAuthenticationStateProvider : AuthenticationStateProvider, IHackSystemAuthenticationStateUpdater
+public class DevelopmentKitAuthenticationStateProvider : AuthenticationStateProvider
 {
     public AuthenticationState AuthenticationState { get; set; }
-
-    public string Token { get; set; }
 
     public DevelopmentKitAuthenticationStateProvider()
     {
@@ -25,17 +22,10 @@ public class DevelopmentKitAuthenticationStateProvider : AuthenticationStateProv
             new Claim("aud", "https://localhost"),
         };
         this.AuthenticationState = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims, authenticationType)));
-
-        this.Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTGVvbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imxlb25AaGFjay5jb20iLCJQcm9mZXNzaW9uYWwiOiJ0cnVlIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbIkhhY2tlciIsIkNvbW1hbmRlciJdLCJleHAiOjIxNDc0NTQ4NDcsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3QifQ.6g2mG4uf3kylqi9wULXxr6miapl0Uv8NC2PeixVxliQ";
     }
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         return this.AuthenticationState;
-    }
-
-    public Task UpdateAuthenticattionStateAsync(string token)
-    {
-        throw new NotImplementedException();
     }
 }
