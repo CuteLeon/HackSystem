@@ -8,7 +8,7 @@ using HackSystem.Web.ProgramDevelopmentKit.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-var apiHost = "https://localhost:9090";
+var apiHost = "https://localhost:4237";
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 

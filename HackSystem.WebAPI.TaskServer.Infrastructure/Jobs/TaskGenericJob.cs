@@ -10,7 +10,7 @@ public class TaskGenericJob : TaskJobBase, ITaskGenericJob
     private readonly IServiceProvider serviceProvider;
     private readonly ITaskPairParameterWrapper taskPairParameterWrapper;
     private readonly ITaskJsonParameterWrapper taskJsonParameterWrapper;
-
+    
     public TaskGenericJob(
         ILogger<TaskGenericJob> logger,
         ITaskLogRepository taskLogRepository,

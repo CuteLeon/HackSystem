@@ -15,4 +15,6 @@ public interface IHackSystemTaskServer
     void UnloadTasks();
 
     void Shutdown();
+
+    void ExecuteTask(TaskDetail taskDetail);
 }

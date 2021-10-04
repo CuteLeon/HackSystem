@@ -10,6 +10,8 @@ public abstract class TaskJobBase : ITaskJobBase
     private readonly ILogger<TaskJobBase> logger;
     private readonly ITaskLogRepository taskLogRepository;
 
+    public bool ManuallyTriggered { get; set; } = false;
+
     public TaskDetail TaskDetail { get; set; }
 
     public TaskJobBase(
@@ -26,7 +28,7 @@ public abstract class TaskJobBase : ITaskJobBase
         {
             TaskID = this.TaskDetail.TaskID,
             Parameters = this.TaskDetail.Parameters,
-            Trigger = nameof(IHackSystemTaskServer),
+            Trigger = this.ManuallyTriggered ? nameof(this.ManuallyTriggered) : nameof(IHackSystemTaskServer),
             TaskLogStatus = TaskLogStatus.Running,
             TriggerDateTime = DateTime.Now,
             StartDateTime = DateTime.Now,

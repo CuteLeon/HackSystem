@@ -8,6 +8,16 @@ public partial class TaskDetailComponent
 
     private async Task ExecuteTask()
     {
+        if (executing) return;
+
+        this.executing = true;
+        this.StateHasChanged();
+
+        if (this.OnExecuteTask.HasDelegate)
+            await this.OnExecuteTask.InvokeAsync(this.TaskDetail);
+
+        this.executing = false;
+        this.StateHasChanged();
     }
 
     private async Task DeleteTask()

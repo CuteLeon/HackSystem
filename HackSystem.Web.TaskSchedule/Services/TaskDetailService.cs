@@ -15,6 +15,13 @@ public class TaskDetailService : AuthenticatedServiceBase, ITaskDetailService
     {
     }
 
+    public async Task<bool> ExecuteTask(TaskDetailRequest taskDetail)
+    {
+        await this.AddAuthorizationHeaderAsync();
+        var result = await this.httpClient.PostAsJsonAsync("api/taskserver/ExecuteTask", taskDetail);
+        return result.IsSuccessStatusCode;
+    }
+
     public async Task<IEnumerable<TaskDetailResponse>> QueryTasks()
     {
         await this.AddAuthorizationHeaderAsync();

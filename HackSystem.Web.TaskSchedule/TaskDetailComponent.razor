@@ -32,13 +32,26 @@
     <div class="card-footer p-1 row justify-content-center">
         <div class="col-auto px-0 btn-group btn-group-sm" role="group" aria-label="Task control button">
             <button type="button" class="btn btn-warning" @onclick=@this.EditTask>Edit</button>
-            <button type="button" class="btn btn-primary" @onclick=@this.ExecuteTask><span class="fas fa-rocket"></span><span class="mx-1"></span>Execute</button>
+            <button type="button" class="btn btn-primary" @onclick=@this.ExecuteTask>
+                @if (executing)
+                {
+                    <span class="spinner-border spinner-border-sm text-warning" role="status"></span>
+                }
+                else
+                {
+                    <span class="fas fa-rocket"></span>
+                }
+                <span class="mx-1"></span>Execute
+            </button>
             <button type="button" class="btn btn-danger" @onclick=@this.DeleteTask>Delete</button>
         </div>
     </div>
 </div>
 
-    @code {
+@code {
+    [Parameter]
+    public EventCallback<TaskDetailResponse> OnExecuteTask { get; set; }
+
     [Parameter]
     public TaskDetailResponse TaskDetail { get; set; }
 
@@ -51,6 +64,8 @@
             this.SwitchTaskEnable(value).ConfigureAwait(false);
         }
     }
+
+    private bool executing = false;
 
     private string GetExecuteTime()
     => this.TaskDetail.TaskFrequency switch

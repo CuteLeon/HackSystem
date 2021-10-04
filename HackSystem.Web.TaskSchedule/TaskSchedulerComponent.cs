@@ -1,4 +1,5 @@
-﻿using HackSystem.Web.Authentication.TokenHandlers;
+﻿using HackSystem.DataTransferObjects.TaskServer;
+using HackSystem.Web.Authentication.TokenHandlers;
 using HackSystem.Web.ProgramPlatform.Abstractions.Enums;
 using HackSystem.Web.TaskSchedule.Services;
 
@@ -53,5 +54,29 @@ public partial class TaskSchedulerComponent
 
     private async Task AddTasks()
     {
+    }
+
+    private async Task ExecuteTask(TaskDetailResponse taskDetail)
+    {
+        try
+        {
+            this.Logger.LogInformation($"Trigger task {taskDetail.TaskName}...");
+            var result = await this.taskDetailService.ExecuteTask(new TaskDetailRequest() { TaskID = taskDetail.TaskID });
+            if (result)
+            {
+                this.Logger.LogInformation($"Trigger task {taskDetail.TaskName} successfully.");
+                this.DesktopToastContainer?.PopToast("Task Trigger Successfully!", $"Task {taskDetail.TaskName} triggered successfully, please wait for complete.", ToastIcons.Information);
+            }
+            else
+            {
+                this.Logger.LogWarning($"Trigger task {taskDetail.TaskName} failed.");
+                this.DesktopToastContainer?.PopToast("Task Trigger Failed.", $"Task {taskDetail.TaskName} triggered failed, please try again later.", ToastIcons.Warning);
+            }
+        }
+        catch (Exception ex)
+        {
+            this.Logger.LogError(ex, $"Unable to trigger task {taskDetail.TaskName}.");
+            this.DesktopToastContainer?.PopToast("Task Trigger Failed!", $"Unable to trigger Task {taskDetail.TaskName}: {ex.Message}", ToastIcons.Error);
+        }
     }
 }

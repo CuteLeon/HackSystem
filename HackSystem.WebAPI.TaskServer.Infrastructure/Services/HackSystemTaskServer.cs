@@ -55,6 +55,16 @@ public class HackSystemTaskServer : IHackSystemTaskServer
         this.logger.LogInformation($"Load {taskDetails.Count()} Tasks...");
     }
 
+    public void ExecuteTask(TaskDetail taskDetail)
+    {
+        this.logger.LogInformation($"Execute Task [{taskDetail.TaskName}] on {options.CurrentValue.TaskServerHost}...");
+        var taskJob = this.serviceProvider.GetRequiredService<ITaskGenericJob>();
+        taskJob.TaskDetail = taskDetail;
+        taskJob.ManuallyTriggered = true;
+        JobManager.AddJob(taskJob, schedule => schedule.ToRunNow());
+        this.logger.LogInformation($"Task [{taskDetail.TaskName}] executed.");
+    }
+
     public void LoadTask(TaskDetail taskDetail)
     {
         this.logger.LogInformation($"Load Task [{taskDetail.TaskName}] on {options.CurrentValue.TaskServerHost}...");
@@ -64,7 +74,6 @@ public class HackSystemTaskServer : IHackSystemTaskServer
         var taskJob = this.serviceProvider.GetRequiredService<ITaskGenericJob>();
         taskJob.TaskDetail = taskDetail;
         JobManager.AddJob(taskJob, taskSchedule.ScheduleAction);
-
         this.logger.LogInformation($"Task [{taskDetail.TaskName}] loaded.");
     }
 
