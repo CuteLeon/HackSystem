@@ -7,6 +7,6 @@ public class ProgramDrawerIconMouseEventArgsMapper : Profile
 {
     public ProgramDrawerIconMouseEventArgsMapper()
     {
-        this.CreateMap<MouseEventArgs, ProgramDrawerIconMouseEventArgs>();
+        this.CreateMap<MouseEventArgs, ProgramIconMouseEventArgs>();
     }
 }

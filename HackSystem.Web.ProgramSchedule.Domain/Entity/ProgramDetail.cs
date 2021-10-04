@@ -13,4 +13,12 @@ public class ProgramDetail
     public Type ProgramComponentType { get; set; }
 
     public int Z_Index { get; set; }
+
+    public string IconUri { get; set; }
+
+    public bool Enabled { get; set; }
+
+    public bool SingleInstance { get; set; }
+
+    public bool Mandatory { get; set; }
 }

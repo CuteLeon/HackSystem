@@ -3,7 +3,7 @@ using HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs;
 
 namespace HackSystem.WebAPI.ProgramServer.Application.Repository;
 
-public interface IBasicProgramRepository : IRepositoryBase<BasicProgram>
+public interface IProgramDetailRepository : IRepositoryBase<ProgramDetail>
 {
-    Task<IEnumerable<BasicProgram>> QueryMandatoryBasicPrograms();
+    Task<IEnumerable<ProgramDetail>> QueryMandatoryPrograms();
 }

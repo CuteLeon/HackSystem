@@ -1,5 +1,4 @@
 ﻿using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
-using HackSystem.DataTransferObjects.Programs;
 using HackSystem.Web.ProgramSchedule.Domain.Entity;
 using HackSystem.Web.ProgramSchedule.Domain.Intermediary;
 
@@ -9,7 +8,7 @@ public partial class ProgramDrawerComponent
 {
     public void ClearProgramDrawer()
     {
-        this.BasicProgramMaps.Clear();
+        this.UserProgramMaps.Clear();
         this.StateHasChanged();
     }
 
@@ -23,21 +22,21 @@ public partial class ProgramDrawerComponent
         }
     }
 
-    public void LoadProgramDrawer(IEnumerable<UserBasicProgramMapResponse> maps)
+    public void LoadProgramDrawer(IEnumerable<UserProgramMap> maps)
     {
-        this.BasicProgramMaps.Clear();
+        this.UserProgramMaps.Clear();
 
         foreach (var map in maps.OrderByDescending(map => map.PinToTop))
         {
-            this.BasicProgramMaps.Add(map.BasicProgram.Id, map);
+            this.UserProgramMaps.Add(map.Program.Id, map);
         }
         this.StateHasChanged();
     }
 
-    public async Task OnDoubleClickIcon(ProgramDrawerIconMouseEventArgs args)
+    public async Task OnDoubleClickIcon(ProgramIconMouseEventArgs args)
     {
-        this.logger.LogInformation($"Double click to luanch program: {args.UserBasicProgramMap.BasicProgram.Name}");
-        var programDetail = this.mapper.Map<BasicProgramResponse, ProgramDetail>(args.UserBasicProgramMap.BasicProgram);
+        var programDetail = args.UserProgramMap.Program;
+        this.logger.LogInformation($"Double click to luanch program: {programDetail.Name}");
         await this.intermediaryRequestSender.Send(new ProgramLaunchRequest() { ProgramDetail = programDetail });
     }
 }

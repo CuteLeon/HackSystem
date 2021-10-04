@@ -13,7 +13,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection AddWebServices(this IServiceCollection services, WebServiceOptions webServiceOptions)
     {
         services.AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(webServiceOptions.APIHost));
-        services.AddHttpClient<IBasicProgramService, BasicProgramService>(httpClient => httpClient.BaseAddress = new Uri(webServiceOptions.APIHost));
+        services.AddHttpClient<IProgramDetailService, ProgramDetailService>(httpClient => httpClient.BaseAddress = new Uri(webServiceOptions.APIHost));
         services.AddHttpClient<IProgramAssetService, ProgramAssetService>(httpClient => httpClient.BaseAddress = new Uri(webServiceOptions.APIHost));
         return services;
     }

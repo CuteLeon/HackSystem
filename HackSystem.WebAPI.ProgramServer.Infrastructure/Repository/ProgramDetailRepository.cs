@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HackSystem.WebAPI.ProgramServer.Infrastructure.Repository;
 
-public class BasicProgramRepository : RepositoryBase<BasicProgram>, IBasicProgramRepository
+public class ProgramDetailRepository : RepositoryBase<ProgramDetail>, IProgramDetailRepository
 {
-    public BasicProgramRepository(
-        ILogger<BasicProgramRepository> logger,
+    public ProgramDetailRepository(
+        ILogger<ProgramDetailRepository> logger,
         DbContext dbContext)
         : base(logger, dbContext)
     {
     }
 
-    public async Task<IEnumerable<BasicProgram>> QueryMandatoryBasicPrograms()
+    public async Task<IEnumerable<ProgramDetail>> QueryMandatoryPrograms()
         => this.AsQueryable().Where(p => p.Mandatory);
 }

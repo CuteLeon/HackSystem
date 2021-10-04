@@ -2,7 +2,7 @@
 
 namespace HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps;
 
-public class UserBasicProgramMap
+public class UserProgramMap
 {
     public string UserId { get; set; }
 
@@ -10,7 +10,7 @@ public class UserBasicProgramMap
 
     public string ProgramId { get; set; }
 
-    public virtual BasicProgram BasicProgram { get; set; }
+    public virtual ProgramDetail Program { get; set; }
 
     [DefaultValue(true)]
     public bool PinToDesktop { get; set; }

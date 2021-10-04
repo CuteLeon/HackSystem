@@ -29,11 +29,11 @@ public class HackSystemDbContext : IdentityDbContext<HackSystemUser, HackSystemR
         this.logger = logger;
     }
 
-    public virtual DbSet<BasicProgram> BasicPrograms { get; set; }
+    public virtual DbSet<ProgramDetail> ProgramDetails { get; set; }
 
     public virtual DbSet<ProgramUser> ProgramUsers { get; set; }
 
-    public virtual DbSet<UserBasicProgramMap> UserBasicProgramMaps { get; set; }
+    public virtual DbSet<UserProgramMap> UserProgramMaps { get; set; }
 
     public virtual DbSet<TaskDetail> TaskDetails { get; set; }
 
@@ -51,16 +51,16 @@ public class HackSystemDbContext : IdentityDbContext<HackSystemUser, HackSystemR
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<UserBasicProgramMap>().HasOne(map => map.BasicProgram).WithMany(program => program.UserProgramMaps).HasForeignKey(map => map.ProgramId).OnDelete(DeleteBehavior.Cascade);
-        builder.Entity<UserBasicProgramMap>().HasOne(map => map.ProgramUser).WithMany(user => user.UserProgramMaps).HasForeignKey(map => map.UserId).OnDelete(DeleteBehavior.Cascade);
-        builder.Entity<UserBasicProgramMap>().HasKey(map => new { map.UserId, map.ProgramId });
+        builder.Entity<UserProgramMap>().HasOne(map => map.Program).WithMany(program => program.UserProgramMaps).HasForeignKey(map => map.ProgramId).OnDelete(DeleteBehavior.Cascade);
+        builder.Entity<UserProgramMap>().HasOne(map => map.ProgramUser).WithMany(user => user.UserProgramMaps).HasForeignKey(map => map.UserId).OnDelete(DeleteBehavior.Cascade);
+        builder.Entity<UserProgramMap>().HasKey(map => new { map.UserId, map.ProgramId });
         builder.Entity<TaskDetail>().HasMany<TaskLogDetail>().WithOne().HasForeignKey(l => l.TaskID).IsRequired();
         builder.Entity<MockRouteDetail>().HasMany<MockRouteLogDetail>().WithOne().HasForeignKey(l => l.RouteID).IsRequired();
 
         builder.Entity<HackSystemUser>().HasOne<ProgramUser>().WithOne().HasForeignKey<HackSystemUser>(u => u.Id).IsRequired();
-        builder.Entity<BasicProgram>().HasIndex(nameof(BasicProgram.Id), nameof(BasicProgram.Name));
-        builder.Entity<UserBasicProgramMap>().HasIndex(nameof(UserBasicProgramMap.UserId));
-        builder.Entity<UserBasicProgramMap>().HasIndex(nameof(UserBasicProgramMap.UserId), nameof(UserBasicProgramMap.ProgramId)).IsUnique();
+        builder.Entity<ProgramDetail>().HasIndex(nameof(ProgramDetail.Id), nameof(ProgramDetail.Name));
+        builder.Entity<UserProgramMap>().HasIndex(nameof(UserProgramMap.UserId));
+        builder.Entity<UserProgramMap>().HasIndex(nameof(UserProgramMap.UserId), nameof(UserProgramMap.ProgramId)).IsUnique();
 
         builder.Entity<TaskDetail>().HasIndex(nameof(TaskDetail.Enabled));
         builder.Entity<TaskDetail>().HasIndex(nameof(TaskDetail.TaskName)).IsUnique();
@@ -85,7 +85,7 @@ public class HackSystemDbContext : IdentityDbContext<HackSystemUser, HackSystemR
         builder.Entity<GenericOption>().Property(nameof(GenericOption.Category)).UseCollation("NOCASE");
         builder.Entity<GenericOption>().Property(nameof(GenericOption.OwnerLevel)).UseCollation("NOCASE");
 
-        builder.InitializeBasicProgramData()
+        builder.InitializeProgramData()
                .InitializeIdentityData()
                .InitializeTaskData();
     }

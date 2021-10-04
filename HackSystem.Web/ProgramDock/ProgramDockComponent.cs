@@ -1,4 +1,4 @@
-﻿using HackSystem.DataTransferObjects.Programs;
+﻿using HackSystem.Web.ProgramSchedule.Domain.Entity;
 
 namespace HackSystem.Web.ProgramDock;
 
@@ -6,17 +6,17 @@ public partial class ProgramDockComponent
 {
     public void ClearProgramDock()
     {
-        this.BasicProgramMaps.Clear();
+        this.UserProgramMaps.Clear();
         this.StateHasChanged();
     }
 
-    public void LoadProgramDock(IEnumerable<UserBasicProgramMapResponse> maps)
+    public void LoadProgramDock(IEnumerable<UserProgramMap> maps)
     {
-        this.BasicProgramMaps.Clear();
+        this.UserProgramMaps.Clear();
 
         foreach (var map in maps)
         {
-            this.BasicProgramMaps.Add(map.BasicProgram.Id, map);
+            this.UserProgramMaps.Add(map.Program.Id, map);
         }
         this.StateHasChanged();
     }

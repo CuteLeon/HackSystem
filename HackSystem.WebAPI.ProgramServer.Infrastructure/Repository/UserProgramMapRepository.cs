@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HackSystem.WebAPI.ProgramServer.Infrastructure.Repository;
 
-public class UserBasicProgramMapRepository : RepositoryBase<UserBasicProgramMap>, IUserBasicProgramMapRepository
+public class UserProgramMapRepository : RepositoryBase<UserProgramMap>, IUserProgramMapRepository
 {
-    public UserBasicProgramMapRepository(
-        ILogger<UserBasicProgramMapRepository> logger,
+    public UserProgramMapRepository(
+        ILogger<UserProgramMapRepository> logger,
         DbContext dbContext)
         : base(logger, dbContext)
     {
     }
 
-    public async Task<bool> DeleteUserBasicProgramMap(string userId, string programId)
+    public async Task<bool> DeleteUserProgramMap(string userId, string programId)
     {
         var map = await this.FindAsync(userId, programId);
         if (map == null) return false;
@@ -22,17 +22,17 @@ public class UserBasicProgramMapRepository : RepositoryBase<UserBasicProgramMap>
         return true;
     }
 
-    public async Task<bool> CheckUserBasicProgramMap(string userId, string programId)
+    public async Task<bool> CheckUserProgramMap(string userId, string programId)
     {
         return await this.AsQueryable().AnyAsync(map => map.UserId == userId && map.ProgramId == programId);
     }
 
-    public async Task<IEnumerable<UserBasicProgramMap>> QueryUserBasicProgramMaps(string userId)
+    public async Task<IEnumerable<UserProgramMap>> QueryUserProgramMaps(string userId)
     {
         return await this.AsQueryable().Where(map => map.UserId == userId).ToListAsync();
     }
 
-    public async Task<bool> SetUserBasicProgramPinToDesktop(string userId, string programId, bool pinToDesktop)
+    public async Task<bool> SetUserProgramPinToDesktop(string userId, string programId, bool pinToDesktop)
     {
         var map = await this.FindAsync(userId, programId);
         if (map == null) return false;
@@ -41,7 +41,7 @@ public class UserBasicProgramMapRepository : RepositoryBase<UserBasicProgramMap>
         return true;
     }
 
-    public async Task<bool> SetUserBasicProgramPinToDock(string userId, string programId, bool pinToDock)
+    public async Task<bool> SetUserProgramPinToDock(string userId, string programId, bool pinToDock)
     {
         var map = await this.FindAsync(userId, programId);
         if (map == null) return false;
@@ -50,7 +50,7 @@ public class UserBasicProgramMapRepository : RepositoryBase<UserBasicProgramMap>
         return true;
     }
 
-    public async Task<bool> SetUserBasicProgramPinToTop(string userId, string programId, bool pinToTop)
+    public async Task<bool> SetUserProgramPinToTop(string userId, string programId, bool pinToTop)
     {
         var map = await this.FindAsync(userId, programId);
         if (map == null) return false;
@@ -59,7 +59,7 @@ public class UserBasicProgramMapRepository : RepositoryBase<UserBasicProgramMap>
         return true;
     }
 
-    public async Task<bool> SetUserBasicProgramRename(string userId, string programId, string rename)
+    public async Task<bool> SetUserProgramRename(string userId, string programId, string rename)
     {
         var map = await this.FindAsync(userId, programId);
         if (map == null) return false;

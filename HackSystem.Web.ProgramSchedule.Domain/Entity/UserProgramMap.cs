@@ -1,8 +1,8 @@
-﻿namespace HackSystem.DataTransferObjects.Programs;
+﻿namespace HackSystem.Web.ProgramSchedule.Domain.Entity;
 
-public class UserBasicProgramMapResponse
+public class UserProgramMap
 {
-    public BasicProgramResponse BasicProgram { get; set; }
+    public ProgramDetail Program { get; set; }
 
     public bool PinToDesktop { get; set; }
 

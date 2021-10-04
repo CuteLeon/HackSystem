@@ -426,7 +426,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                     b.ToTable("MockRouteLogDetails");
                 });
 
-            modelBuilder.Entity("HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps.UserBasicProgramMap", b =>
+            modelBuilder.Entity("HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps.UserProgramMap", b =>
                 {
                     b.Property<string>("UserId")
                         .HasColumnType("TEXT");
@@ -455,7 +455,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                     b.HasIndex("UserId", "ProgramId")
                         .IsUnique();
 
-                    b.ToTable("UserBasicProgramMaps");
+                    b.ToTable("UserProgramMaps");
 
                     b.HasData(
                         new
@@ -676,7 +676,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs.BasicProgram", b =>
+            modelBuilder.Entity("HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs.ProgramDetail", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -711,7 +711,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
 
                     b.HasIndex("Id", "Name");
 
-                    b.ToTable("BasicPrograms");
+                    b.ToTable("ProgramDetails");
 
                     b.HasData(
                         new
@@ -1110,9 +1110,9 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps.UserBasicProgramMap", b =>
+            modelBuilder.Entity("HackSystem.WebAPI.ProgramServer.Domain.Entity.Maps.UserProgramMap", b =>
                 {
-                    b.HasOne("HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs.BasicProgram", "BasicProgram")
+                    b.HasOne("HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs.ProgramDetail", "Program")
                         .WithMany("UserProgramMaps")
                         .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1124,7 +1124,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BasicProgram");
+                    b.Navigation("Program");
 
                     b.Navigation("ProgramUser");
                 });
@@ -1189,7 +1189,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs.BasicProgram", b =>
+            modelBuilder.Entity("HackSystem.WebAPI.ProgramServer.Domain.Entity.Programs.ProgramDetail", b =>
                 {
                     b.Navigation("UserProgramMaps");
                 });

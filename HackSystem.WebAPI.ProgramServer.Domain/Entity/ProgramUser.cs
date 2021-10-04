@@ -7,5 +7,5 @@ public class ProgramUser
     [Key]
     public string Id { get; set; }
 
-    public virtual IList<UserBasicProgramMap> UserProgramMaps { get; set; }
+    public virtual IList<UserProgramMap> UserProgramMaps { get; set; }
 }

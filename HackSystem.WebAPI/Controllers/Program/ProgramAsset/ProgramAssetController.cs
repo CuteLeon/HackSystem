@@ -19,27 +19,27 @@ public class ProgramAssetController : ControllerBase
     private readonly ILogger<ProgramAssetController> logger;
     private readonly UserManager<HackSystemUser> userManager;
     private readonly IMapper mapper;
-    private readonly IUserBasicProgramMapRepository userBasicProgramMapRepository;
+    private readonly IUserProgramMapRepository userProgramMapRepository;
     private readonly IProgramAssetService programAssetService;
 
     public ProgramAssetController(
         ILogger<ProgramAssetController> logger,
         UserManager<HackSystemUser> userManager,
         IMapper mapper,
-        IUserBasicProgramMapRepository userBasicProgramMapRepository,
+        IUserProgramMapRepository userProgramMapRepository,
         IProgramAssetService programAssetService)
     {
         this.logger = logger;
         this.userManager = userManager;
         this.mapper = mapper;
-        this.userBasicProgramMapRepository = userBasicProgramMapRepository;
+        this.userProgramMapRepository = userProgramMapRepository;
         this.programAssetService = programAssetService;
     }
 
     [HttpGet]
     public async Task<IActionResult> QueryProgramAssetList(string programId)
     {
-        if (!await CheckUserBasicProgramMap(programId))
+        if (!await CheckUserProgramMap(programId))
         {
             return this.Forbid();
         }
@@ -62,7 +62,7 @@ public class ProgramAssetController : ControllerBase
     [LogActionFilter(noLogResponseBody: true)]
     public async Task<IActionResult> QueryProgramAssetPackage(string programId)
     {
-        if (!await CheckUserBasicProgramMap(programId))
+        if (!await CheckUserProgramMap(programId))
         {
             return this.Forbid();
         }
@@ -77,7 +77,7 @@ public class ProgramAssetController : ControllerBase
     [LogActionFilter(noLogResponseBody: true)]
     public async Task<IActionResult> QueryProgramAssetPackage(ProgramAssetPackageRequest packageRequest)
     {
-        if (!await CheckUserBasicProgramMap(packageRequest.ProgramId))
+        if (!await CheckUserProgramMap(packageRequest.ProgramId))
         {
             return this.Forbid();
         }
@@ -89,7 +89,7 @@ public class ProgramAssetController : ControllerBase
         return this.Ok(packageResult);
     }
 
-    private async Task<bool> CheckUserBasicProgramMap(string programId)
+    private async Task<bool> CheckUserProgramMap(string programId)
     {
         if (string.IsNullOrWhiteSpace(programId))
         {
@@ -101,7 +101,7 @@ public class ProgramAssetController : ControllerBase
         var user = await this.userManager.FindByNameAsync(userName) ?? throw new AuthenticationException();
         var userId = user.Id;
 
-        var hasAccess = await this.userBasicProgramMapRepository.CheckUserBasicProgramMap(userId, programId);
+        var hasAccess = await this.userProgramMapRepository.CheckUserProgramMap(userId, programId);
         if (!hasAccess)
         {
             this.logger.LogWarning($"User {userName} has no access to program asset of program {programId}.");

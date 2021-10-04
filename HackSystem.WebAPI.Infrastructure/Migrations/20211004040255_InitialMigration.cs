@@ -24,24 +24,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BasicPrograms",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    IconUri = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    SingleInstance = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AssemblyName = table.Column<string>(type: "TEXT", nullable: false),
-                    TypeName = table.Column<string>(type: "TEXT", nullable: false),
-                    Mandatory = table.Column<bool>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BasicPrograms", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "GenericOptions",
                 columns: table => new
                 {
@@ -82,6 +64,24 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MockRouteDetails", x => x.RouteID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProgramDetails",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    IconUri = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    SingleInstance = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AssemblyName = table.Column<string>(type: "TEXT", nullable: false),
+                    TypeName = table.Column<string>(type: "TEXT", nullable: false),
+                    Mandatory = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProgramDetails", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,7 +239,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserBasicProgramMaps",
+                name: "UserProgramMaps",
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "TEXT", nullable: false),
@@ -251,15 +251,15 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserBasicProgramMaps", x => new { x.UserId, x.ProgramId });
+                    table.PrimaryKey("PK_UserProgramMaps", x => new { x.UserId, x.ProgramId });
                     table.ForeignKey(
-                        name: "FK_UserBasicProgramMaps_BasicPrograms_ProgramId",
+                        name: "FK_UserProgramMaps_ProgramDetails_ProgramId",
                         column: x => x.ProgramId,
-                        principalTable: "BasicPrograms",
+                        principalTable: "ProgramDetails",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserBasicProgramMaps_ProgramUsers_UserId",
+                        name: "FK_UserProgramMaps_ProgramUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "ProgramUsers",
                         principalColumn: "Id",
@@ -388,47 +388,47 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 values: new object[] { "msaspnet-core-role-hack-system000002", "43daf209-df6b-499c-83e5-94ea05cf8997", "Commander", "COMMANDER" });
 
             migrationBuilder.InsertData(
-                table: "BasicPrograms",
+                table: "ProgramDetails",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Mandatory", "Name", "SingleInstance", "TypeName" },
                 values: new object[] { "program0-icon-0828-hack-system000001", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/HomeProgram.png", true, "Home", true, "HackSystem.Web.SystemProgram.Home.HomeComponent" });
 
             migrationBuilder.InsertData(
-                table: "BasicPrograms",
+                table: "ProgramDetails",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Mandatory", "Name", "SingleInstance", "TypeName" },
                 values: new object[] { "program0-icon-0828-hack-system000002", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/ExplorerProgram.png", true, "Explorer", false, "HackSystem.Web.SystemProgram.Explorer.ExplorerComponent" });
 
             migrationBuilder.InsertData(
-                table: "BasicPrograms",
+                table: "ProgramDetails",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Mandatory", "Name", "SingleInstance", "TypeName" },
                 values: new object[] { "program0-icon-0828-hack-system000003", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/BorwserProgram.png", true, "Borwser", false, "HackSystem.Web.SystemProgram.Borwser.BorwserComponent" });
 
             migrationBuilder.InsertData(
-                table: "BasicPrograms",
+                table: "ProgramDetails",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Mandatory", "Name", "SingleInstance", "TypeName" },
                 values: new object[] { "program0-icon-0828-hack-system000004", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/ProfileProgram.png", true, "Profile", true, "HackSystem.Web.SystemProgram.Profile.ProfileComponent" });
 
             migrationBuilder.InsertData(
-                table: "BasicPrograms",
+                table: "ProgramDetails",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Mandatory", "Name", "SingleInstance", "TypeName" },
                 values: new object[] { "program0-icon-0828-hack-system000005", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/SettingProgram.png", true, "Setting", true, "HackSystem.Web.SystemProgram.Setting.SettingComponent" });
 
             migrationBuilder.InsertData(
-                table: "BasicPrograms",
+                table: "ProgramDetails",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Mandatory", "Name", "SingleInstance", "TypeName" },
                 values: new object[] { "program0-icon-0828-hack-system000006", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/AppStoreProgram.png", true, "AppStore", true, "HackSystem.Web.SystemProgram.AppStore.AppStoreComponent" });
 
             migrationBuilder.InsertData(
-                table: "BasicPrograms",
+                table: "ProgramDetails",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Mandatory", "Name", "SingleInstance", "TypeName" },
                 values: new object[] { "program0-icon-0828-hack-system000007", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/WeatherProgram.png", false, "Weather", true, "HackSystem.Web.SystemProgram.Weather.WeatherComponent" });
 
             migrationBuilder.InsertData(
-                table: "BasicPrograms",
+                table: "ProgramDetails",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Mandatory", "Name", "SingleInstance", "TypeName" },
                 values: new object[] { "program0-icon-0828-hack-system000008", "HackSystem.Web.TaskSchedule", true, "/images/ProgramIcons/TaskServerProgram.png", true, "TaskServer", true, "HackSystem.Web.TaskSchedule.TaskSchedulerComponent" });
 
             migrationBuilder.InsertData(
-                table: "BasicPrograms",
+                table: "ProgramDetails",
                 columns: new[] { "Id", "AssemblyName", "Enabled", "IconUri", "Mandatory", "Name", "SingleInstance", "TypeName" },
                 values: new object[] { "program0-icon-0828-hack-system000009", "HackSystem.Web.SystemProgram", true, "/images/ProgramIcons/MockServerProgram.png", true, "MockServer", true, "HackSystem.Web.SystemProgram.MockServer.MockServerComponent" });
 
@@ -468,137 +468,137 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 values: new object[] { "msaspnet-core-user-hack-system000003", 0, "93cdc1b8-0c84-4f52-9245-d6ae4bbe5f59", "mathilda@hack.com", true, 0, 0, true, null, "MATHILDA@HACK.COM", "MATHILDA", "AQAAAAEAACcQAAAAEDjIsjVamUxv4OQ06Ur/7YnsqddYfO2eQP7UK/Adjs38RIkmBpgTldrfCXZ5QHP1vQ==", null, false, "2NGFUDFGMLPCBN5U67CHXJEYIDBWQPO3", false, "Mathilda" });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000009", "msaspnet-core-user-hack-system000001", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000008", "msaspnet-core-user-hack-system000003", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000008", "msaspnet-core-user-hack-system000002", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000008", "msaspnet-core-user-hack-system000001", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000007", "msaspnet-core-user-hack-system000003", true, false, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000007", "msaspnet-core-user-hack-system000002", true, false, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000007", "msaspnet-core-user-hack-system000001", true, false, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000006", "msaspnet-core-user-hack-system000003", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000006", "msaspnet-core-user-hack-system000002", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000006", "msaspnet-core-user-hack-system000001", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000005", "msaspnet-core-user-hack-system000003", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000005", "msaspnet-core-user-hack-system000002", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000004", "msaspnet-core-user-hack-system000003", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000009", "msaspnet-core-user-hack-system000002", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000004", "msaspnet-core-user-hack-system000002", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000004", "msaspnet-core-user-hack-system000001", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000003", "msaspnet-core-user-hack-system000003", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000003", "msaspnet-core-user-hack-system000002", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000003", "msaspnet-core-user-hack-system000001", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000002", "msaspnet-core-user-hack-system000003", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000002", "msaspnet-core-user-hack-system000002", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000002", "msaspnet-core-user-hack-system000001", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000001", "msaspnet-core-user-hack-system000003", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000001", "msaspnet-core-user-hack-system000002", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000001", "msaspnet-core-user-hack-system000001", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000005", "msaspnet-core-user-hack-system000001", true, true, false, null });
 
             migrationBuilder.InsertData(
-                table: "UserBasicProgramMaps",
+                table: "UserProgramMaps",
                 columns: new[] { "ProgramId", "UserId", "PinToDesktop", "PinToDock", "PinToTop", "Rename" },
                 values: new object[] { "program0-icon-0828-hack-system000009", "msaspnet-core-user-hack-system000003", true, true, false, null });
 
@@ -665,11 +665,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasicPrograms_Id_Name",
-                table: "BasicPrograms",
-                columns: new[] { "Id", "Name" });
-
-            migrationBuilder.CreateIndex(
                 name: "IX_GenericOptions_OptionName_Category_OwnerLevel",
                 table: "GenericOptions",
                 columns: new[] { "OptionName", "Category", "OwnerLevel" },
@@ -695,6 +690,11 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 name: "IX_MockRouteLogDetails_URI_Method_SourceHost_MockType",
                 table: "MockRouteLogDetails",
                 columns: new[] { "URI", "Method", "SourceHost", "MockType" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProgramDetails_Id_Name",
+                table: "ProgramDetails",
+                columns: new[] { "Id", "Name" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_TaskDetails_Enabled",
@@ -723,18 +723,18 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 columns: new[] { "TaskID", "TaskLogStatus" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserBasicProgramMaps_ProgramId",
-                table: "UserBasicProgramMaps",
+                name: "IX_UserProgramMaps_ProgramId",
+                table: "UserProgramMaps",
                 column: "ProgramId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserBasicProgramMaps_UserId",
-                table: "UserBasicProgramMaps",
+                name: "IX_UserProgramMaps_UserId",
+                table: "UserProgramMaps",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserBasicProgramMaps_UserId_ProgramId",
-                table: "UserBasicProgramMaps",
+                name: "IX_UserProgramMaps_UserId_ProgramId",
+                table: "UserProgramMaps",
                 columns: new[] { "UserId", "ProgramId" },
                 unique: true);
 
@@ -771,7 +771,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 name: "TaskLogDetails");
 
             migrationBuilder.DropTable(
-                name: "UserBasicProgramMaps");
+                name: "UserProgramMaps");
 
             migrationBuilder.DropTable(
                 name: "WebAPILogs");
@@ -789,7 +789,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 name: "TaskDetails");
 
             migrationBuilder.DropTable(
-                name: "BasicPrograms");
+                name: "ProgramDetails");
 
             migrationBuilder.DropTable(
                 name: "ProgramUsers");

@@ -1,6 +1,6 @@
 ﻿namespace HackSystem.DataTransferObjects.Programs;
 
-public class UserBasicProgramMapRequest
+public class UserProgramMapRequest
 {
     public string ProgramId { get; set; }
 

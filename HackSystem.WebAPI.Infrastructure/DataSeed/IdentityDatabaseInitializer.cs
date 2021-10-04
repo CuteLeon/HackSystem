@@ -42,37 +42,37 @@ public static class IdentityDatabaseInitializer
             new ProgramUser() { Id = "msaspnet-core-user-hack-system000003" }
         });
 
-        builder.Entity<UserBasicProgramMap>().HasData(new[]
+        builder.Entity<UserProgramMap>().HasData(new[]
         {
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000001", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000002", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000003", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000004", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000005", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000006", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000007", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000008", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000009", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000001", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000002", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000003", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000004", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000005", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000006", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000007", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000008", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000009", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
 
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000001", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000002", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000003", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000004", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000005", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000006", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000007", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000008", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000009", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000001", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000002", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000003", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000004", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000005", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000006", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000007", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000008", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000009", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
 
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000001", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000002", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000003", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000004", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000005", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000006", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000007", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000008", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
-            new UserBasicProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000009", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true }
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000001", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000002", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000003", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000004", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000005", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000006", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000007", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000008", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
+            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000009", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true }
         });
 
         return builder;

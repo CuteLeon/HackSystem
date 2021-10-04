@@ -1,4 +1,6 @@
-﻿using static HackSystem.Web.Toast.Model.ToastDetail;
+﻿using HackSystem.DataTransferObjects.Programs;
+using HackSystem.Web.ProgramSchedule.Domain.Entity;
+using static HackSystem.Web.Toast.Model.ToastDetail;
 
 namespace HackSystem.Web.Desktop;
 
@@ -38,23 +40,27 @@ public partial class DesktopComponent
     {
         try
         {
-            var maps = await this.basicProgramService.QueryUserBasicProgramMaps();
+            this.logger.LogInformation("Query programs ...");
+            var maps = await this.programDetailService.QueryUserProgramMaps();
             if (maps?.Any() ?? false)
             {
-                this.BasicProgramMaps = maps.ToDictionary(map => map.BasicProgram.Id, map => map);
-                this.ProgramDrawerComponent.LoadProgramDrawer(maps);
-                this.ProgramDockComponent.LoadProgramDock(maps.Where(map => map.PinToDock));
+                var mapDetails = this.mapper.Map<IEnumerable<UserProgramMapResponse>, IEnumerable<UserProgramMap>>(maps);
+                this.UserProgramMaps = mapDetails.ToDictionary(map => map.Program.Id, map => map);
+                this.ProgramDrawerComponent.LoadProgramDrawer(mapDetails);
+                this.ProgramDockComponent.LoadProgramDock(mapDetails.Where(map => map.PinToDock));
             }
             else
             {
                 this.ProgramDockComponent.ClearProgramDock();
                 this.ProgramDrawerComponent.ClearProgramDrawer();
-                this.BasicProgramMaps.Clear();
+                this.UserProgramMaps.Clear();
             }
-            this.GetDesktopToastContainer().PopToast("Query programs successfully", $"Query programs successfully, total of {this.BasicProgramMaps.Count}.", Icons.Information, true, 3000);
+            this.logger.LogInformation($"Query {maps.Count()} programs successfully.");
+            this.GetDesktopToastContainer().PopToast("Query programs successfully", $"Query programs successfully, total of {this.UserProgramMaps.Count}.", Icons.Information, true, 3000);
         }
         catch (Exception ex)
         {
+            this.logger.LogError(ex, $"Query programs failed.");
             this.GetDesktopToastContainer().PopToast("Failed to query programs", $"Failed to query programs: {ex.Message}", Icons.Error, false);
         }
     }

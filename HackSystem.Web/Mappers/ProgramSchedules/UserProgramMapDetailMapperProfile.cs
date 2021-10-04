@@ -3,10 +3,10 @@ using HackSystem.Web.ProgramSchedule.Domain.Entity;
 
 namespace HackSystem.Web.Mappers.ProgramSchedules;
 
-public class ProgramDetailMapperProfile : Profile
+public class UserProgramMapDetailMapperProfile : Profile
 {
-    public ProgramDetailMapperProfile()
+    public UserProgramMapDetailMapperProfile()
     {
-        this.CreateMap<ProgramResponse, ProgramDetail>();
+        this.CreateMap<UserProgramMapResponse, UserProgramMap>();
     }
 }

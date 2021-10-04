@@ -14,5 +14,5 @@ public class UserResponse
 
     public int ExperiencePoints { get; set; }
 
-    public IList<UserBasicProgramMapResponse> UserProgramMaps { get; set; }
+    public IList<UserProgramMapResponse> UserProgramMaps { get; set; }
 }

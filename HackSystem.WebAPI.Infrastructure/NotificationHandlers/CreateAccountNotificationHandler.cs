@@ -9,40 +9,40 @@ namespace HackSystem.WebAPI.Infrastructure.NotificationHandlers;
 public class CreateAccountNotificationHandler : IIntermediaryNotificationHandler<CreateAccountNotification>
 {
     private readonly ILogger<CreateAccountNotificationHandler> logger;
-    private readonly IBasicProgramRepository basicProgramRepository;
+    private readonly IProgramDetailRepository programDetailRepository;
     private readonly IProgramUserRepository programUserRepository;
-    private readonly IUserBasicProgramMapRepository userBasicProgramMapRepository;
+    private readonly IUserProgramMapRepository userProgramMapRepository;
 
     public CreateAccountNotificationHandler(
         ILogger<CreateAccountNotificationHandler> logger,
-        IBasicProgramRepository basicProgramRepository,
+        IProgramDetailRepository programDetailRepository,
         IProgramUserRepository programUserRepository,
-        IUserBasicProgramMapRepository userBasicProgramMapRepository)
+        IUserProgramMapRepository userProgramMapRepository)
     {
         this.logger = logger;
-        this.basicProgramRepository = basicProgramRepository;
+        this.programDetailRepository = programDetailRepository;
         this.programUserRepository = programUserRepository;
-        this.userBasicProgramMapRepository = userBasicProgramMapRepository;
+        this.userProgramMapRepository = userProgramMapRepository;
     }
 
     public async Task Handle(CreateAccountNotification notification, CancellationToken cancellationToken)
     {
         this.logger.LogInformation($"Processing create account notification: {notification.User.UserName}...");
-        var mandatoryBasicPrograms = await this.basicProgramRepository.QueryMandatoryBasicPrograms();
+        var mandatoryPrograms = await this.programDetailRepository.QueryMandatoryPrograms();
         var programUser = await this.programUserRepository.AddAsync(new ProgramUser
         {
             Id = notification.User.Id,
         });
         programUser = await this.programUserRepository.AddAsync(programUser);
-        var userProgramMaps = mandatoryBasicPrograms
-            .Select(program => new UserBasicProgramMap
+        var userProgramMaps = mandatoryPrograms
+            .Select(program => new UserProgramMap
             {
                 UserId = notification.User.Id,
                 ProgramId = program.Id,
                 PinToDesktop = true,
                 PinToDock = true
             });
-        await userBasicProgramMapRepository.AddRangeAsync(userProgramMaps);
+        await userProgramMapRepository.AddRangeAsync(userProgramMaps);
         this.logger.LogDebug($"Create account notification processed {notification.User.UserName}.");
     }
 }

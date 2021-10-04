@@ -1,18 +1,18 @@
 ﻿@inject IJSRuntime jsRuntime
 @inject ILogger<ProgramDockComponent> logger
 
-@if (this.BasicProgramMaps.Count > 0)
+@if (this.UserProgramMaps.Count > 0)
 {
     <div class="border-bottom border-white px-5 rounded-pill shadow" style="pointer-events: auto; backdrop-filter: blur(10px);">
         <div class="d-flex justify-content-center user-select-none">
-            @foreach (var programMap in this.BasicProgramMaps.Values)
+            @foreach (var programMap in this.UserProgramMaps.Values)
             {
-                <ProgramDockIconComponent @key="@programMap.BasicProgram.Id" UserBasicProgramMap="programMap" />
+                <ProgramDockIconComponent @key="@programMap.Program.Id" UserProgramMap="programMap" />
             }
         </div>
     </div>
 }
 
-@code{
-    protected Dictionary<string, UserBasicProgramMapResponse> BasicProgramMaps { get; set; } = new Dictionary<string, UserBasicProgramMapResponse>();
+@code {
+    protected Dictionary<string, UserProgramMap> UserProgramMaps { get; set; } = new();
 }

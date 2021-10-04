@@ -3,7 +3,8 @@
 @attribute [Authorize(Roles = CommonSense.Roles.HackerRole)]
 
 @inject ILogger<DesktopComponent> logger
-@inject IBasicProgramService basicProgramService
+@inject IMapper mapper
+@inject IProgramDetailService programDetailService
 
 <div id="DesktopInstance" class="container-fluid w-100 h-100">
     <TopBarView @ref="TopBarView">
@@ -42,7 +43,7 @@
     [CascadingParameter(Name = "DesktopToastContainer")]
     private Func<IToastContainer> GetDesktopToastContainer { get; set; }
 
-    protected Dictionary<string, UserBasicProgramMapResponse> BasicProgramMaps { get; set; } = new Dictionary<string, UserBasicProgramMapResponse>();
+    protected Dictionary<string, UserProgramMap> UserProgramMaps { get; set; } = new ();
 
     protected ProgramDockComponent ProgramDockComponent { get; set; }
     protected ProgramDrawerComponent ProgramDrawerComponent { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace HackSystem.DataTransferObjects.Programs;
 
-public class BasicProgramResponse
+public class ProgramResponse
 {
     public string Id { get; set; }
 
