@@ -1,13 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using HackSystem.DataTransferObjects.Programs.ProgramAssets;
 using HackSystem.Web.Application.Program.ProgramAsset;
 using HackSystem.Web.Mappers.ProgramAsserts;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Moq;
 using Xunit;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.AssemblyLoader.Tests

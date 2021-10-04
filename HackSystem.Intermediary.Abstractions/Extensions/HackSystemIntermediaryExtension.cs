@@ -31,4 +31,31 @@ public static class HackSystemIntermediaryHandlerExtension
         services.Add(new ServiceDescriptor(typeof(IRequestHandler<TRequest, TResponse>), typeof(TRequestHandler), lifetime));
         return services;
     }
+
+    public static IServiceCollection AddIntermediaryNotificationHandlerSingleton<TNotificationHandler, TNotification>(
+        this IServiceCollection services,
+        IIntermediaryNotificationHandler<TNotification> singletonInstance)
+        where TNotificationHandler : IIntermediaryNotificationHandler<TNotification>
+        where TNotification : IIntermediaryNotification
+    {
+        services.AddSingleton<INotificationHandler<TNotification>>(singletonInstance);
+        return services;
+    }
+
+    public static IServiceCollection AddIntermediaryCommandHandlerSingleton<TCommandHandler, TCommand>(
+        this IServiceCollection services,
+        IIntermediaryRequestHandler<TCommand, ValueTuple> singletonInstance)
+        where TCommandHandler : IIntermediaryRequestHandler<TCommand, ValueTuple>
+        where TCommand : IIntermediaryRequest<ValueTuple>
+        => services.AddIntermediaryRequestHandlerSingleton<TCommandHandler, TCommand, ValueTuple>(singletonInstance);
+
+    public static IServiceCollection AddIntermediaryRequestHandlerSingleton<TRequestHandler, TRequest, TResponse>(
+        this IServiceCollection services,
+        IIntermediaryRequestHandler<TRequest, TResponse> singletonInstance)
+        where TRequestHandler : IIntermediaryRequestHandler<TRequest, TResponse>
+        where TRequest : IIntermediaryRequest<TResponse>
+    {
+        services.AddSingleton<IRequestHandler<TRequest, TResponse>>(singletonInstance);
+        return services;
+    }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using HackSystem.Web.ProgramSchedule.Application.IDGenerator;
+﻿using HackSystem.Web.ProgramSchedule.Application.IDGenerator;
 using HackSystem.Web.ProgramSchedule.Infrastructure.IDGenerator;
 using Xunit;
 

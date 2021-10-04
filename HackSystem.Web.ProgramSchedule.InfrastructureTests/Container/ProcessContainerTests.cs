@@ -1,9 +1,6 @@
-﻿using System.Linq;
-using HackSystem.Web.ProgramSchedule.Application.Container;
+﻿using HackSystem.Web.ProgramSchedule.Application.Container;
 using HackSystem.Web.ProgramSchedule.Domain.Entity;
 using HackSystem.Web.ProgramSchedule.Domain.Enums;
-using Microsoft.Extensions.Logging;
-using Moq;
 using Xunit;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.Container.Tests;
