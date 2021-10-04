@@ -2,5 +2,5 @@
 
 public interface IProcessDestroyer
 {
-    Task DisposeProcess(int processID);
+    Task DestroyProcess(int processID);
 }

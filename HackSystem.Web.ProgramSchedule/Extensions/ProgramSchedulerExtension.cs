@@ -1,14 +1,17 @@
-﻿using HackSystem.Web.ProgramSchedule.Application.AssemblyLoader;
+﻿using HackSystem.Intermediary.Extensions;
+using HackSystem.Web.ProgramSchedule.Application.AssemblyLoader;
 using HackSystem.Web.ProgramSchedule.Application.Container;
 using HackSystem.Web.ProgramSchedule.Application.Destroyer;
 using HackSystem.Web.ProgramSchedule.Application.IDGenerator;
 using HackSystem.Web.ProgramSchedule.Application.Launcher;
 using HackSystem.Web.ProgramSchedule.Application.Scheduler;
+using HackSystem.Web.ProgramSchedule.Domain.Intermediary;
 using HackSystem.Web.ProgramSchedule.Domain.Options;
 using HackSystem.Web.ProgramSchedule.Infrastructure.AssemblyLoader;
 using HackSystem.Web.ProgramSchedule.Infrastructure.Container;
 using HackSystem.Web.ProgramSchedule.Infrastructure.Destroyer;
 using HackSystem.Web.ProgramSchedule.Infrastructure.IDGenerator;
+using HackSystem.Web.ProgramSchedule.Infrastructure.IntermediaryHandler;
 using HackSystem.Web.ProgramSchedule.Infrastructure.Launcher;
 using HackSystem.Web.ProgramSchedule.Infrastructure.Scheduler;
 
@@ -25,7 +28,9 @@ public static class ProgramSchedulerExtension
             .AddSingleton<IProcessContainer, ProcessContainer>()
             .AddSingleton<IProgramLauncher, ProgramLauncher>()
             .AddSingleton<IProcessDestroyer, ProcessDestroyer>()
-            .AddSingleton<IProgramScheduler, ProgramScheduler>();
+            .AddSingleton<IProgramScheduler, ProgramScheduler>()
+            .AddIntermediaryCommandHandler<ProcessDestroyCommandHandler, ProcessDestroyCommand>(ServiceLifetime.Singleton)
+            .AddIntermediaryRequestHandler<ProgramLaunchRequestHandler, ProgramLaunchRequest, ProgramLaunchResponse>(ServiceLifetime.Singleton);
 
         return services;
     }

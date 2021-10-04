@@ -20,7 +20,7 @@ public abstract class ProgramComponentBase : ComponentBase, IDisposable
 
     public virtual void OnClose()
     {
-        this.ProcessDestroyer.DisposeProcess(this.processID);
+        this.ProcessDestroyer.DestroyProcess(this.processID);
     }
 
     public abstract void Dispose();

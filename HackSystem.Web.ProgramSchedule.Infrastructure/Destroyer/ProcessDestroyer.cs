@@ -16,7 +16,7 @@ public class ProcessDestroyer : IProcessDestroyer
         this.processContainer = processContainer;
     }
 
-    public async Task DisposeProcess(int processID)
+    public async Task DestroyProcess(int processID)
     {
         this.logger.LogInformation($"Process closed: {processID} ID");
         _ = this.processContainer.DestroyProcess(processID, out _);
