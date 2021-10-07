@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Components;
 using Moq;
 using Moq.Contrib.HttpClient;
 using Xunit;
+using HackSystem.Intermediary.Extensions;
+using HackSystem.Intermediary.Application;
+using HackSystem.Web.Domain.Intermediary;
 
 namespace HackSystem.WebTests.Account;
 
@@ -21,6 +24,7 @@ public class LogoutComponentTests
         Uri baseUri = new("https://localhost:4237/");
         Uri logoutUri = new(baseUri, "/api/accounts/logout");
         var mockHttpMessageHandler = new Mock<HttpMessageHandler>();
+        var mockLogoutCommandHandler = new Mock<IIntermediaryCommandHandler<LogoutCommand>>();
         var mockHttpClient = mockHttpMessageHandler.CreateClient();
         mockHttpMessageHandler.SetupAnyRequest().Throws(new HttpRequestException("Not allowed request than testing request."));
         mockHttpMessageHandler.SetupRequest(HttpMethod.Get, logoutUri).ReturnsResponse(HttpStatusCode.OK, "Logout successfully.");
@@ -30,6 +34,8 @@ public class LogoutComponentTests
         using var ctx = new TestContext();
         ctx.Services
             .AddLogging()
+            .AddHackSystemIntermediary()
+            .AddIntermediaryCommandHandlerSingleton(mockLogoutCommandHandler.Object)
             .AddSingleton<NavigationManager>(mockNavigationManager)
             .AddSingleton(new Mock<ICookieStorageHandler>().Object)
             .AddHackSystemAuthentication(options =>

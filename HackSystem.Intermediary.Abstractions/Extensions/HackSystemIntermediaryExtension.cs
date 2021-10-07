@@ -42,17 +42,15 @@ public static class HackSystemIntermediaryHandlerExtension
         return services;
     }
 
-    public static IServiceCollection AddIntermediaryCommandHandlerSingleton<TCommandHandler, TCommand>(
+    public static IServiceCollection AddIntermediaryCommandHandlerSingleton<TCommand>(
         this IServiceCollection services,
         IIntermediaryRequestHandler<TCommand, ValueTuple> singletonInstance)
-        where TCommandHandler : IIntermediaryRequestHandler<TCommand, ValueTuple>
         where TCommand : IIntermediaryRequest<ValueTuple>
-        => services.AddIntermediaryRequestHandlerSingleton<TCommandHandler, TCommand, ValueTuple>(singletonInstance);
+        => services.AddIntermediaryRequestHandlerSingleton(singletonInstance);
 
-    public static IServiceCollection AddIntermediaryRequestHandlerSingleton<TRequestHandler, TRequest, TResponse>(
+    public static IServiceCollection AddIntermediaryRequestHandlerSingleton<TRequest, TResponse>(
         this IServiceCollection services,
         IIntermediaryRequestHandler<TRequest, TResponse> singletonInstance)
-        where TRequestHandler : IIntermediaryRequestHandler<TRequest, TResponse>
         where TRequest : IIntermediaryRequest<TResponse>
     {
         services.AddSingleton<IRequestHandler<TRequest, TResponse>>(singletonInstance);

@@ -21,7 +21,7 @@ public class ProgramLaunchRequestHandlerTests
         IServiceCollection serviceCollection = new ServiceCollection()
             .AddLogging()
             .AddHackSystemIntermediary()
-            .AddIntermediaryRequestHandlerSingleton<ProgramLaunchRequestHandler, ProgramLaunchRequest, ProgramLaunchResponse>(requestHandler.Object);
+            .AddIntermediaryRequestHandlerSingleton(requestHandler.Object);
         var serviceProvider = serviceCollection.BuildServiceProvider();
         var requestSender = serviceProvider.GetRequiredService<IIntermediaryRequestSender>();
         for (int index = 0; index < 5; index++)
