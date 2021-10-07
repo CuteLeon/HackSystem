@@ -1,4 +1,5 @@
 ﻿using HackSystem.Intermediary.Extensions;
+using HackSystem.Web.Domain.Intermediary;
 using HackSystem.Web.ProgramSchedule.Application.AssemblyLoader;
 using HackSystem.Web.ProgramSchedule.Application.Container;
 using HackSystem.Web.ProgramSchedule.Application.Destroyer;
@@ -30,6 +31,7 @@ public static class ProgramSchedulerExtension
             .AddSingleton<IProcessDestroyer, ProcessDestroyer>()
             .AddSingleton<IProgramScheduler, ProgramScheduler>()
             .AddIntermediaryCommandHandler<ProcessDestroyCommandHandler, ProcessDestroyCommand>(ServiceLifetime.Singleton)
+            .AddIntermediaryCommandHandler<LogoutCommandHandler, LogoutCommand>(ServiceLifetime.Singleton)
             .AddIntermediaryRequestHandler<ProgramLaunchRequestHandler, ProgramLaunchRequest, ProgramLaunchResponse>(ServiceLifetime.Singleton);
 
         return services;

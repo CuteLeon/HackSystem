@@ -26,5 +26,7 @@
 		<Using Include="Microsoft.Extensions.DependencyInjection" />
 		<Using Include="Microsoft.Extensions.Logging" />
 		<Using Include="Microsoft.Extensions.Options" />
+		<Using Include="HackSystem.Intermediary.Application" />
+		<Using Include="HackSystem.Web.Domain.Intermediary" />
 	</ItemGroup>
 </Project>
