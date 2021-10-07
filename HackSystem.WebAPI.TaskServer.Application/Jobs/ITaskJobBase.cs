@@ -5,7 +5,7 @@ namespace HackSystem.WebAPI.TaskServer.Application.Jobs;
 
 public interface ITaskJobBase : IJob
 {
-    public TaskDetail TaskDetail { get; set; }
+    TaskDetail TaskDetail { get; set; }
 
-    bool ManuallyTriggered { get; set; }
+    string Trigger { get; set; }
 }

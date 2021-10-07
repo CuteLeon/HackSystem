@@ -42,6 +42,6 @@ public class TaskServerController : Controller
     public async Task ExecuteTask(TaskDetailRequest taskDetail)
     {
         var task = await this.taskRepository.FindAsync(taskDetail.TaskID);
-        this.hackSystemTaskServer.ExecuteTask(task);
+        this.hackSystemTaskServer.ExecuteTask(task, this.User?.Identity?.Name);
     }
 }
