@@ -1,6 +1,7 @@
 ﻿using HackSystem.Intermediary.Application;
 using HackSystem.Intermediary.Domain;
 using HackSystem.Intermediary.Extensions;
+using MediatR;
 using Xunit;
 
 namespace HackSystem.Intermediary.Infrastructure.Tests
@@ -59,6 +60,41 @@ namespace HackSystem.Intermediary.Infrastructure.Tests
             Assert.Equal(10, TestNotification_Transient2_Handler.HandlerInstances.Count());
             Assert.Equal(1, TestNotification_Singleton1_Handler.HandlerInstances.Count());
             Assert.Equal(1, TestNotification_Singleton2_Handler.HandlerInstances.Count());
+        }
+
+
+        [Fact()]
+        public void AddIntermediaryNotificationHandlerTest()
+        {
+            IServiceCollection services = new ServiceCollection();
+            services
+                .AddLogging()
+                .AddIntermediaryNotificationHandler<TestNotification_Transient1_Handler, TestNotification>();
+            IServiceProvider provider = services.BuildServiceProvider();
+            Assert.NotSame(
+                provider.GetRequiredService<IIntermediaryNotificationHandler<TestNotification>>(),
+                provider.GetRequiredService<INotificationHandler<TestNotification>>());
+            Assert.NotNull(provider.GetRequiredService<IIntermediaryNotificationHandler<TestNotification>>());
+            Assert.NotNull(provider.GetRequiredService<INotificationHandler<TestNotification>>());
+            Assert.IsType<TestNotification_Transient1_Handler>(provider.GetRequiredService<IIntermediaryNotificationHandler<TestNotification>>());
+            Assert.IsType<TestNotification_Transient1_Handler>(provider.GetRequiredService<INotificationHandler<TestNotification>>());
+        }
+
+        [Fact()]
+        public void AddIntermediaryNotificationHandlerSingletonTest()
+        {
+            IServiceCollection services = new ServiceCollection();
+            services
+                .AddLogging()
+                .AddIntermediaryNotificationHandlerSingleton(new TestNotification_Singleton1_Handler());
+            IServiceProvider provider = services.BuildServiceProvider();
+            Assert.Same(
+                provider.GetRequiredService<IIntermediaryNotificationHandler<TestNotification>>(),
+                provider.GetRequiredService<INotificationHandler<TestNotification>>());
+            Assert.NotNull(provider.GetRequiredService<IIntermediaryNotificationHandler<TestNotification>>());
+            Assert.NotNull(provider.GetRequiredService<INotificationHandler<TestNotification>>());
+            Assert.IsType<TestNotification_Singleton1_Handler>(provider.GetRequiredService<IIntermediaryNotificationHandler<TestNotification>>());
+            Assert.IsType<TestNotification_Singleton1_Handler>(provider.GetRequiredService<INotificationHandler<TestNotification>>());
         }
     }
 }

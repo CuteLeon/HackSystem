@@ -1,6 +1,7 @@
 ﻿using HackSystem.Intermediary.Application;
 using HackSystem.Intermediary.Domain;
 using HackSystem.Intermediary.Extensions;
+using MediatR;
 using Xunit;
 
 namespace HackSystem.Intermediary.Infrastructure.Tests;
@@ -62,5 +63,39 @@ public class IntermediaryCommandSenderTests
         Assert.Equal(1, SingletonTestCommandHandler.HandlerInstances.Count());
         Assert.Empty(TestOverridedCommandHandler.HandlerInstances);
         Assert.Equal(10, TestCommandHandler.HandlerInstances.Count());
+    }
+
+    [Fact()]
+    public void AddIntermediaryCommandHandlerTest()
+    {
+        IServiceCollection services = new ServiceCollection();
+        services
+            .AddLogging()
+            .AddIntermediaryCommandHandler<TestCommandHandler, TestCommand>();
+        IServiceProvider provider = services.BuildServiceProvider();
+        Assert.NotSame(
+            provider.GetRequiredService<IIntermediaryCommandHandler<TestCommand>>(),
+            provider.GetRequiredService<IRequestHandler<TestCommand, ValueTuple>>());
+        Assert.NotNull(provider.GetRequiredService<IIntermediaryCommandHandler<TestCommand>>());
+        Assert.NotNull(provider.GetRequiredService<IRequestHandler<TestCommand, ValueTuple>>());
+        Assert.IsType<TestCommandHandler>(provider.GetRequiredService<IIntermediaryCommandHandler<TestCommand>>());
+        Assert.IsType<TestCommandHandler>(provider.GetRequiredService<IRequestHandler<TestCommand, ValueTuple>>());
+    }
+
+    [Fact()]
+    public void AddIntermediaryCommandHandlerSingletonTest()
+    {
+        IServiceCollection services = new ServiceCollection();
+        services
+            .AddLogging()
+            .AddIntermediaryCommandHandlerSingleton(new SingletonTestCommandHandler());
+        IServiceProvider provider = services.BuildServiceProvider();
+        Assert.Same(
+            provider.GetRequiredService<IIntermediaryCommandHandler<SingletonTestCommand>>(),
+            provider.GetRequiredService<IRequestHandler<SingletonTestCommand, ValueTuple>>());
+        Assert.NotNull(provider.GetRequiredService<IIntermediaryCommandHandler<SingletonTestCommand>>());
+        Assert.NotNull(provider.GetRequiredService<IRequestHandler<SingletonTestCommand, ValueTuple>>());
+        Assert.IsType<SingletonTestCommandHandler>(provider.GetRequiredService<IIntermediaryCommandHandler<SingletonTestCommand>>());
+        Assert.IsType<SingletonTestCommandHandler>(provider.GetRequiredService<IRequestHandler<SingletonTestCommand, ValueTuple>>());
     }
 }

@@ -7,6 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MediatR" Version="9.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-rc.1.21451.13" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0-rc.1.21451.13" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
@@ -21,6 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\HackSystem.Intermediary.Abstractions\HackSystem.Intermediary.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Intermediary\HackSystem.Intermediary.csproj" />
 	</ItemGroup>
 

@@ -1,6 +1,7 @@
 ﻿using HackSystem.Intermediary.Application;
 using HackSystem.Intermediary.Domain;
 using HackSystem.Intermediary.Extensions;
+using MediatR;
 using Xunit;
 
 namespace HackSystem.Intermediary.Infrastructure.Tests;
@@ -62,5 +63,39 @@ public class IntermediaryRequestSenderTests
         Assert.Equal(1, SingletonTestRequestHandler.HandlerInstances.Count());
         Assert.Empty(TestOverridedRequestHandler.HandlerInstances);
         Assert.Equal(10, TestRequestHandler.HandlerInstances.Count());
+    }
+
+    [Fact()]
+    public void AddIntermediaryRequestHandlerTest()
+    {
+        IServiceCollection services = new ServiceCollection();
+        services
+            .AddLogging()
+            .AddIntermediaryRequestHandler<TestRequestHandler, TestRequest, int>();
+        IServiceProvider provider = services.BuildServiceProvider();
+        Assert.NotSame(
+            provider.GetRequiredService<IIntermediaryRequestHandler<TestRequest, int>>(),
+            provider.GetRequiredService<IRequestHandler<TestRequest, int>>());
+        Assert.NotNull(provider.GetRequiredService<IIntermediaryRequestHandler<TestRequest, int>>());
+        Assert.NotNull(provider.GetRequiredService<IRequestHandler<TestRequest, int>>());
+        Assert.IsType<TestRequestHandler>(provider.GetRequiredService<IIntermediaryRequestHandler<TestRequest, int>>());
+        Assert.IsType<TestRequestHandler>(provider.GetRequiredService<IRequestHandler<TestRequest, int>>());
+    }
+
+    [Fact()]
+    public void AddIntermediaryRequestHandlerSingletonTest()
+    {
+        IServiceCollection services = new ServiceCollection();
+        services
+            .AddLogging()
+            .AddIntermediaryRequestHandlerSingleton(new SingletonTestRequestHandler());
+        IServiceProvider provider = services.BuildServiceProvider();
+        Assert.Same(
+            provider.GetRequiredService<IIntermediaryRequestHandler<SingletonTestRequest, int>>(),
+            provider.GetRequiredService<IRequestHandler<SingletonTestRequest, int>>());
+        Assert.NotNull(provider.GetRequiredService<IIntermediaryRequestHandler<SingletonTestRequest, int>>());
+        Assert.NotNull(provider.GetRequiredService<IRequestHandler<SingletonTestRequest, int>>());
+        Assert.IsType<SingletonTestRequestHandler>(provider.GetRequiredService<IIntermediaryRequestHandler<SingletonTestRequest, int>>());
+        Assert.IsType<SingletonTestRequestHandler>(provider.GetRequiredService<IRequestHandler<SingletonTestRequest, int>>());
     }
 }
