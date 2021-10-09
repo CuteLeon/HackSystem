@@ -1,14 +1,17 @@
 ﻿@inject ILogger<ToastContainerComponent> logger
 @inject IJSRuntime jsRuntime
+@inject IIntermediaryEventHandler<ToastEvent> toastEventHandler
 
 <div class="position-fixed overflow-hidden" style="top:@(top)rem; bottom:@(bottom)rem; right:0; width:380px;pointer-events: none;z-index:@z_Index;">
     <div class="p-3" style="overflow-y:scroll;height:100%; width:405px;">
-        @foreach (var toast in this.Toasts.Values.OrderBy(detail => detail.CreateTime).ThenByDescending(detail => detail.Icon))
-        {
-            <p @key=@toast.Id>
-                <ToastComponent @key=@toast.Id ToastDetail="toast" />
-            </p>
-        }
+        <CascadingValue IsFixed=true Value=this.toastModuleReference>
+            <CascadingValue IsFixed=true Value=this.toastContainerReference>
+                @foreach (var toast in this.Toasts.Values.OrderBy(detail => detail.CreateTime).ThenByDescending(detail => detail.Icon))
+                {
+                    <ToastComponent @key=@toast.Id ToastDetail="toast" />
+                }
+            </CascadingValue>
+        </CascadingValue>
     </div>
 </div>
 

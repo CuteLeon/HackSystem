@@ -33,5 +33,19 @@
 
 @code {
     [Parameter]
-    public ToastDetail ToastDetail { get; set; }
+    public ToastDetail ToastDetail { get; init; }
+
+    [CascadingParameter]
+    public IJSObjectReference ToastModuleReference { get; init; }
+
+    [CascadingParameter]
+    public DotNetObjectReference<ToastContainerComponent> ToastContainerReference { get; init; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        /* MAGIC! DO NOT TOUCH! Initial toast detail component after first rendered. */
+        await this.ToastModuleReference.InvokeVoidAsync("toasts.popToast", this.ToastContainerReference, this.ToastDetail.Id, this.ToastDetail.AutoHide, this.ToastDetail.HideDelay);
+    }
 }

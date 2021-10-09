@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.JSInterop;
-
-namespace HackSystem.Web.Component.ToastContainer;
+﻿namespace HackSystem.Web.Component.ToastContainer;
 
 /// <summary>
 /// Toast container component
@@ -9,8 +6,8 @@ namespace HackSystem.Web.Component.ToastContainer;
 /// <remarks> Should works with blazor.toast.js </remarks>
 public partial class ToastContainerComponent : IAsyncDisposable
 {
-    private DotNetObjectReference<ToastContainerComponent> interopReference;
-    private Lazy<Task<IJSObjectReference>> moduleTask;
+    private DotNetObjectReference<ToastContainerComponent> toastContainerReference;
+    private IJSObjectReference toastModuleReference;
 
     public ToastContainerComponent()
     {
@@ -19,9 +16,10 @@ public partial class ToastContainerComponent : IAsyncDisposable
     protected async override Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        this.interopReference = DotNetObjectReference.Create(this);
-        moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-           "import", "./_content/HackSystem.Web.Component/hacksystem.toast.js").AsTask());
+        this.toastContainerReference = DotNetObjectReference.Create(this);
+        this.toastEventHandler.EventRaised += this.HandlerToast;
+        this.toastModuleReference = await jsRuntime
+            .InvokeAsync<IJSObjectReference>("import", "./_content/HackSystem.Web.Component/hacksystem.toast.js");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -29,40 +27,25 @@ public partial class ToastContainerComponent : IAsyncDisposable
         await base.OnAfterRenderAsync(firstRender);
     }
 
-    public async Task PopToast(string title, string message, ToastIcons icon = ToastIcons.HackSystem, bool autoHide = true, int hideDelay = 3000)
+    public async void HandlerToast(object? sender, ToastEvent toastEvent)
     {
-        this.logger.LogDebug($"Pop a Toast: {title}");
-        var toast = new ToastDetail()
-        {
-            Title = title,
-            Message = message,
-            Icon = icon,
-            AutoHide = autoHide,
-            HideDelay = hideDelay,
-        };
-
+        var toast = toastEvent.ToastDetail;
+        this.logger.LogInformation($"Handle toast event: {toast.Id} ({toast.Title})...");
         this.Toasts.Add(toast.Id, toast);
         this.StateHasChanged();
-
-        // MAGIC! DO NOT TOUCH! This component is losing the status which from Bootstrap's initial method after each time renderred, have to re-initial after that.
-        var module = await moduleTask.Value;
-        await module.InvokeVoidAsync("toasts.popToast", this.interopReference, toast.Id, toast.AutoHide, toast.HideDelay);
     }
 
     [JSInvokable]
     public void CloseToast(string toastId)
     {
         this.Toasts.Remove(toastId);
+        this.StateHasChanged();
     }
 
     public async ValueTask DisposeAsync()
     {
         this.Toasts.Clear();
-        this.interopReference.Dispose();
-        if (moduleTask.IsValueCreated)
-        {
-            var module = await moduleTask.Value;
-            await module.DisposeAsync();
-        }
+        this.toastContainerReference.Dispose();
+        await this.toastModuleReference.DisposeAsync();
     }
 }
