@@ -75,4 +75,20 @@ public static class HackSystemIntermediaryHandlerExtension
         => services
             .AddSingleton<IRequestHandler<TRequest, TResponse>>(singletonInstance)
             .AddSingleton<IIntermediaryRequestHandler<TRequest, TResponse>>(singletonInstance);
+
+    // TODO: LEON: Unit Test
+    public static IServiceCollection AddIntermediaryEvent<TEvent>(
+        this IServiceCollection services)
+        where TEvent : IIntermediaryEvent
+    {
+        services.Add(new ServiceDescriptor(
+            typeof(IIntermediaryEventHandler<TEvent>),
+            sp => sp.GetRequiredService<INotificationHandler<TEvent>>(),
+            ServiceLifetime.Singleton));
+        services.Add(new ServiceDescriptor(
+            typeof(INotificationHandler<TEvent>),
+            typeof(DefaultIntermediaryEventHandler<TEvent>),
+            ServiceLifetime.Singleton));
+        return services;
+    }
 }
