@@ -1,7 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using HackSystem.Common;
 using HackSystem.Cryptography;
-using HackSystem.Intermediary.Extensions;
 using HackSystem.Web;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Common;
@@ -11,6 +10,7 @@ using HackSystem.Web.Domain.Configurations;
 using HackSystem.Web.Extensions;
 using HackSystem.Web.Infrastructure.Extensions;
 using HackSystem.Web.ProgramSchedule;
+using HackSystem.WebAPI.Component.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -44,6 +44,7 @@ builder.Services
     {
         APIHost = apiConfiguration.APIHost,
     })
+    .AddHackSystemComponent()
     .AddCookieStorage()
     .AddAuthorizationCore()
     .AddHackSystemAuthentication(options =>
