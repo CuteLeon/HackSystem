@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿ <Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -20,7 +20,7 @@
 		<ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
 		<ProjectReference Include="..\HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.Authentication.Abstractions\HackSystem.Web.Authentication.Abstractions.csproj" />
-		<ProjectReference Include="..\HackSystem.Web.Infrastructure\HackSystem.Web.Infrastructure.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.Component.Abstractions\HackSystem.Web.Component.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform.Abstractions\HackSystem.Web.ProgramPlatform.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform\HackSystem.Web.ProgramPlatform.csproj" />
 	</ItemGroup>

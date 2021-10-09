@@ -15,6 +15,8 @@
 		<ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
 		<ProjectReference Include="..\HackSystem.Intermediary\HackSystem.Intermediary.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.CookieStorage\HackSystem.Web.CookieStorage.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.Domain\HackSystem.Web.Domain.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.Infrastructure\HackSystem.Web.Infrastructure.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.TaskSchedule\HackSystem.Web.TaskSchedule.csproj" />
 	</ItemGroup>
 

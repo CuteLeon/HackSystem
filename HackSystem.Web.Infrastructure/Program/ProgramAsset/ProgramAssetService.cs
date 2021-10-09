@@ -1,8 +1,9 @@
 ﻿using System.Net.Http.Json;
 using HackSystem.DataTransferObjects.Programs.ProgramAssets;
-using HackSystem.Web.Authentication.TokenHandlers;
 using HackSystem.Web.Application.Program.ProgramAsset;
-using HackSystem.Web.Infrastructure.Authentication;
+using HackSystem.Web.Authentication.Options;
+using HackSystem.Web.Authentication.TokenHandlers;
+using HackSystem.Web.Authentication.WebService;
 using Newtonsoft.Json;
 
 namespace HackSystem.Web.Infrastructure.Program.ProgramAsset;
@@ -12,8 +13,9 @@ public class ProgramAssetService : AuthenticatedServiceBase, IProgramAssetServic
     public ProgramAssetService(
         ILogger<ProgramAssetService> logger,
         IHackSystemAuthenticationTokenHandler authenticationTokenHandler,
+        IOptionsSnapshot<HackSystemAuthenticationOptions> optionsSnapshot,
         HttpClient httpClient)
-        : base(logger, authenticationTokenHandler, httpClient)
+        : base(logger, authenticationTokenHandler, optionsSnapshot, httpClient)
     {
     }
 

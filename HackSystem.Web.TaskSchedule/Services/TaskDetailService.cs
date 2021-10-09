@@ -1,7 +1,8 @@
 ﻿using System.Net.Http.Json;
 using HackSystem.DataTransferObjects.TaskServer;
+using HackSystem.Web.Authentication.Options;
 using HackSystem.Web.Authentication.TokenHandlers;
-using HackSystem.Web.Infrastructure.Authentication;
+using HackSystem.Web.Authentication.WebService;
 
 namespace HackSystem.Web.TaskSchedule.Services;
 
@@ -10,8 +11,9 @@ public class TaskDetailService : AuthenticatedServiceBase, ITaskDetailService
     public TaskDetailService(
         ILogger<TaskDetailService> logger,
         IHackSystemAuthenticationTokenHandler authenticationTokenHandler,
+        IOptionsSnapshot<HackSystemAuthenticationOptions> optionsSnapshot,
         HttpClient httpClient)
-        : base(logger, authenticationTokenHandler, httpClient)
+        : base(logger, authenticationTokenHandler, optionsSnapshot, httpClient)
     {
     }
 

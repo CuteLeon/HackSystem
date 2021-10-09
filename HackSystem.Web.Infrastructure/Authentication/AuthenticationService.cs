@@ -2,13 +2,15 @@
 using HackSystem.DataTransferObjects.Accounts;
 using HackSystem.Web.Application.Authentication;
 using HackSystem.Web.Authentication.AuthorizationStateHandlers;
+using HackSystem.Web.Authentication.Extensions;
+using HackSystem.Web.Authentication.Options;
 using HackSystem.Web.Authentication.TokenHandlers;
-using HackSystem.Web.Infrastructure.Extensions;
+using HackSystem.Web.Authentication.WebService;
 using Newtonsoft.Json;
 
 namespace HackSystem.Web.Infrastructure.Authentication;
 
-public class AuthenticationService : IAuthenticationService
+public class AuthenticationService : AuthenticatedServiceBase, IAuthenticationService
 {
     private readonly ILogger<AuthenticationService> logger;
     private readonly HttpClient httpClient;
@@ -18,8 +20,10 @@ public class AuthenticationService : IAuthenticationService
     public AuthenticationService(
         ILogger<AuthenticationService> logger,
         HttpClient httpClient,
+        IOptionsSnapshot<HackSystemAuthenticationOptions> optionsSnapshot,
         IHackSystemAuthenticationTokenHandler authenticationTokenHandler,
         IHackSystemAuthenticationStateUpdater authenticationStateUpdater)
+        : base(logger, authenticationTokenHandler, optionsSnapshot, httpClient)
     {
         this.logger = logger;
         this.httpClient = httpClient;
@@ -68,7 +72,7 @@ public class AuthenticationService : IAuthenticationService
         logger.LogDebug($"Get account information...");
 
         var currentToken = await this.authenticationTokenHandler.GetTokenAsync();
-        httpClient.AddAuthorizationHeader(currentToken);
+        await this.AddAuthorizationHeaderAsync();
         var response = await httpClient.GetAsync("api/accounts/GetAccountInfo");
         if (!response.IsSuccessStatusCode)
         {
@@ -90,7 +94,7 @@ public class AuthenticationService : IAuthenticationService
         try
         {
             var currentToken = await this.authenticationTokenHandler.GetTokenAsync();
-            httpClient.AddAuthorizationHeader(currentToken);
+            await this.AddAuthorizationHeaderAsync();
             await httpClient.GetAsync("api/accounts/logout");
         }
         catch (Exception ex)

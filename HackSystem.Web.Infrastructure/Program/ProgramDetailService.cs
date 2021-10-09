@@ -1,8 +1,9 @@
 ﻿using System.Net.Http.Json;
-using HackSystem.Web.Application.Program;
-using HackSystem.Web.Infrastructure.Authentication;
 using HackSystem.DataTransferObjects.Programs;
+using HackSystem.Web.Application.Program;
+using HackSystem.Web.Authentication.Options;
 using HackSystem.Web.Authentication.TokenHandlers;
+using HackSystem.Web.Authentication.WebService;
 
 namespace HackSystem.Web.Infrastructure.Program;
 
@@ -11,8 +12,9 @@ public class ProgramDetailService : AuthenticatedServiceBase, IProgramDetailServ
     public ProgramDetailService(
         ILogger<ProgramDetailService> logger,
         IHackSystemAuthenticationTokenHandler authenticationTokenHandler,
+        IOptionsSnapshot<HackSystemAuthenticationOptions> optionsSnapshot,
         HttpClient httpClient)
-        : base(logger, authenticationTokenHandler, httpClient)
+        : base(logger, authenticationTokenHandler, optionsSnapshot, httpClient)
     {
     }
 

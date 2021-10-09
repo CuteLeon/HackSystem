@@ -1,5 +1,7 @@
 ﻿using HackSystem.DataTransferObjects.TaskServer;
+using HackSystem.Web.Authentication.Options;
 using HackSystem.Web.Authentication.TokenHandlers;
+using HackSystem.Web.Component.ToastContainer;
 using HackSystem.Web.TaskSchedule.Services;
 
 namespace HackSystem.Web.TaskSchedule;
@@ -21,6 +23,7 @@ public partial class TaskSchedulerComponent
         this.taskDetailService = new TaskDetailService(
             this.serviceScope.ServiceProvider.GetRequiredService<ILogger<TaskDetailService>>(),
             this.serviceScope.ServiceProvider.GetRequiredService<IHackSystemAuthenticationTokenHandler>(),
+            this.serviceScope.ServiceProvider.GetRequiredService<IOptionsSnapshot<HackSystemAuthenticationOptions>>(),
             this.serviceScope.ServiceProvider.GetRequiredService<HttpClient>());
     }
 
@@ -41,8 +44,12 @@ public partial class TaskSchedulerComponent
         var tasks = await this.taskDetailService.QueryTasks();
         this.TaskDetails.AddRange(tasks);
         this.Logger.LogInformation($"Loaded {tasks.Count()} tasks.");
-        // TODO: Leon: Use Intermediary to popup toast
-        // this.DesktopToastContainer?.PopToast("Load Tasks Successfully!", $"Load {tasks.Count()} tasks successfully.", ToastIcons.Information);
+        await this.ToastHandler.PopupToast(new ToastDetail
+        {
+            Title = "Load Tasks Successfully!",
+            Icon = ToastIcons.Information,
+            Message = $"Load {tasks.Count()} tasks successfully.",
+        });
         this.StateHasChanged();
     }
 
@@ -65,21 +72,33 @@ public partial class TaskSchedulerComponent
             if (result)
             {
                 this.Logger.LogInformation($"Trigger task {taskDetail.TaskName} successfully.");
-                // TODO: Leon: Use Intermediary to popup toast
-                // this.DesktopToastContainer?.PopToast("Task Trigger Successfully!", $"Task {taskDetail.TaskName} triggered successfully, please wait for complete.", ToastIcons.Information);
+                await this.ToastHandler.PopupToast(new ToastDetail
+                {
+                    Title = "Task Trigger Successfully!",
+                    Icon = ToastIcons.Information,
+                    Message = $"Task {taskDetail.TaskName} triggered successfully, please wait for complete.",
+                });
             }
             else
             {
                 this.Logger.LogWarning($"Trigger task {taskDetail.TaskName} failed.");
-                // TODO: Leon: Use Intermediary to popup toast
-                // this.DesktopToastContainer?.PopToast("Task Trigger Failed.", $"Task {taskDetail.TaskName} triggered failed, please try again later.", ToastIcons.Warning);
+                await this.ToastHandler.PopupToast(new ToastDetail
+                {
+                    Title = "Task Trigger Failed.",
+                    Icon = ToastIcons.Warning,
+                    Message = $"Task {taskDetail.TaskName} triggered failed, please try again later.",
+                });
             }
         }
         catch (Exception ex)
         {
             this.Logger.LogError(ex, $"Unable to trigger task {taskDetail.TaskName}.");
-            // TODO: Leon: Use Intermediary to popup toast
-            // this.DesktopToastContainer?.PopToast("Task Trigger Failed!", $"Unable to trigger Task {taskDetail.TaskName}: {ex.Message}", ToastIcons.Error);
+            await this.ToastHandler.PopupToast(new ToastDetail
+            {
+                Title = "Task Trigger Failed.",
+                Icon = ToastIcons.Error,
+                Message = $"Unable to trigger Task {taskDetail.TaskName}: {ex.Message}.",
+            });
         }
     }
 }

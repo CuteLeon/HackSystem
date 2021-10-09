@@ -38,6 +38,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\HackSystem.Intermediary.Abstractions\HackSystem.Intermediary.Abstractions.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.Component.Abstractions\HackSystem.Web.Component.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Domain\HackSystem.Web.ProgramSchedule.Domain.csproj" />
 	</ItemGroup>
 

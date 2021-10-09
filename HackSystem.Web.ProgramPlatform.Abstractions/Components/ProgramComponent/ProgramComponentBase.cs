@@ -1,4 +1,5 @@
 ﻿using HackSystem.Intermediary.Application;
+using HackSystem.Web.Component.ToastContainer;
 using HackSystem.Web.ProgramSchedule.Domain.Entity;
 using HackSystem.Web.ProgramSchedule.Domain.Intermediary;
 
@@ -12,13 +13,7 @@ public abstract class ProgramComponentBase : ComponentBase, IDisposable
     protected IIntermediaryCommandSender CommandSender { get; set; }
 
     [Inject]
-    protected IIntermediaryNotificationPublisher NotificationPublisher { get; set; }
-
-    [Inject]
-    protected IIntermediaryRequestSender RequestSender { get; set; }
-
-    [Inject]
-    protected IIntermediaryEventPublisher EventPublisher { get; set; }
+    protected IToastHandler ToastHandler { get; set; }
 
     [Parameter]
     public ProcessDetail ProcessDetail { get => processDetail; set => processDetail = value; }
