@@ -1,22 +1,14 @@
 ﻿namespace HackSystem.Web.CookieStorage;
 
-public interface ICookieStorageHandler
+public interface ICookieStorageHandler : IAsyncDisposable
 {
     event EventHandler<CookieChangedEventArgs> CookieChanged;
 
     ValueTask RemoveCookieAsync(string name);
 
-    void RemoveCookie(string name);
-
-    ValueTask<Dictionary<string, string>> GetAllAsync();
-
-    Dictionary<string, string> GetAll();
+    ValueTask<Dictionary<string, string>> GetCookiesAsync();
 
     ValueTask SaveCookieAsync(string name, string value, long expiresInSecond = -1);
 
-    void SaveCookie(string name, string value, long expiresInSecond = -1);
-
     ValueTask<string> GetCookieAsync(string name);
-
-    string GetCookie(string name);
 }

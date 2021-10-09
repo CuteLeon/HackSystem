@@ -7,42 +7,23 @@
 public class CookieStorageHandler : ICookieStorageHandler
 {
     public event EventHandler<CookieChangedEventArgs> CookieChanged;
-    private readonly IJSInProcessRuntime jsInProcessRuntime;
+    private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
     public CookieStorageHandler(IJSRuntime jsRuntime)
     {
-        this.jsInProcessRuntime = (jsRuntime as IJSInProcessRuntime);
+        moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+           "import", "./_content/HackSystem.Web.CookieStorage/blazor.cookie.js").AsTask());
     }
 
     /// <summary>
     /// Get all Cookie
     /// </summary>
     /// <returns></returns>
-    public Dictionary<string, string> GetAll()
+    public async ValueTask<Dictionary<string, string>> GetCookiesAsync()
     {
-        var cookies = this.jsInProcessRuntime.Invoke<Dictionary<string, string>>("cookies.getAll");
+        var module = await moduleTask.Value;
+        var cookies = await module.InvokeAsync<Dictionary<string, string>>("getCookies");
         return cookies;
-    }
-
-    /// <summary>
-    /// Get all Cookie
-    /// </summary>
-    /// <returns></returns>
-    public async ValueTask<Dictionary<string, string>> GetAllAsync()
-    {
-        var cookies = await this.jsInProcessRuntime.InvokeAsync<Dictionary<string, string>>("cookies.getAll");
-        return cookies;
-    }
-
-    /// <summary>
-    /// Get Cookie
-    /// </summary>
-    /// <param name="name">Name</param>
-    /// <returns></returns>
-    public string GetCookie(string name)
-    {
-        var cookie = this.jsInProcessRuntime.Invoke<string>("cookies.getCookie", name);
-        return cookie;
     }
 
     /// <summary>
@@ -52,17 +33,9 @@ public class CookieStorageHandler : ICookieStorageHandler
     /// <returns></returns>
     public async ValueTask<string> GetCookieAsync(string name)
     {
-        var cookie = await this.jsInProcessRuntime.InvokeAsync<string>("cookies.getCookie", name);
+        var module = await moduleTask.Value;
+        var cookie = await module.InvokeAsync<string>("getCookie", name);
         return cookie;
-    }
-
-    /// <summary>
-    /// Remove Cookie
-    /// </summary>
-    /// <param name="name">Name</param>
-    public void RemoveCookie(string name)
-    {
-        this.jsInProcessRuntime.InvokeVoid("cookies.removeCookie", name);
     }
 
     /// <summary>
@@ -71,7 +44,8 @@ public class CookieStorageHandler : ICookieStorageHandler
     /// <param name="name">Name</param>
     public async ValueTask RemoveCookieAsync(string name)
     {
-        await this.jsInProcessRuntime.InvokeVoidAsync("cookies.removeCookie", name);
+        var module = await moduleTask.Value;
+        await module.InvokeVoidAsync("removeCookie", name);
     }
 
     /// <summary>
@@ -87,28 +61,26 @@ public class CookieStorageHandler : ICookieStorageHandler
     /// Space before or after Cookie's name will be ignored.
     /// Cookie's name and value should contain ';' or '='.
     /// </remarks>
-    public void SaveCookie(string name, string value, long expiresInSecond = -1)
-    {
-        this.jsInProcessRuntime.InvokeVoid("cookies.saveCookie", name, value, expiresInSecond);
-
-        var oldValue = this.GetCookie(name);
-        this.RaiseOnChanged(name, oldValue, value);
-    }
-
-    /// <summary>
-    /// Save Cookie
-    /// </summary>
-    /// <param name="name">Name</param>
-    /// <param name="value">Date</param>
-    /// <param name="expiresInSecond">Expiry in second</param>
     public async ValueTask SaveCookieAsync(string name, string value, long expiresInSecond = -1)
     {
-        await this.jsInProcessRuntime.InvokeVoidAsync("cookies.saveCookie", name, value, expiresInSecond);
+        var oldValue = await this.GetCookieAsync(name);
+        var module = await moduleTask.Value;
+        await module.InvokeVoidAsync("saveCookie", name, value, expiresInSecond);
+        this.RaiseOnChanged(name, oldValue, value);
     }
 
     private void RaiseOnChanged(string name, string oldValue, string newValue)
     {
         var eventArgs = new CookieChangedEventArgs(name, newValue, oldValue);
         this.CookieChanged?.Invoke(this, eventArgs);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (moduleTask.IsValueCreated)
+        {
+            var module = await moduleTask.Value;
+            await module.DisposeAsync();
+        }
     }
 }
