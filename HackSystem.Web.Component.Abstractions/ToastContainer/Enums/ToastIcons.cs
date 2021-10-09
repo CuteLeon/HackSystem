@@ -1,4 +1,4 @@
-﻿namespace HackSystem.Web.ProgramPlatform.Abstractions.Enums;
+﻿namespace HackSystem.Web.Component.ToastContainer;
 
 public enum ToastIcons
 {

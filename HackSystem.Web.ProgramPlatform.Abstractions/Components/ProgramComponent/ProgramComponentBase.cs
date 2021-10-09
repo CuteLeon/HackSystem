@@ -1,8 +1,6 @@
 ﻿using HackSystem.Intermediary.Application;
-using HackSystem.Web.ProgramPlatform.Components.ToastComponent;
 using HackSystem.Web.ProgramSchedule.Domain.Entity;
 using HackSystem.Web.ProgramSchedule.Domain.Intermediary;
-using Microsoft.AspNetCore.Components;
 
 namespace HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
 
@@ -11,12 +9,16 @@ public abstract class ProgramComponentBase : ComponentBase, IDisposable
     private ProcessDetail processDetail;
 
     [Inject]
-    IIntermediaryCommandSender CommandSender { get; set; }
+    protected IIntermediaryCommandSender CommandSender { get; set; }
 
-    [CascadingParameter(Name = IToastContainer.CascadingParameterName)]
-    private Func<IToastContainer> GetDesktopToastContainer { get; set; }
+    [Inject]
+    protected IIntermediaryNotificationPublisher NotificationPublisher { get; set; }
 
-    protected IToastContainer DesktopToastContainer { get => this.GetDesktopToastContainer?.Invoke(); }
+    [Inject]
+    protected IIntermediaryRequestSender RequestSender { get; set; }
+
+    [Inject]
+    protected IIntermediaryEventPublisher EventPublisher { get; set; }
 
     [Parameter]
     public ProcessDetail ProcessDetail { get => processDetail; set => processDetail = value; }

@@ -1,6 +1,4 @@
-﻿using HackSystem.Web.ProgramPlatform.Abstractions.Enums;
-
-namespace HackSystem.Web.ProgramPlatform.Abstractions.Entity;
+﻿namespace HackSystem.Web.Component.ToastContainer;
 
 public class ToastDetail
 {

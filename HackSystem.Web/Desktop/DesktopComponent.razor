@@ -37,15 +37,15 @@
     <div id="programContainer" class="position-fixed w-100 h-100" style="left: 0px; top: 0px;pointer-events:none;">
         <ProgramContainerComponent></ProgramContainerComponent>
     </div>
+
+    <ToastContainerComponent Top="2" @ref="ToastContainer" />
 </div>
 
 @code {
-    [CascadingParameter(Name = "DesktopToastContainer")]
-    private Func<IToastContainer> GetDesktopToastContainer { get; set; }
-
     protected Dictionary<string, UserProgramMap> UserProgramMaps { get; set; } = new();
 
     protected ProgramDockComponent ProgramDockComponent { get; set; }
     protected ProgramDrawerComponent ProgramDrawerComponent { get; set; }
     protected TopBarView TopBarView { get; set; }
+    protected ToastContainerComponent ToastContainer { get; set; }
 }
