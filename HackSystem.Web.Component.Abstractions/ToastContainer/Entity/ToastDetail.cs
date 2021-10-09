@@ -2,15 +2,15 @@
 
 public class ToastDetail
 {
-    public DateTime CreateTime { get; protected set; } = DateTime.Now;
+    public DateTime CreateTime { get; init; } = DateTime.Now;
 
-    public string Id { get; protected set; } = $"toast_{Guid.NewGuid():N}";
+    public string Id { get; init; } = $"toast_{Guid.NewGuid():N}";
 
     public string Title { get; set; } = "Hack System";
 
     public string Message { get; set; } = "Hack System Toast Message.";
 
-    public ToastIcons Icon { get; set; }
+    public ToastIcons Icon { get; set; } = ToastIcons.HackSystem;
 
     public bool AutoHide { get; set; } = true;
 
