@@ -22,7 +22,7 @@ public class CookieStorageHandler : ICookieStorageHandler
     public async ValueTask<Dictionary<string, string>> GetCookiesAsync()
     {
         var module = await moduleTask.Value;
-        var cookies = await module.InvokeAsync<Dictionary<string, string>>("getCookies");
+        var cookies = await module.InvokeAsync<Dictionary<string, string>>("cookie.getCookies");
         return cookies;
     }
 
@@ -34,7 +34,7 @@ public class CookieStorageHandler : ICookieStorageHandler
     public async ValueTask<string> GetCookieAsync(string name)
     {
         var module = await moduleTask.Value;
-        var cookie = await module.InvokeAsync<string>("getCookie", name);
+        var cookie = await module.InvokeAsync<string>("cookie.getCookie", name);
         return cookie;
     }
 
@@ -45,7 +45,7 @@ public class CookieStorageHandler : ICookieStorageHandler
     public async ValueTask RemoveCookieAsync(string name)
     {
         var module = await moduleTask.Value;
-        await module.InvokeVoidAsync("removeCookie", name);
+        await module.InvokeVoidAsync("cookie.removeCookie", name);
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public class CookieStorageHandler : ICookieStorageHandler
     {
         var oldValue = await this.GetCookieAsync(name);
         var module = await moduleTask.Value;
-        await module.InvokeVoidAsync("saveCookie", name, value, expiresInSecond);
+        await module.InvokeVoidAsync("cookie.saveCookie", name, value, expiresInSecond);
         this.RaiseOnChanged(name, oldValue, value);
     }
 
