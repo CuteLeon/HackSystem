@@ -36,10 +36,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\HackSystem.Web.CookieStorage.Abstractions\HackSystem.Web.CookieStorage.Abstractions.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Using Include="Microsoft.Extensions.DependencyInjection" />
 		<Using Include="Microsoft.JSInterop" />
 	</ItemGroup>
