@@ -76,7 +76,6 @@ public static class HackSystemIntermediaryHandlerExtension
             .AddSingleton<IRequestHandler<TRequest, TResponse>>(singletonInstance)
             .AddSingleton<IIntermediaryRequestHandler<TRequest, TResponse>>(singletonInstance);
 
-    // TODO: LEON: Unit Test
     public static IServiceCollection AddIntermediaryEvent<TEvent>(
         this IServiceCollection services)
         where TEvent : IIntermediaryEvent
