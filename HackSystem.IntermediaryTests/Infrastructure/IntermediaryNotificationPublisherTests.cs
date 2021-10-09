@@ -62,7 +62,6 @@ namespace HackSystem.Intermediary.Infrastructure.Tests
             Assert.Equal(1, TestNotification_Singleton2_Handler.HandlerInstances.Count());
         }
 
-
         [Fact()]
         public void AddIntermediaryNotificationHandlerTest()
         {
