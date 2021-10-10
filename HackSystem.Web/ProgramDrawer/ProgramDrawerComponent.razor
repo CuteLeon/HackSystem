@@ -5,7 +5,8 @@
 <div class="d-flex flex-column flex-wrap align-content-start user-select-none w-100 h-100 overflow-hidden">
     @foreach (var programMap in this.UserProgramMaps.Values)
     {
-        <ProgramDrawerIconComponent @key="@programMap.Program.Id" UserProgramMap="programMap" OnIconDoubleClick="this.OnDoubleClickIcon" />
+        var programDrawerKey = $"programDrawerKey_{programMap.Program.Id}";
+        <ProgramDrawerIconComponent @key="@programDrawerKey" UserProgramMap="programMap" OnIconDoubleClick="this.OnDoubleClickIcon" />
     }
 </div>
 

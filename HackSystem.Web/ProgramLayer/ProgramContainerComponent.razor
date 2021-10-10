@@ -5,8 +5,8 @@
     @foreach (var process in this.processContainer.GetProcesses())
     {
         <!-- Fixed a big issue here. More details please navigate to https://github.com/dotnet/aspnetcore/issues/29176 -->
-        var key = $"Process_{process.PID}";
-        <DynamicComponent @key="key"
+        var processKey = $"process_{process.PID}";
+        <DynamicComponent @key="@processKey"
                           Type="process.ProgramDetail.ProgramComponentType"
                           @ref="process.DynamicProgramComponent"
                           Parameters="new Dictionary<string, object>

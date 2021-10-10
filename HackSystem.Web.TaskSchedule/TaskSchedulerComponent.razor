@@ -32,9 +32,8 @@
                             <div class="row">
                                 @foreach (var task in this.TaskDetails)
                                 {
-                                    <div @key=@task.TaskID class="col p-1">
-                                        <TaskDetailComponent @key=@task.TaskID TaskDetail=@task OnExecuteTask="@this.ExecuteTask"></TaskDetailComponent>
-                                    </div>
+                                    var taskKey = $"taskKey_{task.TaskID}";
+                                    <TaskDetailComponent @key="@taskKey" TaskDetail=@task OnExecuteTask="@this.ExecuteTask"></TaskDetailComponent>
                                 }
                             </div>
                         </div>

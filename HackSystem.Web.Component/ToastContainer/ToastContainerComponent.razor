@@ -8,7 +8,8 @@
             <CascadingValue IsFixed=true Value=this.toastContainerReference>
                 @foreach (var toast in this.Toasts.Values.OrderBy(detail => detail.CreateTime).ThenByDescending(detail => detail.Icon))
                 {
-                    <ToastComponent @key=@toast.Id ToastDetail="toast" />
+                    var toastKey = $"toastKey_{toast.Id}";
+                    <ToastComponent @key=@toastKey ToastDetail="toast" />
                 }
             </CascadingValue>
         </CascadingValue>

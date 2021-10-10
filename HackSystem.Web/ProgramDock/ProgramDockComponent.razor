@@ -8,7 +8,8 @@
         <div class="d-flex justify-content-center user-select-none">
             @foreach (var programMap in this.UserProgramMaps.Values)
             {
-                <ProgramDockIconComponent @key="@programMap.Program.Id" UserProgramMap="programMap" OnIconClick="@this.OnClickIcon" />
+                var programDockKey = $"programDockKey_{programMap.Program.Id}";
+                <ProgramDockIconComponent @key="@programDockKey" UserProgramMap="programMap" OnIconClick="@this.OnClickIcon" />
             }
         </div>
     </div>
