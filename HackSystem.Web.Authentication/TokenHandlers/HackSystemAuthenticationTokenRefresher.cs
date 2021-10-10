@@ -1,6 +1,6 @@
 ﻿using HackSystem.Web.Authentication.AuthorizationStateHandlers;
-using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Authentication.Options;
+using HackSystem.Web.Authentication.WebServices;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace HackSystem.Web.Authentication.TokenHandlers;
@@ -9,10 +9,9 @@ public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationT
 {
     private readonly ILogger<HackSystemAuthenticationTokenRefresher> logger;
     private readonly IHackSystemAuthenticationStateUpdater hackSystemAuthenticationStateHandler;
-    private readonly IHackSystemAuthenticationTokenHandler hackSystemAuthenticationTokenHandler;
     private readonly Timer timer;
     private readonly IOptionsMonitor<HackSystemAuthenticationOptions> options;
-    private readonly HttpClient httpClient;
+    private readonly AuthenticatedHttpClient httpClient;
     private readonly int period;
 
     public HackSystemAuthenticationTokenRefresher(
@@ -26,9 +25,8 @@ public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationT
         this.timer = new Timer(new TimerCallback(this.RefreshTokenCallBack), null, Timeout.Infinite, period);
 
         var provider = serviceScopeFactory.CreateScope().ServiceProvider;
-        this.httpClient = provider.GetService<HttpClient>();
+        this.httpClient = provider.GetRequiredService<AuthenticatedHttpClient>();
         this.hackSystemAuthenticationStateHandler = provider.GetService<AuthenticationStateProvider>() as IHackSystemAuthenticationStateUpdater;
-        this.hackSystemAuthenticationTokenHandler = provider.GetService<IHackSystemAuthenticationTokenHandler>();
     }
 
     public bool IsRunning { get; private set; }
@@ -55,14 +53,7 @@ public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationT
     public virtual async Task<string> RefreshTokenAsync()
     {
         this.logger.LogDebug($"Hack System refresh Token ...");
-        var currentToken = await this.hackSystemAuthenticationTokenHandler.GetTokenAsync();
-        if (string.IsNullOrWhiteSpace(currentToken))
-        {
-            this.logger.LogDebug($"Current Token is empty, skipping refresh token ...");
-            return default;
-        }
-
-        this.httpClient.AddAuthorizationHeader(this.options.CurrentValue.AuthenticationScheme, currentToken);
+        await httpClient.AddAuthorizationHeaderAsync();
         var response = await httpClient.GetAsync("api/token/refresh");
         var content = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)

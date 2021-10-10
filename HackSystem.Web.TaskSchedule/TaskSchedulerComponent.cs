@@ -1,6 +1,5 @@
 ﻿using HackSystem.DataTransferObjects.TaskServer;
-using HackSystem.Web.Authentication.Options;
-using HackSystem.Web.Authentication.TokenHandlers;
+using HackSystem.Web.Authentication.WebServices;
 using HackSystem.Web.Component.ToastContainer;
 using HackSystem.Web.TaskSchedule.Services;
 
@@ -22,9 +21,7 @@ public partial class TaskSchedulerComponent
         this.serviceScope = this.ServiceScopeFactory.CreateScope();
         this.taskDetailService = new TaskDetailService(
             this.serviceScope.ServiceProvider.GetRequiredService<ILogger<TaskDetailService>>(),
-            this.serviceScope.ServiceProvider.GetRequiredService<IHackSystemAuthenticationTokenHandler>(),
-            this.serviceScope.ServiceProvider.GetRequiredService<IOptionsSnapshot<HackSystemAuthenticationOptions>>(),
-            this.serviceScope.ServiceProvider.GetRequiredService<HttpClient>());
+            this.serviceScope.ServiceProvider.GetRequiredService<AuthenticatedHttpClient>());
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

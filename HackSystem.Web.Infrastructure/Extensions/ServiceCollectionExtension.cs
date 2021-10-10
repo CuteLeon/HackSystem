@@ -12,9 +12,9 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection AddWebServices(this IServiceCollection services, WebServiceOptions webServiceOptions)
     {
-        services.AddHttpClient<IAuthenticationService, AuthenticationService>(httpClient => httpClient.BaseAddress = new Uri(webServiceOptions.APIHost));
-        services.AddHttpClient<IProgramDetailService, ProgramDetailService>(httpClient => httpClient.BaseAddress = new Uri(webServiceOptions.APIHost));
-        services.AddHttpClient<IProgramAssetService, ProgramAssetService>(httpClient => httpClient.BaseAddress = new Uri(webServiceOptions.APIHost));
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
+        services.AddScoped<IProgramDetailService, ProgramDetailService>();
+        services.AddScoped<IProgramAssetService, ProgramAssetService>();
         return services;
     }
 }

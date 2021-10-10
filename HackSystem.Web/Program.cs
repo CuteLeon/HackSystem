@@ -57,7 +57,6 @@ builder.Services
         options.ExpiryClaimType = WebCommonSense.ExpiryClaimType;
         options.TokenRefreshInMinutes = apiConfiguration.TokenRefreshInMinutes;
     })
-    .AddTransient(sp => new HttpClient { BaseAddress = new Uri(apiConfiguration.APIHost) })
     .AddAuthorizationCore(options =>
     {
         options.AddPolicy(WebCommonSense.AuthorizationPolicy.HackerPolicy, policy =>
@@ -73,8 +72,10 @@ builder.Services
         {
             policy.RequireUserName("Leon");
         });
-    })
-    .AddHttpClient("LocalHttpClient", httpClient => httpClient.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+    });
+
+builder.Services.AddHttpClient<HttpClient>(client => client.BaseAddress = new Uri(apiConfiguration.APIHost));
+builder.Services.AddHttpClient("LocalHttpClient", httpClient => httpClient.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
 await builder
     .Build()

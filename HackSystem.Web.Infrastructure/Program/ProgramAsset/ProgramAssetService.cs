@@ -1,9 +1,7 @@
 ﻿using System.Net.Http.Json;
 using HackSystem.DataTransferObjects.Programs.ProgramAssets;
 using HackSystem.Web.Application.Program.ProgramAsset;
-using HackSystem.Web.Authentication.Options;
-using HackSystem.Web.Authentication.TokenHandlers;
-using HackSystem.Web.Authentication.WebService;
+using HackSystem.Web.Authentication.WebServices;
 using Newtonsoft.Json;
 
 namespace HackSystem.Web.Infrastructure.Program.ProgramAsset;
@@ -12,23 +10,20 @@ public class ProgramAssetService : AuthenticatedServiceBase, IProgramAssetServic
 {
     public ProgramAssetService(
         ILogger<ProgramAssetService> logger,
-        IHackSystemAuthenticationTokenHandler authenticationTokenHandler,
-        IOptionsSnapshot<HackSystemAuthenticationOptions> optionsSnapshot,
-        HttpClient httpClient)
-        : base(logger, authenticationTokenHandler, optionsSnapshot, httpClient)
+        AuthenticatedHttpClient httpClient)
+        : base(logger, httpClient)
     {
     }
 
     public async Task<ProgramAssetPackageResponse> QueryProgramAssetList(string programId)
     {
-        await this.AddAuthorizationHeaderAsync();
+        await httpClient.AddAuthorizationHeaderAsync();
         var result = await this.httpClient.GetFromJsonAsync<ProgramAssetPackageResponse>($"api/programasset/QueryProgramAssetList?programId={programId}");
         return result;
     }
 
     public async Task<ProgramAssetPackageResponse> QueryProgramAssetPackage(ProgramAssetPackageRequest packageRequest)
     {
-        await this.AddAuthorizationHeaderAsync();
         var response = await this.httpClient.PostAsJsonAsync("api/programasset/QueryProgramAssetPackage", packageRequest);
         if (!response.IsSuccessStatusCode)
         {

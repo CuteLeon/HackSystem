@@ -2,13 +2,16 @@
 using HackSystem.Web.Authentication.ClaimsIdentityHandlers;
 using HackSystem.Web.Authentication.Options;
 using HackSystem.Web.Authentication.TokenHandlers;
+using HackSystem.Web.Authentication.WebServices;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace HackSystem.Web.Authentication.Extensions;
 
 public static class HackSystemAuthenticationExtension
 {
-    public static IServiceCollection AddHackSystemAuthentication(this IServiceCollection services, Action<HackSystemAuthenticationOptions> configure)
+    public static IServiceCollection AddHackSystemAuthentication(
+        this IServiceCollection services,
+        Action<HackSystemAuthenticationOptions> configure)
     {
         services
             .Configure(configure)
@@ -19,7 +22,8 @@ public static class HackSystemAuthenticationExtension
             .AddScoped<IHackSystemAuthenticationTokenHandler, HackSystemAuthenticationTokenHandler>()
             .AddScoped<AuthenticationStateProvider, HackSystemAuthenticationStateProvider>()
             .AddScoped<IHackSystemAuthenticationStateUpdater, HackSystemAuthenticationStateUpdater>()
-            .AddSingleton<IHackSystemAuthenticationTokenRefresher, HackSystemAuthenticationTokenRefresher>();
+            .AddSingleton<IHackSystemAuthenticationTokenRefresher, HackSystemAuthenticationTokenRefresher>()
+            .AddTransient<AuthenticatedHttpClient>();
 
         return services;
     }

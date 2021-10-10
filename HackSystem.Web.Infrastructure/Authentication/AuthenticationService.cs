@@ -2,10 +2,7 @@
 using HackSystem.DataTransferObjects.Accounts;
 using HackSystem.Web.Application.Authentication;
 using HackSystem.Web.Authentication.AuthorizationStateHandlers;
-using HackSystem.Web.Authentication.Extensions;
-using HackSystem.Web.Authentication.Options;
-using HackSystem.Web.Authentication.TokenHandlers;
-using HackSystem.Web.Authentication.WebService;
+using HackSystem.Web.Authentication.WebServices;
 using Newtonsoft.Json;
 
 namespace HackSystem.Web.Infrastructure.Authentication;
@@ -13,21 +10,17 @@ namespace HackSystem.Web.Infrastructure.Authentication;
 public class AuthenticationService : AuthenticatedServiceBase, IAuthenticationService
 {
     private readonly ILogger<AuthenticationService> logger;
-    private readonly HttpClient httpClient;
-    private readonly IHackSystemAuthenticationTokenHandler authenticationTokenHandler;
+    private readonly AuthenticatedHttpClient httpClient;
     private readonly IHackSystemAuthenticationStateUpdater authenticationStateUpdater;
 
     public AuthenticationService(
         ILogger<AuthenticationService> logger,
-        HttpClient httpClient,
-        IOptionsSnapshot<HackSystemAuthenticationOptions> optionsSnapshot,
-        IHackSystemAuthenticationTokenHandler authenticationTokenHandler,
+        AuthenticatedHttpClient httpClient,
         IHackSystemAuthenticationStateUpdater authenticationStateUpdater)
-        : base(logger, authenticationTokenHandler, optionsSnapshot, httpClient)
+        : base(logger, httpClient)
     {
         this.logger = logger;
         this.httpClient = httpClient;
-        this.authenticationTokenHandler = authenticationTokenHandler;
         this.authenticationStateUpdater = authenticationStateUpdater;
     }
 
@@ -70,9 +63,7 @@ public class AuthenticationService : AuthenticatedServiceBase, IAuthenticationSe
     public async Task<string> GetAccountInfo()
     {
         logger.LogDebug($"Get account information...");
-
-        var currentToken = await this.authenticationTokenHandler.GetTokenAsync();
-        await this.AddAuthorizationHeaderAsync();
+        await httpClient.AddAuthorizationHeaderAsync();
         var response = await httpClient.GetAsync("api/accounts/GetAccountInfo");
         if (!response.IsSuccessStatusCode)
         {
@@ -93,8 +84,7 @@ public class AuthenticationService : AuthenticatedServiceBase, IAuthenticationSe
 
         try
         {
-            var currentToken = await this.authenticationTokenHandler.GetTokenAsync();
-            await this.AddAuthorizationHeaderAsync();
+            await httpClient.AddAuthorizationHeaderAsync();
             await httpClient.GetAsync("api/accounts/logout");
         }
         catch (Exception ex)
