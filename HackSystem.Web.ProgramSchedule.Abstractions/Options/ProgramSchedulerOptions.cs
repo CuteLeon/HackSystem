@@ -1,4 +1,4 @@
-﻿namespace HackSystem.Web.ProgramSchedule.Domain.Options;
+﻿namespace HackSystem.Web.ProgramSchedule.Options;
 
 public class ProgramSchedulerOptions
 {

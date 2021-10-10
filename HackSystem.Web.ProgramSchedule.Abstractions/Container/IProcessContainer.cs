@@ -1,7 +1,7 @@
-﻿using HackSystem.Web.ProgramSchedule.Domain.Entity;
-using HackSystem.Web.ProgramSchedule.Domain.Enums;
+﻿using HackSystem.Web.ProgramSchedule.Entity;
+using HackSystem.Web.ProgramSchedule.Enums;
 
-namespace HackSystem.Web.ProgramSchedule.Application.Container;
+namespace HackSystem.Web.ProgramSchedule.Container;
 
 public interface IProcessContainer
 {
