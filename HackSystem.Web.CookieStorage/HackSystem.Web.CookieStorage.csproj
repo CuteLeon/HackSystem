@@ -19,10 +19,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="wwwroot\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="..\LICENSE" Pack="true" PackagePath="" />
 		<None Include="..\HackSystem.Web\wwwroot\LogoImageIcon.png">
 			<Pack>True</Pack>
