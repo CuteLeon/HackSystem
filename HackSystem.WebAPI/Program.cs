@@ -108,9 +108,9 @@ try
         .UseHttpsRedirection()
         .UseStaticFiles()
         .UseRouting()
+        .UseHackSystemWebAPILogging()
         .UseAuthentication()
         .UseAuthorization()
-        .UseHackSystemWebAPILogging()
         .UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(

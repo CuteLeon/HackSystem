@@ -39,8 +39,6 @@ public class WebAPILoggingMiddleware
             SourceHost = $"{context.Connection.RemoteIpAddress}:{context.Connection.RemotePort}",
             UserAgent = context.Request.Headers.TryGetValue("User-Agent", out var userAgent) ? userAgent : string.Empty,
             TraceIdentifier = context.TraceIdentifier,
-            IsAuthenticated = context.User.Identity?.IsAuthenticated ?? false,
-            IdentityName = context.User.Identity?.Name ?? string.Empty,
             StartDateTime = DateTime.Now,
         };
 
@@ -83,6 +81,8 @@ public class WebAPILoggingMiddleware
                 await responseBodyStream.CopyToAsync(originalResponseStream);
             }
 
+            webAPILog.IsAuthenticated = context.User.Identity?.IsAuthenticated ?? false;
+            webAPILog.IdentityName = context.User.Identity?.Name ?? string.Empty;
             webAPILog.StatusCode = context.Response.StatusCode;
         }
         catch (Exception ex)
