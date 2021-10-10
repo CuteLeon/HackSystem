@@ -13,6 +13,7 @@ public partial class DesktopComponent
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
+        this.authenticationTokenRefresher.StartRefresher();
     }
 
     private async void OnTest()

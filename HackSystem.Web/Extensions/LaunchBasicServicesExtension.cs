@@ -15,9 +15,6 @@ public static class LaunchBasicServicesExtension
 {
     public static WebAssemblyHost LaunchBasicServices(this WebAssemblyHost host)
     {
-        var refresher = host.Services.GetService<IHackSystemAuthenticationTokenRefresher>();
-        refresher.StartRefresher();
-
         return host;
     }
 }

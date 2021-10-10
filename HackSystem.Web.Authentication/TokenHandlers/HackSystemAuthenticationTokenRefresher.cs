@@ -35,8 +35,8 @@ public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationT
     {
         this.IsRunning = true;
 
-        // Zero to invoke once immediately.
-        this.timer.Change(0, period);
+        // Set first paramter as 0 to invoke once immediately.
+        this.timer.Change(60 * 1000, period);
     }
 
     public void StopRefresher()
@@ -52,7 +52,7 @@ public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationT
 
     public virtual async Task<string> RefreshTokenAsync()
     {
-        this.logger.LogDebug($"Hack System refresh Token ...");
+        this.logger.LogInformation($"Hack System refresh Token ...");
         await httpClient.AddAuthorizationHeaderAsync();
         var response = await httpClient.GetAsync("api/token/refresh");
         var content = await response.Content.ReadAsStringAsync();
@@ -63,6 +63,7 @@ public class HackSystemAuthenticationTokenRefresher : IHackSystemAuthenticationT
         }
 
         await this.hackSystemAuthenticationStateHandler.UpdateAuthenticattionStateAsync(content);
+        this.logger.LogInformation($"Hack System refresh and update Token successfully.");
         return content;
     }
 }
