@@ -1,4 +1,4 @@
-﻿namespace HackSystem.Web.ProgramSchedule.Domain.Entity;
+﻿namespace HackSystem.Web.ProgramSchedule.Entity;
 
 public class UserProgramMap
 {

@@ -1,6 +1,6 @@
-﻿using HackSystem.Web.ProgramSchedule.Application.Destroyer;
-using HackSystem.Web.ProgramSchedule.Application.Container;
-using HackSystem.Web.ProgramSchedule.Domain.Entity;
+﻿using HackSystem.Web.ProgramSchedule.Destroyer;
+using HackSystem.Web.ProgramSchedule.Container;
+using HackSystem.Web.ProgramSchedule.Entity;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.Destroyer;
 

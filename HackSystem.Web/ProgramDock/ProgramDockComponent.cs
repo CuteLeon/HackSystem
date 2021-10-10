@@ -1,6 +1,6 @@
 ﻿using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
-using HackSystem.Web.ProgramSchedule.Domain.Entity;
-using HackSystem.Web.ProgramSchedule.Domain.Intermediary;
+using HackSystem.Web.ProgramSchedule.Entity;
+using HackSystem.Web.ProgramSchedule.Intermediary;
 
 namespace HackSystem.Web.ProgramDock;
 

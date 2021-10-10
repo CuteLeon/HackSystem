@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace HackSystem.Web.ProgramSchedule.Application.AssemblyLoader;
+namespace HackSystem.Web.ProgramSchedule.AssemblyLoader;
 
 public interface IProgramAssemblyLoader
 {

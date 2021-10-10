@@ -14,13 +14,9 @@
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Description>Cookie storage component of Hack System. Should work together with blazor.cookie.js of Hack System.</Description>
-		<AssemblyVersion>1.0.0.2</AssemblyVersion>
+		<AssemblyVersion>1.0.0.3</AssemblyVersion>
 		<Version>$(AssemblyVersion)</Version>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<Folder Include="wwwroot\" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\LICENSE" Pack="true" PackagePath="" />

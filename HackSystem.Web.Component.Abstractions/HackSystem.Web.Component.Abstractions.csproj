@@ -1,13 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>CuteLeon</Authors>
+		<PackageIcon>LogoImageIcon.png</PackageIcon>
+		<PackageProjectUrl>https://github.com/CuteLeon/HackSystem/</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/CuteLeon/HackSystem/</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>HackSystem</PackageTags>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<Description>Web Component Abstractions component of Hack System.</Description>
+		<AssemblyVersion>1.0.0.3</AssemblyVersion>
+		<Version>$(AssemblyVersion)</Version>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HackSystem.Intermediary.Abstractions\HackSystem.Intermediary.Abstractions.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\LICENSE" Pack="true" PackagePath="" />
+		<None Include="..\HackSystem.Web\wwwroot\LogoImageIcon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\HackSystem.Intermediary.Abstractions\HackSystem.Intermediary.Abstractions.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using HackSystem.Intermediary.Domain;
-using HackSystem.Web.ProgramSchedule.Domain.Entity;
+using HackSystem.Web.ProgramSchedule.Entity;
 
-namespace HackSystem.Web.ProgramSchedule.Domain.Intermediary;
+namespace HackSystem.Web.ProgramSchedule.Intermediary;
 
 public class ProcessDestroyCommand : IIntermediaryCommand
 {

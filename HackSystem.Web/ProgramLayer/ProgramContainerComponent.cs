@@ -1,5 +1,5 @@
-﻿using HackSystem.Web.ProgramSchedule.Domain.Entity;
-using HackSystem.Web.ProgramSchedule.Domain.Enums;
+﻿using HackSystem.Web.ProgramSchedule.Entity;
+using HackSystem.Web.ProgramSchedule.Enums;
 
 namespace HackSystem.Web.ProgramLayer;
 

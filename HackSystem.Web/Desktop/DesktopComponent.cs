@@ -1,6 +1,6 @@
 ﻿using HackSystem.DataTransferObjects.Programs;
 using HackSystem.Web.Component.ToastContainer;
-using HackSystem.Web.ProgramSchedule.Domain.Entity;
+using HackSystem.Web.ProgramSchedule.Entity;
 
 namespace HackSystem.Web.Desktop;
 

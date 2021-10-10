@@ -14,13 +14,13 @@
 		<PackageTags>HackSystem</PackageTags>
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<Description>Cookie storage component of Hack System. Should work together with blazor.cookie.js of Hack System.</Description>
-		<AssemblyVersion>1.0.0.2</AssemblyVersion>
+		<Description>Program Schedule Abstractions component of Hack System.</Description>
+		<AssemblyVersion>1.0.0.3</AssemblyVersion>
 		<Version>$(AssemblyVersion)</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\LICENSE" Pack="true" PackagePath=""/>
+		<None Include="..\LICENSE" Pack="true" PackagePath="" />
 		<None Include="..\HackSystem.Web\wwwroot\LogoImageIcon.png">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
@@ -29,6 +29,21 @@
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0-rc.1.21452.15" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0-rc.1.21452.15" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\HackSystem.Intermediary.Abstractions\HackSystem.Intermediary.Abstractions.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="System.Linq" />
+		<Using Include="Microsoft.AspNetCore.Components" />
+		<Using Include="Microsoft.Extensions.Logging" />
 	</ItemGroup>
 
 </Project>

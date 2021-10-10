@@ -1,4 +1,4 @@
-﻿using HackSystem.Web.ProgramSchedule.Application.IDGenerator;
+﻿using HackSystem.Web.ProgramSchedule.IDGenerator;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.IDGenerator;
 

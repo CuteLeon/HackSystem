@@ -1,4 +1,4 @@
-﻿namespace HackSystem.Web.ProgramSchedule.Domain.Enums;
+﻿namespace HackSystem.Web.ProgramSchedule.Enums;
 
 public enum ProcessChangeStates
 {

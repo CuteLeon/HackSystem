@@ -15,7 +15,7 @@
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Description>Web Program Platform abstraction component of Hack System.</Description>
-		<AssemblyVersion>1.0.0.2</AssemblyVersion>
+		<AssemblyVersion>1.0.0.3</AssemblyVersion>
 		<Version>$(AssemblyVersion)</Version>
 	</PropertyGroup>
 
@@ -39,7 +39,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\HackSystem.Intermediary.Abstractions\HackSystem.Intermediary.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.Component.Abstractions\HackSystem.Web.Component.Abstractions.csproj" />
-		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Domain\HackSystem.Web.ProgramSchedule.Domain.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Abstractions\HackSystem.Web.ProgramSchedule.Abstractions.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

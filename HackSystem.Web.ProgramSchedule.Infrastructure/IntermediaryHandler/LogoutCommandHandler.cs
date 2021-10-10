@@ -1,5 +1,5 @@
-﻿using HackSystem.Web.ProgramSchedule.Application.Container;
-using HackSystem.Web.ProgramSchedule.Application.Destroyer;
+﻿using HackSystem.Web.ProgramSchedule.Container;
+using HackSystem.Web.ProgramSchedule.Destroyer;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.IntermediaryHandler;
 

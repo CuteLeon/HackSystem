@@ -22,12 +22,14 @@
 
 ## Nuget Packages
 
-[![Nuget](https://img.shields.io/nuget/vpre/HackSystem.Intermediary?label=HackSystem.Intermediary&style=flat-square)](https://www.nuget.org/packages/HackSystem.Intermediary/)
-[![Nuget](https://img.shields.io/nuget/vpre/HackSystem.Intermediary.Abstractions?label=HackSystem.Intermediary.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Intermediary.Abstractions/)
-[![Nuget](https://img.shields.io/nuget/vpre/HackSystem.Web.CookieStorage?label=HackSystem.Web.CookieStorage&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.CookieStorage/)
-[![Nuget](https://img.shields.io/nuget/vpre/HackSystem.Web.CookieStorage.Abstractions?label=HackSystem.Web.CookieStorage.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.CookieStorage.Abstractions/)
-[![Nuget](https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramPlatform?label=HackSystem.Web.ProgramPlatform&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.ProgramPlatform/)
-[![Nuget](https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramPlatform.Abstractions?label=HackSystem.Web.ProgramPlatform.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.ProgramPlatform.Abstractions/)
+[![HackSystem.Intermediary](https://img.shields.io/nuget/vpre/HackSystem.Intermediary?label=HackSystem.Intermediary&style=flat-square)](https://www.nuget.org/packages/HackSystem.Intermediary/)
+[![HackSystem.Intermediary.Abstractions](https://img.shields.io/nuget/vpre/HackSystem.Intermediary.Abstractions?label=HackSystem.Intermediary.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Intermediary.Abstractions/)
+[![HackSystem.Web.Authentication.Abstractions](https://img.shields.io/nuget/vpre/HackSystem.Web.Authentication.Abstractions?label=HackSystem.Web.Authentication.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.Authentication.Abstractions/)
+[![HackSystem.Web.Component.Abstractions](https://img.shields.io/nuget/vpre/HackSystem.Web.Component.Abstractions?label=HackSystem.Web.Component.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.Component.Abstractions/)
+[![HackSystem.Web.CookieStorage](https://img.shields.io/nuget/vpre/HackSystem.Web.CookieStorage?label=HackSystem.Web.CookieStorage&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.CookieStorage/)
+[![HackSystem.Web.ProgramPlatform](https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramPlatform?label=HackSystem.Web.ProgramPlatform&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.ProgramPlatform/)
+[![HackSystem.Web.ProgramPlatform.Abstractions](https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramPlatform.Abstractions?label=HackSystem.Web.ProgramPlatform.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.ProgramPlatform.Abstractions/)
+[![HackSystem.Web.ProgramSchedule.Abstractions](https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramSchedule.Abstractions?label=HackSystem.Web.ProgramSchedule.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.ProgramSchedule.Abstractions/)
 
 ## How to launch?
 

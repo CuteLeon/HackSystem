@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 using HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
-using HackSystem.Web.ProgramSchedule.Application.AssemblyLoader;
-using HackSystem.Web.ProgramSchedule.Application.Container;
-using HackSystem.Web.ProgramSchedule.Application.IDGenerator;
-using HackSystem.Web.ProgramSchedule.Application.Launcher;
-using HackSystem.Web.ProgramSchedule.Domain.Entity;
+using HackSystem.Web.ProgramSchedule.AssemblyLoader;
+using HackSystem.Web.ProgramSchedule.Container;
+using HackSystem.Web.ProgramSchedule.IDGenerator;
+using HackSystem.Web.ProgramSchedule.Launcher;
+using HackSystem.Web.ProgramSchedule.Entity;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.Launcher;
 
