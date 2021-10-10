@@ -1,16 +1,12 @@
-﻿using System.Net;
-using System.Text.Json;
-using Bunit;
+﻿using Bunit;
 using HackSystem.DataTransferObjects.Accounts;
+using HackSystem.Web.Application.Authentication;
 using HackSystem.Web.Authentication.AuthorizationStateHandlers;
 using HackSystem.Web.Authentication.TokenHandlers;
 using HackSystem.Web.CookieStorage;
-using HackSystem.Web.Application.Authentication;
-using HackSystem.Web.Infrastructure.Authentication;
 using HackSystem.WebTests.Mocks;
 using Microsoft.AspNetCore.Components;
 using Moq;
-using Moq.Contrib.HttpClient;
 using Xunit;
 
 namespace HackSystem.Web.Account.Tests;
@@ -28,29 +24,21 @@ public class LoginComponentTests
     {
         Uri baseUri = new("https://localhost:4237/");
         Uri logoutUri = new(baseUri, "/api/accounts/login");
-        var mockHttpMessageHandler = new Mock<HttpMessageHandler>();
-        mockHttpMessageHandler.SetupAnyRequest().Throws(new HttpRequestException(message));
-        mockHttpMessageHandler.SetupRequest(HttpMethod.Post, logoutUri).ReturnsAsync(() =>
+        var mockAuthenticationService = new Mock<IAuthenticationService>();
+        mockAuthenticationService.Setup(x => x.Login(It.IsAny<LoginRequest>())).ReturnsAsync(() =>
         {
             if (!connection)
             {
                 throw new HttpRequestException(message);
             }
-            var responseJson = JsonSerializer.Serialize(new LoginResponse()
+            var response = new LoginResponse()
             {
                 Successful = loginResult,
                 Error = loginResult ? string.Empty : message,
                 Token = loginResult ? message : string.Empty,
-            });
-            var response = new HttpResponseMessage
-            {
-                StatusCode = loginResult ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
-                Content = new StringContent(responseJson),
             };
             return response;
         });
-        var mockHttpClient = mockHttpMessageHandler.CreateClient();
-        mockHttpClient.BaseAddress = baseUri;
         var mockNavigationManager = new MockNavigationManager(baseUri.AbsoluteUri, logoutUri.AbsoluteUri);
         var mockTokenHandler = new Mock<IHackSystemAuthenticationTokenHandler>();
         var mockStateHandler = new Mock<IHackSystemAuthenticationStateUpdater>();
@@ -60,10 +48,9 @@ public class LoginComponentTests
             .AddLogging()
             .AddSingleton<NavigationManager>(mockNavigationManager)
             .AddSingleton(new Mock<ICookieStorageHandler>().Object)
+            .AddSingleton(mockAuthenticationService.Object)
             .AddSingleton(mockTokenHandler.Object)
-            .AddSingleton(mockStateHandler.Object)
-            .AddScoped<IAuthenticationService, AuthenticationService>()
-            .AddSingleton(mockHttpClient);
+            .AddSingleton(mockStateHandler.Object);
 
         using var loginComponent = ctx.RenderComponent<LoginComponent>();
         loginComponent.SaveSnapshot();
