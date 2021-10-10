@@ -15,7 +15,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\HackSystem.Intermediary.Abstractions\HackSystem.Intermediary.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.Application\HackSystem.Web.Application.csproj" />
-		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Application\HackSystem.Web.ProgramSchedule.Application.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Abstractions\HackSystem.Web.ProgramSchedule.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Infrastructure\HackSystem.Web.ProgramSchedule.Infrastructure.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform\HackSystem.Web.ProgramPlatform.csproj" />
 		<ProjectReference Include="..\HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj" />

@@ -1,8 +1,8 @@
 ﻿using HackSystem.Intermediary.Application;
 using HackSystem.Intermediary.Extensions;
-using HackSystem.Web.ProgramSchedule.Application.IntermediaryHandler;
-using HackSystem.Web.ProgramSchedule.Domain.Entity;
-using HackSystem.Web.ProgramSchedule.Domain.Intermediary;
+using HackSystem.Web.ProgramSchedule.IntermediaryHandler;
+using HackSystem.Web.ProgramSchedule.Entity;
+using HackSystem.Web.ProgramSchedule.Intermediary;
 using Xunit;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.IntermediaryHandler.Tests;

@@ -2,7 +2,7 @@
 using System.Runtime.Loader;
 using HackSystem.DataTransferObjects.Programs.ProgramAssets;
 using HackSystem.Web.Application.Program.ProgramAsset;
-using HackSystem.Web.ProgramSchedule.Application.AssemblyLoader;
+using HackSystem.Web.ProgramSchedule.AssemblyLoader;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.AssemblyLoader;
 

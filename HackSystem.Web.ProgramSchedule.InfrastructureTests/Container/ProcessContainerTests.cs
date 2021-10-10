@@ -1,6 +1,6 @@
-﻿using HackSystem.Web.ProgramSchedule.Application.Container;
-using HackSystem.Web.ProgramSchedule.Domain.Entity;
-using HackSystem.Web.ProgramSchedule.Domain.Enums;
+﻿using HackSystem.Web.ProgramSchedule.Container;
+using HackSystem.Web.ProgramSchedule.Entity;
+using HackSystem.Web.ProgramSchedule.Enums;
 using Xunit;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.Container.Tests;

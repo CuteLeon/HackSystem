@@ -1,4 +1,4 @@
-﻿using HackSystem.Web.ProgramSchedule.Domain.Entity;
+﻿using HackSystem.Web.ProgramSchedule.Entity;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;

@@ -1,6 +1,6 @@
-﻿using HackSystem.Web.ProgramSchedule.Application.IntermediaryHandler;
-using HackSystem.Web.ProgramSchedule.Application.Launcher;
-using HackSystem.Web.ProgramSchedule.Domain.Intermediary;
+﻿using HackSystem.Web.ProgramSchedule.IntermediaryHandler;
+using HackSystem.Web.ProgramSchedule.Launcher;
+using HackSystem.Web.ProgramSchedule.Intermediary;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.IntermediaryHandler;
 

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Immutable;
-using HackSystem.Web.ProgramSchedule.Application.Container;
-using HackSystem.Web.ProgramSchedule.Domain.Entity;
-using HackSystem.Web.ProgramSchedule.Domain.Enums;
-using static HackSystem.Web.ProgramSchedule.Application.Container.IProcessContainer;
+using HackSystem.Web.ProgramSchedule.Container;
+using HackSystem.Web.ProgramSchedule.Entity;
+using HackSystem.Web.ProgramSchedule.Enums;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.Container;
 
@@ -13,7 +12,7 @@ public class ProcessContainer : IProcessContainer
 
     protected ConcurrentDictionary<int, ProcessDetail> Processes { get; init; } = new();
 
-    public event ProcessChangedHandler? ProcessChanged;
+    public event IProcessContainer.ProcessChangedHandler? ProcessChanged;
 
     public ProcessContainer(ILogger<ProcessContainer> logger)
     {
