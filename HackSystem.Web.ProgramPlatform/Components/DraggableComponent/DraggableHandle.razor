@@ -16,13 +16,9 @@
     [Parameter]
     public string Cursor { get => this.cursor; set => this.cursor = value; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnInitializedAsync()
     {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
-        {
-            await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./js/blazor.draggable.js");
-        }
+        await base.OnInitializedAsync();
+        await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./_content/HackSystem.Web.ProgramPlatform/blazor.draggable.js");
     }
 }

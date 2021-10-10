@@ -1,47 +1,43 @@
 ﻿@inject IJSRuntime jsRuntime
 
 <div class="position-fixed user-select-none flex-nowrap text-nowrap"
-	 style="padding:@(resizeableOption.BorderSize)px; left:@(resizeableOption.Left)rem;top:@(resizeableOption.Top)rem;pointer-events:auto;
+     style="padding:@(resizeableOption.BorderSize)px; left:@(resizeableOption.Left)rem;top:@(resizeableOption.Top)rem;pointer-events:auto;
             @(resizeableOption.Width.HasValue?$"width:{resizeableOption.Width}px;":string.Empty)
             @(resizeableOption.Height.HasValue?$"height:{resizeableOption.Height}px;":string.Empty)">
 
-	<div class="position-absolute" style="width:@(resizeableOption.CornerSize)px;height:@(resizeableOption.CornerSize)px;left:0px;top:0px;cursor:nw-resize"
-		 data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-	<div class="position-absolute" style="height:@(resizeableOption.BorderSize)px;left:@(resizeableOption.CornerSize)px;top:0px;right:@(resizeableOption.CornerSize)px;cursor: n-resize"
-		 data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-	<div class="position-absolute" style="width:@(resizeableOption.CornerSize)px;height:@(resizeableOption.CornerSize)px;right:0px;top:0px;cursor: ne-resize"
-		 data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-	<div class="position-absolute" style="width:@(resizeableOption.BorderSize)px;left:0px;top:@(resizeableOption.CornerSize)px;bottom:@(resizeableOption.CornerSize)px;cursor:w-resize"
-		 data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-	<div class="position-absolute" style="width:@(resizeableOption.BorderSize)px;top:@(resizeableOption.CornerSize)px;right:0px;bottom:@(resizeableOption.CornerSize)px;cursor:e-resize"
-		 data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-	<div class="position-absolute" style="width:@(resizeableOption.CornerSize)px;height:@(resizeableOption.CornerSize)px;left:0px;bottom:0px;cursor:sw-resize"
-		 data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-	<div class="position-absolute" style="height:@(resizeableOption.BorderSize)px;left:@(resizeableOption.CornerSize)px;right:@(resizeableOption.CornerSize)px;bottom:0px;cursor: s-resize"
-		 data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
-	<div class="position-absolute" style="width:@(resizeableOption.CornerSize)px;height:@(resizeableOption.CornerSize)px;right:0px;bottom:0px;cursor:se-resize"
-		 data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+    <div class="position-absolute" style="width:@(resizeableOption.CornerSize)px;height:@(resizeableOption.CornerSize)px;left:0px;top:0px;cursor:nw-resize"
+         data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+    <div class="position-absolute" style="height:@(resizeableOption.BorderSize)px;left:@(resizeableOption.CornerSize)px;top:0px;right:@(resizeableOption.CornerSize)px;cursor: n-resize"
+         data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+    <div class="position-absolute" style="width:@(resizeableOption.CornerSize)px;height:@(resizeableOption.CornerSize)px;right:0px;top:0px;cursor: ne-resize"
+         data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+    <div class="position-absolute" style="width:@(resizeableOption.BorderSize)px;left:0px;top:@(resizeableOption.CornerSize)px;bottom:@(resizeableOption.CornerSize)px;cursor:w-resize"
+         data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+    <div class="position-absolute" style="width:@(resizeableOption.BorderSize)px;top:@(resizeableOption.CornerSize)px;right:0px;bottom:@(resizeableOption.CornerSize)px;cursor:e-resize"
+         data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+    <div class="position-absolute" style="width:@(resizeableOption.CornerSize)px;height:@(resizeableOption.CornerSize)px;left:0px;bottom:0px;cursor:sw-resize"
+         data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+    <div class="position-absolute" style="height:@(resizeableOption.BorderSize)px;left:@(resizeableOption.CornerSize)px;right:@(resizeableOption.CornerSize)px;bottom:0px;cursor: s-resize"
+         data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+    <div class="position-absolute" style="width:@(resizeableOption.CornerSize)px;height:@(resizeableOption.CornerSize)px;right:0px;bottom:0px;cursor:se-resize"
+         data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
 
-	<div class="shadow-lg rounded" style="max-width:none;max-height:none;height:100%;">
-		@this.ChildContent
-	</div>
+    <div class="shadow-lg rounded" style="max-width:none;max-height:none;height:100%;">
+        @this.ChildContent
+    </div>
 </div>
 
 @code {
-	[Parameter]
-	public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
-	private ResizeableOption resizeableOption;
-	[Parameter]
-	public ResizeableOption ResizeableOption { get => this.resizeableOption; set => this.resizeableOption = value; }
+    private ResizeableOption resizeableOption;
+    [Parameter]
+    public ResizeableOption ResizeableOption { get => this.resizeableOption; set => this.resizeableOption = value; }
 
-	protected override async Task OnAfterRenderAsync(bool firstRender)
-	{
-		await base.OnAfterRenderAsync(firstRender);
-
-		if (firstRender)
-		{
-			await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "/js/blazor.resizeable.js");
-		}
-	}
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./_content/HackSystem.Web.ProgramPlatform/blazor.resizeable.js");
+    }
 }

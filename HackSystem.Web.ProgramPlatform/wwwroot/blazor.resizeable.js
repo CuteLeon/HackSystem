@@ -1,4 +1,4 @@
-﻿var resizeEvents = {
+﻿let resizeEvents = {
 	resizeData: null,
 	resizeTarget: null,
 	mouseResizeMoveMethod: null,

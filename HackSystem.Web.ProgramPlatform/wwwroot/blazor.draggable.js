@@ -1,4 +1,4 @@
-﻿var dragEvents = {
+﻿let dragEvents = {
     dragData: null,
     dragTarget: null,
     mouseDragStart: function (e) {
