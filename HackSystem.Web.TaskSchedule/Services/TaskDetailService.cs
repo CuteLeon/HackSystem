@@ -8,21 +8,20 @@ public class TaskDetailService : AuthenticatedServiceBase, ITaskDetailService
 {
     public TaskDetailService(
         ILogger<TaskDetailService> logger,
-        AuthenticatedHttpClient httpClient)
-        : base(logger, httpClient)
+        IHttpClientFactory httpClientFactory)
+        : base(logger, httpClientFactory)
     {
     }
 
     public async Task<bool> ExecuteTask(TaskDetailRequest taskDetail)
     {
-        var result = await this.httpClient.PostAsJsonAsync("api/taskserver/ExecuteTask", taskDetail);
+        var result = await this.HttpClient.PostAsJsonAsync("api/taskserver/ExecuteTask", taskDetail);
         return result.IsSuccessStatusCode;
     }
 
     public async Task<IEnumerable<TaskDetailResponse>> QueryTasks()
     {
-        await httpClient.AddAuthorizationHeaderAsync();
-        var result = await this.httpClient.GetFromJsonAsync<IEnumerable<TaskDetailResponse>>("api/taskserver/QueryTasks");
+        var result = await this.HttpClient.GetFromJsonAsync<IEnumerable<TaskDetailResponse>>("api/taskserver/QueryTasks");
         return result;
     }
 }

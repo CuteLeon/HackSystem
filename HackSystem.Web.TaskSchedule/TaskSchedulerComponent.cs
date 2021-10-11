@@ -1,5 +1,4 @@
 ﻿using HackSystem.DataTransferObjects.TaskServer;
-using HackSystem.Web.Authentication.WebServices;
 using HackSystem.Web.Component.ToastContainer;
 using HackSystem.Web.TaskSchedule.Services;
 
@@ -21,7 +20,7 @@ public partial class TaskSchedulerComponent
         this.serviceScope = this.ServiceScopeFactory.CreateScope();
         this.taskDetailService = new TaskDetailService(
             this.serviceScope.ServiceProvider.GetRequiredService<ILogger<TaskDetailService>>(),
-            this.serviceScope.ServiceProvider.GetRequiredService<AuthenticatedHttpClient>());
+            this.serviceScope.ServiceProvider.GetRequiredService<IHttpClientFactory>());
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

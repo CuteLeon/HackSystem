@@ -9,18 +9,14 @@ namespace HackSystem.Web.Infrastructure.Authentication;
 
 public class AuthenticationService : AuthenticatedServiceBase, IAuthenticationService
 {
-    private readonly ILogger<AuthenticationService> logger;
-    private readonly AuthenticatedHttpClient httpClient;
     private readonly IHackSystemAuthenticationStateUpdater authenticationStateUpdater;
 
     public AuthenticationService(
         ILogger<AuthenticationService> logger,
-        AuthenticatedHttpClient httpClient,
+        IHttpClientFactory httpClientFactory,
         IHackSystemAuthenticationStateUpdater authenticationStateUpdater)
-        : base(logger, httpClient)
+        : base(logger, httpClientFactory)
     {
-        this.logger = logger;
-        this.httpClient = httpClient;
         this.authenticationStateUpdater = authenticationStateUpdater;
     }
 
@@ -32,7 +28,7 @@ public class AuthenticationService : AuthenticatedServiceBase, IAuthenticationSe
     public async Task<RegisterResponse> Register(RegisterRequest register)
     {
         logger.LogDebug($"Register new user: {register.UserName}");
-        var response = await httpClient.PostAsJsonAsync("api/accounts/register", register);
+        var response = await this.HttpClient.PostAsJsonAsync("api/accounts/register", register);
         var registerResult = JsonConvert.DeserializeObject<RegisterResponse>(await response.Content.ReadAsStringAsync());
         return registerResult;
     }
@@ -45,7 +41,7 @@ public class AuthenticationService : AuthenticatedServiceBase, IAuthenticationSe
     public async Task<LoginResponse> Login(LoginRequest login)
     {
         logger.LogDebug($"Login user: {login.UserName}");
-        var response = await httpClient.PostAsJsonAsync("api/accounts/login", login);
+        var response = await this.HttpClient.PostAsJsonAsync("api/accounts/login", login);
         var loginResult = JsonConvert.DeserializeObject<LoginResponse>(await response.Content.ReadAsStringAsync());
         if (!response.IsSuccessStatusCode)
         {
@@ -63,8 +59,7 @@ public class AuthenticationService : AuthenticatedServiceBase, IAuthenticationSe
     public async Task<string> GetAccountInfo()
     {
         logger.LogDebug($"Get account information...");
-        await httpClient.AddAuthorizationHeaderAsync();
-        var response = await httpClient.GetAsync("api/accounts/GetAccountInfo");
+        var response = await HttpClient.GetAsync("api/accounts/GetAccountInfo");
         if (!response.IsSuccessStatusCode)
         {
             return $"{(int)response.StatusCode} - {response.StatusCode}";
@@ -84,8 +79,7 @@ public class AuthenticationService : AuthenticatedServiceBase, IAuthenticationSe
 
         try
         {
-            await httpClient.AddAuthorizationHeaderAsync();
-            await httpClient.GetAsync("api/accounts/logout");
+            await this.HttpClient.GetAsync("api/accounts/logout");
         }
         catch (Exception ex)
         {

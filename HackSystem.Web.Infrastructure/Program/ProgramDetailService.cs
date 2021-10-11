@@ -9,49 +9,48 @@ public class ProgramDetailService : AuthenticatedServiceBase, IProgramDetailServ
 {
     public ProgramDetailService(
         ILogger<ProgramDetailService> logger,
-        AuthenticatedHttpClient httpClient)
-        : base(logger, httpClient)
+        IHttpClientFactory httpClientFactory)
+        : base(logger, httpClientFactory)
     {
     }
 
     public async Task<IEnumerable<UserProgramMapResponse>> QueryUserProgramMaps()
     {
-        await httpClient.AddAuthorizationHeaderAsync();
-        var result = await this.httpClient.GetFromJsonAsync<IEnumerable<UserProgramMapResponse>>("api/ProgramDetail/QueryUserProgramMaps");
+        var result = await this.HttpClient.GetFromJsonAsync<IEnumerable<UserProgramMapResponse>>("api/ProgramDetail/QueryUserProgramMaps");
         return result;
     }
 
     public async Task<bool> SetUserProgramHide(UserProgramMapRequest hideRequest)
     {
-        var response = await this.httpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramHide", hideRequest);
+        var response = await this.HttpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramHide", hideRequest);
         response.EnsureSuccessStatusCode();
         return response.IsSuccessStatusCode;
     }
 
     public async Task<bool> SetUserProgramPinToDock(UserProgramMapRequest pinToDockRequest)
     {
-        var response = await this.httpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramPinToDock", pinToDockRequest);
+        var response = await this.HttpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramPinToDock", pinToDockRequest);
         response.EnsureSuccessStatusCode();
         return response.IsSuccessStatusCode;
     }
 
     public async Task<bool> SetUserProgramPinToTop(UserProgramMapRequest pinToTopRequest)
     {
-        var response = await this.httpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramPinToTop", pinToTopRequest);
+        var response = await this.HttpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramPinToTop", pinToTopRequest);
         response.EnsureSuccessStatusCode();
         return response.IsSuccessStatusCode;
     }
 
     public async Task<bool> SetUserProgramRename(UserProgramMapRequest renameRequest)
     {
-        var response = await this.httpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramRename", renameRequest);
+        var response = await this.HttpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramRename", renameRequest);
         response.EnsureSuccessStatusCode();
         return response.IsSuccessStatusCode;
     }
 
     public async Task<bool> DeleteUserProgramMap(string programId)
     {
-        var response = await this.httpClient.DeleteAsync($"api/ProgramDetail/DeleteUserProgramMap?programId={programId}");
+        var response = await this.HttpClient.DeleteAsync($"api/ProgramDetail/DeleteUserProgramMap?programId={programId}");
         response.EnsureSuccessStatusCode();
         return response.IsSuccessStatusCode;
     }

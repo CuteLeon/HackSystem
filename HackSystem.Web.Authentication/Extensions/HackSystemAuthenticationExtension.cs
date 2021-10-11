@@ -23,7 +23,14 @@ public static class HackSystemAuthenticationExtension
             .AddScoped<AuthenticationStateProvider, HackSystemAuthenticationStateProvider>()
             .AddScoped<IHackSystemAuthenticationStateUpdater, HackSystemAuthenticationStateUpdater>()
             .AddSingleton<IHackSystemAuthenticationTokenRefresher, HackSystemAuthenticationTokenRefresher>()
-            .AddTransient<AuthenticatedHttpClient>();
+            .AddTransient<AuthenticatedDelegatingHandler>()
+            .AddHttpClient(AuthenticatedServiceBase.AuthenticatedClientName)
+            .ConfigureHttpClient((sp, client) =>
+            {
+                var options = sp.GetRequiredService<IOptions<HackSystemAuthenticationOptions>>().Value;
+                client.BaseAddress = new Uri(options.AuthenticationURL);
+            })
+            .AddHttpMessageHandler<AuthenticatedDelegatingHandler>();
 
         return services;
     }
