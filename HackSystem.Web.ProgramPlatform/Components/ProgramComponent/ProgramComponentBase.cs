@@ -20,6 +20,10 @@ public abstract class ProgramComponentBase : ComponentBase, IDisposable
 
     public ProgramDetail ProgramDetail { get => this.processDetail.ProgramDetail; }
 
+    public ProgramComponentBase() : base()
+    {
+    }
+
     public virtual void OnClose()
     {
         this.CommandSender.Send(new ProcessDestroyCommand() { ProcessDetail = this.processDetail });

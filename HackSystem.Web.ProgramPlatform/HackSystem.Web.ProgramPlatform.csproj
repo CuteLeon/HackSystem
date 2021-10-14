@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Authors>CuteLeon</Authors>
 		<PackageIcon>LogoImageIcon.png</PackageIcon>
@@ -38,6 +39,10 @@
 	<ItemGroup>
 		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform.Abstractions\HackSystem.Web.ProgramPlatform.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Abstractions\HackSystem.Web.ProgramSchedule.Abstractions.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Microsoft.AspNetCore.Components" />
 	</ItemGroup>
 
 </Project>
