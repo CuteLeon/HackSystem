@@ -20,7 +20,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Include="..\LICENSE" Pack="true" PackagePath=""/>
+	  <None Include="..\LICENSE" Pack="true" PackagePath="" />
 	  <None Include="..\HackSystem.Web\wwwroot\LogoImageIcon.png">
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>
@@ -34,8 +34,8 @@
 	<ItemGroup>
 		<PackageReference Include="MediatR" Version="9.0.0" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0-rc.1.21451.13" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0-rc.1.21451.13" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0-rc.2.21480.5" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0-rc.2.21480.5" />
 	</ItemGroup>
 
 	<ItemGroup>
