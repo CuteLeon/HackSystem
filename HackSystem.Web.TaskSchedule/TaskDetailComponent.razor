@@ -10,7 +10,8 @@
             </div>
             <div class="col-auto p-0">
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" @bind=@this.TaskEnable name="switch_@this.TaskDetail.TaskID" id="switch_@this.TaskDetail.TaskID" />
+                    @* @bind=this.TaskEnable *@
+                    <input type="checkbox" class="custom-control-input" checked name="switch_@this.TaskDetail.TaskID" id="switch_@this.TaskDetail.TaskID" />
                     <label class="custom-control-label" for="switch_@this.TaskDetail.TaskID"></label>
                 </div>
             </div>
@@ -55,7 +56,7 @@
     [Parameter]
     public TaskDetailResponse TaskDetail { get; set; }
 
-    public bool TaskEnable
+    private bool TaskEnable
     {
         get => this.TaskDetail.Enabled;
         set
