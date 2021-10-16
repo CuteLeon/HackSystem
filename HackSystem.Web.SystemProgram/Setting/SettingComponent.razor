@@ -4,14 +4,14 @@
 <ResizeableView ResizeableOption="new ResizeableOption() { Width=640, Height=540, Z_Index=this.ProgramDetail.Z_Index }">
     <div class="modal-dialog m-0 flex-fill" role="dialog" style="max-width:none;height:100%;">
         <div class="modal-content border-danger overflow-hidden" style="height: 100%;">
-            <DraggableHandle DragTarget=".position-fixed">
+            <DraggableHandleComponent DragTarget=".position-fixed">
                 <div class="modal-header border-0 py-2">
                     <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
                     <button type="button" class="close" @onclick="this.OnClose">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            </DraggableHandle>
+            </DraggableHandleComponent>
             <div class="modal-body text-center p-0">
                 <div class="d-flex h-100">
                     <div class="d-inline-block d-flex bg-light align-items-center">

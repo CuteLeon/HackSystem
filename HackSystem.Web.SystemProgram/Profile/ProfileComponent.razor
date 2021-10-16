@@ -3,14 +3,14 @@
 <ResizeableView ResizeableOption="new ResizeableOption() { Left=30, Top=11, Z_Index=this.ProgramDetail.Z_Index }">
     <div class="modal-dialog m-0 flex-fill" role="dialog" style="max-width:none;height:100%;text-shadow:0px 0px 3px #000, 0px 1px 5px #000">
         <div class="modal-content bg-transparent border-primary text-white overflow-hidden" style="height: 100%;backdrop-filter:blur(20px);">
-            <DraggableHandle DragTarget=".position-fixed">
+            <DraggableHandleComponent DragTarget=".position-fixed">
                 <div class="modal-header border-0 py-2">
                     <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
                     <button type="button" class="close" @onclick="this.OnClose">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            </DraggableHandle>
+            </DraggableHandleComponent>
             <div class="modal-body text-center p-5">
                 <p class="fas fa-user-astronaut text-primary fa-10x my-3"></p>
                 <p class="display-4 text-warning">Profile</p>
