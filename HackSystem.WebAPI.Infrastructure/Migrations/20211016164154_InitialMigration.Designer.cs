@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackSystem.WebAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(HackSystemDbContext))]
-    [Migration("20211016162508_InitialMigration")]
+    [Migration("20211016164154_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -802,7 +802,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             Enabled = true,
                             EntryAssemblyName = "HackSystem.Web.TaskSchedule",
                             EntryParameter = "{ \"Developer\": \"Leon\" }",
-                            EntryTypeName = "HackSystem.Web.TaskSchedule.TaskSchedulerComponent",
+                            EntryTypeName = "HackSystem.Web.TaskSchedule.Launcher",
                             IconUri = "/images/ProgramIcons/TaskServerProgram.png",
                             Mandatory = true,
                             Name = "TaskServer",

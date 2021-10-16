@@ -10,6 +10,8 @@ public class ProgramDetail
 
     public string EntryTypeName { get; set; }
 
+    public string EntryParameter { get; set; }
+
     public Type ProgramEntryType { get; set; }
 
     public string IconUri { get; set; }

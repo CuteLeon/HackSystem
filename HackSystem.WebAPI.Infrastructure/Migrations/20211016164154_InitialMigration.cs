@@ -426,7 +426,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "ProgramDetails",
                 columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "IconUri", "Mandatory", "Name", "SingleInstance" },
-                values: new object[] { "program0-icon-0828-hack-system000008", true, "HackSystem.Web.TaskSchedule", "{ \"Developer\": \"Leon\" }", "HackSystem.Web.TaskSchedule.TaskSchedulerComponent", "/images/ProgramIcons/TaskServerProgram.png", true, "TaskServer", true });
+                values: new object[] { "program0-icon-0828-hack-system000008", true, "HackSystem.Web.TaskSchedule", "{ \"Developer\": \"Leon\" }", "HackSystem.Web.TaskSchedule.Launcher", "/images/ProgramIcons/TaskServerProgram.png", true, "TaskServer", true });
 
             migrationBuilder.InsertData(
                 table: "ProgramDetails",

@@ -800,7 +800,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             Enabled = true,
                             EntryAssemblyName = "HackSystem.Web.TaskSchedule",
                             EntryParameter = "{ \"Developer\": \"Leon\" }",
-                            EntryTypeName = "HackSystem.Web.TaskSchedule.TaskSchedulerComponent",
+                            EntryTypeName = "HackSystem.Web.TaskSchedule.Launcher",
                             IconUri = "/images/ProgramIcons/TaskServerProgram.png",
                             Mandatory = true,
                             Name = "TaskServer",
