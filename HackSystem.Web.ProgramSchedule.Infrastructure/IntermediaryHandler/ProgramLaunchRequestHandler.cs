@@ -21,7 +21,7 @@ public class ProgramLaunchRequestHandler : IProgramLaunchRequestHandler
     {
         this.logger.LogInformation($"Handle Program launch request {request.ProgramDetail.Name} ...");
         var processDetail = await this.programLauncher.LaunchProgram(request.ProgramDetail);
-        this.logger.LogInformation($"Program launch request handled, PID={processDetail.PID}.");
+        this.logger.LogInformation($"Program launch request handled, PID={processDetail.ProcessId}.");
         return new ProgramLaunchResponse() { ProcessDetail = processDetail };
     }
 }

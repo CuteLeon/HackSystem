@@ -2,9 +2,7 @@
 
 public class ProcessDetail
 {
-    public int PID { get; set; }
-
-    public DynamicComponent DynamicProgramComponent { get; set; }
+    public int ProcessId { get; set; }
 
     public ProgramDetail ProgramDetail { get; set; }
 }

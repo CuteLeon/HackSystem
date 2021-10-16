@@ -17,9 +17,11 @@ public class ProgramBase
 
     public bool SingleInstance { get; set; }
 
-    public string AssemblyName { get; set; }
+    public string EntryAssemblyName { get; set; }
 
-    public string TypeName { get; set; }
+    public string EntryTypeName { get; set; }
+
+    public string? EntryParameter { get; set; }
 
     public bool Mandatory { get; set; }
 

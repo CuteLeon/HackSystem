@@ -26,7 +26,7 @@ public class ProcessDestroyCommandHandlerTests
         var commandSender = serviceProvider.GetRequiredService<IIntermediaryCommandSender>();
         for (int index = 0; index < 5; index++)
         {
-            await commandSender.Send(new ProcessDestroyCommand() { ProcessDetail = new ProcessDetail { PID = index } });
+            await commandSender.Send(new ProcessDestroyCommand() { ProcessDetail = new ProcessDetail { ProcessId = index } });
         }
         Assert.Equal(5, commandCount);
     }

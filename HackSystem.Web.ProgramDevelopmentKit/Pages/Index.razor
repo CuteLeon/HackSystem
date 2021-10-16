@@ -15,12 +15,11 @@
         var programDetail = new ProgramDetail()
             {
                 Name = this.ProgramType.Name,
-                ProgramComponentType = this.ProgramType,
-                Z_Index = 1,
+                ProgramEntryType = this.ProgramType
             };
         this.ProcessDetail = new ProcessDetail()
             {
-                PID = 1,
+                ProcessId = 1,
                 ProgramDetail = programDetail
             };
 

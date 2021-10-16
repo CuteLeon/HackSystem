@@ -20,7 +20,7 @@ public partial class ProgramContainerComponent : IDisposable
 
     private void ProcessChangedHandler(ProcessChangeStates states, ProcessDetail processDetail)
     {
-        this.logger.LogInformation($"Process {processDetail.PID} {states.ToString()}...");
+        this.logger.LogInformation($"Process {processDetail.ProcessId} {states.ToString()}...");
         this.StateHasChanged();
     }
 

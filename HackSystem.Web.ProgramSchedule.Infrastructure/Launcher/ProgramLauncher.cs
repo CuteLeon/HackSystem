@@ -29,22 +29,22 @@ public class ProgramLauncher : IProgramLauncher
 
     public async Task<ProcessDetail?> LaunchProgram(ProgramDetail programDetail)
     {
-        if (!this.programAssemblyLoader.CheckAssemblyLoaded(programDetail.AssemblyName))
+        if (!this.programAssemblyLoader.CheckAssemblyLoaded(programDetail.EntryAssemblyName))
         {
-            this.logger.LogInformation($"Lazy loading assembly {programDetail.AssemblyName} for program {programDetail.Id} as not loeaded...");
+            this.logger.LogInformation($"Lazy loading assembly {programDetail.EntryAssemblyName} for program {programDetail.Id} as not loeaded...");
             await this.programAssemblyLoader.LoadProgramAssembly(programDetail.Id);
-            this.logger.LogInformation($"Lazy loaded assembly {programDetail.AssemblyName} successfully.");
+            this.logger.LogInformation($"Lazy loaded assembly {programDetail.EntryAssemblyName} successfully.");
         }
 
-        programDetail.ProgramComponentType = GetProgramComponentType(programDetail.AssemblyName, programDetail.TypeName);
-        this.logger.LogInformation($"Launching program of Type={programDetail.ProgramComponentType.FullName}");
+        programDetail.ProgramEntryType = GetProgramComponentType(programDetail.EntryAssemblyName, programDetail.EntryTypeName);
+        this.logger.LogInformation($"Launching program of Type={programDetail.ProgramEntryType.FullName}");
 
         var process = new ProcessDetail()
         {
-            PID = this.pIDGenerator.GetAvailablePID(),
+            ProcessId = this.pIDGenerator.GetAvailablePID(),
             ProgramDetail = programDetail,
         };
-        this.logger.LogInformation($"Creating process of program with Name={programDetail.Name} ({process.PID})");
+        this.logger.LogInformation($"Creating process of program with Name={programDetail.Name} ({process.ProcessId})");
 
         var result = this.processContainer.LaunchProcess(process);
         if (!result)

@@ -22,7 +22,7 @@ public class ProcessContainerTests
 
         for (int index = 0; index < 5; index++)
         {
-            container.LaunchProcess(new ProcessDetail() { PID = index });
+            container.LaunchProcess(new ProcessDetail() { ProcessId = index });
             Assert.NotNull(container.GetProcess(index));
         }
         Assert.Equal(5, container.GetProcesses().Count());

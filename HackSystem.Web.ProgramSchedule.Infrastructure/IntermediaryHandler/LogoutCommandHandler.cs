@@ -25,7 +25,7 @@ public class LogoutCommandHandler : IIntermediaryCommandHandler<LogoutCommand>
         var processes = this.processContainer.GetProcesses();
         foreach (var process in processes)
         {
-            _ = await this.processDestroyer.DestroyProcess(process.PID);
+            _ = await this.processDestroyer.DestroyProcess(process.ProcessId);
         }
         this.logger.LogInformation($"Logout command handled, total {processes.Count()} processes.");
         return ValueTuple.Create();

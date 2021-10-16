@@ -33,8 +33,8 @@ public class ProcessContainer : IProcessContainer
 
     public bool LaunchProcess(ProcessDetail processDetail)
     {
-        this.logger.LogInformation($"Process container, add process => {processDetail.PID} ID");
-        var result = this.Processes.TryAdd(processDetail.PID, processDetail);
+        this.logger.LogInformation($"Process container, add process => {processDetail.ProcessId} ID");
+        var result = this.Processes.TryAdd(processDetail.ProcessId, processDetail);
         if (result)
         {
             this.ProcessChanged?.Invoke(ProcessChangeStates.Launch, processDetail);

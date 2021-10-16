@@ -6,13 +6,11 @@ public class ProgramDetail
 
     public string Name { get; set; }
 
-    public string AssemblyName { get; set; }
+    public string EntryAssemblyName { get; set; }
 
-    public string TypeName { get; set; }
+    public string EntryTypeName { get; set; }
 
-    public Type ProgramComponentType { get; set; }
-
-    public int Z_Index { get; set; }
+    public Type ProgramEntryType { get; set; }
 
     public string IconUri { get; set; }
 

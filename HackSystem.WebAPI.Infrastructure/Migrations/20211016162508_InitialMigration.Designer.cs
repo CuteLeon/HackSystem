@@ -3,6 +3,7 @@ using System;
 using HackSystem.WebAPI.Infrastructure.DBContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,12 +11,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackSystem.WebAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(HackSystemDbContext))]
-    partial class HackSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211016162508_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.0-rc.1.21452.10");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.0-rc.2.21480.5");
 
             modelBuilder.Entity("HackSystem.WebAPI.Domain.Entity.GenericOption", b =>
                 {
@@ -682,12 +684,19 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("AssemblyName")
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("EntryAssemblyName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("EntryParameter")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EntryTypeName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("IconUri")
                         .IsRequired()
@@ -703,10 +712,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                     b.Property<bool>("SingleInstance")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("TypeName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Id", "Name");
@@ -717,101 +722,102 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         new
                         {
                             Id = "program0-icon-0828-hack-system000001",
-                            AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
+                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
+                            EntryTypeName = "HackSystem.Web.SystemProgram.Home.HomeComponent",
                             IconUri = "/images/ProgramIcons/HomeProgram.png",
                             Mandatory = true,
                             Name = "Home",
-                            SingleInstance = true,
-                            TypeName = "HackSystem.Web.SystemProgram.Home.HomeComponent"
+                            SingleInstance = true
                         },
                         new
                         {
                             Id = "program0-icon-0828-hack-system000002",
-                            AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
+                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
+                            EntryTypeName = "HackSystem.Web.SystemProgram.Explorer.ExplorerComponent",
                             IconUri = "/images/ProgramIcons/ExplorerProgram.png",
                             Mandatory = true,
                             Name = "Explorer",
-                            SingleInstance = false,
-                            TypeName = "HackSystem.Web.SystemProgram.Explorer.ExplorerComponent"
+                            SingleInstance = false
                         },
                         new
                         {
                             Id = "program0-icon-0828-hack-system000003",
-                            AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
+                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
+                            EntryTypeName = "HackSystem.Web.SystemProgram.Borwser.BorwserComponent",
                             IconUri = "/images/ProgramIcons/BorwserProgram.png",
                             Mandatory = true,
                             Name = "Borwser",
-                            SingleInstance = false,
-                            TypeName = "HackSystem.Web.SystemProgram.Borwser.BorwserComponent"
+                            SingleInstance = false
                         },
                         new
                         {
                             Id = "program0-icon-0828-hack-system000004",
-                            AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
+                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
+                            EntryTypeName = "HackSystem.Web.SystemProgram.Profile.ProfileComponent",
                             IconUri = "/images/ProgramIcons/ProfileProgram.png",
                             Mandatory = true,
                             Name = "Profile",
-                            SingleInstance = true,
-                            TypeName = "HackSystem.Web.SystemProgram.Profile.ProfileComponent"
+                            SingleInstance = true
                         },
                         new
                         {
                             Id = "program0-icon-0828-hack-system000005",
-                            AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
+                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
+                            EntryTypeName = "HackSystem.Web.SystemProgram.Setting.SettingComponent",
                             IconUri = "/images/ProgramIcons/SettingProgram.png",
                             Mandatory = true,
                             Name = "Setting",
-                            SingleInstance = true,
-                            TypeName = "HackSystem.Web.SystemProgram.Setting.SettingComponent"
+                            SingleInstance = true
                         },
                         new
                         {
                             Id = "program0-icon-0828-hack-system000006",
-                            AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
+                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
+                            EntryTypeName = "HackSystem.Web.SystemProgram.AppStore.AppStoreComponent",
                             IconUri = "/images/ProgramIcons/AppStoreProgram.png",
                             Mandatory = true,
                             Name = "AppStore",
-                            SingleInstance = true,
-                            TypeName = "HackSystem.Web.SystemProgram.AppStore.AppStoreComponent"
+                            SingleInstance = true
                         },
                         new
                         {
                             Id = "program0-icon-0828-hack-system000007",
-                            AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
+                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
+                            EntryTypeName = "HackSystem.Web.SystemProgram.Weather.WeatherComponent",
                             IconUri = "/images/ProgramIcons/WeatherProgram.png",
                             Mandatory = false,
                             Name = "Weather",
-                            SingleInstance = true,
-                            TypeName = "HackSystem.Web.SystemProgram.Weather.WeatherComponent"
+                            SingleInstance = true
                         },
                         new
                         {
                             Id = "program0-icon-0828-hack-system000008",
-                            AssemblyName = "HackSystem.Web.TaskSchedule",
                             Enabled = true,
+                            EntryAssemblyName = "HackSystem.Web.TaskSchedule",
+                            EntryParameter = "{ \"Developer\": \"Leon\" }",
+                            EntryTypeName = "HackSystem.Web.TaskSchedule.TaskSchedulerComponent",
                             IconUri = "/images/ProgramIcons/TaskServerProgram.png",
                             Mandatory = true,
                             Name = "TaskServer",
-                            SingleInstance = true,
-                            TypeName = "HackSystem.Web.TaskSchedule.TaskSchedulerComponent"
+                            SingleInstance = true
                         },
                         new
                         {
                             Id = "program0-icon-0828-hack-system000009",
-                            AssemblyName = "HackSystem.Web.SystemProgram",
                             Enabled = true,
+                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
+                            EntryTypeName = "HackSystem.Web.SystemProgram.MockServer.MockServerComponent",
                             IconUri = "/images/ProgramIcons/MockServerProgram.png",
                             Mandatory = true,
                             Name = "MockServer",
-                            SingleInstance = true,
-                            TypeName = "HackSystem.Web.SystemProgram.MockServer.MockServerComponent"
+                            SingleInstance = true
                         });
                 });
 
