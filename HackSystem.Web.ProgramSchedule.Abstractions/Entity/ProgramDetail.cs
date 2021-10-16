@@ -1,4 +1,6 @@
-﻿namespace HackSystem.Web.ProgramSchedule.Entity;
+﻿using System.Reflection;
+
+namespace HackSystem.Web.ProgramSchedule.Entity;
 
 public class ProgramDetail
 {
@@ -13,6 +15,10 @@ public class ProgramDetail
     public string EntryParameter { get; set; }
 
     public Type ProgramEntryType { get; set; }
+
+    public MethodInfo ProgramEntryMethod { get; set; }
+
+    public Type? ProgramEntryComponentType { get; set; }
 
     public string IconUri { get; set; }
 

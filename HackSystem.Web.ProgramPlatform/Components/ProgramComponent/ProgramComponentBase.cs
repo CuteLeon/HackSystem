@@ -8,6 +8,7 @@ namespace HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
 public abstract class ProgramComponentBase : ComponentBase, IDisposable
 {
     private ProcessDetail processDetail;
+    private ProgramWindowDetail programWindowDetail;
 
     [Inject]
     protected IIntermediaryCommandSender CommandSender { get; set; }
@@ -17,6 +18,9 @@ public abstract class ProgramComponentBase : ComponentBase, IDisposable
 
     [Parameter]
     public ProcessDetail ProcessDetail { get => processDetail; set => processDetail = value; }
+
+    [Parameter]
+    public ProgramWindowDetail ProgramWindowDetail { get => programWindowDetail; set => programWindowDetail = value; }
 
     public ProgramDetail ProgramDetail { get => this.processDetail.ProgramDetail; }
 
