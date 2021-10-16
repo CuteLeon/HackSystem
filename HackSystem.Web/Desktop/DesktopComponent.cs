@@ -94,7 +94,6 @@ public partial class DesktopComponent
             {
                 Title = "Ready to launch program.",
                 Icon = ToastIcons.Information,
-                AutoHide = false,
                 Message = $"Having {this.UserProgramMaps.Count()} available programes, Enjoy your time!"
             });
         }
@@ -105,7 +104,6 @@ public partial class DesktopComponent
             {
                 Title = "Failed to query programes.",
                 Icon = ToastIcons.Error,
-                AutoHide = false,
                 Message = "Failed to query available programes, please refresh this page!"
             });
         }
