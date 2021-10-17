@@ -1,36 +1,21 @@
-﻿using HackSystem.Intermediary.Application;
-using HackSystem.Web.Component.ToastContainer;
+﻿using HackSystem.Web.Component.ToastContainer;
 using HackSystem.Web.ProgramSchedule.Entity;
-using HackSystem.Web.ProgramSchedule.Intermediary;
 
 namespace HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
 
 public abstract class ProgramComponentBase : ComponentBase, IDisposable
 {
-    private ProcessDetail processDetail;
-    private ProgramWindowDetail programWindowDetail;
+    [Parameter]
+    public ProcessDetail ProcessDetail { get; set; }
 
-    [Inject]
-    protected IIntermediaryCommandSender CommandSender { get; set; }
+    [Parameter]
+    public ProgramWindowDetail ProgramWindowDetail { get; set; }
 
     [Inject]
     protected IToastHandler ToastHandler { get; set; }
 
-    [Parameter]
-    public ProcessDetail ProcessDetail { get => processDetail; set => processDetail = value; }
-
-    [Parameter]
-    public ProgramWindowDetail ProgramWindowDetail { get => programWindowDetail; set => programWindowDetail = value; }
-
-    public ProgramDetail ProgramDetail { get => this.processDetail.ProgramDetail; }
-
     public ProgramComponentBase() : base()
     {
-    }
-
-    public virtual void OnClose()
-    {
-        this.CommandSender.Send(new ProcessDestroyCommand() { ProcessDetail = this.processDetail });
     }
 
     public abstract void Dispose();

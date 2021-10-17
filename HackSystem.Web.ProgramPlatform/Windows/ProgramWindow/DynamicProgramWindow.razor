@@ -1,9 +1,42 @@
-﻿<DynamicComponent Type="this.Type" Parameters="this.Parameters"></DynamicComponent>
+﻿@inject IIntermediaryCommandSender CommandSender
+
+@* style="z-index:@this.ProgramWindowDetail.TierIndex" *@
+<ResizeableView ResizeableOption="new ResizeableOption() { Left = 20, Top =10, Width=900, Height=600 }">
+    <div class="modal-dialog m-0 flex-fill modal-dialog-scrollable" role="dialog" style="max-width:none;max-height:none;height:100%;">
+        <div class="modal-content border-primary overflow-hidden" style="height: 100%;">
+            <DraggableHandleComponent DragTarget=".position-fixed">
+                <div class="modal-header bg-light py-2">
+                    <h5 class="modal-title" id="exampleModalLabel">@this.ProgramWindowDetail.Caption</h5>
+                    <button type="button" class="close" onclick=@this.OnClose>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </DraggableHandleComponent>
+            <div class="modal-body">
+                <DynamicComponent @ref=this.DynamicProgramComponent 
+                                  Type="this.ProgramWindowDetail.ProgramWindowType"
+                                  Parameters="new Dictionary<string, object>
+                                  {
+                                      { nameof(ProgramComponentBase.ProcessDetail), this.ProcessDetail },
+                                      { nameof(ProgramComponentBase.ProgramWindowDetail), this.ProgramWindowDetail }
+                                  }">
+                </DynamicComponent>
+            </div>
+        </div>
+    </div>
+</ResizeableView>
 
 @code {
     [Parameter]
-    public Type Type { get; set; } = default!;
+    public ProcessDetail ProcessDetail { get; set; }
 
     [Parameter]
-    public IDictionary<string, object>? Parameters { get; set; }
+    public ProgramWindowDetail ProgramWindowDetail { get; set; }
+
+    public DynamicComponent DynamicProgramComponent { get; init; }
+
+    public virtual void OnClose()
+    {
+        this.CommandSender.Send(new ProcessDestroyCommand() { ProcessDetail = this.ProcessDetail });
+    }
 }

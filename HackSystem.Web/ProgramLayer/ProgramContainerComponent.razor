@@ -8,14 +8,7 @@
         @foreach (var window in process.ProgramWindowDetails.Values)
         {
             var windowKey = $"process_{process.ProcessId}_window_{window.WindowId}";
-            <DynamicProgramWindow @key="windowKey"
-                          Type="window.ProgramWindowType"
-                          Parameters="new Dictionary<string, object>
-                        {
-                            { nameof(ProgramComponentBase.ProcessDetail), process },
-                            { nameof(ProgramComponentBase.ProgramWindowDetail), window }
-                        }">
-            </DynamicProgramWindow>
+            <DynamicProgramWindow @key="windowKey" ProcessDetail=process ProgramWindowDetail=window></DynamicProgramWindow>
         }
     }
 </div>
