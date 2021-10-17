@@ -81,19 +81,20 @@ public class ProgramLauncher : IProgramLauncher
         return process;
     }
 
-    private static Type GetProgramEntryType(string assemblyName, string typeName)
+    public static Type GetProgramEntryType(string assemblyName, string typeName)
     {
         var assembly = Assembly.Load(new AssemblyName(assemblyName));
         var type = assembly.GetType(typeName);
         return type;
     }
 
-    private static MethodInfo GetProgramEntryMethod(Type entryType)
+    public static MethodInfo GetProgramEntryMethod(Type entryType)
     {
         var methodFlags = BindingFlags.Public | BindingFlags.Static;
         var methods = entryType.GetMethods(methodFlags)
-            .Where(m => m.ReturnType.Equals(typeof(Type)))
+            .Where(m => m.ReturnType.Equals(typeof(Type)) || m.ReturnType.Equals(typeof(void)))
             .Where(m => m.GetParameters().Count() <= 1)
+            .OrderBy(m => m.ReturnType.Equals(typeof(Type)) ? 0 : 1)
             .ToArray();
         return methods.Count() switch
         {
@@ -104,7 +105,7 @@ public class ProgramLauncher : IProgramLauncher
         };
     }
 
-    private static bool TryGetProgramEntryParameter(MethodInfo entryMethod, string parameter, out object? parameterObject)
+    public static bool TryGetProgramEntryParameter(MethodInfo entryMethod, string parameter, out object? parameterObject)
     {
         if (!entryMethod.GetParameters().Any())
         {
