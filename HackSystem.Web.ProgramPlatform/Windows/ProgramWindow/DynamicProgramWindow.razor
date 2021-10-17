@@ -9,7 +9,7 @@
         <div class="modal-content bg-transparent @this.ProgramWindowStyle.Border.ToBorderStyle() @this.ProgramWindowStyle.BorderColor.ToBorderColor() overflow-hidden" style="height: 100%;">
             <DraggableHandleComponent DragTarget=".position-fixed">
                 <div class="modal-header @this.ProgramWindowStyle.CaptionBackgroundColor.ToBackgroundColor() py-2" style="@(this.ProgramWindowStyle.CaptionBackgroundColor==Colors.Transparent?"backdrop-filter:blur(5px);":string.Empty)">
-                    <h5 class="modal-title">@this.ProgramWindowDetail.Caption</h5>
+                    <h5 class="modal-title text-nowrap text-truncate">@this.ProgramWindowDetail.Caption 362745678325682345236548672347862354237645328674823</h5>
                     <button type="button" class="close" onclick=@this.OnClose>
                         <span aria-hidden="true">&times;</span>
                     </button>
