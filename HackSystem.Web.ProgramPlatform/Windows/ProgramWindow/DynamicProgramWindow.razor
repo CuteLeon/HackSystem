@@ -1,0 +1,9 @@
+﻿<DynamicComponent Type="this.Type" Parameters="this.Parameters"></DynamicComponent>
+
+@code {
+    [Parameter]
+    public Type Type { get; set; } = default!;
+
+    [Parameter]
+    public IDictionary<string, object>? Parameters { get; set; }
+}
