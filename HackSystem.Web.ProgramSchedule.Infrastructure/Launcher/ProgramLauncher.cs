@@ -44,26 +44,21 @@ public class ProgramLauncher : IProgramLauncher
                 new[] { parameterObject } : Array.Empty<object?>()) is Type entryComponentType ? entryComponentType : default;
         this.logger.LogInformation($"Launching program by entry Method [{programDetail.ProgramEntryMethod.Name}] of Type={programDetail.ProgramEntryType.FullName}");
 
-        var process = new ProcessDetail()
-        {
-            ProcessId = this.pIDGenerator.GetAvailablePID(),
-            ProgramDetail = programDetail,
-            ProgramWindowDetails = new Dictionary<string, ProgramWindowDetail>(),
-        };
+        var processId = this.pIDGenerator.GetAvailablePID();
+        var process = new ProcessDetail(processId, programDetail);
         if (programDetail.ProgramEntryComponentType is not null)
         {
             if (typeof(ProgramComponentBase).IsAssignableFrom(programDetail.ProgramEntryComponentType))
             {
-                var window = new ProgramWindowDetail()
+                var window = new ProgramWindowDetail(
+                    Guid.NewGuid().ToString(),
+                    programDetail.ProgramEntryComponentType,
+                    process)
                 {
-                    WindowId = Guid.NewGuid().ToString(),
                     Caption = programDetail.Name,
                     TierIndex = 100,
-                    ProgramWindowType = programDetail.ProgramEntryComponentType,
-                    ProcessDetail = process,
                 };
-                process.ProgramEntryWindow = window;
-                process.ProgramWindowDetails.Add(window.WindowId, window);
+                process.AddWindowDetail(window);
             }
             else
             {

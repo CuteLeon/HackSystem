@@ -37,6 +37,6 @@ public partial class ProgramDrawerComponent
     {
         var programDetail = args.UserProgramMap.Program;
         this.logger.LogInformation($"Double click to luanch program: {programDetail.Name}");
-        await this.intermediaryRequestSender.Send(new ProgramLaunchRequest() { ProgramDetail = programDetail });
+        await this.intermediaryRequestSender.Send(new ProgramLaunchRequest(programDetail));
     }
 }

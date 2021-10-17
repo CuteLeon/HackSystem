@@ -37,6 +37,6 @@ public partial class ProgramDockComponent
     {
         var programDetail = args.UserProgramMap.Program;
         this.logger.LogInformation($"Click to luanch program: {programDetail.Name}");
-        await this.intermediaryRequestSender.Send(new ProgramLaunchRequest() { ProgramDetail = programDetail });
+        await this.intermediaryRequestSender.Send(new ProgramLaunchRequest(programDetail));
     }
 }

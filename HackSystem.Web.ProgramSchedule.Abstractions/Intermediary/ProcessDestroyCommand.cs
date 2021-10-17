@@ -5,5 +5,10 @@ namespace HackSystem.Web.ProgramSchedule.Intermediary;
 
 public class ProcessDestroyCommand : IIntermediaryCommand
 {
-    public ProcessDetail ProcessDetail { get; set; }
+    public ProcessDestroyCommand(ProcessDetail processDetail)
+    {
+        this.ProcessDetail = processDetail;
+    }
+
+    public ProcessDetail ProcessDetail { get; init; }
 }

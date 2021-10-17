@@ -15,7 +15,7 @@ public class ProgramLaunchRequestHandlerTests
         var requestHandler = new Mock<IIntermediaryRequestHandler<ProgramLaunchRequest, ProgramLaunchResponse>>();
         requestHandler
             .Setup(x => x.Handle(It.IsAny<ProgramLaunchRequest>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new ProgramLaunchResponse())
+            .ReturnsAsync(new ProgramLaunchResponse(default))
             .Callback(() => requestCount++);
         IServiceCollection serviceCollection = new ServiceCollection()
             .AddLogging()
@@ -25,7 +25,7 @@ public class ProgramLaunchRequestHandlerTests
         var requestSender = serviceProvider.GetRequiredService<IIntermediaryRequestSender>();
         for (int index = 0; index < 5; index++)
         {
-            _ = await requestSender.Send(new ProgramLaunchRequest() { ProgramDetail = new ProgramDetail() });
+            _ = await requestSender.Send(new ProgramLaunchRequest(new ProgramDetail(default, default, default, default, default, default, default, default, default)));
         }
         Assert.Equal(5, requestCount);
     }

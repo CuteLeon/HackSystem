@@ -21,6 +21,6 @@ public class ProgramLaunchRequestHandler : IIntermediaryRequestHandler<ProgramLa
         this.logger.LogInformation($"Handle Program launch request {request.ProgramDetail.Name} ...");
         var processDetail = await this.programLauncher.LaunchProgram(request.ProgramDetail);
         this.logger.LogInformation($"Program launch request handled, PID={processDetail.ProcessId}.");
-        return new ProgramLaunchResponse() { ProcessDetail = processDetail };
+        return new ProgramLaunchResponse(processDetail);
     }
 }

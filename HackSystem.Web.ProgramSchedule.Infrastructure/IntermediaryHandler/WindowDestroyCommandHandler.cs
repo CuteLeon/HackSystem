@@ -19,19 +19,17 @@ public class WindowDestroyCommandHandler : IIntermediaryCommandHandler<WindowDes
     {
         var windowDetail = request.ProgramWindowDetail;
         var processDetail = request.ProgramWindowDetail.ProcessDetail;
-        this.logger.LogInformation($"Handle Window destroy command {windowDetail.WindowId} ...");
-        if (windowDetail.Equals(processDetail.ProgramEntryWindow))
+        this.logger.LogInformation($"Handle Window destroy command: Window {windowDetail.WindowId} of Process {processDetail.ProcessId} ...");
+        if (!processDetail.RemoveWindowDetail(windowDetail))
         {
-            this.logger.LogInformation($"Close entry window {windowDetail.WindowId} of process {processDetail.ProcessId}...");
-            await this.commandSender.Send(new ProcessDestroyCommand() { ProcessDetail = processDetail });
+            this.logger.LogWarning($"Failed to close window {windowDetail.WindowId} from process {processDetail.ProcessId}...");
         }
-        else
+
+        if (processDetail.ProgramDetail.ProgramEntryComponentType is not null &&
+            !processDetail.GetWindowDetails().Any())
         {
-            this.logger.LogInformation($"Close window {windowDetail.WindowId} of process {processDetail.ProcessId}...");
-            if (!processDetail.ProgramWindowDetails.Remove(windowDetail.WindowId, out _))
-            {
-                this.logger.LogWarning($"Failed to close window {windowDetail.WindowId} from process {processDetail.ProcessId}...");
-            }
+            this.logger.LogInformation($"Send Destory process command of {processDetail.ProcessId} as all windows destoryed...");
+            await this.commandSender.Send(new ProcessDestroyCommand(processDetail));
         }
         this.logger.LogInformation($"Window {request.ProgramWindowDetail.WindowId} destroy command handled.");
         return ValueTuple.Create();

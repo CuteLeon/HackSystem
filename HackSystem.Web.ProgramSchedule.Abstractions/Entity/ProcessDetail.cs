@@ -2,11 +2,26 @@
 
 public class ProcessDetail
 {
-    public int ProcessId { get; set; }
+    public ProcessDetail(
+        int processId,
+        ProgramDetail programDetail)
+    {
+        ProcessId = processId;
+        ProgramDetail = programDetail;
+    }
 
-    public ProgramDetail ProgramDetail { get; set; }
+    public int ProcessId { get; init; }
 
-    public ProgramWindowDetail ProgramEntryWindow { get; set; }
+    public ProgramDetail ProgramDetail { get; init; }
 
-    public Dictionary<string, ProgramWindowDetail> ProgramWindowDetails { get; set; }
+    protected Dictionary<string, ProgramWindowDetail> ProgramWindowDetails { get; init; } = new();
+
+    public IEnumerable<ProgramWindowDetail> GetWindowDetails()
+        => this.ProgramWindowDetails.Values.AsEnumerable();
+
+    public bool AddWindowDetail(ProgramWindowDetail windowDetail)
+        => windowDetail.ProcessDetail.Equals(this) ? this.ProgramWindowDetails.TryAdd(windowDetail.WindowId, windowDetail) : false;
+
+    public bool RemoveWindowDetail(ProgramWindowDetail windowDetail)
+        => windowDetail.ProcessDetail.Equals(this) ? this.ProgramWindowDetails.Remove(windowDetail.WindowId, out _) : false;
 }

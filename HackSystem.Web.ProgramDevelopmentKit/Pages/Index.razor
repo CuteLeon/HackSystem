@@ -12,16 +12,11 @@
     protected override void OnInitialized()
     {
         this.ProgramType = typeof(HackSystem.Web.TaskSchedule.TaskSchedulerComponent);
-        var programDetail = new ProgramDetail()
+        var programDetail = new ProgramDetail(default, this.ProgramType.Name, default, default, default, default, default, default, default)
             {
-                Name = this.ProgramType.Name,
                 ProgramEntryType = this.ProgramType
             };
-        this.ProcessDetail = new ProcessDetail()
-            {
-                ProcessId = 1,
-                ProgramDetail = programDetail
-            };
+        this.ProcessDetail = new ProcessDetail(1, programDetail);
 
         this.ComponentParameter = new()
             {

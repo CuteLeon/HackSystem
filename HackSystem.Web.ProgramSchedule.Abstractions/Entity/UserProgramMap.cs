@@ -2,7 +2,12 @@
 
 public class UserProgramMap
 {
-    public ProgramDetail Program { get; set; }
+    public UserProgramMap(ProgramDetail program)
+    {
+        this.Program = program;
+    }
+
+    public ProgramDetail Program { get; init; }
 
     public bool PinToDesktop { get; set; }
 

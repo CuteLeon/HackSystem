@@ -41,6 +41,6 @@
     public virtual void OnClose()
     {
         this.Logger.LogInformation($"Close entry window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}...");
-        this.CommandSender.Send(new WindowDestroyCommand() { ProgramWindowDetail = this.ProgramWindowDetail });
+        this.CommandSender.Send(new WindowDestroyCommand(this.ProgramWindowDetail));
     }
 }
