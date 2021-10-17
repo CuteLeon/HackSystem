@@ -5,5 +5,10 @@ namespace HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
 
 public class ProgramIconMouseEventArgs : MouseEventArgs
 {
-    public UserProgramMap UserProgramMap{ get; set; }
+    public ProgramIconMouseEventArgs(UserProgramMap userProgramMap)
+    {
+        this.UserProgramMap = userProgramMap;
+    }
+
+    public UserProgramMap UserProgramMap { get; init; }
 }
