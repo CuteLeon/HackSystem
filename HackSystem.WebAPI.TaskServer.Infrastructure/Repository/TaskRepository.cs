@@ -19,8 +19,8 @@ public class TaskRepository : RepositoryBase<TaskDetail>, ITaskRepository
         return this.AsEnumerable();
     }
 
-    public async Task<IEnumerable<TaskDetail>> QueryEnabledTasks()
+    public async Task<IEnumerable<TaskDetail>> QuerySchedulableTasks()
     {
-        return this.AsQueryable().Where(task => task.Enabled);
+        return this.AsQueryable().Where(task => task.Enabled && task.TaskFrequency != TaskFrequency.Manually);
     }
 }

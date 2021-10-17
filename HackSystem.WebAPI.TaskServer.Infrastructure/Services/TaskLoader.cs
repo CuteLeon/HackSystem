@@ -20,7 +20,7 @@ public class TaskLoader : ITaskLoader
     public IEnumerable<TaskDetail> GetTaskDetails()
     {
         this.logger.LogInformation($"Get task details...");
-        var taskDetails = this.taskRepository.QueryEnabledTasks().Result;
+        var taskDetails = this.taskRepository.QuerySchedulableTasks().Result;
         this.logger.LogInformation($"Get {taskDetails.Count()} Task details.");
         return taskDetails;
     }

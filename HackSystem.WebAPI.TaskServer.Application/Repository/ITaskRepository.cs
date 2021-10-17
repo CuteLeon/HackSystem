@@ -7,5 +7,5 @@ public interface ITaskRepository : IRepositoryBase<TaskDetail>
 {
     Task<IEnumerable<TaskDetail>> QueryTasks();
 
-    Task<IEnumerable<TaskDetail>> QueryEnabledTasks();
+    Task<IEnumerable<TaskDetail>> QuerySchedulableTasks();
 }
