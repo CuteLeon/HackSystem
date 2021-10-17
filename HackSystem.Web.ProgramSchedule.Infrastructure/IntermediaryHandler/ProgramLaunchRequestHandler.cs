@@ -1,10 +1,9 @@
-﻿using HackSystem.Web.ProgramSchedule.IntermediaryHandler;
-using HackSystem.Web.ProgramSchedule.Launcher;
+﻿using HackSystem.Web.ProgramSchedule.Launcher;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.IntermediaryHandler;
 
-public class ProgramLaunchRequestHandler : IProgramLaunchRequestHandler
+public class ProgramLaunchRequestHandler : IIntermediaryRequestHandler<ProgramLaunchRequest, ProgramLaunchResponse>
 {
     private readonly ILogger<ProgramLaunchRequestHandler> logger;
     private readonly IProgramLauncher programLauncher;

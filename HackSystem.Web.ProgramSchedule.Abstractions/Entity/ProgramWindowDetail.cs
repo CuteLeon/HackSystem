@@ -9,4 +9,6 @@ public class ProgramWindowDetail
     public Type ProgramWindowType { get; set; }
 
     public int TierIndex { get; set; }
+
+    public ProcessDetail ProcessDetail { get; set; }
 }

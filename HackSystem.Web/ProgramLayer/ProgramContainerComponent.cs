@@ -14,6 +14,7 @@ public partial class ProgramContainerComponent : IDisposable
 {
     protected async override Task OnInitializedAsync()
     {
+        // TODO: LEON: Modify to listen Window Scheduler to re-render windows
         this.processContainer.ProcessChanged += ProcessChangedHandler;
         await base.OnInitializedAsync();
     }

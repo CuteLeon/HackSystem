@@ -3,7 +3,7 @@
 <div class="position-fixed user-select-none flex-nowrap text-nowrap"
      style="padding:@(resizeableOption.BorderSize)px; left:@(resizeableOption.Left)rem;top:@(resizeableOption.Top)rem;pointer-events:auto;
             @(resizeableOption.Width.HasValue?$"width:{resizeableOption.Width}px;":string.Empty)
-            @(resizeableOption.Height.HasValue?$"height:{resizeableOption.Height}px;":string.Empty)">
+            @(resizeableOption.Height.HasValue?$"height:{resizeableOption.Height}px;":string.Empty);">
 
     <div class="position-absolute" style="width:@(resizeableOption.CornerSize)px;height:@(resizeableOption.CornerSize)px;left:0px;top:0px;cursor:nw-resize"
          data-resizetarget="@resizeableOption.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
@@ -28,10 +28,11 @@
 </div>
 
 @code {
+    private ResizeableOption resizeableOption;
+
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    private ResizeableOption resizeableOption;
     [Parameter]
     public ResizeableOption ResizeableOption { get => this.resizeableOption; set => this.resizeableOption = value; }
 

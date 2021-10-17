@@ -60,7 +60,9 @@ public class ProgramLauncher : IProgramLauncher
                     Caption = programDetail.Name,
                     TierIndex = 100,
                     ProgramWindowType = programDetail.ProgramEntryComponentType,
+                    ProcessDetail = process,
                 };
+                process.ProgramEntryWindow = window;
                 process.ProgramWindowDetails.Add(window.WindowId, window);
             }
             else

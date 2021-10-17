@@ -6,5 +6,7 @@ public class ProcessDetail
 
     public ProgramDetail ProgramDetail { get; set; }
 
+    public ProgramWindowDetail ProgramEntryWindow { get; set; }
+
     public Dictionary<string, ProgramWindowDetail> ProgramWindowDetails { get; set; }
 }

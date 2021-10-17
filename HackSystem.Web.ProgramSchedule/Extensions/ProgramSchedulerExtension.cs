@@ -31,6 +31,7 @@ public static class ProgramSchedulerExtension
             .AddSingleton<IProcessDestroyer, ProcessDestroyer>()
             .AddSingleton<IProgramScheduler, ProgramScheduler>()
             .AddIntermediaryCommandHandler<ProcessDestroyCommandHandler, ProcessDestroyCommand>(ServiceLifetime.Singleton)
+            .AddIntermediaryCommandHandler<WindowDestroyCommandHandler, WindowDestroyCommand>(ServiceLifetime.Singleton)
             .AddIntermediaryCommandHandler<LogoutCommandHandler, LogoutCommand>(ServiceLifetime.Singleton)
             .AddIntermediaryRequestHandler<ProgramLaunchRequestHandler, ProgramLaunchRequest, ProgramLaunchResponse>(ServiceLifetime.Singleton);
 

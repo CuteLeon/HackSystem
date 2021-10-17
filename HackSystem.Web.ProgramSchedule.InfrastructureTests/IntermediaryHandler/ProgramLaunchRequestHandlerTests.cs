@@ -1,6 +1,5 @@
 ﻿using HackSystem.Intermediary.Application;
 using HackSystem.Intermediary.Extensions;
-using HackSystem.Web.ProgramSchedule.IntermediaryHandler;
 using HackSystem.Web.ProgramSchedule.Entity;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 using Xunit;
@@ -13,7 +12,7 @@ public class ProgramLaunchRequestHandlerTests
     public async Task ProgramLaunchRequestHandlerTest()
     {
         var requestCount = 0;
-        var requestHandler = new Mock<IProgramLaunchRequestHandler>();
+        var requestHandler = new Mock<IIntermediaryRequestHandler<ProgramLaunchRequest, ProgramLaunchResponse>>();
         requestHandler
             .Setup(x => x.Handle(It.IsAny<ProgramLaunchRequest>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new ProgramLaunchResponse())

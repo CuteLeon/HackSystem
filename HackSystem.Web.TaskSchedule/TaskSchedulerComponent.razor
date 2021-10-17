@@ -2,53 +2,37 @@
 @inject ILogger<TaskSchedulerComponent> Logger
 @inject IServiceScopeFactory ServiceScopeFactory
 
-<ResizeableView ResizeableOption="new ResizeableOption() { Left = 20, Top =10, Width=900, Height=600 }">
-    <div class="modal-dialog m-0 flex-fill modal-dialog-scrollable" role="dialog" style="max-width:none;max-height:none;height:100%;">
-        <div class="modal-content border-primary overflow-hidden" style="height: 100%;">
-            <DraggableHandleComponent DragTarget=".position-fixed">
-                <div class="modal-header bg-light py-2">
-                    <h5 class="modal-title" id="exampleModalLabel">Task Scheduler</h5>
-                    <button type="button" class="close" @onclick="this.OnClose">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+<AuthorizeView Roles="@CommonSense.Roles.CommanderRole">
+    <Authorized>
+        <div class="container-fluid">
+            <!-- Top control button group -->
+            <div class="row my-2 justify-content-between">
+                <p class="col-auto h4">Tasks</p>
+                <div class="col-auto">
+                    <div class="btn-group btn-group-sm shadow-sm" role="group" aria-label="Task control button">
+                        <button type="button" class="btn btn-info" @onclick=@this.LoadTasks>Refresh</button>
+                        <button type="button" class="btn btn-primary" @onclick=@this.AddTasks>Create</button>
+                        <button type="button" class="btn btn-danger" @onclick=@this.ClearTasks>Clear</button>
+                    </div>
                 </div>
-            </DraggableHandleComponent>
-            <div class="modal-body">
-                <AuthorizeView Roles="@CommonSense.Roles.CommanderRole">
-                    <Authorized>
-                        <div class="container-fluid">
-                            <!-- Top control button group -->
-                            <div class="row my-2 justify-content-between">
-                                <p class="col-auto h4">Tasks</p>
-                                <div class="col-auto">
-                                    <div class="btn-group btn-group-sm shadow-sm" role="group" aria-label="Task control button">
-                                        <button type="button" class="btn btn-info" @onclick=@this.LoadTasks>Refresh</button>
-                                        <button type="button" class="btn btn-primary" @onclick=@this.AddTasks>Create</button>
-                                        <button type="button" class="btn btn-danger" @onclick=@this.ClearTasks>Clear</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Cards container -->
-                            <div class="row">
-                                @foreach (var task in this.TaskDetails)
-                                {
-                                    var taskKey = $"taskKey_{task.TaskID}";
-                                    <TaskDetailComponent @key="@taskKey" TaskDetail=@task OnExecuteTask="@this.ExecuteTask"></TaskDetailComponent>
-                                }
-                            </div>
-                        </div>
-                    </Authorized>
-                    <NotAuthorized>
-                        <div class="d-inline-block w-100 p-5 text-center">
-                            <i class="fas fa-4x fa-user-astronaut text-primary my-3"></i>
-                            <p class="h4 text-secondary">Please login as a Commander!</p>
-                        </div>
-                    </NotAuthorized>
-                </AuthorizeView>
+            </div>
+            <!-- Cards container -->
+            <div class="row">
+                @foreach (var task in this.TaskDetails)
+                {
+                    var taskKey = $"taskKey_{task.TaskID}";
+                    <TaskDetailComponent @key="@taskKey" TaskDetail=@task OnExecuteTask="@this.ExecuteTask"></TaskDetailComponent>
+                }
             </div>
         </div>
-    </div>
-</ResizeableView>
+    </Authorized>
+    <NotAuthorized>
+        <div class="d-inline-block w-100 p-5 text-center">
+            <i class="fas fa-4x fa-user-astronaut text-primary my-3"></i>
+            <p class="h4 text-secondary">Please login as a Commander!</p>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
 
 @code {
     public List<TaskDetailResponse> TaskDetails { get; set; } = new();

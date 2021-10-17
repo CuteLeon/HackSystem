@@ -1,6 +1,5 @@
 ﻿using HackSystem.Intermediary.Application;
 using HackSystem.Intermediary.Extensions;
-using HackSystem.Web.ProgramSchedule.IntermediaryHandler;
 using HackSystem.Web.ProgramSchedule.Entity;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 using Xunit;
@@ -13,7 +12,7 @@ public class ProcessDestroyCommandHandlerTests
     public async Task ProcessDestroyCommandHandlerTest()
     {
         var commandCount = 0;
-        var commandHandler = new Mock<IProcessDestroyCommandHandler>();
+        var commandHandler = new Mock<IIntermediaryCommandHandler<ProcessDestroyCommand>>();
         commandHandler
             .Setup(x => x.Handle(It.IsAny<ProcessDestroyCommand>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(ValueTuple.Create())
