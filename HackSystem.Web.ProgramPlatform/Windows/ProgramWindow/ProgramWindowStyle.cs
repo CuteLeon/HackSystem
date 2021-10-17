@@ -4,13 +4,13 @@ namespace HackSystem.Web.ProgramPlatform.Windows.ProgramWindow;
 
 public class ProgramWindowStyle
 {
-    public int? Top { get; set; }
+    public string? Top { get; set; } = "5%";
 
-    public int? Left { get; set; }
+    public string? Left { get; set; } = "25%";
 
-    public int? Width { get; set; }
+    public string? Width { get; set; } = "50%";
 
-    public int? Height { get; set; }
+    public string? Height { get; set; } = "75%";
 
     public Borders Border { get; set; } = Borders.Border;
 

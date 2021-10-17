@@ -31,25 +31,25 @@
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public string Left { get; set; } = "25%";
+    public string? Left { get; set; } = "auto";
 
     [Parameter]
-    public string Top { get; set; } = "10%";
+    public string? Top { get; set; } = "auto";
 
     [Parameter]
-    public string Width { get; set; } = "50%";
+    public string? Width { get; set; } = "auto";
 
     [Parameter]
-    public string Height { get; set; } = "70%";
+    public string? Height { get; set; } = "auto";
 
     [Parameter]
-    public string ResizeTarget { get; set; } = ".position-fixed";
+    public string? ResizeTarget { get; set; } = ".position-fixed";
 
     [Parameter]
-    public int BorderSize { get; set; } = 8;
+    public int BorderSize { get; set; } = 6;
 
     [Parameter]
-    public int CornerSize { get; set; } = 16;
+    public int CornerSize { get; set; } = 12;
 
     protected override async Task OnInitializedAsync()
     {
