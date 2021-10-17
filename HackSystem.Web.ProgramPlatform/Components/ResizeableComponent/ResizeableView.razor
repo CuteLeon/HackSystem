@@ -2,10 +2,7 @@
 
 <div class="position-fixed user-select-none flex-nowrap text-nowrap"
      style="padding:@(this.BorderSize)px; pointer-events:auto;
-            @(this.Top.HasValue?$"top:{this.Top}px;":string.Empty)
-            @(this.Left.HasValue?$"left:{this.Left}px;":string.Empty)
-            @(this.Width.HasValue?$"width:{this.Width}px;":string.Empty)
-            @(this.Height.HasValue?$"height:{this.Height}px;":string.Empty);">
+            top:@this.Top; left:@this.Left; width:@this.Width; height:@this.Height;">
 
     <div class="position-absolute" style="width:@(this.CornerSize)px;height:@(this.CornerSize)px;left:0px;top:0px;cursor:nw-resize"
          data-resizetarget="@this.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
@@ -34,16 +31,16 @@
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public int? Left { get; set; } = 30;
+    public string Left { get; set; } = "25%";
 
     [Parameter]
-    public int? Top { get; set; } = 30;
+    public string Top { get; set; } = "10%";
 
     [Parameter]
-    public int? Width { get; set; }
+    public string Width { get; set; } = "50%";
 
     [Parameter]
-    public int? Height { get; set; }
+    public string Height { get; set; } = "70%";
 
     [Parameter]
     public string ResizeTarget { get; set; } = ".position-fixed";
