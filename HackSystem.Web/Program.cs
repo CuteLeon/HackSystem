@@ -4,13 +4,13 @@ using HackSystem.Cryptography;
 using HackSystem.Web;
 using HackSystem.Web.Authentication.Extensions;
 using HackSystem.Web.Common;
+using HackSystem.Web.Component.Extensions;
 using HackSystem.Web.Configurations;
 using HackSystem.Web.CookieStorage;
 using HackSystem.Web.Domain.Configurations;
 using HackSystem.Web.Extensions;
 using HackSystem.Web.Infrastructure.Extensions;
 using HackSystem.Web.ProgramSchedule;
-using HackSystem.WebAPI.Component.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

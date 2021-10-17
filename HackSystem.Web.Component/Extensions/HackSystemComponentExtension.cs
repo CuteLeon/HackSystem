@@ -1,7 +1,7 @@
 ﻿using HackSystem.Intermediary.Extensions;
 using HackSystem.Web.Component.ToastContainer;
 
-namespace HackSystem.WebAPI.Component.Extensions;
+namespace HackSystem.Web.Component.Extensions;
 
 public static class HackSystemComponentExtension
 {
