@@ -1,40 +1,26 @@
 ﻿@inherits ProgramComponentBase
 @inject ILogger<SettingComponent> logger
 
-<ResizeableView ResizeableOption="new ResizeableOption() { Width=640, Height=540 }">
-    <div class="modal-dialog m-0 flex-fill" role="dialog" style="max-width:none;height:100%;">
-        <div class="modal-content border-danger overflow-hidden" style="height: 100%;">
-            <DraggableHandleComponent DragTarget=".position-fixed">
-                <div class="modal-header border-0 py-2">
-                    <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
-                    <button type="button" class="close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </DraggableHandleComponent>
-            <div class="modal-body text-center p-0">
-                <div class="d-flex h-100">
-                    <div class="d-inline-block d-flex bg-light align-items-center">
-                        <div class="nav d-flex border-right border-secondary flex-column text-right" style="width:200px;">
-                            <a class="nav-link active">Hack System</a>
-                            <a class="nav-link">Network</a>
-                            <a class="nav-link">Display</a>
-                            <a class="nav-link">Program</a>
-                            <a class="nav-link">Account</a>
-                            <a class="nav-link">About</a>
-                        </div>
-                    </div>
-                    <div class="d-inline-block w-100 h-100 p-5">
-                        <i class="fas fa-cog fa-10x text-secondary my-3"></i>
-                        <p class="display-4 text-secondary">Settings</p>
-                    </div>
-                </div>
+<div class="text-center p-0">
+    <div class="d-flex h-100">
+        <div class="d-inline-block d-flex bg-light align-items-center">
+            <div class="nav d-flex border-right border-secondary flex-column text-right" style="width:200px;">
+                <a class="nav-link active">Hack System</a>
+                <a class="nav-link">Network</a>
+                <a class="nav-link">Display</a>
+                <a class="nav-link">Program</a>
+                <a class="nav-link">Account</a>
+                <a class="nav-link">About</a>
             </div>
         </div>
+        <div class="d-inline-block w-100 h-100 p-5">
+            <i class="fas fa-cog fa-10x text-secondary my-3"></i>
+            <p class="display-4 text-secondary">Settings</p>
+        </div>
     </div>
-</ResizeableView>
+</div>
 
-@code{
+@code {
     public override void Dispose()
     {
         this.logger.LogInformation($"Dispose Setting component...");

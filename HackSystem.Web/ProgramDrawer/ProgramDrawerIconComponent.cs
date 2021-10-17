@@ -12,8 +12,8 @@ public partial class ProgramDrawerIconComponent
             return;
         }
 
-        var eventArgs = this.mapper.Map<ProgramIconMouseEventArgs>(args);
-        eventArgs.UserProgramMap = this.UserProgramMap;
+        var eventArgs = new ProgramIconMouseEventArgs(this.UserProgramMap);
+        this.mapper.Map(args, eventArgs);
         await this.OnIconDoubleClick.InvokeAsync(eventArgs);
     }
 }

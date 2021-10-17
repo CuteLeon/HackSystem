@@ -1,7 +1,7 @@
 ﻿@inject ILogger<DynamicProgramWindow> Logger
 @inject IIntermediaryCommandSender CommandSender
 
-<ResizeableView ResizeableOption="new ResizeableOption() { Left = 20, Top =10, Width=900, Height=600 }">
+<ResizeableView>
     <div class="modal-dialog m-0 flex-fill modal-dialog-scrollable" role="dialog" style="max-width:none;max-height:none;height:100%;">
         <div class="modal-content border-primary overflow-hidden" style="height: 100%;">
             <DraggableHandleComponent DragTarget=".position-fixed">
@@ -37,6 +37,8 @@
     public ProgramWindowDetail ProgramWindowDetail { get; set; }
 
     public DynamicComponent DynamicProgramComponent { get; set; }
+
+    public ProgramWindowStyle ProgramWindowStyle { get; set; }
 
     public virtual void OnClose()
     {
