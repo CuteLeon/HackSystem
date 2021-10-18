@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HackSystem.Intermediary\HackSystem.Intermediary.csproj" />
     <ProjectReference Include="..\HackSystem.Web.ProgramSchedule\HackSystem.Web.ProgramSchedule.csproj" />
   </ItemGroup>
 

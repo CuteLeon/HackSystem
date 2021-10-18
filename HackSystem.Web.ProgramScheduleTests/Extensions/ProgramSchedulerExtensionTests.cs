@@ -1,11 +1,9 @@
-﻿using HackSystem.Web.Application.Program.ProgramAsset;
+﻿using HackSystem.Intermediary.Extensions;
+using HackSystem.Web.Application.Program.ProgramAsset;
 using HackSystem.Web.ProgramSchedule.AssemblyLoader;
 using HackSystem.Web.ProgramSchedule.Container;
 using HackSystem.Web.ProgramSchedule.Destroyer;
 using HackSystem.Web.ProgramSchedule.IDGenerator;
-using HackSystem.Web.ProgramSchedule.Launcher;
-using HackSystem.Web.ProgramSchedule.Scheduler;
-using HackSystem.Web.ProgramSchedule.Intermediary;
 using HackSystem.Web.ProgramSchedule.Infrastructure.AssemblyLoader;
 using HackSystem.Web.ProgramSchedule.Infrastructure.Container;
 using HackSystem.Web.ProgramSchedule.Infrastructure.Destroyer;
@@ -13,6 +11,9 @@ using HackSystem.Web.ProgramSchedule.Infrastructure.IDGenerator;
 using HackSystem.Web.ProgramSchedule.Infrastructure.IntermediaryHandler;
 using HackSystem.Web.ProgramSchedule.Infrastructure.Launcher;
 using HackSystem.Web.ProgramSchedule.Infrastructure.Scheduler;
+using HackSystem.Web.ProgramSchedule.Intermediary;
+using HackSystem.Web.ProgramSchedule.Launcher;
+using HackSystem.Web.ProgramSchedule.Scheduler;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
@@ -27,6 +28,7 @@ namespace HackSystem.Web.ProgramSchedule.Tests
         {
             IServiceCollection serviceCollection = new ServiceCollection()
                 .AddLogging()
+                .AddHackSystemIntermediary()
                 .AddAutoMapper(typeof(ProgramSchedulerExtensionTests).Assembly)
                 .AddSingleton(new Mock<IProgramAssetService>().Object)
                 .AddHackSystemProgramScheduler(options =>
