@@ -8,7 +8,7 @@ public partial class ProgramDrawerIconComponent
     protected async Task OnDbClick(MouseEventArgs args)
         => await this.RaiseIconSelect();
 
-    protected async Task OnTouchEnd(TouchEventArgs e)
+    protected async Task OnTouchEnd(TouchEventArgs args)
         => await this.RaiseIconSelect();
 
     protected async Task RaiseIconSelect()

@@ -5,9 +5,9 @@ namespace HackSystem.Web.ProgramSchedule.Container;
 
 public interface IProcessContainer
 {
-    delegate void ProcessChangedHandler(ProcessChangeStates changeStates, ProcessDetail processDetail);
+    delegate void ProcessChangeHandler(ProcessChangeStates changeStates, ProcessDetail processDetail);
 
-    event ProcessChangedHandler? ProcessChanged;
+    event ProcessChangeHandler? OnProcessChange;
 
     IEnumerable<ProcessDetail> GetProcesses();
 

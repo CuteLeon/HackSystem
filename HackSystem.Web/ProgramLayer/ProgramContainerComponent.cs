@@ -14,19 +14,26 @@ public partial class ProgramContainerComponent : IDisposable
 {
     protected async override Task OnInitializedAsync()
     {
-        // TODO: LEON: Modify to listen Window Scheduler to re-render windows
-        this.processContainer.ProcessChanged += ProcessChangedHandler;
+        this.processContainer.OnProcessChange += this.ProcessChangedHandler;
+        this.windowScheduleRequestHandler.OnWindowSchedule += this.WindowScheduleHandler;
         await base.OnInitializedAsync();
     }
 
     private void ProcessChangedHandler(ProcessChangeStates states, ProcessDetail processDetail)
     {
-        this.logger.LogInformation($"Process {processDetail.ProcessId} {states.ToString()}...");
+        this.logger.LogInformation($"Render program layer when process change: {processDetail.ProcessId} {states.ToString()}...");
+        this.StateHasChanged();
+    }
+
+    private void WindowScheduleHandler(ProgramWindowDetail programWindowDetail)
+    {
+        this.logger.LogInformation($"Render program layer when window schedule: {programWindowDetail.Caption}...");
         this.StateHasChanged();
     }
 
     public void Dispose()
     {
-        this.processContainer.ProcessChanged -= ProcessChangedHandler;
+        this.processContainer.OnProcessChange -= this.ProcessChangedHandler;
+        this.windowScheduleRequestHandler.OnWindowSchedule -= this.WindowScheduleHandler;
     }
 }

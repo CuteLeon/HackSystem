@@ -12,7 +12,7 @@ public class ProcessContainer : IProcessContainer
 
     protected ConcurrentDictionary<int, ProcessDetail> Processes { get; init; } = new();
 
-    public event IProcessContainer.ProcessChangedHandler? ProcessChanged;
+    public event IProcessContainer.ProcessChangeHandler? OnProcessChange;
 
     public ProcessContainer(ILogger<ProcessContainer> logger)
     {
@@ -37,7 +37,7 @@ public class ProcessContainer : IProcessContainer
         var result = this.Processes.TryAdd(processDetail.ProcessId, processDetail);
         if (result)
         {
-            this.ProcessChanged?.Invoke(ProcessChangeStates.Launch, processDetail);
+            this.OnProcessChange?.Invoke(ProcessChangeStates.Launch, processDetail);
         }
         return result;
     }
@@ -46,9 +46,9 @@ public class ProcessContainer : IProcessContainer
     {
         this.logger.LogInformation($"Process container, remove process => {processID} ID");
         var result = this.Processes.TryRemove(processID, out processDetail);
-        if (result && ProcessChanged != null)
+        if (result && OnProcessChange != null)
         {
-            this.ProcessChanged?.Invoke(ProcessChangeStates.Destroy, processDetail);
+            this.OnProcessChange?.Invoke(ProcessChangeStates.Destroy, processDetail);
         }
         return result;
     }

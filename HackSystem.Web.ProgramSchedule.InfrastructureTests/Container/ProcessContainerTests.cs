@@ -12,7 +12,7 @@ public class ProcessContainerTests
     {
         int launchCount = 0, destroyCount = 0;
         IProcessContainer container = new ProcessContainer(new Mock<ILogger<ProcessContainer>>().Object);
-        container.ProcessChanged += (state, process) =>
+        container.OnProcessChange += (state, process) =>
         {
             if (state == ProcessChangeStates.Launch)
                 launchCount++;

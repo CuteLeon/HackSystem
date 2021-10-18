@@ -1,6 +1,8 @@
 ﻿@inject IJSRuntime jsRuntime
 
 <div class="position-fixed user-select-none flex-nowrap text-nowrap"
+     @onmouseup=@this.MouseUp
+     @ontouchend=@this.TouchEnd
      style="padding:@(this.IsMaximized()?0:this.BorderSize)px; pointer-events:auto; @this.GetWindowSizeStyle()">
 
     @if (!this.IsMaximized())
@@ -29,6 +31,9 @@
 </div>
 
 @code {
+    [Parameter]
+    public EventCallback<EventArgs> OnWindowFocusIn { get; set; }
+
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
@@ -64,13 +69,21 @@
         await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./_content/HackSystem.Web.ProgramPlatform/blazor.resizeable.js");
     }
 
-    private string GetWindowSizeStyle()
+    private string GetWindowSizeStyle() => this.WindowState switch
     {
-        return this.WindowState switch
-        {
-            ProgramWindowStates.Normal => $"top:{this.Top}; left:{this.Left}; width:{this.Width}; height:{this.Height};",
-            ProgramWindowStates.Maximized => $"top:inherit;left:inherit;width:inherit;height:calc(100% - {ComponentContract.TopBarHeight}px);",
-            ProgramWindowStates.Minimized => $"display:none;",
-        };
+        ProgramWindowStates.Normal => $"top:{this.Top}; left:{this.Left}; width:{this.Width}; height:{this.Height};",
+        ProgramWindowStates.Maximized => $"top:inherit;left:inherit;width:inherit;height:calc(100% - {ComponentContract.TopBarHeight}px);",
+        ProgramWindowStates.Minimized => $"display:none;",
+        _ => string.Empty
+    };
+
+    private async Task MouseUp(MouseEventArgs args) => await this.OnFocusIn();
+
+    private async Task TouchEnd(TouchEventArgs args) => await this.OnFocusIn();
+
+    protected async Task OnFocusIn()
+    {
+        if (!this.OnWindowFocusIn.HasDelegate) return;
+        await this.OnWindowFocusIn.InvokeAsync();
     }
 }
