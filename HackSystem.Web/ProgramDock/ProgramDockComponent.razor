@@ -9,7 +9,7 @@
             @foreach (var programMap in this.UserProgramMaps.Values)
             {
                 var programDockKey = $"programDockKey_{programMap.Program.Id}";
-                <ProgramDockIconComponent @key="@programDockKey" UserProgramMap="programMap" OnIconClick="@this.OnClickIcon" />
+                <ProgramDockIconComponent @key="@programDockKey" UserProgramMap="programMap" OnIconSelect="@this.OnIconSelect" />
             }
         </div>
     </div>

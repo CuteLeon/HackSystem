@@ -33,7 +33,7 @@ public partial class ProgramDrawerComponent
         this.StateHasChanged();
     }
 
-    public async Task OnDoubleClickIcon(ProgramIconMouseEventArgs args)
+    public async Task OnIconSelect(ProgramIconEventArgs args)
     {
         var programDetail = args.UserProgramMap.Program;
         this.logger.LogInformation($"Double click to luanch program: {programDetail.Name}");

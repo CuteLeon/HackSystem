@@ -1,6 +1,6 @@
 ﻿@inject IMapper mapper
 
-<div class="mt-n5 px-3 position-relative" @onclick="@this.OnClick">
+<div class="mt-n5 px-3 position-relative" @ontouchend="@this.OnTouchEnd" @onclick="@this.OnClick">
     <figure>
         <img src="@UserProgramMap.Program.IconUri" class="img-fluid" style="width:75px;height:75px;" />
         <figcaption class="text-white font-weight-bold text-center stretched-link" style="text-shadow: 0px 0px 5px #000, 0px 0px 7px #222;"
@@ -12,7 +12,7 @@
 
 @code {
     [Parameter]
-    public EventCallback<ProgramIconMouseEventArgs> OnIconClick { get; set; }
+    public EventCallback<ProgramIconEventArgs> OnIconSelect { get; set; }
 
     [Parameter]
     public UserProgramMap UserProgramMap { get; set; }

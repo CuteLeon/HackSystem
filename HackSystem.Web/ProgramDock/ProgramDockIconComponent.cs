@@ -6,14 +6,16 @@ namespace HackSystem.Web.ProgramDock;
 public partial class ProgramDockIconComponent
 {
     public async Task OnClick(MouseEventArgs args)
-    {
-        if (!this.OnIconClick.HasDelegate)
-        {
-            return;
-        }
+        => await this.RaiseIconSelect();
 
-        var eventArgs = new ProgramIconMouseEventArgs(this.UserProgramMap);
-        this.mapper.Map(args, eventArgs);
-        await this.OnIconClick.InvokeAsync(eventArgs);
+    public async Task OnTouchEnd(TouchEventArgs args)
+        => await this.RaiseIconSelect();
+
+    protected async Task RaiseIconSelect()
+    {
+        if (!this.OnIconSelect.HasDelegate) return;
+
+        var eventArgs = new ProgramIconEventArgs(this.UserProgramMap);
+        await this.OnIconSelect.InvokeAsync(eventArgs);
     }
 }

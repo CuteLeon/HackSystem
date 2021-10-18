@@ -1,11 +1,10 @@
 ﻿using HackSystem.Web.ProgramSchedule.Entity;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
 
-public class ProgramIconMouseEventArgs : MouseEventArgs
+public class ProgramIconEventArgs : EventArgs
 {
-    public ProgramIconMouseEventArgs(UserProgramMap userProgramMap)
+    public ProgramIconEventArgs(UserProgramMap userProgramMap)
     {
         this.UserProgramMap = userProgramMap;
     }

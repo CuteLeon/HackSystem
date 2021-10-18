@@ -33,7 +33,7 @@ public partial class ProgramDockComponent
         }
     }
 
-    public async Task OnClickIcon(ProgramIconMouseEventArgs args)
+    public async Task OnIconSelect(ProgramIconEventArgs args)
     {
         var programDetail = args.UserProgramMap.Program;
         this.logger.LogInformation($"Click to luanch program: {programDetail.Name}");
