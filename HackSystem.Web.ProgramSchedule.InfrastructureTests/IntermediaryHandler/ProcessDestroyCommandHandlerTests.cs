@@ -20,7 +20,7 @@ public class ProcessDestroyCommandHandlerTests
         IServiceCollection serviceCollection = new ServiceCollection()
             .AddLogging()
             .AddHackSystemIntermediary()
-            .AddIntermediaryCommandHandlerSingleton(commandHandler.Object);
+            .AddIntermediaryCommandHandlerSingleton<IIntermediaryCommandHandler<ProcessDestroyCommand>, ProcessDestroyCommand>(commandHandler.Object);
         var serviceProvider = serviceCollection.BuildServiceProvider();
         var commandSender = serviceProvider.GetRequiredService<IIntermediaryCommandSender>();
         for (int index = 0; index < 5; index++)

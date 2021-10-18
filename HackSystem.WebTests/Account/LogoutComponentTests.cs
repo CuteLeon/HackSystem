@@ -35,7 +35,7 @@ public class LogoutComponentTests
         ctx.Services
             .AddLogging()
             .AddHackSystemIntermediary()
-            .AddIntermediaryCommandHandlerSingleton(mockLogoutCommandHandler.Object)
+            .AddIntermediaryCommandHandlerSingleton<IIntermediaryCommandHandler<LogoutCommand>, LogoutCommand>(mockLogoutCommandHandler.Object)
             .AddSingleton<NavigationManager>(mockNavigationManager)
             .AddSingleton(new Mock<ICookieStorageHandler>().Object)
             .AddHackSystemAuthentication(options =>
