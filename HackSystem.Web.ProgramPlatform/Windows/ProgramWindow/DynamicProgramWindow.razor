@@ -1,11 +1,11 @@
 ﻿@inject ILogger<DynamicProgramWindow> Logger
 @inject IIntermediaryCommandSender CommandSender
 
-<ResizeableView WindowState=@this.ProgramWindowStyle.WindowState
-                Top=@this.ProgramWindowStyle.Top
-                Left=@this.ProgramWindowStyle.Left
-                Width=@this.ProgramWindowStyle.Width
-                Height=@this.ProgramWindowStyle.Height>
+<ResizeableBorderComponent WindowState=@this.ProgramWindowStyle.WindowState
+                           Top=@this.ProgramWindowStyle.Top
+                           Left=@this.ProgramWindowStyle.Left
+                           Width=@this.ProgramWindowStyle.Width
+                           Height=@this.ProgramWindowStyle.Height>
     <div class="modal-dialog m-0 flex-fill modal-dialog-scrollable w-100 h-100" role="dialog" style="max-width:none;max-height:none;">
         <div class="modal-content bg-transparent @this.ProgramWindowStyle.Border.ToBorderStyle() @this.ProgramWindowStyle.BorderColor.ToBorderColor() overflow-hidden" style="max-width:none;max-height:none;">
             <DraggableHandleComponent>
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-</ResizeableView>
+</ResizeableBorderComponent>
 
 @code {
     // TODO: LEON: JS to set style="z-index:@this.ProgramWindowDetail.TierIndex"
