@@ -12,6 +12,8 @@ public class ProgramWindowStyle
 
     public string? Height { get; set; } = "75%";
 
+    public ProgramWindowStates WindowState { get; set; } = ProgramWindowStates.Normal;
+
     public Borders Border { get; set; } = Borders.Border;
 
     public Colors BorderColor { get; set; } = Colors.Primary;
