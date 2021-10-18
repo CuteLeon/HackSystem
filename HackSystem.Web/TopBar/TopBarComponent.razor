@@ -1,4 +1,4 @@
-﻿<div class="container-fluid justify-content-between d-inline-flex p-0 shadow-sm user-select-none" style="height: 30px; backdrop-filter: blur(15px) opacity(0.8);">
+﻿<div class="container-fluid justify-content-between d-inline-flex p-0 shadow-sm user-select-none" style="height: @(this.BarHeight)px; backdrop-filter: blur(15px) opacity(0.8);">
     <MenuBarComponent></MenuBarComponent>
 
     <form class="d-none d-md-block form-inline mx-2 align-self-center">
@@ -7,3 +7,8 @@
 
     <StatusBarComponent></StatusBarComponent>
 </div>
+
+@code {
+    [Parameter]
+    public int BarHeight { get; set; } = 30;
+}

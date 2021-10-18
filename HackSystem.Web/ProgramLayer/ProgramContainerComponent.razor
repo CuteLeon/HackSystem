@@ -1,7 +1,7 @@
 ﻿@inject ILogger<ProgramContainerComponent> logger
 @inject IProcessContainer processContainer
 
-<div id="ProgramContainerInstance" class="position-fixed w-100 h-100 user-select-none overflow-hidden" style="pointer-events:none;">
+<div class="user-select-none overflow-hidden w-100 h-100" style="pointer-events:none;">
     @foreach (var process in this.processContainer.GetProcesses())
     {
         <!-- Fixed a big issue here. More details please navigate to https://github.com/dotnet/aspnetcore/issues/29176 -->

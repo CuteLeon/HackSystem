@@ -1,6 +1,6 @@
 ﻿@inject IJSRuntime jsRuntime
 
-<span onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget="@this.dragTarget" style="@($"cursor:{(this.cursor is { Length: >0 }?this.cursor:"move")};")">
+<span onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget="@this.DragTarget" style="@($"cursor:{this.Cursor??"move"};")">
     @this.ChildContent
 </span>
 
@@ -8,13 +8,11 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    private string dragTarget = ".position-fixed";
     [Parameter]
-    public string DragTarget { get => this.dragTarget; set => this.dragTarget = value; }
+    public string DragTarget { get; set; } = ".position-fixed";
 
-    private string cursor;
     [Parameter]
-    public string Cursor { get => this.cursor; set => this.cursor = value; }
+    public string? Cursor { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
