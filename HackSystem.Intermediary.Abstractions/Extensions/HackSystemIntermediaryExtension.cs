@@ -12,6 +12,10 @@ public static class HackSystemIntermediaryHandlerExtension
         where TNotification : IIntermediaryNotification
     {
         services.Add(new ServiceDescriptor(
+            typeof(TNotificationHandler),
+            sp => sp.GetRequiredService<INotificationHandler<TNotification>>(),
+            lifetime));
+        services.Add(new ServiceDescriptor(
             typeof(IIntermediaryNotificationHandler<TNotification>),
             sp => sp.GetRequiredService<INotificationHandler<TNotification>>(),
             lifetime));
@@ -29,6 +33,10 @@ public static class HackSystemIntermediaryHandlerExtension
         where TCommand : IIntermediaryCommand
     {
         services.Add(new ServiceDescriptor(
+            typeof(TCommandHandler),
+            sp => sp.GetRequiredService<IRequestHandler<TCommand, ValueTuple>>(),
+            lifetime));
+        services.Add(new ServiceDescriptor(
             typeof(IIntermediaryCommandHandler<TCommand>),
             sp => sp.GetRequiredService<IRequestHandler<TCommand, ValueTuple>>(),
             lifetime));
@@ -42,6 +50,10 @@ public static class HackSystemIntermediaryHandlerExtension
         where TRequest : IIntermediaryRequest<TResponse>
     {
         services.Add(new ServiceDescriptor(
+            typeof(TRequestHandler),
+            sp => sp.GetRequiredService<IRequestHandler<TRequest, TResponse>>(),
+            lifetime));
+        services.Add(new ServiceDescriptor(
             typeof(IIntermediaryRequestHandler<TRequest, TResponse>),
             sp => sp.GetRequiredService<IRequestHandler<TRequest, TResponse>>(),
             lifetime));
@@ -52,27 +64,33 @@ public static class HackSystemIntermediaryHandlerExtension
         return services;
     }
 
-    public static IServiceCollection AddIntermediaryNotificationHandlerSingleton<TNotification>(
+    public static IServiceCollection AddIntermediaryNotificationHandlerSingleton<TNotificationHandler, TNotification>(
         this IServiceCollection services,
-        IIntermediaryNotificationHandler<TNotification> singletonInstance)
+        TNotificationHandler singletonInstance)
+        where TNotificationHandler : class, IIntermediaryNotificationHandler<TNotification>
         where TNotification : IIntermediaryNotification
         => services
+            .AddSingleton<TNotificationHandler>(singletonInstance)
             .AddSingleton<INotificationHandler<TNotification>>(singletonInstance)
             .AddSingleton<IIntermediaryNotificationHandler<TNotification>>(singletonInstance);
 
-    public static IServiceCollection AddIntermediaryCommandHandlerSingleton<TCommand>(
+    public static IServiceCollection AddIntermediaryCommandHandlerSingleton<TCommandHandler, TCommand>(
         this IServiceCollection services,
-        IIntermediaryCommandHandler<TCommand> singletonInstance)
+        TCommandHandler singletonInstance)
+        where TCommandHandler : class, IIntermediaryCommandHandler<TCommand>
         where TCommand : IIntermediaryCommand
         => services
-            .AddIntermediaryRequestHandlerSingleton(singletonInstance)
+            .AddSingleton<TCommandHandler>(singletonInstance)
+            .AddIntermediaryRequestHandlerSingleton<TCommandHandler, TCommand, ValueTuple>(singletonInstance)
             .AddSingleton<IIntermediaryCommandHandler<TCommand>>(singletonInstance);
 
-    public static IServiceCollection AddIntermediaryRequestHandlerSingleton<TRequest, TResponse>(
+    public static IServiceCollection AddIntermediaryRequestHandlerSingleton<TRequestHandler, TRequest, TResponse>(
         this IServiceCollection services,
-        IIntermediaryRequestHandler<TRequest, TResponse> singletonInstance)
+        TRequestHandler singletonInstance)
+        where TRequestHandler : class, IIntermediaryRequestHandler<TRequest, TResponse>
         where TRequest : IIntermediaryRequest<TResponse>
         => services
+            .AddSingleton<TRequestHandler>(singletonInstance)
             .AddSingleton<IRequestHandler<TRequest, TResponse>>(singletonInstance)
             .AddSingleton<IIntermediaryRequestHandler<TRequest, TResponse>>(singletonInstance);
 

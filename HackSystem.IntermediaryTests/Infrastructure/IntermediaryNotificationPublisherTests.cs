@@ -85,7 +85,7 @@ namespace HackSystem.Intermediary.Infrastructure.Tests
             IServiceCollection services = new ServiceCollection();
             services
                 .AddLogging()
-                .AddIntermediaryNotificationHandlerSingleton(new TestNotification_Singleton1_Handler());
+                .AddIntermediaryNotificationHandlerSingleton<IIntermediaryNotificationHandler<TestNotification>, TestNotification>(new TestNotification_Singleton1_Handler());
             IServiceProvider provider = services.BuildServiceProvider();
             Assert.Same(
                 provider.GetRequiredService<IIntermediaryNotificationHandler<TestNotification>>(),

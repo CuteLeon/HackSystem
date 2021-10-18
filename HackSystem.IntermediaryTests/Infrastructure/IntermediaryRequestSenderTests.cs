@@ -88,7 +88,7 @@ public class IntermediaryRequestSenderTests
         IServiceCollection services = new ServiceCollection();
         services
             .AddLogging()
-            .AddIntermediaryRequestHandlerSingleton(new SingletonTestRequestHandler());
+            .AddIntermediaryRequestHandlerSingleton<IIntermediaryRequestHandler<SingletonTestRequest, int>, SingletonTestRequest, int>(new SingletonTestRequestHandler());
         IServiceProvider provider = services.BuildServiceProvider();
         Assert.Same(
             provider.GetRequiredService<IIntermediaryRequestHandler<SingletonTestRequest, int>>(),

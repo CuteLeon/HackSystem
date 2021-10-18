@@ -88,7 +88,7 @@ public class IntermediaryCommandSenderTests
         IServiceCollection services = new ServiceCollection();
         services
             .AddLogging()
-            .AddIntermediaryCommandHandlerSingleton(new SingletonTestCommandHandler());
+            .AddIntermediaryCommandHandlerSingleton<IIntermediaryCommandHandler<SingletonTestCommand>, SingletonTestCommand>(new SingletonTestCommandHandler());
         IServiceProvider provider = services.BuildServiceProvider();
         Assert.Same(
             provider.GetRequiredService<IIntermediaryCommandHandler<SingletonTestCommand>>(),
