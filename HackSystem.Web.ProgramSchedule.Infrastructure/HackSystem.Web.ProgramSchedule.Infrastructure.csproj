@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\HackSystem.Intermediary.Abstractions\HackSystem.Intermediary.Abstractions.csproj" />
+		<ProjectReference Include="..\HackSystem.LRU\HackSystem.LRU.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.Application\HackSystem.Web.Application.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform.Abstractions\HackSystem.Web.ProgramPlatform.Abstractions.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform\HackSystem.Web.ProgramPlatform.csproj" />

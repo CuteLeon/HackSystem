@@ -3,7 +3,7 @@
 <div class="position-fixed user-select-none flex-nowrap text-nowrap"
      @onmouseup=@this.MouseUp
      @ontouchend=@this.TouchEnd
-     style="padding:@(this.IsMaximized()?0:this.BorderSize)px; pointer-events:auto; @this.GetWindowSizeStyle()">
+     style="padding:@(this.IsMaximized()?0:this.BorderSize)px; z-index:@this.TierIndex; pointer-events:auto; @this.GetWindowSizeStyle()">
 
     @if (!this.IsMaximized())
     {
@@ -60,6 +60,9 @@
 
     [Parameter]
     public int CornerSize { get; set; } = 12;
+
+    [Parameter]
+    public int TierIndex { get; set; }
 
     protected bool IsMaximized() => this.WindowState == ProgramWindowStates.Maximized;
 
