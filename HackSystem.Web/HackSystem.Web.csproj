@@ -5,6 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
 		<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+		<PublishTrimmed>false</PublishTrimmed>
 	</PropertyGroup>
 
 	<ItemGroup>
