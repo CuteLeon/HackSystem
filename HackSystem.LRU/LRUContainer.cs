@@ -49,6 +49,16 @@ public class LRUContainer<TKey, TValue>
         return result;
     }
 
+    public IEnumerable<TValue> GetValues()
+    {
+        var node = this.Head;
+        while (node != null)
+        {
+            yield return node.Value;
+            node = node.Previous;
+        }
+    }
+
     public void Add(TValue value)
     {
         var key = this.KeySelector.Invoke(value);
@@ -84,16 +94,17 @@ public class LRUContainer<TKey, TValue>
         node.RemoveSelf();
     }
 
-    public void BringToHead(TValue value)
+    public bool BringToHead(TValue value)
     {
         var key = this.KeySelector.Invoke(value);
         if (!this.Nodes.TryGetValue(key, out var node))
             throw new KeyNotFoundException($"Not found key of {key}.");
 
-        if (this.Head == node) return;
+        if (this.Head == node) return false;
         if (this.Tail == node) this.Tail = node.Next;
         node.RemoveSelf();
         this.Head!.SetNext(node);
         this.Head = node;
+        return true;
     }
 }
