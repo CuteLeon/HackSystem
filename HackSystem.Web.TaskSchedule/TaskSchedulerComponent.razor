@@ -4,7 +4,7 @@
 
 <AuthorizeView Roles="@CommonSense.Roles.CommanderRole">
     <Authorized>
-        <div class="container-fluid">
+        <div class="container-fluid p-3">
             <!-- Top control button group -->
             <div class="row my-2 justify-content-between">
                 <p class="col-auto h4">Tasks</p>
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <!-- Cards container -->
-            <div class="row">
+            <div class="m-0 row">
                 @foreach (var task in this.TaskDetails)
                 {
                     var taskKey = $"taskKey_{task.TaskID}";
