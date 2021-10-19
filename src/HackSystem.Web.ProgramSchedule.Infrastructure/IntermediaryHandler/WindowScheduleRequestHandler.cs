@@ -28,15 +28,14 @@ public class WindowScheduleRequestHandler : IWindowScheduleRequestHandler
         this.logger.LogInformation($"Handle Window {request.ScheduleStates} request {request.ProgramWindowDetail.Caption} ...");
         if (request.ScheduleStates == WindowScheduleStates.Launch)
         {
-            request.ProgramWindowDetail.TierIndex = this.windowLRUContainer.HeadValue?.TierIndex ??
-                this.tierConfiguration.BasicProgramSubscript;
+            request.ProgramWindowDetail.TierIndex = this.GetNewTierIndex();
             this.windowLRUContainer.Add(request.ProgramWindowDetail);
         }
         else if (request.ScheduleStates == WindowScheduleStates.Schedule)
         {
             if (this.windowLRUContainer.HeadValue == request.ProgramWindowDetail) return new WindowScheduleResponse(request.ScheduleStates, false);
 
-            request.ProgramWindowDetail.TierIndex = this.windowLRUContainer.HeadValue!.TierIndex + 1;
+            request.ProgramWindowDetail.TierIndex = this.GetNewTierIndex();
             this.windowLRUContainer.BringToHead(request.ProgramWindowDetail);
         }
         else if (request.ScheduleStates == WindowScheduleStates.Destory)
@@ -45,12 +44,26 @@ public class WindowScheduleRequestHandler : IWindowScheduleRequestHandler
             this.windowLRUContainer.Remove(request.ProgramWindowDetail);
         }
 
-        this.logger.LogInformation($"Window {request.ScheduleStates} request handled, {request.ProgramWindowDetail.Caption}.");
         // TODO: LEON: WHAT IF SET Z_-INDEX BY JS DIRECTLY IEnumerable<(WindowID, TierIndex)> ???!!!
-        // TODO: LEON: Get index from options;
         // TODO: LEON: Just render z-index, and keep other datas;
-        // TODO: LEON: Sort index from lowest to highest, set new index as Head's index + 1. And reset sort form lowest again if reach highest.
+        this.logger.LogWarning($"Window {request.ScheduleStates} request handled, {request.ProgramWindowDetail.Caption} ({request.ProgramWindowDetail.TierIndex}).");
         this.OnWindowSchedule?.Invoke(request.ProgramWindowDetail);
         return new WindowScheduleResponse(request.ScheduleStates, true);
+    }
+
+    private int GetNewTierIndex()
+    {
+        var newTierIndex = this.windowLRUContainer.HeadValue?.TierIndex + 1 ?? this.tierConfiguration.BasicProgramSubscript;
+        if (newTierIndex >= this.tierConfiguration.BasicProgramSuperscript)
+        {
+            this.logger.LogInformation("Reach program superscript, resort all window tier index...");
+            var tierIndex = this.tierConfiguration.BasicProgramSubscript;
+            foreach (var window in this.windowLRUContainer.GetValuesFromTail())
+            {
+                window.TierIndex = tierIndex++;
+            }
+            newTierIndex = --tierIndex;
+        }
+        return newTierIndex;
     }
 }

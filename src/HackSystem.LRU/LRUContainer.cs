@@ -49,13 +49,23 @@ public class LRUContainer<TKey, TValue>
         return result;
     }
 
-    public IEnumerable<TValue> GetValues()
+    public IEnumerable<TValue> GetValuesFromHead()
     {
         var node = this.Head;
         while (node != null)
         {
             yield return node.Value;
             node = node.Previous;
+        }
+    }
+
+    public IEnumerable<TValue> GetValuesFromTail()
+    {
+        var node = this.Tail;
+        while (node != null)
+        {
+            yield return node.Value;
+            node = node.Next;
         }
     }
 
