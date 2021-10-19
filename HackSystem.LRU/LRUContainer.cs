@@ -18,6 +18,8 @@ public class LRUContainer<TKey, TValue>
     protected ConcurrentDictionary<TKey, LRUNode<TValue>> Nodes { get; init; } = new();
 
     public int Capacity { get; init; }
+    public int Count { get => this.Nodes.Count; }
+
     public TValue? HeadValue { get => this.Head is null ? default : this.Head!.Value; }
     public TValue? TailValue { get => this.Tail is null ? default : this.Tail!.Value; }
 
@@ -62,6 +64,11 @@ public class LRUContainer<TKey, TValue>
         {
             this.Head.SetNext(node);
             this.Head = node;
+        }
+
+        while (this.Count > this.Capacity)
+        {
+            this.Remove(this.Tail!.Value);
         }
     }
 
