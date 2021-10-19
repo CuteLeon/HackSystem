@@ -9,21 +9,21 @@
     @if (!this.IsMaximized())
     {
         <div class="position-absolute" style="width:@(this.CornerSize)px;height:@(this.CornerSize)px;left:0px;top:0px;cursor:nw-resize"
-         data-resizetarget="@this.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+         @onmousedown=@((e)=>this.OnMouseDown(e, "nw-resize")) @ontouchstart=@((e)=>this.OnTouchStart(e, "nw-resize"))></div>
         <div class="position-absolute" style="height:@(this.BorderSize)px;left:@(this.CornerSize)px;top:0px;right:@(this.CornerSize)px;cursor: n-resize"
-         data-resizetarget="@this.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+         @onmousedown=@((e)=>this.OnMouseDown(e, "n-resize")) @ontouchstart=@((e)=>this.OnTouchStart(e, "n-resize"))></div>
         <div class="position-absolute" style="width:@(this.CornerSize)px;height:@(this.CornerSize)px;right:0px;top:0px;cursor: ne-resize"
-         data-resizetarget="@this.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+         @onmousedown=@((e)=>this.OnMouseDown(e, "ne-resize")) @ontouchstart=@((e)=>this.OnTouchStart(e, "ne-resize"))></div>
         <div class="position-absolute" style="width:@(this.BorderSize)px;left:0px;top:@(this.CornerSize)px;bottom:@(this.CornerSize)px;cursor:w-resize"
-         data-resizetarget="@this.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+         @onmousedown=@((e)=>this.OnMouseDown(e, "w-resize")) @ontouchstart=@((e)=>this.OnTouchStart(e, "w-resize"))></div>
         <div class="position-absolute" style="width:@(this.BorderSize)px;top:@(this.CornerSize)px;right:0px;bottom:@(this.CornerSize)px;cursor:e-resize"
-         data-resizetarget="@this.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+         @onmousedown=@((e)=>this.OnMouseDown(e, "e-resize")) @ontouchstart=@((e)=>this.OnTouchStart(e, "e-resize"))></div>
         <div class="position-absolute" style="width:@(this.CornerSize)px;height:@(this.CornerSize)px;left:0px;bottom:0px;cursor:sw-resize"
-         data-resizetarget="@this.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+         @onmousedown=@((e)=>this.OnMouseDown(e, "sw-resize")) @ontouchstart=@((e)=>this.OnTouchStart(e, "sw-resize"))></div>
         <div class="position-absolute" style="height:@(this.BorderSize)px;left:@(this.CornerSize)px;right:@(this.CornerSize)px;bottom:0px;cursor: s-resize"
-         data-resizetarget="@this.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+         @onmousedown=@((e)=>this.OnMouseDown(e, "s-resize")) @ontouchstart=@((e)=>this.OnTouchStart(e, "s-resize"))></div>
         <div class="position-absolute" style="width:@(this.CornerSize)px;height:@(this.CornerSize)px;right:0px;bottom:0px;cursor:se-resize"
-         data-resizetarget="@this.ResizeTarget" onmousedown="resizeEvents.mouseResizeStart(event)" ontouchstart="resizeEvents.touchResizeStart(event)"></div>
+         @onmousedown=@((e)=>this.OnMouseDown(e, "se-resize")) @ontouchstart=@((e)=>this.OnTouchStart(e, "se-resize"))></div>
     }
 
     <div class="shadow-lg rounded w-100 h-100" style="max-width:none;max-height:none;">
@@ -34,6 +34,9 @@
 @code {
     [Parameter]
     public EventCallback<EventArgs> OnWindowFocusIn { get; set; }
+
+    [Parameter]
+    public DotNetObjectReference<IResizeableComponent> ResizeableReference { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -57,9 +60,6 @@
     public ProgramWindowStates WindowState { get; set; } = ProgramWindowStates.Normal;
 
     [Parameter]
-    public string ResizeTarget { get; set; } = ".position-fixed";
-
-    [Parameter]
     public int BorderSize { get; set; } = 6;
 
     [Parameter]
@@ -70,10 +70,13 @@
 
     protected bool IsMaximized() => this.WindowState == ProgramWindowStates.Maximized;
 
+    private IJSObjectReference resizeableModuleReference;
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./_content/HackSystem.Web.ProgramPlatform/blazor.resizeable.js");
+        this.resizeableModuleReference = await jsRuntime
+            .InvokeAsync<IJSObjectReference>("import", "./_content/HackSystem.Web.ProgramPlatform/blazor.resizeable.js");
     }
 
     private string GetWindowSizeStyle() => this.WindowState switch
@@ -92,5 +95,24 @@
     {
         if (!this.OnWindowFocusIn.HasDelegate) return;
         await this.OnWindowFocusIn.InvokeAsync();
+    }
+
+    private async Task OnMouseDown(MouseEventArgs args, string cursor)
+    {
+        if (args.Button != 0) return;
+        await this.resizeableModuleReference.InvokeVoidAsync(
+            "resizeStart",
+            this.ResizeableReference,
+            true, args.ClientX, args.ClientY,
+            this.ResizeTargetId, cursor);
+    }
+
+    private async Task OnTouchStart(TouchEventArgs args, string cursor)
+    {
+        await this.resizeableModuleReference.InvokeVoidAsync(
+            "resizeStart",
+            this.ResizeableReference,
+            false, args.Touches[0].ClientX, args.Touches[0].ClientY,
+            this.ResizeTargetId, cursor);
     }
 }

@@ -7,8 +7,8 @@
 </span>
 
 @code {
-    [CascadingParameter]
-    public DotNetObjectReference<IDraggableComponent> draggableReference { get; set; }
+    [Parameter]
+    public DotNetObjectReference<IDraggableComponent> DraggableReference { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -19,30 +19,30 @@
     [Parameter]
     public string DragTargetId { get; set; }
 
-    private IJSObjectReference draggableHandlerReference;
+    private IJSObjectReference draggableModuleReference;
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        this.draggableHandlerReference = await jsRuntime
+        this.draggableModuleReference = await jsRuntime
             .InvokeAsync<IJSObjectReference>("import", "./_content/HackSystem.Web.ProgramPlatform/blazor.draggable.js");
     }
 
     private async Task OnMouseDown(MouseEventArgs args)
     {
         if (args.Button != 0) return;
-        await this.draggableHandlerReference.InvokeVoidAsync(
+        await this.draggableModuleReference.InvokeVoidAsync(
             "dragStart",
-            this.draggableReference,
+            this.DraggableReference,
             true, args.ClientX, args.ClientY,
             this.DragTargetId);
     }
 
     private async Task OnTouchStart(TouchEventArgs args)
     {
-        await this.draggableHandlerReference.InvokeVoidAsync(
+        await this.draggableModuleReference.InvokeVoidAsync(
             "dragStart",
-            this.draggableReference,
+            this.DraggableReference,
             false, args.Touches[0].ClientX, args.Touches[0].ClientY,
             this.DragTargetId);
     }

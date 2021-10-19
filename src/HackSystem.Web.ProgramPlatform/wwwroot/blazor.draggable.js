@@ -9,10 +9,10 @@ export function dragStart(interop, isMouse, startX, startY, dragTargetId) {
     dragTarget = $(`#${dragTargetId}`);
     if (dragTarget === undefined || dragTarget === null) return;
 
-    let currentPosition = { X: dragTarget.offset().left, Y: dragTarget.offset().top };
+    let currentPosition = dragTarget.offset();
     dragData = {
-        diffX: startX - currentPosition.X,
-        diffY: startY - currentPosition.Y,
+        diffX: startX - currentPosition.left,
+        diffY: startY - currentPosition.top,
     };
 
     if (interopReference != null) {

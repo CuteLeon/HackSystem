@@ -6,14 +6,16 @@ using Microsoft.JSInterop;
 
 namespace HackSystem.Web.ProgramPlatform.Windows.ProgramWindow;
 
-public partial class DynamicProgramWindow : IDraggableComponent, IAsyncDisposable
+public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComponent, IAsyncDisposable
 {
     private DotNetObjectReference<IDraggableComponent> draggableReference;
+    private DotNetObjectReference<IResizeableComponent> resizeableReference;
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         this.draggableReference = DotNetObjectReference.Create<IDraggableComponent>(this);
+        this.resizeableReference = DotNetObjectReference.Create<IResizeableComponent>(this);
     }
 
     [JSInvokable]
@@ -21,6 +23,14 @@ public partial class DynamicProgramWindow : IDraggableComponent, IAsyncDisposabl
     {
         this.ProgramWindowStyle.Left = $"{left}px";
         this.ProgramWindowStyle.Top = $"{top}px";
+    }
+
+    [JSInvokable]
+    public void UpdateSize(double left, double top, double width, double height)
+    {
+        this.UpdatePosition(left, top);
+        this.ProgramWindowStyle.Width = $"{width}px";
+        this.ProgramWindowStyle.Height = $"{height}px";
     }
 
     public virtual void OnMin()
@@ -57,5 +67,6 @@ public partial class DynamicProgramWindow : IDraggableComponent, IAsyncDisposabl
     public async ValueTask DisposeAsync()
     {
         this.draggableReference.Dispose();
+        this.resizeableReference.Dispose();
     }
 }
