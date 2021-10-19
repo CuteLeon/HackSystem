@@ -62,7 +62,7 @@ namespace HackSystem.Web.Authentication.AuthorizationStateHandlers
         /// </summary>
         private async Task AuthenticateSuccessfully(string token, ClaimsIdentity claimsIdentity)
         {
-            this.logger.LogWarning("HackSystem Authenticate Successfully !");
+            this.logger.LogInformation("HackSystem Authenticate Successfully !");
             await this.hackSystemAuthenticationTokenHandler.UpdateTokenAsync(token);
             var authenticationState = new AuthenticationState(new ClaimsPrincipal(claimsIdentity));
             this.authenticationStateProvider.NotifyAuthenticationStateChanged(authenticationState);
