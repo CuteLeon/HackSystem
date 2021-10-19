@@ -1,11 +1,28 @@
-﻿using HackSystem.Web.ProgramSchedule.Abstractions.Enums;
+﻿using HackSystem.Web.ProgramPlatform.Components;
+using HackSystem.Web.ProgramSchedule.Abstractions.Enums;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 using Microsoft.Extensions.Logging;
+using Microsoft.JSInterop;
 
 namespace HackSystem.Web.ProgramPlatform.Windows.ProgramWindow;
 
-public partial class DynamicProgramWindow
+public partial class DynamicProgramWindow : IDraggableComponent, IAsyncDisposable
 {
+    private DotNetObjectReference<IDraggableComponent> draggableReference;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        this.draggableReference = DotNetObjectReference.Create<IDraggableComponent>(this);
+    }
+
+    [JSInvokable]
+    public void UpdatePosition(double left, double top)
+    {
+        this.ProgramWindowStyle.Left = $"{left}px";
+        this.ProgramWindowStyle.Top = $"{top}px";
+    }
+
     public virtual void OnMin()
     {
         this.Logger.LogInformation($"Min window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
@@ -35,5 +52,10 @@ public partial class DynamicProgramWindow
         {
             this.Logger.LogInformation($"Scheduled window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
         }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        this.draggableReference.Dispose();
     }
 }

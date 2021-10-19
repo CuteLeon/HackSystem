@@ -1,22 +1,49 @@
 ﻿@inject IJSRuntime jsRuntime
 
-<span onmousedown="dragEvents.mouseDragStart(event)" ontouchstart="dragEvents.touchDragStart(event)" data-dragtarget="@this.DragTarget" style="@($"cursor:{this.Cursor??"move"};")">
+<span @onmousedown=@this.OnMouseDown
+      @ontouchstart=@this.OnTouchStart
+      style="@($"cursor:{this.Cursor??"move"};")">
     @this.ChildContent
 </span>
 
 @code {
+    [CascadingParameter]
+    public DotNetObjectReference<IDraggableComponent> draggableReference { get; set; }
+
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public string DragTarget { get; set; } = ".position-fixed";
+    public string? Cursor { get; set; }
 
     [Parameter]
-    public string? Cursor { get; set; }
+    public string DragTargetId { get; set; }
+
+    private IJSObjectReference draggableHandlerReference;
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./_content/HackSystem.Web.ProgramPlatform/blazor.draggable.js");
+        this.draggableHandlerReference = await jsRuntime
+            .InvokeAsync<IJSObjectReference>("import", "./_content/HackSystem.Web.ProgramPlatform/blazor.draggable.js");
+    }
+
+    private async Task OnMouseDown(MouseEventArgs args)
+    {
+        if (args.Button != 0) return;
+        await this.draggableHandlerReference.InvokeVoidAsync(
+            "dragStart",
+            this.draggableReference,
+            true, args.ClientX, args.ClientY,
+            this.DragTargetId);
+    }
+
+    private async Task OnTouchStart(TouchEventArgs args)
+    {
+        await this.draggableHandlerReference.InvokeVoidAsync(
+            "dragStart",
+            this.draggableReference,
+            false, args.Touches[0].ClientX, args.Touches[0].ClientY,
+            this.DragTargetId);
     }
 }

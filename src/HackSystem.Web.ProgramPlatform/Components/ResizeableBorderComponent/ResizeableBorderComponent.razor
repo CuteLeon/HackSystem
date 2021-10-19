@@ -1,6 +1,7 @@
 ﻿@inject IJSRuntime jsRuntime
 
-<div class="position-fixed user-select-none flex-nowrap text-nowrap"
+<div id="@this.ResizeTargetId"
+     class="position-fixed user-select-none flex-nowrap text-nowrap"
      @onmousedown=@this.MouseDown
      @ontouchstart=@this.TouchStart
      style="padding:@(this.IsMaximized()?0:this.BorderSize)px; z-index:@this.TierIndex; pointer-events:auto; @this.GetWindowSizeStyle()">
@@ -38,16 +39,19 @@
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public string? Left { get; set; } = "auto";
+    public string ResizeTargetId { get; set; }
 
     [Parameter]
-    public string? Top { get; set; } = "auto";
+    public string Left { get; set; } = "auto";
 
     [Parameter]
-    public string? Width { get; set; } = "auto";
+    public string Top { get; set; } = "auto";
 
     [Parameter]
-    public string? Height { get; set; } = "auto";
+    public string Width { get; set; } = "auto";
+
+    [Parameter]
+    public string Height { get; set; } = "auto";
 
     [Parameter]
     public ProgramWindowStates WindowState { get; set; } = ProgramWindowStates.Normal;

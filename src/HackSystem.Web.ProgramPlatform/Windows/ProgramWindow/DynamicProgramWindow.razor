@@ -2,43 +2,45 @@
 @inject IIntermediaryCommandSender CommandSender
 @inject IIntermediaryRequestSender RequestSender
 
-<ResizeableBorderComponent WindowState=@this.ProgramWindowStyle.WindowState
-                           TierIndex=@this.ProgramWindowDetail.TierIndex
-                           Top=@this.ProgramWindowStyle.Top
-                           Left=@this.ProgramWindowStyle.Left
-                           Width=@this.ProgramWindowStyle.Width
-                           Height=@this.ProgramWindowStyle.Height
-                           OnWindowFocusIn=@this.OnWindowFocusIn>
-    <div class="modal-dialog m-0 flex-fill modal-dialog-scrollable w-100 h-100" role="dialog" style="max-width:none;max-height:none;">
-        <div class="modal-content bg-transparent @this.ProgramWindowStyle.Border.ToBorderStyle() @this.ProgramWindowStyle.BorderColor.ToBorderColor() overflow-hidden" style="max-width:none;max-height:none;">
-            <DraggableHandleComponent>
-                <div class="modal-header @this.ProgramWindowStyle.CaptionBackgroundColor.ToBackgroundColor() p-1" style="@(this.ProgramWindowStyle.CaptionBackgroundColor==Colors.Transparent?"backdrop-filter:blur(5px);":string.Empty)">
-                    <h6 class="modal-title @this.ProgramWindowStyle.CaptionTextColor.ToTextColor() text-nowrap text-truncate px-2 pt-1">
-                        <strong>@this.ProgramWindowDetail.Caption</strong>
-                    </h6>
-                    <div class="btn-group btn-group-sm" role="group">
-                        <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMin><span class="far fa-window-minimize"></span></button>
-                        <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMaxRestore><span class="far fa-window-@(this.ProgramWindowStyle.WindowState== ProgramWindowStates.Maximized?"restore":"maximize")"></span></button>
-                        <button type="button" class="btn btn-danger" @onclick=@this.OnClose><span class="far fa-window-close"></span></button>
+<CascadingValue IsFixed=true Value=this.draggableReference>
+    <ResizeableBorderComponent ResizeTargetId=@($"window_{this.ProgramWindowDetail.WindowId}")
+                               WindowState=@this.ProgramWindowStyle.WindowState
+                               TierIndex=@this.ProgramWindowDetail.TierIndex
+                               Top=@this.ProgramWindowStyle.Top
+                               Left=@this.ProgramWindowStyle.Left
+                               Width=@this.ProgramWindowStyle.Width
+                               Height=@this.ProgramWindowStyle.Height
+                               OnWindowFocusIn=@this.OnWindowFocusIn>
+        <div class="modal-dialog m-0 flex-fill modal-dialog-scrollable w-100 h-100" role="dialog" style="max-width:none;max-height:none;">
+            <div class="modal-content bg-transparent @this.ProgramWindowStyle.Border.ToBorderStyle() @this.ProgramWindowStyle.BorderColor.ToBorderColor() overflow-hidden" style="max-width:none;max-height:none;">
+                <DraggableHandleComponent DragTargetId=@($"window_{this.ProgramWindowDetail.WindowId}")>
+                    <div class="modal-header @this.ProgramWindowStyle.CaptionBackgroundColor.ToBackgroundColor() p-1" style="@(this.ProgramWindowStyle.CaptionBackgroundColor==Colors.Transparent?"backdrop-filter:blur(5px);":string.Empty)">
+                        <h6 class="modal-title @this.ProgramWindowStyle.CaptionTextColor.ToTextColor() text-nowrap text-truncate px-2 pt-1">
+                            <strong>@this.ProgramWindowDetail.Caption</strong>
+                        </h6>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMin><span class="far fa-window-minimize"></span></button>
+                            <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMaxRestore><span class="far fa-window-@(this.ProgramWindowStyle.WindowState== ProgramWindowStates.Maximized?"restore":"maximize")"></span></button>
+                            <button type="button" class="btn btn-danger" @onclick=@this.OnClose><span class="far fa-window-close"></span></button>
+                        </div>
                     </div>
-                </div>
-            </DraggableHandleComponent>
-            <div class="modal-body p-0 @this.ProgramWindowStyle.BackgroundColor.ToBackgroundColor()" style="@(this.ProgramWindowStyle.BackgroundColor==Colors.Transparent?"backdrop-filter:blur(20px);":string.Empty)">
-                <DynamicComponent @ref=this.DynamicProgramComponent
-                                  Type="this.ProgramWindowDetail.ProgramWindowType"
-                                  Parameters="new Dictionary<string, object>
+                </DraggableHandleComponent>
+                <div class="modal-body p-0 @this.ProgramWindowStyle.BackgroundColor.ToBackgroundColor()" style="@(this.ProgramWindowStyle.BackgroundColor==Colors.Transparent?"backdrop-filter:blur(20px);":string.Empty)">
+                    <DynamicComponent @ref=this.DynamicProgramComponent
+                                      Type="this.ProgramWindowDetail.ProgramWindowType"
+                                      Parameters="new Dictionary<string, object>
                                   {
                                       { nameof(ProgramComponentBase.ProcessDetail), this.ProcessDetail },
                                       { nameof(ProgramComponentBase.ProgramWindowDetail), this.ProgramWindowDetail }
                                   }">
-                </DynamicComponent>
+                    </DynamicComponent>
+                </div>
             </div>
         </div>
-    </div>
-</ResizeableBorderComponent>
+    </ResizeableBorderComponent>
+</CascadingValue>
 
 @code {
-    // TODO: LEON: Create JS/Net object reference, set as DraggableHandleComponent and ResizeableBorderComponent's parameters to receive position or size changed;
     [Parameter]
     public ProcessDetail ProcessDetail { get; set; }
 

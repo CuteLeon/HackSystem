@@ -44,9 +44,7 @@ public class WindowScheduleRequestHandler : IWindowScheduleRequestHandler
             this.windowLRUContainer.Remove(request.ProgramWindowDetail);
         }
 
-        // TODO: LEON: WHAT IF SET Z_-INDEX BY JS DIRECTLY IEnumerable<(WindowID, TierIndex)> ???!!!
-        // TODO: LEON: Just render z-index, and keep other datas;
-        this.logger.LogWarning($"Window {request.ScheduleStates} request handled, {request.ProgramWindowDetail.Caption} ({request.ProgramWindowDetail.TierIndex}).");
+        this.logger.LogInformation($"Window {request.ScheduleStates} request handled, {request.ProgramWindowDetail.Caption} ({request.ProgramWindowDetail.TierIndex}).");
         this.OnWindowSchedule?.Invoke(request.ProgramWindowDetail);
         return new WindowScheduleResponse(request.ScheduleStates, true);
     }

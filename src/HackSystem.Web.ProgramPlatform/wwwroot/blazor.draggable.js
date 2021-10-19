@@ -1,72 +1,78 @@
-﻿let dragEvents = {
-    dragData: null,
-    dragTarget: null,
-    mouseDragStart: function (e) {
-        let $event = $.event.fix(e);
-        if ($event.button === 0) {
-            let $target = $($event.currentTarget);
-            dragTarget = $target.parents($target.data('dragtarget'))[0];
-            if (dragTarget === undefined || dragTarget === null) return;
+﻿let dragData = null;
+let dragTarget = null;
+let interopReference = null;
+let isMouseMode = null;
 
-            let currentPosition = { X: $(dragTarget).offset().left, Y: $(dragTarget).offset().top };
-            dragData = {
-                diffX: $event.clientX - currentPosition.X,
-                diffY: $event.clientY - currentPosition.Y,
-            };
+export function dragStart(interop, isMouse, startX, startY, dragTargetId) {
+    interopReference = interop;
+    isMouseMode = isMouse;
+    dragTarget = $(`#${dragTargetId}`);
+    if (dragTarget === undefined || dragTarget === null) return;
 
-            $(document).on('mousemove', dragEvents.mouseDragMove);
-            $(document).one('mouseup', dragEvents.dragEnd);
-        }
-        else {
-            dragData = null;
-            dragTarget = null;
-        }
-    },
-    touchDragStart: function (e) {
-        let $event = $.event.fix(e);
-        let $target = $($event.currentTarget);
-        dragTarget = $target.parents($target.data('dragtarget'))[0];
-        if (dragTarget === undefined || dragTarget === null) return;
+    let currentPosition = { X: dragTarget.offset().left, Y: dragTarget.offset().top };
+    dragData = {
+        diffX: startX - currentPosition.X,
+        diffY: startY - currentPosition.Y,
+    };
 
-        let clientX = $event.touches[0].clientX;
-        let clientY = $event.touches[0].clientY;
-        let currentPosition = { X: $(dragTarget).offset().left, Y: $(dragTarget).offset().top };
-        dragData = {
-            diffX: clientX - currentPosition.X,
-            diffY: clientY - currentPosition.Y,
-        };
+    if (interopReference != null) {
+        let left = startX - dragData.diffX;
+        let top = startY - dragData.diffY;
+        interopReference.invokeMethodAsync('UpdatePosition', left, top);
+    }
 
-        document.addEventListener('touchmove', dragEvents.touchDragMove);
-        document.addEventListener('touchend', dragEvents.dragEnd);
-    },
-    mouseDragMove: function (e) {
-        if (e.button === 0) {
-            if (dragTarget !== undefined &&
-                dragTarget !== null) {
-                if (0 <= e.clientX && e.clientX <= document.documentElement.clientWidth)
-                    $(dragTarget).css('left', e.clientX - dragData.diffX);
-                if (0 <= e.clientY && e.clientY <= document.documentElement.clientHeight)
-                    $(dragTarget).css('top', e.clientY - dragData.diffY);
-            }
-        }
-    },
-    touchDragMove: function (e) {
-        let $event = $.event.fix(e);
+    if (isMouseMode) {
+        $(document).on('mousemove', mouseDragMove);
+        $(document).one('mouseup', dragEnd);
+    } else {
+        document.addEventListener('touchmove', touchDragMove);
+        document.addEventListener('touchend', dragEnd);
+    }
+};
+
+export function mouseDragMove(e) {
+    if (e.button === 0) {
         if (dragTarget !== undefined &&
             dragTarget !== null) {
-            let clientX = $event.touches[0].clientX;
-            let clientY = $event.touches[0].clientY;
-            if (0 <= clientX && clientX <= document.documentElement.clientWidth)
-                $(dragTarget).css('left', clientX - dragData.diffX);
-            if (0 <= clientY && clientY <= document.documentElement.clientHeight)
-                $(dragTarget).css('top', clientY - dragData.diffY);
+            if (0 <= e.clientX && e.clientX <= document.documentElement.clientWidth)
+                $(dragTarget).css('left', e.clientX - dragData.diffX);
+            if (0 <= e.clientY && e.clientY <= document.documentElement.clientHeight)
+                $(dragTarget).css('top', e.clientY - dragData.diffY);
         }
-    },
-    dragEnd: function (e) {
-        dragData = null;
-        dragTarget = null;
-        $(document).off('mousemove', dragEvents.mouseDragMove);
-        document.removeEventListener('touchmove', dragEvents.touchDragMove);
-        document.removeEventListener('touchend', dragEvents.dragEnd);
     }
+};
+
+export function touchDragMove(e) {
+    let $event = $.event.fix(e);
+    if (dragTarget !== undefined &&
+        dragTarget !== null) {
+        let clientX = $event.touches[0].clientX;
+        let clientY = $event.touches[0].clientY;
+        if (0 <= clientX && clientX <= document.documentElement.clientWidth)
+            $(dragTarget).css('left', clientX - dragData.diffX);
+        if (0 <= clientY && clientY <= document.documentElement.clientHeight)
+            $(dragTarget).css('top', clientY - dragData.diffY);
+    }
+};
+
+export function dragEnd(e) {
+    if (interopReference != null) {
+        let left = 0, top = 0;
+        if (isMouseMode) {
+            left = e.clientX - dragData.diffX;
+            top = e.clientY - dragData.diffY;
+        } else {
+            left = e.changedTouches[0].clientX - dragData.diffX;
+            top = e.changedTouches[0].clientY - dragData.diffY;
+        }
+        interopReference.invokeMethodAsync('UpdatePosition', left, top);
+    }
+
+    dragData = null;
+    dragTarget = null;
+    interopReference = null;
+    isMouseMode = null;
+    $(document).off('mousemove', mouseDragMove);
+    document.removeEventListener('touchmove', touchDragMove);
+    document.removeEventListener('touchend', dragEnd);
 };

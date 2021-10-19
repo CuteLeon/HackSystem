@@ -1,6 +1,6 @@
-﻿<div class="rounded-lg @(showBorderFlag?"border border-white":"border-0") text-nowrap text-white position-fixed" style="top:4rem; left:40rem; backdrop-filter:blur(10px);">
+﻿<div id="mainInfoPanel" class="rounded-lg @(showBorderFlag?"border border-white":"border-0") text-nowrap text-white position-fixed" style="top:4rem; left:40rem; backdrop-filter:blur(10px);">
     <div class="position-fixed float-left p-1" style="pointer-events: auto;" @onmouseover="e=>this.showBorderFlag=true" @onmouseout="e=>this.showBorderFlag=false">
-        <DraggableHandleComponent DragTarget=".border" Cursor="move">
+        <DraggableHandleComponent DragTargetId="mainInfoPanel" Cursor="move">
             <span class="fas fa-arrows-alt p-1 mb-0"></span>
         </DraggableHandleComponent>
         <p class="fas fa-circle-notch @(showRefreshingFlag?"fa-spin":string.Empty) p-1 mb-0" @onclick="e=>showRefreshingFlag=!showRefreshingFlag" style="cursor: pointer;"></p>
