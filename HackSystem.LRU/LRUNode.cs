@@ -55,17 +55,11 @@ public class LRUNode<TValue>
     {
         if (this.IsHead && this.IsTail) return;
 
-        if (!this.IsHead)
-        {
-            this.Next!.Previous = this.Previous;
-            this.Next = null;
-        }
+        if (!this.IsHead) this.Next!.Previous = this.Previous;
+        if (!this.IsTail) this.Previous!.Next = this.Next;
 
-        if (!this.IsTail)
-        {
-            this.Previous!.Next = this.Next;
-            this.Previous = null;
-        }
+        this.Next = null;
+        this.Previous = null;
     }
 
     public void RemovePrevious()
@@ -74,10 +68,7 @@ public class LRUNode<TValue>
 
         var previous = this.Previous!;
         this.Previous = previous.Previous;
-        if (this.Previous is not null)
-        {
-            this.Previous.Next = this;
-        }
+        if (this.Previous is not null) this.Previous.Next = this;
         previous.Previous = null;
         previous.Next = null;
     }
@@ -88,11 +79,11 @@ public class LRUNode<TValue>
 
         var next = this.Next!;
         this.Next = next.Next;
-        if (this.Next is not null)
-        {
-            this.Next.Previous = this;
-        }
+        if (this.Next is not null) this.Next.Previous = this;
         next.Previous = null;
         next.Next = null;
     }
+
+    public override string ToString()
+        => this.Value?.ToString() ?? String.Empty;
 }

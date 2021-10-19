@@ -91,6 +91,7 @@ public class LRUContainer<TKey, TValue>
             throw new KeyNotFoundException($"Not found key of {key}.");
 
         if (this.Head == node) return;
+        if (this.Tail == node) this.Tail = node.Next;
         node.RemoveSelf();
         this.Head!.SetNext(node);
         this.Head = node;
