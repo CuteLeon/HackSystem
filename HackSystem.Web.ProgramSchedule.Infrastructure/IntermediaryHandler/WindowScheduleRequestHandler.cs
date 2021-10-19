@@ -48,6 +48,7 @@ public class WindowScheduleRequestHandler : IWindowScheduleRequestHandler
         {
             // TODO: LEON: Get index from options;
             // TODO: LEON: Just render z-index, and keep other datas;
+            // TODO: LEON: Sort index from lowest to highest, set new index as Head's index + 1. And reset sort form lowest again if reach highest.
             foreach (var (window, index) in this.windowLRUContainer.GetValues().Select((window, index) => (window, index)))
             {
                 window.TierIndex = 949 - index;
