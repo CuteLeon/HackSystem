@@ -1,8 +1,8 @@
 ﻿@inject IJSRuntime jsRuntime
 
 <div class="position-fixed user-select-none flex-nowrap text-nowrap"
-     @onmouseup=@this.MouseUp
-     @ontouchend=@this.TouchEnd
+     @onmousedown=@this.MouseDown
+     @ontouchstart=@this.TouchStart
      style="padding:@(this.IsMaximized()?0:this.BorderSize)px; z-index:@this.TierIndex; pointer-events:auto; @this.GetWindowSizeStyle()">
 
     @if (!this.IsMaximized())
@@ -80,9 +80,9 @@
         _ => string.Empty
     };
 
-    private async Task MouseUp(MouseEventArgs args) => await this.OnFocusIn();
+    private async Task MouseDown(MouseEventArgs args) => await this.OnFocusIn();
 
-    private async Task TouchEnd(TouchEventArgs args) => await this.OnFocusIn();
+    private async Task TouchStart(TouchEventArgs args) => await this.OnFocusIn();
 
     protected async Task OnFocusIn()
     {
