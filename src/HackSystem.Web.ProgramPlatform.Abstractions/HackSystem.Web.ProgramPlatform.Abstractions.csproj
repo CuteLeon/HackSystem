@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -14,18 +14,18 @@
 		<PackageTags>HackSystem</PackageTags>
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<Description>Program Schedule Abstractions component of Hack System.</Description>
+		<Description>Web Program Platform abstraction component of Hack System.</Description>
 		<AssemblyVersion>1.0.0.4</AssemblyVersion>
 		<Version>$(AssemblyVersion)</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\LICENSE" Pack="true" PackagePath="" />
+		<None Include="..\..\LICENSE" Pack="true" PackagePath="" />
 		<None Include="..\HackSystem.Web\wwwroot\LogoImageIcon.png">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>
-		<None Include="..\README.md">
+		<None Include="..\..\README.md">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>
@@ -38,12 +38,12 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\HackSystem.Intermediary.Abstractions\HackSystem.Intermediary.Abstractions.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.Component.Abstractions\HackSystem.Web.Component.Abstractions.csproj" />
+		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule.Abstractions\HackSystem.Web.ProgramSchedule.Abstractions.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Using Include="System.Linq" />
 		<Using Include="Microsoft.AspNetCore.Components" />
-		<Using Include="Microsoft.Extensions.Logging" />
 	</ItemGroup>
 
 </Project>

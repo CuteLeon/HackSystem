@@ -20,12 +20,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Include="..\LICENSE" Pack="true" PackagePath="" />
+	  <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
 	  <None Include="..\HackSystem.Web\wwwroot\LogoImageIcon.png">
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>
 	  </None>
-	  <None Include="..\README.md">
+	  <None Include="..\..\README.md">
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>
 	  </None>
