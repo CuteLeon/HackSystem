@@ -3,6 +3,7 @@
 @attribute [Authorize(Roles = CommonSense.Roles.HackerRole)]
 
 @inject ILogger<DesktopComponent> logger
+@inject IOptionsSnapshot<WebComponentTierConfiguration> tierConfiguration
 @inject IMapper mapper
 @inject IToastHandler toastHandler
 @inject IProgramDetailService programDetailService
@@ -18,7 +19,7 @@
         </ProgramStatusView>
     </TopBarView>
 
-    <div id="topBar" class="fixed-top">
+    <div id="topBar" class="fixed-top" style="z-index:@this.tierConfiguration.Value.TopBar">
         <CascadingValue IsFixed="false" Name="DesktopTopBarView" Value=@this.TopBarView>
             <TopBarComponent BarHeight=ComponentContract.TopBarHeight />
         </CascadingValue>
@@ -42,7 +43,7 @@
         </div>
     </div>
 
-    <div class="position-fixed overflow-hidden" style="top:@(ComponentContract.TopBarHeight)px; right:0px; width:380px; height:100%; pointer-events: none;z-index:512;">
+    <div class="position-fixed overflow-hidden" style="top:@(ComponentContract.TopBarHeight)px; right:0px; width:380px; height:100%; pointer-events: none;z-index:@this.tierConfiguration.Value.ToastContainer;">
         <ToastContainerComponent @ref="ToastContainer" />
     </div>
 </div>

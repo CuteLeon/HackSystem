@@ -27,6 +27,7 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.HostEnvironment.Environment}.json", true, true);
 
 builder.Services
+    .Configure<WebComponentTierConfiguration>(config)
     .AddAutoMapper(typeof(Program).Assembly)
     .AddLogging()
     .AddBlazoredLocalStorage()

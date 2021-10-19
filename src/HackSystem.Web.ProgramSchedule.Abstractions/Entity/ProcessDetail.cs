@@ -20,8 +20,8 @@ public class ProcessDetail
         => this.ProgramWindowDetails.Values.AsEnumerable();
 
     public bool AddWindowDetail(ProgramWindowDetail windowDetail)
-        => windowDetail.ProcessDetail.Equals(this) ? this.ProgramWindowDetails.TryAdd(windowDetail.WindowId, windowDetail) : false;
+        => windowDetail.ProcessDetail.Equals(this) && this.ProgramWindowDetails.TryAdd(windowDetail.WindowId, windowDetail);
 
     public bool RemoveWindowDetail(ProgramWindowDetail windowDetail)
-        => windowDetail.ProcessDetail.Equals(this) ? this.ProgramWindowDetails.Remove(windowDetail.WindowId, out _) : false;
+        => windowDetail.ProcessDetail.Equals(this) && this.ProgramWindowDetails.Remove(windowDetail.WindowId, out _);
 }
