@@ -18,7 +18,7 @@
 [![GitHub commits since latest release (by date including pre-releases)](https://img.shields.io/github/commits-since/CuteLeon/HackSystem/latest/master?include_prereleases)](https://github.com/CuteLeon/HackSystem/releases)
 [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/CuteLeon/HackSystem/master)](https://github.com/CuteLeon/HackSystem/commits/master)
 
-![](https://raw.github.com/CuteLeon/HackSystem/master/HackSystem.Web/wwwroot/LogoImage.png)
+![](https://raw.github.com/CuteLeon/HackSystem/master/src/HackSystem.Web/wwwroot/LogoImage.png)
 
 ## Nuget Packages
 
@@ -59,41 +59,41 @@
 
 > Click image below to watch video.
 
-[![CuteLeon/HackSystem](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/VideoSplash.jpg)](https://www.bilibili.com/video/BV1di4y177TH/ "CuteLeon/HackSystem")
+[![CuteLeon/HackSystem](https://raw.github.com/CuteLeon/HackSystem/master/readme/VideoSplash.jpg)](https://www.bilibili.com/video/BV1di4y177TH/ "CuteLeon/HackSystem")
 
 # Screen
 
 ## Start Up
 
-![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/StartUp.jpg)
+![](https://raw.github.com/CuteLeon/HackSystem/master/readme/StartUp.jpg)
 
 
 
 ## Register
 
-![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/Register.jpg)
+![](https://raw.github.com/CuteLeon/HackSystem/master/readme/Register.jpg)
 
 
 
 ## Login
 
-![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/Login.jpg)
+![](https://raw.github.com/CuteLeon/HackSystem/master/readme/Login.jpg)
 
 
 
 ## Desktop Demo
 
-![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/DesktopDemo_0.jpg)
+![](https://raw.github.com/CuteLeon/HackSystem/master/readme/DesktopDemo_0.jpg)
 
-![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/DesktopDemo_2.jpg)
+![](https://raw.github.com/CuteLeon/HackSystem/master/readme/DesktopDemo_2.jpg)
 
-![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/DesktopDemo_1.jpg)
+![](https://raw.github.com/CuteLeon/HackSystem/master/readme/DesktopDemo_1.jpg)
 
 
 
 ## Task Scheduler
 
-![](https://raw.github.com/CuteLeon/HackSystem/master/ReadMe/TaskScheduler.jpg)
+![](https://raw.github.com/CuteLeon/HackSystem/master/readme/TaskScheduler.jpg)
 
 
 
