@@ -10,8 +10,7 @@
             </div>
             <div class="col-auto p-0">
                 <div class="custom-control custom-switch">
-                    @* @bind=this.TaskEnable *@
-                    <input type="checkbox" class="custom-control-input" checked name="switch_@this.TaskDetail.TaskID" id="switch_@this.TaskDetail.TaskID" />
+                    <input type="checkbox" class="custom-control-input" @bind=this.TaskEnable name="switch_@this.TaskDetail.TaskID" id="switch_@this.TaskDetail.TaskID" />
                     <label class="custom-control-label" for="switch_@this.TaskDetail.TaskID"></label>
                 </div>
             </div>
@@ -65,7 +64,6 @@
         }
     }
 
-    private const long TicksPerDay = 24L * 60L * 60L * 1000L * 10000L;
     private bool executing = false;
 
     private string GetExecuteTime()
@@ -81,17 +79,7 @@
             var interval => $"{interval.TotalDays} D"
         },
         TaskFrequency.Daily => this.TaskDetail.ExecuteDateTime.ToString("HH:mm:ss"),
-        TaskFrequency.Weekly => string.Concat((((this.TaskDetail.ExecuteDateTime.Ticks / TicksPerDay) + 1) % 7) switch
-        {
-            0L => "Sunday",
-            1L => "Monday",
-            2L => "Tuesday",
-            3L => "Wednesday",
-            4L => "Thursday",
-            5L => "Friday",
-            6L => "Saturday",
-            _ => string.Empty
-        }, this.TaskDetail.ExecuteDateTime.ToString("HH:mm:ss")),
+        TaskFrequency.Weekly => $"{this.TaskDetail.ExecuteDateTime.DayOfWeek} {this.TaskDetail.ExecuteDateTime.ToString("HH:mm:ss")}",
         TaskFrequency.Monthly => this.TaskDetail.ExecuteDateTime.ToString("dd HH:mm:ss"),
         TaskFrequency.Yearly => this.TaskDetail.ExecuteDateTime.ToString("MM-dd HH:mm:ss"),
         _ => "Unknown"
