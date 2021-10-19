@@ -46,6 +46,7 @@ public class WindowScheduleRequestHandler : IWindowScheduleRequestHandler
 
         if (scheduled)
         {
+            // TODO: LEON: WHAT IF SET Z_-INDEX BY JS DIRECTLY IEnumerable<(WindowID, TierIndex)> ???!!!
             // TODO: LEON: Get index from options;
             // TODO: LEON: Just render z-index, and keep other datas;
             // TODO: LEON: Sort index from lowest to highest, set new index as Head's index + 1. And reset sort form lowest again if reach highest.
