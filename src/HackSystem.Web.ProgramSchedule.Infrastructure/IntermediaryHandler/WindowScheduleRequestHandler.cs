@@ -26,38 +26,31 @@ public class WindowScheduleRequestHandler : IWindowScheduleRequestHandler
     public async Task<WindowScheduleResponse> Handle(WindowScheduleRequest request, CancellationToken cancellationToken)
     {
         this.logger.LogInformation($"Handle Window {request.ScheduleStates} request {request.ProgramWindowDetail.Caption} ...");
-        var scheduled = true;
-        switch (request.ScheduleStates)
+        if (request.ScheduleStates == WindowScheduleStates.Launch)
         {
-            case Abstractions.Enums.WindowScheduleStates.Schedule:
-                {
-                    scheduled = this.windowLRUContainer.BringToHead(request.ProgramWindowDetail);
-                    break;
-                }
-            case Abstractions.Enums.WindowScheduleStates.Launch:
-                {
-                    this.windowLRUContainer.Add(request.ProgramWindowDetail);
-                    break;
-                }
-            case Abstractions.Enums.WindowScheduleStates.Destory:
-                {
-                    this.windowLRUContainer.Remove(request.ProgramWindowDetail);
-                    break;
-                }
-            default:
-                break;
+            request.ProgramWindowDetail.TierIndex = this.windowLRUContainer.HeadValue?.TierIndex ??
+                this.tierConfiguration.BasicProgramSubscript;
+            this.windowLRUContainer.Add(request.ProgramWindowDetail);
         }
-        this.logger.LogInformation($"Window {request.ScheduleStates} request handled, {request.ProgramWindowDetail.Caption}.");
+        else if (request.ScheduleStates == WindowScheduleStates.Schedule)
+        {
+            if (this.windowLRUContainer.HeadValue == request.ProgramWindowDetail) return new WindowScheduleResponse(request.ScheduleStates, false);
 
-        if (scheduled && request.ScheduleStates != WindowScheduleStates.Destory)
-        {
-            // TODO: LEON: WHAT IF SET Z_-INDEX BY JS DIRECTLY IEnumerable<(WindowID, TierIndex)> ???!!!
-            // TODO: LEON: Get index from options;
-            // TODO: LEON: Just render z-index, and keep other datas;
-            // TODO: LEON: Sort index from lowest to highest, set new index as Head's index + 1. And reset sort form lowest again if reach highest.
             request.ProgramWindowDetail.TierIndex = this.windowLRUContainer.HeadValue!.TierIndex + 1;
-            this.OnWindowSchedule?.Invoke(request.ProgramWindowDetail);
+            this.windowLRUContainer.BringToHead(request.ProgramWindowDetail);
         }
-        return new WindowScheduleResponse(request.ScheduleStates, scheduled);
+        else if (request.ScheduleStates == WindowScheduleStates.Destory)
+        {
+            request.ProgramWindowDetail.TierIndex = this.tierConfiguration.BasicProgramSubscript;
+            this.windowLRUContainer.Remove(request.ProgramWindowDetail);
+        }
+
+        this.logger.LogInformation($"Window {request.ScheduleStates} request handled, {request.ProgramWindowDetail.Caption}.");
+        // TODO: LEON: WHAT IF SET Z_-INDEX BY JS DIRECTLY IEnumerable<(WindowID, TierIndex)> ???!!!
+        // TODO: LEON: Get index from options;
+        // TODO: LEON: Just render z-index, and keep other datas;
+        // TODO: LEON: Sort index from lowest to highest, set new index as Head's index + 1. And reset sort form lowest again if reach highest.
+        this.OnWindowSchedule?.Invoke(request.ProgramWindowDetail);
+        return new WindowScheduleResponse(request.ScheduleStates, true);
     }
 }
