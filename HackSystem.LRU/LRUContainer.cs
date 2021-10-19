@@ -5,8 +5,8 @@ namespace HackSystem.LRU;
 public class LRUContainer<TValue> : LRUContainer<TValue, TValue>
     where TValue : notnull
 {
-    public LRUContainer()
-        : base(new Func<TValue, TValue>(value => value))
+    public LRUContainer(int capacity = 100)
+        : base(new Func<TValue, TValue>(value => value), capacity)
     {
     }
 }
@@ -17,14 +17,16 @@ public class LRUContainer<TKey, TValue>
     protected Func<TValue, TKey> KeySelector { get; init; }
     protected ConcurrentDictionary<TKey, LRUNode<TValue>> Nodes { get; init; } = new();
 
+    public int Capacity { get; init; }
     public TValue? HeadValue { get => this.Head is null ? default : this.Head!.Value; }
     public TValue? TailValue { get => this.Tail is null ? default : this.Tail!.Value; }
 
     protected LRUNode<TValue>? Head { get; set; }
     protected LRUNode<TValue>? Tail { get; set; }
 
-    public LRUContainer(Func<TValue, TKey> keySelector)
+    public LRUContainer(Func<TValue, TKey> keySelector, int capacity = 100)
     {
+        this.Capacity = capacity > 0 ? capacity : throw new ArgumentOutOfRangeException($"Capacity should not be or less than 0.");
         this.KeySelector = keySelector;
     }
 
