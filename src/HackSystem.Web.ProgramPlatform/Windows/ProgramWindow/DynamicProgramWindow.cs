@@ -21,6 +21,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
     [JSInvokable]
     public void UpdatePosition(double left, double top)
     {
+        this.Logger.LogInformation($"Sync window position at ({left}, {top}).");
         this.ProgramWindowStyle.Left = $"{left}px";
         this.ProgramWindowStyle.Top = $"{top}px";
     }
@@ -28,6 +29,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
     [JSInvokable]
     public void UpdateSize(double left, double top, double width, double height)
     {
+        this.Logger.LogInformation($"Sync window size as ({width}, {height}).");
         this.UpdatePosition(left, top);
         this.ProgramWindowStyle.Width = $"{width}px";
         this.ProgramWindowStyle.Height = $"{height}px";
