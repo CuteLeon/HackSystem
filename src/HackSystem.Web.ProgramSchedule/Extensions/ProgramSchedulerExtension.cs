@@ -28,6 +28,7 @@ public static class ProgramSchedulerExtension
             .AddSingleton<IPIDGenerator, PIDGenerator>()
             .AddSingleton<IProgramAssemblyLoader, ProgramAssemblyLoader>()
             .AddSingleton<IProcessContainer, ProcessContainer>()
+            .AddSingleton<IWindowLauncher, WindowLauncher>()
             .AddSingleton<IProgramLauncher, ProgramLauncher>()
             .AddSingleton<IProcessDestroyer, ProcessDestroyer>()
             .AddSingleton<IWindowDestroyer, WindowDestroyer>()

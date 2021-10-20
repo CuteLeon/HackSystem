@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Text.Json;
-using HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
 using HackSystem.Web.ProgramSchedule.Abstractions.Enums;
 using HackSystem.Web.ProgramSchedule.AssemblyLoader;
 using HackSystem.Web.ProgramSchedule.Container;
@@ -17,20 +16,20 @@ public class ProgramLauncher : IProgramLauncher
     private readonly IProgramAssemblyLoader programAssemblyLoader;
     private readonly IPIDGenerator pIDGenerator;
     private readonly IProcessContainer processContainer;
-    private readonly IIntermediaryRequestSender requestSender;
+    private readonly IWindowLauncher windowLauncher;
 
     public ProgramLauncher(
         ILogger<ProgramLauncher> logger,
         IProgramAssemblyLoader programAssemblyLoader,
         IPIDGenerator pIDGenerator,
         IProcessContainer processContainer,
-        IIntermediaryRequestSender requestSender)
+        IWindowLauncher windowLauncher)
     {
         this.logger = logger;
         this.programAssemblyLoader = programAssemblyLoader;
         this.pIDGenerator = pIDGenerator;
         this.processContainer = processContainer;
-        this.requestSender = requestSender;
+        this.windowLauncher = windowLauncher;
     }
 
     public async Task<ProcessDetail?> LaunchProgram(ProgramDetail programDetail)
@@ -51,27 +50,6 @@ public class ProgramLauncher : IProgramLauncher
 
         var processId = this.pIDGenerator.GetAvailablePID();
         var process = new ProcessDetail(processId, programDetail);
-        ProgramWindowDetail programWindowDetail = default;
-        if (programDetail.ProgramEntryComponentType is not null)
-        {
-            if (typeof(ProgramComponentBase).IsAssignableFrom(programDetail.ProgramEntryComponentType))
-            {
-                programWindowDetail = new ProgramWindowDetail(
-                    Guid.NewGuid().ToString(),
-                    programDetail.ProgramEntryComponentType,
-                    process)
-                {
-                    Caption = programDetail.Name,
-                };
-                process.AddWindowDetail(programWindowDetail);
-            }
-            else
-            {
-                throw new TypeLoadException($"Program entry component type must derive from {typeof(ProgramComponentBase).Name}.");
-            }
-        }
-        this.logger.LogInformation($"Creating process of program with Name={programDetail.Name} ({process.ProcessId})");
-
         var result = this.processContainer.LaunchProcess(process);
         if (!result)
         {
@@ -79,11 +57,8 @@ public class ProgramLauncher : IProgramLauncher
             return default;
         }
 
-        this.logger.LogInformation($"Launched process.");
-        if (programWindowDetail is not null)
-        {
-            _ = await this.requestSender.Send(new WindowScheduleRequest(programWindowDetail, WindowScheduleStates.Launch));
-        }
+        var programWindowDetail = programDetail.ProgramEntryComponentType is null ? default :
+            await this.windowLauncher.LaunchWindow(process, programDetail.ProgramEntryComponentType, programDetail.Name);
         return process;
     }
 
