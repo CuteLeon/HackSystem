@@ -49,4 +49,6 @@ public class ProgramDetail
     public bool SingleInstance { get; init; }
 
     public bool Mandatory { get; init; }
+
+    public List<ProcessDetail> Processes { get; init; } = new();
 }
