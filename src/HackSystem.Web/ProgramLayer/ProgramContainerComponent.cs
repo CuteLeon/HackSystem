@@ -14,7 +14,6 @@ public partial class ProgramContainerComponent : IDisposable
 {
     protected async override Task OnInitializedAsync()
     {
-        this.processContainer.OnProcessChange += this.ProcessChangedHandler;
         this.windowScheduleRequestHandler.OnWindowSchedule += this.WindowScheduleHandler;
         await base.OnInitializedAsync();
     }
@@ -33,7 +32,6 @@ public partial class ProgramContainerComponent : IDisposable
 
     public void Dispose()
     {
-        this.processContainer.OnProcessChange -= this.ProcessChangedHandler;
         this.windowScheduleRequestHandler.OnWindowSchedule -= this.WindowScheduleHandler;
     }
 }

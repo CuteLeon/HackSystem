@@ -8,13 +8,13 @@ public class WindowScheduleRequest : IIntermediaryRequest<WindowScheduleResponse
 {
     public WindowScheduleRequest(
         ProgramWindowDetail programWindowDetail,
-        WindowScheduleStates scheduleStates)
+        WindowChangeStates changeStates)
     {
         this.ProgramWindowDetail = programWindowDetail;
-        this.ScheduleStates = scheduleStates;
+        this.ChangeStates = changeStates;
     }
 
     public ProgramWindowDetail ProgramWindowDetail { get; init; }
 
-    public WindowScheduleStates ScheduleStates { get; init; }
+    public WindowChangeStates ChangeStates { get; init; }
 }

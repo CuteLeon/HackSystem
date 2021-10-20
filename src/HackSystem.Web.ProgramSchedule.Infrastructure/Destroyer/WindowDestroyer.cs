@@ -8,17 +8,20 @@ namespace HackSystem.Web.ProgramSchedule.Infrastructure.Destroyer;
 public class WindowDestroyer : IWindowDestroyer
 {
     private readonly ILogger<WindowDestroyer> logger;
-    private readonly IIntermediaryCommandSender commandSender;
+    private readonly IProcessDestroyer processDestroyer;
     private readonly IIntermediaryRequestSender requestSender;
+    private readonly IIntermediaryEventPublisher eventPublisher;
 
     public WindowDestroyer(
         ILogger<WindowDestroyer> logger,
-        IIntermediaryCommandSender commandSender,
-        IIntermediaryRequestSender requestSender)
+        IProcessDestroyer processDestroyer,
+        IIntermediaryRequestSender requestSender,
+        IIntermediaryEventPublisher eventPublisher)
     {
         this.logger = logger;
-        this.commandSender = commandSender;
+        this.processDestroyer = processDestroyer;
         this.requestSender = requestSender;
+        this.eventPublisher = eventPublisher;
     }
 
     public async Task DestroyWindow(ProgramWindowDetail windowDetail)
@@ -27,7 +30,8 @@ public class WindowDestroyer : IWindowDestroyer
         this.logger.LogInformation($"Handle Window destroy command: Window {windowDetail.WindowId} of Process {processDetail.ProcessId} ...");
         if (processDetail.RemoveWindowDetail(windowDetail))
         {
-            _ = await this.requestSender.Send(new WindowScheduleRequest(windowDetail, WindowScheduleStates.Destory));
+            _ = await this.requestSender.Send(new WindowScheduleRequest(windowDetail, WindowChangeStates.Destory));
+            await this.eventPublisher.Publish(new WindowChangeEvent(WindowChangeStates.Destory, windowDetail));
         }
         else
         {
@@ -38,7 +42,7 @@ public class WindowDestroyer : IWindowDestroyer
             !processDetail.GetWindowDetails().Any())
         {
             this.logger.LogInformation($"Send Destory process command of {processDetail.ProcessId} as all windows destoryed...");
-            await this.commandSender.Send(new ProcessDestroyCommand(processDetail));
+            _ = await this.processDestroyer.DestroyProcess(processDetail.ProcessId);
         }
         GC.Collect();
         this.logger.LogInformation($"Window {windowDetail.WindowId} destroy command handled.");

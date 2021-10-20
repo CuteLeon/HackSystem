@@ -5,14 +5,14 @@ namespace HackSystem.Web.ProgramSchedule.Intermediary;
 public class WindowScheduleResponse
 {
     public WindowScheduleResponse(
-        WindowScheduleStates scheduleStates,
+        WindowChangeStates changeStates,
         bool scheduled)
     {
-        this.ScheduleStates = scheduleStates;
+        this.ChangeStates = changeStates;
         this.Scheduled = scheduled;
     }
 
-    public WindowScheduleStates ScheduleStates { get; init; }
+    public WindowChangeStates ChangeStates { get; init; }
 
     public bool Scheduled { get; init; }
 }

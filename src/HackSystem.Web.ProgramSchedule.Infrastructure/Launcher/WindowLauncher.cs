@@ -10,13 +10,16 @@ public class WindowLauncher : IWindowLauncher
 {
     private readonly ILogger<WindowLauncher> logger;
     private readonly IIntermediaryRequestSender requestSender;
+    private readonly IIntermediaryEventPublisher eventPublisher;
 
     public WindowLauncher(
         ILogger<WindowLauncher> logger,
-        IIntermediaryRequestSender requestSender)
+        IIntermediaryRequestSender requestSender,
+        IIntermediaryEventPublisher eventPublisher)
     {
         this.logger = logger;
         this.requestSender = requestSender;
+        this.eventPublisher = eventPublisher;
     }
 
     public async Task<ProgramWindowDetail> LaunchWindow(ProcessDetail process, Type windowComponentType, string caption)
@@ -28,7 +31,8 @@ public class WindowLauncher : IWindowLauncher
         var programWindowDetail = new ProgramWindowDetail(Guid.NewGuid().ToString(), windowComponentType, process) { Caption = caption };
         process.AddWindowDetail(programWindowDetail);
         this.logger.LogInformation($"Window {programWindowDetail.Caption} ({programWindowDetail.WindowId}) of process {process.ProcessId} launched.");
-        _ = await this.requestSender.Send(new WindowScheduleRequest(programWindowDetail, WindowScheduleStates.Launch));
+        _ = await this.requestSender.Send(new WindowScheduleRequest(programWindowDetail, WindowChangeStates.Launch));
+        await this.eventPublisher.Publish(new WindowChangeEvent(WindowChangeStates.Launch, programWindowDetail));
         return programWindowDetail;
     }
 }

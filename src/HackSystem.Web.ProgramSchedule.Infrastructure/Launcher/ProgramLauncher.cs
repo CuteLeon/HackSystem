@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using System.Text.Json;
-using HackSystem.Web.ProgramSchedule.Abstractions.Enums;
 using HackSystem.Web.ProgramSchedule.AssemblyLoader;
 using HackSystem.Web.ProgramSchedule.Container;
 using HackSystem.Web.ProgramSchedule.Entity;
+using HackSystem.Web.ProgramSchedule.Enums;
 using HackSystem.Web.ProgramSchedule.IDGenerator;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 using HackSystem.Web.ProgramSchedule.Launcher;
@@ -17,19 +17,22 @@ public class ProgramLauncher : IProgramLauncher
     private readonly IPIDGenerator pIDGenerator;
     private readonly IProcessContainer processContainer;
     private readonly IWindowLauncher windowLauncher;
+    private readonly IIntermediaryEventPublisher eventPublisher;
 
     public ProgramLauncher(
         ILogger<ProgramLauncher> logger,
         IProgramAssemblyLoader programAssemblyLoader,
         IPIDGenerator pIDGenerator,
         IProcessContainer processContainer,
-        IWindowLauncher windowLauncher)
+        IWindowLauncher windowLauncher,
+        IIntermediaryEventPublisher eventPublisher)
     {
         this.logger = logger;
         this.programAssemblyLoader = programAssemblyLoader;
         this.pIDGenerator = pIDGenerator;
         this.processContainer = processContainer;
         this.windowLauncher = windowLauncher;
+        this.eventPublisher = eventPublisher;
     }
 
     public async Task<ProcessDetail?> LaunchProgram(ProgramDetail programDetail)
@@ -57,6 +60,7 @@ public class ProgramLauncher : IProgramLauncher
             return default;
         }
 
+        await this.eventPublisher.Publish(new ProcessChangeEvent(ProcessChangeStates.Launch, process));
         var programWindowDetail = programDetail.ProgramEntryComponentType is null ? default :
             await this.windowLauncher.LaunchWindow(process, programDetail.ProgramEntryComponentType, programDetail.Name);
         return process;

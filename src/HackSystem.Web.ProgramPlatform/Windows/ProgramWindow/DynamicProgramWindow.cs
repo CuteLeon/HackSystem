@@ -48,7 +48,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
         this.ProgramWindowStyle.WindowState = this.ProgramWindowStyle.WindowState == ProgramWindowStates.Maximized ?
             ProgramWindowStates.Normal :
             ProgramWindowStates.Maximized;
-        _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowScheduleStates.Schedule));
+        _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Schedule));
         this.StateHasChanged();
     }
 
@@ -60,7 +60,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
 
     protected async Task OnWindowFocusIn()
     {
-        var windowScheduleResponse = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowScheduleStates.Schedule));
+        var windowScheduleResponse = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Schedule));
         if (windowScheduleResponse.Scheduled)
         {
             this.Logger.LogInformation($"Scheduled window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");

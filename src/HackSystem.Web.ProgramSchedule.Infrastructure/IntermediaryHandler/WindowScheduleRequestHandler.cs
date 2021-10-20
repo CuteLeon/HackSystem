@@ -25,28 +25,28 @@ public class WindowScheduleRequestHandler : IWindowScheduleRequestHandler
 
     public async Task<WindowScheduleResponse> Handle(WindowScheduleRequest request, CancellationToken cancellationToken)
     {
-        this.logger.LogInformation($"Handle Window {request.ScheduleStates} request {request.ProgramWindowDetail.Caption} ...");
-        if (request.ScheduleStates == WindowScheduleStates.Launch)
+        this.logger.LogInformation($"Handle Window {request.ChangeStates} request {request.ProgramWindowDetail.Caption} ...");
+        if (request.ChangeStates == WindowChangeStates.Launch)
         {
             request.ProgramWindowDetail.TierIndex = this.GetNewTierIndex();
             this.windowLRUContainer.Add(request.ProgramWindowDetail);
         }
-        else if (request.ScheduleStates == WindowScheduleStates.Schedule)
+        else if (request.ChangeStates == WindowChangeStates.Schedule)
         {
-            if (this.windowLRUContainer.HeadValue == request.ProgramWindowDetail) return new WindowScheduleResponse(request.ScheduleStates, false);
+            if (this.windowLRUContainer.HeadValue == request.ProgramWindowDetail) return new WindowScheduleResponse(request.ChangeStates, false);
 
             request.ProgramWindowDetail.TierIndex = this.GetNewTierIndex();
             this.windowLRUContainer.BringToHead(request.ProgramWindowDetail);
         }
-        else if (request.ScheduleStates == WindowScheduleStates.Destory)
+        else if (request.ChangeStates == WindowChangeStates.Destory)
         {
             request.ProgramWindowDetail.TierIndex = this.tierConfiguration.BasicProgramSubscript;
             this.windowLRUContainer.Remove(request.ProgramWindowDetail);
         }
 
-        this.logger.LogInformation($"Window {request.ScheduleStates} request handled, {request.ProgramWindowDetail.Caption} ({request.ProgramWindowDetail.TierIndex}).");
+        this.logger.LogInformation($"Window {request.ChangeStates} request handled, {request.ProgramWindowDetail.Caption} ({request.ProgramWindowDetail.TierIndex}).");
         this.OnWindowSchedule?.Invoke(request.ProgramWindowDetail);
-        return new WindowScheduleResponse(request.ScheduleStates, true);
+        return new WindowScheduleResponse(request.ChangeStates, true);
     }
 
     private int GetNewTierIndex()

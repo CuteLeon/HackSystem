@@ -2,7 +2,6 @@
 using System.Collections.Immutable;
 using HackSystem.Web.ProgramSchedule.Container;
 using HackSystem.Web.ProgramSchedule.Entity;
-using HackSystem.Web.ProgramSchedule.Enums;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.Container;
 
@@ -11,8 +10,6 @@ public class ProcessContainer : IProcessContainer
     private readonly ILogger<ProcessContainer> logger;
 
     protected ConcurrentDictionary<int, ProcessDetail> Processes { get; init; } = new();
-
-    public event IProcessContainer.ProcessChangeHandler? OnProcessChange;
 
     public ProcessContainer(ILogger<ProcessContainer> logger)
     {
@@ -35,10 +32,6 @@ public class ProcessContainer : IProcessContainer
     {
         this.logger.LogInformation($"Process container, add process => {processDetail.ProcessId} ID");
         var result = this.Processes.TryAdd(processDetail.ProcessId, processDetail);
-        if (result)
-        {
-            this.OnProcessChange?.Invoke(ProcessChangeStates.Launch, processDetail);
-        }
         return result;
     }
 
@@ -46,10 +39,6 @@ public class ProcessContainer : IProcessContainer
     {
         this.logger.LogInformation($"Process container, remove process => {processID} ID");
         var result = this.Processes.TryRemove(processID, out processDetail);
-        if (result && OnProcessChange != null)
-        {
-            this.OnProcessChange?.Invoke(ProcessChangeStates.Destroy, processDetail);
-        }
         return result;
     }
 }
