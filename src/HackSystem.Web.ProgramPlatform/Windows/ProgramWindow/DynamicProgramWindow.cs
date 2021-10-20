@@ -35,26 +35,27 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
         this.ProgramWindowStyle.Height = $"{height}px";
     }
 
-    public virtual void OnMin()
+    public virtual async Task OnMin()
     {
         this.Logger.LogInformation($"Min window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
         this.ProgramWindowStyle.WindowState = ProgramWindowStates.Minimized;
         this.StateHasChanged();
     }
 
-    public virtual void OnMaxRestore()
+    public virtual async Task OnMaxRestore()
     {
         this.Logger.LogInformation($"Switch max window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
         this.ProgramWindowStyle.WindowState = this.ProgramWindowStyle.WindowState == ProgramWindowStates.Maximized ?
             ProgramWindowStates.Normal :
             ProgramWindowStates.Maximized;
+        _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowScheduleStates.Schedule));
         this.StateHasChanged();
     }
 
-    public virtual void OnClose()
+    public virtual async Task OnClose()
     {
         this.Logger.LogInformation($"Close window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
-        this.CommandSender.Send(new WindowDestroyCommand(this.ProgramWindowDetail));
+        await this.CommandSender.Send(new WindowDestroyCommand(this.ProgramWindowDetail));
     }
 
     protected async Task OnWindowFocusIn()
