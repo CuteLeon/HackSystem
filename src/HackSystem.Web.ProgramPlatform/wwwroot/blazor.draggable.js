@@ -30,7 +30,7 @@ export function dragStart(interop, isMouse, startX, startY, dragTargetId) {
     }
 };
 
-export function mouseDragMove(e) {
+function mouseDragMove(e) {
     if (e.button === 0) {
         if (dragTarget !== undefined &&
             dragTarget !== null) {
@@ -42,7 +42,7 @@ export function mouseDragMove(e) {
     }
 };
 
-export function touchDragMove(e) {
+function touchDragMove(e) {
     let $event = $.event.fix(e);
     if (dragTarget !== undefined &&
         dragTarget !== null) {
@@ -55,7 +55,7 @@ export function touchDragMove(e) {
     }
 };
 
-export function dragEnd(e) {
+function dragEnd(e) {
     if (interopReference != null) {
         let left = 0, top = 0;
         if (isMouseMode) {

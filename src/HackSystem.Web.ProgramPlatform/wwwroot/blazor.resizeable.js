@@ -117,7 +117,7 @@ export function resizeStart(interop, isMouse, startX, startY, resizeTargetId, cu
     }
 };
 
-export function mouse_N_Resize(e) {
+function mouse_N_Resize(e) {
     if (resizeTarget !== undefined &&
         resizeTarget !== null) {
         let top = e.clientY - resizeData.diffY;
@@ -126,7 +126,7 @@ export function mouse_N_Resize(e) {
         $(resizeTarget).css('height', resizeData.bottom - top);
     }
 };
-export function mouse_W_Resize(e) {
+function mouse_W_Resize(e) {
     if (resizeTarget !== undefined &&
         resizeTarget !== null) {
         let left = e.clientX - resizeData.diffX;
@@ -135,37 +135,37 @@ export function mouse_W_Resize(e) {
         $(resizeTarget).css('width', resizeData.right - left);
     }
 };
-export function mouse_E_Resize(e) {
+function mouse_E_Resize(e) {
     if (resizeTarget !== undefined &&
         resizeTarget !== null) {
         if (resizeData.left <= e.clientX && e.clientX <= document.documentElement.clientWidth)
             $(resizeTarget).css('width', e.clientX - resizeData.left + resizeData.diffX);
     }
 };
-export function mouse_S_Resize(e) {
+function mouse_S_Resize(e) {
     if (resizeTarget !== undefined &&
         resizeTarget !== null) {
         if (resizeData.top <= e.clientY && e.clientY <= document.documentElement.clientHeight)
             $(resizeTarget).css('height', e.clientY - resizeData.top + resizeData.diffY);
     }
 };
-export function mouse_NW_Resize(e) {
+function mouse_NW_Resize(e) {
     mouse_N_Resize(e);
     mouse_W_Resize(e);
 };
-export function mouse_NE_Resize(e) {
+function mouse_NE_Resize(e) {
     mouse_N_Resize(e);
     mouse_E_Resize(e);
 };
-export function mouse_SW_Resize(e) {
+function mouse_SW_Resize(e) {
     mouse_S_Resize(e);
     mouse_W_Resize(e);
 };
-export function mouse_SE_Resize(e) {
+function mouse_SE_Resize(e) {
     mouse_S_Resize(e);
     mouse_E_Resize(e);
 };
-export function touch_N_Resize(e) {
+function touch_N_Resize(e) {
     let $event = $.event.fix(e);
     let clientY = $event.touches[0].clientY;
     if (resizeTarget !== undefined &&
@@ -176,7 +176,7 @@ export function touch_N_Resize(e) {
         $(resizeTarget).css('height', resizeData.bottom - top);
     }
 };
-export function touch_W_Resize(e) {
+function touch_W_Resize(e) {
     let $event = $.event.fix(e);
     let clientX = $event.touches[0].clientX;
     if (resizeTarget !== undefined &&
@@ -187,7 +187,7 @@ export function touch_W_Resize(e) {
         $(resizeTarget).css('width', resizeData.right - left);
     }
 };
-export function touch_E_Resize(e) {
+function touch_E_Resize(e) {
     let $event = $.event.fix(e);
     let clientX = $event.touches[0].clientX;
     if (resizeTarget !== undefined &&
@@ -196,7 +196,7 @@ export function touch_E_Resize(e) {
             $(resizeTarget).css('width', clientX - resizeData.left + resizeData.diffX);
     }
 };
-export function touch_S_Resize(e) {
+function touch_S_Resize(e) {
     let $event = $.event.fix(e);
     let clientY = $event.touches[0].clientY;
     if (resizeTarget !== undefined &&
@@ -205,24 +205,24 @@ export function touch_S_Resize(e) {
             $(resizeTarget).css('height', clientY - resizeData.top + resizeData.diffY);
     }
 };
-export function touch_NW_Resize(e) {
+function touch_NW_Resize(e) {
     touch_N_Resize(e);
     touch_W_Resize(e);
 };
-export function touch_NE_Resize(e) {
+function touch_NE_Resize(e) {
     touch_N_Resize(e);
     touch_E_Resize(e);
 };
-export function touch_SW_Resize(e) {
+function touch_SW_Resize(e) {
     touch_S_Resize(e);
     touch_W_Resize(e);
 };
-export function touch_SE_Resize(e) {
+function touch_SE_Resize(e) {
     touch_S_Resize(e);
     touch_E_Resize(e);
 };
 
-export function resizeEnd(e) {
+function resizeEnd(e) {
     if (isMouseMode) {
         $(document).off('mousemove', mouseResizeMoveMethod);
     } else {
