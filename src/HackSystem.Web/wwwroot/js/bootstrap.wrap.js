@@ -7,12 +7,6 @@
     },
 };
 
-window.popover = {
-    initPopover: function (popoverFilter) {
-        $(popoverFilter).popover();
-    },
-};
-
 window.submenus = {
     initSubMenus: function () {
         $('[data-submenu]').submenupicker();
