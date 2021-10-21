@@ -50,5 +50,14 @@ public class ProgramDetail
 
     public bool Mandatory { get; init; }
 
-    public List<ProcessDetail> Processes { get; init; } = new();
+    protected Dictionary<int, ProcessDetail> ProcessDetails { get; init; } = new();
+
+    public IEnumerable<ProcessDetail> GetProcessDetails()
+    => this.ProcessDetails.Values.AsEnumerable();
+
+    public bool AddProcessDetail(ProcessDetail processDetail)
+        => processDetail.ProgramDetail.Equals(this) && this.ProcessDetails.TryAdd(processDetail.ProcessId, processDetail);
+
+    public bool RemoveProcessDetail(ProcessDetail processDetail)
+        => processDetail.ProgramDetail.Equals(this) && this.ProcessDetails.Remove(processDetail.ProcessId, out _);
 }

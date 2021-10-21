@@ -2,15 +2,24 @@
 
 public class ProcessDetail
 {
+    public ProcessDetail(int processId, ProgramDetail programDetail)
+        : this(processId, programDetail, DateTime.Now)
+    {
+    }
+
     public ProcessDetail(
         int processId,
-        ProgramDetail programDetail)
+        ProgramDetail programDetail,
+        DateTime launchTime)
     {
-        ProcessId = processId;
-        ProgramDetail = programDetail;
+        this.ProcessId = processId;
+        this.ProgramDetail = programDetail;
+        this.LaunchTime = launchTime;
     }
 
     public int ProcessId { get; init; }
+
+    public DateTime LaunchTime { get; init; }
 
     public ProgramDetail ProgramDetail { get; init; }
 

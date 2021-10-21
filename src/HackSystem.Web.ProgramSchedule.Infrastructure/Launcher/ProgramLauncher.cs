@@ -60,6 +60,7 @@ public class ProgramLauncher : IProgramLauncher
             return default;
         }
 
+        programDetail.AddProcessDetail(process);
         await this.eventPublisher.Publish(new ProcessChangeEvent(ProcessChangeStates.Launch, process));
         var programWindowDetail = programDetail.ProgramEntryComponentType is null ? default :
             await this.windowLauncher.LaunchWindow(process, programDetail.ProgramEntryComponentType, programDetail.Name);

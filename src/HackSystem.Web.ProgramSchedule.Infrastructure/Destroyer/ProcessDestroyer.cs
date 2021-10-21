@@ -31,6 +31,8 @@ public class ProcessDestroyer : IProcessDestroyer
             this.logger.LogWarning($"Didn't destroy process {processID}.");
             return default;
         }
+
+        process!.ProgramDetail.RemoveProcessDetail(process);
         await this.eventPublisher.Publish(new ProcessChangeEvent(ProcessChangeStates.Launch, process));
         GC.Collect();
         this.logger.LogInformation($"Destroy process {processID}.");
