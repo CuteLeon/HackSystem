@@ -10,5 +10,5 @@ public class UserProgramMapResponse
 
     public bool PinToTop { get; set; }
 
-    public string Rename { get; set; }
+    public string? Rename { get; set; }
 }
