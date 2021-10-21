@@ -33,7 +33,7 @@ public class ProcessDestroyer : IProcessDestroyer
         }
 
         process!.ProgramDetail.RemoveProcessDetail(process);
-        await this.eventPublisher.Publish(new ProcessChangeEvent(ProcessChangeStates.Launch, process));
+        await this.eventPublisher.Publish(new ProcessChangeEvent(ProcessChangeStates.Destroy, process));
         GC.Collect();
         this.logger.LogInformation($"Destroy process {processID}.");
         return process;

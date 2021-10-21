@@ -1,25 +1,23 @@
 ﻿@inject IJSRuntime jsRuntime
 @inject ILogger<ProgramDockComponent> logger
-@inject IProcessContainer processContainer
 @inject IIntermediaryRequestSender intermediaryRequestSender
 @inject IIntermediaryEventHandler<ProcessChangeEvent> processChangeEventHandler
 @inject IIntermediaryEventHandler<WindowChangeEvent> windowChangeEventHandler
 
-@if (this.UserProgramMaps?.Any() ?? false)
+@if (this.DockedProgramMaps.Any() || this.UndockedRunningProgramMaps.Any())
 {
     <div class="border-bottom border-white px-4 rounded-pill shadow" style="pointer-events: auto; backdrop-filter: blur(10px);">
         <div class="d-flex justify-content-center user-select-none">
-            @foreach (var programMap in this.GetDockedRuningUserProgramMaps())
+            @foreach (var programMap in this.DockedProgramMaps.Values)
             {
                 var programDockKey = $"programDockKey_{programMap.Program.Id}";
                 <ProgramDockIconComponent @key="@programDockKey" UserProgramMap="programMap" OnIconSelect="@this.OnIconSelect" />
             }
             @{
-                var undockedProgramMaps = this.GetUndockedRuningUserProgramMaps();
-                if (undockedProgramMaps.Any())
+                if (this.UndockedRunningProgramMaps.Any())
                 {
                     <img class="mt-n4 px-1" src="/images/Dock/DockDivider.png" style="object-fit:scale-down;">
-                    @foreach (var undockedProgramMap in undockedProgramMaps)
+                    @foreach (var undockedProgramMap in this.UndockedRunningProgramMaps.Values)
                     {
                         var programDockKey = $"programDockKey_{undockedProgramMap.Program.Id}";
                         <ProgramDockIconComponent @key="@programDockKey" UserProgramMap="undockedProgramMap" OnIconSelect="@this.OnIconSelect" />
@@ -31,5 +29,9 @@
 }
 
 @code {
-    protected Dictionary<string, UserProgramMap> UserProgramMaps { get; set; }
+    protected Dictionary<string, UserProgramMap> UserProgramMaps { get; set; } = new();
+
+    protected Dictionary<string, UserProgramMap> DockedProgramMaps { get; set; } = new();
+
+    protected Dictionary<string, UserProgramMap> UndockedRunningProgramMaps { get; set; } = new();
 }

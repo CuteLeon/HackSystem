@@ -1,5 +1,6 @@
 ﻿using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
 using HackSystem.Web.ProgramSchedule.Entity;
+using HackSystem.Web.ProgramSchedule.Enums;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 
 namespace HackSystem.Web.ProgramDock;
@@ -15,23 +16,48 @@ public partial class ProgramDockComponent
 
     private void OnProcessChangeEvent(object sender, ProcessChangeEvent e)
     {
-        this.StateHasChanged();
+        if (e.ChangeStates == ProcessChangeStates.Launch)
+        {
+            if (this.DockedProgramMaps.ContainsKey(e.ProcessDetail.ProgramDetail.Id) ||
+                this.UndockedRunningProgramMaps.ContainsKey(e.ProcessDetail.ProgramDetail.Id)) return;
+            if (!this.UserProgramMaps.TryGetValue(e.ProcessDetail.ProgramDetail.Id, out var programMap)) return;
+
+            (programMap.PinToDock ? DockedProgramMaps : UndockedRunningProgramMaps).Add(programMap.Program.Id, programMap);
+            this.StateHasChanged();
+        }
+        else if (e.ChangeStates == ProcessChangeStates.Destroy)
+        {
+            if (this.DockedProgramMaps.ContainsKey(e.ProcessDetail.ProgramDetail.Id) ||
+                !this.UndockedRunningProgramMaps.ContainsKey(e.ProcessDetail.ProgramDetail.Id)) return;
+            if (!this.UserProgramMaps.TryGetValue(e.ProcessDetail.ProgramDetail.Id, out var programMap)) return;
+            if (e.ProcessDetail.ProgramDetail.GetProcessDetails().Any()) return;
+            this.UndockedRunningProgramMaps.Remove(programMap.Program.Id);
+            this.StateHasChanged();
+        }
     }
 
     private void OnWindowChangeEvent(object sender, WindowChangeEvent e)
     {
+        // TODO: LEON: Update ICON's windows collection of process
         this.StateHasChanged();
     }
 
     public void ClearProgramDock()
     {
-        this.UserProgramMaps = default;
+        this.UserProgramMaps.Clear();
+        this.DockedProgramMaps.Clear();
+        this.UndockedRunningProgramMaps.Clear();
         this.StateHasChanged();
     }
 
     public void LoadProgramDock(IEnumerable<UserProgramMap> maps)
     {
-        this.UserProgramMaps = maps.ToDictionary(map => map.Program.Id);
+        foreach (var map in maps)
+        {
+            this.UserProgramMaps.Add(map.Program.Id, map);
+            if (map.PinToDock) this.DockedProgramMaps.Add(map.Program.Id, map);
+            else if (map.Program.GetProcessDetails().Any()) this.UndockedRunningProgramMaps.Add(map.Program.Id, map);
+        }
         this.StateHasChanged();
     }
 
@@ -51,16 +77,4 @@ public partial class ProgramDockComponent
         this.logger.LogInformation($"Click to luanch program: {programDetail.Name}");
         await this.intermediaryRequestSender.Send(new ProgramLaunchRequest(programDetail));
     }
-
-    private IEnumerable<UserProgramMap> GetDockedRuningUserProgramMaps()
-        => this.UserProgramMaps.Values.Where(map => map.PinToDock).ToArray();
-
-    private IEnumerable<UserProgramMap> GetUndockedRuningUserProgramMaps()
-        => this.processContainer.GetProcesses()
-            .OrderBy(process => process.LaunchTime)
-            .DistinctBy(process => process.ProgramDetail)
-            .Select(process => process.ProgramDetail)
-            .Select(program => this.UserProgramMaps.TryGetValue(program.Id, out var map) && !map.PinToDock ? map : default)
-            .Where(map => map != null)
-            .ToArray();
 }

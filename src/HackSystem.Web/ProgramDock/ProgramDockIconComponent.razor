@@ -1,4 +1,5 @@
 ﻿@inject IJSRuntime jsRuntime
+@inject IIntermediaryEventHandler<WindowChangeEvent> windowChangeEventHandler
 
 <div class="mt-n4 px-2 position-relative" @ontouchend="@this.OnTouchEnd" @onclick="@this.OnClick">
     <figure id=@this.DockIconId data-toggle="popover" data-placement="top" data-trigger="hover" data-original-title="Popover" data-content="Content.">

@@ -8,7 +8,7 @@ public partial class ProgramDrawerComponent
 {
     public void ClearProgramDrawer()
     {
-        this.UserProgramMaps = default;
+        this.UserProgramMaps.Clear();
         this.StateHasChanged();
     }
 
@@ -24,7 +24,7 @@ public partial class ProgramDrawerComponent
 
     public void LoadProgramDrawer(IEnumerable<UserProgramMap> maps)
     {
-        this.UserProgramMaps = maps.ToDictionary(map => map.Program.Id);
+        foreach (var map in maps) this.UserProgramMaps.Add(map.Program.Id, map);
         this.StateHasChanged();
     }
 
