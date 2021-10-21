@@ -1,13 +1,32 @@
-﻿@inject IJSRuntime jsRuntime
+﻿@inject IPopoverHandler popoverHandler
 @inject IIntermediaryEventHandler<WindowChangeEvent> windowChangeEventHandler
 
 <div class="mt-n4 px-2 position-relative" @ontouchend="@this.OnTouchEnd" @onclick="@this.OnClick">
-    <figure id=@this.DockIconId data-toggle="popover" data-placement="top" data-trigger="hover" data-original-title="Popover" data-content="Content.">
+    <figure id=@this.DockIconId>
         <img src="@UserProgramMap.Program.IconUri" class="img-fluid" style="width:75px;height:75px;" />
         <figcaption class="text-white font-weight-bold text-center stretched-link" style="text-shadow: 0px 0px 5px #000, 0px 0px 7px #222;"
                     onmouseover="dockEvents.mouseOverIcon(this)" onmouseout="dockEvents.mouseOutIcon(this)" onmousedown="dockEvents.mouseDownIcon(this)" onmouseup="dockEvents.mouseUpIcon(this)">
         </figcaption>
     </figure>
+    <div id=@($"popover_{this.DockIconId}") class="d-none">
+        @{
+            var windows = this.UserProgramMap.Program.GetProcessDetails().SelectMany(process => process.GetWindowDetails());
+            if (windows.Any())
+            {
+                <div style="min-width:320px" class="btn-group-vertical btn-group-sm">
+                    @foreach (var window in windows)
+                    {
+                        var processItemKey = $"{this.DockIconId}_window_{window.WindowId}";
+                        <a @key=processItemKey role="button" class="btn btn-light">@($"{window.Caption} ({window.ProcessDetail.ProcessId})")</a>
+                    }
+                </div>
+            }
+            else
+            {
+                <p style="width:320px" class="text-muted"><em>No windows launched.</em></p>
+            }
+        }
+    </div>
 </div>
 
 @code {
@@ -19,13 +38,23 @@
 
     protected string DockIconId { get => $"dockicon_{this.UserProgramMap.Program.Id}"; }
 
+    protected string DockIconPopoverId { get => $"#popover_{this.DockIconId}"; }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
         if (firstRender)
         {
-            // TODO: LEON: Split to a independent sevice to manage popover
-            await this.jsRuntime.InvokeVoidAsync("popover.initPopover", $"#{this.DockIconId}");
+            await this.popoverHandler.SetupPopover(new PopoverDetail()
+                {
+                    ShowDelay = 150,
+                    IsHtmlContent = true,
+                    Content = this.DockIconPopoverId,
+                    Trigger = PopoverTriggers.Hover,
+                    Placement = PopoverPlacements.Top,
+                    TargetElemantFilter = $"#{this.DockIconId}",
+                    Title = this.UserProgramMap.Rename ?? this.UserProgramMap.Program.Name,
+                });
         }
     }
 }
