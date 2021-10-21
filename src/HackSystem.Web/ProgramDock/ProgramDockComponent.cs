@@ -6,20 +6,32 @@ namespace HackSystem.Web.ProgramDock;
 
 public partial class ProgramDockComponent
 {
+    protected async override Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        this.windowChangeEventHandler.EventRaised += OnWindowChangeEvent;
+        this.processChangeEventHandler.EventRaised += OnProcessChangeEvent;
+    }
+
+    private void OnProcessChangeEvent(object sender, ProcessChangeEvent e)
+    {
+        this.StateHasChanged();
+    }
+
+    private void OnWindowChangeEvent(object sender, WindowChangeEvent e)
+    {
+        this.StateHasChanged();
+    }
+
     public void ClearProgramDock()
     {
-        this.UserProgramMaps.Clear();
+        this.UserProgramMaps = default;
         this.StateHasChanged();
     }
 
     public void LoadProgramDock(IEnumerable<UserProgramMap> maps)
     {
-        this.UserProgramMaps.Clear();
-
-        foreach (var map in maps)
-        {
-            this.UserProgramMaps.Add(map.Program.Id, map);
-        }
+        this.UserProgramMaps = maps.ToDictionary(map => map.Program.Id);
         this.StateHasChanged();
     }
 
@@ -39,4 +51,16 @@ public partial class ProgramDockComponent
         this.logger.LogInformation($"Click to luanch program: {programDetail.Name}");
         await this.intermediaryRequestSender.Send(new ProgramLaunchRequest(programDetail));
     }
+
+    private IEnumerable<UserProgramMap> GetDockedRuningUserProgramMaps()
+        => this.UserProgramMaps.Values.Where(map => map.PinToDock).ToArray();
+
+    private IEnumerable<UserProgramMap> GetUndockedRuningUserProgramMaps()
+        => this.processContainer.GetProcesses()
+            .OrderBy(process => process.LaunchTime)
+            .DistinctBy(process => process.ProgramDetail)
+            .Select(process => process.ProgramDetail)
+            .Select(program => this.UserProgramMaps.TryGetValue(program.Id, out var map) && !map.PinToDock ? map : default)
+            .Where(map => map != null)
+            .ToArray();
 }

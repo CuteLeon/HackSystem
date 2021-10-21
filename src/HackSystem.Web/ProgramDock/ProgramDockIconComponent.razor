@@ -1,11 +1,10 @@
 ﻿@inject IMapper mapper
 
-<div class="mt-n5 px-3 position-relative" @ontouchend="@this.OnTouchEnd" @onclick="@this.OnClick">
+<div class="mt-n4 px-2 position-relative" @ontouchend="@this.OnTouchEnd" @onclick="@this.OnClick">
     <figure>
         <img src="@UserProgramMap.Program.IconUri" class="img-fluid" style="width:75px;height:75px;" />
         <figcaption class="text-white font-weight-bold text-center stretched-link" style="text-shadow: 0px 0px 5px #000, 0px 0px 7px #222;"
                     onmouseover="dockEvents.mouseOverIcon(this)" onmouseout="dockEvents.mouseOutIcon(this)" onmousedown="dockEvents.mouseDownIcon(this)" onmouseup="dockEvents.mouseUpIcon(this)">
-            <span class="d-block mx-auto text-truncate p-1" style="width:75px;">@(string.IsNullOrWhiteSpace(UserProgramMap.Rename)? UserProgramMap.Program.Name: UserProgramMap.Rename)</span>
         </figcaption>
     </figure>
 </div>

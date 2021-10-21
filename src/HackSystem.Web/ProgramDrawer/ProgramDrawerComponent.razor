@@ -3,7 +3,7 @@
 @inject IIntermediaryRequestSender intermediaryRequestSender
 
 <div class="d-flex flex-column flex-wrap align-content-start user-select-none w-100 h-100 overflow-hidden">
-    @foreach (var programMap in this.UserProgramMaps.Values)
+    @foreach (var programMap in this.UserProgramMaps?.Values?.OrderByDescending(map => map.PinToTop) ?? Enumerable.Empty<UserProgramMap>())
     {
         var programDrawerKey = $"programDrawerKey_{programMap.Program.Id}";
         <ProgramDrawerIconComponent @key="@programDrawerKey" UserProgramMap="programMap" OnIconSelect="this.OnIconSelect" />
@@ -11,5 +11,5 @@
 </div>
 
 @code {
-    protected Dictionary<string, UserProgramMap> UserProgramMaps { get; set; } = new();
+    protected Dictionary<string, UserProgramMap> UserProgramMaps { get; set; }
 }
