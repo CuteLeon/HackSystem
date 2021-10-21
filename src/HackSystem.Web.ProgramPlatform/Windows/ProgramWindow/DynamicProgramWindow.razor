@@ -11,8 +11,8 @@
 						   Width=@this.ProgramWindowStyle.Width
 						   Height=@this.ProgramWindowStyle.Height
 						   OnWindowFocusIn=@this.OnWindowFocusIn>
-	<div class="modal-dialog m-0 shadow flex-fill modal-dialog-scrollable w-100 h-100" role="dialog" style="max-width:none;max-height:none;">
-		<div class="modal-content bg-transparent @this.ProgramWindowStyle.Border.ToBorderStyle() @this.ProgramWindowStyle.BorderColor.ToBorderColor() overflow-hidden" style="max-width:none;max-height:none;">
+	<div class="modal-dialog m-0 flex-fill modal-dialog-scrollable w-100 h-100" role="dialog" style="max-width:none;max-height:none;">
+		<div class="modal-content shadow bg-transparent @this.ProgramWindowStyle.Border.ToBorderStyle() @this.ProgramWindowStyle.BorderColor.ToBorderColor() overflow-hidden" style="max-width:none;max-height:none;">
 			<DraggableHandleComponent DraggableReference=this.draggableReference
 									  DragTargetId=@($"window_{this.ProgramWindowDetail.WindowId}")>
 				<div class="modal-header @this.ProgramWindowStyle.CaptionBackgroundColor.ToBackgroundColor() p-1" style="@(this.ProgramWindowStyle.CaptionBackgroundColor==Colors.Transparent?"backdrop-filter:blur(5px);":string.Empty)">
