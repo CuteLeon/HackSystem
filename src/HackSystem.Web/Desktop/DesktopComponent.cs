@@ -79,22 +79,20 @@ public partial class DesktopComponent
             if (maps?.Any() ?? false)
             {
                 var mapDetails = this.mapper.Map<IEnumerable<UserProgramMapResponse>, IEnumerable<UserProgramMap>>(maps);
-                this.UserProgramMaps = mapDetails.ToDictionary(map => map.Program.Id, map => map);
                 this.ProgramDrawerComponent.LoadProgramDrawer(mapDetails);
-                this.ProgramDockComponent.LoadProgramDock(mapDetails.Where(map => map.PinToDock));
+                this.ProgramDockComponent.LoadProgramDock(mapDetails);
             }
             else
             {
                 this.ProgramDockComponent.ClearProgramDock();
                 this.ProgramDrawerComponent.ClearProgramDrawer();
-                this.UserProgramMaps.Clear();
             }
             this.logger.LogInformation($"Query {maps.Count()} programs successfully.");
             await this.toastHandler.PopupToast(new ToastDetail
             {
                 Title = "Ready to launch program.",
                 Icon = ToastIcons.Information,
-                Message = $"Having {this.UserProgramMaps.Count()} available programes, Enjoy your time!"
+                Message = $"Having {maps.Count()} available programes, Enjoy your time!"
             });
         }
         catch (Exception ex)

@@ -16,7 +16,7 @@ public class ProgramWindowStyle
 
     public Borders Border { get; set; } = Borders.Border;
 
-    public Colors BorderColor { get; set; } = Colors.Primary;
+    public Colors BorderColor { get; set; } = Colors.Light;
 
     public Colors BackgroundColor { get; set; } = Colors.White;
 
