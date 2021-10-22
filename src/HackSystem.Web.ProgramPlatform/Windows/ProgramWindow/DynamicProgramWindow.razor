@@ -22,7 +22,10 @@
                             <h6 class="modal-title @this.ProgramWindowStyle.CaptionTextColor.ToTextColor() text-nowrap text-truncate px-2 pt-1">
                                 <strong>@this.ProgramWindowDetail.Caption</strong>
                             </h6>
-                            <div class="btn-group btn-group-sm" role="group" @ontouchstart:stopPropagation @onmousedown:stopPropagation @onclick:stopPropagation>
+                            <div class="btn-group btn-group-sm" role="group"
+                                 @ontouchstart:stopPropagation @ontouchend:stopPropagation
+                                 @onmousedown:stopPropagation @onmouseup:stopPropagation
+                                 @onclick:stopPropagation>
                                 <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMin>
                                     <span class="far fa-window-minimize"></span>
                                 </button>
