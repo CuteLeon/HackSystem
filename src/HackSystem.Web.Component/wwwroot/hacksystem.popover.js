@@ -2,8 +2,8 @@
     setupPopover: function (filter) {
         $(filter).popover();
     },
-    setupPopover: function (filter, title, html, content, trigger, placement, offset, showDelay, hideDelay) {
-        let popovers = $(filter);
+    setupPopover: function (popoverTargetFilter, title, html, content, trigger, placement, offset, showDelay, hideDelay, replaceContent = false) {
+        let popoverTarget = $(popoverTargetFilter);
         let options = {
             title: title,
             trigger: trigger,
@@ -14,25 +14,36 @@
                 hide: hideDelay
             },
         };
+        let replacementId = null;
         if (html) {
             options.html = true;
             options.content = function () {
-                let htmlContent = $(content).html();
-                return htmlContent;
+                if (!replaceContent) return $(content).html();
+                else {
+                    replacementId = `popoverPlacement_${Math.round(Math.random() * 100000000)}`
+                    return $("<div></div>").append($("<div></div>", { id: replacementId })).html();
+                }
             };
         }
         else {
             Option.content = content;
         }
-        let res = popovers.popover(options);
+        let res = popoverTarget.popover(options);
         if (trigger === 'hover') {
             res.on('hide.bs.popover', function () {
                 if ($(".popover:hover").length) {
                     $(document).one('mouseleave', '.popover', function () {
-                        popovers.popover('hide');
+                        popoverTarget.popover('hide');
                     });
                     return false;
                 }
+            });
+        }
+        if (html && replaceContent) {
+            popoverTarget.on('inserted.bs.popover', e => {
+                var replacement = $(`#${replacementId}`);
+                var origin = $(content).children().clone(true);
+                replacement.replaceWith(origin);
             });
         }
     },

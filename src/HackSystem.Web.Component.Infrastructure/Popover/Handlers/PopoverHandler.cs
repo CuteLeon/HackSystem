@@ -50,7 +50,8 @@ public class PopoverHandler : IPopoverHandler, IAsyncDisposable
             popoverDetail.Placement.ToString().ToLower(),
             popoverDetail.Offset,
             popoverDetail.ShowDelay,
-            popoverDetail.HideDelay);
+            popoverDetail.HideDelay,
+            popoverDetail.ReplaceContent);
     }
 
     public async Task UpdatePopover(string targetElementFilter, string action)

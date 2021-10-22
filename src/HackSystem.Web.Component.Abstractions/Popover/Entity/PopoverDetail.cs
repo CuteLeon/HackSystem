@@ -19,4 +19,6 @@ public class PopoverDetail
     public int ShowDelay { get; set; }
 
     public int HideDelay { get; set; }
+
+    public bool ReplaceContent { get; set; } = false;
 }
