@@ -117,4 +117,20 @@ public class LRUContainer<TKey, TValue>
         this.Head = node;
         return true;
     }
+
+    public void MoveToAfter(TValue value, TValue nextValue)
+    {
+        var key = this.KeySelector.Invoke(value);
+        var nextKey = this.KeySelector.Invoke(nextValue);
+        if (!this.Nodes.TryGetValue(key, out var node))
+            throw new KeyNotFoundException($"Not found key of {key}.");
+        if (!this.Nodes.TryGetValue(nextKey, out var nextNode))
+            throw new KeyNotFoundException($"Not found next key of {nextKey}.");
+
+        if (this.Head == node) this.Head = node.Previous;
+        if (this.Tail == node) this.Tail = node.Next;
+        else if (this.Tail == nextNode) this.Tail = node;
+        node.RemoveSelf();
+        nextNode.SetPrevious(node);
+    }
 }

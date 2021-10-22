@@ -48,6 +48,22 @@ public class LRUContainerTests
         Assert.Equal("32146", string.Join(string.Empty, container.GetValuesFromHead()));
         Assert.Equal(3, container.HeadValue);
         Assert.Equal(6, container.TailValue);
+        container.MoveToAfter(6, 3);
+        Assert.Equal("36214", string.Join(string.Empty, container.GetValuesFromHead()));
+        Assert.Equal(3, container.HeadValue);
+        Assert.Equal(4, container.TailValue);
+        container.MoveToAfter(1, 3);
+        Assert.Equal("31624", string.Join(string.Empty, container.GetValuesFromHead()));
+        Assert.Equal(3, container.HeadValue);
+        Assert.Equal(4, container.TailValue);
+        container.MoveToAfter(3, 2);
+        Assert.Equal("16234", string.Join(string.Empty, container.GetValuesFromHead()));
+        Assert.Equal(1, container.HeadValue);
+        Assert.Equal(4, container.TailValue);
+        container.MoveToAfter(1, 4);
+        Assert.Equal("62341", string.Join(string.Empty, container.GetValuesFromHead()));
+        Assert.Equal(6, container.HeadValue);
+        Assert.Equal(1, container.TailValue);
         container.Clear();
         Assert.Equal(0, container.Count);
     }
