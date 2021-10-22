@@ -25,33 +25,34 @@ public class WindowScheduleRequestHandler : IWindowScheduleRequestHandler
 
     public async Task<WindowScheduleResponse> Handle(WindowScheduleRequest request, CancellationToken cancellationToken)
     {
-        this.logger.LogInformation($"Handle Window {request.ChangeStates} request {request.ProgramWindowDetail.Caption} ...");
+        var windowDetail = request.ProgramWindowDetail;
+        this.logger.LogInformation($"Handle Window {request.ChangeStates} request {windowDetail.Caption} ...");
         if (request.ChangeStates == WindowChangeStates.Launch)
         {
-            request.ProgramWindowDetail.TierIndex = this.GetNewTierIndex();
-            this.windowLRUContainer.Add(request.ProgramWindowDetail);
+            windowDetail.TierIndex = this.GetNewTierIndex();
+            this.windowLRUContainer.Add(windowDetail);
         }
         else if (request.ChangeStates == WindowChangeStates.Active)
         {
-            if (this.windowLRUContainer.HeadValue == request.ProgramWindowDetail)
+            if (this.windowLRUContainer.HeadValue == windowDetail)
             {
-                if (request.ProgramWindowDetail.WindowState == ProgramWindowStates.Minimized)
-                    request.ProgramWindowDetail.WindowState = request.ProgramWindowDetail.LastWindowState;
+                if (windowDetail.WindowState == ProgramWindowStates.Minimized)
+                    windowDetail.WindowState = windowDetail.LastWindowState;
                 else
                     return new WindowScheduleResponse(request.ChangeStates, false);
             }
             else
             {
-                if (request.ProgramWindowDetail.WindowState == ProgramWindowStates.Minimized)
-                    request.ProgramWindowDetail.WindowState = request.ProgramWindowDetail.LastWindowState;
-                request.ProgramWindowDetail.TierIndex = this.GetNewTierIndex();
-                this.windowLRUContainer.BringToHead(request.ProgramWindowDetail);
+                if (windowDetail.WindowState == ProgramWindowStates.Minimized)
+                    windowDetail.WindowState = windowDetail.LastWindowState;
+                windowDetail.TierIndex = this.GetNewTierIndex();
+                this.windowLRUContainer.BringToHead(windowDetail);
             }
         }
         else if (request.ChangeStates == WindowChangeStates.Inactive)
         {
             var headWindow = this.windowLRUContainer.HeadValue!;
-            if (headWindow == request.ProgramWindowDetail)
+            if (headWindow == windowDetail)
             {
                 var previewWindow = this.windowLRUContainer.GetPreviousValue(headWindow);
                 if (previewWindow is not null)
@@ -59,19 +60,19 @@ public class WindowScheduleRequestHandler : IWindowScheduleRequestHandler
             }
             else
             {
-                request.ProgramWindowDetail.TierIndex = headWindow.TierIndex;
+                windowDetail.TierIndex = headWindow.TierIndex;
                 headWindow.TierIndex = this.GetNewTierIndex();
-                this.windowLRUContainer.MoveToAfter(request.ProgramWindowDetail, this.windowLRUContainer.HeadValue!);
+                this.windowLRUContainer.MoveToAfter(windowDetail, this.windowLRUContainer.HeadValue!);
             }
         }
         else if (request.ChangeStates == WindowChangeStates.Destory)
         {
-            request.ProgramWindowDetail.TierIndex = this.tierConfiguration.BasicProgramSubscript;
-            this.windowLRUContainer.Remove(request.ProgramWindowDetail);
+            windowDetail.TierIndex = this.tierConfiguration.BasicProgramSubscript;
+            this.windowLRUContainer.Remove(windowDetail);
         }
 
-        this.logger.LogInformation($"Window {request.ChangeStates} request handled, {request.ProgramWindowDetail.Caption} ({request.ProgramWindowDetail.TierIndex}).");
-        this.OnWindowSchedule?.Invoke(request.ProgramWindowDetail);
+        this.logger.LogInformation($"Window {request.ChangeStates} request handled, {windowDetail.Caption} ({windowDetail.TierIndex}).");
+        this.OnWindowSchedule?.Invoke(windowDetail);
         return new WindowScheduleResponse(request.ChangeStates, true);
     }
 
