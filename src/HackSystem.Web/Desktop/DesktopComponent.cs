@@ -79,8 +79,8 @@ public partial class DesktopComponent
             if (maps?.Any() ?? false)
             {
                 var mapDetails = this.mapper.Map<IEnumerable<UserProgramMapResponse>, IEnumerable<UserProgramMap>>(maps);
-                this.ProgramDrawerComponent.LoadProgramDrawer(mapDetails);
-                this.ProgramDockComponent.LoadProgramDock(mapDetails);
+                await this.ProgramDrawerComponent.LoadProgramDrawer(mapDetails);
+                await this.ProgramDockComponent.LoadProgramDock(mapDetails);
             }
             else
             {

@@ -1,8 +1,9 @@
-﻿namespace HackSystem.Web.ProgramSchedule.Abstractions.Enums;
+﻿namespace HackSystem.Web.ProgramSchedule.Enums;
 
 public enum WindowChangeStates
 {
-    Schedule,
+    Active,
+    Inactive,
     Launch,
     Destory,
 }

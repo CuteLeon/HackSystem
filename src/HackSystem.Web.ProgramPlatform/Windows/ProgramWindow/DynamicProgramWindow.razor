@@ -4,8 +4,8 @@
 
 <ResizeableBorderComponent ResizeTargetId=@($"window_{this.ProgramWindowDetail.WindowId}")
 						   ResizeableReference=this.resizeableReference
-						   WindowState=@this.ProgramWindowStyle.WindowState
 						   TierIndex=@this.ProgramWindowDetail.TierIndex
+						   WindowState=@this.ProgramWindowDetail.WindowState
 						   Top=@this.ProgramWindowStyle.Top
 						   Left=@this.ProgramWindowStyle.Left
 						   Width=@this.ProgramWindowStyle.Width
@@ -21,7 +21,7 @@
 					</h6>
 					<div class="btn-group btn-group-sm" role="group" @ontouchstart:stopPropagation @onmousedown:stopPropagation @onclick:stopPropagation>
 						<button type="button" class="btn btn-outline-primary" @onclick=@this.OnMin><span class="far fa-window-minimize"></span></button>
-						<button type="button" class="btn btn-outline-primary" @onclick=@this.OnMaxRestore><span class="far fa-window-@(this.ProgramWindowStyle.WindowState== ProgramWindowStates.Maximized?"restore":"maximize")"></span></button>
+						<button type="button" class="btn btn-outline-primary" @onclick=@this.OnMaxRestore><span class="far fa-window-@(this.ProgramWindowDetail.WindowState== ProgramWindowStates.Maximized?"restore":"maximize")"></span></button>
 						<button type="button" class="btn btn-danger" @onclick=@this.OnClose><span class="far fa-window-close"></span></button>
 					</div>
 				</div>

@@ -1,6 +1,6 @@
-﻿using HackSystem.Web.ProgramSchedule.Abstractions.Enums;
-using HackSystem.Web.ProgramSchedule.Destroyer;
+﻿using HackSystem.Web.ProgramSchedule.Destroyer;
 using HackSystem.Web.ProgramSchedule.Entity;
+using HackSystem.Web.ProgramSchedule.Enums;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.Destroyer;

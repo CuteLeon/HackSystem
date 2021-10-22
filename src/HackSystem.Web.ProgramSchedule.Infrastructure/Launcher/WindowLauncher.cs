@@ -1,6 +1,6 @@
 ﻿using HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
-using HackSystem.Web.ProgramSchedule.Abstractions.Enums;
 using HackSystem.Web.ProgramSchedule.Entity;
+using HackSystem.Web.ProgramSchedule.Enums;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 using HackSystem.Web.ProgramSchedule.Launcher;
 

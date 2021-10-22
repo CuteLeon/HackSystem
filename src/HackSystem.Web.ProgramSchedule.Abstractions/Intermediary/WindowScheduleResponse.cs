@@ -1,4 +1,4 @@
-﻿using HackSystem.Web.ProgramSchedule.Abstractions.Enums;
+﻿using HackSystem.Web.ProgramSchedule.Enums;
 
 namespace HackSystem.Web.ProgramSchedule.Intermediary;
 

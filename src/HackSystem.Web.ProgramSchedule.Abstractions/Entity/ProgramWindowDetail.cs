@@ -1,7 +1,11 @@
-﻿namespace HackSystem.Web.ProgramSchedule.Entity;
+﻿using HackSystem.Web.ProgramSchedule.Enums;
+
+namespace HackSystem.Web.ProgramSchedule.Entity;
 
 public class ProgramWindowDetail
 {
+    private ProgramWindowStates windowState = ProgramWindowStates.Normal;
+
     public ProgramWindowDetail(
         string windowId,
         Type programWindowType,
@@ -19,6 +23,19 @@ public class ProgramWindowDetail
     public Type ProgramWindowType { get; init; }
 
     public int TierIndex { get; set; }
+
+    public ProgramWindowStates LastWindowState { get; protected set; } = ProgramWindowStates.Normal;
+
+    public ProgramWindowStates WindowState
+    {
+        get => this.windowState;
+        set
+        {
+            if (this.windowState == value) return;
+            this.LastWindowState = this.WindowState;
+            this.windowState = value;
+        }
+    }
 
     public ProcessDetail ProcessDetail { get; init; }
 }

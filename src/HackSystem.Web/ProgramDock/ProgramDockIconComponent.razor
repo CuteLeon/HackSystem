@@ -17,7 +17,11 @@
                     @foreach (var window in windows)
                     {
                         var processItemKey = $"{this.DockIconId}_window_{window.WindowId}";
-                        <a @key=processItemKey role="button" class="btn btn-light" @onclick=this.OnClickWindow click="e=>alert(e);">
+                        <a id=@processItemKey @key=processItemKey role="button" class="btn btn-light"
+               onclick="programDock.windowClick(this)"
+               data-programid="@window.ProcessDetail.ProgramDetail.Id"
+               data-processid="@window.ProcessDetail.ProcessId"
+               data-windowid="@window.WindowId">
                             @window.Caption <em class="text-right">Process:@window.ProcessDetail.ProcessId</em>
                         </a>
                     }
@@ -56,6 +60,7 @@
                     Placement = PopoverPlacements.Top,
                     TargetElemantFilter = $"#{this.DockIconId}",
                     Title = this.UserProgramMap.Rename ?? this.UserProgramMap.Program.Name,
+                    ReplaceContent = true,
                 });
         }
     }

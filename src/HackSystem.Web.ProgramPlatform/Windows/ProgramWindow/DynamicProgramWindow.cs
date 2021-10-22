@@ -1,5 +1,5 @@
 ﻿using HackSystem.Web.ProgramPlatform.Components;
-using HackSystem.Web.ProgramSchedule.Abstractions.Enums;
+using HackSystem.Web.ProgramSchedule.Enums;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
@@ -38,17 +38,18 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
     public virtual async Task OnMin()
     {
         this.Logger.LogInformation($"Min window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
-        this.ProgramWindowStyle.WindowState = ProgramWindowStates.Minimized;
+        this.ProgramWindowDetail.WindowState = ProgramWindowStates.Minimized;
+        _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Inactive));
         this.StateHasChanged();
     }
 
     public virtual async Task OnMaxRestore()
     {
         this.Logger.LogInformation($"Switch max window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
-        this.ProgramWindowStyle.WindowState = this.ProgramWindowStyle.WindowState == ProgramWindowStates.Maximized ?
+        this.ProgramWindowDetail.WindowState = this.ProgramWindowDetail.WindowState == ProgramWindowStates.Maximized ?
             ProgramWindowStates.Normal :
             ProgramWindowStates.Maximized;
-        _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Schedule));
+        _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
         this.StateHasChanged();
     }
 
@@ -58,9 +59,9 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
         await this.CommandSender.Send(new WindowDestroyCommand(this.ProgramWindowDetail));
     }
 
-    protected async Task OnWindowFocusIn()
+    public async Task OnWindowFocusIn()
     {
-        var windowScheduleResponse = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Schedule));
+        var windowScheduleResponse = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
         if (windowScheduleResponse.Scheduled)
         {
             this.Logger.LogInformation($"Scheduled window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
