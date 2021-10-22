@@ -36,7 +36,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
         this.Logger.LogInformation($"Sync window position at ({left}, {top}) and size as ({width}, {height}) {this.ProgramWindowDetail.WindowState}.");
         this.ProgramWindowDetail.Left = $"{left}px";
         this.ProgramWindowDetail.Top = $"{top}px";
-        this.ProgramWindowDetail.Height = $"{height}px";
+        this.ProgramWindowDetail.Width = $"{width}px";
         this.ProgramWindowDetail.Height = $"{height}px";
     }
 
