@@ -20,14 +20,6 @@ export function resizeStart(interop, isMouse, startX, startY, resizeTargetId, cu
         bottom: currentOffSet.top + resizeTarget.outerHeight(),
     };
 
-    if (interopReference != null) {
-        let left = currentOffSet.left;
-        let top = currentOffSet.top;
-        let width = resizeTarget.outerWidth();
-        let height = resizeTarget.outerHeight();
-        interopReference.invokeMethodAsync('UpdateSize', left, top, width, height);
-    }
-
     switch (resizeData.direction) {
         case 'nw-resize':
             {

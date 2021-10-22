@@ -15,12 +15,6 @@ export function dragStart(interop, isMouse, startX, startY, dragTargetId) {
         diffY: startY - currentPosition.top,
     };
 
-    if (interopReference != null) {
-        let left = startX - dragData.diffX;
-        let top = startY - dragData.diffY;
-        interopReference.invokeMethodAsync('UpdatePosition', left, top);
-    }
-
     if (isMouseMode) {
         $(document).on('mousemove', mouseDragMove);
         $(document).one('mouseup', dragEnd);

@@ -20,7 +20,7 @@
             options.content = function () {
                 if (!replaceContent) return $(content).html();
                 else {
-                    replacementId = `popoverPlacement_${Math.round(Math.random() * 100000000)}`
+                    replacementId = `popoverPlacement_${Math.round(performance.now() * 1000000000000)}_${Math.round(Math.random() * 100000000000000000)}`
                     return $("<div></div>").append($("<div></div>", { id: replacementId })).html();
                 }
             };

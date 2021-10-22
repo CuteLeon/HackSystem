@@ -13,23 +13,26 @@
             var windows = this.UserProgramMap.Program.GetProcessDetails().SelectMany(process => process.GetWindowDetails());
             if (windows.Any())
             {
-                <div class="btn-group-vertical btn-group-sm">
+                <div class="btn-group-vertical btn-group-sm" style="width:250px;">
                     @foreach (var window in windows)
                     {
-                        var processItemKey = $"{this.DockIconId}_window_{window.WindowId}";
-                        <a id=@processItemKey @key=processItemKey role="button" class="btn btn-light"
+                        var processItemKey = $"popover_window_{window.WindowId}";
+                        <a @key=processItemKey role="button" class="btn btn-outline-info"
                onclick="programDock.windowClick(this)"
                data-programid="@window.ProcessDetail.ProgramDetail.Id"
                data-processid="@window.ProcessDetail.ProcessId"
                data-windowid="@window.WindowId">
-                            @window.Caption <em class="text-right">Process:@window.ProcessDetail.ProcessId</em>
+                            <div class="row justify-content-between">
+                                <div class="col-auto"><strong>@window.Caption</strong></div>
+                                <div class="col-auto"><em>@window.ProcessDetail.ProcessId</em></div>
+                            </div>
                         </a>
                     }
                 </div>
             }
             else
             {
-                <p class="mx-3 mb-0 text-muted"><em>No windows launched.</em></p>
+                <p class="mx-3 text-muted"><em>* No windows launched. *</em></p>
             }
         }
     </div>
