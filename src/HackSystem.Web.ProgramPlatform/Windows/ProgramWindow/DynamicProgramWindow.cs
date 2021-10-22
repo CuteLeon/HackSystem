@@ -45,10 +45,24 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
 
     public virtual async Task OnMaxRestore()
     {
+        if (this.ProgramWindowDetail.WindowState == ProgramWindowStates.Maximized)
+            await this.OnRestore();
+        else
+            await this.OnMax();
+    }
+
+    public virtual async Task OnMax()
+    {
         this.Logger.LogInformation($"Switch max window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
-        this.ProgramWindowDetail.WindowState = this.ProgramWindowDetail.WindowState == ProgramWindowStates.Maximized ?
-            ProgramWindowStates.Normal :
-            ProgramWindowStates.Maximized;
+        this.ProgramWindowDetail.WindowState = ProgramWindowStates.Maximized;
+        _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
+        this.StateHasChanged();
+    }
+
+    public virtual async Task OnRestore()
+    {
+        this.Logger.LogInformation($"Switch restore window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
+        this.ProgramWindowDetail.WindowState = ProgramWindowStates.Normal;
         _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
         this.StateHasChanged();
     }
@@ -66,6 +80,19 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
         {
             this.Logger.LogInformation($"Scheduled window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
         }
+    }
+
+    public async Task OnDoubleClickHeader()
+    {
+        await this.OnMaxRestore();
+    }
+
+    public async Task OnDragStart()
+    {
+    }
+
+    public async Task OnDragEnd()
+    {
     }
 
     public async ValueTask DisposeAsync()

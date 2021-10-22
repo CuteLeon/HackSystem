@@ -7,23 +7,36 @@
         <ResizeableBorderComponent ResizeTargetId=@($"window_{this.ProgramWindowDetail.WindowId}")
                                    ResizeableReference=this.resizeableReference
                                    OnWindowFocusIn=@this.OnWindowFocusIn>
-            <div class="modal-dialog m-0 flex-fill modal-dialog-scrollable w-100 h-100" role="dialog" style="max-width:none;max-height:none;">
-                <div class="modal-content shadow bg-transparent @this.ProgramWindowStyle.Border.ToBorderStyle() @this.ProgramWindowStyle.BorderColor.ToBorderColor() overflow-hidden" style="max-width:none;max-height:none;">
+            <div class="modal-dialog m-0 flex-fill modal-dialog-scrollable w-100 h-100"
+                 role="dialog" style="max-width:none;max-height:none;">
+                <div class="modal-content shadow bg-transparent @this.ProgramWindowStyle.Border.ToBorderStyle() @this.ProgramWindowStyle.BorderColor.ToBorderColor() overflow-hidden"
+                     style="max-width:none;max-height:none;">
                     <DraggableHandleComponent Cursor="auto"
+                                              OnDoubleClick=this.OnDoubleClickHeader
+                                              OnDragStart=this.OnDragStart
+                                              OnDragEnd=this.OnDragEnd
                                               DraggableReference=this.draggableReference
                                               DragTargetId=@($"window_{this.ProgramWindowDetail.WindowId}")>
-                        <div class="modal-header @this.ProgramWindowStyle.CaptionBackgroundColor.ToBackgroundColor() p-1" style="@(this.ProgramWindowStyle.CaptionBackgroundColor==Colors.Transparent?"backdrop-filter:blur(5px);":string.Empty)">
+                        <div class="modal-header @this.ProgramWindowStyle.CaptionBackgroundColor.ToBackgroundColor() p-1"
+                             style="@(this.ProgramWindowStyle.CaptionBackgroundColor==Colors.Transparent?"backdrop-filter:blur(5px);":string.Empty)">
                             <h6 class="modal-title @this.ProgramWindowStyle.CaptionTextColor.ToTextColor() text-nowrap text-truncate px-2 pt-1">
                                 <strong>@this.ProgramWindowDetail.Caption</strong>
                             </h6>
                             <div class="btn-group btn-group-sm" role="group" @ontouchstart:stopPropagation @onmousedown:stopPropagation @onclick:stopPropagation>
-                                <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMin><span class="far fa-window-minimize"></span></button>
-                                <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMaxRestore><span class="far fa-window-@(this.ProgramWindowDetail.WindowState== ProgramWindowStates.Maximized?"restore":"maximize")"></span></button>
-                                <button type="button" class="btn btn-outline-danger" @onclick=@this.OnClose><span class="far fa-window-close"></span></button>
+                                <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMin>
+                                    <span class="far fa-window-minimize"></span>
+                                </button>
+                                <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMaxRestore>
+                                    <span class="far fa-window-@(this.ProgramWindowDetail.WindowState== ProgramWindowStates.Maximized?"restore":"maximize")"></span>
+                                </button>
+                                <button type="button" class="btn btn-outline-danger" @onclick=@this.OnClose>
+                                    <span class="far fa-window-close"></span>
+                                </button>
                             </div>
                         </div>
                     </DraggableHandleComponent>
-                    <div class="modal-body p-0 @this.ProgramWindowStyle.BackgroundColor.ToBackgroundColor()" style="@(this.ProgramWindowStyle.BackgroundColor==Colors.Transparent?"backdrop-filter:blur(20px);":string.Empty)">
+                    <div class="modal-body p-0 @this.ProgramWindowStyle.BackgroundColor.ToBackgroundColor()"
+                         style="@(this.ProgramWindowStyle.BackgroundColor==Colors.Transparent?"backdrop-filter:blur(20px);":string.Empty)">
                         <DynamicComponent @ref=this.DynamicProgramComponent
                                           Type="this.ProgramWindowDetail.ProgramWindowType">
                         </DynamicComponent>
