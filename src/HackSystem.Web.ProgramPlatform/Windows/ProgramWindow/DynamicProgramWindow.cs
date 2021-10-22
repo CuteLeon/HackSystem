@@ -19,19 +19,24 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
     }
 
     [JSInvokable]
-    public void UpdatePosition(double left, double top)
+    public async void UpdatePosition(double left, double top)
     {
-        this.Logger.LogInformation($"Sync window position at ({left}, {top}).");
+        if (this.ProgramWindowDetail.WindowState == ProgramWindowStates.Maximized) return;
+
+        this.Logger.LogInformation($"Sync window position at ({left}, {top}) {this.ProgramWindowDetail.WindowState}.");
         this.ProgramWindowDetail.Left = $"{left}px";
         this.ProgramWindowDetail.Top = $"{top}px";
     }
 
     [JSInvokable]
-    public void UpdateSize(double left, double top, double width, double height)
+    public async void UpdateSize(double left, double top, double width, double height)
     {
-        this.Logger.LogInformation($"Sync window size as ({width}, {height}).");
-        this.UpdatePosition(left, top);
-        this.ProgramWindowDetail.Width = $"{width}px";
+        if (this.ProgramWindowDetail.WindowState == ProgramWindowStates.Maximized) return;
+
+        this.Logger.LogInformation($"Sync window position at ({left}, {top}) and size as ({width}, {height}) {this.ProgramWindowDetail.WindowState}.");
+        this.ProgramWindowDetail.Left = $"{left}px";
+        this.ProgramWindowDetail.Top = $"{top}px";
+        this.ProgramWindowDetail.Height = $"{height}px";
         this.ProgramWindowDetail.Height = $"{height}px";
     }
 
