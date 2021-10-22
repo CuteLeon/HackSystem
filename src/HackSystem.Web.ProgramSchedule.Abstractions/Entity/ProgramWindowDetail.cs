@@ -22,6 +22,14 @@ public class ProgramWindowDetail
 
     public Type ProgramWindowType { get; init; }
 
+    public string Top { get; set; } = "5%";
+
+    public string Left { get; set; } = "25%";
+
+    public string Width { get; set; } = "50%";
+
+    public string Height { get; set; } = "75%";
+
     public int TierIndex { get; set; }
 
     public ProgramWindowStates LastWindowState { get; protected set; } = ProgramWindowStates.Normal;

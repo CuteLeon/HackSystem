@@ -5,14 +5,15 @@ namespace HackSystem.Web.ProgramPlatform.Components.ProgramComponent;
 
 public abstract class ProgramComponentBase : ComponentBase, IDisposable
 {
-    [Parameter]
-    public ProcessDetail ProcessDetail { get; set; }
+    public ProgramDetail ProgramDetail { get => this.ProcessDetail.ProgramDetail; }
+
+    public ProcessDetail ProcessDetail { get => this.ProgramWindowDetail.ProcessDetail; }
 
     [Parameter]
-    public ProgramWindowDetail ProgramWindowDetail { get; set; }
+    public ProgramWindowDetail ProgramWindowDetail { get; init; }
 
     [Inject]
-    protected IToastHandler ToastHandler { get; set; }
+    protected IToastHandler ToastHandler { get; init; }
 
     public ProgramComponentBase() : base()
     {

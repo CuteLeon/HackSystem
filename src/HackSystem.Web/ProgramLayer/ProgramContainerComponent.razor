@@ -9,7 +9,7 @@
         @foreach (var window in process.GetWindowDetails())
         {
             var windowKey = $"process_{process.ProcessId}_window_{window.WindowId}";
-            <DynamicProgramWindow @key="windowKey" ProcessDetail=process ProgramWindowDetail=window></DynamicProgramWindow>
+            <DynamicProgramWindow @key="windowKey" ProgramWindowDetail=window></DynamicProgramWindow>
         }
     }
 </div>

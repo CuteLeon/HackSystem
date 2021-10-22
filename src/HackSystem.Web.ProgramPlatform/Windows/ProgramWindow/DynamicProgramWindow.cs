@@ -22,8 +22,8 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
     public void UpdatePosition(double left, double top)
     {
         this.Logger.LogInformation($"Sync window position at ({left}, {top}).");
-        this.ProgramWindowStyle.Left = $"{left}px";
-        this.ProgramWindowStyle.Top = $"{top}px";
+        this.ProgramWindowDetail.Left = $"{left}px";
+        this.ProgramWindowDetail.Top = $"{top}px";
     }
 
     [JSInvokable]
@@ -31,13 +31,13 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
     {
         this.Logger.LogInformation($"Sync window size as ({width}, {height}).");
         this.UpdatePosition(left, top);
-        this.ProgramWindowStyle.Width = $"{width}px";
-        this.ProgramWindowStyle.Height = $"{height}px";
+        this.ProgramWindowDetail.Width = $"{width}px";
+        this.ProgramWindowDetail.Height = $"{height}px";
     }
 
     public virtual async Task OnMin()
     {
-        this.Logger.LogInformation($"Min window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
+        this.Logger.LogInformation($"Min window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
         this.ProgramWindowDetail.WindowState = ProgramWindowStates.Minimized;
         _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Inactive));
         this.StateHasChanged();
@@ -45,7 +45,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
 
     public virtual async Task OnMaxRestore()
     {
-        this.Logger.LogInformation($"Switch max window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
+        this.Logger.LogInformation($"Switch max window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
         this.ProgramWindowDetail.WindowState = this.ProgramWindowDetail.WindowState == ProgramWindowStates.Maximized ?
             ProgramWindowStates.Normal :
             ProgramWindowStates.Maximized;
@@ -55,7 +55,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
 
     public virtual async Task OnClose()
     {
-        this.Logger.LogInformation($"Close window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
+        this.Logger.LogInformation($"Close window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
         await this.CommandSender.Send(new WindowDestroyCommand(this.ProgramWindowDetail));
     }
 
@@ -64,7 +64,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
         var windowScheduleResponse = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
         if (windowScheduleResponse.Scheduled)
         {
-            this.Logger.LogInformation($"Scheduled window {this.ProgramWindowDetail.WindowId} of process {this.ProcessDetail.ProcessId}.");
+            this.Logger.LogInformation($"Scheduled window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
         }
     }
 

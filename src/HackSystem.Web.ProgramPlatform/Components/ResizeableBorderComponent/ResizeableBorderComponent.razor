@@ -4,9 +4,9 @@
      class="position-fixed user-select-none flex-nowrap text-nowrap"
      @onmousedown=@this.MouseDown
      @ontouchstart=@this.TouchStart
-     style="padding:@(this.IsMaximized()?0:this.BorderSize)px; z-index:@this.TierIndex; pointer-events:auto; @this.GetWindowSizeStyle()">
+     style="padding:@(this.ProgramWindowDetail.WindowState== ProgramWindowStates.Maximized?0:this.BorderSize)px; z-index:@this.ProgramWindowDetail.TierIndex; pointer-events:auto; @this.GetWindowSizeStyle()">
 
-    @if (!this.IsMaximized())
+    @if (this.ProgramWindowDetail.WindowState != ProgramWindowStates.Maximized)
     {
         <div class="position-absolute" style="width:@(this.CornerSize)px;height:@(this.CornerSize)px;left:0px;top:0px;cursor:nw-resize"
          @onmousedown=@((e)=>this.OnMouseDown(e, "nw-resize")) @ontouchstart=@((e)=>this.OnTouchStart(e, "nw-resize"))></div>
@@ -33,42 +33,28 @@
 
 @code {
     [Parameter]
-    public EventCallback<EventArgs> OnWindowFocusIn { get; set; }
+    public EventCallback<EventArgs> OnWindowFocusIn { get; init; }
 
     [Parameter]
-    public DotNetObjectReference<IResizeableComponent> ResizeableReference { get; set; }
+    public DotNetObjectReference<IResizeableComponent> ResizeableReference { get; init; }
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment ChildContent { get; init; }
+
+    [CascadingParameter]
+    public ProgramWindowDetail ProgramWindowDetail { get; init; }
+
+    [CascadingParameter]
+    public ProgramWindowStyle ProgramWindowStyle { get; init; }
 
     [Parameter]
     public string ResizeTargetId { get; set; }
-
-    [Parameter]
-    public string Left { get; set; } = "auto";
-
-    [Parameter]
-    public string Top { get; set; } = "auto";
-
-    [Parameter]
-    public string Width { get; set; } = "auto";
-
-    [Parameter]
-    public string Height { get; set; } = "auto";
-
-    [Parameter]
-    public ProgramWindowStates WindowState { get; set; } = ProgramWindowStates.Normal;
 
     [Parameter]
     public int BorderSize { get; set; } = 6;
 
     [Parameter]
     public int CornerSize { get; set; } = 12;
-
-    [Parameter]
-    public int TierIndex { get; set; }
-
-    protected bool IsMaximized() => this.WindowState == ProgramWindowStates.Maximized;
 
     private IJSObjectReference resizeableModuleReference;
 
@@ -79,9 +65,9 @@
             .InvokeAsync<IJSObjectReference>("import", "./_content/HackSystem.Web.ProgramPlatform/blazor.resizeable.js");
     }
 
-    private string GetWindowSizeStyle() => this.WindowState switch
+    private string GetWindowSizeStyle() => this.ProgramWindowDetail.WindowState switch
     {
-        ProgramWindowStates.Normal => $"top:{this.Top}; left:{this.Left}; width:{this.Width}; height:{this.Height};",
+        ProgramWindowStates.Normal => $"top:{this.ProgramWindowDetail.Top}; left:{this.ProgramWindowDetail.Left}; width:{this.ProgramWindowDetail.Width}; height:{this.ProgramWindowDetail.Height};",
         ProgramWindowStates.Maximized => $"top:inherit;left:inherit;width:inherit;height:calc(100% - {ComponentContract.TopBarHeight}px);",
         ProgramWindowStates.Minimized => $"display:none;",
         _ => string.Empty
