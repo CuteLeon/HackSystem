@@ -2,16 +2,28 @@
 
 <span @onmousedown=@this.OnMouseDown
       @ontouchstart=@this.OnTouchStart
+      @onmouseup=@this.OnDragEnd
+      @ontouchend=@this.OnDragEnd
+      @ondblclick=@this.OnDoubleClick
       style="@($"cursor:{this.Cursor??"move"};")">
     @this.ChildContent
 </span>
 
 @code {
     [Parameter]
-    public DotNetObjectReference<IDraggableComponent> DraggableReference { get; set; }
+    public EventCallback OnDoubleClick { get; init; }
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public EventCallback OnDragStart { get; init; }
+
+    [Parameter]
+    public EventCallback OnDragEnd { get; init; }
+
+    [Parameter]
+    public DotNetObjectReference<IDraggableComponent> DraggableReference { get; init; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; init; }
 
     [Parameter]
     public string? Cursor { get; set; }
@@ -31,6 +43,9 @@
     private async Task OnMouseDown(MouseEventArgs args)
     {
         if (args.Button != 0) return;
+        if (this.OnDragStart.HasDelegate)
+            await this.OnDragStart.InvokeAsync();
+
         await this.draggableModuleReference.InvokeVoidAsync(
             "dragStart",
             this.DraggableReference,
@@ -40,6 +55,9 @@
 
     private async Task OnTouchStart(TouchEventArgs args)
     {
+        if (this.OnDragStart.HasDelegate)
+            await this.OnDragStart.InvokeAsync();
+
         await this.draggableModuleReference.InvokeVoidAsync(
             "dragStart",
             this.DraggableReference,
