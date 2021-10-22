@@ -113,6 +113,11 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
             this.ProgramWindowDetail.Top = $"{position.Y - dragStartPoint.Y + ComponentContract.TopBarHeight}px";
             await this.OnRestore();
         }
+        else if (this.ProgramWindowDetail.WindowState == ProgramWindowStates.Normal)
+        {
+            // Tiny magic.
+            if (position.Y <= ComponentContract.TopBarHeight * 2) await this.OnMax();
+        }
     }
 
     public async ValueTask DisposeAsync()
