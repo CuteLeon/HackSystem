@@ -25,6 +25,9 @@ public class ProcessDetail
 
     protected Dictionary<string, ProgramWindowDetail> ProgramWindowDetails { get; init; } = new();
 
+    public bool TryGetWindowDetail(string windowId, out ProgramWindowDetail? windowDetail)
+        => this.ProgramWindowDetails.TryGetValue(windowId, out windowDetail);
+
     public IEnumerable<ProgramWindowDetail> GetWindowDetails()
         => this.ProgramWindowDetails.Values.AsEnumerable();
 

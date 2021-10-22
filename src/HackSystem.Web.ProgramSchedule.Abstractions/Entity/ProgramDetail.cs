@@ -52,6 +52,9 @@ public class ProgramDetail
 
     protected Dictionary<int, ProcessDetail> ProcessDetails { get; init; } = new();
 
+    public bool TryGetProcessDetail(int processId, out ProcessDetail? processDetail)
+    => this.ProcessDetails.TryGetValue(processId, out processDetail);
+
     public IEnumerable<ProcessDetail> GetProcessDetails()
     => this.ProcessDetails.Values.AsEnumerable();
 
