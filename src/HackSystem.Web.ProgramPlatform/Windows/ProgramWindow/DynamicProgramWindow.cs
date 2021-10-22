@@ -1,4 +1,6 @@
-﻿using HackSystem.Web.ProgramPlatform.Components;
+﻿using System.Drawing;
+using HackSystem.Web.ProgramPlatform.Components;
+using HackSystem.Web.ProgramPlatform.Contracts;
 using HackSystem.Web.ProgramSchedule.Enums;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 using Microsoft.Extensions.Logging;
@@ -10,6 +12,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
 {
     private DotNetObjectReference<IDraggableComponent> draggableReference;
     private DotNetObjectReference<IResizeableComponent> resizeableReference;
+    private Point dragStartPoint;
 
     protected override async Task OnInitializedAsync()
     {
@@ -92,12 +95,24 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
         await this.OnMaxRestore();
     }
 
-    public async Task OnDragStart()
+    public async Task OnDragStart(Point position)
     {
+        this.dragStartPoint = position;
     }
 
-    public async Task OnDragEnd()
+    public async Task OnDragEnd(Point position)
     {
+        // MAGIC, No matter what, it works, at least...
+        var distance = Math.Pow(position.X - this.dragStartPoint.X, 2) + Math.Pow(position.Y - this.dragStartPoint.Y, 2);
+        if (distance < 50) return;
+
+        if (this.ProgramWindowDetail.WindowState == ProgramWindowStates.Maximized)
+        {
+            // ANOTHER MAGIC, I resolved this issue in an I-DON'T-UNDERSTAND way.
+            this.ProgramWindowDetail.Left = $"{position.X - dragStartPoint.X}px";
+            this.ProgramWindowDetail.Top = $"{position.Y - dragStartPoint.Y + ComponentContract.TopBarHeight}px";
+            await this.OnRestore();
+        }
     }
 
     public async ValueTask DisposeAsync()

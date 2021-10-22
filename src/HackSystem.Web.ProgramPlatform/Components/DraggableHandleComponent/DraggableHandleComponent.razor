@@ -2,22 +2,25 @@
 
 <span @onmousedown=@this.OnMouseDown
       @ontouchstart=@this.OnTouchStart
-      @onmouseup=@this.OnDragEnd
-      @ontouchend=@this.OnDragEnd
-      @ondblclick=@this.OnDoubleClick
+      @onmouseup=@this.OnMouseUp
+      @ontouchend=@this.OnTouchEnd
+      @ondblclick=@this.OnDbClick
       style="@($"cursor:{this.Cursor??"move"};")">
     @this.ChildContent
 </span>
 
 @code {
     [Parameter]
-    public EventCallback OnDoubleClick { get; init; }
+    public EventCallback<Point> OnDoubleClick { get; init; }
 
     [Parameter]
-    public EventCallback OnDragStart { get; init; }
+    public EventCallback<Point> OnDragStart { get; init; }
 
     [Parameter]
-    public EventCallback OnDragEnd { get; init; }
+    public EventCallback<Point> OnDragEnd { get; init; }
+
+    [Parameter]
+    public bool Enabled { get; set; } = true;
 
     [Parameter]
     public DotNetObjectReference<IDraggableComponent> DraggableReference { get; init; }
@@ -42,9 +45,10 @@
 
     private async Task OnMouseDown(MouseEventArgs args)
     {
+        if (!this.Enabled) return;
         if (args.Button != 0) return;
         if (this.OnDragStart.HasDelegate)
-            await this.OnDragStart.InvokeAsync();
+            await this.OnDragStart.InvokeAsync(new Point((int)args.ClientX, (int)args.ClientY));
 
         await this.draggableModuleReference.InvokeVoidAsync(
             "dragStart",
@@ -55,13 +59,42 @@
 
     private async Task OnTouchStart(TouchEventArgs args)
     {
+        if (!this.Enabled) return;
         if (this.OnDragStart.HasDelegate)
-            await this.OnDragStart.InvokeAsync();
+            if (args.Touches.Any())
+                await this.OnDragStart.InvokeAsync(new Point((int)args.Touches.First().ClientX, (int)args.Touches.First().ClientY));
+            else
+                await this.OnDragStart.InvokeAsync();
 
         await this.draggableModuleReference.InvokeVoidAsync(
             "dragStart",
             this.DraggableReference,
             false, args.Touches[0].ClientX, args.Touches[0].ClientY,
             this.DragTargetId);
+    }
+
+    private async Task OnMouseUp(MouseEventArgs args)
+    {
+        if (!this.Enabled) return;
+        if (args.Button != 0) return;
+        if (this.OnDragEnd.HasDelegate)
+            await this.OnDragEnd.InvokeAsync(new Point((int)args.ClientX, (int)args.ClientY));
+    }
+
+    private async Task OnTouchEnd(TouchEventArgs args)
+    {
+        if (!this.Enabled) return;
+        if (this.OnDragEnd.HasDelegate)
+            if (args.Touches.Any())
+                await this.OnDragEnd.InvokeAsync(new Point((int)args.Touches.First().ClientX, (int)args.Touches.First().ClientY));
+            else
+                await this.OnDragEnd.InvokeAsync();
+    }
+
+    private async Task OnDbClick(MouseEventArgs args)
+    {
+        if (!this.Enabled) return;
+        if (this.OnDoubleClick.HasDelegate)
+            await this.OnDoubleClick.InvokeAsync(new Point((int)args.ClientX, (int)args.ClientY));
     }
 }
