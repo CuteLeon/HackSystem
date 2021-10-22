@@ -1,4 +1,6 @@
-﻿namespace HackSystem.Web.Component.Popover;
+﻿using Microsoft.JSInterop;
+
+namespace HackSystem.Web.Component.Popover;
 
 public class PopoverHandler : IPopoverHandler, IAsyncDisposable
 {

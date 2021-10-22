@@ -29,9 +29,9 @@
 }
 
 @code {
-    protected Dictionary<string, UserProgramMap> UserProgramMaps { get; set; } = new();
+    protected Dictionary<string, UserProgramMap> UserProgramMaps { get; init; } = new();
 
-    protected Dictionary<string, UserProgramMap> DockedProgramMaps { get; set; } = new();
+    protected Dictionary<string, UserProgramMap> DockedProgramMaps { get; init; } = new();
 
-    protected Dictionary<string, UserProgramMap> UndockedRunningProgramMaps { get; set; } = new();
+    protected Dictionary<string, UserProgramMap> UndockedRunningProgramMaps { get; init; } = new();
 }
