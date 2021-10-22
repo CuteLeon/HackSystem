@@ -31,7 +31,7 @@ public partial class ProgramDrawerComponent
     public async Task OnIconSelect(ProgramIconEventArgs args)
     {
         var programDetail = args.UserProgramMap.Program;
-        this.logger.LogInformation($"Double click to luanch program: {programDetail.Name}");
+        this.logger.LogInformation($"Double click to launch program: {programDetail.Name}");
         await this.intermediaryRequestSender.Send(new ProgramLaunchRequest(programDetail));
     }
 }

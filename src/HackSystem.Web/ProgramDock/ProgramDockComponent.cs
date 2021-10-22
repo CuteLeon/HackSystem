@@ -70,7 +70,7 @@ public partial class ProgramDockComponent
     public async Task OnIconSelect(ProgramIconEventArgs args)
     {
         var programDetail = args.UserProgramMap.Program;
-        this.logger.LogInformation($"Click to luanch program: {programDetail.Name}");
+        this.logger.LogInformation($"Click to launch program: {programDetail.Name}");
         await this.requestSender.Send(new ProgramLaunchRequest(programDetail));
     }
 
