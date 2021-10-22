@@ -30,6 +30,10 @@ public class LRUContainerTests
         Assert.Equal(8, container.HeadValue);
         Assert.Equal(4, container.TailValue);
         Assert.Equal("87654", string.Join(string.Empty, container.GetValuesFromHead()));
+        Assert.Equal(0, container.GetPreviousValue(4));
+        Assert.Equal(4, container.GetPreviousValue(5));
+        Assert.Equal(0, container.GetNextValue(8));
+        Assert.Equal(8, container.GetNextValue(7));
         container.BringToHead(6);
         Assert.Equal("68754", string.Join(string.Empty, container.GetValuesFromHead()));
         Assert.Equal(6, container.HeadValue);

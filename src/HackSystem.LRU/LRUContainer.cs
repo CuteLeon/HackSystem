@@ -118,6 +118,22 @@ public class LRUContainer<TKey, TValue>
         return true;
     }
 
+    public TValue? GetPreviousValue(TValue value)
+    {
+        var key = this.KeySelector.Invoke(value);
+        if (!this.Nodes.TryGetValue(key, out var node))
+            throw new KeyNotFoundException($"Not found key of {key}.");
+        return node.IsTail ? default : node.Previous!.Value;
+    }
+
+    public TValue? GetNextValue(TValue value)
+    {
+        var key = this.KeySelector.Invoke(value);
+        if (!this.Nodes.TryGetValue(key, out var node))
+            throw new KeyNotFoundException($"Not found key of {key}.");
+        return node.IsHead ? default : node.Next!.Value;
+    }
+
     public void MoveToAfter(TValue value, TValue nextValue)
     {
         var key = this.KeySelector.Invoke(value);
