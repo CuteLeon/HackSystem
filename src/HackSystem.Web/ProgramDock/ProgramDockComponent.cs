@@ -7,11 +7,15 @@ namespace HackSystem.Web.ProgramDock;
 
 public partial class ProgramDockComponent
 {
+    private DotNetObjectReference<ProgramDockComponent> programDockReference;
+
     protected async override Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         this.windowChangeEventHandler.EventRaised += OnWindowChangeEvent;
         this.processChangeEventHandler.EventRaised += OnProcessChangeEvent;
+        this.programDockReference = DotNetObjectReference.Create<ProgramDockComponent>(this);
+        await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./js/hacksystem.programdock.js");
     }
 
     private void OnProcessChangeEvent(object sender, ProcessChangeEvent e)
@@ -50,7 +54,7 @@ public partial class ProgramDockComponent
         this.StateHasChanged();
     }
 
-    public void LoadProgramDock(IEnumerable<UserProgramMap> maps)
+    public async Task LoadProgramDock(IEnumerable<UserProgramMap> maps)
     {
         foreach (var map in maps)
         {
@@ -59,22 +63,25 @@ public partial class ProgramDockComponent
             else if (map.Program.GetProcessDetails().Any()) this.UndockedRunningProgramMaps.Add(map.Program.Id, map);
         }
         this.StateHasChanged();
-    }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
-        {
-            await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./js/hacksystem.programdock.js");
-        }
+        await this.jsRuntime.InvokeVoidAsync("programDock.initialProgramDock", this.programDockReference);
     }
 
     public async Task OnIconSelect(ProgramIconEventArgs args)
     {
         var programDetail = args.UserProgramMap.Program;
         this.logger.LogInformation($"Click to luanch program: {programDetail.Name}");
-        await this.intermediaryRequestSender.Send(new ProgramLaunchRequest(programDetail));
+        await this.requestSender.Send(new ProgramLaunchRequest(programDetail));
+    }
+
+    [JSInvokable]
+    public async Task OnWindowClick(string programId, int processId, string windowId)
+    {
+        if (this.UserProgramMaps.TryGetValue(programId, out var programMap) &&
+            programMap.Program.TryGetProcessDetail(processId, out var process) &&
+            process.TryGetWindowDetail(windowId, out var window))
+        {
+            await this.requestSender.Send(new WindowScheduleRequest(window, WindowChangeStates.Active));
+        }
     }
 }

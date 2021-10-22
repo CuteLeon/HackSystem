@@ -1,4 +1,17 @@
-﻿var dockEvents = {
+﻿window.programDock = {
+    programDockReference: null,
+    initialProgramDock: function (reference) {
+        programDockReference = reference;
+    },
+    windowClick: function (nativeTarget) {
+        let target = $(nativeTarget);
+        let programId = target.data("programid");
+        let processId = target.data("processid");
+        let windowId = target.data("windowid");
+        programDockReference.invokeMethodAsync('OnWindowClick', programId, processId, windowId);
+    }
+};
+var dockEvents = {
     mouseOverIcon: function (e) {
         $(e).prev().animate({
             width: '100px',

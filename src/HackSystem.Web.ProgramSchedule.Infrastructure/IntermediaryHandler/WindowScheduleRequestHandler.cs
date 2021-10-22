@@ -1,7 +1,7 @@
 ﻿using HackSystem.LRU;
 using HackSystem.Web.Component.Configurations;
-using HackSystem.Web.ProgramSchedule.Abstractions.Enums;
 using HackSystem.Web.ProgramSchedule.Entity;
+using HackSystem.Web.ProgramSchedule.Enums;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 using HackSystem.Web.ProgramSchedule.IntermediaryHandler;
 
@@ -31,12 +31,38 @@ public class WindowScheduleRequestHandler : IWindowScheduleRequestHandler
             request.ProgramWindowDetail.TierIndex = this.GetNewTierIndex();
             this.windowLRUContainer.Add(request.ProgramWindowDetail);
         }
-        else if (request.ChangeStates == WindowChangeStates.Schedule)
+        else if (request.ChangeStates == WindowChangeStates.Active)
         {
-            if (this.windowLRUContainer.HeadValue == request.ProgramWindowDetail) return new WindowScheduleResponse(request.ChangeStates, false);
-
-            request.ProgramWindowDetail.TierIndex = this.GetNewTierIndex();
-            this.windowLRUContainer.BringToHead(request.ProgramWindowDetail);
+            if (this.windowLRUContainer.HeadValue == request.ProgramWindowDetail)
+            {
+                if (request.ProgramWindowDetail.WindowState == ProgramWindowStates.Minimized)
+                    request.ProgramWindowDetail.WindowState = request.ProgramWindowDetail.LastWindowState;
+                else
+                    return new WindowScheduleResponse(request.ChangeStates, false);
+            }
+            else
+            {
+                if (request.ProgramWindowDetail.WindowState == ProgramWindowStates.Minimized)
+                    request.ProgramWindowDetail.WindowState = request.ProgramWindowDetail.LastWindowState;
+                request.ProgramWindowDetail.TierIndex = this.GetNewTierIndex();
+                this.windowLRUContainer.BringToHead(request.ProgramWindowDetail);
+            }
+        }
+        else if (request.ChangeStates == WindowChangeStates.Inactive)
+        {
+            var headWindow = this.windowLRUContainer.HeadValue!;
+            if (headWindow == request.ProgramWindowDetail)
+            {
+                var previewWindow = this.windowLRUContainer.GetPreviousValue(headWindow);
+                if (previewWindow is not null)
+                    this.windowLRUContainer.BringToHead(previewWindow);
+            }
+            else
+            {
+                request.ProgramWindowDetail.TierIndex = headWindow.TierIndex;
+                headWindow.TierIndex = this.GetNewTierIndex();
+                this.windowLRUContainer.MoveToAfter(request.ProgramWindowDetail, this.windowLRUContainer.HeadValue!);
+            }
         }
         else if (request.ChangeStates == WindowChangeStates.Destory)
         {

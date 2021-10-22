@@ -22,7 +22,7 @@ public partial class ProgramDrawerComponent
         }
     }
 
-    public void LoadProgramDrawer(IEnumerable<UserProgramMap> maps)
+    public async Task LoadProgramDrawer(IEnumerable<UserProgramMap> maps)
     {
         foreach (var map in maps) this.UserProgramMaps.Add(map.Program.Id, map);
         this.StateHasChanged();

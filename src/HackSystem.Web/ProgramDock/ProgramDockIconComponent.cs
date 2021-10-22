@@ -5,10 +5,6 @@ namespace HackSystem.Web.ProgramDock;
 
 public partial class ProgramDockIconComponent
 {
-    public async Task OnClickWindow()
-    {
-    }
-
     public async Task OnClick(MouseEventArgs args)
         => await this.RaiseIconSelect();
 
