@@ -4,9 +4,11 @@ public interface IPopoverHandler
 {
     Task InitializeAsync();
 
-    Task SetupPopover(string targetElementFilter);
+    Task SetupPopovers(string targetElementFilter);
 
-    Task SetupPopover(PopoverDetail popoverDetail);
+    Task<string?> SetupPopover(PopoverDetail popoverDetail);
 
     Task UpdatePopover(string targetElementFilter, string action);
+
+    Task RefreshContent(string popoverId, string replacementTargetId, string originSourceId);
 }

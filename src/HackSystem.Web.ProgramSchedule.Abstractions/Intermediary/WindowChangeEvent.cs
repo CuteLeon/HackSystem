@@ -7,14 +7,14 @@ namespace HackSystem.Web.ProgramSchedule.Intermediary;
 public class WindowChangeEvent : IIntermediaryEvent
 {
     public WindowChangeEvent(
-        WindowChangeStates changeStates,
+        WindowChangeStates changeState,
         ProgramWindowDetail windowDetail)
     {
-        this.ChangeStates = changeStates;
+        this.ChangeState = changeState;
         this.WindowDetail = windowDetail;
     }
 
-    public WindowChangeStates ChangeStates { get; init; }
+    public WindowChangeStates ChangeState { get; init; }
 
     public ProgramWindowDetail WindowDetail { get; init; }
 }
