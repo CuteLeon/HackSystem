@@ -1,6 +1,6 @@
 ﻿@inject ILogger<ProgramContainerComponent> logger
 @inject IProcessContainer processContainer
-@inject IWindowScheduleRequestHandler windowScheduleRequestHandler
+@inject IWindowScheduler windowScheduler
 
 <div class="user-select-none overflow-hidden w-100 h-100" style="pointer-events:none;">
     @foreach (var process in this.processContainer.GetProcesses())

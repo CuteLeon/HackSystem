@@ -53,8 +53,8 @@ namespace HackSystem.Web.ProgramSchedule.Tests
             Assert.Same(serviceProvider.GetRequiredService<IProcessDestroyer>(), serviceProvider.GetRequiredService<IProcessDestroyer>());
             Assert.IsType<ProcessDestroyer>(serviceProvider.GetRequiredService<IProcessDestroyer>());
 
-            Assert.Same(serviceProvider.GetRequiredService<IProgramScheduler>(), serviceProvider.GetRequiredService<IProgramScheduler>());
-            Assert.IsType<ProgramScheduler>(serviceProvider.GetRequiredService<IProgramScheduler>());
+            Assert.Same(serviceProvider.GetRequiredService<IWindowScheduler>(), serviceProvider.GetRequiredService<IWindowScheduler>());
+            Assert.IsType<WindowScheduler>(serviceProvider.GetRequiredService<IWindowScheduler>());
 
             Assert.Same(
                 serviceProvider.GetRequiredService<IRequestHandler<ProcessDestroyCommand, ValueTuple>>(),
