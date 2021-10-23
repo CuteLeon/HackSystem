@@ -81,7 +81,7 @@ public partial class ProgramDockComponent
             programMap.Program.TryGetProcessDetail(processId, out var process) &&
             process.TryGetWindowDetail(windowId, out var window))
         {
-            await this.requestSender.Send(new WindowScheduleRequest(window, WindowChangeStates.Active));
+            await this.requestSender.Send(new WindowScheduleRequest(window, WindowChangeStates.ToggleActive));
         }
     }
 }

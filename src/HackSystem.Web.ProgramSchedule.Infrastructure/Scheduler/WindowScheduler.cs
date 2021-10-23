@@ -25,52 +25,94 @@ public class WindowScheduler : IWindowScheduler
 
     public async Task<bool> Schedule(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
     {
-        if (changeState == WindowChangeStates.Launch)
+        this.logger.LogInformation($"Schedule Window {changeState}, {windowDetail.Caption} ({windowDetail.TierIndex})...");
+        var scheduled = false;
+        switch (changeState)
         {
-            windowDetail.TierIndex = this.GetNewTierIndex();
-            this.windowLRUContainer.Add(windowDetail);
-        }
-        else if (changeState == WindowChangeStates.Active)
-        {
-            if (this.windowLRUContainer.HeadValue == windowDetail)
-            {
-                if (windowDetail.WindowState == ProgramWindowStates.Minimized)
-                    windowDetail.WindowState = windowDetail.LastWindowState;
-                else
-                    return false;
-            }
-            else
-            {
-                if (windowDetail.WindowState == ProgramWindowStates.Minimized)
-                    windowDetail.WindowState = windowDetail.LastWindowState;
-                windowDetail.TierIndex = this.GetNewTierIndex();
-                this.windowLRUContainer.BringToHead(windowDetail);
-            }
-        }
-        else if (changeState == WindowChangeStates.Inactive)
-        {
-            var headWindow = this.windowLRUContainer.HeadValue!;
-            if (headWindow == windowDetail)
-            {
-                var previewWindow = this.windowLRUContainer.GetPreviousValue(headWindow);
-                if (previewWindow is not null)
-                    this.windowLRUContainer.BringToHead(previewWindow);
-            }
-            else
-            {
-                windowDetail.TierIndex = headWindow.TierIndex;
-                headWindow.TierIndex = this.GetNewTierIndex();
-                this.windowLRUContainer.MoveToAfter(windowDetail, this.windowLRUContainer.HeadValue!);
-            }
-        }
-        else if (changeState == WindowChangeStates.Destory)
-        {
-            windowDetail.TierIndex = this.tierConfiguration.BasicProgramSubscript;
-            this.windowLRUContainer.Remove(windowDetail);
+            case WindowChangeStates.Launch:
+                scheduled = LaunchWindow(windowDetail);
+                break;
+            case WindowChangeStates.Active:
+                scheduled = ActiveWindow(windowDetail);
+                break;
+            case WindowChangeStates.Inactive:
+                scheduled = InactiveWindow(windowDetail);
+                break;
+            case WindowChangeStates.ToggleActive:
+                scheduled = ToggleWindowActive(windowDetail);
+                break;
+            case WindowChangeStates.Destory:
+                scheduled = DestoryWindow(windowDetail);
+                break;
+            default: break;
         }
 
-        this.logger.LogInformation($"Window {changeState} request handled, {windowDetail.Caption} ({windowDetail.TierIndex}).");
-        this.OnWindowSchedule?.Invoke(windowDetail);
+        if (scheduled)
+        {
+            this.logger.LogInformation($"Window {changeState} scheduled, {windowDetail.Caption} ({windowDetail.TierIndex}).");
+            this.OnWindowSchedule?.Invoke(windowDetail);
+        }
+        return scheduled;
+    }
+
+    private bool DestoryWindow(ProgramWindowDetail windowDetail)
+    {
+        windowDetail.TierIndex = this.tierConfiguration.BasicProgramSubscript;
+        this.windowLRUContainer.Remove(windowDetail);
+        return true;
+    }
+
+    private bool ToggleWindowActive(ProgramWindowDetail windowDetail)
+    {
+        if (this.windowLRUContainer.HeadValue == windowDetail &&
+            windowDetail.WindowState != ProgramWindowStates.Minimized)
+            return this.InactiveWindow(windowDetail);
+        else
+            return this.ActiveWindow(windowDetail);
+    }
+
+    private bool InactiveWindow(ProgramWindowDetail windowDetail)
+    {
+        var headWindow = this.windowLRUContainer.HeadValue!;
+        if (headWindow == windowDetail)
+        {
+            windowDetail.WindowState = ProgramWindowStates.Minimized;
+            var previewWindow = this.windowLRUContainer.GetPreviousValue(headWindow);
+            if (previewWindow is not null)
+                this.windowLRUContainer.BringToHead(previewWindow);
+        }
+        else
+        {
+            windowDetail.TierIndex = headWindow.TierIndex;
+            headWindow.TierIndex = this.GetNewTierIndex();
+            this.windowLRUContainer.MoveToAfter(windowDetail, this.windowLRUContainer.HeadValue!);
+        }
+        return true;
+    }
+
+    private bool ActiveWindow(ProgramWindowDetail windowDetail)
+    {
+        if (this.windowLRUContainer.HeadValue == windowDetail)
+        {
+            if (windowDetail.WindowState == ProgramWindowStates.Minimized)
+                windowDetail.WindowState = windowDetail.LastWindowState;
+            else
+                return false;
+        }
+        else
+        {
+            if (windowDetail.WindowState == ProgramWindowStates.Minimized)
+                windowDetail.WindowState = windowDetail.LastWindowState;
+            windowDetail.TierIndex = this.GetNewTierIndex();
+            this.windowLRUContainer.BringToHead(windowDetail);
+        }
+        return true;
+    }
+
+    private bool LaunchWindow(ProgramWindowDetail windowDetail)
+    {
+        windowDetail.TierIndex = this.GetNewTierIndex();
+        this.windowLRUContainer.Add(windowDetail);
         return true;
     }
 

@@ -4,6 +4,7 @@ public enum WindowChangeStates
 {
     Active,
     Inactive,
+    ToggleActive,
     Launch,
     Destory,
 }
