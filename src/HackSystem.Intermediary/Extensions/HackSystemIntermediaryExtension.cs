@@ -9,8 +9,5 @@ public static class HackSystemIntermediaryExtension
         => services
             .AddMediatR(typeof(HackSystemIntermediaryExtension).Assembly)
             .AddTransient(typeof(IPipelineBehavior<,>), typeof(IntermediaryPipelineBehavior<,>))
-            .AddTransient<IIntermediaryEventPublisher, IntermediaryEventPublisher>()
-            .AddTransient<IIntermediaryNotificationPublisher, IntermediaryNotificationPublisher>()
-            .AddTransient<IIntermediaryCommandSender, IntermediaryCommandSender>()
-            .AddTransient<IIntermediaryRequestSender, IntermediaryRequestSender>();
+            .AddTransient<IIntermediaryPublisher, IntermediaryPublisher>();
 }

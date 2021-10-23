@@ -47,7 +47,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
     {
         this.Logger.LogInformation($"Min window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
         this.ProgramWindowDetail.WindowState = ProgramWindowStates.Minimized;
-        _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Inactive));
+        _ = await this.publisher.SendRequest(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Inactive));
         this.StateHasChanged();
     }
 
@@ -63,7 +63,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
     {
         this.Logger.LogInformation($"Switch max window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
         this.ProgramWindowDetail.WindowState = ProgramWindowStates.Maximized;
-        _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
+        _ = await this.publisher.SendRequest(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
         this.StateHasChanged();
     }
 
@@ -71,19 +71,19 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
     {
         this.Logger.LogInformation($"Switch restore window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
         this.ProgramWindowDetail.WindowState = ProgramWindowStates.Normal;
-        _ = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
+        _ = await this.publisher.SendRequest(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
         this.StateHasChanged();
     }
 
     public virtual async Task OnClose()
     {
         this.Logger.LogInformation($"Close window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
-        await this.CommandSender.Send(new WindowDestroyCommand(this.ProgramWindowDetail));
+        await this.publisher.SendCommand(new WindowDestroyCommand(this.ProgramWindowDetail));
     }
 
     public async Task OnWindowFocusIn()
     {
-        var windowScheduleResponse = await this.RequestSender.Send(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
+        var windowScheduleResponse = await this.publisher.SendRequest(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
         if (windowScheduleResponse.Scheduled)
         {
             this.Logger.LogInformation($"Scheduled window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");

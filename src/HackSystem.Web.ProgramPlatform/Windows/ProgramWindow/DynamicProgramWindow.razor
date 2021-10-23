@@ -1,6 +1,5 @@
 ﻿@inject ILogger<DynamicProgramWindow> Logger
-@inject IIntermediaryCommandSender CommandSender
-@inject IIntermediaryRequestSender RequestSender
+@inject IIntermediaryPublisher publisher
 
 <CascadingValue IsFixed=true Value=this.ProgramWindowDetail>
     <CascadingValue IsFixed=true Value=this.ProgramWindowStyle>

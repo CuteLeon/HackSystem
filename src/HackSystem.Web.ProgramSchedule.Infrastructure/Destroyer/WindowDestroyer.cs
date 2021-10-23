@@ -9,19 +9,16 @@ public class WindowDestroyer : IWindowDestroyer
 {
     private readonly ILogger<WindowDestroyer> logger;
     private readonly IProcessDestroyer processDestroyer;
-    private readonly IIntermediaryRequestSender requestSender;
-    private readonly IIntermediaryEventPublisher eventPublisher;
+    private readonly IIntermediaryPublisher publisher;
 
     public WindowDestroyer(
         ILogger<WindowDestroyer> logger,
         IProcessDestroyer processDestroyer,
-        IIntermediaryRequestSender requestSender,
-        IIntermediaryEventPublisher eventPublisher)
+        IIntermediaryPublisher publisher)
     {
         this.logger = logger;
         this.processDestroyer = processDestroyer;
-        this.requestSender = requestSender;
-        this.eventPublisher = eventPublisher;
+        this.publisher = publisher;
     }
 
     public async Task DestroyWindow(ProgramWindowDetail windowDetail)
@@ -30,8 +27,8 @@ public class WindowDestroyer : IWindowDestroyer
         this.logger.LogInformation($"Handle Window destroy command: Window {windowDetail.WindowId} of Process {processDetail.ProcessId} ...");
         if (processDetail.RemoveWindowDetail(windowDetail))
         {
-            _ = await this.requestSender.Send(new WindowScheduleRequest(windowDetail, WindowChangeStates.Destory));
-            await this.eventPublisher.Publish(new WindowChangeEvent(WindowChangeStates.Destory, windowDetail));
+            _ = await this.publisher.SendRequest(new WindowScheduleRequest(windowDetail, WindowChangeStates.Destory));
+            await this.publisher.PublishEvent(new WindowChangeEvent(WindowChangeStates.Destory, windowDetail));
         }
         else
         {

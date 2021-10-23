@@ -1,7 +1,6 @@
 ﻿@inject IJSRuntime jsRuntime
 @inject ILogger<ProgramDockComponent> logger
-@inject IIntermediaryRequestSender requestSender
-@inject IIntermediaryCommandSender commandSender
+@inject IIntermediaryPublisher publisher
 @inject IIntermediaryEventHandler<ProcessChangeEvent> processChangeEventHandler
 @inject IIntermediaryEventHandler<WindowChangeEvent> windowChangeEventHandler
 

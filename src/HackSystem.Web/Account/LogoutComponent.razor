@@ -1,13 +1,13 @@
 ﻿@page "/Logout"
 @inject IAuthenticationService AuthenticationService
 @inject NavigationManager NavigationManager
-@inject IIntermediaryCommandSender IntermediaryCommandSender
+@inject IIntermediaryPublisher publisher
 
 @code {
     protected override async Task OnInitializedAsync()
     {
         await AuthenticationService.Logout();
-        await this.IntermediaryCommandSender.Send(new LogoutCommand());
+        await this.publisher.SendCommand(new LogoutCommand());
         NavigationManager.NavigateTo("/StartUp");
     }
 }

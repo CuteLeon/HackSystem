@@ -50,10 +50,10 @@ namespace HackSystem.Intermediary.Infrastructure.Tests
                 .AddIntermediaryNotificationHandler<TestNotification_Singleton1_Handler, TestNotification>(ServiceLifetime.Singleton)
                 .AddIntermediaryNotificationHandler<TestNotification_Singleton2_Handler, TestNotification>(ServiceLifetime.Singleton);
             IServiceProvider provider = services.BuildServiceProvider();
-            var publisher = provider.GetRequiredService<IIntermediaryNotificationPublisher>();
+            var publisher = provider.GetRequiredService<IIntermediaryPublisher>();
             for (int index = 0; index < 10; index++)
             {
-                await publisher.Publish(new TestNotification() { Value = index });
+                await publisher.PublishNotification(new TestNotification() { Value = index });
             }
 
             Assert.Equal(10, TestNotification_Transient1_Handler.HandlerInstances.Count());

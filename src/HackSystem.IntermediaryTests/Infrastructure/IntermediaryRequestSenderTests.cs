@@ -53,11 +53,11 @@ public class IntermediaryRequestSenderTests
             .AddIntermediaryRequestHandler<TestOverridedRequestHandler, TestRequest, int>()
             .AddIntermediaryRequestHandler<TestRequestHandler, TestRequest, int>();
         IServiceProvider provider = services.BuildServiceProvider();
-        var sender = provider.GetRequiredService<IIntermediaryRequestSender>();
+        var sender = provider.GetRequiredService<IIntermediaryPublisher>();
         for (int index = 0; index < 10; index++)
         {
-            await sender.Send(new TestRequest() { Value = index });
-            await sender.Send(new SingletonTestRequest() { Value = index });
+            await sender.SendRequest(new TestRequest() { Value = index });
+            await sender.SendRequest(new SingletonTestRequest() { Value = index });
         }
 
         Assert.Equal(1, SingletonTestRequestHandler.HandlerInstances.Count());

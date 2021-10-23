@@ -22,10 +22,10 @@ public class ProgramLaunchRequestHandlerTests
             .AddHackSystemIntermediary()
             .AddIntermediaryRequestHandlerSingleton<IIntermediaryRequestHandler<ProgramLaunchRequest, ProgramLaunchResponse>, ProgramLaunchRequest, ProgramLaunchResponse>(requestHandler.Object);
         var serviceProvider = serviceCollection.BuildServiceProvider();
-        var requestSender = serviceProvider.GetRequiredService<IIntermediaryRequestSender>();
+        var requestSender = serviceProvider.GetRequiredService<IIntermediaryPublisher>();
         for (int index = 0; index < 5; index++)
         {
-            _ = await requestSender.Send(new ProgramLaunchRequest(new ProgramDetail(default, default, default, default, default, default, default, default, default)));
+            _ = await requestSender.SendRequest(new ProgramLaunchRequest(new ProgramDetail(default, default, default, default, default, default, default, default, default)));
         }
         Assert.Equal(5, requestCount);
     }

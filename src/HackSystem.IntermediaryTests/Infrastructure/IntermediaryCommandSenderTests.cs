@@ -53,11 +53,11 @@ public class IntermediaryCommandSenderTests
             .AddIntermediaryCommandHandler<TestOverridedCommandHandler, TestCommand>()
             .AddIntermediaryCommandHandler<TestCommandHandler, TestCommand>();
         IServiceProvider provider = services.BuildServiceProvider();
-        var sender = provider.GetRequiredService<IIntermediaryCommandSender>();
+        var sender = provider.GetRequiredService<IIntermediaryPublisher>();
         for (int index = 0; index < 10; index++)
         {
-            await sender.Send(new TestCommand() { Value = index });
-            await sender.Send(new SingletonTestCommand() { Value = index });
+            await sender.SendCommand(new TestCommand() { Value = index });
+            await sender.SendCommand(new SingletonTestCommand() { Value = index });
         }
 
         Assert.Equal(1, SingletonTestCommandHandler.HandlerInstances.Count());

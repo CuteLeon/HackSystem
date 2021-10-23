@@ -18,13 +18,13 @@ public class IntermediaryEventPublisherTests
             .AddHackSystemIntermediary()
             .AddIntermediaryEvent<TestEvent>();
         IServiceProvider provider = services.BuildServiceProvider();
-        var publisher = provider.GetRequiredService<IIntermediaryEventPublisher>();
+        var publisher = provider.GetRequiredService<IIntermediaryPublisher>();
         var eventHandler = provider.GetRequiredService<IIntermediaryEventHandler<TestEvent>>();
         var count = 0;
         eventHandler.EventRaised += (s, e) => count++;
         for (int index = 0; index < 10; index++)
         {
-            await publisher.Publish(new TestEvent());
+            await publisher.PublishEvent(new TestEvent());
         }
 
         Assert.Equal(10, count);

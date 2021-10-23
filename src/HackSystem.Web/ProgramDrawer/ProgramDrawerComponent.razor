@@ -1,5 +1,5 @@
 ﻿@inject ILogger<ProgramDrawerComponent> logger
-@inject IIntermediaryRequestSender intermediaryRequestSender
+@inject IIntermediaryPublisher publisher
 
 <div class="d-flex flex-column flex-wrap align-content-start user-select-none w-100 h-100 overflow-hidden">
     @foreach (var programMap in this.UserProgramMaps.Values.OrderByDescending(map => map.PinToTop))

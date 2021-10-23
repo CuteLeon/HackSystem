@@ -10,16 +10,16 @@ public class ProcessDestroyer : IProcessDestroyer
 {
     private readonly ILogger<IProcessDestroyer> logger;
     private readonly IProcessContainer processContainer;
-    private readonly IIntermediaryEventPublisher eventPublisher;
+    private readonly IIntermediaryPublisher publisher;
 
     public ProcessDestroyer(
         ILogger<ProcessDestroyer> logger,
         IProcessContainer processContainer,
-        IIntermediaryEventPublisher eventPublisher)
+        IIntermediaryPublisher publisher)
     {
         this.logger = logger;
         this.processContainer = processContainer;
-        this.eventPublisher = eventPublisher;
+        this.publisher = publisher;
     }
 
     public async Task<ProcessDetail?> DestroyProcess(int processID)
@@ -33,7 +33,7 @@ public class ProcessDestroyer : IProcessDestroyer
         }
 
         process!.ProgramDetail.RemoveProcessDetail(process);
-        await this.eventPublisher.Publish(new ProcessChangeEvent(ProcessChangeStates.Destroy, process));
+        await this.publisher.PublishEvent(new ProcessChangeEvent(ProcessChangeStates.Destroy, process));
         GC.Collect();
         this.logger.LogInformation($"Destroy process {processID}.");
         return process;

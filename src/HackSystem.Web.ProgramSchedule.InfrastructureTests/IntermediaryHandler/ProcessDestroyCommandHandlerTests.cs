@@ -22,10 +22,10 @@ public class ProcessDestroyCommandHandlerTests
             .AddHackSystemIntermediary()
             .AddIntermediaryCommandHandlerSingleton<IIntermediaryCommandHandler<ProcessDestroyCommand>, ProcessDestroyCommand>(commandHandler.Object);
         var serviceProvider = serviceCollection.BuildServiceProvider();
-        var commandSender = serviceProvider.GetRequiredService<IIntermediaryCommandSender>();
+        var commandSender = serviceProvider.GetRequiredService<IIntermediaryPublisher>();
         for (int index = 0; index < 5; index++)
         {
-            await commandSender.Send(new ProcessDestroyCommand(new ProcessDetail(index, default)));
+            await commandSender.SendCommand(new ProcessDestroyCommand(new ProcessDetail(index, default)));
         }
         Assert.Equal(5, commandCount);
     }

@@ -19,14 +19,14 @@ public class AccountsController : AuthenticateControllerBase
     private readonly ILogger<AccountsController> logger;
     private readonly ITokenGenerator tokenGenerator;
     private readonly IMapper mapper;
-    private readonly IIntermediaryNotificationPublisher notificationPublisher;
+    private readonly IIntermediaryPublisher publisher;
     private readonly SignInManager<HackSystemUser> signInManager;
 
     public AccountsController(
         ILogger<AccountsController> logger,
         ITokenGenerator tokenGenerator,
         IMapper mapper,
-        IIntermediaryNotificationPublisher notificationPublisher,
+        IIntermediaryPublisher publisher,
         SignInManager<HackSystemUser> signInManager,
         RoleManager<HackSystemRole> roleManager,
         UserManager<HackSystemUser> userManager)
@@ -35,7 +35,7 @@ public class AccountsController : AuthenticateControllerBase
         this.logger = logger;
         this.tokenGenerator = tokenGenerator;
         this.mapper = mapper;
-        this.notificationPublisher = notificationPublisher;
+        this.publisher = publisher;
         this.signInManager = signInManager;
     }
 
@@ -81,7 +81,7 @@ public class AccountsController : AuthenticateControllerBase
             return this.BadRequest(failedResult);
         }
 
-        await this.notificationPublisher.Publish(new CreateAccountNotification { User = newUser });
+        await this.publisher.PublishNotification(new CreateAccountNotification { User = newUser });
 
         this.logger.LogInformation($"Register successfully: {register.UserName}");
         var registerResult = new RegisterResponse()

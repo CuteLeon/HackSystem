@@ -5,19 +5,19 @@ namespace HackSystem.Web.Component.ToastContainer;
 public class ToastHandler : IToastHandler
 {
     private readonly ILogger<ToastHandler> logger;
-    private readonly IIntermediaryEventPublisher eventPublisher;
+    private readonly IIntermediaryPublisher publisher;
 
     public ToastHandler(
         ILogger<ToastHandler> logger,
-        IIntermediaryEventPublisher eventPublisher)
+        IIntermediaryPublisher publisher)
     {
         this.logger = logger;
-        this.eventPublisher = eventPublisher;
+        this.publisher = publisher;
     }
 
     public async Task PopupToast(ToastDetail toastDetail)
     {
         this.logger.LogInformation($"Popup toast: {toastDetail.Title}...");
-        await this.eventPublisher.Publish(new ToastEvent { ToastDetail = toastDetail });
+        await this.publisher.PublishEvent(new ToastEvent { ToastDetail = toastDetail });
     }
 }

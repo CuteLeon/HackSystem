@@ -17,7 +17,7 @@ public class ProgramLauncher : IProgramLauncher
     private readonly IPIDGenerator pIDGenerator;
     private readonly IProcessContainer processContainer;
     private readonly IWindowLauncher windowLauncher;
-    private readonly IIntermediaryEventPublisher eventPublisher;
+    private readonly IIntermediaryPublisher publisher;
 
     public ProgramLauncher(
         ILogger<ProgramLauncher> logger,
@@ -25,14 +25,14 @@ public class ProgramLauncher : IProgramLauncher
         IPIDGenerator pIDGenerator,
         IProcessContainer processContainer,
         IWindowLauncher windowLauncher,
-        IIntermediaryEventPublisher eventPublisher)
+        IIntermediaryPublisher publisher)
     {
         this.logger = logger;
         this.programAssemblyLoader = programAssemblyLoader;
         this.pIDGenerator = pIDGenerator;
         this.processContainer = processContainer;
         this.windowLauncher = windowLauncher;
-        this.eventPublisher = eventPublisher;
+        this.publisher = publisher;
     }
 
     public async Task<ProcessDetail?> LaunchProgram(ProgramDetail programDetail)
@@ -61,7 +61,7 @@ public class ProgramLauncher : IProgramLauncher
         }
 
         programDetail.AddProcessDetail(process);
-        await this.eventPublisher.Publish(new ProcessChangeEvent(ProcessChangeStates.Launch, process));
+        await this.publisher.PublishEvent(new ProcessChangeEvent(ProcessChangeStates.Launch, process));
         var programWindowDetail = programDetail.ProgramEntryComponentType is null ? default :
             await this.windowLauncher.LaunchWindow(process, programDetail.ProgramEntryComponentType, programDetail.Name);
         return process;

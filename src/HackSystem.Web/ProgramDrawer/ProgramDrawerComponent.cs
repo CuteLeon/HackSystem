@@ -27,6 +27,6 @@ public partial class ProgramDrawerComponent
     {
         var programDetail = args.UserProgramMap.Program;
         this.logger.LogInformation($"Double click to launch program: {programDetail.Name}");
-        await this.intermediaryRequestSender.Send(new ProgramLaunchRequest(programDetail));
+        await this.publisher.SendRequest(new ProgramLaunchRequest(programDetail));
     }
 }

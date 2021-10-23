@@ -71,7 +71,7 @@ public partial class ProgramDockComponent
     {
         var programDetail = args.UserProgramMap.Program;
         this.logger.LogInformation($"Click to launch program: {programDetail.Name}");
-        await this.requestSender.Send(new ProgramLaunchRequest(programDetail));
+        await this.publisher.SendRequest(new ProgramLaunchRequest(programDetail));
     }
 
     [JSInvokable]
@@ -81,7 +81,7 @@ public partial class ProgramDockComponent
             programMap.Program.TryGetProcessDetail(processId, out var process) &&
             process.TryGetWindowDetail(windowId, out var window))
         {
-            await this.requestSender.Send(new WindowScheduleRequest(window, WindowChangeStates.ToggleActive));
+            await this.publisher.SendRequest(new WindowScheduleRequest(window, WindowChangeStates.ToggleActive));
         }
     }
 
@@ -92,7 +92,7 @@ public partial class ProgramDockComponent
             programMap.Program.TryGetProcessDetail(processId, out var process) &&
             process.TryGetWindowDetail(windowId, out var window))
         {
-            await this.commandSender.Send(new WindowDestroyCommand(window));
+            await this.publisher.SendCommand(new WindowDestroyCommand(window));
         }
     }
 }
