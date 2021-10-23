@@ -18,7 +18,7 @@ public partial class ProgramDockComponent
         await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./js/hacksystem.programdock.js");
     }
 
-    private void OnProcessChangeEvent(object sender, ProcessChangeEvent e)
+    private async void OnProcessChangeEvent(object sender, ProcessChangeEvent e)
     {
         if (e.ChangeStates == ProcessChangeStates.Launch)
         {
@@ -26,6 +26,7 @@ public partial class ProgramDockComponent
                 this.UndockedRunningProgramMaps.ContainsKey(e.ProcessDetail.ProgramDetail.Id)) return;
             if (!this.UserProgramMaps.TryGetValue(e.ProcessDetail.ProgramDetail.Id, out var programMap)) return;
 
+            this.logger.LogInformation($"Launch process {e.ProcessDetail.ProcessId}, add to program dock...");
             (programMap.PinToDock ? DockedProgramMaps : UndockedRunningProgramMaps).Add(programMap.Program.Id, programMap);
             this.StateHasChanged();
         }
@@ -35,15 +36,21 @@ public partial class ProgramDockComponent
                 !this.UndockedRunningProgramMaps.ContainsKey(e.ProcessDetail.ProgramDetail.Id)) return;
             if (!this.UserProgramMaps.TryGetValue(e.ProcessDetail.ProgramDetail.Id, out var programMap)) return;
             if (e.ProcessDetail.ProgramDetail.GetProcessDetails().Any()) return;
+
+            this.logger.LogInformation($"Destory process {e.ProcessDetail.ProcessId}, remove from program dock...");
             this.UndockedRunningProgramMaps.Remove(programMap.Program.Id);
             this.StateHasChanged();
         }
     }
 
-    private void OnWindowChangeEvent(object sender, WindowChangeEvent e)
+    private async void OnWindowChangeEvent(object sender, WindowChangeEvent e)
     {
-        // TODO: LEON: Update ICON's windows collection of process
-        this.StateHasChanged();
+        var programId = e.WindowDetail?.ProcessDetail?.ProgramDetail?.Id;
+        if (programId is null) return;
+        if (!this.DockIconComponents.TryGetValue(programId, out var dockIconComponent)) return;
+
+        this.logger.LogInformation($"Window {e.WindowDetail.Caption} {e.ChangeState}, update Dock Icon Component...");
+        await dockIconComponent.UpdateWindowDetail(e.WindowDetail, e.ChangeState);
     }
 
     public void ClearProgramDock()

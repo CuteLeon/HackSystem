@@ -1,5 +1,4 @@
 ﻿@inject IPopoverHandler popoverHandler
-@inject IIntermediaryEventHandler<WindowChangeEvent> windowChangeEventHandler
 
 <div class="mt-n4 px-2 position-relative" @ontouchend="@this.OnTouchEnd" @onclick="@this.OnClick">
     <figure id=@this.DockIconId>
@@ -8,7 +7,7 @@
                     onmouseover="dockEvents.mouseOverIcon(this)" onmouseout="dockEvents.mouseOutIcon(this)" onmousedown="dockEvents.mouseDownIcon(this)" onmouseup="dockEvents.mouseUpIcon(this)">
         </figcaption>
     </figure>
-    <div id=@($"popover_{this.DockIconId}") class="d-none">
+    <div id=@this.DockIconPopoverId class="d-none">
         @{
             var windows = this.UserProgramMap.Program.GetProcessDetails()
                 .OrderByDescending(process => process.ProcessId)
@@ -37,7 +36,7 @@
             }
             else
             {
-                <p class="mx-3 text-muted"><em>No windows launched. (๑•̀ㅂ•́)و✧</em></p>
+                <p class="mx-3 text-center text-muted"><em>No windows launched.<br />(๑•̀ㅂ•́)و✧</em></p>
             }
         }
     </div>
@@ -52,24 +51,9 @@
 
     protected string DockIconId { get => $"dockicon_{this.UserProgramMap.Program.Id}"; }
 
-    protected string DockIconPopoverId { get => $"#popover_{this.DockIconId}"; }
+    protected string DockIconPopoverId { get => $"popover_{this.DockIconId}"; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-        if (firstRender)
-        {
-            await this.popoverHandler.SetupPopover(new PopoverDetail()
-                {
-                    ShowDelay = 150,
-                    IsHtmlContent = true,
-                    Content = this.DockIconPopoverId,
-                    Trigger = PopoverTriggers.Hover,
-                    Placement = PopoverPlacements.Top,
-                    TargetElemantFilter = $"#{this.DockIconId}",
-                    Title = this.UserProgramMap.Rename ?? this.UserProgramMap.Program.Name,
-                    ReplaceContent = true,
-                });
-        }
-    }
+    public string PopoverReplacementId { get; protected set; }
+
+    private bool pendingRefreshWindows = false;
 }

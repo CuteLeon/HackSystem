@@ -11,7 +11,7 @@
             @foreach (var programMap in this.DockedProgramMaps.Values)
             {
                 var programDockKey = $"programDockKey_{programMap.Program.Id}";
-                <ProgramDockIconComponent @key="@programDockKey" UserProgramMap="programMap" OnIconSelect="@this.OnIconSelect" />
+                <ProgramDockIconComponent @key="@programDockKey" @ref=DockIconComponentAnchor UserProgramMap="programMap" OnIconSelect="@this.OnIconSelect" />
             }
             @{
                 if (this.UndockedRunningProgramMaps.Any())
@@ -20,7 +20,7 @@
                     @foreach (var undockedProgramMap in this.UndockedRunningProgramMaps.Values)
                     {
                         var programDockKey = $"programDockKey_{undockedProgramMap.Program.Id}";
-                        <ProgramDockIconComponent @key="@programDockKey" UserProgramMap="undockedProgramMap" OnIconSelect="@this.OnIconSelect" />
+                        <ProgramDockIconComponent @key="@programDockKey" @ref=DockIconComponentAnchor UserProgramMap="undockedProgramMap" OnIconSelect="@this.OnIconSelect" />
                     }
                 }
             }
@@ -34,4 +34,14 @@
     protected Dictionary<string, UserProgramMap> DockedProgramMaps { get; init; } = new();
 
     protected Dictionary<string, UserProgramMap> UndockedRunningProgramMaps { get; init; } = new();
+
+    private ProgramDockIconComponent DockIconComponentAnchor
+    {
+        set
+        {
+            if (value?.UserProgramMap?.Program?.Id is null) return;
+            this.DockIconComponents[value.UserProgramMap.Program.Id] = value;
+        }
+    }
+    private Dictionary<string, ProgramDockIconComponent> DockIconComponents { get; init; } = new();
 }
