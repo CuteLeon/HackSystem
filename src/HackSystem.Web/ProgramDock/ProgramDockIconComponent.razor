@@ -10,29 +10,34 @@
     </figure>
     <div id=@($"popover_{this.DockIconId}") class="d-none">
         @{
-            var windows = this.UserProgramMap.Program.GetProcessDetails().SelectMany(process => process.GetWindowDetails());
+            var windows = this.UserProgramMap.Program.GetProcessDetails()
+                .OrderByDescending(process => process.ProcessId)
+                .SelectMany(process => process.GetWindowDetails())
+                .ToArray();
             if (windows.Any())
             {
-                <div class="btn-group-vertical btn-group-sm" style="width:250px;">
-                    @foreach (var window in windows)
-                    {
-                        var processItemKey = $"popover_window_{window.WindowId}";
-                        <a @key=processItemKey role="button" class="btn btn-outline-info"
-               onclick="programDock.windowClick(this)"
-               data-programid="@window.ProcessDetail.ProgramDetail.Id"
-               data-processid="@window.ProcessDetail.ProcessId"
-               data-windowid="@window.WindowId">
-                            <div class="row justify-content-between">
+                @foreach (var window in windows)
+                {
+                    var processItemKey = $"popover_window_{window.WindowId}";
+                    <div @key=@processItemKey class="btn-group btn-group-sm mb-1" style="width:250px;"
+             data-programid="@window.ProcessDetail.ProgramDetail.Id"
+             data-processid="@window.ProcessDetail.ProcessId"
+             data-windowid="@window.WindowId">
+                        <a role="button" onclick="programDock.windowClick(this)" class="btn btn-@(window.WindowState== ProgramWindowStates.Minimized?"outline-":string.Empty)warning">
+                            <div class="row justify-content-between px-1">
                                 <div class="col-auto"><strong>@window.Caption</strong></div>
                                 <div class="col-auto"><em>@window.ProcessDetail.ProcessId</em></div>
                             </div>
                         </a>
-                    }
-                </div>
+                        <a role="button" onclick="programDock.windowClose(this)" class="btn btn-outline-danger" style="width:30px; max-width:30px">
+                            <span class="fas fa-times"></span>
+                        </a>
+                    </div>
+                }
             }
             else
             {
-                <p class="mx-3 text-muted"><em>* No windows launched. *</em></p>
+                <p class="mx-3 text-muted"><em>No windows launched. (๑•̀ㅂ•́)و✧</em></p>
             }
         }
     </div>

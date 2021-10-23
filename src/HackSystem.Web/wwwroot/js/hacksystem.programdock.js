@@ -4,11 +4,18 @@
         programDockReference = reference;
     },
     windowClick: function (nativeTarget) {
-        let target = $(nativeTarget);
+        let target = $(nativeTarget).parent(".btn-group");
         let programId = target.data("programid");
         let processId = target.data("processid");
         let windowId = target.data("windowid");
         programDockReference.invokeMethodAsync('OnWindowClick', programId, processId, windowId);
+    },
+    windowClose: function (nativeTarget) {
+        let target = $(nativeTarget).parent(".btn-group");
+        let programId = target.data("programid");
+        let processId = target.data("processid");
+        let windowId = target.data("windowid");
+        programDockReference.invokeMethodAsync('OnWindowClose', programId, processId, windowId);
     }
 };
 var dockEvents = {

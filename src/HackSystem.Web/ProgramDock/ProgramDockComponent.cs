@@ -84,4 +84,15 @@ public partial class ProgramDockComponent
             await this.requestSender.Send(new WindowScheduleRequest(window, WindowChangeStates.ToggleActive));
         }
     }
+
+    [JSInvokable]
+    public async Task OnWindowClose(string programId, int processId, string windowId)
+    {
+        if (this.UserProgramMaps.TryGetValue(programId, out var programMap) &&
+            programMap.Program.TryGetProcessDetail(processId, out var process) &&
+            process.TryGetWindowDetail(windowId, out var window))
+        {
+            await this.commandSender.Send(new WindowDestroyCommand(window));
+        }
+    }
 }
