@@ -2,6 +2,7 @@
 using HackSystem.Web.Component.Configurations;
 using HackSystem.Web.ProgramSchedule.Entity;
 using HackSystem.Web.ProgramSchedule.Enums;
+using HackSystem.Web.ProgramSchedule.Intermediary;
 using HackSystem.Web.ProgramSchedule.Scheduler;
 using static HackSystem.Web.ProgramSchedule.Scheduler.IWindowScheduler;
 
@@ -11,14 +12,17 @@ public class WindowScheduler : IWindowScheduler
 {
     public event WindowScheduleHandler? OnWindowSchedule;
     private readonly ILogger<WindowScheduler> logger;
+    private readonly IIntermediaryPublisher publisher;
     private readonly WebComponentTierConfiguration tierConfiguration;
     private readonly LRUContainer<string, ProgramWindowDetail> windowLRUContainer;
 
     public WindowScheduler(
         ILogger<WindowScheduler> logger,
+        IIntermediaryPublisher publisher,
         IOptionsMonitor<WebComponentTierConfiguration> tierConfiguration)
     {
         this.logger = logger;
+        this.publisher = publisher;
         this.tierConfiguration = tierConfiguration.CurrentValue;
         this.windowLRUContainer = new(window => window.WindowId, int.MaxValue);
     }
@@ -50,6 +54,7 @@ public class WindowScheduler : IWindowScheduler
         if (scheduled)
         {
             this.logger.LogInformation($"Window {changeState} scheduled, {windowDetail.Caption} ({windowDetail.TierIndex}).");
+            await this.publisher.PublishEvent(new WindowChangeEvent(changeState, windowDetail));
             this.OnWindowSchedule?.Invoke(windowDetail);
         }
         return scheduled;

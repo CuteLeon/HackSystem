@@ -28,7 +28,6 @@ public class WindowDestroyer : IWindowDestroyer
         if (processDetail.RemoveWindowDetail(windowDetail))
         {
             _ = await this.publisher.SendRequest(new WindowScheduleRequest(windowDetail, WindowChangeStates.Destory));
-            await this.publisher.PublishEvent(new WindowChangeEvent(WindowChangeStates.Destory, windowDetail));
         }
         else
         {

@@ -29,7 +29,6 @@ public class WindowLauncher : IWindowLauncher
         process.AddWindowDetail(programWindowDetail);
         this.logger.LogInformation($"Window {programWindowDetail.Caption} ({programWindowDetail.WindowId}) of process {process.ProcessId} launched.");
         _ = await this.publisher.SendRequest(new WindowScheduleRequest(programWindowDetail, WindowChangeStates.Launch));
-        await this.publisher.PublishEvent(new WindowChangeEvent(WindowChangeStates.Launch, programWindowDetail));
         return programWindowDetail;
     }
 }
