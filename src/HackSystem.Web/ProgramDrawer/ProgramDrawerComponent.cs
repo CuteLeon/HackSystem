@@ -15,11 +15,6 @@ public partial class ProgramDrawerComponent
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
-        {
-            await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "/js/hacksystem.programdrawer.js");
-        }
     }
 
     public async Task LoadProgramDrawer(IEnumerable<UserProgramMap> maps)
