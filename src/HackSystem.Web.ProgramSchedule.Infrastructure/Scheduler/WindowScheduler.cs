@@ -76,8 +76,12 @@ public class WindowScheduler : IWindowScheduler
         var headWindow = this.windowLRUContainer.HeadValue!;
         if (headWindow == windowDetail)
         {
+            var previewWindow = windowDetail;
             windowDetail.WindowState = ProgramWindowStates.Minimized;
-            var previewWindow = this.windowLRUContainer.GetPreviousValue(headWindow);
+            while (previewWindow is not null && previewWindow.WindowState == ProgramWindowStates.Minimized)
+            {
+                previewWindow = this.windowLRUContainer.GetPreviousValue(previewWindow);
+            }
             if (previewWindow is not null)
                 this.windowLRUContainer.BringToHead(previewWindow);
         }
