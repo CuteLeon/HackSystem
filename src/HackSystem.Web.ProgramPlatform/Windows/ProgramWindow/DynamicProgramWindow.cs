@@ -61,7 +61,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
 
     public virtual async Task OnMax()
     {
-        this.Logger.LogInformation($"Switch max window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
+        this.Logger.LogInformation($"Toggle max window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
         this.ProgramWindowDetail.WindowState = ProgramWindowStates.Maximized;
         _ = await this.publisher.SendRequest(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
         this.StateHasChanged();
@@ -69,7 +69,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
 
     public virtual async Task OnRestore()
     {
-        this.Logger.LogInformation($"Switch restore window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
+        this.Logger.LogInformation($"Toggle restore window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
         this.ProgramWindowDetail.WindowState = ProgramWindowStates.Normal;
         _ = await this.publisher.SendRequest(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.Active));
         this.StateHasChanged();
@@ -121,6 +121,13 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
             // Tiny magic.
             await this.OnMax();
         }
+    }
+
+    public async Task OnToggleTopTier()
+    {
+        this.Logger.LogInformation($"Toggle top tier window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
+        _ = await this.publisher.SendRequest(new WindowScheduleRequest(this.ProgramWindowDetail, WindowChangeStates.ToggleTopTier));
+        this.StateHasChanged();
     }
 
     public async ValueTask DisposeAsync()

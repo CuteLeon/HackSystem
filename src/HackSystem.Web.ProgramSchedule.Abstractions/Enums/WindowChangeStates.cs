@@ -2,9 +2,12 @@
 
 public enum WindowChangeStates
 {
+    Launch,
     Active,
     Inactive,
     ToggleActive,
-    Launch,
+    TopTier,
+    NonTopTier,
+    ToggleTopTier,
     Destory,
 }

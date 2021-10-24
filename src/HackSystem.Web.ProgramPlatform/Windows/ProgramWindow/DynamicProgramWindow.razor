@@ -23,7 +23,12 @@
                             </h6>
                             <div @ontouchstart:stopPropagation @ontouchend:stopPropagation
                                  @onmousedown:stopPropagation @onmouseup:stopPropagation
-                                 @onclick:stopPropagation>
+                                 @onclick:stopPropagation @ondblclick:stopPropagation>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-@(this.ProgramWindowDetail.StickyTopTier?string.Empty:"outline-")primary" @onclick=@this.OnToggleTopTier>
+                                        <span class="fas fa-map-@(this.ProgramWindowDetail.StickyTopTier?"marker":"pin")"></span>
+                                    </button>
+                                </div>
                                 <div class="btn-group btn-group-sm" role="group">
                                     @if (this.ProgramWindowDetail.AllowMinimized)
                                     {

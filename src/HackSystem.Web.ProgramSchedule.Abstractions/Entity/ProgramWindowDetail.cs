@@ -34,6 +34,8 @@ public class ProgramWindowDetail
 
     public bool AllowMaximized { get; set; } = true;
 
+    public bool StickyTopTier { get; set; } = false;
+
     public int TierIndex { get; set; }
 
     public ProgramWindowStates LastWindowState { get; protected set; } = ProgramWindowStates.Normal;

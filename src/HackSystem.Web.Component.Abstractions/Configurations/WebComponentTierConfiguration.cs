@@ -8,11 +8,11 @@ public class WebComponentTierConfiguration
 
     public int ProgramDock { get; set; } = 199;
 
-    public int BasicProgramSubscript { get; set; } = 200;
+    public int BasicProgramEdge { get; set; } = 200;
 
-    public int BasicProgramSuperscript { get; set; } = 849;
+    public int ProgramDivider { get; set; } = 799;
 
-    public int TopProgram { get; set; } = 999;
+    public int TopProgramEdge { get; set; } = 999;
 
     public int Bootstrap_Dropdown { get; set; } = 1000;
 
