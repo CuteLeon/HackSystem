@@ -10,8 +10,9 @@
     <div id=@this.DockIconPopoverId class="d-none">
         @{
             var windows = this.UserProgramMap.Program.GetProcessDetails()
-                .OrderByDescending(process => process.ProcessId)
                 .SelectMany(process => process.GetWindowDetails())
+                .OrderByDescending(window => window.StickyTopTier)
+                .ThenByDescending(window => window.ProcessDetail.ProcessId)
                 .ToArray();
             if (windows.Any())
             {
@@ -23,13 +24,18 @@
              data-processid="@window.ProcessDetail.ProcessId"
              data-windowid="@window.WindowId">
                         <a role="button" onclick="programDock.windowClick(this)"
-                   class="btn btn-@(window.WindowState== ProgramWindowStates.Minimized?"outline-info":"warning")">
-                            <div class="row justify-content-between px-1">
-                                <div class="col-auto"><strong>@window.Caption</strong></div>
+                   class="btn text-truncate btn-@(window.WindowState== ProgramWindowStates.Minimized?"outline-info":"warning")">
+                            <div class="row px-1">
+                                <div class="col text-truncate"><strong>@window.Caption sdkjfhlwherehjrtkhdjkflhgdf</strong></div>
                                 <div class="col-auto"><em>@window.ProcessDetail.ProcessId</em></div>
                             </div>
                         </a>
-                        <a role="button" onclick="programDock.windowClose(this)" class="btn btn-outline-danger" style="width:30px; max-width:30px">
+                        <a role="button" onclick="programDock.windowStickyTop(this)"
+                   class="btn p-1 btn-@(window.StickyTopTier?string.Empty:"outline-")primary" style="width:30px; max-width:30px">
+                            <span class="fas fa-map-@(window.StickyTopTier?"marker":"pin")"></span>
+                        </a>
+                        <a role="button" onclick="programDock.windowClose(this)"
+                   class="btn p-1 btn-outline-danger" style="width:30px; max-width:30px">
                             <span class="fas fa-times"></span>
                         </a>
                     </div>

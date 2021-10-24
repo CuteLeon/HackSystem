@@ -93,6 +93,17 @@ public partial class ProgramDockComponent
     }
 
     [JSInvokable]
+    public async Task OnWindowStickyTop(string programId, int processId, string windowId)
+    {
+        if (this.UserProgramMaps.TryGetValue(programId, out var programMap) &&
+            programMap.Program.TryGetProcessDetail(processId, out var process) &&
+            process.TryGetWindowDetail(windowId, out var window))
+        {
+            await this.publisher.SendRequest(new WindowScheduleRequest(window, WindowChangeStates.ToggleTopTier));
+        }
+    }
+
+    [JSInvokable]
     public async Task OnWindowClose(string programId, int processId, string windowId)
     {
         if (this.UserProgramMaps.TryGetValue(programId, out var programMap) &&
