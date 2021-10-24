@@ -62,7 +62,7 @@ public class WindowScheduler : IWindowScheduler
 
     private bool DestoryWindow(ProgramWindowDetail windowDetail)
     {
-        windowDetail.TierIndex = this.tierConfiguration.BasicProgramSubscript;
+        windowDetail.TierIndex = this.tierConfiguration.BasicProgramEdge;
         this.windowLRUContainer.Remove(windowDetail);
         return true;
     }
@@ -132,11 +132,11 @@ public class WindowScheduler : IWindowScheduler
 
     private int GetNewTierIndex()
     {
-        var newTierIndex = this.windowLRUContainer.HeadValue?.TierIndex + 1 ?? this.tierConfiguration.BasicProgramSubscript;
-        if (newTierIndex >= this.tierConfiguration.BasicProgramSuperscript)
+        var newTierIndex = this.windowLRUContainer.HeadValue?.TierIndex + 1 ?? this.tierConfiguration.BasicProgramEdge;
+        if (newTierIndex >= this.tierConfiguration.ProgramDivider)
         {
             this.logger.LogInformation("Reach program superscript, resort all window tier index...");
-            var tierIndex = this.tierConfiguration.BasicProgramSubscript;
+            var tierIndex = this.tierConfiguration.BasicProgramEdge;
             foreach (var window in this.windowLRUContainer.GetValuesFromTail())
             {
                 window.TierIndex = tierIndex++;
