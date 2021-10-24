@@ -4,7 +4,7 @@
      class="position-fixed user-select-none flex-nowrap text-nowrap"
      @onmousedown=@this.MouseDown
      @ontouchstart=@this.TouchStart
-     style="padding:@(this.ProgramWindowDetail.WindowState== ProgramWindowStates.Maximized?0:this.BorderSize)px; z-index:@this.ProgramWindowDetail.TierIndex; pointer-events:auto; @this.GetWindowSizeStyle()">
+     style="padding:@(this.ProgramWindowDetail.WindowState == ProgramWindowStates.Maximized?0:this.BorderSize)px; z-index:@this.ProgramWindowDetail.TierIndex; pointer-events:auto; @this.GetWindowSizeStyle()">
 
     @if (this.ProgramWindowDetail.WindowState != ProgramWindowStates.Maximized)
     {

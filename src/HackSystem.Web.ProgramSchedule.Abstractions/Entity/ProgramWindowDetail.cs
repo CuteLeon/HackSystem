@@ -30,6 +30,10 @@ public class ProgramWindowDetail
 
     public string Height { get; set; } = "75%";
 
+    public bool AllowMinimized { get; set; } = true;
+
+    public bool AllowMaximized { get; set; } = true;
+
     public int TierIndex { get; set; }
 
     public ProgramWindowStates LastWindowState { get; protected set; } = ProgramWindowStates.Normal;
@@ -40,6 +44,9 @@ public class ProgramWindowDetail
         set
         {
             if (this.windowState == value) return;
+            if (!this.AllowMinimized && value == ProgramWindowStates.Minimized) return;
+            if (!this.AllowMaximized && value == ProgramWindowStates.Maximized) return;
+
             this.LastWindowState = this.WindowState;
             this.windowState = value;
         }

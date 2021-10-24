@@ -21,19 +21,26 @@
                             <h6 class="modal-title @this.ProgramWindowStyle.CaptionTextColor.ToTextColor() text-nowrap text-truncate px-2 pt-1">
                                 <strong>@this.ProgramWindowDetail.Caption</strong>
                             </h6>
-                            <div class="btn-group btn-group-sm" role="group"
-                                 @ontouchstart:stopPropagation @ontouchend:stopPropagation
+                            <div @ontouchstart:stopPropagation @ontouchend:stopPropagation
                                  @onmousedown:stopPropagation @onmouseup:stopPropagation
                                  @onclick:stopPropagation>
-                                <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMin>
-                                    <span class="far fa-window-minimize"></span>
-                                </button>
-                                <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMaxRestore>
-                                    <span class="far fa-window-@(this.ProgramWindowDetail.WindowState== ProgramWindowStates.Maximized?"restore":"maximize")"></span>
-                                </button>
-                                <button type="button" class="btn btn-outline-danger" @onclick=@this.OnClose>
-                                    <span class="far fa-window-close"></span>
-                                </button>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    @if (this.ProgramWindowDetail.AllowMinimized)
+                                    {
+                                        <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMin>
+                                            <span class="far fa-window-minimize"></span>
+                                        </button>
+                                    }
+                                    @if (this.ProgramWindowDetail.AllowMaximized)
+                                    {
+                                        <button type="button" class="btn btn-outline-primary" @onclick=@this.OnMaxRestore>
+                                            <span class="far fa-window-@(this.ProgramWindowDetail.WindowState == ProgramWindowStates.Maximized?"restore":"maximize")"></span>
+                                        </button>
+                                    }
+                                    <button type="button" class="btn btn-outline-danger" @onclick=@this.OnClose>
+                                        <span class="far fa-window-close"></span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </DraggableHandleComponent>

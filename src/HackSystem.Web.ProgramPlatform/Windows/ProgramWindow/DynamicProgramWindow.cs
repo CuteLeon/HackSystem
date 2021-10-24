@@ -92,6 +92,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
 
     public async Task OnDoubleClickHeader()
     {
+        if (!this.ProgramWindowDetail.AllowMaximized) return;
         await this.OnMaxRestore();
     }
 
@@ -113,10 +114,12 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
             this.ProgramWindowDetail.Top = $"{position.Y - dragStartPoint.Y + ComponentContract.TopBarHeight}px";
             await this.OnRestore();
         }
-        else if (this.ProgramWindowDetail.WindowState == ProgramWindowStates.Normal)
+        else if (position.Y <= ComponentContract.TopBarHeight * 2 &&
+            this.ProgramWindowDetail.AllowMaximized &&
+            this.ProgramWindowDetail.WindowState == ProgramWindowStates.Normal)
         {
             // Tiny magic.
-            if (position.Y <= ComponentContract.TopBarHeight * 2) await this.OnMax();
+            await this.OnMax();
         }
     }
 
