@@ -39,8 +39,14 @@ public class LRUContainer<TKey, TValue>
         this.Nodes.Clear();
     }
 
-    public bool Exists(TKey key)
+    public bool ExistKey(TKey key)
         => this.Nodes.ContainsKey(key);
+
+    public bool ExistValue(TValue value)
+    {
+        var key = this.KeySelector.Invoke(value);
+        return this.Nodes.ContainsKey(key);
+    }
 
     public bool TryGetValue(TKey key, out TValue? value)
     {
@@ -69,7 +75,7 @@ public class LRUContainer<TKey, TValue>
         }
     }
 
-    public void Add(TValue value)
+    public bool Add(TValue value)
     {
         var key = this.KeySelector.Invoke(value);
         var node = new LRUNode<TValue>(value);
@@ -90,9 +96,10 @@ public class LRUContainer<TKey, TValue>
         {
             this.Remove(this.Tail!.Value);
         }
+        return true;
     }
 
-    public void Remove(TValue value)
+    public bool Remove(TValue value)
     {
         var key = this.KeySelector.Invoke(value);
         if (!this.Nodes.TryRemove(key, out var node))
@@ -102,6 +109,7 @@ public class LRUContainer<TKey, TValue>
         if (this.Tail == node) this.Tail = node.Next;
 
         node.RemoveSelf();
+        return true;
     }
 
     public bool BringToHead(TValue value)
