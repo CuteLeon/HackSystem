@@ -1,5 +1,4 @@
-﻿using HackSystem.LRU;
-using HackSystem.Web.Component.Configurations;
+﻿using HackSystem.Web.Component.Configurations;
 using HackSystem.Web.ProgramSchedule.Entity;
 using HackSystem.Web.ProgramSchedule.Enums;
 using HackSystem.Web.ProgramSchedule.Intermediary;
@@ -13,43 +12,37 @@ public class WindowScheduler : IWindowScheduler
     public event WindowScheduleHandler? OnWindowSchedule;
     private readonly ILogger<WindowScheduler> logger;
     private readonly IIntermediaryPublisher publisher;
-    private readonly WebComponentTierConfiguration tierConfiguration;
-    private readonly LRUContainer<string, ProgramWindowDetail> windowLRUContainer;
+    private readonly IWindowScheduleContainer windowScheduleContainer;
+    private readonly IWindowScheduleContainer topWindowScheduleContainer;
 
     public WindowScheduler(
         ILogger<WindowScheduler> logger,
         IIntermediaryPublisher publisher,
+        IWindowScheduleContainer windowScheduleContainer,
+        IWindowScheduleContainer topWindowScheduleContainer,
         IOptionsMonitor<WebComponentTierConfiguration> tierConfiguration)
     {
         this.logger = logger;
         this.publisher = publisher;
-        this.tierConfiguration = tierConfiguration.CurrentValue;
-        this.windowLRUContainer = new(window => window.WindowId, int.MaxValue);
+        this.windowScheduleContainer = windowScheduleContainer;
+        this.topWindowScheduleContainer = topWindowScheduleContainer;
+        var currentConfig = tierConfiguration.CurrentValue;
+        this.windowScheduleContainer.WindowTierIndexLowEdge = currentConfig.BasicProgramEdge;
+        this.windowScheduleContainer.WindowTierIndexHighEdge = currentConfig.ProgramDivider;
+        this.topWindowScheduleContainer.WindowTierIndexLowEdge = currentConfig.ProgramDivider + 1;
+        this.topWindowScheduleContainer.WindowTierIndexHighEdge = currentConfig.TopProgramEdge;
     }
 
     public async Task<bool> Schedule(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
     {
         this.logger.LogInformation($"Schedule Window {changeState}, {windowDetail.Caption} ({windowDetail.TierIndex})...");
-        var scheduled = false;
-        switch (changeState)
+        var scheduled = changeState switch
         {
-            case WindowChangeStates.Launch:
-                scheduled = LaunchWindow(windowDetail);
-                break;
-            case WindowChangeStates.Active:
-                scheduled = ActiveWindow(windowDetail);
-                break;
-            case WindowChangeStates.Inactive:
-                scheduled = InactiveWindow(windowDetail);
-                break;
-            case WindowChangeStates.ToggleActive:
-                scheduled = ToggleWindowActive(windowDetail);
-                break;
-            case WindowChangeStates.Destory:
-                scheduled = DestoryWindow(windowDetail);
-                break;
-            default: break;
-        }
+            WindowChangeStates.TopTier => await this.TopTierWindow(windowDetail, changeState),
+            WindowChangeStates.NonTopTier => await this.NonTopTierWindow(windowDetail, changeState),
+            WindowChangeStates.ToggleTopTier => await this.ToggleTopTierWindow(windowDetail, changeState),
+            _ => await this.CommonScheduleWindow(windowDetail, changeState)
+        };
 
         if (scheduled)
         {
@@ -60,89 +53,38 @@ public class WindowScheduler : IWindowScheduler
         return scheduled;
     }
 
-    private bool DestoryWindow(ProgramWindowDetail windowDetail)
+    private async Task<bool> TopTierWindow(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
     {
-        windowDetail.TierIndex = this.tierConfiguration.BasicProgramEdge;
-        this.windowLRUContainer.Remove(windowDetail);
-        return true;
+        windowDetail.StickyTopTier = true;
+        if (await this.windowScheduleContainer.WindowExist(windowDetail))
+            await this.windowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Destory);
+
+        if (await this.topWindowScheduleContainer.WindowExist(windowDetail)) return false;
+        return await this.topWindowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Launch);
     }
 
-    private bool ToggleWindowActive(ProgramWindowDetail windowDetail)
+    private async Task<bool> NonTopTierWindow(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
     {
-        if (this.windowLRUContainer.HeadValue == windowDetail &&
-            windowDetail.WindowState != ProgramWindowStates.Minimized)
-            return this.InactiveWindow(windowDetail);
-        else
-            return this.ActiveWindow(windowDetail);
+        windowDetail.StickyTopTier = false;
+        if (await this.topWindowScheduleContainer.WindowExist(windowDetail))
+            await this.topWindowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Destory);
+
+        if (await this.windowScheduleContainer.WindowExist(windowDetail)) return false;
+        return await this.windowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Launch);
     }
 
-    private bool InactiveWindow(ProgramWindowDetail windowDetail)
+    private async Task<bool> ToggleTopTierWindow(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
     {
-        var headWindow = this.windowLRUContainer.HeadValue!;
-        if (headWindow == windowDetail)
-        {
-            var previewWindow = windowDetail;
-            if (windowDetail.AllowMinimized)
-                windowDetail.WindowState = ProgramWindowStates.Minimized;
-            do
-            {
-                previewWindow = this.windowLRUContainer.GetPreviousValue(previewWindow);
-            }
-            while (previewWindow is not null && previewWindow.WindowState == ProgramWindowStates.Minimized);
-            if (previewWindow is not null)
-            {
-                previewWindow.TierIndex = GetNewTierIndex();
-                this.windowLRUContainer.BringToHead(previewWindow);
-            }
-        }
-        else
-        {
-            windowDetail.TierIndex = headWindow.TierIndex;
-            headWindow.TierIndex = this.GetNewTierIndex();
-            this.windowLRUContainer.MoveToAfter(windowDetail, this.windowLRUContainer.HeadValue!);
-        }
-        return true;
+        return windowDetail.StickyTopTier ?
+            await this.NonTopTierWindow(windowDetail, changeState) :
+            await this.TopTierWindow(windowDetail, changeState);
     }
 
-    private bool ActiveWindow(ProgramWindowDetail windowDetail)
+    private async Task<bool> CommonScheduleWindow(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
     {
-        if (this.windowLRUContainer.HeadValue == windowDetail)
-        {
-            if (windowDetail.WindowState == ProgramWindowStates.Minimized)
-                windowDetail.WindowState = windowDetail.LastWindowState;
-            else
-                return false;
-        }
-        else
-        {
-            if (windowDetail.WindowState == ProgramWindowStates.Minimized)
-                windowDetail.WindowState = windowDetail.LastWindowState;
-            windowDetail.TierIndex = this.GetNewTierIndex();
-            this.windowLRUContainer.BringToHead(windowDetail);
-        }
-        return true;
-    }
-
-    private bool LaunchWindow(ProgramWindowDetail windowDetail)
-    {
-        windowDetail.TierIndex = this.GetNewTierIndex();
-        this.windowLRUContainer.Add(windowDetail);
-        return true;
-    }
-
-    private int GetNewTierIndex()
-    {
-        var newTierIndex = this.windowLRUContainer.HeadValue?.TierIndex + 1 ?? this.tierConfiguration.BasicProgramEdge;
-        if (newTierIndex >= this.tierConfiguration.ProgramDivider)
-        {
-            this.logger.LogInformation("Reach program superscript, resort all window tier index...");
-            var tierIndex = this.tierConfiguration.BasicProgramEdge;
-            foreach (var window in this.windowLRUContainer.GetValuesFromTail())
-            {
-                window.TierIndex = tierIndex++;
-            }
-            newTierIndex = --tierIndex;
-        }
-        return newTierIndex;
+        return await (windowDetail.StickyTopTier ?
+            this.topWindowScheduleContainer :
+            this.windowScheduleContainer)
+            .Schedule(windowDetail, changeState);
     }
 }
