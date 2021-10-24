@@ -22,7 +22,8 @@
              data-programid="@window.ProcessDetail.ProgramDetail.Id"
              data-processid="@window.ProcessDetail.ProcessId"
              data-windowid="@window.WindowId">
-                        <a role="button" onclick="programDock.windowClick(this)" class="btn btn-@(window.WindowState== ProgramWindowStates.Minimized?"outline-":string.Empty)warning">
+                        <a role="button" onclick="programDock.windowClick(this)"
+                   class="btn btn-@(window.WindowState== ProgramWindowStates.Minimized?"outline-info":"warning")">
                             <div class="row justify-content-between px-1">
                                 <div class="col-auto"><strong>@window.Caption</strong></div>
                                 <div class="col-auto"><em>@window.ProcessDetail.ProcessId</em></div>
