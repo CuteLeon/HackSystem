@@ -59,7 +59,13 @@
 
 > Click image below to watch video.
 
+## Main Desktop
+
 [![CuteLeon/HackSystem](https://raw.github.com/CuteLeon/HackSystem/master/readme/VideoSplash.jpg)](https://www.bilibili.com/video/BV1di4y177TH/ "CuteLeon/HackSystem")
+
+## Multiple Windows Scheduler
+
+[![CuteLeon/HackSystem](https://raw.github.com/CuteLeon/HackSystem/master/readme/MultipleWindowsScheduler.jpg)](https://www.bilibili.com/video/BV16r4y117Fz/ "CuteLeon/HackSystem")
 
 # Screen
 
