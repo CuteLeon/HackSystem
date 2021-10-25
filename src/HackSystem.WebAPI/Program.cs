@@ -45,7 +45,7 @@ try
         .AddNLogWeb();
 
     builder.Services
-        .AddCors(options => options.AddPolicy("AllowAny", builder => builder
+        .AddCors(options => options.AddDefaultPolicy(builder => builder
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()))
@@ -104,7 +104,7 @@ try
         app.UseHsts();
     }
 
-    app.UseCors("AllowAny")
+    app.UseCors()
         .UseHttpsRedirection()
         .UseStaticFiles()
         .UseRouting()
