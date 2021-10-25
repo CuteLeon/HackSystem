@@ -479,7 +479,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000003",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -503,7 +503,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000006",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -519,7 +519,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000008",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -527,7 +527,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000009",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -551,7 +551,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000003",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -575,7 +575,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000006",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -591,7 +591,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000008",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -599,7 +599,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000009",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -623,7 +623,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000003",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -647,7 +647,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000006",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -663,7 +663,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000008",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -671,7 +671,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000009",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         });
                 });

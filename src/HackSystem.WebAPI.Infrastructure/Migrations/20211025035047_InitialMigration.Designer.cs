@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackSystem.WebAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(HackSystemDbContext))]
-    [Migration("20211016164154_InitialMigration")]
+    [Migration("20211025035047_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -481,7 +481,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000003",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -505,7 +505,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000006",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -521,7 +521,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000008",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -529,7 +529,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000001",
                             ProgramId = "program0-icon-0828-hack-system000009",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -553,7 +553,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000003",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -577,7 +577,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000006",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -593,7 +593,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000008",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -601,7 +601,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000009",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -625,7 +625,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000003",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -649,7 +649,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000006",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -665,7 +665,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000008",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         },
                         new
@@ -673,7 +673,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000009",
                             PinToDesktop = true,
-                            PinToDock = true,
+                            PinToDock = false,
                             PinToTop = false
                         });
                 });
