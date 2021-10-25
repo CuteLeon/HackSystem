@@ -20,7 +20,7 @@ public partial class ProgramDockComponent
 
     private async void OnProcessChangeEvent(object sender, ProcessChangeEvent e)
     {
-        if (e.ChangeStates == ProcessChangeStates.Launch)
+        if (e.ChangeState == ProcessChangeStates.Launch)
         {
             if (this.DockedProgramMaps.ContainsKey(e.ProcessDetail.ProgramDetail.Id) ||
                 this.UndockedRunningProgramMaps.ContainsKey(e.ProcessDetail.ProgramDetail.Id)) return;
@@ -30,7 +30,7 @@ public partial class ProgramDockComponent
             (programMap.PinToDock ? DockedProgramMaps : UndockedRunningProgramMaps).Add(programMap.Program.Id, programMap);
             this.StateHasChanged();
         }
-        else if (e.ChangeStates == ProcessChangeStates.Destroy)
+        else if (e.ChangeState == ProcessChangeStates.Destroy)
         {
             if (this.DockedProgramMaps.ContainsKey(e.ProcessDetail.ProgramDetail.Id) ||
                 !this.UndockedRunningProgramMaps.ContainsKey(e.ProcessDetail.ProgramDetail.Id)) return;

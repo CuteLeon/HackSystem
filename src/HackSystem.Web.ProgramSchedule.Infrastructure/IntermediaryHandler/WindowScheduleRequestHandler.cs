@@ -19,9 +19,9 @@ public class WindowScheduleRequestHandler : IWindowScheduleRequestHandler
 
     public async Task<WindowScheduleResponse> Handle(WindowScheduleRequest request, CancellationToken cancellationToken)
     {
-        this.logger.LogInformation($"Handle Window {request.ChangeStates} request {request.ProgramWindowDetail.Caption} ...");
-        var scheduled = await this.windowScheduler.Schedule(request.ProgramWindowDetail, request.ChangeStates);
-        this.logger.LogInformation($"Window {request.ChangeStates} request {request.ProgramWindowDetail.Caption} handled.");
-        return new WindowScheduleResponse(request.ChangeStates, scheduled);
+        this.logger.LogInformation($"Handle Window {request.ChangeState} request {request.ProgramWindowDetail.Caption} ...");
+        var scheduled = await this.windowScheduler.Schedule(request.ProgramWindowDetail, request.ChangeState);
+        this.logger.LogInformation($"Window {request.ChangeState} request {request.ProgramWindowDetail.Caption} handled.");
+        return new WindowScheduleResponse(request.ChangeState, scheduled);
     }
 }

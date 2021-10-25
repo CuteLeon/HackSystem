@@ -7,14 +7,14 @@ namespace HackSystem.Web.ProgramSchedule.Intermediary;
 public class ProcessChangeEvent : IIntermediaryEvent
 {
     public ProcessChangeEvent(
-        ProcessChangeStates changeStates,
+        ProcessChangeStates changeState,
         ProcessDetail processDetail)
     {
-        this.ChangeStates = changeStates;
+        this.ChangeState = changeState;
         this.ProcessDetail = processDetail;
     }
 
-    public ProcessChangeStates ChangeStates { get; init; }
+    public ProcessChangeStates ChangeState { get; init; }
 
     public ProcessDetail ProcessDetail { get; init; }
 }
