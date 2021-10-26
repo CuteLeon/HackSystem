@@ -1,7 +1,9 @@
-﻿using HackSystem.Web.ProgramSchedule.Container;
+﻿using HackSystem.Intermediary.Application;
+using HackSystem.Web.Domain.Intermediary;
+using HackSystem.Web.ProgramSchedule.Container;
 using HackSystem.Web.ProgramSchedule.Destroyer;
 
-namespace HackSystem.Web.ProgramSchedule.Infrastructure.IntermediaryHandler;
+namespace HackSystem.Web.Infrastructure.IntermediaryHandler;
 
 public class LogoutCommandHandler : IIntermediaryCommandHandler<LogoutCommand>
 {
