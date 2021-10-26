@@ -35,9 +35,10 @@ export function setupPopover(popoverTargetId, title, html, content, trigger, pla
     let res = popoverTarget.popover(options);
     if (trigger === 'hover') {
         res.on('hide.bs.popover', function () {
-            if ($(".popover:hover").length) {
-                $(document).one('mouseleave', '.popover', function () {
-                    popoverTarget.popover('hide');
+            let hoverPopovers = $(".popover:hover");
+            if (hoverPopovers.length) {
+                hoverPopovers.one('mouseleave', function () {
+                    hoverPopovers.popover('hide');
                 });
                 return false;
             }
