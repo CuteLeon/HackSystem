@@ -6,16 +6,18 @@ namespace HackSystem.Web.ProgramDrawer;
 public partial class ProgramDrawerIconComponent
 {
     protected async Task OnDbClick(MouseEventArgs args)
-        => await this.RaiseIconSelect();
-
-    protected async Task OnTouchEnd(TouchEventArgs args)
-        => await this.RaiseIconSelect();
-
-    protected async Task RaiseIconSelect()
     {
         if (!this.OnIconSelect.HasDelegate) return;
 
-        var eventArgs = new ProgramIconEventArgs(this.UserProgramMap);
+        var eventArgs = new ProgramIconEventArgs(this.UserProgramMap, args);
+        await this.OnIconSelect.InvokeAsync(eventArgs);
+    }
+
+    protected async Task OnTouchEnd(TouchEventArgs args)
+    {
+        if (!this.OnIconSelect.HasDelegate) return;
+
+        var eventArgs = new ProgramIconEventArgs(this.UserProgramMap, args);
         await this.OnIconSelect.InvokeAsync(eventArgs);
     }
 }

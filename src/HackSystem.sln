@@ -142,9 +142,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.Component.Ab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.Component.Infrastructure", "HackSystem.Web.Component.Infrastructure\HackSystem.Web.Component.Infrastructure.csproj", "{0F420B90-652E-48FE-B0D6-9F301C91E36B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.LRU", "HackSystem.LRU\HackSystem.LRU.csproj", "{FC435D20-394E-44EF-84E9-D37CFF9667B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.LRU", "HackSystem.LRU\HackSystem.LRU.csproj", "{FC435D20-394E-44EF-84E9-D37CFF9667B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.LRUTests", "HackSystem.LRUTests\HackSystem.LRUTests.csproj", "{5B36BAD7-5A00-4156-83BE-727F993C41F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.LRUTests", "HackSystem.LRUTests\HackSystem.LRUTests.csproj", "{5B36BAD7-5A00-4156-83BE-727F993C41F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
