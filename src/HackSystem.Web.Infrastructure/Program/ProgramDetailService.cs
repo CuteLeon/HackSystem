@@ -20,30 +20,9 @@ public class ProgramDetailService : AuthenticatedServiceBase, IProgramDetailServ
         return result;
     }
 
-    public async Task<bool> SetUserProgramHide(UserProgramMapRequest hideRequest)
+    public async Task<bool> UpdateUserProgram(UserProgramMapRequest request)
     {
-        var response = await this.HttpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramHide", hideRequest);
-        response.EnsureSuccessStatusCode();
-        return response.IsSuccessStatusCode;
-    }
-
-    public async Task<bool> SetUserProgramPinToDock(UserProgramMapRequest pinToDockRequest)
-    {
-        var response = await this.HttpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramPinToDock", pinToDockRequest);
-        response.EnsureSuccessStatusCode();
-        return response.IsSuccessStatusCode;
-    }
-
-    public async Task<bool> SetUserProgramPinToTop(UserProgramMapRequest pinToTopRequest)
-    {
-        var response = await this.HttpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramPinToTop", pinToTopRequest);
-        response.EnsureSuccessStatusCode();
-        return response.IsSuccessStatusCode;
-    }
-
-    public async Task<bool> SetUserProgramRename(UserProgramMapRequest renameRequest)
-    {
-        var response = await this.HttpClient.PutAsJsonAsync("api/ProgramDetail/SetUserProgramRename", renameRequest);
+        var response = await this.HttpClient.PutAsJsonAsync("api/ProgramDetail/UpdateUserProgram", request);
         response.EnsureSuccessStatusCode();
         return response.IsSuccessStatusCode;
     }

@@ -45,43 +45,19 @@ public class ProgramDetailController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> SetUserProgramHide(UserProgramMapRequest hideRequest)
+    public async Task<IActionResult> UpdateUserProgram(UserProgramMapRequest request)
     {
-        this.logger.LogInformation($"Hide program {hideRequest.ProgramId} for user...");
-        var userId = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
-        var result = await this.userProgramMapRepository.SetUserProgramPinToDesktop(userId, hideRequest.ProgramId, hideRequest.PinToDesktop.Value);
-        this.logger.LogInformation($"Hide program {hideRequest.ProgramId} for user {userId} {(result ? "successfully" : "failed")}.");
-        return result ? this.Ok(result) : this.BadRequest(result);
-    }
+        this.logger.LogInformation($"Update use program map of {request.ProgramId} ...");
+        var userName = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
+        var user = await this.userManager.FindByNameAsync(userName) ?? throw new AuthenticationException();
+        var userId = user.Id;
+        var map = await this.userProgramMapRepository.FindAsync(userId, request.ProgramId);
 
-    [HttpPut]
-    public async Task<IActionResult> SetUserProgramPinToDock(UserProgramMapRequest pinToDockRequest)
-    {
-        this.logger.LogInformation($"Pin program {pinToDockRequest.ProgramId} to dock for user...");
-        var userId = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
-        var result = await this.userProgramMapRepository.SetUserProgramPinToDock(userId, pinToDockRequest.ProgramId, pinToDockRequest.PinToDock.Value);
-        this.logger.LogInformation($"Pin program {pinToDockRequest.ProgramId} to dock for user {userId} {(result ? "successfully" : "failed")}.");
-        return result ? this.Ok(result) : this.BadRequest(result);
-    }
+        if (request.PinToDock.HasValue) map.PinToDock = request.PinToDock.Value;
 
-    [HttpPut]
-    public async Task<IActionResult> SetUserProgramPinToTop(UserProgramMapRequest pinToTopRequest)
-    {
-        this.logger.LogInformation($"Pin program {pinToTopRequest.ProgramId} to top for user...");
-        var userId = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
-        var result = await this.userProgramMapRepository.SetUserProgramPinToTop(userId, pinToTopRequest.ProgramId, pinToTopRequest.PinToTop.Value);
-        this.logger.LogInformation($"Pin program {pinToTopRequest.ProgramId} to top for user {userId} {(result ? "successfully" : "failed")}.");
-        return result ? this.Ok(result) : this.BadRequest(result);
-    }
-
-    [HttpPut]
-    public async Task<IActionResult> SetUserProgramRename(UserProgramMapRequest renameRequest)
-    {
-        this.logger.LogInformation($"Rename program {renameRequest.ProgramId} for user...");
-        var userId = this.HttpContext.User?.Identity?.Name ?? throw new AuthenticationException();
-        var result = await this.userProgramMapRepository.SetUserProgramRename(userId, renameRequest.ProgramId, renameRequest.Rename);
-        this.logger.LogInformation($"Rename program {renameRequest.ProgramId} for user {userId} {(result ? "successfully" : "failed")}.");
-        return result ? this.Ok(result) : this.BadRequest(result);
+        await this.userProgramMapRepository.UpdateAsync(map);
+        this.logger.LogInformation($"User program map of {request.ProgramId} for user {userId} updated.");
+        return this.Ok();
     }
 
     [HttpDelete]

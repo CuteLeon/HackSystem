@@ -31,40 +31,4 @@ public class UserProgramMapRepository : RepositoryBase<UserProgramMap>, IUserPro
     {
         return await this.AsQueryable().Where(map => map.UserId == userId).ToListAsync();
     }
-
-    public async Task<bool> SetUserProgramPinToDesktop(string userId, string programId, bool pinToDesktop)
-    {
-        var map = await this.FindAsync(userId, programId);
-        if (map == null) return false;
-        map.PinToDesktop = pinToDesktop;
-        await this.UpdateAsync(map);
-        return true;
-    }
-
-    public async Task<bool> SetUserProgramPinToDock(string userId, string programId, bool pinToDock)
-    {
-        var map = await this.FindAsync(userId, programId);
-        if (map == null) return false;
-        map.PinToDock = pinToDock;
-        await this.UpdateAsync(map);
-        return true;
-    }
-
-    public async Task<bool> SetUserProgramPinToTop(string userId, string programId, bool pinToTop)
-    {
-        var map = await this.FindAsync(userId, programId);
-        if (map == null) return false;
-        map.PinToTop = pinToTop;
-        await this.UpdateAsync(map);
-        return true;
-    }
-
-    public async Task<bool> SetUserProgramRename(string userId, string programId, string rename)
-    {
-        var map = await this.FindAsync(userId, programId);
-        if (map == null) return false;
-        map.Rename = rename;
-        await this.UpdateAsync(map);
-        return true;
-    }
 }

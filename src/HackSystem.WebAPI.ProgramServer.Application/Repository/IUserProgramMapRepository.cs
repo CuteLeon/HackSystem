@@ -9,13 +9,5 @@ public interface IUserProgramMapRepository : IRepositoryBase<UserProgramMap>
 
     Task<IEnumerable<UserProgramMap>> QueryUserProgramMaps(string userId);
 
-    Task<bool> SetUserProgramPinToDesktop(string userId, string programId, bool pinToDesktop);
-
-    Task<bool> SetUserProgramPinToDock(string userId, string programId, bool pinToDock);
-
-    Task<bool> SetUserProgramPinToTop(string userId, string programId, bool pinToTop);
-
-    Task<bool> SetUserProgramRename(string userId, string programId, string rename);
-
     Task<bool> DeleteUserProgramMap(string userId, string programId);
 }
