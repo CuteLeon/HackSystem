@@ -19,7 +19,9 @@ public static class ServiceCollectionExtension
             .AddScoped<IAuthenticationService, AuthenticationService>()
             .AddScoped<IProgramDetailService, ProgramDetailService>()
             .AddScoped<IProgramAssetService, ProgramAssetService>()
-            .AddIntermediaryCommandHandler<LogoutCommandHandler, LogoutCommand>(ServiceLifetime.Singleton);
+            .AddIntermediaryEvent<UserProgramMapEvent>()
+            .AddIntermediaryCommandHandler<LogoutCommandHandler, LogoutCommand>(ServiceLifetime.Singleton)
+            .AddIntermediaryCommandHandler<UserProgramMapCommandHandler, UserProgramMapCommand>(ServiceLifetime.Singleton);
         return services;
     }
 }
