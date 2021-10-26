@@ -1,11 +1,12 @@
-﻿using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
+﻿using HackSystem.Web.Domain.Intermediary;
+using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
 using HackSystem.Web.ProgramSchedule.Entity;
 using HackSystem.Web.ProgramSchedule.Enums;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 
 namespace HackSystem.Web.ProgramDock;
 
-public partial class ProgramDockComponent
+public partial class ProgramDockComponent : IAsyncDisposable
 {
     private DotNetObjectReference<ProgramDockComponent> programDockReference;
 
@@ -14,8 +15,41 @@ public partial class ProgramDockComponent
         await base.OnInitializedAsync();
         this.windowChangeEventHandler.EventRaised += OnWindowChangeEvent;
         this.processChangeEventHandler.EventRaised += OnProcessChangeEvent;
+        this.programMapEventHandler.EventRaised += OnProgramMapEventHandle;
         this.programDockReference = DotNetObjectReference.Create<ProgramDockComponent>(this);
         await this.jsRuntime.InvokeVoidAsync("blazorJSTools.importJavaScript", "./js/hacksystem.programdock.js");
+    }
+
+    private async void OnProgramMapEventHandle(object sender, UserProgramMapEvent args)
+    {
+        var request = args.UserProgramMap;
+        if (!this.UserProgramMaps.TryGetValue(request.ProgramId, out var programMap)) return;
+
+        if (request.PinToDock.HasValue)
+        {
+            programMap.PinToDock = request.PinToDock.Value;
+            if (programMap.PinToDock)
+            {
+                if (this.UndockedRunningProgramMaps.ContainsKey(programMap.Program.Id))
+                {
+                    this.UndockedRunningProgramMaps.Remove(programMap.Program.Id);
+                }
+                this.DockedProgramMaps[programMap.Program.Id] = programMap;
+            }
+            else if (!programMap.PinToDock)
+            {
+                if (this.DockedProgramMaps.ContainsKey(programMap.Program.Id))
+                {
+                    this.DockedProgramMaps.Remove(programMap.Program.Id);
+                }
+                if (programMap.Program.GetProcessDetails().Any())
+                {
+                    this.UndockedRunningProgramMaps[programMap.Program.Id] = programMap;
+                }
+            }
+        }
+
+        this.StateHasChanged();
     }
 
     private async void OnProcessChangeEvent(object sender, ProcessChangeEvent e)
@@ -112,5 +146,12 @@ public partial class ProgramDockComponent
         {
             await this.publisher.SendCommand(new WindowDestroyCommand(window));
         }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        this.windowChangeEventHandler.EventRaised -= OnWindowChangeEvent;
+        this.processChangeEventHandler.EventRaised -= OnProcessChangeEvent;
+        this.programMapEventHandler.EventRaised -= OnProgramMapEventHandle;
     }
 }

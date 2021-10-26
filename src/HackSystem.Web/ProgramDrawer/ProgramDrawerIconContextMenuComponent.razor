@@ -1,0 +1,42 @@
+﻿<div class="dropdown-menu dropdown-menu-sm position-fixed @(this.Visible?"d-block":"d-none")"
+     style="pointer-events:auto; @(this.Visible?$"left:{this.PositionX}px; top:{this.PositionY}px;":string.Empty)"
+     @onblur=@this.Hide @onclick=@this.Hide @ontouchend=@this.Hide>
+    <a role="button" class="dropdown-item"
+       @onclick=@(async e=>{if(this.OnRunProgram.HasDelegate){await this.OnRunProgram.InvokeAsync(this.UserProgramMap);}})>
+        <span class="fas fa-rocket pr-3"></span>Run
+    </a>
+    <div class="dropdown-divider"></div>
+    <a role="button" class="dropdown-item"
+       @onclick=@(async e=>{if(this.OnTogglePinToDock.HasDelegate){await this.OnTogglePinToDock.InvokeAsync(this.UserProgramMap);}})>
+        <span class="fas fa-plane-@(this.UserProgramMap.PinToDock?"departure":"arrival") pr-3"></span>
+        @(this.UserProgramMap.PinToDock?"Unpin":"Pin") to Dock
+    </a>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<UserProgramMap> OnRunProgram { get; set; }
+
+    [Parameter]
+    public EventCallback<UserProgramMap> OnTogglePinToDock { get; set; }
+
+    public bool Visible { get; set; }
+    public int PositionX { get; set; }
+    public int PositionY { get; set; }
+    public UserProgramMap UserProgramMap { get; set; } = new(default);
+
+    public async Task Show(UserProgramMap programMap, Point point)
+    {
+        this.UserProgramMap = programMap;
+        this.PositionX = point.X;
+        this.PositionY = point.Y;
+        this.Visible = true;
+        this.StateHasChanged();
+    }
+
+    public async Task Hide()
+    {
+        this.Visible = false;
+        this.StateHasChanged();
+    }
+}

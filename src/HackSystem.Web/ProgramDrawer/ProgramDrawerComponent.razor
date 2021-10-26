@@ -1,14 +1,22 @@
 ﻿@inject ILogger<ProgramDrawerComponent> logger
 @inject IIntermediaryPublisher publisher
+@inject IIntermediaryEventHandler<UserProgramMapEvent> programMapEventHandler
 
 <div class="d-flex flex-column flex-wrap align-content-start user-select-none w-100 h-100 overflow-hidden">
     @foreach (var programMap in this.UserProgramMaps.Values.OrderByDescending(map => map.PinToTop))
     {
         var programDrawerKey = $"programDrawerKey_{programMap.Program.Id}";
-        <ProgramDrawerIconComponent @key="@programDrawerKey" UserProgramMap="programMap" OnIconSelect="this.OnIconSelect" />
+        <ProgramDrawerIconComponent @key="@programDrawerKey" UserProgramMap="programMap"
+                                OnIconSelect="@this.OnIconSelect" OnIconContextMenu=@this.OnIconContextMenu />
     }
+    <ProgramDrawerIconContextMenuComponent @ref=@this.IconContextMenuComponent
+                                           OnRunProgram=this.OnMenuRunProgram
+                                           OnTogglePinToDock=this.OnMenuTogglePinToDock>
+    </ProgramDrawerIconContextMenuComponent>
 </div>
 
 @code {
     protected Dictionary<string, UserProgramMap> UserProgramMaps { get; init; } = new();
+
+    protected ProgramDrawerIconContextMenuComponent IconContextMenuComponent { get; set; }
 }

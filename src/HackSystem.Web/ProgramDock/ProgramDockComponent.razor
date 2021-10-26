@@ -3,6 +3,7 @@
 @inject IIntermediaryPublisher publisher
 @inject IIntermediaryEventHandler<ProcessChangeEvent> processChangeEventHandler
 @inject IIntermediaryEventHandler<WindowChangeEvent> windowChangeEventHandler
+@inject IIntermediaryEventHandler<UserProgramMapEvent> programMapEventHandler
 
 @if (this.DockedProgramMaps.Any() || this.UndockedRunningProgramMaps.Any())
 {

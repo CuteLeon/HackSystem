@@ -20,4 +20,12 @@ public partial class ProgramDrawerIconComponent
         var eventArgs = new ProgramIconEventArgs(this.UserProgramMap, args);
         await this.OnIconSelect.InvokeAsync(eventArgs);
     }
+
+    public async Task OnContextMenu(MouseEventArgs args)
+    {
+        if (!this.OnIconContextMenu.HasDelegate) return;
+
+        var eventArgs = new ProgramIconEventArgs(this.UserProgramMap, args);
+        await this.OnIconContextMenu.InvokeAsync(eventArgs);
+    }
 }

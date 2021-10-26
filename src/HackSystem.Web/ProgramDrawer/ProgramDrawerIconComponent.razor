@@ -1,4 +1,5 @@
 ﻿<figure class="m-1 rounded position-relative @this.DrawerIconClass"
+        @oncontextmenu=@this.OnContextMenu @oncontextmenu:preventDefault
         @ontouchend=this.OnTouchEnd @ondblclick="this.OnDbClick"
         @onmouseover=@(e=>{this.DrawerIconClass="drawer-icon-hover";this.StateHasChanged();})
         @onmousedown=@(e=>{this.DrawerIconClass="drawer-icon-active";this.StateHasChanged();})
@@ -13,6 +14,9 @@
 @code {
     [Parameter]
     public EventCallback<ProgramIconEventArgs> OnIconSelect { get; set; }
+
+    [Parameter]
+    public EventCallback<ProgramIconEventArgs> OnIconContextMenu { get; set; }
 
     [Parameter]
     public UserProgramMap UserProgramMap { get; set; }
