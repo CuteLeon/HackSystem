@@ -1,5 +1,6 @@
 ﻿<div class="dropdown-menu dropdown-menu-sm position-fixed @(this.Visible?"d-block":"d-none")"
      style="pointer-events:auto; @(this.Visible?$"left:{this.PositionX}px; top:{this.PositionY}px;":string.Empty)"
+     tabindex=@(this.Visible?-1:0) @ref=@this.ContextMenuElement
      @onblur=@this.Hide @onclick=@this.Hide @ontouchend=@this.Hide>
     <a role="button" class="dropdown-item"
        @onclick=@(async e=>{if(this.OnRunProgram.HasDelegate){await this.OnRunProgram.InvokeAsync(this.UserProgramMap);}})>
@@ -20,10 +21,11 @@
     [Parameter]
     public EventCallback<UserProgramMap> OnTogglePinToDock { get; set; }
 
-    public bool Visible { get; set; }
-    public int PositionX { get; set; }
-    public int PositionY { get; set; }
-    public UserProgramMap UserProgramMap { get; set; } = new(default);
+    protected ElementReference ContextMenuElement { get; set; }
+    protected bool Visible { get; set; }
+    protected int PositionX { get; set; }
+    protected int PositionY { get; set; }
+    protected UserProgramMap UserProgramMap { get; set; } = new(default);
 
     public async Task Show(UserProgramMap programMap, Point point)
     {
@@ -38,5 +40,14 @@
     {
         this.Visible = false;
         this.StateHasChanged();
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (this.Visible)
+        {
+            await this.ContextMenuElement.FocusAsync();
+        }
     }
 }
