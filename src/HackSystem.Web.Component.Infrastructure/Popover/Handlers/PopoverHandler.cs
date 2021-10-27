@@ -37,10 +37,10 @@ public class PopoverHandler : IPopoverHandler, IAsyncDisposable
         await popoverModuleReference.InvokeVoidAsync("setupPopovers", targetElementFilter);
     }
 
-    public async Task<string?> SetupPopover(PopoverDetail popoverDetail)
+    public async Task SetupPopover(PopoverDetail popoverDetail)
     {
         if (!this.initialized) await this.InitializeAsync();
-        return await popoverModuleReference.InvokeAsync<string?>(
+        await popoverModuleReference.InvokeAsync<string?>(
             "setupPopover",
             popoverDetail.TargetElemantFilter,
             popoverDetail.Title,
@@ -51,7 +51,8 @@ public class PopoverHandler : IPopoverHandler, IAsyncDisposable
             popoverDetail.Offset,
             popoverDetail.ShowDelay,
             popoverDetail.HideDelay,
-            popoverDetail.ReplaceContent);
+            popoverDetail.ContentSourceId,
+            popoverDetail.HeaderSourceId);
     }
 
     public async Task UpdatePopover(string targetElementFilter, string action)
@@ -60,10 +61,10 @@ public class PopoverHandler : IPopoverHandler, IAsyncDisposable
         await popoverModuleReference.InvokeVoidAsync("updatePopover", targetElementFilter, action);
     }
 
-    public async Task RefreshContent(string popoverId, string replacementTargetId, string originSourceId)
+    public async Task RefreshReplacement(string contentSourceId, string headerSourceId)
     {
         if (!this.initialized) await this.InitializeAsync();
-        await popoverModuleReference.InvokeVoidAsync("refreshContent", popoverId, replacementTargetId, originSourceId);
+        await popoverModuleReference.InvokeVoidAsync("refreshReplacement", contentSourceId, headerSourceId);
     }
 
     public async ValueTask DisposeAsync()

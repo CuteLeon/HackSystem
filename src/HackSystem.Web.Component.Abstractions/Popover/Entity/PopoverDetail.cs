@@ -20,5 +20,7 @@ public class PopoverDetail
 
     public int HideDelay { get; set; }
 
-    public bool ReplaceContent { get; set; } = false;
+    public string? ContentSourceId { get; set; }
+
+    public string? HeaderSourceId { get; set; }
 }

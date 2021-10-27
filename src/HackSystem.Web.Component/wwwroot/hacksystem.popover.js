@@ -2,7 +2,8 @@
     $(filter).popover();
 };
 
-export function setupPopover(popoverTargetId, title, html, content, trigger, placement, offset, showDelay, hideDelay, replaceContent = false) {
+export function setupPopover(popoverTargetId, title, html, content, trigger, placement, offset,
+    showDelay, hideDelay, contentSourceId, headerSourceId) {
     let popoverTarget = $(`#${popoverTargetId}`);
     let options = {
         title: title,
@@ -14,16 +15,14 @@ export function setupPopover(popoverTargetId, title, html, content, trigger, pla
             hide: hideDelay
         },
     };
-    let replacementId = null;
     if (html) {
         options.html = true;
-        if (replaceContent) {
-            replacementId = `popoverPlacement_${$(`#${content}`).attr('id')}`;
+        if (contentSourceId) {
             options.content = function () {
-                return $("<div></div>").append($("<div></div>", { id: replacementId })).html();
+                return $("<div></div>").append($("<div></div>", { id: getContentRepleacementId(contentSourceId) })).html();
             };
             popoverTarget.on('inserted.bs.popover', e => {
-                refreshContent(popoverTargetId, replacementId, content);
+                refreshReplacement(contentSourceId, headerSourceId);
             });
         } else {
             options.content = function () { return $(`#${content}`).html(); };
@@ -44,18 +43,31 @@ export function setupPopover(popoverTargetId, title, html, content, trigger, pla
             }
         });
     }
-    return replacementId;
+};
+
+function getContentRepleacementId(sourceId) {
+    return getRepleacementId(sourceId, "Content");
+};
+
+function getRepleacementId(sourceId, prefix) {
+    return `popover${prefix}Placement_${sourceId}`;
 };
 
 export function updatePopover(filter, action) {
     $(filter).popover(action);
 };
 
-export function refreshContent(popoverId, replacementId, originId) {
-    if (!replacementId || !originId) return;
-    let replacementTarget = $(`#${replacementId}`), originSource = $(`#${originId}`);
-    if (!replacementTarget || !originSource) return;
-    var cloneSource = originSource.children().clone(true);
-    replacementTarget.empty().append(cloneSource);
-    $(`#${popoverId}`).popover('update');
+export function refreshReplacement(contentSourceId, headerSourceId) {
+    if (!contentSourceId) return;
+
+    let contentSourceElement = $(`#${contentSourceId}`);
+    let contentReplacementElement = $(`#${getContentRepleacementId(contentSourceId)}`);
+    let cloneContentSourceElement = contentSourceElement.children().clone(true);
+    contentReplacementElement.empty().append(cloneContentSourceElement);
+
+    if (headerSourceId) {
+        let headerSourceElement = $(`#${headerSourceId}`);
+        var cloneHeaderSourceElement = headerSourceElement.children().clone(true);
+        contentReplacementElement.parents(".popover").children(".popover-header").replaceWith(cloneHeaderSourceElement);
+    }
 };

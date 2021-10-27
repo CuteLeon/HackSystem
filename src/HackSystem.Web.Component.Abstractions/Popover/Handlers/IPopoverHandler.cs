@@ -6,9 +6,9 @@ public interface IPopoverHandler
 
     Task SetupPopovers(string targetElementFilter);
 
-    Task<string?> SetupPopover(PopoverDetail popoverDetail);
+    Task SetupPopover(PopoverDetail popoverDetail);
 
     Task UpdatePopover(string targetElementFilter, string action);
 
-    Task RefreshContent(string popoverId, string replacementTargetId, string originSourceId);
+    Task RefreshReplacement(string contentSourceId, string headerSourceId);
 }
