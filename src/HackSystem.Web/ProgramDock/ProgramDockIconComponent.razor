@@ -7,7 +7,24 @@
 					onmouseover="dockEvents.mouseOverIcon(this)" onmouseout="dockEvents.mouseOutIcon(this)" onmousedown="dockEvents.mouseDownIcon(this)" onmouseup="dockEvents.mouseUpIcon(this)">
 		</figcaption>
 	</figure>
-	<div id=@this.DockIconPopoverId class="d-none">
+	<div class="d-none">
+		<div id=@this.DockIconPopoverHeaderId>
+			<div class="popover-header p-1 m-0 w-100 row justify-content-between">
+				<h6 class="col m-1 p-0">@(this.UserProgramMap.Rename ?? this.UserProgramMap.Program.Name)</h6>
+				<div class="col-auto p-0 btn-group btn-group-sm" data-programid="@this.UserProgramMap.Program.Id">
+					<a role="button" onclick=""
+					   class="btn p-1 btn-outline-primary" style="width:30px; max-width:30px">
+						<span class="fas fa-rocket"></span>
+					</a>
+					<a role="button" onclick=""
+					   class="btn p-1 btn-@(this.UserProgramMap.PinToDock?string.Empty:"outline-")primary" style="width:30px; max-width:30px">
+						<span class="fas fa-plane-@(this.UserProgramMap.PinToDock?"departure":"arrival")"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id=@this.DockIconPopoverContentId class="d-none">
 		@{
 			var windows = this.UserProgramMap.Program.GetProcessDetails()
 				.SelectMany(process => process.GetWindowDetails())
@@ -18,8 +35,8 @@
 			{
 				@foreach (var window in windows)
 				{
-					var processItemKey = $"popover_window_{window.WindowId}";
-					<div @key=@processItemKey class="btn-group btn-group-sm mb-1" style="width:250px;"
+					var windowItemKey = $"popover_window_{window.WindowId}";
+					<div @key=@windowItemKey class="btn-group btn-group-sm mb-1" style="width:250px;"
 			 data-programid="@window.ProcessDetail.ProgramDetail.Id"
 			 data-processid="@window.ProcessDetail.ProcessId"
 			 data-windowid="@window.WindowId">
@@ -58,9 +75,9 @@
 
 	protected string DockIconId { get => $"dockicon_{this.UserProgramMap.Program.Id}"; }
 
-	protected string DockIconPopoverId { get => $"popover_{this.DockIconId}"; }
+	protected string DockIconPopoverContentId { get => $"popoverContent_{this.DockIconId}"; }
 
-	public string PopoverReplacementId { get; protected set; }
+	protected string DockIconPopoverHeaderId { get => $"popoverHeader_{this.DockIconId}"; }
 
 	private bool pendingRefreshWindows = false;
 }

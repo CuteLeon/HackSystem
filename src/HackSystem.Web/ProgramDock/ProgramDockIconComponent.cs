@@ -8,6 +8,8 @@ namespace HackSystem.Web.ProgramDock;
 
 public partial class ProgramDockIconComponent
 {
+    //TODO: Leon: Buttons in popover header
+
     public async Task OnClick(MouseEventArgs args)
     {
         if (!this.OnIconSelect.HasDelegate) return;
@@ -36,22 +38,21 @@ public partial class ProgramDockIconComponent
         await base.OnAfterRenderAsync(firstRender);
         if (firstRender)
         {
-            this.PopoverReplacementId = await this.popoverHandler.SetupPopover(new PopoverDetail()
+            await this.popoverHandler.SetupPopover(new PopoverDetail()
             {
                 ShowDelay = 150,
                 IsHtmlContent = true,
-                Content = this.DockIconPopoverId,
+                ContentSourceId = this.DockIconPopoverContentId,
+                HeaderSourceId = this.DockIconPopoverHeaderId,
                 Trigger = PopoverTriggers.Hover,
                 Placement = PopoverPlacements.Top,
                 TargetElemantFilter = this.DockIconId,
-                Title = this.UserProgramMap.Rename ?? this.UserProgramMap.Program.Name,
-                ReplaceContent = true,
             });
         }
 
         if (pendingRefreshWindows)
         {
-            await this.popoverHandler.RefreshContent(this.DockIconId, this.PopoverReplacementId, this.DockIconPopoverId);
+            await this.popoverHandler.RefreshReplacement(this.DockIconPopoverContentId, this.DockIconPopoverHeaderId);
             pendingRefreshWindows = false;
         }
     }
