@@ -1,66 +1,66 @@
 ﻿@inject IPopoverHandler popoverHandler
 
 <div class="mt-n4 px-2 position-relative" @ontouchend="@this.OnTouchEnd" @onclick="@this.OnClick">
-    <figure id=@this.DockIconId>
-        <img src="@UserProgramMap.Program.IconUri" class="img-fluid" style="width:75px;height:75px;" />
-        <figcaption class="text-white font-weight-bold text-center stretched-link" style="text-shadow: 0px 0px 5px #000, 0px 0px 7px #222;"
-                    onmouseover="dockEvents.mouseOverIcon(this)" onmouseout="dockEvents.mouseOutIcon(this)" onmousedown="dockEvents.mouseDownIcon(this)" onmouseup="dockEvents.mouseUpIcon(this)">
-        </figcaption>
-    </figure>
-    <div id=@this.DockIconPopoverId class="d-none">
-        @{
-            var windows = this.UserProgramMap.Program.GetProcessDetails()
-                .SelectMany(process => process.GetWindowDetails())
-                .OrderByDescending(window => window.StickyTopTier)
-                .ThenByDescending(window => window.ProcessDetail.ProcessId)
-                .ToArray();
-            if (windows.Any())
-            {
-                @foreach (var window in windows)
-                {
-                    var processItemKey = $"popover_window_{window.WindowId}";
-                    <div @key=@processItemKey class="btn-group btn-group-sm mb-1" style="width:250px;"
-             data-programid="@window.ProcessDetail.ProgramDetail.Id"
-             data-processid="@window.ProcessDetail.ProcessId"
-             data-windowid="@window.WindowId">
-                        <a role="button" onclick="programDock.windowClick(this)"
-                   class="btn text-truncate btn-@(window.WindowState== ProgramWindowStates.Minimized?"outline-info":"warning")">
-                            <div class="row px-1">
-                                <div class="col text-truncate"><strong>@window.Caption</strong></div>
-                                <div class="col-auto"><em>@window.ProcessDetail.ProcessId</em></div>
-                            </div>
-                        </a>
-                        <a role="button" onclick="programDock.windowStickyTop(this)"
-                   class="btn p-1 btn-@(window.StickyTopTier?string.Empty:"outline-")primary" style="width:30px; max-width:30px">
-                            <span class="fas fa-map-@(window.StickyTopTier?"marker":"pin")"></span>
-                        </a>
-                        <a role="button" onclick="programDock.windowClose(this)"
-                   class="btn p-1 btn-outline-danger" style="width:30px; max-width:30px">
-                            <span class="fas fa-times"></span>
-                        </a>
-                    </div>
-                }
-            }
-            else
-            {
-                <p class="mx-3 text-center text-muted"><em>No windows launched.<br />(๑•̀ㅂ•́)و✧</em></p>
-            }
-        }
-    </div>
+	<figure id=@this.DockIconId>
+		<img src="@UserProgramMap.Program.IconUri" class="img-fluid" style="width:75px;height:75px;" />
+		<figcaption class="text-white font-weight-bold text-center stretched-link" style="text-shadow: 0px 0px 5px #000, 0px 0px 7px #222;"
+					onmouseover="dockEvents.mouseOverIcon(this)" onmouseout="dockEvents.mouseOutIcon(this)" onmousedown="dockEvents.mouseDownIcon(this)" onmouseup="dockEvents.mouseUpIcon(this)">
+		</figcaption>
+	</figure>
+	<div id=@this.DockIconPopoverId class="d-none">
+		@{
+			var windows = this.UserProgramMap.Program.GetProcessDetails()
+				.SelectMany(process => process.GetWindowDetails())
+				.OrderByDescending(window => window.StickyTopTier)
+				.ThenByDescending(window => window.ProcessDetail.ProcessId)
+				.ToArray();
+			if (windows.Any())
+			{
+				@foreach (var window in windows)
+				{
+					var processItemKey = $"popover_window_{window.WindowId}";
+					<div @key=@processItemKey class="btn-group btn-group-sm mb-1" style="width:250px;"
+			 data-programid="@window.ProcessDetail.ProgramDetail.Id"
+			 data-processid="@window.ProcessDetail.ProcessId"
+			 data-windowid="@window.WindowId">
+						<a role="button" onclick="programDock.windowClick(this)"
+			   	class="btn text-truncate btn-@(window.WindowState== ProgramWindowStates.Minimized?"outline-info":"warning")">
+							<div class="row px-1">
+								<div class="col text-truncate"><strong>@window.Caption</strong></div>
+								<div class="col-auto"><em>@window.ProcessDetail.ProcessId</em></div>
+							</div>
+						</a>
+						<a role="button" onclick="programDock.windowStickyTop(this)"
+			   	class="btn p-1 btn-@(window.StickyTopTier?string.Empty:"outline-")primary" style="width:30px; max-width:30px">
+							<span class="fas fa-map-marker@(window.StickyTopTier?string.Empty:"-alt")"></span>
+						</a>
+						<a role="button" onclick="programDock.windowClose(this)"
+			   	class="btn p-1 btn-outline-danger" style="width:30px; max-width:30px">
+							<span class="fas fa-times"></span>
+						</a>
+					</div>
+				}
+			}
+			else
+			{
+				<p class="mx-3 text-center text-muted p-0" style="width:250px;"><em>No windows launched.<br />(๑•̀ㅂ•́)و✧</em></p>
+			}
+		}
+	</div>
 </div>
 
 @code {
-    [Parameter]
-    public EventCallback<ProgramIconEventArgs> OnIconSelect { get; set; }
+	[Parameter]
+	public EventCallback<ProgramIconEventArgs> OnIconSelect { get; set; }
 
-    [Parameter]
-    public UserProgramMap UserProgramMap { get; set; }
+	[Parameter]
+	public UserProgramMap UserProgramMap { get; set; }
 
-    protected string DockIconId { get => $"dockicon_{this.UserProgramMap.Program.Id}"; }
+	protected string DockIconId { get => $"dockicon_{this.UserProgramMap.Program.Id}"; }
 
-    protected string DockIconPopoverId { get => $"popover_{this.DockIconId}"; }
+	protected string DockIconPopoverId { get => $"popover_{this.DockIconId}"; }
 
-    public string PopoverReplacementId { get; protected set; }
+	public string PopoverReplacementId { get; protected set; }
 
-    private bool pendingRefreshWindows = false;
+	private bool pendingRefreshWindows = false;
 }

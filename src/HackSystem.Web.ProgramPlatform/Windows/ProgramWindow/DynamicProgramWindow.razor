@@ -26,7 +26,7 @@
                                  @onclick:stopPropagation @ondblclick:stopPropagation>
                                 <div class="btn-group btn-group-sm" role="group">
                                     <button type="button" class="btn btn-@(this.ProgramWindowDetail.StickyTopTier?string.Empty:"outline-")primary" @onclick=@this.OnToggleTopTier>
-                                        <span class="fas fa-map-@(this.ProgramWindowDetail.StickyTopTier?"marker":"pin")"></span>
+                                        <span class="fas fa-map-marker@(this.ProgramWindowDetail.StickyTopTier?string.Empty:"-alt")"></span>
                                     </button>
                                 </div>
                                 <div class="btn-group btn-group-sm" role="group">
