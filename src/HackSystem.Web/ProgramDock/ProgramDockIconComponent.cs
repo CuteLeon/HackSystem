@@ -8,8 +8,6 @@ namespace HackSystem.Web.ProgramDock;
 
 public partial class ProgramDockIconComponent
 {
-    //TODO: Leon: Buttons in popover header
-
     public async Task OnClick(MouseEventArgs args)
     {
         if (!this.OnIconSelect.HasDelegate) return;

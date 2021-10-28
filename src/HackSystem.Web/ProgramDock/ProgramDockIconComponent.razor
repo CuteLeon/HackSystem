@@ -12,11 +12,11 @@
 			<div class="popover-header p-1 m-0 w-100 row justify-content-between">
 				<h6 class="col m-1 p-0">@(this.UserProgramMap.Rename ?? this.UserProgramMap.Program.Name)</h6>
 				<div class="col-auto p-0 btn-group btn-group-sm" data-programid="@this.UserProgramMap.Program.Id">
-					<a role="button" onclick=""
+					<a role="button" onclick="programDock.runClick(this)"
 					   class="btn p-1 btn-outline-primary" style="width:30px; max-width:30px">
 						<span class="fas fa-rocket"></span>
 					</a>
-					<a role="button" onclick=""
+					<a role="button" onclick="programDock.pinToDockClick(this)"
 					   class="btn p-1 btn-@(this.UserProgramMap.PinToDock?string.Empty:"outline-")primary" style="width:30px; max-width:30px">
 						<span class="fas fa-plane-@(this.UserProgramMap.PinToDock?"departure":"arrival")"></span>
 					</a>

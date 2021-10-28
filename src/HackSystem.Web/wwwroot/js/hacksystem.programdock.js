@@ -3,6 +3,14 @@
     initialProgramDock: function (reference) {
         programDockReference = reference;
     },
+    pinToDockClick: function (nativeTarget) {
+        let programId = $(nativeTarget).parent(".btn-group").data("programid");
+        programDockReference.invokeMethodAsync('OnPinToDockClick', programId);
+    },
+    runClick: function (nativeTarget) {
+        let programId = $(nativeTarget).parent(".btn-group").data("programid");
+        programDockReference.invokeMethodAsync('OnRunClick', programId);
+    },
     windowClick: function (nativeTarget) {
         let windowRef = programDock.getWindowReferenceId(nativeTarget);
         programDockReference.invokeMethodAsync('OnWindowClick', windowRef.programId, windowRef.processId, windowRef.windowId);

@@ -1,4 +1,5 @@
-﻿using HackSystem.Web.Domain.Intermediary;
+﻿using HackSystem.DataTransferObjects.Programs;
+using HackSystem.Web.Domain.Intermediary;
 using HackSystem.Web.ProgramDrawer.ProgramDrawerEventArgs;
 using HackSystem.Web.ProgramSchedule.Entity;
 using HackSystem.Web.ProgramSchedule.Enums;
@@ -145,6 +146,29 @@ public partial class ProgramDockComponent : IAsyncDisposable
             process.TryGetWindowDetail(windowId, out var window))
         {
             await this.publisher.SendCommand(new WindowDestroyCommand(window));
+        }
+    }
+
+    [JSInvokable]
+    public async Task OnRunClick(string programId)
+    {
+        if (this.UserProgramMaps.TryGetValue(programId, out var programMap))
+        {
+            await this.publisher.SendRequest(new ProgramLaunchRequest(programMap.Program));
+        }
+    }
+
+    [JSInvokable]
+    public async Task OnPinToDockClick(string programId)
+    {
+        if (this.UserProgramMaps.TryGetValue(programId, out var programMap))
+        {
+            var programMapCommand = new UserProgramMapCommand(new UserProgramMapRequest()
+            {
+                ProgramId = programMap.Program.Id,
+                PinToDock = !programMap.PinToDock,
+            });
+            await this.publisher.SendCommand(programMapCommand);
         }
     }
 
