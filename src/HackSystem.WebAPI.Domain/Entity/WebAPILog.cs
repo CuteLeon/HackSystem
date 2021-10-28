@@ -20,7 +20,7 @@ public class WebAPILog
 
     public bool IsAuthenticated { get; set; }
 
-    public string IdentityName { get; set; }
+    public string? IdentityName { get; set; }
 
     public string? RequestBody { get; set; }
 
