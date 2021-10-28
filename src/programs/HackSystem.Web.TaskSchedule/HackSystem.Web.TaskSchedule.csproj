@@ -25,12 +25,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\HackSystem.Common\HackSystem.Common.csproj" />
-		<ProjectReference Include="..\HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj" />
-		<ProjectReference Include="..\HackSystem.Web.Authentication.Abstractions\HackSystem.Web.Authentication.Abstractions.csproj" />
-		<ProjectReference Include="..\HackSystem.Web.Component.Abstractions\HackSystem.Web.Component.Abstractions.csproj" />
-		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform.Abstractions\HackSystem.Web.ProgramPlatform.Abstractions.csproj" />
-		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform\HackSystem.Web.ProgramPlatform.csproj" />
+		<ProjectReference Include="..\..\HackSystem.Common\HackSystem.Common.csproj" />
+		<ProjectReference Include="..\..\HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj" />
+		<ProjectReference Include="..\..\HackSystem.Web.Authentication.Abstractions\HackSystem.Web.Authentication.Abstractions.csproj" />
+		<ProjectReference Include="..\..\HackSystem.Web.Component.Abstractions\HackSystem.Web.Component.Abstractions.csproj" />
+		<ProjectReference Include="..\..\HackSystem.Web.ProgramPlatform.Abstractions\HackSystem.Web.ProgramPlatform.Abstractions.csproj" />
+		<ProjectReference Include="..\..\HackSystem.Web.ProgramPlatform\HackSystem.Web.ProgramPlatform.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
