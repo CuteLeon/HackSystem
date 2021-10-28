@@ -88,7 +88,6 @@ public class WebAPILoggingMiddleware
         catch (Exception ex)
         {
             webAPILog.Exception = ex.ToString();
-
             throw;
         }
         finally
@@ -96,7 +95,15 @@ public class WebAPILoggingMiddleware
             watcher.Stop();
             webAPILog.FinishDateTime = DateTime.Now;
             webAPILog.ElapsedTime = watcher.ElapsedMilliseconds;
-            await this.webAPILogRepository.AddAsync(webAPILog);
+
+            try
+            {
+                await this.webAPILogRepository.AddAsync(webAPILog);
+            }
+            catch (Exception logEx)
+            {
+                this.logger.LogError(logEx, $"Failed to record Web API Log of {webAPILog.IdentityName} from {webAPILog.SourceHost} in {webAPILog.ElapsedTime} ms: [{webAPILog.Method}]=>{webAPILog.RequestURI} [{webAPILog.StatusCode}]");
+            }
             this.logger.LogInformation($"Web API of {webAPILog.IdentityName} from {webAPILog.SourceHost} in {webAPILog.ElapsedTime} ms: [{webAPILog.Method}]=>{webAPILog.RequestURI} [{webAPILog.StatusCode}]");
         }
     }
