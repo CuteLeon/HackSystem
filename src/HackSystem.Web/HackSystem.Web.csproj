@@ -38,7 +38,6 @@
 		<ProjectReference Include="..\HackSystem.Web.Infrastructure\HackSystem.Web.Infrastructure.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramPlatform\HackSystem.Web.ProgramPlatform.csproj" />
 		<ProjectReference Include="..\HackSystem.Web.ProgramSchedule\HackSystem.Web.ProgramSchedule.csproj" />
-		<ProjectReference Include="..\HackSystem.Web.SystemProgram\HackSystem.Web.SystemProgram.csproj" />
 		<ProjectReference Include="..\HackSystem.DataTransferObjects\HackSystem.DataTransferObjects.csproj" />
 	</ItemGroup>
 
