@@ -1,0 +1,28 @@
+﻿@inherits ProgramComponentBase
+
+<div class="text-center p-0">
+    <div class="d-flex h-100">
+        <div class="d-inline-block bg-light">
+            <div class="nav flex-column nav-pills" style="width:200px;">
+                <a class="nav-link active" data-toggle="pill">Hack System</a>
+                <a class="nav-link" data-toggle="pill">Network</a>
+                <a class="nav-link" data-toggle="pill">Session</a>
+                <a class="nav-link" data-toggle="pill">Cookie</a>
+                <a class="nav-link" data-toggle="pill">Local</a>
+                <a class="nav-link" data-toggle="pill">Disk</a>
+            </div>
+        </div>
+        <div class="d-inline-block w-100 h-100 p-5">
+            <i class="fas fa-folder-open fa-10x text-dark my-3"></i>
+            <p class="display-4 text-dark">Explorer</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    public override void Dispose()
+    {
+    }
+
+    public static Type Launch() => typeof(ExplorerComponent);
+}
