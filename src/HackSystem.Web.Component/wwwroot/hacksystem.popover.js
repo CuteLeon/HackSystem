@@ -2,9 +2,9 @@
     $(filter).popover();
 };
 
-export function setupPopover(popoverTargetId, title, html, content, trigger, placement, offset,
+export function setupPopover(popoverId, title, html, content, trigger, placement, offset,
     showDelay, hideDelay, contentSourceId, headerSourceId) {
-    let popoverTarget = $(`#${popoverTargetId}`);
+    let popoverTarget = $(`#${popoverId}`);
     let options = {
         title: title,
         trigger: trigger,
@@ -22,7 +22,7 @@ export function setupPopover(popoverTargetId, title, html, content, trigger, pla
                 return $("<div></div>").append($("<div></div>", { id: getContentRepleacementId(contentSourceId) })).html();
             };
             popoverTarget.on('inserted.bs.popover', e => {
-                refreshReplacement(contentSourceId, headerSourceId);
+                refreshReplacement(popoverId, contentSourceId, headerSourceId);
             });
         } else {
             options.content = function () { return $(`#${content}`).html(); };
@@ -57,7 +57,7 @@ export function updatePopover(filter, action) {
     $(filter).popover(action);
 };
 
-export function refreshReplacement(contentSourceId, headerSourceId) {
+export function refreshReplacement(popoverId, contentSourceId, headerSourceId) {
     if (!contentSourceId) return;
 
     let contentSourceElement = $(`#${contentSourceId}`);
@@ -69,5 +69,9 @@ export function refreshReplacement(contentSourceId, headerSourceId) {
         let headerSourceElement = $(`#${headerSourceId}`);
         var cloneHeaderSourceElement = headerSourceElement.children().clone(true);
         contentReplacementElement.parents(".popover").children(".popover-header").replaceWith(cloneHeaderSourceElement);
+    }
+
+    if (popoverId) {
+        $(`#${popoverId}`).popover('update');
     }
 };

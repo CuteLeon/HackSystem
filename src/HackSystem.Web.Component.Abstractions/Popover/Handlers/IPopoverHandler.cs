@@ -10,5 +10,5 @@ public interface IPopoverHandler
 
     Task UpdatePopover(string targetElementFilter, string action);
 
-    Task RefreshReplacement(string contentSourceId, string headerSourceId);
+    Task RefreshReplacement(string popoverId, string contentSourceId, string headerSourceId);
 }

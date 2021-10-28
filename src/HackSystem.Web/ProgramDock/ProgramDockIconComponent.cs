@@ -50,7 +50,7 @@ public partial class ProgramDockIconComponent
 
         if (pendingRefreshWindows)
         {
-            await this.popoverHandler.RefreshReplacement(this.DockIconPopoverContentId, this.DockIconPopoverHeaderId);
+            await this.popoverHandler.RefreshReplacement(this.DockIconId, this.DockIconPopoverContentId, this.DockIconPopoverHeaderId);
             pendingRefreshWindows = false;
         }
     }

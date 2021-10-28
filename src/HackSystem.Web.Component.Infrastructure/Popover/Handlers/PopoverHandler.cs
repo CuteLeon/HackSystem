@@ -61,10 +61,10 @@ public class PopoverHandler : IPopoverHandler, IAsyncDisposable
         await popoverModuleReference.InvokeVoidAsync("updatePopover", targetElementFilter, action);
     }
 
-    public async Task RefreshReplacement(string contentSourceId, string headerSourceId)
+    public async Task RefreshReplacement(string popoverId, string contentSourceId, string headerSourceId)
     {
         if (!this.initialized) await this.InitializeAsync();
-        await popoverModuleReference.InvokeVoidAsync("refreshReplacement", contentSourceId, headerSourceId);
+        await popoverModuleReference.InvokeVoidAsync("refreshReplacement", popoverId, contentSourceId, headerSourceId);
     }
 
     public async ValueTask DisposeAsync()
