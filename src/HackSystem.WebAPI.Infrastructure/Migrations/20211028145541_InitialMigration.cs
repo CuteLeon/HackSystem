@@ -71,7 +71,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    IconUri = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
                     SingleInstance = table.Column<bool>(type: "INTEGER", nullable: false),
@@ -134,7 +133,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                     UserAgent = table.Column<string>(type: "TEXT", nullable: false),
                     TraceIdentifier = table.Column<string>(type: "TEXT", nullable: false),
                     IsAuthenticated = table.Column<bool>(type: "INTEGER", nullable: false),
-                    IdentityName = table.Column<string>(type: "TEXT", nullable: false),
+                    IdentityName = table.Column<string>(type: "TEXT", nullable: true),
                     RequestBody = table.Column<string>(type: "TEXT", nullable: true),
                     ResponseBody = table.Column<string>(type: "TEXT", nullable: true),
                     StatusCode = table.Column<int>(type: "INTEGER", nullable: false),
@@ -390,48 +389,48 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "ProgramDetails",
-                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "IconUri", "Mandatory", "Name", "SingleInstance" },
-                values: new object[] { "program0-icon-0828-hack-system000001", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Home.HomeComponent", "/images/ProgramIcons/HomeProgram.png", true, "Home", true });
+                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "Mandatory", "Name", "SingleInstance" },
+                values: new object[] { "program0-icon-0828-hack-system000001", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Home.HomeComponent", true, "Home", true });
 
             migrationBuilder.InsertData(
                 table: "ProgramDetails",
-                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "IconUri", "Mandatory", "Name", "SingleInstance" },
-                values: new object[] { "program0-icon-0828-hack-system000002", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Explorer.ExplorerComponent", "/images/ProgramIcons/ExplorerProgram.png", true, "Explorer", false });
+                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "Mandatory", "Name", "SingleInstance" },
+                values: new object[] { "program0-icon-0828-hack-system000002", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Explorer.ExplorerComponent", true, "Explorer", false });
 
             migrationBuilder.InsertData(
                 table: "ProgramDetails",
-                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "IconUri", "Mandatory", "Name", "SingleInstance" },
-                values: new object[] { "program0-icon-0828-hack-system000003", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Borwser.BorwserComponent", "/images/ProgramIcons/BorwserProgram.png", true, "Borwser", false });
+                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "Mandatory", "Name", "SingleInstance" },
+                values: new object[] { "program0-icon-0828-hack-system000003", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Borwser.BorwserComponent", true, "Borwser", false });
 
             migrationBuilder.InsertData(
                 table: "ProgramDetails",
-                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "IconUri", "Mandatory", "Name", "SingleInstance" },
-                values: new object[] { "program0-icon-0828-hack-system000004", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Profile.ProfileComponent", "/images/ProgramIcons/ProfileProgram.png", true, "Profile", true });
+                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "Mandatory", "Name", "SingleInstance" },
+                values: new object[] { "program0-icon-0828-hack-system000004", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Profile.ProfileComponent", true, "Profile", true });
 
             migrationBuilder.InsertData(
                 table: "ProgramDetails",
-                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "IconUri", "Mandatory", "Name", "SingleInstance" },
-                values: new object[] { "program0-icon-0828-hack-system000005", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Setting.SettingComponent", "/images/ProgramIcons/SettingProgram.png", true, "Setting", true });
+                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "Mandatory", "Name", "SingleInstance" },
+                values: new object[] { "program0-icon-0828-hack-system000005", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Setting.SettingComponent", true, "Setting", true });
 
             migrationBuilder.InsertData(
                 table: "ProgramDetails",
-                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "IconUri", "Mandatory", "Name", "SingleInstance" },
-                values: new object[] { "program0-icon-0828-hack-system000006", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.AppStore.AppStoreComponent", "/images/ProgramIcons/AppStoreProgram.png", true, "AppStore", true });
+                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "Mandatory", "Name", "SingleInstance" },
+                values: new object[] { "program0-icon-0828-hack-system000006", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.AppStore.AppStoreComponent", true, "AppStore", true });
 
             migrationBuilder.InsertData(
                 table: "ProgramDetails",
-                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "IconUri", "Mandatory", "Name", "SingleInstance" },
-                values: new object[] { "program0-icon-0828-hack-system000007", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Weather.WeatherComponent", "/images/ProgramIcons/WeatherProgram.png", false, "Weather", true });
+                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "Mandatory", "Name", "SingleInstance" },
+                values: new object[] { "program0-icon-0828-hack-system000007", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.Weather.WeatherComponent", false, "Weather", true });
 
             migrationBuilder.InsertData(
                 table: "ProgramDetails",
-                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "IconUri", "Mandatory", "Name", "SingleInstance" },
-                values: new object[] { "program0-icon-0828-hack-system000008", true, "HackSystem.Web.TaskSchedule", "{ \"Developer\": \"Leon\" }", "HackSystem.Web.TaskSchedule.Launcher", "/images/ProgramIcons/TaskServerProgram.png", true, "TaskServer", true });
+                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "Mandatory", "Name", "SingleInstance" },
+                values: new object[] { "program0-icon-0828-hack-system000008", true, "HackSystem.Web.TaskSchedule", "{ \"Developer\": \"Leon\" }", "HackSystem.Web.TaskSchedule.Launcher", true, "TaskServer", true });
 
             migrationBuilder.InsertData(
                 table: "ProgramDetails",
-                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "IconUri", "Mandatory", "Name", "SingleInstance" },
-                values: new object[] { "program0-icon-0828-hack-system000009", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.MockServer.MockServerComponent", "/images/ProgramIcons/MockServerProgram.png", true, "MockServer", true });
+                columns: new[] { "Id", "Enabled", "EntryAssemblyName", "EntryParameter", "EntryTypeName", "Mandatory", "Name", "SingleInstance" },
+                values: new object[] { "program0-icon-0828-hack-system000009", true, "HackSystem.Web.SystemProgram", null, "HackSystem.Web.SystemProgram.MockServer.MockServerComponent", true, "MockServer", true });
 
             migrationBuilder.InsertData(
                 table: "ProgramUsers",

@@ -238,7 +238,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("IdentityName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsAuthenticated")
@@ -696,10 +695,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("IconUri")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<bool>("Mandatory")
                         .HasColumnType("INTEGER");
 
@@ -723,7 +718,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             Enabled = true,
                             EntryAssemblyName = "HackSystem.Web.SystemProgram",
                             EntryTypeName = "HackSystem.Web.SystemProgram.Home.HomeComponent",
-                            IconUri = "/images/ProgramIcons/HomeProgram.png",
                             Mandatory = true,
                             Name = "Home",
                             SingleInstance = true
@@ -734,7 +728,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             Enabled = true,
                             EntryAssemblyName = "HackSystem.Web.SystemProgram",
                             EntryTypeName = "HackSystem.Web.SystemProgram.Explorer.ExplorerComponent",
-                            IconUri = "/images/ProgramIcons/ExplorerProgram.png",
                             Mandatory = true,
                             Name = "Explorer",
                             SingleInstance = false
@@ -745,7 +738,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             Enabled = true,
                             EntryAssemblyName = "HackSystem.Web.SystemProgram",
                             EntryTypeName = "HackSystem.Web.SystemProgram.Borwser.BorwserComponent",
-                            IconUri = "/images/ProgramIcons/BorwserProgram.png",
                             Mandatory = true,
                             Name = "Borwser",
                             SingleInstance = false
@@ -756,7 +748,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             Enabled = true,
                             EntryAssemblyName = "HackSystem.Web.SystemProgram",
                             EntryTypeName = "HackSystem.Web.SystemProgram.Profile.ProfileComponent",
-                            IconUri = "/images/ProgramIcons/ProfileProgram.png",
                             Mandatory = true,
                             Name = "Profile",
                             SingleInstance = true
@@ -767,7 +758,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             Enabled = true,
                             EntryAssemblyName = "HackSystem.Web.SystemProgram",
                             EntryTypeName = "HackSystem.Web.SystemProgram.Setting.SettingComponent",
-                            IconUri = "/images/ProgramIcons/SettingProgram.png",
                             Mandatory = true,
                             Name = "Setting",
                             SingleInstance = true
@@ -778,7 +768,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             Enabled = true,
                             EntryAssemblyName = "HackSystem.Web.SystemProgram",
                             EntryTypeName = "HackSystem.Web.SystemProgram.AppStore.AppStoreComponent",
-                            IconUri = "/images/ProgramIcons/AppStoreProgram.png",
                             Mandatory = true,
                             Name = "AppStore",
                             SingleInstance = true
@@ -789,7 +778,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             Enabled = true,
                             EntryAssemblyName = "HackSystem.Web.SystemProgram",
                             EntryTypeName = "HackSystem.Web.SystemProgram.Weather.WeatherComponent",
-                            IconUri = "/images/ProgramIcons/WeatherProgram.png",
                             Mandatory = false,
                             Name = "Weather",
                             SingleInstance = true
@@ -801,7 +789,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             EntryAssemblyName = "HackSystem.Web.TaskSchedule",
                             EntryParameter = "{ \"Developer\": \"Leon\" }",
                             EntryTypeName = "HackSystem.Web.TaskSchedule.Launcher",
-                            IconUri = "/images/ProgramIcons/TaskServerProgram.png",
                             Mandatory = true,
                             Name = "TaskServer",
                             SingleInstance = true
@@ -812,7 +799,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                             Enabled = true,
                             EntryAssemblyName = "HackSystem.Web.SystemProgram",
                             EntryTypeName = "HackSystem.Web.SystemProgram.MockServer.MockServerComponent",
-                            IconUri = "/images/ProgramIcons/MockServerProgram.png",
                             Mandatory = true,
                             Name = "MockServer",
                             SingleInstance = true
