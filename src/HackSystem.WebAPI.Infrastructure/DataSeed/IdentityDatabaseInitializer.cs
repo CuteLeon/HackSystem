@@ -51,8 +51,6 @@ public static class IdentityDatabaseInitializer
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000005", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000006", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000007", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
-            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000008", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
-            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000001", ProgramId = "program0-icon-0828-hack-system000009", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
 
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000001", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000002", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
@@ -61,8 +59,6 @@ public static class IdentityDatabaseInitializer
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000005", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000006", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000007", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
-            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000008", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
-            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000002", ProgramId = "program0-icon-0828-hack-system000009", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
 
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000001", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000002", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
@@ -71,8 +67,6 @@ public static class IdentityDatabaseInitializer
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000005", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = true },
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000006", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
             new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000007", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
-            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000008", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false },
-            new UserProgramMap { UserId = "msaspnet-core-user-hack-system000003", ProgramId = "program0-icon-0828-hack-system000009", Rename = null, PinToTop = false, PinToDesktop=true, PinToDock = false }
         });
 
         return builder;

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackSystem.WebAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(HackSystemDbContext))]
-    [Migration("20211028145541_InitialMigration")]
+    [Migration("20211028165411_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -517,22 +517,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         },
                         new
                         {
-                            UserId = "msaspnet-core-user-hack-system000001",
-                            ProgramId = "program0-icon-0828-hack-system000008",
-                            PinToDesktop = true,
-                            PinToDock = false,
-                            PinToTop = false
-                        },
-                        new
-                        {
-                            UserId = "msaspnet-core-user-hack-system000001",
-                            ProgramId = "program0-icon-0828-hack-system000009",
-                            PinToDesktop = true,
-                            PinToDock = false,
-                            PinToTop = false
-                        },
-                        new
-                        {
                             UserId = "msaspnet-core-user-hack-system000002",
                             ProgramId = "program0-icon-0828-hack-system000001",
                             PinToDesktop = true,
@@ -589,22 +573,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         },
                         new
                         {
-                            UserId = "msaspnet-core-user-hack-system000002",
-                            ProgramId = "program0-icon-0828-hack-system000008",
-                            PinToDesktop = true,
-                            PinToDock = false,
-                            PinToTop = false
-                        },
-                        new
-                        {
-                            UserId = "msaspnet-core-user-hack-system000002",
-                            ProgramId = "program0-icon-0828-hack-system000009",
-                            PinToDesktop = true,
-                            PinToDock = false,
-                            PinToTop = false
-                        },
-                        new
-                        {
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000001",
                             PinToDesktop = true,
@@ -655,22 +623,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             UserId = "msaspnet-core-user-hack-system000003",
                             ProgramId = "program0-icon-0828-hack-system000007",
-                            PinToDesktop = true,
-                            PinToDock = false,
-                            PinToTop = false
-                        },
-                        new
-                        {
-                            UserId = "msaspnet-core-user-hack-system000003",
-                            ProgramId = "program0-icon-0828-hack-system000008",
-                            PinToDesktop = true,
-                            PinToDock = false,
-                            PinToTop = false
-                        },
-                        new
-                        {
-                            UserId = "msaspnet-core-user-hack-system000003",
-                            ProgramId = "program0-icon-0828-hack-system000009",
                             PinToDesktop = true,
                             PinToDock = false,
                             PinToTop = false
@@ -718,8 +670,8 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             Id = "program0-icon-0828-hack-system000001",
                             Enabled = true,
-                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
-                            EntryTypeName = "HackSystem.Web.SystemProgram.Home.HomeComponent",
+                            EntryAssemblyName = "HackSystem.Web.Home",
+                            EntryTypeName = "HackSystem.Web.Home.Launcher",
                             Mandatory = true,
                             Name = "Home",
                             SingleInstance = true
@@ -728,8 +680,8 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             Id = "program0-icon-0828-hack-system000002",
                             Enabled = true,
-                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
-                            EntryTypeName = "HackSystem.Web.SystemProgram.Explorer.ExplorerComponent",
+                            EntryAssemblyName = "HackSystem.Web.Explorer",
+                            EntryTypeName = "HackSystem.Web.Explorer.Launcher",
                             Mandatory = true,
                             Name = "Explorer",
                             SingleInstance = false
@@ -738,55 +690,35 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         {
                             Id = "program0-icon-0828-hack-system000003",
                             Enabled = true,
-                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
-                            EntryTypeName = "HackSystem.Web.SystemProgram.Borwser.BorwserComponent",
-                            Mandatory = true,
-                            Name = "Borwser",
-                            SingleInstance = false
-                        },
-                        new
-                        {
-                            Id = "program0-icon-0828-hack-system000004",
-                            Enabled = true,
-                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
-                            EntryTypeName = "HackSystem.Web.SystemProgram.Profile.ProfileComponent",
+                            EntryAssemblyName = "HackSystem.Web.Profile",
+                            EntryTypeName = "HackSystem.Web.Profile.Launcher",
                             Mandatory = true,
                             Name = "Profile",
                             SingleInstance = true
                         },
                         new
                         {
-                            Id = "program0-icon-0828-hack-system000005",
+                            Id = "program0-icon-0828-hack-system000004",
                             Enabled = true,
-                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
-                            EntryTypeName = "HackSystem.Web.SystemProgram.Setting.SettingComponent",
+                            EntryAssemblyName = "HackSystem.Web.Setting",
+                            EntryTypeName = "HackSystem.Web.Setting.Launcher",
                             Mandatory = true,
                             Name = "Setting",
                             SingleInstance = true
                         },
                         new
                         {
-                            Id = "program0-icon-0828-hack-system000006",
+                            Id = "program0-icon-0828-hack-system000005",
                             Enabled = true,
-                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
-                            EntryTypeName = "HackSystem.Web.SystemProgram.AppStore.AppStoreComponent",
+                            EntryAssemblyName = "HackSystem.Web.AppStore",
+                            EntryTypeName = "HackSystem.Web.AppStore.Launcher",
                             Mandatory = true,
                             Name = "AppStore",
                             SingleInstance = true
                         },
                         new
                         {
-                            Id = "program0-icon-0828-hack-system000007",
-                            Enabled = true,
-                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
-                            EntryTypeName = "HackSystem.Web.SystemProgram.Weather.WeatherComponent",
-                            Mandatory = false,
-                            Name = "Weather",
-                            SingleInstance = true
-                        },
-                        new
-                        {
-                            Id = "program0-icon-0828-hack-system000008",
+                            Id = "program0-icon-0828-hack-system000006",
                             Enabled = true,
                             EntryAssemblyName = "HackSystem.Web.TaskSchedule",
                             EntryParameter = "{ \"Developer\": \"Leon\" }",
@@ -797,10 +729,10 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = "program0-icon-0828-hack-system000009",
+                            Id = "program0-icon-0828-hack-system000007",
                             Enabled = true,
-                            EntryAssemblyName = "HackSystem.Web.SystemProgram",
-                            EntryTypeName = "HackSystem.Web.SystemProgram.MockServer.MockServerComponent",
+                            EntryAssemblyName = "HackSystem.Web.MockServer",
+                            EntryTypeName = "HackSystem.Web.MockServer.Launcher",
                             Mandatory = true,
                             Name = "MockServer",
                             SingleInstance = true
