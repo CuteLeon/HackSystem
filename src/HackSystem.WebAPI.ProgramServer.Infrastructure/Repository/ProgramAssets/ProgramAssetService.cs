@@ -1,7 +1,7 @@
 ﻿using HackSystem.WebAPI.ProgramServer.Application.Repository.ProgramAssets;
 using HackSystem.WebAPI.ProgramServer.Domain.Configurations;
 using HackSystem.WebAPI.ProgramServer.Domain.Entity.ProgramAssets;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 
 namespace HackSystem.WebAPI.ProgramServer.Infrastructure.Repository.ProgramAssets;
@@ -9,14 +9,20 @@ namespace HackSystem.WebAPI.ProgramServer.Infrastructure.Repository.ProgramAsset
 public class ProgramAssetService : IProgramAssetService
 {
     private readonly ILogger<ProgramAssetService> logger;
+    private readonly IHostingEnvironment hostingEnvironment;
     private readonly IOptionsSnapshot<ProgramAssetOptions> options;
+    private readonly byte[] defaultProgramIcon;
 
     public ProgramAssetService(
         ILogger<ProgramAssetService> logger,
+        IHostingEnvironment hostingEnvironment,
         IOptionsSnapshot<ProgramAssetOptions> options)
     {
         this.logger = logger;
+        this.hostingEnvironment = hostingEnvironment;
         this.options = options;
+        var defaultIconInfo = this.hostingEnvironment.WebRootFileProvider.GetFileInfo("images/HackSystemDefaultProgramIcon.png");
+        this.defaultProgramIcon = File.ReadAllBytes(defaultIconInfo.PhysicalPath);
     }
 
     public async Task<ProgramAssetPackage> QueryProgramAssetList(string programId)
@@ -80,9 +86,18 @@ public class ProgramAssetService : IProgramAssetService
         {
             var dllPath = Path.Combine(programAssetFolder, programAsset.FileName + ".dll");
             var pdbPath = Path.Combine(programAssetFolder, programAsset.FileName + ".pdb");
-            programAsset.DLLBytes = File.Exists(dllPath) ? File.ReadAllBytes(dllPath) : default;
-            programAsset.PDBBytes = File.Exists(pdbPath) ? File.ReadAllBytes(pdbPath) : default;
+            programAsset.DLLBytes = File.Exists(dllPath) ? await File.ReadAllBytesAsync(dllPath) : default;
+            programAsset.PDBBytes = File.Exists(pdbPath) ? await File.ReadAllBytesAsync(pdbPath) : default;
         }
         return package;
+    }
+
+    public async Task<byte[]> QueryProgramIcon(string programId)
+    {
+        var programIconPath = Path.Combine(this.options.Value.FolderPath, programId, "Index.png");
+        if (!File.Exists(programIconPath)) return this.defaultProgramIcon;
+
+        var fileBytes = await File.ReadAllBytesAsync(programIconPath);
+        return fileBytes;
     }
 }

@@ -59,6 +59,16 @@ public class ProgramAssetController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
+    [LogActionFilter(noLogResponseBody: true)]
+    public async Task<IActionResult> QueryProgramIcon(string programId)
+    {
+        var iconBytes = await this.programAssetService.QueryProgramIcon(programId);
+        this.logger.LogInformation($"Found icon of program {programId}.");
+        return this.File(iconBytes, "image/png");
+    }
+
+    [HttpGet]
     [LogActionFilter(noLogResponseBody: true)]
     public async Task<IActionResult> QueryProgramAssetPackage(string programId)
     {

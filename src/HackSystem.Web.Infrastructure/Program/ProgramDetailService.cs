@@ -16,7 +16,12 @@ public class ProgramDetailService : AuthenticatedServiceBase, IProgramDetailServ
 
     public async Task<IEnumerable<UserProgramMapResponse>> QueryUserProgramMaps()
     {
-        var result = await this.HttpClient.GetFromJsonAsync<IEnumerable<UserProgramMapResponse>>("api/ProgramDetail/QueryUserProgramMaps");
+        var result = await this.HttpClient
+            .GetFromJsonAsync<IEnumerable<UserProgramMapResponse>>("api/ProgramDetail/QueryUserProgramMaps");
+        foreach (var programMap in result!)
+        {
+            programMap.Program.IconUri = new Uri(this.HttpClient.BaseAddress!, $"api/programasset/QueryProgramIcon?programId={programMap.Program.Id}").AbsoluteUri;
+        }
         return result;
     }
 
