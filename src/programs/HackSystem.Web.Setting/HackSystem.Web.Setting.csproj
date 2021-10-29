@@ -37,7 +37,7 @@
 		<Using Include="Microsoft.Extensions.Options" />
 	</ItemGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(OS)' == 'Windows_NT'">
 	  <Exec Command="set assetFolder=$(SolutionDir)HackSystem.WebAPI\$(OutDir)ProgramAssets\&#xD;&#xA;MKDIR assetFolder&#xD;&#xA;set assetFolder=%25assetFolder%25program0-icon-0828-hack-system000004\&#xD;&#xA;MKDIR assetFolder&#xD;&#xA;XCOPY $(TargetDir)* %25assetFolder%25 /Y /S /H" />
 	</Target>
 
