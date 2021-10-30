@@ -1,0 +1,56 @@
+﻿@inject ILogger<MockRouteComponent> Logger
+
+<div class="alert @this.GetAlertBackground() w-100" role="alert">
+    <h5 class="alert-heading">@this.MockRoute.RouteName</h5>
+    <hr>
+    <div class="row">
+        <span class="badge badge-primary mx-1">@this.MockRoute.StatusCode</span>
+        @if (!string.IsNullOrEmpty(this.MockRoute.MockMethod))
+        {
+            <span class="badge badge-primary mx-1">@this.MockRoute.MockMethod</span>
+        }
+        @if (!string.IsNullOrEmpty(this.MockRoute.MockSourceHost))
+        {
+            <span class="badge badge-primary mx-1">@this.MockRoute.MockSourceHost</span>
+        }
+        <span class="badge badge-primary mx-1">@this.MockRoute.MockType</span>
+        @if (!string.IsNullOrEmpty(this.MockRoute.MockURI))
+        {
+            <span class="badge badge-primary mx-1">@this.MockRoute.MockURI</span>
+        }
+        @if (!string.IsNullOrEmpty(this.MockRoute.ForwardAddress))
+        {
+            <span class="badge badge-primary mx-1">@this.MockRoute.ForwardAddress</span>
+        }
+        @if (!string.IsNullOrEmpty(this.MockRoute.ForwardMethod))
+        {
+            <span class="badge badge-primary mx-1">@this.MockRoute.ForwardMethod</span>
+        }
+        @if (this.MockRoute.ForwardMockType.HasValue)
+        {
+            <span class="badge badge-primary mx-1">@this.MockRoute.ForwardMockType</span>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public MockRouteResponse MockRoute { get; set; }
+
+    private bool MockRouteEnable
+    {
+        get => this.MockRoute.Enabled;
+        set
+        {
+            this.MockRoute.Enabled = value;
+            this.SwitchMockRouteEnable(value).ConfigureAwait(false);
+        }
+    }
+
+    private string GetAlertBackground()
+        => this.MockRoute.Enabled ?
+            this.MockRoute.StatusCode is (>= (int)HttpStatusCode.OK and < (int)HttpStatusCode.MultipleChoices) or (int)HttpStatusCode.Redirect ?
+            "alert-success shadow-sm" :
+            "alert-danger shadow-sm" :
+            "alert-secondary";
+}

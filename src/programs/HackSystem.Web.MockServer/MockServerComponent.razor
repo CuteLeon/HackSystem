@@ -1,11 +1,41 @@
 ﻿@inherits ProgramComponentBase
+@inject ILogger<MockServerComponent> Logger
+@inject IServiceScopeFactory ServiceScopeFactory
 
-<div class="my-component">
-	This component is defined in the <strong>HackSystem.Web.MockServer</strong> library.
-</div>
+<AuthorizeView Roles="@CommonSense.Roles.CommanderRole">
+    <Authorized>
+        <div class="container p-3">
+            <!-- Top control button group -->
+            <div class="row my-2 justify-content-between">
+                <p class="col-auto h4">Mock Routes</p>
+                <div class="col-auto">
+                    <div class="btn-group btn-group-sm shadow-sm" role="group" aria-label="Task control button">
+                        <button type="button" class="btn btn-info" @onclick=@this.LoadMockRoutes>Refresh</button>
+                        <button type="button" class="btn btn-danger" @onclick=@this.ClearMockRoutes>Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards container -->
+            @foreach (var mockRoute in this.MockRoutes)
+            {
+                var mockRouteKey = $"mockRouteKey_{mockRoute.RouteID}";
+                <MockRouteComponent @key="@mockRouteKey" MockRoute=@mockRoute></MockRouteComponent>
+            }
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="d-inline-block w-100 p-5 text-center">
+            <i class="fas fa-4x fa-user-astronaut text-primary my-3"></i>
+            <p class="h4 text-secondary">Please login as a Commander!</p>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
 
 @code {
-	public override void Dispose()
-	{
-	}
+    public List<MockRouteResponse> MockRoutes { get; set; } = new();
+
+    public override void Dispose()
+    {
+    }
 }

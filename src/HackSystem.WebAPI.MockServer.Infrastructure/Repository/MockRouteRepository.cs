@@ -19,6 +19,11 @@ public class MockRouteRepository : RepositoryBase<MockRouteDetail>, IMockRouteRe
         this.memoryCache = memoryCache;
     }
 
+    public async Task<IEnumerable<MockRouteDetail>> QueryMockRoutes()
+    {
+        return this.AsEnumerable();
+    }
+
     public async Task<MockRouteDetail?> QueryMockRoute(string uri, string method, string sourceHost)
     {
         if (string.IsNullOrWhiteSpace(uri))
