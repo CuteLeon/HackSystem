@@ -1,28 +1,30 @@
 ﻿@* MAGIC! DO NOT TOUCH! @key instruction is necessary. *@
 <div id="@this.ToastDetail.Id" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="pointer-events:auto;backdrop-filter: blur(4px);">
-    <div class="toast-header">
-        @switch (this.ToastDetail.Icon)
-        {
-            case ToastIcons.Information:
-                <span class="fas fa-info-circle text-success mr-2" style="font-size:20px;"></span>
-                break;
-            case ToastIcons.Question:
-                <span class="fas fa-question-circle text-primary mr-2" style="font-size:20px;"></span>
-                break;
-            case ToastIcons.Warning:
-                <span class="fas fa-exclamation-circle text-warning mr-2" style="font-size:20px;"></span>
-                break;
-            case ToastIcons.Error:
-                <span class="fas fa-times-circle text-danger mr-2" style="font-size:20px;"></span>
-                break;
-            default:
-            case ToastIcons.HackSystem:
-                <img src="/LogoImageSmall.png" class="rounded mr-2" />
-                break;
-        }
-        <strong class="mr-auto">@this.ToastDetail.Title</strong>
-        <small class="text-muted">@this.ToastDetail.CreateTime.ToLongTimeString()</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+    <div class="toast-header justify-content-between">
+        <div class="col-auto p-0">
+            @switch (this.ToastDetail.Icon)
+            {
+                case ToastIcons.Information:
+                    <span class="fas fa-info-circle text-success" style="font-size:20px;"></span>
+                    break;
+                case ToastIcons.Question:
+                    <span class="fas fa-question-circle text-primary" style="font-size:20px;"></span>
+                    break;
+                case ToastIcons.Warning:
+                    <span class="fas fa-exclamation-circle text-warning" style="font-size:20px;"></span>
+                    break;
+                case ToastIcons.Error:
+                    <span class="fas fa-times-circle text-danger" style="font-size:20px;"></span>
+                    break;
+                default:
+                case ToastIcons.HackSystem:
+                    <img src="/LogoImageSmall.png" class="rounded" style="width:20px; height:20px;" />
+                    break;
+            }
+        </div>
+        <strong class="col mr-auto text-truncate">@this.ToastDetail.Title</strong>
+        <small class="col-auto text-muted">@this.ToastDetail.CreateTime.ToLongTimeString()</small>
+        <button type="button" class="col-auto close" data-dismiss="toast" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
