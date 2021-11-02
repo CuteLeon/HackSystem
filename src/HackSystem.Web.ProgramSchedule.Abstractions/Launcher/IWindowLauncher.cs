@@ -4,5 +4,5 @@ namespace HackSystem.Web.ProgramSchedule.Launcher;
 
 public interface IWindowLauncher
 {
-    Task<ProgramWindowDetail> LaunchWindow(ProcessDetail process, Type windowComponentType);
+    Task<ProgramWindowDetail> LaunchWindow(ProcessDetail process, Type windowComponentType, ProgramWindowDetail? parentWindowDetail = null);
 }

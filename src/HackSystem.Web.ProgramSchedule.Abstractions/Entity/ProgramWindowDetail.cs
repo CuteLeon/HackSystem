@@ -55,4 +55,31 @@ public class ProgramWindowDetail
     }
 
     public ProcessDetail ProcessDetail { get; init; }
+
+    public ProgramWindowDetail ParentWindow { get; protected set; }
+
+    public void SetParentWindow(ProgramWindowDetail parentWindow)
+    {
+        if (this.ParentWindow is not null)
+            this.ParentWindow.RemoveChildWindowDetail(this);
+        this.ParentWindow = parentWindow;
+        if (this.ParentWindow is not null)
+            this.ParentWindow.AddChildWindowDetail(this);
+    }
+
+    protected Dictionary<string, ProgramWindowDetail> ChildWindowDetails { get; init; } = new();
+
+    public bool TryGetChildWindowDetail(string childWindowId, out ProgramWindowDetail? childWindowDetail)
+        => this.ChildWindowDetails.TryGetValue(childWindowId, out childWindowDetail);
+
+    public IEnumerable<ProgramWindowDetail> GetChildWindowDetails()
+        => this.ChildWindowDetails.Values.AsEnumerable();
+
+    protected bool AddChildWindowDetail(ProgramWindowDetail childWindowDetail)
+        => childWindowDetail.ProcessDetail == this.ProcessDetail &&
+            this.ChildWindowDetails.TryAdd(childWindowDetail.WindowId, childWindowDetail);
+
+    protected bool RemoveChildWindowDetail(ProgramWindowDetail childWindowDetail)
+        => childWindowDetail.ProcessDetail == this.ProcessDetail &&
+            this.ChildWindowDetails.Remove(childWindowDetail.WindowId, out _);
 }

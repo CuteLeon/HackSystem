@@ -53,14 +53,14 @@ public class ProgramDetail
     protected Dictionary<int, ProcessDetail> ProcessDetails { get; init; } = new();
 
     public bool TryGetProcessDetail(int processId, out ProcessDetail? processDetail)
-    => this.ProcessDetails.TryGetValue(processId, out processDetail);
+        => this.ProcessDetails.TryGetValue(processId, out processDetail);
 
     public IEnumerable<ProcessDetail> GetProcessDetails()
-    => this.ProcessDetails.Values.AsEnumerable();
+        => this.ProcessDetails.Values.AsEnumerable();
 
     public bool AddProcessDetail(ProcessDetail processDetail)
-        => processDetail.ProgramDetail.Equals(this) && this.ProcessDetails.TryAdd(processDetail.ProcessId, processDetail);
+        => processDetail.ProgramDetail == this && this.ProcessDetails.TryAdd(processDetail.ProcessId, processDetail);
 
     public bool RemoveProcessDetail(ProcessDetail processDetail)
-        => processDetail.ProgramDetail.Equals(this) && this.ProcessDetails.Remove(processDetail.ProcessId, out _);
+        => processDetail.ProgramDetail == this && this.ProcessDetails.Remove(processDetail.ProcessId, out _);
 }
