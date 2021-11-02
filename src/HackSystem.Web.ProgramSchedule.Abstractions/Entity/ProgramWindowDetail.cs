@@ -5,6 +5,7 @@ namespace HackSystem.Web.ProgramSchedule.Entity;
 public class ProgramWindowDetail
 {
     private ProgramWindowStates windowState = ProgramWindowStates.Normal;
+    private SemaphoreSlim modalSemaphore;
 
     public ProgramWindowDetail(
         string windowId,
@@ -14,6 +15,16 @@ public class ProgramWindowDetail
         this.WindowId = windowId;
         this.ProgramWindowType = programWindowType;
         this.ProcessDetail = processDetail;
+    }
+
+    public ProgramWindowDetail(
+        string windowId,
+        Type programWindowType,
+        ProcessDetail processDetail,
+        ProgramWindowDetail? parentWindow)
+        : this(windowId, programWindowType, processDetail)
+    {
+        this.SetParentWindow(parentWindow);
     }
 
     public string WindowId { get; init; }
@@ -54,11 +65,13 @@ public class ProgramWindowDetail
         }
     }
 
+    public bool IsModal { get => this.modalSemaphore is not null; }
+
     public ProcessDetail ProcessDetail { get; init; }
 
-    public ProgramWindowDetail ParentWindow { get; protected set; }
+    public ProgramWindowDetail? ParentWindow { get; protected set; }
 
-    public void SetParentWindow(ProgramWindowDetail parentWindow)
+    protected void SetParentWindow(ProgramWindowDetail? parentWindow)
     {
         if (this.ParentWindow is not null)
             this.ParentWindow.RemoveChildWindowDetail(this);

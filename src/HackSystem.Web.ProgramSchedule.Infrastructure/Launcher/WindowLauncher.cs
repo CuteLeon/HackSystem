@@ -25,10 +25,7 @@ public class WindowLauncher : IWindowLauncher
         if (!typeof(ProgramComponentBase).IsAssignableFrom(windowComponentType))
             throw new TypeLoadException($"Program entry component type must derive from {typeof(ProgramComponentBase).Name}.");
 
-        var programWindowDetail = new ProgramWindowDetail(Guid.NewGuid().ToString(), windowComponentType, process);
-        if (parentWindowDetail is not null)
-            programWindowDetail.SetParentWindow(parentWindowDetail);
-        process.AddWindowDetail(programWindowDetail);
+        var programWindowDetail = new ProgramWindowDetail(Guid.NewGuid().ToString(), windowComponentType, process, parentWindowDetail);
         this.logger.LogInformation($"Window {programWindowDetail.Caption} ({programWindowDetail.WindowId}) of process {process.ProcessId} launched.");
         _ = await this.publisher.SendRequest(new WindowScheduleRequest(programWindowDetail, WindowChangeStates.Launch));
         return programWindowDetail;
