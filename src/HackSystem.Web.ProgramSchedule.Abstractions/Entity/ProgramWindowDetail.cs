@@ -2,10 +2,10 @@
 
 namespace HackSystem.Web.ProgramSchedule.Entity;
 
-public class ProgramWindowDetail
+public class ProgramWindowDetail : IAsyncDisposable
 {
     private ProgramWindowStates windowState = ProgramWindowStates.Normal;
-    private SemaphoreSlim modalSemaphore;
+    private SemaphoreSlim? modalSemaphore;
 
     public ProgramWindowDetail(
         string windowId,
@@ -67,6 +67,26 @@ public class ProgramWindowDetail
 
     public bool IsModal { get => this.modalSemaphore is not null; }
 
+    public ModalWindowResults ModalWindowResult { get; protected set; } = ModalWindowResults.None;
+
+    public ModalWindowResults GetModalWindowResult()
+    {
+        if (this.modalSemaphore is null)
+            this.modalSemaphore = new SemaphoreSlim(1, 1);
+        this.modalSemaphore.Wait();
+        return this.ModalWindowResult;
+    }
+
+    public void SetModalWindowResult(ModalWindowResults modalWindowResult)
+    {
+        if (modalWindowResult == ModalWindowResults.None) return;
+
+        this.ModalWindowResult = modalWindowResult;
+        this.modalSemaphore!.Release(this.modalSemaphore.CurrentCount);
+        this.modalSemaphore!.Dispose();
+        this.modalSemaphore = null;
+    }
+
     public ProcessDetail ProcessDetail { get; init; }
 
     public ProgramWindowDetail? ParentWindow { get; protected set; }
@@ -95,4 +115,14 @@ public class ProgramWindowDetail
     protected bool RemoveChildWindowDetail(ProgramWindowDetail childWindowDetail)
         => childWindowDetail.ProcessDetail == this.ProcessDetail &&
             this.ChildWindowDetails.Remove(childWindowDetail.WindowId, out _);
+
+    public async ValueTask DisposeAsync()
+    {
+        if (this.modalSemaphore is not null)
+        {
+            if (this.modalSemaphore.CurrentCount > 0)
+                this.modalSemaphore.Release(this.modalSemaphore.CurrentCount);
+            this.modalSemaphore.Dispose();
+        }
+    }
 }

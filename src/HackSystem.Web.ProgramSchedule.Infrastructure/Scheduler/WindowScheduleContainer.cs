@@ -28,17 +28,17 @@ public class WindowScheduleContainer : IWindowScheduleContainer
         return changeState switch
         {
             WindowChangeStates.Launch => this.LaunchWindow(windowDetail),
-            WindowChangeStates.Active => ActiveWindow(windowDetail),
-            WindowChangeStates.Inactive => InactiveWindow(windowDetail),
-            WindowChangeStates.ToggleActive => ToggleWindowActive(windowDetail),
-            WindowChangeStates.Destory => DestoryWindow(windowDetail),
+            WindowChangeStates.Active => this.ActiveWindow(windowDetail),
+            WindowChangeStates.Inactive => this.InactiveWindow(windowDetail),
+            WindowChangeStates.ToggleActive => this.ToggleWindowActive(windowDetail),
+            WindowChangeStates.Destory => this.DestoryWindow(windowDetail),
             _ => false
         };
     }
 
     private bool DestoryWindow(ProgramWindowDetail windowDetail)
     {
-        windowDetail.TierIndex = WindowTierIndexLowEdge;
+        windowDetail.TierIndex = this.WindowTierIndexLowEdge;
         return this.windowLRUContainer.Remove(windowDetail);
     }
 

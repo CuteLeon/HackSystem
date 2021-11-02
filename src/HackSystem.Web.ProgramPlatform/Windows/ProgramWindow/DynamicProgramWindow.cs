@@ -79,6 +79,8 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
     public virtual async Task OnClose()
     {
         this.Logger.LogInformation($"Close window {this.ProgramWindowDetail.WindowId} of process {this.ProgramWindowDetail.ProcessDetail.ProcessId}.");
+        if (this.ProgramWindowDetail.IsModal)
+            this.ProgramWindowDetail.SetModalWindowResult(ModalWindowResults.Cancel);
         await this.publisher.SendCommand(new WindowDestroyCommand(this.ProgramWindowDetail));
     }
 
