@@ -19,6 +19,7 @@ public partial class DynamicProgramWindow : IDraggableComponent, IResizeableComp
         await base.OnInitializedAsync();
         this.draggableReference = DotNetObjectReference.Create<IDraggableComponent>(this);
         this.resizeableReference = DotNetObjectReference.Create<IResizeableComponent>(this);
+        this.ProgramWindowDetail.Caption = this.ProgramWindowDetail.ProcessDetail.ProgramDetail.Name;
     }
 
     [JSInvokable]
