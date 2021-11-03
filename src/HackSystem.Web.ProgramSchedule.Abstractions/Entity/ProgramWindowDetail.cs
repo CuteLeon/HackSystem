@@ -82,7 +82,8 @@ public class ProgramWindowDetail : IAsyncDisposable
         if (modalWindowResult == ModalWindowResults.None) return;
 
         this.ModalWindowResult = modalWindowResult;
-        this.modalSemaphore!.Release(this.modalSemaphore.CurrentCount);
+        if (this.modalSemaphore.CurrentCount > 0)
+            this.modalSemaphore!.Release(this.modalSemaphore.CurrentCount);
         this.modalSemaphore!.Dispose();
         this.modalSemaphore = null;
     }
