@@ -9,7 +9,7 @@ public abstract class ProgramComponentBase : ComponentBase, IDisposable
 
     public ProcessDetail ProcessDetail { get => this.ProgramWindowDetail.ProcessDetail; }
 
-    [Parameter]
+    [CascadingParameter]
     public ProgramWindowDetail ProgramWindowDetail { get; init; }
 
     [Inject]
