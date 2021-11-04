@@ -57,7 +57,7 @@ public class WindowScheduler : IWindowScheduler
     {
         windowDetail.StickyTopTier = true;
         if (await this.windowScheduleContainer.WindowExist(windowDetail))
-            await this.windowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Destory);
+            await this.windowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Destroy);
 
         if (await this.topWindowScheduleContainer.WindowExist(windowDetail)) return false;
         return await this.topWindowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Launch);
@@ -67,7 +67,7 @@ public class WindowScheduler : IWindowScheduler
     {
         windowDetail.StickyTopTier = false;
         if (await this.topWindowScheduleContainer.WindowExist(windowDetail))
-            await this.topWindowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Destory);
+            await this.topWindowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Destroy);
 
         if (await this.windowScheduleContainer.WindowExist(windowDetail)) return false;
         return await this.windowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Launch);
@@ -85,6 +85,6 @@ public class WindowScheduler : IWindowScheduler
         return await (windowDetail.StickyTopTier ?
             this.topWindowScheduleContainer :
             this.windowScheduleContainer)
-            .Schedule(windowDetail, changeState);
+                .Schedule(windowDetail, changeState);
     }
 }

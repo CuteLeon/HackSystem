@@ -27,7 +27,7 @@ public class WindowDestroyer : IWindowDestroyer
         this.logger.LogInformation($"Handle Window destroy command: Window {windowDetail.WindowId} of Process {processDetail.ProcessId} ...");
         if (processDetail.RemoveWindowDetail(windowDetail))
         {
-            _ = await this.publisher.SendRequest(new WindowScheduleRequest(windowDetail, WindowChangeStates.Destory));
+            _ = await this.publisher.SendRequest(new WindowScheduleRequest(windowDetail, WindowChangeStates.Destroy));
         }
         else
         {
@@ -37,7 +37,7 @@ public class WindowDestroyer : IWindowDestroyer
         if (processDetail.ProgramDetail.ProgramEntryComponentType is not null &&
             !processDetail.GetWindowDetails().Any())
         {
-            this.logger.LogInformation($"Send Destory process command of {processDetail.ProcessId} as all windows destoryed...");
+            this.logger.LogInformation($"Send Destroy process command of {processDetail.ProcessId} as all windows destroyed...");
             _ = await this.processDestroyer.DestroyProcess(processDetail.ProcessId);
         }
         GC.Collect();

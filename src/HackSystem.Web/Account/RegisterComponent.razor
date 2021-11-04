@@ -11,7 +11,7 @@
 
             @if (ShowErrors)
             {
-                @* Do not close alert by method of Bootstrap, cause this will destory element and make Blazor works incorrectly. *@
+                @* Do not close alert by method of Bootstrap, cause this will destroy element and make Blazor works incorrectly. *@
                 <div class="alert alert-warning fade show" role="alert">
                     <strong>Register failed!</strong>
                     <button type="button" class="close" aria-label="Close" @onclick="OnCloseAlert">

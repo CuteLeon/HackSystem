@@ -72,7 +72,7 @@ public partial class ProgramDockComponent : IAsyncDisposable
             if (!this.UserProgramMaps.TryGetValue(e.ProcessDetail.ProgramDetail.Id, out var programMap)) return;
             if (e.ProcessDetail.ProgramDetail.GetProcessDetails().Any()) return;
 
-            this.logger.LogInformation($"Destory process {e.ProcessDetail.ProcessId}, remove from program dock...");
+            this.logger.LogInformation($"Destroy process {e.ProcessDetail.ProcessId}, remove from program dock...");
             this.UndockedRunningProgramMaps.Remove(programMap.Program.Id);
             this.StateHasChanged();
         }

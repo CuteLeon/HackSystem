@@ -31,12 +31,12 @@ public class WindowScheduleContainer : IWindowScheduleContainer
             WindowChangeStates.Active => this.ActiveWindow(windowDetail),
             WindowChangeStates.Inactive => this.InactiveWindow(windowDetail),
             WindowChangeStates.ToggleActive => this.ToggleWindowActive(windowDetail),
-            WindowChangeStates.Destory => this.DestoryWindow(windowDetail),
+            WindowChangeStates.Destroy => this.DestroyWindow(windowDetail),
             _ => false
         };
     }
 
-    private bool DestoryWindow(ProgramWindowDetail windowDetail)
+    private bool DestroyWindow(ProgramWindowDetail windowDetail)
     {
         windowDetail.TierIndex = this.WindowTierIndexLowEdge;
         return this.windowLRUContainer.Remove(windowDetail);

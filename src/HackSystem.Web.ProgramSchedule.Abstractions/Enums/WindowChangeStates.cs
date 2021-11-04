@@ -9,5 +9,5 @@ public enum WindowChangeStates
     TopTier,
     NonTopTier,
     ToggleTopTier,
-    Destory,
+    Destroy,
 }
