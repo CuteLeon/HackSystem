@@ -54,6 +54,10 @@
                         <DynamicComponent @ref=this.DynamicProgramComponent
                                           Type="this.ProgramWindowDetail.ProgramWindowType">
                         </DynamicComponent>
+                        @if (this.ProgramWindowDetail.GetChildWindowDetails().Any(x => x.IsModal))
+                        {
+                            <div class="position-absolute w-100 h-100 bg-transparent" style="left:0px; top:0px; backdrop-filter:blur(20px);"></div>
+                        }
                     </div>
                 </div>
             </div>

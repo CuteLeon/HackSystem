@@ -3,36 +3,36 @@
 @inject ILogger<HomeComponent> logger
 
 <div class="bg-secondary text-center p-0">
-	<img src="LogoImage.png" class="img-fluid" />
+    <img src="LogoImage.png" class="img-fluid" />
 </div>
 <div class="btn-group w-100 p-2">
-	<a class="btn btn-primary" @onclick=@this.OnWindowButtonClick>Show Window</a>
-	<a class="btn btn-success" @onclick=@this.OnChildWindowButtonClick>Show Child Window</a>
-	<a class="btn btn-warning" @onclick=@this.OnModalWindowButtonClick>Show Modal Window</a>
+    <a class="btn btn-primary" @onclick=@this.OnWindowButtonClick>Show Window</a>
+    <a class="btn btn-success" @onclick=@this.OnChildWindowButtonClick>Show Child Window</a>
+    <a class="btn btn-warning" @onclick=@this.OnModalWindowButtonClick>Show Modal Window</a>
 </div>
 
 @code {
-	public override void Dispose()
-	{
-	}
+    public override void Dispose()
+    {
+    }
 
-	protected async Task OnWindowButtonClick()
-	{
-		this.logger.LogWarning("Launch window...");
-		await this.windowLauncher.LaunchWindow(this.ProcessDetail, typeof(HomeComponent), this.ProgramWindowDetail);
-	}
+    protected async Task OnWindowButtonClick()
+    {
+        this.logger.LogWarning("Launch window...");
+        await this.windowLauncher.LaunchWindow(this.ProcessDetail, typeof(HomeComponent), this.ProgramWindowDetail);
+    }
 
-	protected async Task OnChildWindowButtonClick()
-	{
-		this.logger.LogWarning("Launch child window...");
-		await this.windowLauncher.LaunchWindow(this.ProcessDetail, typeof(ChildWindowComponent), this.ProgramWindowDetail);
-	}
+    protected async Task OnChildWindowButtonClick()
+    {
+        this.logger.LogWarning("Launch child window...");
+        await this.windowLauncher.LaunchWindow(this.ProcessDetail, typeof(ChildWindowComponent), this.ProgramWindowDetail);
+    }
 
-	protected async Task OnModalWindowButtonClick()
-	{
-		this.logger.LogWarning("Launch modal window...");
-		var modal = await this.windowLauncher.LaunchWindow(this.ProcessDetail, typeof(ModalWindowComponent), this.ProgramWindowDetail);
-		var result = modal.GetModalWindowResult();
-		this.logger.LogWarning(result.ToString());
-	}
+    protected async Task OnModalWindowButtonClick()
+    {
+        this.logger.LogWarning("Launch modal window...");
+        var modal = await this.windowLauncher.LaunchWindow(this.ProcessDetail, typeof(ModalWindowComponent), this.ProgramWindowDetail);
+        var result = await modal.GetModalWindowResult();
+        this.logger.LogWarning(result.ToString());
+    }
 }

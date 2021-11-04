@@ -69,11 +69,11 @@ public class ProgramWindowDetail : IAsyncDisposable
 
     public ModalWindowResults ModalWindowResult { get; protected set; } = ModalWindowResults.None;
 
-    public ModalWindowResults GetModalWindowResult()
+    public async Task<ModalWindowResults> GetModalWindowResult()
     {
         if (this.modalSemaphore is null)
-            this.modalSemaphore = new SemaphoreSlim(1, 1);
-        this.modalSemaphore.Wait();
+            this.modalSemaphore = new SemaphoreSlim(0, 1);
+        await this.modalSemaphore.WaitAsync();
         return this.ModalWindowResult;
     }
 
@@ -82,8 +82,7 @@ public class ProgramWindowDetail : IAsyncDisposable
         if (modalWindowResult == ModalWindowResults.None) return;
 
         this.ModalWindowResult = modalWindowResult;
-        if (this.modalSemaphore!.CurrentCount > 0)
-            this.modalSemaphore!.Release(this.modalSemaphore.CurrentCount);
+        this.modalSemaphore!.Release();
         this.modalSemaphore!.Dispose();
         this.modalSemaphore = null;
     }
@@ -121,8 +120,7 @@ public class ProgramWindowDetail : IAsyncDisposable
     {
         if (this.modalSemaphore is not null)
         {
-            if (this.modalSemaphore.CurrentCount > 0)
-                this.modalSemaphore.Release(this.modalSemaphore.CurrentCount);
+            this.modalSemaphore.Release();
             this.modalSemaphore.Dispose();
         }
     }
