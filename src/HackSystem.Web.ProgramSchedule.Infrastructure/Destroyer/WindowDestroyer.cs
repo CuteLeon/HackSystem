@@ -25,14 +25,7 @@ public class WindowDestroyer : IWindowDestroyer
     {
         var processDetail = windowDetail.ProcessDetail;
         this.logger.LogInformation($"Handle Window destroy command: Window {windowDetail.WindowId} of Process {processDetail.ProcessId} ...");
-        if (processDetail.RemoveWindowDetail(windowDetail))
-        {
-            _ = await this.publisher.SendRequest(new WindowScheduleRequest(windowDetail, WindowChangeStates.Destroy));
-        }
-        else
-        {
-            this.logger.LogWarning($"Failed to close window {windowDetail.WindowId} from process {processDetail.ProcessId}...");
-        }
+        await this.DestroyWindowInternal(windowDetail);
 
         if (processDetail.ProgramDetail.ProgramEntryComponentType is not null &&
             !processDetail.GetWindowDetails().Any())
@@ -42,5 +35,22 @@ public class WindowDestroyer : IWindowDestroyer
         }
         GC.Collect();
         this.logger.LogInformation($"Window {windowDetail.WindowId} destroy command handled.");
+    }
+
+    protected async Task DestroyWindowInternal(ProgramWindowDetail windowDetail)
+    {
+        Stack<ProgramWindowDetail> windowStack = new(new[] { windowDetail });
+        while (windowStack.TryPop(out var currentWindow))
+        {
+            foreach (var childWindow in currentWindow.GetChildWindowDetails())
+                windowStack.Push(childWindow);
+
+            if (currentWindow.SetParentWindow(null) &&
+                currentWindow.ProcessDetail.RemoveWindowDetail(currentWindow))
+            {
+                this.logger.LogInformation($"Send Destroy window command of {currentWindow.WindowId}...");
+                _ = await this.publisher.SendRequest(new WindowScheduleRequest(currentWindow, WindowChangeStates.Destroy));
+            }
+        }
     }
 }

@@ -82,7 +82,7 @@ public class ProgramWindowDetail : IAsyncDisposable
         if (modalWindowResult == ModalWindowResults.None) return;
 
         this.ModalWindowResult = modalWindowResult;
-        if (this.modalSemaphore.CurrentCount > 0)
+        if (this.modalSemaphore!.CurrentCount > 0)
             this.modalSemaphore!.Release(this.modalSemaphore.CurrentCount);
         this.modalSemaphore!.Dispose();
         this.modalSemaphore = null;
@@ -92,13 +92,13 @@ public class ProgramWindowDetail : IAsyncDisposable
 
     public ProgramWindowDetail? ParentWindow { get; protected set; }
 
-    protected void SetParentWindow(ProgramWindowDetail? parentWindow)
+    public bool SetParentWindow(ProgramWindowDetail? parentWindow)
     {
-        if (this.ParentWindow is not null)
-            this.ParentWindow.RemoveChildWindowDetail(this);
+        var result =
+            (this.ParentWindow?.RemoveChildWindowDetail(this) ?? true) &&
+            (parentWindow?.AddChildWindowDetail(this) ?? true);
         this.ParentWindow = parentWindow;
-        if (this.ParentWindow is not null)
-            this.ParentWindow.AddChildWindowDetail(this);
+        return result;
     }
 
     protected Dictionary<string, ProgramWindowDetail> ChildWindowDetails { get; init; } = new();
