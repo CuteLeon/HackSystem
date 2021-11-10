@@ -106,6 +106,57 @@
       2. Just run `HackSystem.Host.exe`.
 6. Enjoy it.
 
+# How to develop customized programs
+
+> Something may change with platform developing.
+
+1. Create a new Razor Class Library project.
+
+2. Install above nuget pakcages to this project.
+
+3. Add a new image file named as Index.png in root folder of this project, and copy to output directory if newer.
+
+4. Create a new Razor Component as entry component, and inherits ProgramComponentBase class.
+
+   1. Design and Implement it.
+
+5. Create a new static Launcher class and return the type of entry component from static Launch method.
+   1. ```csharp
+      public static class Launcher
+      {
+          // Launch Parameter is not mandatory.
+          public static Type Launch(LaunchParameter parameter)
+          {
+              return typeof(TaskSchedulerComponent);
+          }
+      }
+      ```
+
+# How to deploy customized programs
+
+> Something may change with platform developing.
+
+1. Insert a new record in database of new program.
+
+   1. ```sql
+      INSERT INTO ProgramDetails (Id,Name,Enabled,SingleInstance,EntryAssemblyName,EntryTypeName,EntryParameter,Mandatory)
+      VALUES ('program0-icon-0828-hack-system000006','TaskServer',1,1,'HackSystem.Web.TaskSchedule','HackSystem.Web.TaskSchedule.Launcher','{ "Developer": "Leon" }',1);	
+      ```
+
+2. Edit `ProgramAssetConfiguration` section of  `HackSystem.WebAPI` project's `appsettings.json` to config program asset folder path.
+
+3. Create new filder named as new program ID in program asset folder.
+
+4. Build program project and copy all files into above folder.
+
+5. Insert a new record in database to map releationship between user and program.
+
+   1. ```sql
+      INSERT INTO UserProgramMaps (UserId,ProgramId,PinToDesktop,PinToDock,PinToTop,"Rename")
+      VALUES ('msaspnet-core-user-hack-system000001','program0-icon-0828-hack-system000006',1,0,0,NULL);
+      ```
+
+6. Launch Hack System and login above user, should see the new program launch and enjoy it.
 
 # Video
 
