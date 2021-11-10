@@ -106,7 +106,7 @@
       2. Just run `HackSystem.Host.exe`.
 6. Enjoy it.
 
-# How to develop customized programs
+## How to develop customized programs
 
 > Something may change with platform developing.
 
@@ -132,7 +132,7 @@
       }
       ```
 
-# How to deploy customized programs
+## How to deploy customized programs
 
 > Something may change with platform developing.
 
