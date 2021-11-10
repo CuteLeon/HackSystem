@@ -4,7 +4,10 @@
    <img src="https://raw.github.com/CuteLeon/HackSystem/master/src/HackSystem.Web/wwwroot/LogoImage.png" align="center"/>
    <h2 align="center">Hack System</h2>
    <p align="center">A Hack System based on ASP.NET Core and Blazor WebAssembly.</p>
+   <p align="center">Design and implement your program and Execute it in Hack System!</p>
 </p>
+
+## Status
 
 <p align="center">
    <a href="https://github.com/CuteLeon/HackSystem/actions/workflows/dotnet-core.yml">
