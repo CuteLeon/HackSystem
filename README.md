@@ -1,35 +1,87 @@
 # HackSystem
 
-[![Hack System](https://github.com/CuteLeon/HackSystem/workflows/.Net%20Build/badge.svg)](https://github.com/CuteLeon/HackSystem/actions/workflows/dotnet-core.yml)
-[![GitHub](https://img.shields.io/github/license/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/blob/master/LICENSE)
-[![GitHub top language](https://img.shields.io/github/languages/top/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/search?l=c%23)
-[![GitHub repo file count](https://img.shields.io/github/directory-file-count/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem)
-[![GitHub repo size](https://img.shields.io/github/repo-size/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/archive/refs/heads/master.zip)
+<p align="center">
+   <img src="https://raw.github.com/CuteLeon/HackSystem/master/src/HackSystem.Web/wwwroot/LogoImage.png" align="center"/>
+   <h2 align="center">Hack System</h2>
+   <p align="center">A Hack System based on ASP.NET Core and Blazor WebAssembly.</p>
+</p>
 
-[![GitHub issues](https://img.shields.io/github/issues/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/issues?q=is%3Aopen+is%3Aissue)
-[![GitHub forks](https://img.shields.io/github/forks/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/network/members)
-[![GitHub Repo stars](https://img.shields.io/github/stars/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/stargazers)
-[![GitHub watchers](https://img.shields.io/github/watchers/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/watchers)
-[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/CuteLeon/HackSystem?include_prereleases)](https://github.com/CuteLeon/HackSystem/releases)
-[![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/releases)
-
-[![GitHub all releases](https://img.shields.io/github/downloads/CuteLeon/HackSystem/total)](https://github.com/CuteLeon/HackSystem/archive/refs/heads/master.zip)
-[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/CuteLeon/HackSystem)](https://github.com/CuteLeon/HackSystem/tags)
-[![GitHub commits since latest release (by date including pre-releases)](https://img.shields.io/github/commits-since/CuteLeon/HackSystem/latest/master?include_prereleases)](https://github.com/CuteLeon/HackSystem/releases)
-[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/CuteLeon/HackSystem/master)](https://github.com/CuteLeon/HackSystem/commits/master)
-
-![](https://raw.github.com/CuteLeon/HackSystem/master/src/HackSystem.Web/wwwroot/LogoImage.png)
+<p align="center">
+   <a href="https://github.com/CuteLeon/HackSystem/actions/workflows/dotnet-core.yml">
+      <img border="0" src="https://github.com/CuteLeon/HackSystem/workflows/.Net%20Build/badge.svg" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/blob/master/LICENSE">
+      <img border="0" src="https://img.shields.io/github/license/CuteLeon/HackSystem" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/search?l=c%23">
+      <img border="0" src="https://img.shields.io/github/languages/top/CuteLeon/HackSystem" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem">
+      <img border="0" src="https://img.shields.io/github/directory-file-count/CuteLeon/HackSystem" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/archive/refs/heads/master.zip">
+      <img border="0" src="https://img.shields.io/github/repo-size/CuteLeon/HackSystem" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/issues?q=is%3Aopen+is%3Aissue">
+      <img border="0" src="https://img.shields.io/github/issues/CuteLeon/HackSystem" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/network/members">
+      <img border="0" src="https://img.shields.io/github/forks/CuteLeon/HackSystem" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/stargazers">
+      <img border="0" src="https://img.shields.io/github/stars/CuteLeon/HackSystem" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/watchers">
+      <img border="0" src="https://img.shields.io/github/watchers/CuteLeon/HackSystem" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/releases">
+      <img border="0" src="https://img.shields.io/github/v/release/CuteLeon/HackSystem?include_prereleases" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/releases">
+      <img border="0" src="https://img.shields.io/github/release-date-pre/CuteLeon/HackSystem" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/archive/refs/heads/master.zip">
+      <img border="0" src="https://img.shields.io/github/downloads/CuteLeon/HackSystem/total" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/tags">
+      <img border="0" src="https://img.shields.io/github/v/tag/CuteLeon/HackSystem" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/releases">
+      <img border="0" src="https://img.shields.io/github/commits-since/CuteLeon/HackSystem/latest/master?include_prereleases" />
+   </a>
+   <a href="https://github.com/CuteLeon/HackSystem/commits/master">
+      <img border="0" src="https://img.shields.io/github/last-commit/CuteLeon/HackSystem/master" />
+   </a>
+</p>
 
 ## Nuget Packages
 
-[![HackSystem.Intermediary](https://img.shields.io/nuget/vpre/HackSystem.Intermediary?label=HackSystem.Intermediary&style=flat-square)](https://www.nuget.org/packages/HackSystem.Intermediary/)
-[![HackSystem.Intermediary.Abstractions](https://img.shields.io/nuget/vpre/HackSystem.Intermediary.Abstractions?label=HackSystem.Intermediary.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Intermediary.Abstractions/)
-[![HackSystem.Web.Authentication.Abstractions](https://img.shields.io/nuget/vpre/HackSystem.Web.Authentication.Abstractions?label=HackSystem.Web.Authentication.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.Authentication.Abstractions/)
-[![HackSystem.Web.Component.Abstractions](https://img.shields.io/nuget/vpre/HackSystem.Web.Component.Abstractions?label=HackSystem.Web.Component.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.Component.Abstractions/)
-[![HackSystem.Web.CookieStorage](https://img.shields.io/nuget/vpre/HackSystem.Web.CookieStorage?label=HackSystem.Web.CookieStorage&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.CookieStorage/)
-[![HackSystem.Web.ProgramPlatform](https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramPlatform?label=HackSystem.Web.ProgramPlatform&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.ProgramPlatform/)
-[![HackSystem.Web.ProgramPlatform.Abstractions](https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramPlatform.Abstractions?label=HackSystem.Web.ProgramPlatform.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.ProgramPlatform.Abstractions/)
-[![HackSystem.Web.ProgramSchedule.Abstractions](https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramSchedule.Abstractions?label=HackSystem.Web.ProgramSchedule.Abstractions&style=flat-square)](https://www.nuget.org/packages/HackSystem.Web.ProgramSchedule.Abstractions/)
+<p align="center">
+   <a href="https://www.nuget.org/packages/HackSystem.Intermediary/">
+      <img border="0" src="https://img.shields.io/nuget/vpre/HackSystem.Intermediary?label=HackSystem.Intermediary&style=flat-square" />
+   </a>
+   <a href="https://www.nuget.org/packages/HackSystem.Intermediary.Abstractions/">
+      <img border="0" src="https://img.shields.io/nuget/vpre/HackSystem.Intermediary.Abstractions?label=HackSystem.Intermediary.Abstractions&style=flat-square" />
+   </a>
+   <a href="https://www.nuget.org/packages/HackSystem.Web.Authentication.Abstractions/">
+      <img border="0" src="https://img.shields.io/nuget/vpre/HackSystem.Web.Authentication.Abstractions?label=HackSystem.Web.Authentication.Abstractions&style=flat-square" />
+   </a>
+   <a href="https://www.nuget.org/packages/HackSystem.Web.Component.Abstractions/">
+      <img border="0" src="https://img.shields.io/nuget/vpre/HackSystem.Web.Component.Abstractions?label=HackSystem.Web.Component.Abstractions&style=flat-square" />
+   </a>
+   <a href="https://www.nuget.org/packages/HackSystem.Web.CookieStorage/">
+      <img border="0" src="https://img.shields.io/nuget/vpre/HackSystem.Web.CookieStorage?label=HackSystem.Web.CookieStorage&style=flat-square" />
+   </a>
+   <a href="https://www.nuget.org/packages/HackSystem.Web.ProgramPlatform/">
+      <img border="0" src="https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramPlatform?label=HackSystem.Web.ProgramPlatform&style=flat-square" />
+   </a>
+   <a href="https://www.nuget.org/packages/HackSystem.Web.ProgramPlatform.Abstractions/">
+      <img border="0" src="https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramPlatform.Abstractions?label=HackSystem.Web.ProgramPlatform.Abstractions&style=flat-square" />
+   </a>
+   <a href="https://www.nuget.org/packages/HackSystem.Web.ProgramSchedule.Abstractions/">
+      <img border="0" src="https://img.shields.io/nuget/vpre/HackSystem.Web.ProgramSchedule.Abstractions?label=HackSystem.Web.ProgramSchedule.Abstractions&style=flat-square" />
+   </a>
+</p>
 
 ## How to launch?
 
