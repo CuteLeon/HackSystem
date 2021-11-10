@@ -113,11 +113,19 @@
 
 ## Main Desktop
 
-[![CuteLeon/HackSystem](https://raw.github.com/CuteLeon/HackSystem/master/readme/VideoSplash.jpg)](https://www.bilibili.com/video/BV1di4y177TH/ "CuteLeon/HackSystem")
+<p align="center">
+   <a href="https://www.bilibili.com/video/BV1di4y177TH/">
+      <img border="0" src="https://raw.github.com/CuteLeon/HackSystem/master/readme/VideoSplash.jpg" />
+   </a>
+</p>
 
 ## Multiple Windows Scheduler
 
-[![CuteLeon/HackSystem](https://raw.github.com/CuteLeon/HackSystem/master/readme/MultipleWindowsScheduler.jpg)](https://www.bilibili.com/video/BV16r4y117Fz/ "CuteLeon/HackSystem")
+<p align="center">
+   <a href="https://www.bilibili.com/video/BV16r4y117Fz/">
+      <img border="0" src="https://raw.github.com/CuteLeon/HackSystem/master/readme/MultipleWindowsScheduler.jpg" />
+   </a>
+</p>
 
 # Screen
 
