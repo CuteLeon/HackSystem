@@ -150,8 +150,7 @@
 4. Build program project and copy all files into above folder.
 
    1. Post-build event to copy program files into WebAPI's out directory automatically.
-
-   2. ```shell
+      ```shell
       set assetFolder=$(SolutionDir)HackSystem.WebAPI\$(OutDir)ProgramAssets\
       MKDIR assetFolder
       set assetFolder=%assetFolder%program0-icon-0828-hack-system000006\
