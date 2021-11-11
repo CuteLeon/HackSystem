@@ -15,7 +15,7 @@
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Description>Web Program Platform component of Hack System.</Description>
-		<AssemblyVersion>1.0.0.4</AssemblyVersion>
+		<AssemblyVersion>1.0.0.5</AssemblyVersion>
 		<Version>$(AssemblyVersion)</Version>
 	</PropertyGroup>
 
