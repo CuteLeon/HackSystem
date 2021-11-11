@@ -7,8 +7,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="6.0.0-rc.2.21480.10" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+		<PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="6.0.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0-preview-20211109-03" />
 		<PackageReference Include="Moq" Version="4.16.1" />
 		<PackageReference Include="MSTest.TestAdapter" Version="2.2.7" />
 		<PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
