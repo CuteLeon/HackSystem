@@ -2,13 +2,13 @@
 @inject IWindowLauncher windowLauncher
 @inject ILogger<HomeComponent> logger
 
-<div class="bg-secondary text-center p-0">
-    <img src="LogoImage.png" class="img-fluid" />
-</div>
 <div class="btn-group w-100 p-2">
     <a class="btn btn-primary" @onclick=@this.OnWindowButtonClick>Show Window</a>
     <a class="btn btn-success" @onclick=@this.OnChildWindowButtonClick>Show Child Window</a>
     <a class="btn btn-warning" @onclick=@this.OnModalWindowButtonClick>Show Modal Window</a>
+</div>
+<div class="bg-secondary text-center p-0">
+    <img src="LogoImage.png" class="img-fluid" />
 </div>
 
 @code {

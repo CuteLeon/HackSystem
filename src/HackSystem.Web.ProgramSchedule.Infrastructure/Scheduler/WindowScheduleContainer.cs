@@ -28,12 +28,22 @@ public class WindowScheduleContainer : IWindowScheduleContainer
         return changeState switch
         {
             WindowChangeStates.Launch => this.LaunchWindow(windowDetail),
+            WindowChangeStates.BringToHead => this.BringToHeadWindow(windowDetail),
             WindowChangeStates.Active => this.ActiveWindow(windowDetail),
             WindowChangeStates.Inactive => this.InactiveWindow(windowDetail),
             WindowChangeStates.ToggleActive => this.ToggleWindowActive(windowDetail),
             WindowChangeStates.Destroy => this.DestroyWindow(windowDetail),
             _ => false
         };
+    }
+
+    private bool BringToHeadWindow(ProgramWindowDetail windowDetail)
+    {
+        if (windowDetail.WindowState == ProgramWindowStates.Minimized)
+            windowDetail.WindowState = windowDetail.LastWindowState;
+        windowDetail.TierIndex = this.GetNewTierIndex();
+        this.windowLRUContainer.BringToHead(windowDetail);
+        return true;
     }
 
     private bool DestroyWindow(ProgramWindowDetail windowDetail)

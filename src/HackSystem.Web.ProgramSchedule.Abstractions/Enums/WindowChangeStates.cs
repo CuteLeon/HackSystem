@@ -3,6 +3,7 @@
 public enum WindowChangeStates
 {
     Launch,
+    BringToHead,
     Active,
     Inactive,
     ToggleActive,

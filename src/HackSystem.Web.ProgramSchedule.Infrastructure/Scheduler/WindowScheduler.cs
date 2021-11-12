@@ -38,9 +38,9 @@ public class WindowScheduler : IWindowScheduler
         this.logger.LogInformation($"Schedule Window {changeState}, {windowDetail.Caption} ({windowDetail.TierIndex})...");
         var scheduled = changeState switch
         {
-            WindowChangeStates.TopTier => await this.TopTierWindow(windowDetail, changeState),
-            WindowChangeStates.NonTopTier => await this.NonTopTierWindow(windowDetail, changeState),
-            WindowChangeStates.ToggleTopTier => await this.ToggleTopTierWindow(windowDetail, changeState),
+            WindowChangeStates.TopTier => await this.TopTierWindow(windowDetail),
+            WindowChangeStates.NonTopTier => await this.NonTopTierWindow(windowDetail),
+            WindowChangeStates.ToggleTopTier => await this.ToggleTopTierWindow(windowDetail),
             _ => await this.CommonScheduleWindow(windowDetail, changeState)
         };
 
@@ -53,31 +53,59 @@ public class WindowScheduler : IWindowScheduler
         return scheduled;
     }
 
-    private async Task<bool> TopTierWindow(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
+    private async Task<bool> TopTierWindow(ProgramWindowDetail windowDetail)
     {
-        windowDetail.StickyTopTier = true;
-        if (await this.windowScheduleContainer.WindowExist(windowDetail))
-            await this.windowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Destroy);
+        var windowQueue = new Queue<ProgramWindowDetail>();
+        windowQueue.Enqueue(windowDetail);
+        while (windowQueue.TryDequeue(out var currentWindow))
+        {
+            if (currentWindow.StickyTopTier) continue;
 
-        if (await this.topWindowScheduleContainer.WindowExist(windowDetail)) return false;
-        return await this.topWindowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Launch);
+            currentWindow.StickyTopTier = true;
+            if (await this.windowScheduleContainer.WindowExist(currentWindow))
+                await this.windowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Destroy);
+
+            if (!await this.topWindowScheduleContainer.WindowExist(currentWindow))
+                await this.topWindowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Launch);
+
+            foreach (var childWindow in currentWindow.GetChildWindowDetails().OrderBy(x => x.TierIndex))
+                windowQueue.Enqueue(childWindow);
+        }
+
+        return await this.topWindowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Active);
     }
 
-    private async Task<bool> NonTopTierWindow(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
+    private async Task<bool> NonTopTierWindow(ProgramWindowDetail windowDetail)
     {
-        windowDetail.StickyTopTier = false;
-        if (await this.topWindowScheduleContainer.WindowExist(windowDetail))
-            await this.topWindowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Destroy);
+        var rootTopWindow = windowDetail;
+        while (rootTopWindow.ParentWindow is not null && rootTopWindow.ParentWindow.StickyTopTier)
+            rootTopWindow = rootTopWindow.ParentWindow;
 
-        if (await this.windowScheduleContainer.WindowExist(windowDetail)) return false;
-        return await this.windowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Launch);
+        var windowQueue = new Queue<ProgramWindowDetail>();
+        windowQueue.Enqueue(rootTopWindow);
+        while (windowQueue.TryDequeue(out var currentWindow))
+        {
+            if (!currentWindow.StickyTopTier) continue;
+
+            currentWindow.StickyTopTier = false;
+            if (await this.topWindowScheduleContainer.WindowExist(currentWindow))
+                await this.topWindowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Destroy);
+
+            if (!await this.windowScheduleContainer.WindowExist(currentWindow))
+                await this.windowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Launch);
+
+            foreach (var childWindow in currentWindow.GetChildWindowDetails().OrderBy(x => x.TierIndex))
+                windowQueue.Enqueue(childWindow);
+        }
+
+        return await this.windowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Active);
     }
 
-    private async Task<bool> ToggleTopTierWindow(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
+    private async Task<bool> ToggleTopTierWindow(ProgramWindowDetail windowDetail)
     {
         return windowDetail.StickyTopTier ?
-            await this.NonTopTierWindow(windowDetail, changeState) :
-            await this.TopTierWindow(windowDetail, changeState);
+            await this.NonTopTierWindow(windowDetail) :
+            await this.TopTierWindow(windowDetail);
     }
 
     private async Task<bool> CommonScheduleWindow(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
