@@ -46,7 +46,7 @@ public class WindowScheduler : IWindowScheduler
 
         if (scheduled)
         {
-            this.logger.LogInformation($"Window {changeState} scheduled, {windowDetail.Caption} ({windowDetail.TierIndex}).");
+            this.logger.LogInformation($"Window {windowDetail.WindowId} request {changeState} scheduled.");
             await this.publisher.PublishEvent(new WindowChangeEvent(changeState, windowDetail));
         }
         return scheduled;
@@ -60,18 +60,18 @@ public class WindowScheduler : IWindowScheduler
         {
             if (currentWindow.StickyTopTier) continue;
 
+            this.logger.LogInformation($"Sticky window {windowDetail.WindowId} to top...");
             currentWindow.StickyTopTier = true;
-            if (this.windowScheduleContainer.WindowExist(currentWindow))
-                await this.windowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Destroy);
-
-            if (!this.topWindowScheduleContainer.WindowExist(currentWindow))
-                await this.topWindowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Launch);
+            await this.windowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Destroy);
+            await this.topWindowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Launch);
 
             foreach (var childWindow in currentWindow.GetChildWindowDetails())
                 windowQueue.Enqueue(childWindow);
         }
 
+        this.logger.LogInformation($"Active window {windowDetail.WindowId} after Sticky to top...");
         await this.topWindowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Active);
+        this.logger.LogInformation($"Sticky window {windowDetail.WindowId} to top completed.");
         return true;
     }
 
@@ -80,6 +80,7 @@ public class WindowScheduler : IWindowScheduler
         var rootTopWindow = windowDetail;
         while (rootTopWindow.ParentWindow is not null && rootTopWindow.ParentWindow.StickyTopTier)
             rootTopWindow = rootTopWindow.ParentWindow;
+        this.logger.LogInformation($"Found root top window {rootTopWindow.WindowId} ...");
 
         var windowQueue = new Queue<ProgramWindowDetail>();
         windowQueue.Enqueue(rootTopWindow);
@@ -87,23 +88,24 @@ public class WindowScheduler : IWindowScheduler
         {
             if (!currentWindow.StickyTopTier) continue;
 
+            this.logger.LogInformation($"Unsticky window {windowDetail.WindowId} from top...");
             currentWindow.StickyTopTier = false;
-            if (this.topWindowScheduleContainer.WindowExist(currentWindow))
-                await this.topWindowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Destroy);
-
-            if (!this.windowScheduleContainer.WindowExist(currentWindow))
-                await this.windowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Launch);
+            await this.topWindowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Destroy);
+            await this.windowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Launch);
 
             foreach (var childWindow in currentWindow.GetChildWindowDetails())
                 windowQueue.Enqueue(childWindow);
         }
 
+        this.logger.LogInformation($"Active window {windowDetail.WindowId} after Unsticky from top...");
         await this.windowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Active);
+        this.logger.LogInformation($"Unsticky window {windowDetail.WindowId} from top completed.");
         return true;
     }
 
     private async Task<bool> ToggleTopTierWindow(ProgramWindowDetail windowDetail)
     {
+        this.logger.LogInformation($"Toggle window {windowDetail.WindowId} sticky to top or not...");
         return windowDetail.StickyTopTier ?
             await this.NonTopTierWindow(windowDetail) :
             await this.TopTierWindow(windowDetail);
@@ -111,6 +113,7 @@ public class WindowScheduler : IWindowScheduler
 
     private async Task<bool> ToggleWindowActive(ProgramWindowDetail windowDetail)
     {
+        this.logger.LogInformation($"Toggle window {windowDetail.WindowId} active or not...");
         if (windowDetail.WindowState != ProgramWindowStates.Minimized &&
             (this.windowScheduleContainer.ActivatedWindow == windowDetail ||
             this.topWindowScheduleContainer.ActivatedWindow == windowDetail))

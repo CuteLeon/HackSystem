@@ -39,6 +39,7 @@ public class WindowScheduleContainer : IWindowScheduleContainer
 
     private bool LaunchWindow(ProgramWindowDetail windowDetail)
     {
+        this.logger.LogInformation($"Launch window {windowDetail.WindowId} ...");
         if (windowDetail.WindowState == ProgramWindowStates.Minimized)
             windowDetail.WindowState = windowDetail.LastWindowState;
         this.ActivatedWindow = windowDetail;
@@ -52,6 +53,7 @@ public class WindowScheduleContainer : IWindowScheduleContainer
             windowDetail.WindowState != ProgramWindowStates.Minimized)
             return false;
 
+        this.logger.LogInformation($"Bring window {windowDetail.WindowId} to head ...");
         if (windowDetail.WindowState == ProgramWindowStates.Minimized)
             windowDetail.WindowState = windowDetail.LastWindowState;
 
@@ -80,6 +82,7 @@ public class WindowScheduleContainer : IWindowScheduleContainer
             windowQueue.Enqueue(windowDetail);
             while (windowQueue.TryDequeue(out var currentWindow))
             {
+                this.logger.LogInformation($"Active window {windowDetail.WindowId} ...");
                 if (this.WindowExist(currentWindow))
                 {
                     this.BringToHeadWindow(currentWindow);
@@ -101,7 +104,10 @@ public class WindowScheduleContainer : IWindowScheduleContainer
         while (previewWindow is not null && previewWindow.WindowState == ProgramWindowStates.Minimized);
 
         if (previewWindow is not null)
+        {
+            this.logger.LogInformation($"Found preview visible window {previewWindow.WindowId} ...");
             this.ActiveWindow(previewWindow);
+        }
         else
             this.ActivatedWindow = null;
 
@@ -109,6 +115,7 @@ public class WindowScheduleContainer : IWindowScheduleContainer
         windowQueue.Enqueue(windowDetail);
         while (windowQueue.TryDequeue(out var currentWindow))
         {
+            this.logger.LogInformation($"Inactive window {windowDetail.WindowId} ...");
             if (currentWindow.WindowState != ProgramWindowStates.Minimized && currentWindow.AllowMinimized)
                 currentWindow.WindowState = ProgramWindowStates.Minimized;
 
@@ -121,6 +128,7 @@ public class WindowScheduleContainer : IWindowScheduleContainer
 
     private bool DestroyWindow(ProgramWindowDetail windowDetail)
     {
+        this.logger.LogInformation($"Destroy window {windowDetail.WindowId} ...");
         windowDetail.TierIndex = this.WindowTierIndexLowEdge;
         if (this.ActivatedWindow == windowDetail)
             this.InactiveWindow(windowDetail);
@@ -140,6 +148,8 @@ public class WindowScheduleContainer : IWindowScheduleContainer
             }
             newTierIndex = --tierIndex;
         }
+
+        this.logger.LogInformation($"Get new tier index {newTierIndex}.");
         return newTierIndex;
     }
 }
