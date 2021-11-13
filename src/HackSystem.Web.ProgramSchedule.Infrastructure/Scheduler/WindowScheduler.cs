@@ -69,7 +69,8 @@ public class WindowScheduler : IWindowScheduler
                 windowQueue.Enqueue(childWindow);
         }
 
-        return await this.topWindowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Active);
+        await this.topWindowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Active);
+        return true;
     }
 
     private async Task<bool> NonTopTierWindow(ProgramWindowDetail windowDetail)
@@ -95,7 +96,8 @@ public class WindowScheduler : IWindowScheduler
                 windowQueue.Enqueue(childWindow);
         }
 
-        return await this.windowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Active);
+        await this.windowScheduleContainer.Schedule(windowDetail, WindowChangeStates.Active);
+        return true;
     }
 
     private async Task<bool> ToggleTopTierWindow(ProgramWindowDetail windowDetail)
