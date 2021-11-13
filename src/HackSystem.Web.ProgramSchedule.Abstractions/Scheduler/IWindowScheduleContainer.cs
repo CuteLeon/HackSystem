@@ -9,7 +9,9 @@ public interface IWindowScheduleContainer
 
     int WindowTierIndexHighEdge { get; set; }
 
-    Task<bool> WindowExist(ProgramWindowDetail windowDetail);
+    ProgramWindowDetail? ActivatedWindow { get; }
+
+    bool WindowExist(ProgramWindowDetail windowDetail);
 
     Task<bool> Schedule(ProgramWindowDetail windowDetail, WindowChangeStates changeState);
 }

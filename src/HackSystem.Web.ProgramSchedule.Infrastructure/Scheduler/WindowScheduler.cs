@@ -39,7 +39,9 @@ public class WindowScheduler : IWindowScheduler
             WindowChangeStates.TopTier => await this.TopTierWindow(windowDetail),
             WindowChangeStates.NonTopTier => await this.NonTopTierWindow(windowDetail),
             WindowChangeStates.ToggleTopTier => await this.ToggleTopTierWindow(windowDetail),
-            _ => await this.CommonScheduleWindow(windowDetail, changeState)
+            WindowChangeStates.ToggleActive => await this.ToggleWindowActive(windowDetail),
+            WindowChangeStates.Active => await this.CommonScheduleWindow(windowDetail, changeState),
+            _ => await this.SingleScheduleWindow(windowDetail, changeState)
         };
 
         if (scheduled)
@@ -59,10 +61,10 @@ public class WindowScheduler : IWindowScheduler
             if (currentWindow.StickyTopTier) continue;
 
             currentWindow.StickyTopTier = true;
-            if (await this.windowScheduleContainer.WindowExist(currentWindow))
+            if (this.windowScheduleContainer.WindowExist(currentWindow))
                 await this.windowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Destroy);
 
-            if (!await this.topWindowScheduleContainer.WindowExist(currentWindow))
+            if (!this.topWindowScheduleContainer.WindowExist(currentWindow))
                 await this.topWindowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Launch);
 
             foreach (var childWindow in currentWindow.GetChildWindowDetails())
@@ -86,10 +88,10 @@ public class WindowScheduler : IWindowScheduler
             if (!currentWindow.StickyTopTier) continue;
 
             currentWindow.StickyTopTier = false;
-            if (await this.topWindowScheduleContainer.WindowExist(currentWindow))
+            if (this.topWindowScheduleContainer.WindowExist(currentWindow))
                 await this.topWindowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Destroy);
 
-            if (!await this.windowScheduleContainer.WindowExist(currentWindow))
+            if (!this.windowScheduleContainer.WindowExist(currentWindow))
                 await this.windowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Launch);
 
             foreach (var childWindow in currentWindow.GetChildWindowDetails())
@@ -107,11 +109,28 @@ public class WindowScheduler : IWindowScheduler
             await this.TopTierWindow(windowDetail);
     }
 
-    private async Task<bool> CommonScheduleWindow(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
+    private async Task<bool> ToggleWindowActive(ProgramWindowDetail windowDetail)
+    {
+        if (windowDetail.WindowState != ProgramWindowStates.Minimized &&
+            (this.windowScheduleContainer.ActivatedWindow == windowDetail ||
+            this.topWindowScheduleContainer.ActivatedWindow == windowDetail))
+            return await this.SingleScheduleWindow(windowDetail, WindowChangeStates.Inactive);
+        else
+            return await this.CommonScheduleWindow(windowDetail, WindowChangeStates.Active);
+    }
+
+    private async Task<bool> SingleScheduleWindow(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
     {
         return await (windowDetail.StickyTopTier ?
             this.topWindowScheduleContainer :
             this.windowScheduleContainer)
                 .Schedule(windowDetail, changeState);
+    }
+
+    private async Task<bool> CommonScheduleWindow(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
+    {
+        var result = await this.windowScheduleContainer.Schedule(windowDetail, changeState);
+        var topResult = await this.topWindowScheduleContainer.Schedule(windowDetail, changeState);
+        return result || topResult;
     }
 }

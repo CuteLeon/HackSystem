@@ -20,7 +20,7 @@ public class WindowScheduleContainer : IWindowScheduleContainer
         this.windowLRUContainer = new(window => window.WindowId, int.MaxValue);
     }
 
-    public async Task<bool> WindowExist(ProgramWindowDetail windowDetail)
+    public bool WindowExist(ProgramWindowDetail windowDetail)
         => this.windowLRUContainer.ExistValue(windowDetail);
 
     public async Task<bool> Schedule(ProgramWindowDetail windowDetail, WindowChangeStates changeState)
@@ -32,7 +32,6 @@ public class WindowScheduleContainer : IWindowScheduleContainer
             WindowChangeStates.BringToHead => this.BringToHeadWindow(windowDetail),
             WindowChangeStates.Active => this.ActiveWindow(windowDetail),
             WindowChangeStates.Inactive => this.InactiveWindow(windowDetail),
-            WindowChangeStates.ToggleActive => this.ToggleWindowActive(windowDetail),
             WindowChangeStates.Destroy => this.DestroyWindow(windowDetail),
             _ => false
         };
@@ -81,7 +80,11 @@ public class WindowScheduleContainer : IWindowScheduleContainer
             windowQueue.Enqueue(windowDetail);
             while (windowQueue.TryDequeue(out var currentWindow))
             {
-                this.BringToHeadWindow(currentWindow);
+                if (this.WindowExist(currentWindow))
+                {
+                    this.BringToHeadWindow(currentWindow);
+                }
+
                 foreach (var childWindow in currentWindow.GetChildWindowDetails().OrderBy(x => x.TierIndex))
                     windowQueue.Enqueue(childWindow);
             }
@@ -114,15 +117,6 @@ public class WindowScheduleContainer : IWindowScheduleContainer
         }
 
         return true;
-    }
-
-    private bool ToggleWindowActive(ProgramWindowDetail windowDetail)
-    {
-        if (this.ActivatedWindow != windowDetail ||
-            windowDetail.WindowState == ProgramWindowStates.Minimized)
-            return this.ActiveWindow(windowDetail);
-        else
-            return this.InactiveWindow(windowDetail);
     }
 
     private bool DestroyWindow(ProgramWindowDetail windowDetail)
