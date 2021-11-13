@@ -1,5 +1,4 @@
-﻿using HackSystem.Web.ProgramSchedule.Entity;
-using HackSystem.Web.ProgramSchedule.Enums;
+﻿using HackSystem.Web.ProgramSchedule.Intermediary;
 
 namespace HackSystem.Web.ProgramLayer;
 
@@ -14,24 +13,18 @@ public partial class ProgramContainerComponent : IDisposable
 {
     protected async override Task OnInitializedAsync()
     {
-        this.windowScheduler.OnWindowSchedule += this.WindowScheduleHandler;
+        this.windowChangeEventHandler.EventRaised += this.OnWindowChangeEvent;
         await base.OnInitializedAsync();
     }
 
-    private void ProcessChangedHandler(ProcessChangeStates states, ProcessDetail processDetail)
+    private void OnWindowChangeEvent(object sender, WindowChangeEvent args)
     {
-        this.logger.LogInformation($"Render program layer when process change: {processDetail.ProcessId} {states.ToString()}...");
-        this.StateHasChanged();
-    }
-
-    private void WindowScheduleHandler(ProgramWindowDetail programWindowDetail)
-    {
-        this.logger.LogInformation($"Render program layer when window schedule: {programWindowDetail.Caption}...");
+        this.logger.LogInformation($"Render program layer when window schedule: {args.WindowDetail.Caption}...");
         this.StateHasChanged();
     }
 
     public void Dispose()
     {
-        this.windowScheduler.OnWindowSchedule -= this.WindowScheduleHandler;
+        this.windowChangeEventHandler.EventRaised -= this.OnWindowChangeEvent;
     }
 }

@@ -3,13 +3,11 @@ using HackSystem.Web.ProgramSchedule.Entity;
 using HackSystem.Web.ProgramSchedule.Enums;
 using HackSystem.Web.ProgramSchedule.Intermediary;
 using HackSystem.Web.ProgramSchedule.Scheduler;
-using static HackSystem.Web.ProgramSchedule.Scheduler.IWindowScheduler;
 
 namespace HackSystem.Web.ProgramSchedule.Infrastructure.Scheduler;
 
 public class WindowScheduler : IWindowScheduler
 {
-    public event WindowScheduleHandler? OnWindowSchedule;
     private readonly ILogger<WindowScheduler> logger;
     private readonly IIntermediaryPublisher publisher;
     private readonly IWindowScheduleContainer windowScheduleContainer;
@@ -48,7 +46,6 @@ public class WindowScheduler : IWindowScheduler
         {
             this.logger.LogInformation($"Window {changeState} scheduled, {windowDetail.Caption} ({windowDetail.TierIndex}).");
             await this.publisher.PublishEvent(new WindowChangeEvent(changeState, windowDetail));
-            this.OnWindowSchedule?.Invoke(windowDetail);
         }
         return scheduled;
     }
@@ -68,7 +65,7 @@ public class WindowScheduler : IWindowScheduler
             if (!await this.topWindowScheduleContainer.WindowExist(currentWindow))
                 await this.topWindowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Launch);
 
-            foreach (var childWindow in currentWindow.GetChildWindowDetails().OrderBy(x => x.TierIndex))
+            foreach (var childWindow in currentWindow.GetChildWindowDetails())
                 windowQueue.Enqueue(childWindow);
         }
 
@@ -94,7 +91,7 @@ public class WindowScheduler : IWindowScheduler
             if (!await this.windowScheduleContainer.WindowExist(currentWindow))
                 await this.windowScheduleContainer.Schedule(currentWindow, WindowChangeStates.Launch);
 
-            foreach (var childWindow in currentWindow.GetChildWindowDetails().OrderBy(x => x.TierIndex))
+            foreach (var childWindow in currentWindow.GetChildWindowDetails())
                 windowQueue.Enqueue(childWindow);
         }
 
