@@ -49,6 +49,7 @@ public class WindowScheduleContainer : IWindowScheduleContainer
     {
         if (windowDetail.WindowState == ProgramWindowStates.Minimized)
             windowDetail.WindowState = windowDetail.LastWindowState;
+        if (windowDetail == this.windowLRUContainer.HeadValue) return false;
         windowDetail.TierIndex = this.GetNewTierIndex();
         this.windowLRUContainer.BringToHead(windowDetail);
         return true;
@@ -56,58 +57,30 @@ public class WindowScheduleContainer : IWindowScheduleContainer
 
     private bool ActiveWindow(ProgramWindowDetail windowDetail)
     {
-        if (this.ActivatedWindow == windowDetail)
-        {
-            if (windowDetail.WindowState == ProgramWindowStates.Minimized)
-                windowDetail.WindowState = windowDetail.LastWindowState;
-            else
-                return false;
-        }
-        else
-        {
-            this.ActivatedWindow = windowDetail;
-            if (windowDetail.WindowState == ProgramWindowStates.Minimized)
-                windowDetail.WindowState = windowDetail.LastWindowState;
-            windowDetail.TierIndex = this.GetNewTierIndex();
-            this.windowLRUContainer.BringToHead(windowDetail);
-        }
+        if (windowDetail.WindowState == ProgramWindowStates.Minimized)
+            windowDetail.WindowState = windowDetail.LastWindowState;
+        if (this.ActivatedWindow == windowDetail) return false;
+        this.ActivatedWindow = windowDetail;
+        windowDetail.TierIndex = this.GetNewTierIndex();
+        this.windowLRUContainer.BringToHead(windowDetail);
         return true;
     }
 
     private bool InactiveWindow(ProgramWindowDetail windowDetail)
     {
-        if (this.ActivatedWindow == windowDetail)
-        {
-            var previewWindow = windowDetail;
-            if (windowDetail.AllowMinimized)
-                windowDetail.WindowState = ProgramWindowStates.Minimized;
-            do
-            {
-                previewWindow = this.windowLRUContainer.GetPreviousValue(previewWindow);
-            }
-            while (previewWindow is not null && previewWindow.WindowState == ProgramWindowStates.Minimized);
-            if (previewWindow is not null)
-            {
-                previewWindow.TierIndex = GetNewTierIndex();
-                this.windowLRUContainer.BringToHead(previewWindow);
-            }
-        }
-        else
-        {
-            windowDetail.TierIndex = this.ActivatedWindow!.TierIndex;
-            this.ActivatedWindow!.TierIndex = this.GetNewTierIndex();
-            this.windowLRUContainer.MoveToAfter(windowDetail, this.ActivatedWindow!);
-        }
+        if (this.ActivatedWindow != windowDetail) return false;
+        if (windowDetail.WindowState == ProgramWindowStates.Normal && windowDetail.AllowMinimized)
+            windowDetail.WindowState = ProgramWindowStates.Minimized;
         return true;
     }
 
     private bool ToggleWindowActive(ProgramWindowDetail windowDetail)
     {
-        if (this.ActivatedWindow == windowDetail &&
-            windowDetail.WindowState != ProgramWindowStates.Minimized)
-            return this.InactiveWindow(windowDetail);
-        else
+        if (this.ActivatedWindow != windowDetail ||
+            windowDetail.WindowState == ProgramWindowStates.Minimized)
             return this.ActiveWindow(windowDetail);
+        else
+            return this.InactiveWindow(windowDetail);
     }
 
     private bool DestroyWindow(ProgramWindowDetail windowDetail)
