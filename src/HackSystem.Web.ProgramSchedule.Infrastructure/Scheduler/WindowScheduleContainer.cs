@@ -82,7 +82,7 @@ public class WindowScheduleContainer : IWindowScheduleContainer
             windowQueue.Enqueue(windowDetail);
             while (windowQueue.TryDequeue(out var currentWindow))
             {
-                this.logger.LogInformation($"Active window {windowDetail.WindowId} ...");
+                this.logger.LogInformation($"Active window {currentWindow.WindowId} ...");
                 if (this.WindowExist(currentWindow))
                 {
                     this.BringToHeadWindow(currentWindow);
@@ -115,7 +115,7 @@ public class WindowScheduleContainer : IWindowScheduleContainer
         windowQueue.Enqueue(windowDetail);
         while (windowQueue.TryDequeue(out var currentWindow))
         {
-            this.logger.LogInformation($"Inactive window {windowDetail.WindowId} ...");
+            this.logger.LogInformation($"Inactive window {currentWindow.WindowId} ...");
             if (currentWindow.WindowState != ProgramWindowStates.Minimized && currentWindow.AllowMinimized)
                 currentWindow.WindowState = ProgramWindowStates.Minimized;
 
