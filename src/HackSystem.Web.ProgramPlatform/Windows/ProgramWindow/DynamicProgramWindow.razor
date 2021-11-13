@@ -19,7 +19,7 @@
                         <div class="modal-header @this.ProgramWindowStyle.CaptionBackgroundColor.ToBackgroundColor() p-1"
                              style="@(this.ProgramWindowStyle.CaptionBackgroundColor==Colors.Transparent?"backdrop-filter:blur(5px);":string.Empty)">
                             <h6 class="modal-title @this.ProgramWindowStyle.CaptionTextColor.ToTextColor() text-nowrap text-truncate px-2 pt-1">
-                                <strong>@this.ProgramWindowDetail.Caption</strong>
+                                <strong>@this.ProgramWindowDetail.Caption</strong> <small class="text-muted">(@this.ProgramWindowDetail.WindowId)</small>
                             </h6>
                             <div @ontouchstart:stopPropagation @ontouchend:stopPropagation
                                  @onmousedown:stopPropagation @onmouseup:stopPropagation
