@@ -40,8 +40,11 @@ public class WindowScheduleContainer : IWindowScheduleContainer
 
     private bool LaunchWindow(ProgramWindowDetail windowDetail)
     {
-        this.windowLRUContainer.Add(windowDetail);
-        return this.ActiveWindow(windowDetail);
+        if (windowDetail.WindowState == ProgramWindowStates.Minimized)
+            windowDetail.WindowState = windowDetail.LastWindowState;
+        this.ActivatedWindow = windowDetail;
+        windowDetail.TierIndex = this.GetNewTierIndex();
+        return this.windowLRUContainer.Add(windowDetail);
     }
 
     private bool BringToHeadWindow(ProgramWindowDetail windowDetail)
@@ -89,22 +92,27 @@ public class WindowScheduleContainer : IWindowScheduleContainer
 
     private bool InactiveWindow(ProgramWindowDetail windowDetail)
     {
-        if (this.ActivatedWindow != windowDetail) return false;
-        if (windowDetail.WindowState != ProgramWindowStates.Minimized && windowDetail.AllowMinimized)
-            windowDetail.WindowState = ProgramWindowStates.Minimized;
-
         var previewWindow = windowDetail;
         do
-        {
             previewWindow = this.windowLRUContainer.GetPreviousValue(previewWindow);
-        }
         while (previewWindow is not null && previewWindow.WindowState == ProgramWindowStates.Minimized);
 
-        this.ActivatedWindow = previewWindow;
         if (previewWindow is not null)
+            this.ActiveWindow(previewWindow);
+        else
+            this.ActivatedWindow = null;
+
+        var windowQueue = new Queue<ProgramWindowDetail>();
+        windowQueue.Enqueue(windowDetail);
+        while (windowQueue.TryDequeue(out var currentWindow))
         {
-            this.BringToHeadWindow(previewWindow);
+            if (currentWindow.WindowState != ProgramWindowStates.Minimized && currentWindow.AllowMinimized)
+                currentWindow.WindowState = ProgramWindowStates.Minimized;
+
+            foreach (var childWindow in currentWindow.GetChildWindowDetails().OrderBy(x => x.TierIndex))
+                windowQueue.Enqueue(childWindow);
         }
+
         return true;
     }
 
