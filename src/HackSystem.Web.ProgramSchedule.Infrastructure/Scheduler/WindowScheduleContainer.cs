@@ -129,7 +129,7 @@ public class WindowScheduleContainer : IWindowScheduleContainer
     {
         windowDetail.TierIndex = this.WindowTierIndexLowEdge;
         if (this.ActivatedWindow == windowDetail)
-            this.ActivatedWindow = this.windowLRUContainer.HeadValue;
+            this.InactiveWindow(windowDetail);
         return this.windowLRUContainer.Remove(windowDetail);
     }
 
