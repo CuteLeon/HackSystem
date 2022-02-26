@@ -172,7 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>91.1.211</Version>
+      <Version>98.1.210</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces">
       <Version>6.0.0-preview.6.21352.12</Version>
