@@ -1,6 +1,7 @@
 ﻿namespace HackSystem.Intermediary.Infrastructure;
 
 public class IntermediaryPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
 {
     private readonly ILogger<IntermediaryPipelineBehavior<TRequest, TResponse>> logger;
 
