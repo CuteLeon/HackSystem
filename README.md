@@ -119,7 +119,7 @@
 
 1. Create a new Razor Class Library project.
 
-2. Install above nuget pakcages to this project.
+2. Install above nuget packages to this project.
 
 3. Add a new image file named as Index.png in root folder of this project, and copy to output directory if newer.
 
@@ -153,7 +153,7 @@
 
 2. Edit `ProgramAssetConfiguration` section of  `HackSystem.WebAPI` project's `appsettings.json` to config program asset folder path.
 
-3. Create new filder named as new program ID in program asset folder.
+3. Create new folder named as new program ID in program asset folder.
 
 4. Build program project and copy all files into above folder.
    
@@ -230,11 +230,11 @@
 
     Contains all Front-end related projects, such as interfaces or implementations of UI Components, Authentication, Front-end Contracts, Cookie Storage, Domain Models, and a WebHost process.
 
-    The core project is `HackSystem.Web`, configura Front-end requests process pipe and Dependency injection in `Program.cs`, configura Front-end related application settings in `wwwroot\appsettings.json`.
+    The core project is `HackSystem.Web`, configure Front-end requests process pipe and Dependency injection in `Program.cs`, configure Front-end related application settings in `wwwroot\appsettings.json`.
 
 #### ProgramSchedule
 
-    Program schedule component of Front-end, used to Lazy load program assemblies, Manage and Schedule Program UI WIndows, Launch and Destory Processes, Produce and Consume programs or processes related notifications.
+    Program schedule component of Front-end, used to Lazy load program assemblies, Manage and Schedule Program UI Windows, Launch and Destroy Processes, Produce and Consume programs or processes related notifications.
 
 ### DevelopmentKit
 
@@ -264,7 +264,7 @@
 
     Contains all Back-end related projects, such as interfaces or implementations of Back-end Services, Authentication, Back-end Contracts, Domain Models. It works as both of a Web MVC and a Web API programs.
 
-    The core project is `HackSystem.WebAPI`, configura Back-end requests process pipe, Dependency injection and Security policies in `Program.cs`, configura Back-end related application settings in `appsettings.json`.
+    The core project is `HackSystem.WebAPI`, configure Back-end requests process pipe, Dependency injection and Security policies in `Program.cs`, configure Back-end related application settings in `appsettings.json`.
 
 #### MockServer
 
@@ -292,7 +292,7 @@
 
 ## Log
 
-    Declare log format and out level in `NLog.config`, log with different level will be wrote into sepcified log files at Back-end side.
+    Declare log format and out level in `NLog.config`, log with different level will be wrote into specified log files at Back-end side.
 
 ## Good Dependency Injection Practice
 
@@ -300,7 +300,7 @@
 
 ### Application
 
-    Define interfaces of each service, and use this project as a Abstraction, and can be referred by other projects without any impletmentation included.
+    Define interfaces of each service, and use this project as a Abstraction, and can be referred by other projects without any implementation included.
 
 ### Domain
 
@@ -312,7 +312,7 @@
 
 ### Root Project
 
-    This is a link between application and inplementation, root project of each sub domain should contains a statis Extension class with  a static Extension method on IServiceCollection to inject dependency into DI container, like below:
+    This is a link between application and implementation, root project of each sub domain should contain a static Extension class with  a static Extension method on IServiceCollection to inject dependency into DI container, like below:
 
 ```csharp
 public static IServiceCollection AttachTaskServer(
@@ -363,7 +363,7 @@ public class GenericOption
 }
 ```
 
-### Link Entity Class into DataBase Context
+### Link Entity Class into Database Context
 
     Add new `DbSet<TEntity>` collection property in `HackSystem.WebAPI.Infrastructure\DBContexts\HackSystemDbContext.cs` to map to a table in database.
 
@@ -424,9 +424,9 @@ Update-Database
 
 ### Apply Pending Database Migrations automatically
 
-    In above step, it's a development-time manual operation to apply modifation to database file.
+    In above step, it's a development-time manual operation to apply modification  to database file.
 
-    Here is a way to apply these modifaction all automatically during production-time, this way is "doing nothing manaully", as there is already a function at Back-end side to check pending database schema modifiton and apply them when launch Back-end program\: `HackSystem.WebAPI.Infrastructure\DataSeed\DatabaseInitializer.cs`.
+    Here is a way to apply these modification all automatically during production-time, this way is "doing nothing manually", as there is already a function at Back-end side to check pending database schema modification and apply them when launch Back-end program\: `HackSystem.WebAPI.Infrastructure\DataSeed\DatabaseInitializer.cs`.
 
 ```csharp
 private async static Task InitializeDatabaseAsync(IHost host)
@@ -458,7 +458,7 @@ private async static Task InitializeDatabaseAsync(IHost host)
 
 ### Implement and Inject Repository Service of entity classes
 
-    Define reponsitory interface in `HackSystem.WebAPI.Application\Repository` folder.
+    Define repository interface in `HackSystem.WebAPI.Application\Repository` folder.
 
 ```csharp
 public interface IGenericOptionRepository : IRepositoryBase<GenericOption>
@@ -490,8 +490,6 @@ public class GenericOptionRepository : RepositoryBase<GenericOption>, IGenericOp
         .ThenByDescending(o => o.Category)
         .FirstOrDefaultAsync();
 }
-
-
 ```
 
     Inject repository interface and implementation at `HackSystem.WebAPI\Extensions\HackSystemInfrastructureExtension.cs`
@@ -508,7 +506,7 @@ public static IServiceCollection AddHackSystemWebAPIServices(
 
 ## Intermediary
 
-    We use `Intermediary` to communicate between components independently, it support multiple kinds of Communication Behaviors:
+    We use `Intermediary` to communicate between components independently, it support multiple kinds of Communication Behaviour:
 
 ### Messages
 
@@ -534,13 +532,13 @@ public static IServiceCollection AddHackSystemWebAPIServices(
   
   - Similar with Command mode
   
-  - Support multiple Notifiaction Handlers for each Notifaction type
+  - Support multiple Notifiaction Handlers for each Notification  type
 
 - Event
   
   - `IIntermediaryEvent`
   
-  - Similar with combination of Command and Notifaction
+  - Similar with combination of Command and Notification 
   
   - Multiple Event Handlers point to the same instance reference for each Event type, to process published event.
 
