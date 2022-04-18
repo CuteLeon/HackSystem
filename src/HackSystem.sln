@@ -154,7 +154,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.Profile", "p
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.Setting", "programs\HackSystem.Web.Setting\HackSystem.Web.Setting.csproj", "{F5035773-F1C4-4F45-A484-FBAB5924FFED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackSystem.Web.MockServer", "programs\HackSystem.Web.MockServer\HackSystem.Web.MockServer.csproj", "{9DBC8856-B723-4E7C-A474-EBE6EB53C6A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackSystem.Web.MockServer", "programs\HackSystem.Web.MockServer\HackSystem.Web.MockServer.csproj", "{9DBC8856-B723-4E7C-A474-EBE6EB53C6A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
