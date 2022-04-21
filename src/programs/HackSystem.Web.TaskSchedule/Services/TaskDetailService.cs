@@ -19,6 +19,12 @@ public class TaskDetailService : AuthenticatedServiceBase, ITaskDetailService
         return result.IsSuccessStatusCode;
     }
 
+    public async Task<bool> UpdateTask(TaskDetailRequest taskDetail)
+    {
+        var result = await this.HttpClient.PutAsJsonAsync("api/taskserver/UpdateTask", taskDetail);
+        return result.IsSuccessStatusCode;
+    }
+
     public async Task<IEnumerable<TaskDetailResponse>> QueryTasks()
     {
         var result = await this.HttpClient.GetFromJsonAsync<IEnumerable<TaskDetailResponse>>("api/taskserver/QueryTasks");

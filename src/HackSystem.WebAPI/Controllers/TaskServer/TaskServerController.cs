@@ -41,7 +41,27 @@ public class TaskServerController : Controller
     [HttpPost]
     public async Task ExecuteTask(TaskDetailRequest taskDetail)
     {
+        var userName = this.User?.Identity?.Name ?? "[Unknown]";
+        this.logger.LogInformation($"{userName} executed task {taskDetail.TaskName} [{taskDetail.TaskID}]...");
         var task = await this.taskRepository.FindAsync(taskDetail.TaskID);
-        this.hackSystemTaskServer.ExecuteTask(task, this.User?.Identity?.Name);
+        this.hackSystemTaskServer.ExecuteTask(task, userName);
+    }
+
+    [HttpPut]
+    public async Task UpdateTask(TaskDetailRequest taskDetail)
+    {
+        var userName = this.User?.Identity?.Name ?? "[Unknown]";
+        this.logger.LogInformation($"{userName} updated task {taskDetail.TaskName} [{taskDetail.TaskID}]...");
+        var task = await this.taskRepository.FindAsync(taskDetail.TaskID);
+        if (taskDetail.Enabled.HasValue)
+        {
+            task.Enabled = taskDetail.Enabled.Value;
+        }
+
+        if (task.Enabled && task.TaskFrequency != (int)TaskFrequency.Manually)
+            this.hackSystemTaskServer.LoadTask(task);
+        else
+            this.hackSystemTaskServer.UnloadTask(task);
+        await this.taskRepository.SaveChangesAsync();
     }
 }

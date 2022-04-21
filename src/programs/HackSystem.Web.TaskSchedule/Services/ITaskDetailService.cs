@@ -7,4 +7,6 @@ public interface ITaskDetailService
     Task<IEnumerable<TaskDetailResponse>> QueryTasks();
 
     Task<bool> ExecuteTask(TaskDetailRequest taskDetail);
+
+    Task<bool> UpdateTask(TaskDetailRequest taskDetail);
 }

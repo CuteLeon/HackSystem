@@ -47,6 +47,9 @@
 
 @code {
     [Parameter]
+    public EventCallback<TaskDetailRequest> OnUpdateTask { get; set; }
+
+    [Parameter]
     public EventCallback<TaskDetailResponse> OnExecuteTask { get; set; }
 
     [Parameter]
@@ -59,6 +62,7 @@
         {
             this.TaskDetail.Enabled = value;
             this.SwitchTaskEnable(value).ConfigureAwait(false);
+            this.StateHasChanged();
         }
     }
 

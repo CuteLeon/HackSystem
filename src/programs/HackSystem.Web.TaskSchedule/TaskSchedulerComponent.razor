@@ -21,7 +21,7 @@
                 @foreach (var task in this.TaskDetails)
                 {
                     var taskKey = $"taskKey_{task.TaskID}";
-                    <TaskDetailComponent @key="@taskKey" TaskDetail=@task OnExecuteTask="@this.ExecuteTask"></TaskDetailComponent>
+                    <TaskDetailComponent @key="@taskKey" TaskDetail=@task OnExecuteTask="@this.ExecuteTask" OnUpdateTask="@this.UpdateTask"></TaskDetailComponent>
                 }
             </div>
         </div>

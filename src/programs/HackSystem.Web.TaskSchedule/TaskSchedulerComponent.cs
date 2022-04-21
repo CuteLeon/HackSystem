@@ -97,4 +97,43 @@ public partial class TaskSchedulerComponent
             });
         }
     }
+
+    private async Task UpdateTask(TaskDetailRequest taskDetail)
+    {
+        try
+        {
+            this.Logger.LogInformation($"Update task {taskDetail.TaskName}...");
+            var result = await this.taskDetailService.UpdateTask(taskDetail);
+            if (result)
+            {
+                this.Logger.LogInformation($"Update task {taskDetail.TaskName} successfully.");
+                await this.ToastHandler.PopupToast(new ToastDetail
+                {
+                    Title = "Update task Successfully!",
+                    Icon = ToastIcons.Information,
+                    Message = $"Task {taskDetail.TaskName} updated successfully.",
+                });
+            }
+            else
+            {
+                this.Logger.LogWarning($"Update task {taskDetail.TaskName} failed.");
+                await this.ToastHandler.PopupToast(new ToastDetail
+                {
+                    Title = "Update task Failed.",
+                    Icon = ToastIcons.Warning,
+                    Message = $"Task {taskDetail.TaskName} updated failed, please try again later.",
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            this.Logger.LogError(ex, $"Unable to update task {taskDetail.TaskName}.");
+            await this.ToastHandler.PopupToast(new ToastDetail
+            {
+                Title = "Update task Failed.",
+                Icon = ToastIcons.Error,
+                Message = $"Unable to update Task {taskDetail.TaskName}: {ex.Message}.",
+            });
+        }
+    }
 }
