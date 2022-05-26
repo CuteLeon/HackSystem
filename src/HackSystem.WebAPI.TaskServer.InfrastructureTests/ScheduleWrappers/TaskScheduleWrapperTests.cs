@@ -47,9 +47,9 @@ public class TaskScheduleWrapperTests
             Reentrant = reentrant
         };
         var taskScheduleWrapper = new TaskScheduleWrapper();
-        var taskSchedule = taskScheduleWrapper.WrapTaskSchedule(taskDetail);
+        var taskScheduleTuple = taskScheduleWrapper.WrapTaskSchedule(taskDetail);
 
-        JobManager.AddJob(this.Job, taskSchedule.ScheduleAction);
+        JobManager.AddJob(this.Job, taskScheduleTuple.ScheduleAction);
         if ((taskFrequency == TaskFrequency.Manually) ||
             (taskFrequency == TaskFrequency.Once &&
              ((taskDetail.ExecuteDateTime != default && taskDetail.ExecuteDateTime < DateTime.Now) ||
@@ -57,9 +57,11 @@ public class TaskScheduleWrapperTests
             (taskFrequency == TaskFrequency.Monthly && taskDetail.ExecuteDateTime.Day <= DateTime.Now.Day))
             return;
 
-        Assert.Single(JobManager.AllSchedules);
-        var nextRun = JobManager.AllSchedules.First().NextRun;
-        JobManager.RemoveAllJobs();
+        Assert.NotEmpty(JobManager.AllSchedules);
+        var taskSchedule = JobManager.AllSchedules.FirstOrDefault(x => x.Name.Equals(taskDetail.TaskName, StringComparison.CurrentCultureIgnoreCase));
+        Assert.NotNull(taskSchedule);
+        var nextRun = taskSchedule.NextRun;
+        JobManager.RemoveJob(taskSchedule.Name);
     }
 
     private void Job()
