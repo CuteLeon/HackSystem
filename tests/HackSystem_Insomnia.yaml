@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-12-10T10:48:21.588Z
+__export_date: 2022-12-10T13:12:40.175Z
 __export_source: insomnia.desktop.app:v2022.7.0-beta.6
 resources:
   - _id: req_19b0860ee6654f92b4ea4eb6b2ea6a1f
@@ -36,13 +36,13 @@ resources:
     _type: request
   - _id: fld_d846d768179945f2837981898eec2ec3
     parentId: wrk_04c0b2f68ea24556a7ada708a21da801
-    modified: 1670665483475
+    modified: 1670675710445
     created: 1670665068500
     name: Accounts
     description: ""
     environment: {}
     environmentPropertyOrder: null
-    metaSortKey: -1670665068500
+    metaSortKey: -1670675707300
     _type: request_group
   - _id: wrk_04c0b2f68ea24556a7ada708a21da801
     parentId: null
@@ -52,6 +52,460 @@ resources:
     description: ""
     scope: collection
     _type: workspace
+  - _id: req_5cdc7440af254cd58702c87993ad910a
+    parentId: fld_d846d768179945f2837981898eec2ec3
+    modified: 1670675295954
+    created: 1670670759519
+    url: "{{ _.WebAPIUrl }}/api/accounts/login"
+    name: Login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"userName": "Leon",
+        	"password": "12345@Qq"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1670664656196
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_577b6087ccf24c639680925963206601
+    parentId: fld_d846d768179945f2837981898eec2ec3
+    modified: 1670675442044
+    created: 1670670877234
+    url: "{{ _.WebAPIUrl }}/api/accounts/logout"
+    name: Logout
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - id: pair_ffc86dee2d8747e4be9691eef15a7232
+        name: ""
+        value: ""
+        description: ""
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+    metaSortKey: -1670664656146
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e4e877fe31594b6eab740bc5985242a0
+    parentId: fld_d846d768179945f2837981898eec2ec3
+    modified: 1670675497168
+    created: 1670670904051
+    url: "{{ _.WebAPIUrl }}/api/accounts/GetAccountInfo"
+    name: GetAccountInfo
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+      disabled: false
+    metaSortKey: -1670664656096
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0956eeb4abb54804ae27c7f928645874
+    parentId: fld_397fe2cc67d54a2a986748227c0fe709
+    modified: 1670675635954
+    created: 1670675521467
+    url: "{{ _.WebAPIUrl }}/api/token/refresh"
+    name: Refresh
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+    metaSortKey: -1670664656083.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_397fe2cc67d54a2a986748227c0fe709
+    parentId: wrk_04c0b2f68ea24556a7ada708a21da801
+    modified: 1670675712292
+    created: 1670675599365
+    name: Token
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1670675707275
+    _type: request_group
+  - _id: req_ce88a385bbf742adbf44dbfc826aa22d
+    parentId: fld_43988968888d4349ac44f2bb9de1150d
+    modified: 1670675794083
+    created: 1670675780137
+    url: "{{ _.WebAPIUrl }}/api/MockServer/QueryMockRoutes"
+    name: QueryMockRoutes
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+    metaSortKey: -1670664656033.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_43988968888d4349ac44f2bb9de1150d
+    parentId: wrk_04c0b2f68ea24556a7ada708a21da801
+    modified: 1670675845050
+    created: 1670675707250
+    name: MockServer
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1670675707268.75
+    _type: request_group
+  - _id: req_47747bdbe4954ec6bf4181bae0f42474
+    parentId: fld_2282121ec50e43fbb3e694c13147b774
+    modified: 1670677653738
+    created: 1670677618510
+    url: "{{ _.WebAPIUrl }}/api/TaskServer/QueryTasks"
+    name: QueryTasks
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+    metaSortKey: -1670664656021
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_2282121ec50e43fbb3e694c13147b774
+    parentId: wrk_04c0b2f68ea24556a7ada708a21da801
+    modified: 1670677644616
+    created: 1670677181917
+    name: TaskServer
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1670675707265.625
+    _type: request_group
+  - _id: req_a5f832720f10450d89ee058c8d3c2cfc
+    parentId: fld_11840f9289b548c3a5ddce5f337a91cd
+    modified: 1670676965301
+    created: 1670675965483
+    url: "{{ _.WebAPIUrl }}/api/ProgramAsset/QueryProgramAssetList?programId={{
+      _.ProgramId }}"
+    name: QueryProgramAssetList
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+    metaSortKey: -1670664656008.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_11840f9289b548c3a5ddce5f337a91cd
+    parentId: fld_0af2e5549e7c43eda5713d61277663d4
+    modified: 1670676864127
+    created: 1670676848630
+    name: ProgramAsset
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1670664656058.5
+    _type: request_group
+  - _id: fld_0af2e5549e7c43eda5713d61277663d4
+    parentId: wrk_04c0b2f68ea24556a7ada708a21da801
+    modified: 1670675945350
+    created: 1670675723261
+    name: Program
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1670675707262.5
+    _type: request_group
+  - _id: req_8995c634628a41a58a02021909bafb87
+    parentId: fld_11840f9289b548c3a5ddce5f337a91cd
+    modified: 1670676973982
+    created: 1670676064307
+    url: "{{ _.WebAPIUrl }}/api/ProgramAsset/QueryProgramIcon?programId={{
+      _.ProgramId }}"
+    name: QueryProgramIcon
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+      disabled: true
+    metaSortKey: -1670664655958.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_9cedd65c41a2428e940134895b55701d
+    parentId: fld_11840f9289b548c3a5ddce5f337a91cd
+    modified: 1670676981633
+    created: 1670676081356
+    url: "{{ _.WebAPIUrl }}/api/ProgramAsset/QueryProgramAssetPackage?programId={{
+      _.ProgramId }}"
+    name: QueryProgramAssetPackage
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+      disabled: false
+    metaSortKey: -1670664655908.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_92d3ebaa9f714d9d85cfe32ba3494cd5
+    parentId: fld_11840f9289b548c3a5ddce5f337a91cd
+    modified: 1670677939960
+    created: 1670676144298
+    url: "{{ _.WebAPIUrl }}/api/ProgramAsset/QueryProgramAssetPackage?programId={{
+      _.ProgramId }}"
+    name: QueryProgramAssetPackage
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: "{% response 'raw', 'req_a5f832720f10450d89ee058c8d3c2cfc', '',
+        'no-history', 60 %}"
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+      disabled: false
+    metaSortKey: -1670664655858.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_af642653c7514228989a6f9698483a9f
+    parentId: fld_7dda247fd5d948348f9a26671afa74a2
+    modified: 1670677024127
+    created: 1670677004490
+    url: "{{ _.WebAPIUrl }}/api/ProgramDetail/QueryUserProgramMaps"
+    name: QueryUserProgramMaps
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+    metaSortKey: -1670664655996
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_7dda247fd5d948348f9a26671afa74a2
+    parentId: fld_0af2e5549e7c43eda5713d61277663d4
+    modified: 1670676905700
+    created: 1670676889012
+    name: ProgramDetail
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1670664656008.5
+    _type: request_group
+  - _id: req_ad7e17f0d94b408ea1e819f08cb51ef5
+    parentId: fld_7dda247fd5d948348f9a26671afa74a2
+    modified: 1670677110077
+    created: 1670677044420
+    url: "{{ _.WebAPIUrl }}/api/ProgramDetail/UpdateUserProgram"
+    name: UpdateUserProgram
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"programId": "{{ _.ProgramId }}",
+        		"pinToDesktop": true,
+        		"pinToDock": false,
+        		"pinToTop": false,
+        		"rename": null
+        	}
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+    metaSortKey: -1670664655989.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c42bbde5aacf42baa071334f1ee56114
+    parentId: fld_7dda247fd5d948348f9a26671afa74a2
+    modified: 1670677148208
+    created: 1670677121063
+    url: "{{ _.WebAPIUrl }}/api/ProgramDetail/DeleteUserProgramMap?programId={{
+      _.ProgramId }}_123"
+    name: DeleteUserProgramMap
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+    metaSortKey: -1670664655986.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b7f37da29d064277aa7d2f7aa00fe65f
+    parentId: fld_91d24fa6b5034cdabcb5a1dace95a611
+    modified: 1670675916767
+    created: 1670675867903
+    url: "{{ _.WebAPIUrl }}/Home/HackSystemError"
+    name: HackSystemError
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_5cdc7440af254cd58702c87993ad910a',
+        'b64::JC50b2tlbg==::46b', 'when-expired', 1500 %}"
+      prefix: bearer
+      disabled: true
+    metaSortKey: -1670664655983.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_91d24fa6b5034cdabcb5a1dace95a611
+    parentId: wrk_04c0b2f68ea24556a7ada708a21da801
+    modified: 1670675835908
+    created: 1670675829214
+    name: Home
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1670675707200
+    _type: request_group
   - _id: env_e90dfa3384e0a6555bf9b97d8d194fc19e79e325
     parentId: wrk_04c0b2f68ea24556a7ada708a21da801
     modified: 1670664561482
@@ -65,10 +519,47 @@ resources:
     _type: environment
   - _id: jar_e90dfa3384e0a6555bf9b97d8d194fc19e79e325
     parentId: wrk_04c0b2f68ea24556a7ada708a21da801
-    modified: 1670664561484
+    modified: 1670677027416
     created: 1670664561484
     name: Default Jar
-    cookies: []
+    cookies:
+      - key: .AspNetCore.Identity.Application
+        value: CfDJ8PoCm2Du_8NGgRm866NTBQtxb4vWh3h9bmZJjaPtabN1nhk8CWbCqQKbfM9TMinimp7KY4fBFdmzX8XQzNVJgNUn7_obRUTXoGQZnFOX60ugCNQFJGR8uCOwnLbjHu7P2s1EKwLiHHwKr9Rp-IaRCZZzSMsBQxuLgxD0_J4q6PYkowDjHTBnHPueQ6FrzrZX259ygHRc79RM3BIsHzKNaBdqlTsM9e4kUii6roUTOjRdF2UUZ-jycygANFBU5Tnl7tpFGPDnSgIE-HCim_p0QWlMdeqeqH86cHfegNd1CcPMtALHQxmDuIcmO8rfTnzFwEMIGTq2QKJ8JeQaVOlvXk5TcXHcQyK8ikO77v-ZMIzOIXH0Uig80jh5rRVjRYnxK5BwT4TAqlpvNur3tkg84_XJwsnr6ECeTZQWxZgE6I9CmLoL3jBik621Wfgia9AJXqgw8i2u38x7sf04r-OYurlk3L9HL5TmJN9RJjjJMlKY2R3yrc85PzmAdiQHSh8RSFRR91FBm9LMUsMqHb3P_887lBQtN26dZWBlYPVOtM9XuJAjpzhF91mXQBQEEq3s74n8_hw7gIV75XtQ4ERR3zqGDD8bPt4AkrtObbuVZ9qP1P-vgj62ptAMlAAyt4Bc44BAjRSEUeyTuG3-o9K35KWpO59IN8LzXKL9CEqEpGg_iYyio0p4Wf8r92-CLg8ylRHJ0JYk-UMXIPOCdCz1wysjLomp0ZJh5014Rx6s8Rn8-PkzGln-asDOcjEQmtidkmOU5lRZv8Xs4ahTYpq-mCRNQHK_XySEqw2uFZIvnMCPWP4-dxPjsY4p5wcVvNAKItFFccGxM5VgZNhHvIIebakS9Do_K_vUMGtAb0Hr6E35rsJ9AJhS_OsRU4x9EvxJBNyE_K_Atu7tJfdOgG-YBzpyhZtzo4SIBNXYIbITm1NkA3I0QSnB8mqMXEeXEhoe2bPv_j9fWmaJzeYlnbYhzQUoJgyufPKBmhXZ0s43amVm
+        expires: 2022-12-24T12:57:07.000Z
+        domain: localhost
+        path: /
+        secure: true
+        httpOnly: true
+        extensions:
+          - samesite=lax
+        hostOnly: true
+        creation: 2022-12-10T11:14:17.238Z
+        lastAccessed: 2022-12-10T12:57:07.416Z
+        id: "2163140682720992"
+      - key: Identity.External
+        expires: 1970-01-01T00:00:00.000Z
+        domain: localhost
+        path: /
+        secure: true
+        httpOnly: true
+        extensions:
+          - samesite=lax
+        hostOnly: true
+        creation: 2022-12-10T12:30:47.731Z
+        lastAccessed: 2022-12-10T12:30:47.731Z
+        id: "395622342518978"
+      - key: Identity.TwoFactorUserId
+        expires: 1970-01-01T00:00:00.000Z
+        domain: localhost
+        path: /
+        secure: true
+        httpOnly: true
+        extensions:
+          - samesite=lax
+        hostOnly: true
+        creation: 2022-12-10T12:30:47.731Z
+        lastAccessed: 2022-12-10T12:30:47.731Z
+        id: "20387642369096692"
     _type: cookie_jar
   - _id: spc_b1b98b5ac9ba467aa419c6e2fcea57b7
     parentId: wrk_04c0b2f68ea24556a7ada708a21da801
@@ -80,14 +571,16 @@ resources:
     _type: api_spec
   - _id: env_0350a91eddbf4552a597f8532f8881b9
     parentId: env_e90dfa3384e0a6555bf9b97d8d194fc19e79e325
-    modified: 1670664735173
+    modified: 1670676935824
     created: 1670664667468
     name: LocalHost
     data:
       WebAPIUrl: " https://localhost:4237"
+      ProgramId: program0-icon-0828-hack-system000001
     dataPropertyOrder:
       "&":
         - WebAPIUrl
+        - ProgramId
     color: "#3300ff"
     isPrivate: false
     metaSortKey: 1670664667468
