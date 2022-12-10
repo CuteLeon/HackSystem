@@ -1,0 +1,94 @@
+_type: export
+__export_format: 4
+__export_date: 2022-12-10T10:48:21.588Z
+__export_source: insomnia.desktop.app:v2022.7.0-beta.6
+resources:
+  - _id: req_19b0860ee6654f92b4ea4eb6b2ea6a1f
+    parentId: fld_d846d768179945f2837981898eec2ec3
+    modified: 1670666275807
+    created: 1670664656246
+    url: "{{ _.WebAPIUrl }}/api/accounts/register"
+    name: Register
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "userName": "Mathilda_",
+          "email": "Mathilda@mathilda.com",
+          "password": "12345@Mathilda",
+          "confirmPassword": "12345@Mathilda"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1670664656246
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_d846d768179945f2837981898eec2ec3
+    parentId: wrk_04c0b2f68ea24556a7ada708a21da801
+    modified: 1670665483475
+    created: 1670665068500
+    name: Accounts
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1670665068500
+    _type: request_group
+  - _id: wrk_04c0b2f68ea24556a7ada708a21da801
+    parentId: null
+    modified: 1670664561476
+    created: 1670664561476
+    name: HackSystem
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: env_e90dfa3384e0a6555bf9b97d8d194fc19e79e325
+    parentId: wrk_04c0b2f68ea24556a7ada708a21da801
+    modified: 1670664561482
+    created: 1670664561482
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1670664561482
+    _type: environment
+  - _id: jar_e90dfa3384e0a6555bf9b97d8d194fc19e79e325
+    parentId: wrk_04c0b2f68ea24556a7ada708a21da801
+    modified: 1670664561484
+    created: 1670664561484
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_b1b98b5ac9ba467aa419c6e2fcea57b7
+    parentId: wrk_04c0b2f68ea24556a7ada708a21da801
+    modified: 1670664561477
+    created: 1670664561477
+    fileName: HackSystem
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_0350a91eddbf4552a597f8532f8881b9
+    parentId: env_e90dfa3384e0a6555bf9b97d8d194fc19e79e325
+    modified: 1670664735173
+    created: 1670664667468
+    name: LocalHost
+    data:
+      WebAPIUrl: " https://localhost:4237"
+    dataPropertyOrder:
+      "&":
+        - WebAPIUrl
+    color: "#3300ff"
+    isPrivate: false
+    metaSortKey: 1670664667468
+    _type: environment
