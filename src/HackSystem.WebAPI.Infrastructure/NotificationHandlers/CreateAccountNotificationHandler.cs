@@ -33,7 +33,6 @@ public class CreateAccountNotificationHandler : IIntermediaryNotificationHandler
         {
             Id = notification.User.Id,
         });
-        programUser = await this.programUserRepository.AddAsync(programUser);
         var userProgramMaps = mandatoryPrograms
             .Select(program => new UserProgramMap
             {
