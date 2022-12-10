@@ -57,7 +57,7 @@ public class HackSystemDbContext : IdentityDbContext<HackSystemUser, HackSystemR
         builder.Entity<TaskDetail>().HasMany<TaskLogDetail>().WithOne().HasForeignKey(l => l.TaskID).IsRequired();
         builder.Entity<MockRouteDetail>().HasMany<MockRouteLogDetail>().WithOne().HasForeignKey(l => l.RouteID).IsRequired();
 
-        builder.Entity<HackSystemUser>().HasOne<ProgramUser>().WithOne().HasForeignKey<HackSystemUser>(u => u.Id).IsRequired();
+        builder.Entity<HackSystemUser>().HasOne<ProgramUser>().WithOne().HasForeignKey<ProgramUser>(u => u.Id).IsRequired();
         builder.Entity<ProgramDetail>().HasIndex(nameof(ProgramDetail.Id), nameof(ProgramDetail.Name));
         builder.Entity<UserProgramMap>().HasIndex(nameof(UserProgramMap.UserId));
         builder.Entity<UserProgramMap>().HasIndex(nameof(UserProgramMap.UserId), nameof(UserProgramMap.ProgramId)).IsUnique();

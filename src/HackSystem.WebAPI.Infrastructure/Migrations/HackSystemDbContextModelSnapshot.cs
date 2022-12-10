@@ -15,7 +15,7 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.0-rc.2.21480.5");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.7");
 
             modelBuilder.Entity("HackSystem.WebAPI.Domain.Entity.GenericOption", b =>
                 {
@@ -1014,15 +1014,6 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("HackSystem.WebAPI.Domain.Entity.Identity.HackSystemUser", b =>
-                {
-                    b.HasOne("HackSystem.WebAPI.ProgramServer.Domain.Entity.ProgramUser", null)
-                        .WithOne()
-                        .HasForeignKey("HackSystem.WebAPI.Domain.Entity.Identity.HackSystemUser", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HackSystem.WebAPI.MockServer.Domain.Entity.MockRouteLogDetail", b =>
                 {
                     b.HasOne("HackSystem.WebAPI.MockServer.Domain.Entity.MockRouteDetail", null)
@@ -1049,6 +1040,15 @@ namespace HackSystem.WebAPI.Infrastructure.Migrations
                     b.Navigation("Program");
 
                     b.Navigation("ProgramUser");
+                });
+
+            modelBuilder.Entity("HackSystem.WebAPI.ProgramServer.Domain.Entity.ProgramUser", b =>
+                {
+                    b.HasOne("HackSystem.WebAPI.Domain.Entity.Identity.HackSystemUser", null)
+                        .WithOne()
+                        .HasForeignKey("HackSystem.WebAPI.ProgramServer.Domain.Entity.ProgramUser", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HackSystem.WebAPI.TaskServer.Domain.Entity.TaskLogDetail", b =>
